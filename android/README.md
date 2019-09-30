@@ -5,7 +5,7 @@ Storyly SDK targets api level 17 or higher.
 Storyly SDK is available through Maven.  To install
 it, you can add dependency to application’s `build.gradle` file;
 ```
-implementation 'com.appsamurai.storyly:storyly:0.0.1'
+implementation 'com.appsamurai.storyly:storyly:0.0.2'
 ```
 ## Adding from XML
 ```xml
@@ -33,4 +33,19 @@ storyly_view.storylyListener = object: StorylyListener{
         Log.d("[Storyly]", "storylyLoadFailed")
     }
 }
+```
+```java
+StorylyView storylyView = findViewById(R.id.storyly_view);
+storylyView.setStorylyId("[YOUR_APP_ID_FROM_DASHBOARD]");
+storylyView.setStorylyListener(new StorylyListener() {
+    @Override
+    public void storylyLoaded(@NonNull StorylyView storylyView) {
+        Log.d("[Storyly]", "storylyLoaded");
+    }
+
+    @Override
+    public void storylyLoadFailed(@NonNull StorylyView storylyView) {
+        Log.d("[Storyly]", "storylyLoadFailed");
+    }
+});
 ```

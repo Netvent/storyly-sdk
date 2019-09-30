@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        storyly_view.storylyId = "[YOUR_APP_ID]"
+        storyly_view.storylyId = "[YOUR_APP_ID_FROM_DASHBOARD]"
         storyly_view.storylyListener = object: StorylyListener{
             override fun storylyLoaded(storylyView: StorylyView) {
                 super.storylyLoaded(storylyView)
