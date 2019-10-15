@@ -49,3 +49,11 @@ storylyView.setStorylyListener(new StorylyListener() {
     }
 });
 ```
+## Refresh
+```kotlin
+storyly_view.refresh()
+```
+```java
+StorylyView storylyView = findViewById(R.id.storyly_view);
+...
+storylyView.refresh();
