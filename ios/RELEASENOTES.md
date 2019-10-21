@@ -1,4 +1,8 @@
 # Release Notes
+### 0.0.8
+* add cubic animation to story transititon
+* handle orientation changes
+
 ### 0.0.7
 * add refresh API
 * add story seen state handling
