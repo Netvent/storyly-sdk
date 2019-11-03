@@ -1,4 +1,8 @@
 # Release Notes
+### 0.0.9
+* add pause/resume API
+* add story title
+
 ### 0.0.8
 * add cubic animation to story transititon
 * handle orientation changes
