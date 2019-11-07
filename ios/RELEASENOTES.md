@@ -1,4 +1,9 @@
 # Release Notes
+### 0.0.10
+* change storylyActionClicked delegate signature 
+* ui changes
+* fix video story playback
+
 ### 0.0.9
 * add pause/resume API
 * add story title

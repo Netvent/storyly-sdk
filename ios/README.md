@@ -11,38 +11,8 @@ pod 'Storyly'
 StorylyView can be added to storyboard and xib file by defining `Custom Class` as StorylyView in `Identity Inspector`. In this approach, setting `width` to device’s `width` and `height`  to 100 is suggested for better experience.
 ## Adding Programmatically
 ```swift
-let storylyView = StorylyView()
-        self.view.addSubview(storylyView)
-        self.view.addConstraints([
-            NSLayoutConstraint(item: storylyView,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: self.view,
-                               attribute: .top,
-                               multiplier: 1,
-                               constant: 10),
-            NSLayoutConstraint(item: storylyView,
-                               attribute: .leading,
-                               relatedBy: .equal,
-                               toItem: self.view,
-                               attribute: .leading,
-                               multiplier: 1,
-                               constant: 8),
-            NSLayoutConstraint(item: storylyView,
-                               attribute: .trailing,
-                               relatedBy: .equal,
-                               toItem: self.view,
-                               attribute: .trailing,
-                               multiplier: 1,
-                               constant: -8),
-            NSLayoutConstraint(item: storylyView,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 100)
-        ])
+let storylyView = StorylyView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 120))
+self.view.addSubview(storylyView)
 ```
 ## Initialization
 ```swift
