@@ -1,4 +1,9 @@
 # Release Notes
+### 0.0.11
+* add skeleton view for loading cases
+* improvements on gestures
+* enable bitcode generation
+
 ### 0.0.10
 * change storylyActionClicked delegate signature 
 * ui changes

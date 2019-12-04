@@ -1,4 +1,12 @@
 # Release Notes
+### 0.0.11
+* add skeleton view for loading cases
+* change storylyActionClicked delegate signature 
+* ui changes
+* fix video story playback
+* add story title
+* improvements on gestures
+
 ### 0.0.8
 * add cubic animation to story transititon
 * handle orientation changes
