@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.appsamurai.storyly.Story;
 import com.appsamurai.storyly.StorylyListener;
 import com.appsamurai.storyly.StorylyView;
 
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void storylyLoadFailed(@NonNull StorylyView storylyView) {
                 Log.d("[Storyly]", "storylyLoadFailed");
+            }
+
+            // return true if app wants to handle redirection, otherwise return false
+            @Override
+            public boolean storylyActionClicked(@NonNull StorylyView storylyView, @NonNull Story story) {
+                Log.d("[Storyly]", "storylyActionClicked");
+                return false;
             }
         });
     }

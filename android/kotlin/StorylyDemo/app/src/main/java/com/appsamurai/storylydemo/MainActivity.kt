@@ -1,8 +1,9 @@
 package com.appsamurai.storylydemo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.appsamurai.storyly.Story
 import com.appsamurai.storyly.StorylyListener
 import com.appsamurai.storyly.StorylyView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         storyly_view.storylyId = "[YOUR_APP_ID_FROM_DASHBOARD]"
-        storyly_view.storylyListener = object: StorylyListener{
+        storyly_view.storylyListener = object : StorylyListener {
             override fun storylyLoaded(storylyView: StorylyView) {
                 super.storylyLoaded(storylyView)
                 Log.d("[Storyly]", "storylyLoaded")
@@ -23,6 +24,15 @@ class MainActivity : AppCompatActivity() {
             override fun storylyLoadFailed(storylyView: StorylyView) {
                 super.storylyLoadFailed(storylyView)
                 Log.d("[Storyly]", "storylyLoadFailed")
+            }
+
+            // return true if app wants to handle redirection, otherwise return false
+            override fun storylyActionClicked(
+                storylyView: StorylyView,
+                story: Story
+            ): Boolean {
+                Log.d("[Storyly]", "storylyActionClicked")
+                return false
             }
         }
     }

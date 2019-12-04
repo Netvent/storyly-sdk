@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		19C7686A8439D88F52D8372F /* Pods_StorylyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736369B3007CB8524D1E56A7 /* Pods_StorylyDemo.framework */; };
 		A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA836233B90E3000514FA /* AppDelegate.swift */; };
-		A16DA839233B90E3000514FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA838233B90E3000514FA /* SceneDelegate.swift */; };
 		A16DA83B233B90E3000514FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA83A233B90E3000514FA /* ViewController.swift */; };
 		A16DA83E233B90E3000514FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83C233B90E3000514FA /* Main.storyboard */; };
 		A16DA840233B90E5000514FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83F233B90E5000514FA /* Assets.xcassets */; };
@@ -22,7 +21,6 @@
 		8796B38706767D0054280E24 /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A16DA833233B90E3000514FA /* StorylyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorylyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16DA836233B90E3000514FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A16DA838233B90E3000514FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A16DA83A233B90E3000514FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A16DA83D233B90E3000514FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A16DA83F233B90E5000514FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,7 +46,6 @@
 				3CB5F4E3423BEB3D0BA0629B /* Pods-StorylyDemo.debug.xcconfig */,
 				8796B38706767D0054280E24 /* Pods-StorylyDemo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -74,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				A16DA836233B90E3000514FA /* AppDelegate.swift */,
-				A16DA838233B90E3000514FA /* SceneDelegate.swift */,
 				A16DA83A233B90E3000514FA /* ViewController.swift */,
 				A16DA83C233B90E3000514FA /* Main.storyboard */,
 				A16DA83F233B90E5000514FA /* Assets.xcassets */,
@@ -209,7 +205,6 @@
 			files = (
 				A16DA83B233B90E3000514FA /* ViewController.swift in Sources */,
 				A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */,
-				A16DA839233B90E3000514FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +350,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6M3HAPKN9X;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -373,7 +370,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6M3HAPKN9X;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

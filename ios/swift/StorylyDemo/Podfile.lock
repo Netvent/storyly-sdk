@@ -1,8 +1,8 @@
 PODS:
-  - Alamofire (4.9.0)
-  - AlamofireImage (3.5.2):
-    - Alamofire (~> 4.8)
-  - Storyly (0.0.4):
+  - Alamofire (4.9.1)
+  - AlamofireImage (3.6.0):
+    - Alamofire (~> 4.9)
+  - Storyly (0.0.11):
     - AlamofireImage
 
 DEPENDENCIES:
@@ -15,10 +15,10 @@ SPEC REPOS:
     - Storyly
 
 SPEC CHECKSUMS:
-  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
-  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
-  Storyly: 909ace90b5026659c2e399b5cbb0e8b181b04221
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
+  Storyly: 3d68f89f689e6ff349cf2f614dfcb746953a301a
 
 PODFILE CHECKSUM: 3fe4479b28e265f4b9b7c1b007140ca1f0b55038
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.4
