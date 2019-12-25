@@ -12,10 +12,7 @@ implementation ‘com.appsamurai.storyly:storyly:<latest-version>'
 <com.appsamurai.storyly.StorylyView
     android:id="@+id/storyly_view"
     android:layout_width="match_parent"
-    android:layout_height=“120dp”
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop=“8dp”/>
+    android:layout_height=“120dp”/>
 ```
 ## Initialization
 Kotlin:
