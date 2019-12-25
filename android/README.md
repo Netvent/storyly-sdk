@@ -21,6 +21,23 @@ implementation ‘com.appsamurai.storyly:storyly:<latest-version>'
 Kotlin:
 ```kotlin
 storyly_view.storylyId = "[YOUR_APP_ID_FROM_DASHBOARD]"
+```
+Java:
+```java
+StorylyView storylyView = findViewById(R.id.storyly_view);
+storylyView.setStorylyId("[YOUR_APP_ID_FROM_DASHBOARD]");
+```
+
+## Storyly Events
+In Storyly, there are 3 different optional methods that you can override and use.  These are:
+* storylyLoaded: This method is called when your story groups are loaded without a problem.
+* storylyLoadFailed: This method is called if any problem occurs while loading story groups such as network problem etc…
+* storylyActionClicked: This method is called when the user clicks to action button on a story or swipes up in a story.  If you want to handle how the story link should be opened, you should override this method and you must return true as a result. Otherwise, SDK will open the link in a new activity. 
+
+Sample usages can be seen below:
+
+Kotlin:
+```kotlin
 storyly_view.storylyListener = object: StorylyListener{
     override fun storylyLoaded(storylyView: StorylyView) {
         super.storylyLoaded(storylyView)
@@ -35,14 +52,12 @@ storyly_view.storylyListener = object: StorylyListener{
     // return true if app wants to handle redirection, otherwise return false
     override fun storylyActionClicked( storylyView: StorylyView, story: Story): Boolean {
         Log.d("[Storyly]", "storylyActionClicked")
-		  return false
+		  return true
     }
 }
 ```
 Java:
 ```java
-StorylyView storylyView = findViewById(R.id.storyly_view);
-storylyView.setStorylyId("[YOUR_APP_ID_FROM_DASHBOARD]");
 storylyView.setStorylyListener(new StorylyListener() {
     @Override
     public void storylyLoaded(@NonNull StorylyView storylyView) {
@@ -58,12 +73,40 @@ storylyView.setStorylyListener(new StorylyListener() {
     @Override
     public boolean storylyActionClicked(@NonNull StorylyView storylyView, @NonNull Story story) {
          Log.d("[Storyly]", "storylyActionClicked");
-         return false;
+         return true;
     }
 });
 ```
 
-If you are planning to do additional operations with the story link by overriding `storylyActionClicked`method, you can access the link by using `story.media.actionUrl`.
+As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows:
+
+```kotlin
+data class Story(
+    val index: Int,
+    val title: String,
+    val media: StoryMedia
+)
+
+data class StoryMedia(
+    val type: StoryType,
+    val url: String,
+    val buttonText: String,
+    val data: List<StorylyData>?
+ 	  val actionUrl: String
+)
+
+data class StorylyData(
+    val key: String,
+    val value: String
+)
+
+enum class StoryType {
+    Unknown,
+    Image,
+    Video;
+}
+``` 
+
 ## Refresh
 Kotlin:
 ```kotlin
@@ -76,7 +119,7 @@ StorylyView storylyView = findViewById(R.id.storyly_view);
 storylyView.refresh();
 ```
 ## UI Customizations
-Using Storyly SDK, you can customize story experience of your users. If you don’t specify any of these attributes, default values will be used. Some of color related attributes are single color attributes and others requires at least two colors. 
+Using Storyly SDK, you can customize story experience of your users. If you don’t specify any of these attributes, default values will be used. Some of the color related attributes are single color attributes and others require at least two colors. 
 
 In order to specify the attributes in layout xml, following part should be added as layout attribute:
 ```xml
@@ -84,7 +127,7 @@ xmlns:app=“http://schemas.android.com/apk/res-auto”
 ```
 
 Here is the list of attributes that you can change:
-##### ***Story Group Text Color (Single Color):***
+####  ***Story Group Text Color (Single Color):***
 This attribute changes the text color of the story group. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -109,7 +152,7 @@ app:storyGroupTextColor=“#RGBA”
 In order to set this attribute from design view, find and fill the `storyGroupTextColor` attribute.
 
 
-#####  ***Story Group Icon Background Color (Single Color):***
+#### ***Story Group Icon Background Color (Single Color):***
 This attribute changes the background color of the story group icon which is shown to the user as skeleton view till the stories are loaded. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -134,7 +177,7 @@ app:storyGroupIconBackgroundColor=“#RGBA”
 In order to set this attribute from design view, find and fill the `storyGroupIconBackgroundColor` attribute.
 
 
-#####  ***Story Group Icon Border Color Seen (Multiple Colors):***
+#### ***Story Group Icon Border Color Seen (Multiple Colors):***
 This attribute changes the border color of the story group icon which is already watched by the user. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -163,7 +206,7 @@ app:storyGroupIconBorderColorSeen=“@<location>/seen”
 
 In order to set this attribute from design view, find and fill the `storyGroupIconBorderColorSeen` attribute as an array of color codes.
 
-##### ***Story Group Icon Border Color Not Seen (Multiple Colors):***
+#### ***Story Group Icon Border Color Not Seen (Multiple Colors):***
 This attribute changes the border color of the story group icon which has not watched by the user yet. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -195,7 +238,7 @@ app:storyGroupIconBorderColorNotSeen=“@<location>/notSeen”
 
 In order to set this attribute from design view, find and fill the `storyGroupIconBorderColorNotSeen` attribute as an array of color codes.
 
-##### ***Pinned Story Group Icon Color (Single Color):***
+#### ***Pinned Story Group Icon Color (Single Color):***
 If any of the story group is selected as pinned story from dashboard, a little icon will appear right bottom side of the story group. This attribute changes the background color of this little icon. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -219,7 +262,7 @@ app:storyGroupPinIconColor=“#RGBA”
 
 In order to set this attribute from design view, find and fill the `storyGroupPinIconColor` attribute.
 
-##### ***Story Item Text Color (Single Color):***
+#### ***Story Item Text Color (Single Color):***
 This attribute changes the text color of the story item. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -243,7 +286,7 @@ app:storyItemTextColor=“#RGBA”
 
 In order to set this attribute from design view, find and fill the `storyItemTextColor` attribute.
 
-##### ***Story Item Icon Border Color (Multiple Color):***
+#### ***Story Item Icon Border Color (Multiple Color):***
 This attribute changes the border color of the story item icon. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -272,7 +315,7 @@ app:storyItemIconBorderColor=“@<location>/storyItemBorderColors”
 
 In order to set this attribute from design view, find and fill the `storyItemIconBorderColor` attribute as an array of color codes.
 
-##### ***Story Item Progress Bar Color (Two Colors):***
+#### ***Story Item Progress Bar Color (Two Colors):***
 This attribute changes the colors of the progress bars. The bars consists of two colors.  The first defined color is the color of the background bars and the second one is the color of the foreground bars while watching the stories. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
