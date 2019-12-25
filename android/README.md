@@ -128,6 +128,15 @@ xmlns:app=“http://schemas.android.com/apk/res-auto”
 
 Here is the list of attributes that you can change:
 ####  ***Story Group Text Color (Single Color):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_textcolor_1.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_textcolor.png)
+
 This attribute changes the text color of the story group. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -153,6 +162,15 @@ In order to set this attribute from design view, find and fill the `storyGroupTe
 
 
 #### ***Story Group Icon Background Color (Single Color):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_iconbackground.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_iconbackground_1.png)
+
 This attribute changes the background color of the story group icon which is shown to the user as skeleton view till the stories are loaded. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -178,6 +196,15 @@ In order to set this attribute from design view, find and fill the `storyGroupIc
 
 
 #### ***Story Group Icon Border Color Seen (Multiple Colors):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_seen.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_seen_1.png)
+
 This attribute changes the border color of the story group icon which is already watched by the user. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -207,6 +234,15 @@ app:storyGroupIconBorderColorSeen=“@<location>/seen”
 In order to set this attribute from design view, find and fill the `storyGroupIconBorderColorSeen` attribute as an array of color codes.
 
 #### ***Story Group Icon Border Color Not Seen (Multiple Colors):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_notseen.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_notseen_1.png)
+
 This attribute changes the border color of the story group icon which has not watched by the user yet. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -239,6 +275,15 @@ app:storyGroupIconBorderColorNotSeen=“@<location>/notSeen”
 In order to set this attribute from design view, find and fill the `storyGroupIconBorderColorNotSeen` attribute as an array of color codes.
 
 #### ***Pinned Story Group Icon Color (Single Color):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_pincolor.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_pincolor_1.png)
+
 If any of the story group is selected as pinned story from dashboard, a little icon will appear right bottom side of the story group. This attribute changes the background color of this little icon. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -263,6 +308,15 @@ app:storyGroupPinIconColor=“#RGBA”
 In order to set this attribute from design view, find and fill the `storyGroupPinIconColor` attribute.
 
 #### ***Story Item Text Color (Single Color):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_textcolor.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_textcolor_1.png)
+
 This attribute changes the text color of the story item. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -287,6 +341,15 @@ app:storyItemTextColor=“#RGBA”
 In order to set this attribute from design view, find and fill the `storyItemTextColor` attribute.
 
 #### ***Story Item Icon Border Color (Multiple Color):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_iconborder.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_iconborder_1.png)
+
 This attribute changes the border color of the story item icon. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
@@ -316,6 +379,15 @@ app:storyItemIconBorderColor=“@<location>/storyItemBorderColors”
 In order to set this attribute from design view, find and fill the `storyItemIconBorderColor` attribute as an array of color codes.
 
 #### ***Story Item Progress Bar Color (Two Colors):***
+
+Default Sample: 
+
+![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar.png) 
+
+Edited Sample: 
+
+![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar_1.png)
+
 This attribute changes the colors of the progress bars. The bars consists of two colors.  The first defined color is the color of the background bars and the second one is the color of the foreground bars while watching the stories. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
 	
 In order to set this attribute programmatically use the following method: 
