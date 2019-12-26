@@ -1,5 +1,6 @@
 # Storyly 
 Storyly SDK is used for story representation provided by App Samurai. You can register from [Storyly Dashboard](http://dashboard.storyly.io) and add stories to your registered applications and represent them in application with the help of this SDK.
+
 Storyly SDK targets iOS 9 or higher. 
 ## Getting Started
 Storyly SDK is available through [CocoaPods](https://cocoapods.org). To install
