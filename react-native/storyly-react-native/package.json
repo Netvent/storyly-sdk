@@ -1,0 +1,36 @@
+{
+  "name": "storyly-react-native",
+  "title": "Storyly React Native",
+  "version": "0.0.18",
+  "description": "A react-native component for Storyly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Netvent/storyly-mobile.git",
+    "baseUrl": "https://github.com/Netvent/storyly-mobile"
+  },
+  "keywords": [
+    "react-native",
+    "storyly",
+    "story",
+    "appsamurai"
+  ],
+  "author": {
+    "name": "App Samurai Mobile Team",
+    "email": "mobile@appsamurai.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.59.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.8.3",
+    "react-native": "^0.59.10"
+  }
+}
