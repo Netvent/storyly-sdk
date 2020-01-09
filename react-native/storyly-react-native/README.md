@@ -99,9 +99,13 @@ This attribute changes the border color of the story group icon which is already
 #### ***Story Group Icon Border Color Not Seen (Multiple Colors):***
 You need to set `storyGroupIconBorderColorNotSeen: arrayOf(string)` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_notseen.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_notseen_1.png)
+
 This attribute changes the border color of the story group icon which has not watched by the user yet. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used.
 #### ***Pinned Story Group Icon Color (Single Color):***
 You need to set `storyGroupPinIconColor: string` parameter.
