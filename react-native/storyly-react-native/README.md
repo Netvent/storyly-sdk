@@ -66,23 +66,35 @@ Here is the list of attributes that you can change:
 ####  ***Story Group Text Color (Single Color):***
 You need to set `storyGroupTextColor: string` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_textcolor_1.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_textcolor.png)
+
 This attribute changes the text color of the story group.
 #### ***Story Group Icon Background Color (Single Color):***
 You need to set `storyGroupIconBackgroundColor: string` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_iconbackground.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_iconbackground_1.png)
+
 This attribute changes the background color of the story group icon which is shown to the user as skeleton view till the stories are loaded.
 #### ***Story Group Icon Border Color Seen (Multiple Colors):***
 You need to set `storyGroupIconBorderColorSeen: arrayOf(string)` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_seen.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_seen_1.png)
+
 This attribute changes the border color of the story group icon which is already watched by the user. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used.
 #### ***Story Group Icon Border Color Not Seen (Multiple Colors):***
 You need to set `storyGroupIconBorderColorNotSeen: arrayOf(string)` parameter.
@@ -94,28 +106,44 @@ This attribute changes the border color of the story group icon which has not wa
 #### ***Pinned Story Group Icon Color (Single Color):***
 You need to set `storyGroupPinIconColor: string` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_pincolor.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_pincolor_1.png)
+
 If any of the story group is selected as pinned story from dashboard, a little icon will appear right bottom side of the story group. This attribute changes the background color of this little icon.
 #### ***Story Item Text Color (Single Color):***
 You need to set `storyItemTextColor: string` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_textcolor.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_textcolor_1.png)
+
 This attribute changes the text color of the story item.
 #### ***Story Item Icon Border Color (Multiple Color):***
 You need to set `storyItemIconBorderColor: arrayOf(string)` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_iconborder.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_iconborder_1.png)
+
 This attribute changes the border color of the story item icon. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used.
 #### ***Story Item Progress Bar Color (Two Colors):***
 You need to set `storylyItemProgressBarColor: arrayOf(string)` parameter.
 Default Sample:
+
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar.png)
+
 Edited Sample:
+
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar_1.png)
+
 This attribute changes the colors of the progress bars. The bars consists of two colors.  The first defined color is the color of the background bars and the second one is the color of the foreground bars while watching the stories.
