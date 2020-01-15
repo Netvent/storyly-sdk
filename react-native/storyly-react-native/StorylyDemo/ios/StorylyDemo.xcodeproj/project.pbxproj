@@ -161,7 +161,6 @@
 				C1A91249634FE04EFF972CAF /* Pods-StorylyDemoTests.debug.xcconfig */,
 				326B5D6973CFCA12C35DFEAD /* Pods-StorylyDemoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,6 +308,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

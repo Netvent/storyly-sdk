@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.storylyView.appId = "[YOUR_APP_ID]"
+        self.storylyView.storylyId = "[YOUR_APP_ID]"
         self.storylyView.rootViewController = self
         self.storylyView.delegate = self
     }
@@ -29,5 +29,10 @@ extension ViewController: StorylyDelegate {
     
     func storylyLoadFailed(_ storylyView: StorylyView, error: StorylyError) {
         print("storylyLoadFailed \(error.localizedDescription)")
+    }
+    
+    func storylyActionClicked(_ storylyView: Storyly.StorylyView, rootViewController: UIViewController, story: Storyly.Story) -> Bool {
+        print("storylyActionClicked \(story)")
+        return true // return false if sdk should handle click
     }
 }

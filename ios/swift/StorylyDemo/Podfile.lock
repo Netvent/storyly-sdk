@@ -1,23 +1,21 @@
 PODS:
-  - Alamofire (4.9.1)
-  - AlamofireImage (3.6.0):
-    - Alamofire (~> 4.9)
-  - Storyly (0.0.11):
-    - AlamofireImage
+  - SDWebImage (5.4.2):
+    - SDWebImage/Core (= 5.4.2)
+  - SDWebImage/Core (5.4.2)
+  - Storyly (0.0.18):
+    - SDWebImage
 
 DEPENDENCIES:
   - Storyly
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Alamofire
-    - AlamofireImage
+    - SDWebImage
     - Storyly
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  Storyly: 3d68f89f689e6ff349cf2f614dfcb746953a301a
+  SDWebImage: 4ca2dc4eefae4224bea8f504251cda485a363745
+  Storyly: 2080f4b382d13940d50648ccd007ef471ae20c18
 
 PODFILE CHECKSUM: 3fe4479b28e265f4b9b7c1b007140ca1f0b55038
 

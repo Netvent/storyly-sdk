@@ -1,4 +1,21 @@
 # Release Notes
+### 0.0.18
+* rename appId to storylyId
+* improvements on video story
+
+### 0.0.15
+* improvements for iPhoneX
+
+### 0.0.14
+* add UI customization APIs, please check README for details
+* add pinned story flow
+* improve story loading for better UX
+* change action view icons
+
+### 0.0.13
+* add BUILD_LIBRARY_FOR_DISTRIBUTION setting
+* improvements on gestures
+
 ### 0.0.11
 * add skeleton view for loading cases
 * improvements on gestures

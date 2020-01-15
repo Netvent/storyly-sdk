@@ -17,7 +17,7 @@ self.view.addSubview(storylyView)
 ```
 ## Initialization
 ```swift
-storylyView.appId = "[YOUR_APP_ID_FROM_DASHBOARD]"
+storylyView.storylyId = "[YOUR_APP_ID_FROM_DASHBOARD]"
 storylyView.rootViewController = self // A view controller
 storylyView.delegate = self // StorylyDelegate implementation
 ```
