@@ -20,16 +20,22 @@ class Storyly extends Component {
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
             storyItemIconBorderColor,
-            storylyItemProgressBarColor,
+            storyItemProgressBarColor,
+            onLoad,
+            onFail,
+            onPress
             ...otherProps
         } = this.props;
         return (
             <STStoryly
                 {...otherProps}
+                onStorylyLoaded={onLoad}
+                onStorylyLoadFailed={onFail}
+                onStorylyActionClicked={onPress}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
                 storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
                 storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
-                storylyItemProgressBarColor={storylyItemProgressBarColor ? storylyItemProgressBarColor.map(processColor) : null}
+                storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
                 ref={el => (this._storylyView = el)}/>
         )
     }
@@ -46,11 +52,11 @@ Storyly.propTypes = {
     storyGroupPinIconColor: string,
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,
-    storylyItemProgressBarColor: arrayOf(string),
+    storyItemProgressBarColor: arrayOf(string),
 
-    onStorylyLoaded: func,
-    onStorylyLoadFailed: func,
-    onStorylyActionClicked: func
+    onLoad: func,
+    onFail: func,
+    onPress: func
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);
