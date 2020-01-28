@@ -24,23 +24,23 @@ Adding as react element
 <Storyly
     style={{ width: '100%', height: 120 }}
     storylyId="[YOUR_APP_ID_FROM_DASHBOARD]"
-    onStorylyLoaded={() => {
+    onLoad={() => {
         console.log("[Storyly] onStorylyLoaded");
     }}
-    onStorylyLoadFailed={() => {
+    onFail={() => {
         console.log("[Storyly] onStorylyLoadFailed");
     }}
-    onStorylyActionClicked={story => {
-        console.log("[Storyly] onStorylyActionClicked");
+    onPress={story => {
+        console.log("[Storyly] onStorylyPressed");
     }}
 />
 ```
 ## Storyly Events
 In Storyly, there are 3 different optional methods that you can override and use.  These are:
-* storylyLoaded: This method is called when your story groups are loaded without a problem.
-* storylyLoadFailed: This method is called if any problem occurs while loading story groups such as network problem etc…
-* storylyActionClicked: This method is called when the user clicks to action button on a story or swipes up in a story.  You need to handle how the story link should be opened, you need to override this method.
-`storylyActionClicked` method has a parameter called `story`. It's json representation of `Story` object. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
+* **onLoad**: This function is called when your story groups are loaded without a problem.
+* **onFail**: This function is called if any problem occurs while loading story groups such as network problem etc…
+* **onPress**: This function is called when the user presses to action button on a story or swipes up in a story. If want to change how the story link should be opened, you need to override this function.
+`onPress` function has a parameter called `story`. It's json representation of `Story` object. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
 ``` json
 {
     "index":[int],
@@ -59,7 +59,7 @@ In Storyly, there are 3 different optional methods that you can override and use
 }
 ```
 ## Storyly Methods
-* refresh: You can call this function to refresh storyly view and load stories again.
+* **refresh**: You can call this function to refresh storyly view and load stories again.
 ## UI Customizations
 Using Storyly SDK, you can customize story experience of your users. If you don’t specify any of these attributes, default values will be used. Some of the color related attributes are single color attributes and others require at least two colors.
 Here is the list of attributes that you can change:
@@ -141,7 +141,7 @@ Edited Sample:
 
 This attribute changes the border color of the story item icon. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used.
 #### ***Story Item Progress Bar Color (Two Colors):***
-You need to set `storylyItemProgressBarColor: arrayOf(string)` parameter.
+You need to set `storyItemProgressBarColor: arrayOf(string)` parameter.
 Default Sample:
 
 ![Default Group Text](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar.png)
