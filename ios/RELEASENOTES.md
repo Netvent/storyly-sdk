@@ -1,4 +1,14 @@
 # Release Notes
+### 0.0.20
+* add pull down for close story
+* add animation to dismiss action
+* add multiple instance support
+* fix video buffer issue
+* significant improvements on performance
+
+### 0.0.19
+* improvements and modications
+
 ### 0.0.18
 * rename appId to storylyId
 * improvements on video story
