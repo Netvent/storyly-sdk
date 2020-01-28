@@ -39,7 +39,7 @@ Adding as react element
 In Storyly, there are 3 different optional methods that you can override and use.  These are:
 * **onLoad**: This function is called when your story groups are loaded without a problem.
 * **onFail**: This function is called if any problem occurs while loading story groups such as network problem etc…
-* **onPress**: This function is called when the user presses to action button on a story or swipes up in a story. If want to change how the story link should be opened, you need to override this function.
+* **onPress**: This function is called when the user presses to action button on a story or swipes up in a story. If you want to change how the story link should be opened, you need to override this function.
 `onPress` function has a parameter called `story`. It's json representation of `Story` object. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
 ``` json
 {
