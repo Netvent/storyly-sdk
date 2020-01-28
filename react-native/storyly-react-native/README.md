@@ -17,7 +17,7 @@ react-native link storyly-react-native
 ## Usage
 Importing Storyly
 ```javascript
-import STStoryly from 'storyly-react-native';
+import Storyly from 'storyly-react-native';
 ```
 Adding as react element
 ``` js
