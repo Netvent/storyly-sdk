@@ -1,4 +1,7 @@
 # Release Notes
+### 0.0.21
+Gesture fix after overscroll dismiss
+
 ### 0.0.20
 * add pull down for close story
 * add animation to dismiss action
