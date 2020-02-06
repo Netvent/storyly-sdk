@@ -3,7 +3,7 @@ Storyly SDK is used for story representation provided by App Samurai. You can re
 
 Storyly SDK targets api level 17 or higher. 
 ## Getting Started
-Storyly SDK is available through Maven.  To install it, you must add the following dependency to application’s `build.gradle` file, be sure to use the latest version which is: [ ![Download](https://api.bintray.com/packages/appsamurai/maven/attribution/images/download.svg?) ](https://bintray.com/appsamurai/maven/storyly/_latestVersion).
+Storyly SDK is available through Maven.  To install it, you must add the following dependency to application’s `build.gradle` file, be sure to use the latest version which is: [ ![Download](https://api.bintray.com/packages/appsamurai/maven/storyly/images/download.svg) ](https://bintray.com/appsamurai/maven/storyly/_latestVersion).
 ```
 implementation ‘com.appsamurai.storyly:storyly:<latest-version>'
 ```
