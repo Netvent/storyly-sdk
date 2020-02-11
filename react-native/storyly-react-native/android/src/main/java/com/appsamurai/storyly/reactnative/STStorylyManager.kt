@@ -53,12 +53,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         }
     }
 
-    override fun receiveCommand(root: STStorylyView, commandId: String?, args: ReadableArray?) {
-        when (commandId) {
-            COMMAND_REFRESH_NAME -> root.storylyView.refresh()
-        }
-    }
-
     @ReactProp(name = PROP_STORYLY_ID)
     fun setPropStorylyId(view: STStorylyView, storylyId: String) {
         view.storylyView.storylyId = storylyId
