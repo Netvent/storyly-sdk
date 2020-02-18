@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun storylyStoryDismissed(storylyView: StorylyView) {
+                Log.d("[Storyly]", "storylyStoryDismissed")
             }
         }
     }
