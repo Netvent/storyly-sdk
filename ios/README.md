@@ -27,27 +27,29 @@ storylyView.refresh()
 ```
  
 ## Storyly Events
-In Storyly, there are 3 different optional methods that you can use in an extension.  These are:
-* storylyLoaded: This method is called when your story groups are loaded without a problem.
-* storylyLoadFailed: This method is called if any problem occurs while loading story groups such as network problem etc…
+In Storyly, there are 5 different optional methods that you can use in an extension.  These are:
+* storylyLoaded: This method is called when your story groups are loaded without a problem. It informs about loaded story groups and stories in them.
+* storylyLoadFailed: This method is called if any problem occurs while loading story groups such as network problem etc… You can find detailed information from `errorMessage` parameter.
 * storylyActionClicked: This method is called when the user clicks to action button on a story or swipes up in a story.  If you want to handle how the story link should be opened, you should override this method and you must return true as a result. Otherwise, SDK will open the link in a new activity. 
+* storylyStoryPresented: This method is called when a story is shown in fullscreen.
+* storylyStoryDismissed: This method is called when story screen is dismissed.
 
 Sample usages can be seen below:
 ```swift
 extension ViewController: StorylyDelegate {
-    func storylyLoaded(_ storylyView: StorylyView) {
-        print(“storylyLoaded”)
-    }
+    func storylyLoaded(_ storylyView: StorylyView, storyGroupList: [StoryGroup]) {}
     
-    func storylyLoadFailed(_ storylyView: StorylyView, error: StorylyError) {
-        print(“storylyLoadFailed \(error.localizedDescription)”)
-    }
+    func storylyLoadFailed(_ storylyView: StorylyView, errorMessage: String) {}
 
     // return true if app wants to handle redirection, otherwise return false
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) -> Bool {
         print(“storylyActionClicked \(story)”)
         return true
     }
+
+    func storylyStoryPresented(_ storylyView: StorylyView) {}
+    
+    func storylyStoryDismissed(_ storylyView: StorylyView) {}
 }
 ```
 As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows:
@@ -74,7 +76,7 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
     @objc public var actionUrl: String
 }
 
-@objc public final class StorylyData: NSObject {
+@objc public final class StoryData: NSObject {
     @objc public let key: String
     @objc public let value: String
 }
@@ -95,13 +97,13 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_textcolor.png)
 
 This attribute changes the text color of the story group. This attribute can be specified programmatically or from attributes inspector of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 ```swift
 storylyView.storyGroupTextColor = UIColor
 ```
-	
+    
 In order to set this attribute from design view, change the color of the `Story Group Text Color` under Storyly View section in attributes inspector.
 
 
@@ -116,13 +118,13 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_iconbackground_1.png)
 
 This attribute changes the background color of the story group icon which is shown to the user as skeleton view till the stories are loaded. This attribute can be specified programmatically or from attributes inspector of design view.
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 ```swift
 storylyView.storyGroupIconBackgroundColor = UIColor
 ```
-	
+    
 In order to set this attribute from design view, change the color of the `Story Group Icon Background Color` under Storyly View section in attributes inspector.
 
 #### ***Story Group Icon Border Color Seen (Multiple Colors):***
@@ -136,13 +138,13 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_seen_1.png)
 
 This attribute changes the border color of the story group icon which is already watched by the user. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can only be specified programmatically.
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 ```swift
 storylyView.storyGroupIconBackgroundColor = [UIColor]
 ```
-	
+    
 
 #### ***Story Group Icon Border Color Not Seen (Multiple Colors):***
 
@@ -161,7 +163,7 @@ In order to set this attribute programmatically use the following method:
 ```swift
 storylyView.storyGroupIconBorderColorNotSeen = [UIColor]
 ```
-	
+    
 
 #### ***Pinned Story Group Icon Color (Single Color):***
 
@@ -174,13 +176,13 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_pincolor_1.png)
 
 If any of the story group is selected as pinned story from dashboard, a little icon will appear right bottom side of the story group. This attribute changes the background color of this little icon. This attribute can be specified programmatically or from attributes inspector of design view.
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 ```swift
 storylyView.storyGroupPinIconColor = UIColor
 ```
-	
+    
 In order to set this attribute from design view, change the color of the `Story Group Pin Icon Color` under Storyly View section in attributes inspector.
 
 #### ***Story Item Text Color (Single Color):***
@@ -194,13 +196,13 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_textcolor_1.png)
 
 This attribute changes the text color of the story item. This attribute can be specified programmatically or from attributes inspector of design view.
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 ```swift
 storylyView.storyItemTextColor = UIColor
 ```
-	
+    
 In order to set this attribute from design view, change the color of the `Story Item Text Color` under Storyly View section in attributes inspector.
 
 #### ***Story Item Icon Border Color (Multiple Color):***
@@ -214,20 +216,19 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar_1.png)
 
 This attribute changes the border color of the story item icon. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can only be specified programmatically.
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 ```swift
 storylyView.storyItemIconBorderColor = [UIColor]
 ```
-	
+    
 
 #### ***Story Item Progress Bar Color (Two Colors):***
 This attribute changes the colors of the progress bars. The bars consists of two colors.  The first defined color is the color of the background bars and the second one is the color of the foreground bars while watching the stories. This attribute can only be specified programmatically.
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 ```swift
 storylyView.progressBarColor = [UIColor]
 ```
-	

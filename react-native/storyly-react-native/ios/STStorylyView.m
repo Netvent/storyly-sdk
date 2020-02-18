@@ -43,36 +43,71 @@
           rootViewController:(UIViewController * _Nonnull)rootViewController
                        story:(Story * _Nonnull)story {
 
-    NSMutableDictionary* storyDataMap = [NSMutableDictionary new];
-    for (StorylyData *data in story.media.data) {
-        [storyDataMap setObject:data.value forKey:data.key];
-    }
+
     if (self.onStorylyActionClicked) {
-        self.onStorylyActionClicked(@{
-            @"index": @(story.index),
-            @"title": story.title,
-            @"media": @{
-                    @"type": @(story.media.type),
-                    @"url": story.media.url,
-                    @"buttonText": story.media.buttonText,
-                    @"actionUrl": story.media.actionUrl,
-                    @"data": storyDataMap
-            }});
+        self.onStorylyActionClicked([self createStoryMap:story]);
     }
     return YES;
 }
 
-- (void)storylyLoadFailed:(StorylyView * _Nonnull)storylyView
-                    error:(StorylyError * _Nonnull)error {
+- (void)storylyLoaded:(StorylyView * _Nonnull)storylyView
+       storyGroupList:(NSArray<StoryGroup *> *)storyGroupList {
+    if (self.onStorylyLoaded) {
+        NSMutableArray* storyGroups = [NSMutableArray new];
+        for (StoryGroup *storyGroup in storyGroupList) {
+            [storyGroups addObject:[self createStoryGroupMap:storyGroup]];
+        }
+    }
+
+}
+
+-(void)storylyLoadFailed:(StorylyView *)storylyView errorMessage:(NSString *)errorMessage {
     if (self.onStorylyLoadFailed) {
-        self.onStorylyLoadFailed(@{});
+        self.onStorylyLoadFailed(@{
+            @"errorMessage": errorMessage
+        });
     }
 }
 
-- (void)storylyLoaded:(StorylyView * _Nonnull)storylyView {
-    if (self.onStorylyLoaded) {
-        self.onStorylyLoaded(@{});
+- (void)storylyStoryPresented:(StorylyView * _Nonnull)storylyView {
+    if (self.onStorylyStoryPresented) {
+        self.onStorylyStoryPresented(@{});
     }
+}
+
+- (void)storylyStoryDismissed:(StorylyView * _Nonnull)storylyView {
+    if (self.onStorylyStoryDismissed) {
+        self.onStorylyStoryDismissed(@{});
+    }
+}
+
+-(NSDictionary *)createStoryGroupMap:(StoryGroup * _Nonnull)storyGroup {
+    NSMutableArray* stories = [NSMutableArray new];
+    for (Story *story in storyGroup.stories) {
+        [stories addObject:[self createStoryMap:story]];
+    }
+    return @{
+        @"index": @(storyGroup.index),
+        @"title": storyGroup.title,
+        @"stories": stories
+    };
+}
+
+-(NSDictionary *)createStoryMap:(Story * _Nonnull)story {
+    NSMutableDictionary* storyDataMap = [NSMutableDictionary new];
+    for (StoryData *data in story.media.data) {
+        [storyDataMap setObject:data.value forKey:data.key];
+    }
+    return @{
+        @"index": @(story.index),
+        @"title": story.title,
+        @"media": @{
+                @"type": @(story.media.type),
+                @"url": story.media.url,
+                @"buttonText": story.media.buttonText,
+                @"actionUrl": story.media.actionUrl,
+                @"data": storyDataMap
+        }};
 }
 
 @end

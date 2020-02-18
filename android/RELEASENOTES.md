@@ -1,4 +1,17 @@
 # Release Notes
+### 1.0.0
+* IMPORTANT! change storylyLoad callback signature, please check README
+* IMPORTANT! change storylyLoadFailed callback signature, please check README
+* add storylyStoryShown and storylyStoryDismissed callbacks
+* add show and dismis api
+* rename StorylyData to StoryData
+* improvements on cutout handling
+* improvements on pull down and overscroll animations
+* fix video black screen issue on some Samsung devices
+
+### 0.0.22
+* improvements on multiline textview
+
 ### 0.0.21
 * improvements for phones with cutout display area(notch)
 * add multiple instance support

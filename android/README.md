@@ -21,57 +21,55 @@ storyly_view.storylyId = "[YOUR_APP_ID_FROM_DASHBOARD]"
 ```
 Java:
 ```java
-StorylyView storylyView = findViewById(R.id.storyly_view);
 storylyView.setStorylyId("[YOUR_APP_ID_FROM_DASHBOARD]");
 ```
 
 ## Storyly Events
-In Storyly, there are 3 different optional methods that you can override and use.  These are:
-* storylyLoaded: This method is called when your story groups are loaded without a problem.
-* storylyLoadFailed: This method is called if any problem occurs while loading story groups such as network problem etc…
+In Storyly, there are 5 different optional methods that you can override and use.  These are:
+* storylyLoaded: This method is called when your story groups are loaded without a problem. It informs about loaded story groups and stories in them.
+* storylyLoadFailed: This method is called if any problem occurs while loading story groups such as network problem etc… You can find detailed information from `errorMessage` parameter.
 * storylyActionClicked: This method is called when the user clicks to action button on a story or swipes up in a story.  If you want to handle how the story link should be opened, you should override this method and you must return true as a result. Otherwise, SDK will open the link in a new activity. 
-
+* storylyStoryShown: This method is called when a story is shown in fullscreen.
+* storylyStoryDismissed: This method is called when story screen is dismissed.
 Sample usages can be seen below:
 
 Kotlin:
 ```kotlin
 storyly_view.storylyListener = object: StorylyListener{
-    override fun storylyLoaded(storylyView: StorylyView) {
-        super.storylyLoaded(storylyView)
-        Log.d("[Storyly]", "storylyLoaded")
-    }
+    override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {}
 
-    override fun storylyLoadFailed(storylyView: StorylyView) {
-        super.storylyLoadFailed(storylyView)
-        Log.d("[Storyly]", "storylyLoadFailed")
-    }
+    override fun storylyLoadFailed(storylyView: StorylyView, errorMessage: String) {}
 
     // return true if app wants to handle redirection, otherwise return false
     override fun storylyActionClicked( storylyView: StorylyView, story: Story): Boolean {
-        Log.d("[Storyly]", "storylyActionClicked")
-		  return true
+          return true
     }
+
+    override fun storylyStoryShown(storylyView: StorylyView) {}
+
+    override fun storylyStoryDismissed(storylyView: StorylyView) {}
 }
 ```
 Java:
 ```java
 storylyView.setStorylyListener(new StorylyListener() {
     @Override
-    public void storylyLoaded(@NonNull StorylyView storylyView) {
-        Log.d("[Storyly]", "storylyLoaded");
-    }
+    ppublic void storylyLoaded(@NonNull StorylyView storylyView, @NonNull List<StoryGroup> storyGroupList) {}
 
     @Override
-    public void storylyLoadFailed(@NonNull StorylyView storylyView) {
-        Log.d("[Storyly]", "storylyLoadFailed");
-    }
+    public void storylyLoadFailed(@NonNull StorylyView storylyView, @NonNull String errorMessage) {}
 
     // return true if app wants to handle redirection, otherwise return false
     @Override
     public boolean storylyActionClicked(@NonNull StorylyView storylyView, @NonNull Story story) {
-         Log.d("[Storyly]", "storylyActionClicked");
          return true;
     }
+
+    @Override
+    public void storylyStoryShown(@NonNull StorylyView storylyView) {}
+
+    @Override
+    public void storylyStoryDismissed(@NonNull StorylyView storylyView) {}
 });
 ```
 
@@ -89,10 +87,10 @@ data class StoryMedia(
     val url: String,
     val buttonText: String,
     val data: List<StorylyData>?
- 	  val actionUrl: String
+    val actionUrl: String
 )
 
-data class StorylyData(
+data class StoryData(
     val key: String,
     val value: String
 )
@@ -104,6 +102,15 @@ enum class StoryType {
 }
 ``` 
 
+Kotlin:
+```kotlin
+storyly_view.show()
+```
+Java: 
+```java
+storylyView.show();
+```
+
 ## Refresh
 Kotlin:
 ```kotlin
@@ -111,8 +118,6 @@ storyly_view.refresh()
 ```
 Java: 
 ```java
-StorylyView storylyView = findViewById(R.id.storyly_view);
-…
 storylyView.refresh();
 ```
 ## UI Customizations
@@ -135,18 +140,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_textcolor.png)
 
 This attribute changes the text color of the story group. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryGroupTextColor(color: Int)
+    storylyView.setStoryGroupTextColor(color: Int)
 ```
 Java:
 ```java
-	storylyView.setStoryGroupTextColor(Int color)
+    storylyView.setStoryGroupTextColor(Int color)
 ```
-	
+    
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
@@ -169,18 +174,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_iconbackground_1.png)
 
 This attribute changes the background color of the story group icon which is shown to the user as skeleton view till the stories are loaded. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryGroupIconBackgroundColor(color: Int)
+    storylyView.setStoryGroupIconBackgroundColor(color: Int)
 ```
 Java:
 ```java
-	storylyView.setStoryGroupIconBackgroundColor(Int color)
+    storylyView.setStoryGroupIconBackgroundColor(Int color)
 ```
-	
+    
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
@@ -203,18 +208,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_seen_1.png)
 
 This attribute changes the border color of the story group icon which is already watched by the user. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryGroupIconBorderColorSeen(colors: Array<Int>)
+    storylyView.setStoryGroupIconBorderColorSeen(colors: Array<Int>)
 ```
 Java:
 ```java
-	storylyView.setStoryGroupIconBorderColorSeen(Integer[] color)
+    storylyView.setStoryGroupIconBorderColorSeen(Integer[] color)
 ```
-	
+    
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml
@@ -241,18 +246,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_notseen_1.png)
 
 This attribute changes the border color of the story group icon which has not watched by the user yet. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryGroupIconBorderColorNotSeen(colors: Array<Int>)
+    storylyView.setStoryGroupIconBorderColorNotSeen(colors: Array<Int>)
 ```
 Java:
 ```java
-	setStoryGroupIconBorderColorNotSeen(Integer[] color)
+    setStoryGroupIconBorderColorNotSeen(Integer[] color)
 ```
-	
+    
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml
@@ -282,18 +287,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/sg_pincolor_1.png)
 
 If any of the story group is selected as pinned story from dashboard, a little icon will appear right bottom side of the story group. This attribute changes the background color of this little icon. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryGroupPinIconColor(color: Int)
+    storylyView.setStoryGroupPinIconColor(color: Int)
 ```
 Java:
 ```java
-	storylyView.setStoryGroupPinIconColor(Int color)
+    storylyView.setStoryGroupPinIconColor(Int color)
 ```
-	
+    
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
@@ -315,18 +320,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_textcolor_1.png)
 
 This attribute changes the text color of the story item. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryItemTextColor(color: Int)
+    storylyView.setStoryItemTextColor(color: Int)
 ```
 Java:
 ```java
-	storylyView.setStoryItemTextColor(Int color)
+    storylyView.setStoryItemTextColor(Int color)
 ```
-	
+    
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
@@ -348,18 +353,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_iconborder_1.png)
 
 This attribute changes the border color of the story item icon. The border consists of color gradients. At least 2 colors must be defined in order to use this attribute. If a single color is requested,  two same color code can be used. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryItemIconBorderColor(colors: Array<Int>)
+    storylyView.setStoryItemIconBorderColor(colors: Array<Int>)
 ```
 Java:
 ```java
-	storylyView.setStoryItemIconBorderColor(Integer[] color)
+    storylyView.setStoryItemIconBorderColor(Integer[] color)
 ```
-	
+    
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml
@@ -386,18 +391,18 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar_1.png)
 
 This attribute changes the colors of the progress bars. The bars consists of two colors.  The first defined color is the color of the background bars and the second one is the color of the foreground bars while watching the stories. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
-	
+    
 In order to set this attribute programmatically use the following method: 
 
 Kotlin:
 ```kotlin
-	storylyView.setStoryItemProgressBarColor(colors: Array<Int>)
+    storylyView.setStoryItemProgressBarColor(colors: Array<Int>)
 ```
 Java:
 ```java
-	storylyView.setStoryItemProgressBarColor(Integer[] color)
+    storylyView.setStoryItemProgressBarColor(Integer[] color)
 ```
-	
+    
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml

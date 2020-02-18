@@ -1,6 +1,18 @@
 # Release Notes
+### 1.0.0
+* IMPORTANT! change storylyLoad callback signature, please check README
+* IMPORTANT! change storylyLoadFailed callback signature, please check README
+* add storylyStoryPresented and storylyStoryDismissed callbacks
+* rename StorylyData to StoryData
+* improvements on pull down and overscroll animations
+
+### 0.0.22
+* improvements on notch handling
+* improvements on dismiss animation for iPhoneX
+* fix StorylyView constructors' visibility modifier issue
+
 ### 0.0.21
-Gesture fix after overscroll dismiss
+* fix gesture handling for overscroll dismiss
 
 ### 0.0.20
 * add pull down for close story

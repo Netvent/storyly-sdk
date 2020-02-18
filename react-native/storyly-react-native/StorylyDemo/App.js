@@ -19,15 +19,21 @@ export default class App extends Component<{}> {
                 <Storyly
                     ref={ref => { this.storyly = ref }}
                     style={{ width: '100%', height: 120, marginTop: 4 }}
-                    storylyId=[YOUR_APP_ID]
-                    onStorylyLoaded={() => {
-                        console.log("[Storyly] onStorylyLoaded");
+                    storylyId=[YOUR_APP_ID_FROM_DASHBOARD]
+                    onLoad={storyGroupList => {
+                        console.log("[Storyly] onLoad");
                     }}
-                    onStorylyLoadFailed={() => {
-                        console.log("[Storyly] onStorylyLoadFailed");
+                    onFail={errorMessage => {
+                        console.log("[Storyly] onFail");
                     }}
-                    onStorylyActionClicked={story => {
-                        console.log("[Storyly] onStorylyActionClicked");
+                    onPress={story => {
+                        console.log("[Storyly] onPress");
+                    }}
+                    onStoryOpen={() => {
+                        console.log("[Storyly] onStoryOpen");
+                    }}
+                    onStoryClose={() => {
+                        console.log("[Storyly] onStoryClose");
                     }}/>
                 <Button
                     onPress={() => { this.storyly.refresh(); }}

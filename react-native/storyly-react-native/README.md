@@ -24,21 +24,23 @@ Adding as react element
 <Storyly
     style={{ width: '100%', height: 120 }}
     storylyId="[YOUR_APP_ID_FROM_DASHBOARD]"
-    onLoad={() => {
-        console.log("[Storyly] onStorylyLoaded");
-    }}
-    onFail={() => {
-        console.log("[Storyly] onStorylyLoadFailed");
-    }}
-    onPress={story => {
-        console.log("[Storyly] onStorylyPressed");
-    }}
+    onLoad={storyGroupList => {}}
+    onFail={errorMessage => {}}
+    onPress={story => {}}
+    onStoryOpen={() => {}}
+    onStoryClose={() => {}}
 />
 ```
 ## Storyly Events
-In Storyly, there are 3 different optional methods that you can override and use.  These are:
-* **onLoad**: This function is called when your story groups are loaded without a problem.
-* **onFail**: This function is called if any problem occurs while loading story groups such as network problem etc…
+In Storyly, there are 5 different optional methods that you can override and use.  These are:
+* **onLoad**: This function is called when your story groups are loaded without a problem. It informs about loaded story groups and stories in them. Check `storyGroupList` member of function parameter.
+``` json
+{
+    "index":[int],
+    "title":[string],
+    "stories":[jsonarray of story]
+}
+* **onFail**: This function is called if any problem occurs while loading story groups such as network problem etc… You can find detailed information from `errorMessage` parameter.
 * **onPress**: This function is called when the user presses to action button on a story or swipes up in a story. If you want to change how the story link should be opened, you need to override this function.
 `onPress` function has a parameter called `story`. It's json representation of `Story` object. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
 ``` json
@@ -58,6 +60,9 @@ In Storyly, there are 3 different optional methods that you can override and use
     }
 }
 ```
+* **onStoryOpen**: This method is called when a story is shown in fullscreen.
+* **onStoryClose**: This method is called when story screen is dismissed.
+
 ## Storyly Methods
 * **refresh**: You can call this function to refresh storyly view and load stories again.
 ## UI Customizations
