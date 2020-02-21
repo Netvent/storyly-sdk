@@ -1,4 +1,8 @@
 # Release Notes
+### 1.0.1
+* improvements on placement for different device ratio
+* fix orientation calculation issue
+
 ### 1.0.0
 * IMPORTANT! change storylyLoad callback signature, please check README
 * IMPORTANT! change storylyLoadFailed callback signature, please check README
