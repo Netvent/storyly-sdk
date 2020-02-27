@@ -2,7 +2,7 @@
 # Storyly External API
 Storyly External API is used to manage your apps, story groups and stories via HTTP requests. 
 ## Getting Started
-To use the external API, you will need to create a unique API Token from dashboard. Login to dashboard, navigate to `Settings  > User Settings` page, where you can create or update your token. This token provides read and write access to your account, so do not share or distribute it.
+To use the external API, you will need to create a unique API Token from dashboard. Login to dashboard, navigate to `Settings  > User Settings` page, where you can create or update your token. This token provides read and write access to your account, so do not share or distribute it. Do not use this API to publish your stories to any platform, as it is rate limited and your token will be exposed.
 ## Endpoints
 Storyly External API base URL is: `https://api.storyly.io/api`
 
