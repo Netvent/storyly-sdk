@@ -13,8 +13,21 @@ Token should be provided on query string of each API request, such as:  `https:/
 Available filters and parameters (will be described in detail below) can be added to query string.
 
 All post / patch request bodies should be in JSON format and `Content-Type: applicaton/json` should be added to request header.
+
+All date fields are in this format: yyyy-mm-dd hh-mm-dd
 ## App Endpoint
 App endpoint allows list, create and delete actions.
+### App Entity
+```
+id: {int} Internal ID of the app.
+token: {string} Token for SDK requests.
+title: {string} Name of the app.
+store_id: {string} Play Store package ID or Apple Store id.
+store_type: {string} App Store type "play" for Google Play, "ios" for Apple.
+category: {string} Category of the app.
+detailed_info: {string} Additional Store information about app.
+settings: {object} Additional settings for app.
+```
 ### List
 Returns list of apps based on provided filters.
 Request Method: `GET`
@@ -87,7 +100,7 @@ Response Body:
 ```
  ---
 ### Create
-Create an app record.
+Create an app record. Post the app's store / package id. App details will be fetched from store. If your app is not store yet, just post the store / package id. We can fetch details later.
 Request Method: `Post`
 #### Sample Request:
 `POST: https://api.storyly.io/api/app?token={your_token_here}`
@@ -135,6 +148,21 @@ Response Body:
 ```
 ## Story Group Endpoint
 Story Group Endpoint allows list, create, update and delete actions.
+### Story Group Entity
+```
+"id": {int} Internal ID of the story group.
+"app_id": {int} Internal ID of the app this story group attached.
+"title": {string} Title of the story group.
+"icon": {string} URL of the story group icon.
+"target_cap": {int} Target view cap. Story group will be paused when view count reaches cap.
+"pinned": {bool} Pin status of the story group.
+"sort_order": {int} Order of the story group.
+"settings": {object} Additonal story group settings.
+"status": {int} Status of the story group. Only ACTIVE story groups will be displayed by SDK. -- Possible values: [ACTIVE = 1, PASSIVE = 2, CAP_REACHED = 3, END_DATE_REACHED = 4, ARCHIVED = 9]
+"views": {int} View count of the story group.
+"ts_start": {string} Start date of the story group. Story group will not be displayed by SDK if this date is not reached.
+"ts_end": {string} End date of the story group. Story group will not be displayed by SDK after this date is reached.
+```
 ### List
 Returns list of story groups based on provided filters.
 `Request Method: GET`
@@ -298,6 +326,23 @@ Response Body:
 ```
 ## Story Endpoint
 Story Endpoint allows list, create, update and delete actions.
+### Story Entity
+```
+id: {int} Internal ID of the story.
+story_group_id: {int} Internal ID of the story group this story is attached.
+type: {int} Type of the story. Required while creating a story. -- Possible values: [IMAGE = 1, VIDEO = 2]
+title: {string} Title of the story.
+sort_order: {int} Order the story.
+media: {string} URL of the story media.
+mime_type: {string} MIME Type of the story media.
+button_text: {string} Call-to-action text.
+outlink: {string} Call-to-action action definition. Can be a URL or in app action.
+settings: {string} Additional story settings.
+status: {int} status of the story -- Possible values: [ACTIVE = 1, PASSIVE = 2, PASSIVE_BY_STORY_GROUP = 3, END_DATE_REACHED = 4, ARCHIVED = 9]
+views: {int} view count of the story.
+ts_start: {string} Start date of the story. Story will not be displayed by SDK if this date is not reached.
+ts_end: {string} End date of the story. Story will not be displayed by SDK after this date is reached.
+```
 ### List
 Returns list of stories based on provided filters.
 `Request Method: GET`
