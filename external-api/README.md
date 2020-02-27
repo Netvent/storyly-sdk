@@ -5,9 +5,13 @@ Storyly External API is used to manage your apps, story groups and stories via H
 To use the external API, you will need to create a unique API Token from dashboard. Login to dashboard, navigate to `Settings  > User Settings` page, where you can create or update your token. This token provides read and write access to your account, so do not share or distribute it.
 ## Endpoints
 Storyly External API base URL is: `https://api.storyly.io/api`
+
 Currently available endpoints are: `/app`  `/story_group` `/story`
+
 Token should be provided on query string of each API request, such as:  `https://api.storyly.io/api/app?token={your_token_here}`
+
 Available filters and parameters (will be described in detail below) can be added to query string.
+
 All post / patch request bodies should be in JSON format and `Content-Type: applicaton/json` should be added to request header.
 ## App Endpoint
 App endpoint allows list, create and delete actions.
@@ -91,7 +95,7 @@ Request Method: `Post`
 Request Body: 
 ```json
 {
-    "app_id": "com.package.id" //Store id of your app, should be android package name or iOS id like id378084401
+    "app_id": "com.package.id"
 }
 ```
 Response Body:
