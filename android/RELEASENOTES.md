@@ -1,4 +1,7 @@
 # Release Notes
+### 1.0.2
+* improvements on placement for different device ratio including tablets
+
 ### 1.0.1
 * improvements on placement for different device ratio
 * fix orientation calculation issue
