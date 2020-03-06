@@ -1,4 +1,8 @@
 # Release Notes
+### 1.0.2
+* improvements on placement for different device ratio including tablets
+* improvement on orientation change handling for iPads
+
 ### 1.0.1
 * improvements on placement for different device ratios
 * fix pin icon bug
