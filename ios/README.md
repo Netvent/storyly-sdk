@@ -43,7 +43,7 @@ extension ViewController: StorylyDelegate {
 
     // return true if app wants to handle redirection, otherwise return false
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) -> Bool {
-        print(“storylyActionClicked \(story)”)
+        print("storylyActionClicked \(story)")
         return true
     }
 
