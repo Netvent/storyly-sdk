@@ -9,10 +9,33 @@ yarn add storyly-react-native
 npm install --save storyly-react-native
 ```
 *Linking library*
+
 react-native 0.60+ handles autolinking as it mentioned in [autolinking in react-native](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
 For react-native 0.60- version auto linking needs to be done to use libraries with native dependencies correctly. Please refer detailed explanation from [Linking Libraries in iOS](https://facebook.github.io/react-native/docs/linking-libraries-ios.html)
 ``` shell
 react-native link storyly-react-native
+```
+
+*Kotlin Support*
+
+You need to set Kotlin plugin to Android App. You can add this to app's main gradle file which is located in android/build.gradle.
+```
+buildscript {
+    ext.kotlin_version = '1.3.70'
+    ...
+    dependencies {
+        ...
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        ...
+    }
+}
+```
+
+Moreover, you need to check AndroidX support of your project. You can do this check and add related lines if it's required from android/gradle.properties file.
+```
+android.useAndroidX=true
+android.enableJetifier=true
 ```
 ## Usage
 Importing Storyly
