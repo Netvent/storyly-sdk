@@ -1,0 +1,35 @@
+PODS:
+  - Flutter (1.0.0)
+  - SDWebImage (5.6.0):
+    - SDWebImage/Core (= 5.6.0)
+  - SDWebImage/Core (5.6.0)
+  - Storyly (1.0.2):
+    - SDWebImage
+  - storyly_flutter (0.0.1):
+    - Flutter
+    - Storyly
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - storyly_flutter (from `.symlinks/plugins/storyly_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - SDWebImage
+    - Storyly
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  storyly_flutter:
+    :path: ".symlinks/plugins/storyly_flutter/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  SDWebImage: 21b19f56b4226cdfe3aefe4e6848dc43ed129a86
+  Storyly: e6bc7015aa44f2162a624eae2e6a963f46dd9844
+  storyly_flutter: 06136642a3bf94e8f238f036b6e064d5ad697b91
+
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+
+COCOAPODS: 1.9.1
