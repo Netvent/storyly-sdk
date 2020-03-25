@@ -63,6 +63,7 @@ In Storyly, there are 5 different optional methods that you can override and use
     "title":[string],
     "stories":[jsonarray of story]
 }
+```
 * **onFail**: This function is called if any problem occurs while loading story groups such as network problem etc… You can find detailed information from `errorMessage` parameter.
 * **onPress**: This function is called when the user presses to action button on a story or swipes up in a story. If you want to change how the story link should be opened, you need to override this function.
 `onPress` function has a parameter called `story`. It's json representation of `Story` object. You can check native documentation for paratemers in detail, also here is the sample format of parameters;

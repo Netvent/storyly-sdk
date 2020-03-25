@@ -1,8 +1,7 @@
 name: storyly_flutter
 description: Storyly for flutter.
-version: 0.0.1
-author: AppSamurai Mobile Team
-homepage: "https://dashboard.storyly.io"
+version: 0.0.2
+homepage: "https://github.com/Netvent/storyly-mobile/"
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
