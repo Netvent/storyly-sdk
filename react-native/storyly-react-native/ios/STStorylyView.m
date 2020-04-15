@@ -39,6 +39,16 @@
     [_storylyView refresh];
 }
 
+- (void) open {
+    [_storylyView presentWithAnimated:false completion:nil];
+    [_storylyView resume];
+}
+
+- (void) close {
+    [_storylyView pause];
+    [_storylyView dismissWithAnimated:false completion:nil];
+}
+
 - (BOOL)storylyActionClicked:(StorylyView * _Nonnull)storylyView
           rootViewController:(UIViewController * _Nonnull)rootViewController
                        story:(Story * _Nonnull)story {
@@ -94,19 +104,13 @@
 }
 
 -(NSDictionary *)createStoryMap:(Story * _Nonnull)story {
-    NSMutableDictionary* storyDataMap = [NSMutableDictionary new];
-    for (StoryData *data in story.media.data) {
-        [storyDataMap setObject:data.value forKey:data.key];
-    }
     return @{
         @"index": @(story.index),
         @"title": story.title,
         @"media": @{
                 @"type": @(story.media.type),
                 @"url": story.media.url,
-                @"buttonText": story.media.buttonText,
-                @"actionUrl": story.media.actionUrl,
-                @"data": storyDataMap
+                @"actionUrl": story.media.actionUrl
         }};
 }
 

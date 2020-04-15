@@ -46,7 +46,7 @@ Adding as react element
 ``` js
 <Storyly
     style={{ width: '100%', height: 120 }}
-    storylyId="[YOUR_APP_ID_FROM_DASHBOARD]"
+    storylyId=[YOUR_APP_ID_FROM_DASHBOARD]
     onLoad={storyGroupList => {}}
     onFail={errorMessage => {}}
     onPress={story => {}}

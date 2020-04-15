@@ -17,11 +17,11 @@ implementation ‘com.appsamurai.storyly:storyly:<latest-version>'
 ## Initialization
 Kotlin:
 ```kotlin
-storyly_view.storylyId = "[YOUR_APP_ID_FROM_DASHBOARD]"
+storyly_view.storylyId = [YOUR_APP_ID_FROM_DASHBOARD]
 ```
 Java:
 ```java
-storylyView.setStorylyId("[YOUR_APP_ID_FROM_DASHBOARD]");
+storylyView.setStorylyId([YOUR_APP_ID_FROM_DASHBOARD]);
 ```
 
 ## Storyly Events

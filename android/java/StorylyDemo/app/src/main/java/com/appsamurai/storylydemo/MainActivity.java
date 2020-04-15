@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         StorylyView storylyView = findViewById(R.id.storyly_view);
-        storylyView.setStorylyId("[YOUR_APP_ID_FROM_DASHBOARD]");
+        storylyView.setStorylyId([YOUR_APP_ID_FROM_DASHBOARD]);
         storylyView.setStorylyListener(new StorylyListener() {
             @Override
             public void storylyLoaded(@NonNull StorylyView storylyView,

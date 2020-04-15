@@ -21,6 +21,30 @@ RCT_EXPORT_METHOD(refresh:(nonnull NSNumber *)reactTag)
     }];
 }
 
+RCT_EXPORT_METHOD(open:(nonnull NSNumber *)reactTag)
+{
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
+        STStorylyView *stStorylyView = viewRegistry[reactTag];
+        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
+            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
+        } else {
+            [stStorylyView open];
+        }
+    }];
+}
+
+RCT_EXPORT_METHOD(close:(nonnull NSNumber *)reactTag)
+{
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
+        STStorylyView *stStorylyView = viewRegistry[reactTag];
+        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
+            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
+        } else {
+            [stStorylyView close];
+        }
+    }];
+}
+
 RCT_REMAP_VIEW_PROPERTY(storylyId, _storylyView.storylyId, NSString)
 
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorSeen, _storylyView.storyGroupIconBorderColorSeen, NSArray<UIColor *>)

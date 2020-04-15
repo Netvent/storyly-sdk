@@ -23,6 +23,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
+        private const val COMMAND_OPEN_NAME = "open"
+        private const val COMMAND_OPEN_CODE = 2
+        private const val COMMAND_CLOSE_NAME = "close"
+        private const val COMMAND_CLOSE_CODE = 3
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -50,12 +54,18 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     }
 
     override fun getCommandsMap(): Map<String, Int> {
-        return MapBuilder.of(COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE)
+        return MapBuilder.of(
+                COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE,
+                COMMAND_OPEN_NAME, COMMAND_OPEN_CODE,
+                COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE
+        )
     }
 
     override fun receiveCommand(root: STStorylyView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             COMMAND_REFRESH_CODE -> root.storylyView.refresh()
+            COMMAND_OPEN_CODE -> root.storylyView.show()
+            COMMAND_CLOSE_CODE -> root.storylyView.dismiss()
         }
     }
 

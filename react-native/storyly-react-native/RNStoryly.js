@@ -15,6 +15,23 @@ class Storyly extends Component {
         );
     };
 
+    open = () => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.open,
+            [],
+        );
+    };
+
+
+    close = () => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.close,
+            [],
+        );
+    };
+
     render() {
         const {
             storyGroupIconBorderColorSeen,

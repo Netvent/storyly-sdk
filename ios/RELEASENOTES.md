@@ -1,4 +1,7 @@
 # Release Notes
+### 1.1.0
+* add interactive stories support for custom button action, text and emoji reaction
+
 ### 1.0.2
 * improvements on placement for different device ratio including tablets
 * improvement on orientation change handling for iPads
