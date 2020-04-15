@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyStoryDismissed;
 
 - (void)refresh;
+- (void)open;
+- (void)close;
 
 @end
 
