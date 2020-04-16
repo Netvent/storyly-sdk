@@ -84,13 +84,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             storyMap.putMap("media", Arguments.createMap().also { storyMediaMap ->
                 storyMediaMap.putInt("type", story.media.type.ordinal)
                 storyMediaMap.putString("url", story.media.url)
-                storyMediaMap.putString("buttonText", story.media.buttonText)
                 storyMediaMap.putString("actionUrl", story.media.actionUrl)
-                storyMediaMap.putMap("data", Arguments.createMap().also { storyDataMap ->
-                    story.media.data?.forEach {
-                        storyDataMap.putString(it.key, it.value)
-                    }
-                })
             })
         }
     }
