@@ -232,3 +232,8 @@ In order to set this attribute programmatically use the following method:
 ```swift
 storylyView.progressBarColor = [UIColor]
 ```
+## Advanced
+
+#### ***Universal Links***
+
+Predefined story groups and stories can be given external sources as universal links as long as your application support universal link. The only need is to register these universal links in Storyly Dashboard. 
