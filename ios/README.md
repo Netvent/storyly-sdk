@@ -236,4 +236,4 @@ storylyView.progressBarColor = [UIColor]
 
 #### ***Universal Links***
 
-Predefined story groups and stories can be given external sources as universal links as long as your application support universal link. The only need is to register these universal links in Storyly Dashboard. 
+Predefined story groups and stories can be given external sources as universal links as long as your application supports universal link. The only need is to register these universal links in Storyly Dashboard. 
