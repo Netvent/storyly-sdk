@@ -420,6 +420,6 @@ In order to set this attribute from design view, find and fill the `storyItemPro
 
 ## Advanced
 
-#### ***Universal Links***
+#### ***Deep Links***
 
 Predefined story groups and stories can be given external sources as deep links as long as your application supports deep link. The only need is to register these deep links in Storyly Dashboard. 
