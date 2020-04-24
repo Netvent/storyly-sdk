@@ -1,4 +1,9 @@
 # Release Notes
+### 1.2.0
+* Performance improvements on story transitions
+* Added capability to open stories using deeplink generated from dashboard
+* [Segmentify](https://www.segmentify.com/) integration to show personalized stories to users
+
 ### 1.1.0
 * add interactive stories support for custom button action, text and emoji reaction
 
