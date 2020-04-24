@@ -5,14 +5,14 @@ Storyly SDK targets api level 17 or higher.
 ## Getting Started
 Storyly SDK is available through Maven.  To install it, you must add the following dependency to application’s `build.gradle` file, be sure to use the latest version which is: [ ![Download](https://api.bintray.com/packages/appsamurai/maven/storyly/images/download.svg) ](https://bintray.com/appsamurai/maven/storyly/_latestVersion).
 ```
-implementation ‘com.appsamurai.storyly:storyly:<latest-version>'
+implementation 'com.appsamurai.storyly:storyly:<latest-version>'
 ```
 ## Adding from XML
 ```xml
 <com.appsamurai.storyly.StorylyView
     android:id="@+id/storyly_view"
     android:layout_width="match_parent"
-    android:layout_height=“120dp”/>
+    android:layout_height="120dp"/>
 ```
 ## Initialization
 Kotlin:
@@ -125,7 +125,7 @@ Using Storyly SDK, you can customize story experience of your users. If you don�
 
 In order to specify the attributes in layout xml, following part should be added as layout attribute:
 ```xml
-xmlns:app=“http://schemas.android.com/apk/res-auto”
+xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
 
 Here is the list of attributes that you can change:
@@ -155,9 +155,9 @@ Java:
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
-app:storyGroupTextColor=“@android:color/<color>”
+app:storyGroupTextColor="@android:color/<color>"
 or
-app:storyGroupTextColor=“#RGBA”
+app:storyGroupTextColor="#RGBA"
 ```
 
 In order to set this attribute from design view, find and fill the `storyGroupTextColor` attribute.
@@ -189,9 +189,9 @@ Java:
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
-app:storyGroupIconBackgroundColor=“@android:color/<color>”
+app:storyGroupIconBackgroundColor="@android:color/<color>"
 or
-app:storyGroupIconBackgroundColor=“#RGBA”
+app:storyGroupIconBackgroundColor="#RGBA"
 ```
 
 In order to set this attribute from design view, find and fill the `storyGroupIconBackgroundColor` attribute.
@@ -223,14 +223,14 @@ Java:
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml
-<array name=“seen”>
+<array name="seen">
     <item>#FFDBDBDB</item>
     <item>#FFDBDBDB</item>
 </array>
 ```
 
 ```xml
-app:storyGroupIconBorderColorSeen=“@<location>/seen”
+app:storyGroupIconBorderColorSeen="@<location>/seen"
 ```
 
 In order to set this attribute from design view, find and fill the `storyGroupIconBorderColorSeen` attribute as an array of color codes.
@@ -261,7 +261,7 @@ Java:
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml
-<array name=“notSeen”>
+<array name="notSeen">
     <item>#FFFED169</item>
     <item>#FFFA7C20</item>
     <item>#FFC9287B</item>
@@ -271,7 +271,7 @@ In order to set this attribute from layout xml, first define an array of color c
 ```
 
 ```xml
-app:storyGroupIconBorderColorNotSeen=“@<location>/notSeen”
+app:storyGroupIconBorderColorNotSeen="@<location>/notSeen"
 ```
 
 In order to set this attribute from design view, find and fill the `storyGroupIconBorderColorNotSeen` attribute as an array of color codes.
@@ -302,9 +302,9 @@ Java:
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
-app:storyGroupPinIconColor=“@android:color/<color>”
+app:storyGroupPinIconColor="@android:color/<color>"
 or
-app:storyGroupPinIconColor=“#RGBA”
+app:storyGroupPinIconColor="#RGBA"
 ```
 
 In order to set this attribute from design view, find and fill the `storyGroupPinIconColor` attribute.
@@ -335,9 +335,9 @@ Java:
 In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
 
 ```xml
-app:storyItemTextColor=“@android:color/<color>”
+app:storyItemTextColor="@android:color/<color>"
 or
-app:storyItemTextColor=“#RGBA”
+app:storyItemTextColor="#RGBA"
 ```
 
 In order to set this attribute from design view, find and fill the `storyItemTextColor` attribute.
@@ -368,14 +368,14 @@ Java:
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml
-<array name=“storyItemBorderColors”>
+<array name="storyItemBorderColors">
     <item>#FFDBDBDB</item>
     <item>#FFDBDBDB</item>
 </array>
 ```
 
 ```xml
-app:storyItemIconBorderColor=“@<location>/storyItemBorderColors”
+app:storyItemIconBorderColor="@<location>/storyItemBorderColors"
 ```
 
 In order to set this attribute from design view, find and fill the `storyItemIconBorderColor` attribute as an array of color codes.
@@ -406,14 +406,28 @@ Java:
 In order to set this attribute from layout xml, first define an array of color code items as a resource and then give the name of the array as reference as a StorylyView attribute:
 
 ```xml
-<array name=“progressBarColors”>
+<array name="progressBarColors">
     <item>#CCCCCCCC</item>
     <item>#FFFFFFFF</item>
 </array>
 ```
 
 ```xml
-app:storyItemProgressBarColor=“@<location>/progressBarColors”
+app:storyItemProgressBarColor="@<location>/progressBarColors"
 ```
 
 In order to set this attribute from design view, find and fill the `storyItemProgressBarColor` attribute as an array of color codes.
+
+## Advanced
+
+### Deep Links
+
+Storyly Dashboard generates a deep link with app's predefined custom scheme. Application needs to handle the setup of intent handling and route the related uri to Storyly SDK to open related story. 
+
+Application can determine from url's host if it's related with Storyly SDK, host will be 'storyly' for Storyly Dashboard generated deep link urls.
+
+```kotlin
+if (deeplinkUrl.host.equals("storyly")) {
+    storylyView.openStory(payload= [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
+}
+```
