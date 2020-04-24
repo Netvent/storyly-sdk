@@ -82,6 +82,12 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
 }
 ``` 
 
+## Third Party Library Integrations
+In Storyly, you can use different story templates to show personalized products to your users if you are using one of the following personalization platforms. Currently, [Segmentify](https://www.segmentify.com/) is supported.
+
+#### Segmentify:
+If you are planning to use Segmentify story group, please make sure you initialize Segmentify before Storyly initialization. Then, you can create different template stories from dashboard which has a Segmentify source. For more details on Segmentify integration: https://segmentify.github.io/segmentify-dev-doc/integration_ios/
+
 ## UI Customizations
 Using Storyly SDK, you can customize story experience of your users. If you don’t specify any of these attributes, default values will be used. Some of color related attributes are single color attributes and others requires at least two colors. 
 
