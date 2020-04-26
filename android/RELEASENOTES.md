@@ -1,4 +1,7 @@
 # Release Notes
+### 1.2.1
+* fix crash during deeplink openings
+
 ### 1.2.0
 * Performance improvements on story transitions
 * Added capability to open stories using deeplink generated from dashboard
