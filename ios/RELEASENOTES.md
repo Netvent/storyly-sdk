@@ -1,5 +1,8 @@
 # Release Notes
 ### 1.2.1
+* add dependency to podspec
+
+### 1.2.1
 * fix crash during deeplink openings
 
 ### 1.2.0
