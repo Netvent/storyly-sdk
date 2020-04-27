@@ -1,5 +1,5 @@
 # Release Notes
-### 1.2.1
+### 1.2.2
 * add dependency to podspec
 
 ### 1.2.1
