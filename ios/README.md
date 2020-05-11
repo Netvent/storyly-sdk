@@ -238,22 +238,6 @@ In order to set this attribute programmatically use the following method:
 ```swift
 storylyView.progressBarColor = [UIColor]
 ```
-<<<<<<< HEAD
-
-## Advanced
-
-### Deep Links
-
-Storyly Dashboard generates a deep link with app's predefined custom scheme. Application needs to handle the setup of intent handling and route the uri to Storyly SDK to open the story. 
-
-Application can determine from url's host if it's related with Storyly SDK, host will be 'storyly' for Storyly Dashboard generated deep link urls.
-
-```swift
-if deeplinkUrl.host.elementsEqual("storyly") {
-    storylyView.openStory(payload: [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
-}
-```
-=======
 ####  ***Story Group Size:***
 
 This attribute changes the size of the story group. This attribute can be specified programmatically or from attributes inspector of design view. 
@@ -269,7 +253,14 @@ In order to set this attribute from design view, change the color of the `Story 
 
 ## Advanced
 
-#### ***Universal Links***
+### Deep Links
 
-Predefined story groups and stories can be given external sources as universal links as long as your application supports universal link. The only need is to register these universal links in Storyly Dashboard. 
->>>>>>> 580b02b0d29601571955ba2c800da2bd8025f74a
+Storyly Dashboard generates a deep link with app's predefined custom scheme. Application needs to handle the setup of intent handling and route the uri to Storyly SDK to open the story. 
+
+Application can determine from url's host if it's related with Storyly SDK, host will be 'storyly' for Storyly Dashboard generated deep link urls.
+
+```swift
+if deeplinkUrl.host.elementsEqual("storyly") {
+    storylyView.openStory(payload: [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
+}
+```
