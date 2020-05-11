@@ -425,6 +425,7 @@ app:storyItemProgressBarColor="@<location>/progressBarColors"
 
 In order to set this attribute from design view, find and fill the `storyItemProgressBarColor` attribute as an array of color codes.
 
+<<<<<<< HEAD
 ## Advanced
 
 ### Deep Links
@@ -438,3 +439,35 @@ if (deeplinkUrl.host.equals("storyly")) {
     storylyView.openStory(payload= [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
 }
 ```
+=======
+####  ***Story Group Size:***
+
+This attribute changes the size of the story group. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
+    
+In order to set this attribute programmatically use the following method: 
+
+Kotlin:
+```kotlin
+    storylyView.setStoryGroupSize(size: StoryGroupSize)
+```
+Java:
+```java
+    storylyView.setStoryGroupSize(StoryGroupSize size)
+```
+    
+In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
+
+```xml
+app:storyGroupSize="small"
+or
+DEFAULT: app:storyGroupSize="large"
+```
+
+In order to set this attribute from design view, find and fill the `storyGroupSize` attribute.
+
+## Advanced
+
+#### ***Deep Links***
+
+Predefined story groups and stories can be given external sources as deep links as long as your application supports deep link. The only need is to register these deep links in Storyly Dashboard. 
+>>>>>>> 580b02b0d29601571955ba2c800da2bd8025f74a

@@ -238,6 +238,7 @@ In order to set this attribute programmatically use the following method:
 ```swift
 storylyView.progressBarColor = [UIColor]
 ```
+<<<<<<< HEAD
 
 ## Advanced
 
@@ -252,3 +253,23 @@ if deeplinkUrl.host.elementsEqual("storyly") {
     storylyView.openStory(payload: [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
 }
 ```
+=======
+####  ***Story Group Size:***
+
+This attribute changes the size of the story group. This attribute can be specified programmatically or from attributes inspector of design view. 
+    
+In order to set this attribute programmatically use the following method: 
+
+```swift
+storylyView.storyGroupSize = "small"
+DEFAULT: storylyView.storyGroupSize = "large"
+```
+    
+In order to set this attribute from design view, change the color of the `Story Group Size` under Storyly View section in attributes inspector.
+
+## Advanced
+
+#### ***Universal Links***
+
+Predefined story groups and stories can be given external sources as universal links as long as your application supports universal link. The only need is to register these universal links in Storyly Dashboard. 
+>>>>>>> 580b02b0d29601571955ba2c800da2bd8025f74a
