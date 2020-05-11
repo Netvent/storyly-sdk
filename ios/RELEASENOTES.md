@@ -1,4 +1,12 @@
 # Release Notes
+### 1.3.0
+* IMPORTANT! removed storylyId with storylyInit parameter, please check README
+* IMPORTANT! changed openStory method signature, please check README
+* added setExternalData api to extend personalized usage, please check Advanced Topics
+* added segmentation of story groups
+* added dynamic/runtime segmentation of story groups, please check Advanced Topics
+* added 'large'(default one) and 'small' story group size 
+
 ### 1.2.2
 * add dependency to podspec
 
