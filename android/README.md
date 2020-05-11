@@ -425,21 +425,6 @@ app:storyItemProgressBarColor="@<location>/progressBarColors"
 
 In order to set this attribute from design view, find and fill the `storyItemProgressBarColor` attribute as an array of color codes.
 
-<<<<<<< HEAD
-## Advanced
-
-### Deep Links
-
-Storyly Dashboard generates a deep link with app's predefined custom scheme. Application needs to handle the setup of intent handling and route the related uri to Storyly SDK to open related story. 
-
-Application can determine from url's host if it's related with Storyly SDK, host will be 'storyly' for Storyly Dashboard generated deep link urls.
-
-```kotlin
-if (deeplinkUrl.host.equals("storyly")) {
-    storylyView.openStory(payload= [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
-}
-```
-=======
 ####  ***Story Group Size:***
 
 This attribute changes the size of the story group. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
@@ -467,7 +452,14 @@ In order to set this attribute from design view, find and fill the `storyGroupSi
 
 ## Advanced
 
-#### ***Deep Links***
+### Deep Links
 
-Predefined story groups and stories can be given external sources as deep links as long as your application supports deep link. The only need is to register these deep links in Storyly Dashboard. 
->>>>>>> 580b02b0d29601571955ba2c800da2bd8025f74a
+Storyly Dashboard generates a deep link with app's predefined custom scheme. Application needs to handle the setup of intent handling and route the related uri to Storyly SDK to open related story. 
+
+Application can determine from url's host if it's related with Storyly SDK, host will be 'storyly' for Storyly Dashboard generated deep link urls.
+
+```kotlin
+if (deeplinkUrl.host.equals("storyly")) {
+    storylyView.openStory(payload= [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
+}
+```
