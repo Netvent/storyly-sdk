@@ -9,7 +9,8 @@ it, simply add the following line to your Podfile:
 pod 'Storyly'
 ```
 ## Adding from Storyboard
-StorylyView can be added to storyboard and xib file by defining `Custom Class` as StorylyView in `Identity Inspector`. In this approach, setting `width` to device’s `width` and `height`  to 120 is suggested for better experience.
+StorylyView can be added to storyboard and xib file by defining `Custom Class` as StorylyView in `Identity Inspector`. In this approach, setting `width` to device’s `width` and `height`  to 120 is suggested for better experience for default size. If `small` size is selected for Storyly, then setting `height` to 90 is suggested.
+
 ## Adding Programmatically
 ```swift
 let storylyView = StorylyView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 120))
@@ -17,15 +18,37 @@ self.view.addSubview(storylyView)
 ```
 ## Initialization
 ```swift
-storylyView.storylyId = [YOUR_APP_ID_FROM_DASHBOARD]
+storylyView.storylyInit = StorylyInit(storylyId: [YOUR_APP_TOKEN_FROM_SETTINGS_SECTION_IN_DASHBOARD])
 storylyView.rootViewController = self // A view controller
 storylyView.delegate = self // StorylyDelegate implementation
 ```
+## Storyly Initialization Parameters
+Storyly can be customized based on your initialization parameters. Currently, StorylyInit class has the following definition:
+```swift
+init(storylyId: String, segmentation: StorylySegmentationParams)
+```
+
+#### Storyly Segmentation Parameters
+In StorylyInit class, "segmentation" parameter is related with the story group segmentation. In your storyly dashboard, if you set segments for your story groups you can use this parameter to filter these story groups. If segment of the group group in dashboard is subset of your segments in SDK, SDK will show that story group. Here are a few examples: 
+- If you do not give any parameters to segments, SDK will show all active story groups with/without segments. This is the default behaviour.
+- If you set ["car", "man"] as segment set in SDK, Storyly SDK will show the story groups whose segment set is "car", "man", car" and "man" and lastly it will show the story groups without segments. 
+- If you set an empty segment set in SDK, only the story groups without segments will be shown.
+
+StorylySegmentationParams has the following definition:
+```swift
+init(segments: Set<String>? = nil, 
+     dynamicSegmentation: Bool = false, 
+     dynamicSegmentationFilterFunction: ((Set<String>?, Set<String>?) -> Bool)? = nil) 
+```
+It is enough to set segments parameter to use segmentation feature. All segments in SDK are case insensitive and trimmed. 
+
+If you want to get information about what other parameters are please check Dynamic Segmentation in [Advanced](#advanced) section.
+
 ## Refresh
 ```swift
 storylyView.refresh()
 ```
- 
+
 ## Storyly Events
 In Storyly, there are 5 different optional methods that you can use in an extension.  These are:
 * storylyLoaded: This method is called when your story groups are loaded without a problem. It informs about loaded story groups and stories in them.
