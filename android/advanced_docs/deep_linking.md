@@ -7,6 +7,6 @@ Application can determine from url's host if it's related with Storyly SDK, host
 
 ```kotlin
 if (deeplinkUrl.host.equals("storyly")) {
-    storylyView.openStory(payload= [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
+    storylyView.openStory(payload= deeplinkUrl)
 }
 ```
