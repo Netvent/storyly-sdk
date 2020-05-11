@@ -452,4 +452,5 @@ In order to set this attribute from design view, find and fill the `storyGroupSi
 
 ## Advanced
 
-[Deep Links](advanced_docs/deep_linking.md)
+* [Deep Links](advanced_docs/deep_linking.md)
+* [Dynamic Segmentation](advanced_docs/dynamic_segmentation.md)
