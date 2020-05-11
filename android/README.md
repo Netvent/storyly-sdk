@@ -425,16 +425,32 @@ app:storyItemProgressBarColor="@<location>/progressBarColors"
 
 In order to set this attribute from design view, find and fill the `storyItemProgressBarColor` attribute as an array of color codes.
 
+####  ***Story Group Size:***
+
+This attribute changes the size of the story group. This attribute can be specified programmatically, from layout xml or from attributes section of design view. 
+    
+In order to set this attribute programmatically use the following method: 
+
+Kotlin:
+```kotlin
+    storylyView.setStoryGroupSize(size: StoryGroupSize)
+```
+Java:
+```java
+    storylyView.setStoryGroupSize(StoryGroupSize size)
+```
+    
+In order to set this attribute from layout xml add the following attribute as StorylyView attribute:
+
+```xml
+app:storyGroupSize="small"
+or
+DEFAULT: app:storyGroupSize="large"
+```
+
+In order to set this attribute from design view, find and fill the `storyGroupSize` attribute.
+
 ## Advanced
 
-### Deep Links
-
-Storyly Dashboard generates a deep link with app's predefined custom scheme. Application needs to handle the setup of intent handling and route the related uri to Storyly SDK to open related story. 
-
-Application can determine from url's host if it's related with Storyly SDK, host will be 'storyly' for Storyly Dashboard generated deep link urls.
-
-```kotlin
-if (deeplinkUrl.host.equals("storyly")) {
-    storylyView.openStory(payload= [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
-}
-```
+* [Deep Links](advanced_docs/deep_linking.md)
+* [Dynamic Segmentation](advanced_docs/dynamic_segmentation.md)

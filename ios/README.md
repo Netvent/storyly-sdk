@@ -261,17 +261,20 @@ In order to set this attribute programmatically use the following method:
 ```swift
 storylyView.progressBarColor = [UIColor]
 ```
+####  ***Story Group Size:***
+
+This attribute changes the size of the story group. This attribute can be specified programmatically or from attributes inspector of design view. 
+    
+In order to set this attribute programmatically use the following method: 
+
+```swift
+storylyView.storyGroupSize = "small"
+DEFAULT: storylyView.storyGroupSize = "large"
+```
+    
+In order to set this attribute from design view, change the color of the `Story Group Size` under Storyly View section in attributes inspector.
 
 ## Advanced
 
-### Deep Links
-
-Storyly Dashboard generates a deep link with app's predefined custom scheme. Application needs to handle the setup of intent handling and route the uri to Storyly SDK to open the story. 
-
-Application can determine from url's host if it's related with Storyly SDK, host will be 'storyly' for Storyly Dashboard generated deep link urls.
-
-```swift
-if deeplinkUrl.host.elementsEqual("storyly") {
-    storylyView.openStory(payload: [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
-}
-```
+* [Deep Links](advanced_docs/deep_linking.md)
+* [Dynamic Segmentation](advanced_docs/dynamic_segmentation.md)
