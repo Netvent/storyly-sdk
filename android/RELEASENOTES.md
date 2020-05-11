@@ -1,11 +1,11 @@
 # Release Notes
 ### 1.3.0
-* IMPORTANT! remove storylyId with storylyInit parameter, please check README
-* IMPORTANT! change openStory method signature, please check README
-* add setExternalData api to extend personalized usage, please check Advanced Topics
-* add segmentation of story groups
-* add dynamic/runtime segmentation of story groups, please check Advanced Topics
-* add 'large'(default one) and 'small' story group size 
+* IMPORTANT! removed storylyId with storylyInit parameter, please check README
+* IMPORTANT! changed openStory method signature, please check README
+* added setExternalData api to extend personalized usage, please check Advanced Topics
+* added segmentation of story groups
+* added dynamic/runtime segmentation of story groups, please check Advanced Topics
+* added 'large'(default one) and 'small' story group size 
 
 ### 1.2.1
 * fix crash during deeplink openings
