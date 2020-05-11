@@ -232,6 +232,19 @@ In order to set this attribute programmatically use the following method:
 ```swift
 storylyView.progressBarColor = [UIColor]
 ```
+####  ***Story Group Size:***
+
+This attribute changes the size of the story group. This attribute can be specified programmatically or from attributes inspector of design view. 
+    
+In order to set this attribute programmatically use the following method: 
+
+```swift
+storylyView.storyGroupSize = "small"
+DEFAULT: storylyView.storyGroupSize = "large"
+```
+    
+In order to set this attribute from design view, change the color of the `Story Group Size` under Storyly View section in attributes inspector.
+
 ## Advanced
 
 #### ***Universal Links***
