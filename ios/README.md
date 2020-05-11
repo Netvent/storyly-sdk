@@ -106,7 +106,7 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
 ``` 
 
 ## Third Party Library Integrations
-In Storyly, you can use different story templates to show personalized products to your users if you are using one of the following personalization platforms. Currently, [Segmentify](https://www.segmentify.com/) is supported.
+In Storyly, you can use different story templates to show personalized products to your users if you are using one of the following personalization platforms. Currently, [Segmentify](https://www.segmentify.com/) is supported. Please check `Storyly External Data Flow` in [Advanced](#advanced) section in order to learn how to use these third party libraries.
 
 #### Segmentify:
 If you are planning to use Segmentify story group, please make sure you initialize Segmentify before Storyly initialization. Then, you can create different template stories from dashboard which has a Segmentify source. For more details on Segmentify integration: https://segmentify.github.io/segmentify-dev-doc/integration_ios/
@@ -278,3 +278,4 @@ In order to set this attribute from design view, change the color of the `Story 
 
 * [Deep Links](advanced_docs/deep_linking.md)
 * [Dynamic Segmentation](advanced_docs/dynamic_segmentation.md)
+* [Storyly External Data Flow](advanced_docs/external_data.md)
