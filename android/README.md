@@ -17,12 +17,37 @@ implementation 'com.appsamurai.storyly:storyly:<latest-version>'
 ## Initialization
 Kotlin:
 ```kotlin
-storyly_view.storylyId = [YOUR_APP_ID_FROM_DASHBOARD]
+storyly_view..storylyInit = StorylyInit([YOUR_APP_TOKEN_FROM_SETTINGS_SECTION_IN_DASHBOARD])
 ```
 Java:
 ```java
-storylyView.setStorylyId([YOUR_APP_ID_FROM_DASHBOARD]);
+storylyView.setStorylyInit(new StorylyInit([YOUR_APP_TOKEN_FROM_SETTINGS_SECTION_IN_DASHBOARD], new StorylySegmentationParams()));
 ```
+
+## Storyly Initialization Parameters
+Storyly can be customized based on your initialization parameters. Currently, StorylyInit data class has the following definition:
+```kotlin
+data class StorylyInit(
+    internal val storylyId: String,
+    internal val segmentation: StorylySegmentationParams = StorylySegmentationParams()
+)
+```
+
+#### Storyly Segmentation Parameters
+In StorylyInit class, "segments" parameter is related with the story group segmentation. In your storyly dashboard, if you set segments for your story groups you can use this parameter to filter these story groups. If segment of the group group in dashboard is subset of your segments in SDK, SDK will show that story group. Here are a few examples: 
+- If you do not give any parameters to segments, SDK will show all active story groups with/without segments. This is the default behaviour.
+- If you set ["car", "man"] as segment set in SDK, Storyly SDK will show the story groups whose segment set is "car", "man", car" and "man" and lastly it will show the story groups without segments. 
+- If you set an empty segment set in SDK, only the story groups without segments will be shown.
+
+StorylySegmentationParams has the following method constructor:
+```kotlin
+class StorylySegmentationParams(segments: Set<String>? = null,
+                                internal val dynamicSegmentation: Boolean = false,
+                                dynamicSegmentationFilterFunction: ((Set<String>?, Set<String>?) -> Boolean)? = null) 
+```
+It is enough to set segments parameter to use segmentation feature. All segments in SDK are case insensitive and trimmed. 
+
+If you want to get information about what other parameters are please check Dynamic Segmentation in [Advanced](#advanced) section.
 
 ## Storyly Events
 In Storyly, there are 5 different optional methods that you can override and use.  These are:
