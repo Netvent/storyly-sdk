@@ -6,6 +6,6 @@ Application can determine from url's host if it's related with Storyly SDK, host
 
 ```swift
 if deeplinkUrl.host.elementsEqual("storyly") {
-    storylyView.openStory(payload: [DEEP_LINK_PAYLOAD_WITHOUT_SCHEME])
+    storylyView.openStory(payload: deeplinkUrl)
 }
 ```
