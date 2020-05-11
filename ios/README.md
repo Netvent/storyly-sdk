@@ -253,5 +253,5 @@ In order to set this attribute from design view, change the color of the `Story 
 
 ## Advanced
 
-[Deep Links](advanced_docs/deep_linking.md)
-[Dynamic Segmentation](advanced_docs/dynamic_segmentation.md)
+* [Deep Links](advanced_docs/deep_linking.md)
+* [Dynamic Segmentation](advanced_docs/dynamic_segmentation.md)
