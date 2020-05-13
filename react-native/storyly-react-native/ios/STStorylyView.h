@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)refresh;
 - (void)open;
 - (void)close;
+- (BOOL)openStory:(NSURL *)payload;
+- (BOOL)setExternalData:(NSArray<NSDictionary *> *)externalData;
 
 @end
 

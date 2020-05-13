@@ -32,8 +32,26 @@ class Storyly extends Component {
         );
     };
 
+    openStory = (payload) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.openStory,
+            [payload],
+        );
+    };
+
+    setExternalData = (externalData) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.setExternalData,
+            [externalData],
+        );
+    }
+
     render() {
         const {
+            storylyId,
+            storylySegments,
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
             storyItemIconBorderColor,
@@ -48,6 +66,7 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
+                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments}}
                 onStorylyLoaded={onLoad}
                 onStorylyLoadFailed={onFail}
                 onStorylyActionClicked={onPress}
@@ -65,6 +84,7 @@ class Storyly extends Component {
 Storyly.propTypes = {
     ...ViewPropTypes,
     storylyId: string.isRequired,
+    storylySegments: arrayOf(string),
 
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),

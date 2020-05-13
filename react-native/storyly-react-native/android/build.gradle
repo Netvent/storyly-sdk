@@ -36,7 +36,7 @@ buildscript {
             jcenter()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.6.2'
+            classpath 'com.android.tools.build:gradle:3.6.3'
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlin_version', DEFAULT_KOTLIN_VERSION)}"
         }
     }
@@ -76,7 +76,7 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlin_version', DEFAULT_KOTLIN_VERSION)}"
 
-    implementation 'com.appsamurai.storyly:storyly:1.1.0'
+    implementation 'com.appsamurai.storyly:storyly:1.3.0'
 }
 
 def configureReactNativePom(def pom) {

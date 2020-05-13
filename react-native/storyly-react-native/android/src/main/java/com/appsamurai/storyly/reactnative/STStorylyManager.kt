@@ -1,7 +1,11 @@
 package com.appsamurai.storyly.reactnative
 
 import android.graphics.Color
+import android.net.Uri
+import com.appsamurai.storyly.StorylyInit
+import com.appsamurai.storyly.StorylySegmentationParams
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
@@ -11,7 +15,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     companion object {
         private const val REACT_CLASS = "STStoryly"
 
+        private const val PROP_STORYLY_INIT = "storylyInit"
         private const val PROP_STORYLY_ID = "storylyId"
+        private const val PROP_STORYLY_SEGMENTS = "storylySegments"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
         private const val PROP_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
@@ -27,6 +33,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_OPEN_CODE = 2
         private const val COMMAND_CLOSE_NAME = "close"
         private const val COMMAND_CLOSE_CODE = 3
+        private const val COMMAND_OPEN_STORY_NAME = "openStory"
+        private const val COMMAND_OPEN_STORY_CODE = 4
+        private const val COMMAND_SET_EXTERNAL_DATA_NAME = "setExternalData"
+        private const val COMMAND_SET_EXTERNAL_DATA_CODE = 5
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -57,7 +67,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         return MapBuilder.of(
                 COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE,
                 COMMAND_OPEN_NAME, COMMAND_OPEN_CODE,
-                COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE
+                COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
+                COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
+                COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE
         )
     }
 
@@ -66,12 +78,28 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_REFRESH_CODE -> root.storylyView.refresh()
             COMMAND_OPEN_CODE -> root.storylyView.show()
             COMMAND_CLOSE_CODE -> root.storylyView.dismiss()
+            COMMAND_OPEN_STORY_CODE -> {
+                val payloadStr: String = args?.getString(0) ?: return
+                root.storylyView.openStory(Uri.parse(payloadStr))
+            }
+            COMMAND_SET_EXTERNAL_DATA_CODE -> {
+                root.storylyView.setExternalData(args?.getArray(0)?.toArrayList() as? ArrayList<Map<String, Any>>)
+            }
         }
     }
 
-    @ReactProp(name = PROP_STORYLY_ID)
-    fun setPropStorylyId(view: STStorylyView, storylyId: String) {
-        view.storylyView.storylyId = storylyId
+    @ReactProp(name = PROP_STORYLY_INIT)
+    fun setPropStorylyInit(view: STStorylyView, storylyInit: ReadableMap) {
+        val storylyId: String = storylyInit.getString(PROP_STORYLY_ID) ?: return
+        storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.let {
+            it.toArrayList().map { it as? String }
+            val segmentationParams = StorylySegmentationParams(segments = (it.toArrayList() as? ArrayList<String>)?.toSet(),
+                    dynamicSegmentation = false,
+                    dynamicSegmentationFilterFunction = null)
+            view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams)
+        } ?: run {
+            view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+        }
     }
 
     @ReactProp(name = PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN)
