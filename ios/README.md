@@ -25,7 +25,7 @@ storylyView.delegate = self // StorylyDelegate implementation
 ## Storyly Initialization Parameters
 Storyly can be customized based on your initialization parameters. Currently, StorylyInit class has the following definition:
 ```swift
-init(storylyId: String, segmentation: StorylySegmentationParams)
+init(storylyId: String, segmentation: StorylySegmentation)
 ```
 
 #### Storyly Segmentation Parameters
@@ -34,11 +34,11 @@ In StorylyInit class, "segmentation" parameter is related with the story group s
 - If you set ["car", "man"] as segment set in SDK, Storyly SDK will show the story groups whose segment set is "car", "man", car" and "man" and lastly it will show the story groups without segments. 
 - If you set an empty segment set in SDK, only the story groups without segments will be shown.
 
-StorylySegmentationParams has the following definition:
+StorylySegmentation has the following definition:
 ```swift
 init(segments: Set<String>? = nil, 
-     dynamicSegmentation: Bool = false, 
-     dynamicSegmentationFilterFunction: ((Set<String>?, Set<String>?) -> Bool)? = nil) 
+     isDynamicSegmentationEnabled: Bool = false, 
+     dynamicSegmentationCallback: (StorylyDynamicSegmentationCallback? = nil) 
 ```
 It is enough to set segments parameter to use segmentation feature. All segments in SDK are case insensitive and trimmed. 
 
