@@ -11,5 +11,5 @@ Your story groups are started being filtered in SDK rather than backend. In defa
 If you would like to customize filtering function according to your own business needs, you can override
 
 ```
-dynamicSegmentationCallback: ((Set<String>?, Set<String>?) -> Boolean)
+dynamicSegmentationCallback: StorylyDynamicSegmentationCallback
 ```
