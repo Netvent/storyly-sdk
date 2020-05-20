@@ -21,7 +21,7 @@ storyly_view..storylyInit = StorylyInit([YOUR_APP_TOKEN_FROM_SETTINGS_SECTION_IN
 ```
 Java:
 ```java
-storylyView.setStorylyInit(new StorylyInit([YOUR_APP_TOKEN_FROM_SETTINGS_SECTION_IN_DASHBOARD], new StorylySegmentationParams()));
+storylyView.setStorylyInit(new StorylyInit([YOUR_APP_TOKEN_FROM_SETTINGS_SECTION_IN_DASHBOARD], new StorylySegmentation()));
 ```
 
 ## Storyly Initialization Parameters
@@ -29,7 +29,7 @@ Storyly can be customized based on your initialization parameters. Currently, St
 ```kotlin
 data class StorylyInit(
     internal val storylyId: String,
-    internal val segmentation: StorylySegmentationParams = StorylySegmentationParams()
+    internal val segmentation: StorylySegmentation = StorylySegmentation()
 )
 ```
 
@@ -39,11 +39,11 @@ In StorylyInit class, "segments" parameter is related with the story group segme
 - If you set ["car", "man"] as segment set in SDK, Storyly SDK will show the story groups whose segment set is "car", "man", car" and "man" and lastly it will show the story groups without segments. 
 - If you set an empty segment set in SDK, only the story groups without segments will be shown.
 
-StorylySegmentationParams has the following method constructor:
+StorylySegmentation has the following method constructor:
 ```kotlin
-class StorylySegmentationParams(segments: Set<String>? = null,
-                                internal val dynamicSegmentation: Boolean = false,
-                                dynamicSegmentationFilterFunction: ((Set<String>?, Set<String>?) -> Boolean)? = null) 
+class StorylySegmentation(segments: Set<String>? = null,
+                                internal val isDynamicSegmentationEnabled: Boolean = false,
+                                dynamicSegmentationCallback: ((Set<String>?, Set<String>?) -> Boolean)? = null) 
 ```
 It is enough to set segments parameter to use segmentation feature. All segments in SDK are case insensitive and trimmed. 
 
