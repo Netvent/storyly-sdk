@@ -43,7 +43,7 @@ StorylySegmentation has the following method constructor:
 ```kotlin
 class StorylySegmentation(segments: Set<String>? = null,
                                 internal val isDynamicSegmentationEnabled: Boolean = false,
-                                dynamicSegmentationCallback: ((Set<String>?, Set<String>?) -> Boolean)? = null) 
+                                dynamicSegmentationCallback: (StorylyDynamicSegmentationCallback? = null) 
 ```
 It is enough to set segments parameter to use segmentation feature. All segments in SDK are case insensitive and trimmed. 
 
