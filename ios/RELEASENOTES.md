@@ -1,4 +1,9 @@
 # Release Notes
+### 1.3.2
+* IMPORTANT! changed StorylyInit class definitions, please check README
+* fixed a rare bug during transitions
+* fixed crash during empty story group list scroll
+
 ### 1.3.0
 * IMPORTANT! removed storylyId with storylyInit parameter, please check README
 * IMPORTANT! changed openStory method signature, please check README
