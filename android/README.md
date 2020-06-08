@@ -14,7 +14,7 @@ implementation 'com.appsamurai.storyly:storyly:<latest-version>'
     android:layout_width="match_parent"
     android:layout_height="120dp"/>
 ```
-## Initializationnnn
+## Initialization
 Kotlin:
 ```kotlin
 storyly_view..storylyInit = StorylyInit([YOUR_APP_TOKEN_FROM_SETTINGS_SECTION_IN_DASHBOARD])
