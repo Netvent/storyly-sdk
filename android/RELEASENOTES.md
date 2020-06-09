@@ -1,4 +1,13 @@
 # Release Notes
+### 1.4.1
+* added 'Sponsored' indicator for ad story groups
+* improved ad place calculation for better user experience
+* fixed user experience for some native ad types
+
+### 1.4.0
+* added client side ad insertion flow
+* fixed crash that occurs when deactivated story is opened with deeplink
+
 ### 1.3.1
 * IMPORTANT! changed StorylyInit class definitions, please check README
 * fixed a rare bug during transitions
