@@ -37,6 +37,17 @@ Moreover, you need to check AndroidX support of your project. You can do this ch
 android.useAndroidX=true
 android.enableJetifier=true
 ```
+
+*Dynamic Framework Support*
+
+Storyly iOS SDK is a dynamic framework, it cannot be imported as static library so you need to define that behavior on your app's Podfile. Just add following line(first lines of Podfile or related target) and run `pod update`;
+
+```
+use_frameworks!
+```
+
+If you're encountering runtime issue that says; `dyld: Library not loaded: @rpath/SDWebImage.framework/SDWebImage`, this means that app side needs this update.
+
 ## Usage
 Importing Storyly
 ```javascript

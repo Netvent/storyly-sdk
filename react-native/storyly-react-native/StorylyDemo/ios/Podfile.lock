@@ -220,9 +220,9 @@ PODS:
   - SDWebImage (5.8.0):
     - SDWebImage/Core (= 5.8.0)
   - SDWebImage/Core (5.8.0)
-  - Storyly (1.3.1):
+  - Storyly (1.3.2):
     - SDWebImage
-  - storyly-react-native (1.3.0-rc4):
+  - storyly-react-native (1.3.1):
     - React
     - Storyly (~> 1.3.0)
   - Yoga (1.14.0)
@@ -345,8 +345,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
-  Storyly: 8e3d9d3c81fa66d75f5a8f5b720cef52c6ad6384
-  storyly-react-native: f6c207f323b92b3d7b72e7a6d2f80e83bd38285f
+  Storyly: 6cbbb85bbafb9048c2a91532d07e46e7947d8f7e
+  storyly-react-native: af2cf352611902f7002f92e54e073c72fc851a62
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: 5ce8248467a14a1ce698edb77357bf0b149f95a8

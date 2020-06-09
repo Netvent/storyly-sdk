@@ -54,7 +54,7 @@
 }
 
 - (BOOL) setExternalData:(NSArray<NSDictionary *> *)externalData {
-    return [_storylyView setExternalDataWithExternalData:externalData];
+    return [_storylyView setExternalData:externalData];
 }
 
 - (BOOL)storylyActionClicked:(StorylyView * _Nonnull)storylyView

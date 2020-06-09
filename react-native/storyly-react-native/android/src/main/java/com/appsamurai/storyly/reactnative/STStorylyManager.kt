@@ -3,7 +3,7 @@ package com.appsamurai.storyly.reactnative
 import android.graphics.Color
 import android.net.Uri
 import com.appsamurai.storyly.StorylyInit
-import com.appsamurai.storyly.StorylySegmentationParams
+import com.appsamurai.storyly.StorylySegmentation
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -91,13 +91,14 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORYLY_INIT)
     fun setPropStorylyInit(view: STStorylyView, storylyInit: ReadableMap) {
         val storylyId: String = storylyInit.getString(PROP_STORYLY_ID) ?: return
-        storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.let {
-            it.toArrayList().map { it as? String }
-            val segmentationParams = StorylySegmentationParams(segments = (it.toArrayList() as? ArrayList<String>)?.toSet(),
-                    dynamicSegmentation = false,
-                    dynamicSegmentationFilterFunction = null)
-            view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams)
-        } ?: run {
+        if (storylyInit.hasKey(PROP_STORYLY_SEGMENTS)) {
+            storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.let { storylySegments ->
+                val segmentationParams = StorylySegmentation(segments = (storylySegments.toArrayList() as? ArrayList<String>)?.toSet())
+                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams)
+            } ?: run {
+                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+            }
+        } else {
             view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
         }
     }

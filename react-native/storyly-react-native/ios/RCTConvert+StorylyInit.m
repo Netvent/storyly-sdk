@@ -11,15 +11,15 @@
 
 + (StorylyInit *)STStorylyInit:(id)json {
     NSDictionary *storylyInit = [self NSDictionary:json];
-    StorylySegmentationParams *storylySegmentationParams = [StorylySegmentationParams alloc];
+    StorylySegmentation *storylySegmentation = [StorylySegmentation alloc];
     if ([storylyInit.allKeys containsObject:@"storylySegments"] &&
         storylyInit[@"storylySegments"] != NULL) {
-        storylySegmentationParams = [storylySegmentationParams initWithSegments:storylyInit[@"storylySegments"]
-                                                            dynamicSegmentation:FALSE
-                                              dynamicSegmentationFilterFunction:NULL];
+        storylySegmentation = [storylySegmentation initWithSegments:storylyInit[@"storylySegments"]
+                                       isDynamicSegmentationEnabled:FALSE
+                                        dynamicSegmentationCallback:NULL];
     }
     return [[StorylyInit alloc] initWithStorylyId:storylyInit[@"storylyId"]
-                                     segmentation:storylySegmentationParams];
+                                     segmentation:storylySegmentation];
 }
 
 @end
