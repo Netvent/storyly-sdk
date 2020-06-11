@@ -1,4 +1,7 @@
 # Release Notes
+### 1.4.2
+* fixed rare crash that occurs on story completes
+
 ### 1.4.1
 * added 'Sponsored' indicator for ad story groups
 * improved ad place calculation for better user experience
