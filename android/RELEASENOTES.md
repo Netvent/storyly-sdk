@@ -1,6 +1,6 @@
 # Release Notes
 ### 1.4.2
-* fixed rare crash that occurs on story completes
+* fixed rare crash that occurs when story completes
 
 ### 1.4.1
 * added 'Sponsored' indicator for ad story groups
