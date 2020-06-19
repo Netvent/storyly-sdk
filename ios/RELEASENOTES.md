@@ -1,4 +1,9 @@
 # Release Notes
+### 1.4.0
+* added client side ad insertion flow
+* improved StorylyInit and StorylySegmentation class initializers for ObjC
+* added BUILD_LIBRARY_FOR_DISTRIBUTION as compile option to support backward Swift compatibility
+
 ### 1.3.2
 * IMPORTANT! changed StorylyInit class definitions, please check README
 * fixed a rare bug during transitions
