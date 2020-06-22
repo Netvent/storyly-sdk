@@ -2,7 +2,7 @@
 
 ### 1.5.0
 * added interactive stories support for poll
-* emoji reaction bar is taken from right to bottom
+* updated placement of emoji reaction view
 
 ### 1.4.0
 * added client side ad insertion flow
