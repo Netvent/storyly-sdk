@@ -1,4 +1,9 @@
 # Release Notes
+
+### 1.5.0
+* added interactive stories support for poll
+* emoji reaction bar is taken from right to bottom
+
 ### 1.4.0
 * added client side ad insertion flow
 * improved StorylyInit and StorylySegmentation class initializers for ObjC
