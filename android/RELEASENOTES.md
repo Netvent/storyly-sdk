@@ -1,4 +1,8 @@
 # Release Notes
+### 1.5.0
+* added interactive stories support for poll
+* updated placement of emoji reaction view
+
 ### 1.4.2
 * fixed rare crash that occurs when story completes
 
