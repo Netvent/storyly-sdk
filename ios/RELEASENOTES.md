@@ -1,4 +1,6 @@
 # Release Notes
+### 1.5.1
+* added frame parameter to StorylyExternalViewProvider callback to support better sizing
 
 ### 1.5.0
 * added interactive stories support for poll
