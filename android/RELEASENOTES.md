@@ -1,4 +1,9 @@
 # Release Notes
+### 1.5.1
+* fixed jagged edges in interactive poll component
+* fixed a bug for rotated interactive action button
+* increased padding size for rotated interactive action button
+
 ### 1.5.0
 * added interactive stories support for poll
 * updated placement of emoji reaction view
