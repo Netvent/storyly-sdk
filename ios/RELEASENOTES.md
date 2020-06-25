@@ -1,4 +1,7 @@
 # Release Notes
+### 1.5.2
+* fixed a bug in external data
+
 ### 1.5.1
 * added frame parameter to StorylyExternalViewProvider callback to support better sizing
 
