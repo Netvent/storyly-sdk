@@ -1,4 +1,10 @@
 # Release Notes
+### 1.5.4
+* added 'xlarge' story group size 
+* added storyGroupIconForegroundColors method for 'xlarge' story groups gradient layer
+* added storyGroupTextTypeface method
+* added 'customParameter' parameter to StorylyInit to pass customized field for users
+
 ### 1.5.3
 * fixed a bug in external data
 
