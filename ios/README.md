@@ -25,7 +25,7 @@ storylyView.delegate = self // StorylyDelegate implementation
 ## Storyly Initialization Parameters
 Storyly can be customized based on your initialization parameters. Currently, StorylyInit class has the following definition:
 ```swift
-init(storylyId: String, segmentation: StorylySegmentation)
+init(storylyId: String, segmentation: StorylySegmentation, customParameter: String?)
 ```
 
 #### Storyly Segmentation Parameters
@@ -43,6 +43,9 @@ init(segments: Set<String>? = nil,
 It is enough to set segments parameter to use segmentation feature. All segments in SDK are case insensitive and trimmed. 
 
 If you want to get information about what other parameters are please check Dynamic Segmentation in [Advanced](#advanced) section.
+
+#### Custom Parameter
+In StorylyInit class, "customParameter" field can be used for analytical purposes. You can send a string value with this field which cannot have more than 200 characters. If you exceed the size limit, your value will be set to nil.
 
 ## Refresh
 ```swift
