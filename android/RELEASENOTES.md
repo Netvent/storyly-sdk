@@ -1,4 +1,10 @@
 # Release Notes
+### 1.5.2
+* added 'xlarge' story group size 
+* added storyGroupIconForegroundColors method for 'xlarge' story groups gradient layer
+* added storyGroupTextTypeface method
+* added 'customParameter' parameter to StorylyInit to pass customized field for users
+
 ### 1.5.1
 * fixed jagged edges in interactive poll component
 * fixed a bug for rotated interactive action button
