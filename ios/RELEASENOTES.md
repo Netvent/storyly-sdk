@@ -1,4 +1,7 @@
 # Release Notes
+### 1.5.5
+* fixed compile issue due to swift backward compatibility (issue: inheritance from non-protocol type 'UIView')
+
 ### 1.5.4
 * added 'xlarge' story group size 
 * added storyGroupIconForegroundColors method for 'xlarge' story groups gradient layer
