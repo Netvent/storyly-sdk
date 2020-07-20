@@ -1,4 +1,8 @@
 # Release Notes
+### 1.6.0
+* added quiz component for interactive stories
+* removed use_frameworks! constraint for CocoaPods integrations
+
 ### 1.5.5
 * fixed compile issue due to swift backward compatibility (issue: inheritance from non-protocol type 'UIView')
 
