@@ -1,4 +1,7 @@
 # Release Notes
+### 1.6.0
+* added quiz component for interactive stories
+
 ### 1.5.2
 * added 'xlarge' story group size 
 * added storyGroupIconForegroundColors method for 'xlarge' story groups gradient layer
