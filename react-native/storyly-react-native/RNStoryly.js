@@ -52,8 +52,10 @@ class Storyly extends Component {
         const {
             storylyId,
             storylySegments,
+            customParameter,
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
+            storyGroupIconForegroundColors,
             storyItemIconBorderColor,
             storyItemProgressBarColor,
             onLoad,
@@ -66,7 +68,7 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
-                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments}}
+                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter}}
                 onStorylyLoaded={onLoad}
                 onStorylyLoadFailed={onFail}
                 onStorylyActionClicked={onPress}
@@ -74,6 +76,7 @@ class Storyly extends Component {
                 onStorylyStoryDismissed={onStoryClose}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
                 storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
+                storyGroupIconForegroundColors={storyGroupIconForegroundColors ? storyGroupIconForegroundColors.map(processColor) : null}
                 storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
                 storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
                 ref={el => (this._storylyView = el)}/>
@@ -85,12 +88,15 @@ Storyly.propTypes = {
     ...ViewPropTypes,
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
+    customParameter: string,
 
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),
     storyGroupIconBackgroundColor: string,
     storyGroupTextColor: string,
     storyGroupPinIconColor: string,
+    storyGroupIconForegroundColors: arrayOf(string),
+    storyGroupSize: string,
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,
     storyItemProgressBarColor: arrayOf(string),

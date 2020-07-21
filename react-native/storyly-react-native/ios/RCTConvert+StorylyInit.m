@@ -19,7 +19,8 @@
                                         dynamicSegmentationCallback:NULL];
     }
     return [[StorylyInit alloc] initWithStorylyId:storylyInit[@"storylyId"]
-                                     segmentation:storylySegmentation];
+                                     segmentation:storylySegmentation
+                                     customParameter:storylyInit[@"customParameter"]];
 }
 
 @end
