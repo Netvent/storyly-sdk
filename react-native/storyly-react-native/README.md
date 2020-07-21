@@ -183,7 +183,7 @@ Edited Sample:
 
 This attribute changes the colors of the progress bars. The bars consists of two colors.  The first defined color is the color of the background bars and the second one is the color of the foreground bars while watching the stories.
 #### ***Story Group Size:***
-This attribute changes the size of the story group. This attribute can be specified programmatically, from layout xml or from attributes section of design view.
+This attribute changes the size of the story group. 
 
 You need to set `storyGroupSize: string` parameter. Possible values for this property are `small`, `xlarge` and `large`.
 #### ***Story Group Icon Foreground Color (Multiple Color):***

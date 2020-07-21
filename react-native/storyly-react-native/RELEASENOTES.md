@@ -7,7 +7,6 @@
 * added 'customParameter' parameter to StorylyInit to pass customized field for users
 * added interactive stories support for poll
 * updated placement of emoji reaction view
-* added client side ad insertion flow
 
 ### 1.3.1
 * updated native Storyly SDK dependencies, Android to 1.4.1 and iOS to 1.3.*
