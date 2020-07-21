@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.net.Uri
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylySegmentation
+import com.appsamurai.storyly.StoryGroupSize
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -18,11 +19,14 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORYLY_INIT = "storylyInit"
         private const val PROP_STORYLY_ID = "storylyId"
         private const val PROP_STORYLY_SEGMENTS = "storylySegments"
+        private const val PROP_CUSTOM_PARAMETER = "customParameter"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
         private const val PROP_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
         private const val PROP_STORY_GROUP_TEXT_COLOR = "storyGroupTextColor"
         private const val PROP_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
+        private const val PROP_STORY_GROUP_ICON_FOREGROUND_COLORS = "storyGroupIconForegroundColors"
+        private const val PROP_STORY_GROUP_SIZE = "storyGroupSize"
         private const val PROP_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val PROP_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val PROP_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
@@ -94,12 +98,24 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         if (storylyInit.hasKey(PROP_STORYLY_SEGMENTS)) {
             storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.let { storylySegments ->
                 val segmentationParams = StorylySegmentation(segments = (storylySegments.toArrayList() as? ArrayList<String>)?.toSet())
-                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams)
+                if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER))
+                } else {
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams)
+                }
             } ?: run {
-                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+                if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER))
+                } else {
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+                }
             }
         } else {
-            view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+            if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
+                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER))
+            } else {
+                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+            }
         }
     }
 
@@ -126,6 +142,20 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORY_GROUP_PIN_ICON_COLOR)
     fun setPropStoryGroupPinIconColor(view: STStorylyView, color: String) {
         view.storylyView.setStoryGroupPinIconColor(Color.parseColor(color))
+    }
+
+    @ReactProp(name = PROP_STORY_GROUP_ICON_FOREGROUND_COLORS)
+    fun setPropStoryGroupIconForegroundColors(view: STStorylyView, colors: ReadableArray?) {
+        colors?.let { view.storylyView.setStoryGroupIconForegroundColor(convertColorArray(colors)) }
+    }
+
+    @ReactProp(name = PROP_STORY_GROUP_SIZE)
+    fun setPropStoryGroupSize(view: STStorylyView, size: String) {
+        when(size) {
+            "small" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Small)
+            "xlarge" -> view.storylyView.setStoryGroupSize(StoryGroupSize.XLarge)
+            else -> view.storylyView.setStoryGroupSize(StoryGroupSize.Large)
+        }
     }
 
     @ReactProp(name = PROP_STORY_ITEM_ICON_BORDER_COLOR)

@@ -1,4 +1,13 @@
 # Release Notes
+### 1.6.0
+* added quiz component for interactive stories
+* removed use_frameworks! constraint for iOS CocoaPods integrations
+* added 'xlarge' story group size
+* added storyGroupIconForegroundColors method for 'xlarge' story groups gradient layer
+* added 'customParameter' parameter to StorylyInit to pass customized field for users
+* added interactive stories support for poll
+* updated placement of emoji reaction view
+
 ### 1.3.1
 * updated native Storyly SDK dependencies, Android to 1.4.1 and iOS to 1.3.*
 * fixed setExternalData naming issue that causes compile time error

@@ -1,5 +1,4 @@
 platform :ios, '9.0'
-use_frameworks!
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'StorylyDemo' do

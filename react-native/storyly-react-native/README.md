@@ -38,15 +38,6 @@ android.useAndroidX=true
 android.enableJetifier=true
 ```
 
-*Dynamic Framework Support*
-
-Storyly iOS SDK is a dynamic framework, it cannot be imported as static library so you need to define that behavior on your app's Podfile. Just add following line(first lines of Podfile or related target) and run `pod update`;
-
-```
-use_frameworks!
-```
-
-If you're encountering runtime issue that says; `dyld: Library not loaded: @rpath/SDWebImage.framework/SDWebImage`, this means that app side needs this update.
 
 ## Usage
 Importing Storyly
@@ -191,3 +182,13 @@ Edited Sample:
 ![Example](https://github.com/Netvent/storyly-mobile/blob/master/readme_images/si_progressbar_1.png)
 
 This attribute changes the colors of the progress bars. The bars consists of two colors.  The first defined color is the color of the background bars and the second one is the color of the foreground bars while watching the stories.
+#### ***Story Group Size:***
+This attribute changes the size of the story group. 
+
+You need to set `storyGroupSize: string` parameter. Possible values for this property are `small`, `xlarge` and `large`.
+#### ***Story Group Icon Foreground Color (Multiple Color):***
+You need to set `storyGroupIconForegroundColors: arrayOf(string)` parameter.
+
+This attribute only works with when story group size is set to `xlarge`.
+
+
