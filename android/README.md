@@ -105,6 +105,12 @@ storylyView.setStorylyListener(new StorylyListener() {
 As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows:
 
 ```kotlin
+data class StoryGroup(
+    val index: Int,
+    val title: String,
+    val stories: List<Story>
+)
+
 data class Story(
     val index: Int,
     val title: String,
