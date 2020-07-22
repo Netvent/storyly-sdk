@@ -88,6 +88,12 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
     case HTML
 }
 
+@objc public final class StoryGroup: NSObject {
+    @objc public let index: Int
+    @objc public let title: String
+    @objc public let stories: [Story]
+}
+
 @objc public final class Story: NSObject {
     @objc public let index: Int
     @objc public let title: String
