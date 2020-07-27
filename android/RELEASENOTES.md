@@ -1,4 +1,9 @@
 # Release Notes
+### 1.6.1
+* added id field to Story and StoryGroup classes
+* added iconImageUrl to StoryGroup class
+* added openStory(storyGroupId: Int, storyId: Int?) method
+
 ### 1.6.0
 * added quiz component for interactive stories
 
