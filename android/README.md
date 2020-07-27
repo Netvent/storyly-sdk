@@ -106,14 +106,17 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
 
 ```kotlin
 data class StoryGroup(
-    val index: Int,
+    val id: Int,
     val title: String,
+    val iconUrl: String,
+    val index: Int,
     val stories: List<Story>
 )
 
 data class Story(
-    val index: Int,
+    val id: Int,
     val title: String,
+    val index: Int,
     val media: StoryMedia
 )
 
