@@ -1,4 +1,8 @@
 # Release Notes
+### 1.6.2
+* added thumbnail image to video stories
+* improved event payload for better analysis
+
 ### 1.6.1
 * added id field to Story and StoryGroup classes
 * added iconImageUrl to StoryGroup class
