@@ -1,4 +1,7 @@
 # Release Notes
+### 1.6.3
+* improved events for better analysis
+
 ### 1.6.2
 * added thumbnail image to video stories
 * improved event payload for better analysis
