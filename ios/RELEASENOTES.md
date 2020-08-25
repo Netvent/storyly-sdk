@@ -1,4 +1,9 @@
 # Release Notes
+### 1.7.0
+* added countdown component for interactive stories
+* added share feature to stories
+* removed close button from stories
+
 ### 1.6.2
 * improved event payload for better analysis
 
