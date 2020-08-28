@@ -79,9 +79,9 @@ storyly_view.storylyListener = object: StorylyListener{
 
     override fun storylyStoryDismissed(storylyView: StorylyView) {}
     
-    //StoryLayer can be one of the following subclasses: StoryEmojiLayer, StoryQuizLayer, StoryPollLayer. 
-    //Based on "type" property of storyLayer, cast this argument to the proper subclass
-    override fun storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyLayer: StoryLayer) {}
+    //StoryComponent can be one of the following subclasses: StoryEmojiComponent, StoryQuizComponent, StoryPollComponent. 
+    //Based on "type" property of storyComponent, cast this argument to the proper subclass
+    override fun storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {}
 }
 ```
 Java:
@@ -105,15 +105,15 @@ storylyView.setStorylyListener(new StorylyListener() {
     @Override
     public void storylyStoryDismissed(@NonNull StorylyView storylyView) {}
     
-    //StoryLayer can be one of the following subclasses: StoryEmojiLayer, StoryQuizLayer, StoryPollLayer. 
-    //Based on "type" property of storyLayer, cast this argument to the proper subclass
+    //StoryComponent can be one of the following subclasses: StoryEmojiComponent, StoryQuizComponent, StoryPollComponent. 
+    //Based on "type" property of storyComponent, cast this argument to the proper subclass
     @Override
-    public void storylyUserInteracted(@NonNull StorylyView storylyView, @NonNull StoryGroup storyGroup, @NonNull Story story, @NonNull StoryLayer storyLayer) {}
+    public void storylyUserInteracted(@NonNull StorylyView storylyView, @NonNull StoryGroup storyGroup, @NonNull Story story, @NonNull StoryComponent storyComponent) {}
 
 });
 ```
 
-As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects can be seen below. In addition, `storylyUserInteracted` method has a parameter called `StoryLayer` which has the following subclasses `StoryQuizLayer`, `StoryEmojiLayer`, `StoryPollLayer`, details of these object also can be seen below:
+As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects can be seen below. In addition, `storylyUserInteracted` method has a parameter called `StoryComponent` which has the following subclasses `StoryQuizComponent`, `StoryEmojiComponent`, `StoryPollComponent` with type class `StoryComponentType`, details of these object also can be seen below:
 
 ```kotlin
 data class StoryGroup(
@@ -150,28 +150,39 @@ enum class StoryType {
     Video;
 }
 
-open class StoryLayer(val type: String)
+@Keep
+open class StoryComponent(val type: StoryComponentType)
 
-data class StoryQuizLayer(
+@Keep
+enum class StoryComponentType {
+    Quiz,
+    Poll,
+    Emoji;
+}
+
+@Keep
+data class StoryQuizComponent(
     val title: String,
     val options: List<String>,
     val rightAnswerIndex: Int?,
     val selectedOptionIndex: Int,
     val customPayload: String?
-): StoryLayer("quiz")
+): StoryComponent(StoryComponentType.Quiz)
 
-data class StoryPollLayer(
+@Keep
+data class StoryPollComponent(
     val title: String,
     val options: List<String>,
     val selectedOptionIndex: Int,
     val customPayload: String?
-): StoryLayer("poll")
+): StoryComponent(StoryComponentType.Poll)
 
-data class StoryEmojiLayer(
+@Keep
+data class StoryEmojiComponent(
     val emojiCodes: List<String>,
     val selectedEmojiIndex: Int,
     val customPayload: String?
-    ): StoryLayer("emoji")
+): StoryComponent(StoryComponentType.Emoji)
 ``` 
 
 Kotlin:
