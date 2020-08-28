@@ -83,7 +83,7 @@ extension ViewController: StorylyDelegate {
     func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyLayer: StoryLayer) {}
 }
 ```
-As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows:
+As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows. In addition, `storylyUserInteracted` method has a parameter called `StoryLayer` which has the following subclasses `StoryQuizLayer`, `StoryEmojiLayer`, `StoryPollLayer`, details of these object also can be seen below:
 
 ```swift
 @objc public enum StoryType: Int {
@@ -116,6 +116,34 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
 @objc public final class StoryData: NSObject {
     @objc public let key: String
     @objc public let value: String
+}
+
+@objc public class StoryLayer: NSObject {
+    @objc public var type: String? { return nil }
+}
+
+@objc public final class StoryQuizLayer: StoryLayer {
+    @objc override public var type: String? { return "quiz" }
+    @objc public var title: String
+    @objc public var options: [String]
+    @objc public var rightAnswerIndex: NSNumber?
+    @objc public var selectedOptionIndex: Int
+    @objc public var customPayload: String?
+}
+
+@objc public final class StoryPollLayer: StoryLayer {
+    @objc override public var type: String { return "poll" }
+    @objc public var title: String
+    @objc public var options: [String]
+    @objc public var selectedOptionIndex: Int
+    @objc public var customPayload: String?
+}
+
+@objc public final class StoryEmojiLayer: StoryLayer {
+    @objc override public var type: String { return "emoji" }
+    @objc public var emojiCodes: [String]
+    @objc public var selectedEmojiIndex: Int
+    @objc public var customPayload: String?
 }
 ``` 
 
