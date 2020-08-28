@@ -60,6 +60,7 @@ In Storyly, there are 5 different optional methods that you can override and use
 * storylyActionClicked: This method is called when the user clicks to action button on a story or swipes up in a story.  If you want to handle how the story link should be opened, you should override this method and you must return true as a result. Otherwise, SDK will open the link in a new activity. 
 * storylyStoryShown: This method is called when a story is shown in fullscreen.
 * storylyStoryDismissed: This method is called when story screen is dismissed.
+* storylyUserInteracted: This method is called when a user is interacted with a quiz, a poll or an emoji.
 Sample usages can be seen below:
 
 Kotlin:
@@ -77,6 +78,10 @@ storyly_view.storylyListener = object: StorylyListener{
     override fun storylyStoryShown(storylyView: StorylyView) {}
 
     override fun storylyStoryDismissed(storylyView: StorylyView) {}
+    
+    //StoryLayer can be one of the following subclasses: StoryEmojiLayer, StoryQuizLayer, StoryPollLayer. 
+    //Based on "type" property of storyLayer, cast this argument to the proper subclass
+    override fun storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyLayer: StoryLayer) {}
 }
 ```
 Java:
@@ -99,10 +104,16 @@ storylyView.setStorylyListener(new StorylyListener() {
 
     @Override
     public void storylyStoryDismissed(@NonNull StorylyView storylyView) {}
+    
+    //StoryLayer can be one of the following subclasses: StoryEmojiLayer, StoryQuizLayer, StoryPollLayer. 
+    //Based on "type" property of storyLayer, cast this argument to the proper subclass
+    @Override
+    public void storylyUserInteracted(@NonNull StorylyView storylyView, @NonNull StoryGroup storyGroup, @NonNull Story story, @NonNull StoryLayer storyLayer) {}
+
 });
 ```
 
-As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows:
+As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects can be seen below. In addition, `storylyUserInteracted` method has a parameter called `StoryLayer` which has the following subclasses `StoryQuizLayer`, `StoryEmojiLayer`, `StoryPollLayer`, details of these object also can be seen below:
 
 ```kotlin
 data class StoryGroup(
@@ -138,6 +149,29 @@ enum class StoryType {
     Image,
     Video;
 }
+
+open class StoryLayer(val type: String)
+
+data class StoryQuizLayer(
+    val title: String,
+    val options: List<String>,
+    val rightAnswerIndex: Int?,
+    val selectedOptionIndex: Int,
+    val customPayload: String?
+): StoryLayer("quiz")
+
+data class StoryPollLayer(
+    val title: String,
+    val options: List<String>,
+    val selectedOptionIndex: Int,
+    val customPayload: String?
+): StoryLayer("poll")
+
+data class StoryEmojiLayer(
+    val emojiCodes: List<String>,
+    val selectedEmojiIndex: Int,
+    val customPayload: String?
+    ): StoryLayer("emoji")
 ``` 
 
 Kotlin:
