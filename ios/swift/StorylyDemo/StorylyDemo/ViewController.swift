@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.storylyView.storylyId = [YOUR_APP_ID_FROM_DASHBOARD]
+        self.storylyView.storylyInit = StorylyInit(storylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD)
         self.storylyView.rootViewController = self
         self.storylyView.delegate = self
     }
@@ -42,5 +42,24 @@ extension ViewController: StorylyDelegate {
     
     func storylyStoryDismissed(_ storylyView: StorylyView) {
         print("storylyStoryDismissed")
+    }
+    
+    func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
+        switch storyComponent.type {
+            case .Quiz:
+                if let quizComponent = storyComponent as? StoryQuizComponent {
+                    // quizComponent actions
+                }
+            case .Poll:
+                if let pollComponent = storyComponent as? StoryPollComponent {
+                    // pollComponent actions
+                }
+            case .Emoji:
+                if let emojiComponent = storyComponent as? StoryEmojiComponent {
+                    // emojiComponent actions
+                }
+            case .Undefined: do {}
+            default: do {}
+        }
     }
 }

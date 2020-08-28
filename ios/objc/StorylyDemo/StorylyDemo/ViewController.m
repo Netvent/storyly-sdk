@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.storylyView.storylyId = [YOUR_APP_ID_FROM_DASHBOARD]
+    self.storylyView.storylyInit = [[StorylyInit alloc] initWithStorylyId:@YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyView.rootViewController = self;
     self.storylyView.delegate = self;
 }
@@ -43,6 +43,33 @@
 
 - (void)storylyStoryDismissed:(StorylyView *)storylyView {
     NSLog(@"storylyStoryDismissed");
+}
+
+- (void)storylyUserInteracted:(StorylyView *)storylyView storyGroup:(StoryGroup *)storyGroup story:(Story *)story storyComponent:(StoryComponent *)storyComponent {
+    switch (storyComponent.type) {
+        case StoryComponentTypeQuiz:
+            {
+                StoryQuizComponent *quizComponent = (StoryQuizComponent *)storyComponent;
+                // quizComponent actions
+            }
+            break;
+        case StoryComponentTypePoll:
+            {
+                StoryPollComponent *pollComponent = (StoryPollComponent *)storyComponent;
+                // pollComponent actions
+            }
+            break;
+        case StoryComponentTypeEmoji:
+            {
+                StoryEmojiComponent *emojiComponent = (StoryEmojiComponent *)storyComponent;
+                // emojiComponent actions
+            }
+            break;
+        case StoryComponentTypeUndefined:
+            break;
+        default:
+            break;
+    }
 }
 
 @end
