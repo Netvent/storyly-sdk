@@ -1,6 +1,6 @@
 # Release Notes
-### 1.7.1
-* added storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyLayer: StoryLayer) callback
+### 1.7.2
+* added storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) callback
 * improved events for better analysis
 
 ### 1.7.0
