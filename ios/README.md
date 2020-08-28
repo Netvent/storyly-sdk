@@ -78,12 +78,12 @@ extension ViewController: StorylyDelegate {
     
     func storylyStoryDismissed(_ storylyView: StorylyView) {}
     
-    //StoryLayer can be one of the following subclasses: StoryEmojiLayer, StoryQuizLayer, StoryPollLayer. 
-    //Based on "type" property of storyLayer, cast this argument to the proper subclass
-    func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyLayer: StoryLayer) {}
+    //StoryComponent can be one of the following subclasses: StoryEmojiComponent, StoryQuizComponent, StoryPollComponent. 
+    //Based on "type" property of storyComponent, cast this argument to the proper subclass
+    func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {}
 }
 ```
-As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows. In addition, `storylyUserInteracted` method has a parameter called `StoryLayer` which has the following subclasses `StoryQuizLayer`, `StoryEmojiLayer`, `StoryPollLayer`, details of these object also can be seen below:
+As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows. In addition, `storylyUserInteracted` method has a parameter called `StoryComponent` which has the following subclasses `StoryQuizComponent`, `StoryEmojiComponent`, `StoryPollComponent` with type class `StoryComponentType`, details of these object also can be seen below:
 
 ```swift
 @objc public enum StoryType: Int {
@@ -118,12 +118,19 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
     @objc public let value: String
 }
 
-@objc public class StoryLayer: NSObject {
-    @objc public var type: String? { return nil }
+@objc public class StoryComponent: NSObject {
+    @objc public var type: StoryComponentType
 }
 
-@objc public final class StoryQuizLayer: StoryLayer {
-    @objc override public var type: String? { return "quiz" }
+@objc public enum StoryComponentType: Int {
+    case Undefined
+    case Quiz
+    case Poll
+    case Emoji
+}
+
+@objc public final class StoryQuizComponent: StoryComponent {
+    @objc override public var type: StoryComponentType { return .Quiz }
     @objc public var title: String
     @objc public var options: [String]
     @objc public var rightAnswerIndex: NSNumber?
@@ -131,20 +138,21 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
     @objc public var customPayload: String?
 }
 
-@objc public final class StoryPollLayer: StoryLayer {
-    @objc override public var type: String { return "poll" }
+@objc public final class StoryPollComponent: StoryComponent {
+    @objc override public var type: StoryComponentType { return .Poll }
     @objc public var title: String
     @objc public var options: [String]
     @objc public var selectedOptionIndex: Int
     @objc public var customPayload: String?
 }
 
-@objc public final class StoryEmojiLayer: StoryLayer {
-    @objc override public var type: String { return "emoji" }
+@objc public final class StoryEmojiComponent: StoryComponent {
+    @objc override public var type: StoryComponentType { return .Emoji }
     @objc public var emojiCodes: [String]
     @objc public var selectedEmojiIndex: Int
     @objc public var customPayload: String?
 }
+
 ``` 
 
 ## Third Party Library Integrations
