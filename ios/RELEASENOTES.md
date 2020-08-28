@@ -1,4 +1,8 @@
 # Release Notes
+### 1.7.1
+* added storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyLayer: StoryLayer) callback
+* improved events for better analysis
+
 ### 1.7.0
 * added countdown component for interactive stories
 * added share feature to stories
