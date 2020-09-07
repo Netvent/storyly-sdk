@@ -1,4 +1,7 @@
 # Release Notes
+### 1.7.3
+* fixed compile issue due to swift backward compatibility
+
 ### 1.7.2
 * added storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) callback
 * improved events for better analysis
