@@ -1,4 +1,10 @@
 # Release Notes
+### 1.7.4
+* added StoryGroupIconStyling to support custom size story groups, added 'storyGroupIconWidth', 'storyGroupIconHeight', 'storyGroupIconCornerRadius' and 'storyGroupPaddingBetweenItems' as xml attributes
+* added StoryGroupTextStyling for visibility handling of elements, added 'storyGroupTextIsVisible' as xml attribute
+* added StoryHeaderStyling for visibility handling of elements, added 'storyHeaderIconIsVisible', 'storyHeaderTextIsVisible' as xml attributes
+* added runtime update feature for StorylyInit's segmentation parameters
+
 ### 1.7.3
 * improved swipe up handling
 
