@@ -533,6 +533,71 @@ DEFAULT: app:storyGroupSize="large"
 
 In order to set this attribute from design view, find and fill the `storyGroupSize` attribute.
 
+####  ***Story Group Icon Styling (Just valid for `Custom` story group size):***
+
+This styling changes the shape of the story group icons, their corners and the distance between each other. Users can create square, circle and oval shaped icons using these attributes. In order to use these values, your group size should be set to `custom`. Otherwise, they will not affect the story groups. This styling can be specified programmatically, from layout xml or from attributes section of design view. Users should set `StoryGroupIconStyling` data class which consists of the following variables: height, width, cornerRadius and paddingBetweenItems. 
+
+In order to set this styling programmatically use the following method: 
+Kotlin:
+```kotlin
+    storylyView.setStoryGroupIconStyling(storyGroupIconStyling: StoryGroupIconStyling)
+```
+Java:
+```java
+    storylyView.setStoryGroupIconStyling(StoryGroupIconStyling storyGroupIconStyling)
+```
+If you will set the values programmatically, you should send the pixel values for the variables of StoryGroupIconStyling.
+
+If you are planning to set this styling from layout xml add the following attributes as StorylyView attributes:
+
+```xml
+app:storyGroupIconHeight="" (should be set as dp, default values is: "80dp")
+app:storyGroupIconWidth="" (should be set as dp, default values is: "80dp")
+app:storyGroupIconCornerRadius="" (should be set as dp, default values is: "40dp")
+app:storyGroupPaddingBetweenItems="" (should be set as dp, default values is: "4dp")
+```
+
+####  ***Story Group Text Styling:***
+
+This styling changes the visibility of the story group text. This styling can be specified programmatically, from layout xml or from attributes section of design view. Users should set `StoryGroupTextStyling` data class which consists of the following variable: isVisible. 
+
+In order to set this styling programmatically use the following method: 
+Kotlin:
+```kotlin
+    storylyView.setStoryGroupTextStyling(storyGroupTextStyling: StoryGroupTextStyling)
+```
+Java:
+```java
+    storylyView.setStoryGroupTextStyling(StoryGroupTextStyling storyGroupTextStyling)
+```
+
+If you are planning to set this styling from layout xml add the following attributes as StorylyView attribute:
+
+```xml
+app:storyGroupTextIsVisible="" (boolean, default values is: "true")
+```
+
+####  ***Story Header Styling:***
+
+This styling changes the visibility of the text and icon of the stories. This styling can be specified programmatically, from layout xml or from attributes section of design view. Users should set `StoryHeaderStyling` data class which consists of the following variables: isTextVisible, isIconVisible. 
+
+In order to set this styling programmatically use the following method: 
+Kotlin:
+```kotlin
+    storylyView.setStoryHeaderStyling(storyHeaderStyling: StoryHeaderStyling)
+```
+Java:
+```java
+    storylyView.setStoryHeaderStyling(StoryHeaderStyling storyHeaderStyling)
+```
+
+If you are planning to set this styling from layout xml add the following attributes as StorylyView attributes:
+
+```xml
+app:storyHeaderIconIsVisible="" (boolean, default values is: "true")
+app:storyHeaderTextIsVisible="" (boolean, default values is: "true")
+```
+
 ## Advanced
 
 * [Deep Links](advanced_docs/deep_linking.md)
