@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.0
+* added rating component for interactive stories
+* added language support for en, tr, de, fr, ru, es locales
+
 ### 1.7.4
 * added StoryGroupIconStyling to support custom size story groups, added 'storyGroupIconWidth', 'storyGroupIconHeight', 'storyGroupIconCornerRadius' and 'storyGroupPaddingBetweenItems' as xml attributes
 * added StoryGroupTextStyling for visibility handling of elements, added 'storyGroupTextIsVisible' as xml attribute
