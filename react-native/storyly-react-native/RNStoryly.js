@@ -4,7 +4,7 @@ import { requireNativeComponent,
     findNodeHandle,
     ViewPropTypes,
     processColor} from 'react-native';
-import { string, arrayOf, func } from 'prop-types';
+import { string, arrayOf, func, number, boolean } from 'prop-types';
 
 class Storyly extends Component {
     refresh = () => {
@@ -40,6 +40,14 @@ class Storyly extends Component {
         );
     };
 
+    openStory = (storyGroupId, storyId) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.openStory,
+            [storyGroupId, storyId],
+        );
+    };
+
     setExternalData = (externalData) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
@@ -58,22 +66,34 @@ class Storyly extends Component {
             storyGroupIconForegroundColors,
             storyItemIconBorderColor,
             storyItemProgressBarColor,
+            storyGroupIconHeight,
+            storyGroupIconWidth,
+            storyGroupIconCornerRadius,
+            storyGroupPaddingBetweenItems,
+            storyGroupTextIsVisible,
+            storyHeaderTextIsVisible,
+            storyHeaderIconIsVisible,
             onLoad,
             onFail,
             onPress,
             onStoryOpen,
             onStoryClose,
+            onUserInteracted,
             ...otherProps
         } = this.props;
         return (
             <STStoryly
                 {...otherProps}
                 storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter}}
+                storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius, 'paddingBetweenItems': storyGroupPaddingBetweenItems}}
+                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible}}
+                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible}}
                 onStorylyLoaded={onLoad}
                 onStorylyLoadFailed={onFail}
                 onStorylyActionClicked={onPress}
                 onStorylyStoryPresented={onStoryOpen}
                 onStorylyStoryDismissed={onStoryClose}
+                onStorylyUserInteracted={onUserInteracted}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
                 storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
                 storyGroupIconForegroundColors={storyGroupIconForegroundColors ? storyGroupIconForegroundColors.map(processColor) : null}
@@ -100,12 +120,20 @@ Storyly.propTypes = {
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,
     storyItemProgressBarColor: arrayOf(string),
+    storyGroupIconHeight: number,
+    storyGroupIconWidth: number,
+    storyGroupIconCornerRadius: number,
+    storyGroupPaddingBetweenItems: number,
+    storyGroupTextIsVisible: boolean,
+    storyHeaderTextIsVisible: boolean,
+    storyHeaderIconIsVisible: boolean,
 
     onLoad: func,
     onFail: func,
     onPress: func,
     onStoryOpen: func,
-    onStoryClose: func
+    onStoryClose: func,
+    onUserInteracted: func
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);

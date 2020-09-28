@@ -16,4 +16,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface RCTConvert (StoryGroupIconStyling)
+
++ (StoryGroupIconStyling *)STStoryGroupIconStyling:(id)json;
+
+@end
+
+@interface RCTConvert (StoryGroupTextStyling)
+
++ (StoryGroupTextStyling *)STStoryGroupTextStyling:(id)json;
+
+@end
+
+@interface RCTConvert (StoryHeaderStyling)
+
++ (StoryHeaderStyling *)STStoryHeaderStyling:(id)json;
+
+@end
+
 NS_ASSUME_NONNULL_END

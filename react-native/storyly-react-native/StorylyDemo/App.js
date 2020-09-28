@@ -34,6 +34,9 @@ export default class App extends Component<{}> {
                     }}
                     onStoryClose={() => {
                         console.log("[Storyly] onStoryClose");
+                    }}
+                    onUserInteracted={interactionEvent => {
+                        console.log("[Storyly] onStoryUserInteracted");
                     }}/>
                 <Button
                     onPress={() => { this.storyly.refresh(); }}

@@ -20,11 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyActionClicked;
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyStoryPresented;
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyStoryDismissed;
+@property(nonatomic, copy) RCTBubblingEventBlock onStorylyUserInteracted;
 
 - (void)refresh;
 - (void)open;
 - (void)close;
 - (BOOL)openStory:(NSURL *)payload;
+- (BOOL)openStory:(NSNumber *)storyGroupId:(NSNumber *)storyId;
 - (BOOL)setExternalData:(NSArray<NSDictionary *> *)externalData;
 
 @end

@@ -2,9 +2,13 @@ package com.appsamurai.storyly.reactnative
 
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylySegmentation
 import com.appsamurai.storyly.StoryGroupSize
+import com.appsamurai.storyly.styling.StoryGroupIconStyling
+import com.appsamurai.storyly.styling.StoryGroupTextStyling
+import com.appsamurai.storyly.styling.StoryHeaderStyling
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -30,6 +34,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val PROP_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val PROP_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
+        private const val PROP_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
+        private const val PROP_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
+        private const val PROP_STORY_HEADER_STYLING = "storyHeaderStyling"
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
@@ -41,12 +48,16 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_OPEN_STORY_CODE = 4
         private const val COMMAND_SET_EXTERNAL_DATA_NAME = "setExternalData"
         private const val COMMAND_SET_EXTERNAL_DATA_CODE = 5
+        private const val COMMAND_OPEN_STORY_V2_NAME = "openStory"
+        private const val COMMAND_OPEN_STORY_V2_CODE = 6
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
         internal const val EVENT_STORYLY_ACTION_CLICKED = "onStorylyActionClicked"
         internal const val EVENT_STORYLY_STORY_PRESENTED = "onStorylyStoryPresented"
         internal const val EVENT_STORYLY_STORY_DISMISSED = "onStorylyStoryDismissed"
+        internal const val EVENT_STORYLY_USER_INTERACTED = "onStorylyUserInteracted"
+
     }
 
     override fun getName(): String = REACT_CLASS
@@ -61,7 +72,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 EVENT_STORYLY_LOAD_FAILED,
                 EVENT_STORYLY_ACTION_CLICKED,
                 EVENT_STORYLY_STORY_PRESENTED,
-                EVENT_STORYLY_STORY_DISMISSED).forEach {
+                EVENT_STORYLY_STORY_DISMISSED,
+                EVENT_STORYLY_USER_INTERACTED).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
         }
         return builder.build()
@@ -73,7 +85,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 COMMAND_OPEN_NAME, COMMAND_OPEN_CODE,
                 COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
                 COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
-                COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE
+                COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE,
+                COMMAND_OPEN_STORY_V2_NAME, COMMAND_OPEN_STORY_V2_CODE
         )
     }
 
@@ -88,6 +101,12 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             }
             COMMAND_SET_EXTERNAL_DATA_CODE -> {
                 root.storylyView.setExternalData(args?.getArray(0)?.toArrayList() as? ArrayList<Map<String, Any>>)
+            }
+            COMMAND_OPEN_STORY_V2_CODE -> {
+                val storyGroupId: Int = args?.getInt(0) ?: return
+                val storyId: Int? = if (args.size() > 1) args.getInt(1) else null
+
+                root.storylyView.openStory(storyGroupId, storyId)
             }
         }
     }
@@ -154,6 +173,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         when(size) {
             "small" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Small)
             "xlarge" -> view.storylyView.setStoryGroupSize(StoryGroupSize.XLarge)
+            "custom" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Custom)
             else -> view.storylyView.setStoryGroupSize(StoryGroupSize.Large)
         }
     }
@@ -171,6 +191,35 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORY_ITEM_PROGRESS_BAR_COLOR)
     fun setPropStoryItemProgressBarColor(view: STStorylyView, colors: ReadableArray?) {
         colors?.let { view.storylyView.setStoryItemProgressBarColor(convertColorArray(colors)) }
+    }
+
+    @ReactProp(name = PROP_STORY_GROUP_ICON_STYLING)
+    fun setPropStoryGroupIconStyling(view: STStorylyView, storyGroupIconStylingMap: ReadableMap) {
+        Log.d("yigig","storyGroupIconStylingMap $storyGroupIconStylingMap")
+        if (storyGroupIconStylingMap.hasKey("height") && storyGroupIconStylingMap.hasKey("width") &&
+                storyGroupIconStylingMap.hasKey("cornerRadius") && storyGroupIconStylingMap.hasKey("paddingBetweenItems")) {
+            view.storylyView.setStoryGroupIconStyling(StoryGroupIconStyling(
+                    storyGroupIconStylingMap.getInt("height"),
+                    storyGroupIconStylingMap.getInt("width"),
+                    storyGroupIconStylingMap.getDouble("cornerRadius").toFloat(),
+                    storyGroupIconStylingMap.getInt("paddingBetweenItems")))
+        }
+    }
+
+    @ReactProp(name = PROP_STORY_GROUP_TEXT_STYLING)
+    fun setPropStoryGroupTextStyling(view: STStorylyView, storyGroupTextStylingMap: ReadableMap) {
+        if (storyGroupTextStylingMap.hasKey("isVisible")) {
+            view.storylyView.setStoryGroupTextStyling(StoryGroupTextStyling(storyGroupTextStylingMap.getBoolean("isVisible")))
+        }
+    }
+
+    @ReactProp(name = PROP_STORY_HEADER_STYLING)
+    fun setPropStoryHeaderStyling(view: STStorylyView, storyHeaderStylingMap: ReadableMap) {
+        if (storyHeaderStylingMap.hasKey("isTextVisible") && storyHeaderStylingMap.hasKey("isIconVisible")) {
+            view.storylyView.setStoryHeaderStyling(StoryHeaderStyling(
+                    storyHeaderStylingMap.getBoolean("isTextVisible"),
+                    storyHeaderStylingMap.getBoolean("isIconVisible")))
+        }
     }
 
     private fun convertColorArray(colors: ReadableArray): Array<Int> {

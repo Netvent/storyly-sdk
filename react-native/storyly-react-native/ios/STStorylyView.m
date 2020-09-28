@@ -29,6 +29,7 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
+    [_storylyView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_storylyView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = YES;
     [_storylyView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = YES;
     [_storylyView.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor].active = YES;
@@ -51,6 +52,12 @@
 
 - (BOOL) openStory:(NSURL *)payload {
     return [_storylyView openStoryWithPayload:payload];
+}
+
+- (BOOL) openStory:(NSNumber *)storyGroupId
+           storyId:(NSNumber *)storyId {
+    return [_storylyView openStory:[NSNumber numberWithInt:1]
+                                  :[NSNumber numberWithInt:2]];
 }
 
 - (BOOL) setExternalData:(NSArray<NSDictionary *> *)externalData {
@@ -97,6 +104,17 @@
     }
 }
 
+- (void)storylyUserInteracted:(StorylyView * _Nonnull)storylyView
+               storyGroup:(StoryGroup  *)storyGroup
+                    story:(Story *)story 
+           storyComponent:(StoryComponent *)storyComponent {
+    if (self.onStorylyUserInteracted) {
+        self.onStorylyUserInteracted(@{@"storyGroup": [self createStoryGroupMap:storyGroup], 
+                                       @"story": [self createStoryMap:story],
+                                       @"storyComponent": [self createStoryComponentMap:storyComponent]});
+    }
+}
+
 -(NSDictionary *)createStoryGroupMap:(StoryGroup * _Nonnull)storyGroup {
     NSMutableArray* stories = [NSMutableArray new];
     for (Story *story in storyGroup.stories) {
@@ -118,6 +136,68 @@
                 @"url": story.media.url,
                 @"actionUrl": story.media.actionUrl
         }};
+}
+
+-(NSDictionary *)createStoryComponentMap:(StoryComponent * _Nonnull)storyComponent {
+    switch (storyComponent.type) {
+        case StoryComponentTypeQuiz:
+            {
+                StoryQuizComponent *quizComponent = (StoryQuizComponent *)storyComponent;
+                return @{
+                    @"type": @(quizComponent.type),
+                    @"title": quizComponent.title,
+                    @"options": quizComponent.options,
+                    @"rightAnswerIndex": quizComponent.rightAnswerIndex,
+                    @"selectedOptionIndex": [NSNumber numberWithInt:quizComponent.selectedOptionIndex],
+                    @"customPayload": quizComponent.customPayload
+                };
+            }
+            break;
+        case StoryComponentTypePoll:
+            {
+                StoryPollComponent *pollComponent = (StoryPollComponent *)storyComponent;
+                return @{
+                    @"type": @(pollComponent.type),
+                    @"title": pollComponent.title,
+                    @"options": pollComponent.options,
+                    @"selectedOptionIndex": [NSNumber numberWithInt:pollComponent.selectedOptionIndex],
+                    @"customPayload": pollComponent.customPayload
+                }; 
+            }
+            break;
+        case StoryComponentTypeEmoji:
+            {
+                StoryEmojiComponent *emojiComponent = (StoryEmojiComponent *)storyComponent;
+                return @{
+                    @"type": @(emojiComponent.type),
+                    @"emojiCodes": emojiComponent.emojiCodes,
+                    @"selectedEmojiIndex": [NSNumber numberWithInt:emojiComponent.selectedEmojiIndex],
+                    @"customPayload": emojiComponent.customPayload
+                };
+            }
+            break;
+        case StoryComponentTypeRating:
+            {
+                StoryRatingComponent *ratingComponent = (StoryRatingComponent *)storyComponent;
+                return @{
+                    @"type": @(ratingComponent.type),
+                    @"emojiCode": ratingComponent.emojiCode,
+                    @"rating": [NSNumber numberWithInt:ratingComponent.rating],
+                    @"customPayload": ratingComponent.customPayload
+                };
+            }
+            break;
+        case StoryComponentTypeUndefined:
+            {
+                return @{};
+            }
+            break;
+        default:
+            {
+                return @{};
+            }
+            break;
+    }
 }
 
 @end

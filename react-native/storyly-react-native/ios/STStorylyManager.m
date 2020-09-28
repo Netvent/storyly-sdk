@@ -58,6 +58,21 @@ RCT_EXPORT_METHOD(openStory:(nonnull NSNumber *)reactTag
     }];
 }
 
+RCT_EXPORT_METHOD(openStory:(nonnull NSNumber *)reactTag
+                  storyGroupId:(nonnull NSNumber *)storyGroupId
+                  storyId:(NSNumber *)storyId)
+{
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
+        STStorylyView *stStorylyView = viewRegistry[reactTag];
+        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
+            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
+        } else {
+            [stStorylyView openStory:[NSNumber numberWithInt:1]
+                                    :[NSNumber numberWithInt:2]];
+        }
+    }];
+}
+
 RCT_EXPORT_METHOD(setExternalData:(nonnull NSNumber *)reactTag
                   externalData:(nonnull NSArray<NSDictionary *> *)externalData)
 {
@@ -83,11 +98,16 @@ RCT_REMAP_VIEW_PROPERTY(storyGroupSize, _storylyView.storyGroupSize, NSString)
 RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, _storylyView.storyItemIconBorderColor, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, _storylyView.storyItemTextColor, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyItemProgressBarColor, _storylyView.storylyItemProgressBarColor, NSArray<UIColor *>)
+RCT_REMAP_VIEW_PROPERTY(storyGroupIconStyling, _storylyView.storyGroupIconStyling, STStoryGroupIconStyling)
+RCT_REMAP_VIEW_PROPERTY(storyGroupTextStyling, _storylyView.storyGroupTextStyling, STStoryGroupTextStyling)
+RCT_REMAP_VIEW_PROPERTY(storyHeaderStyling, _storylyView.storyHeaderStyling, STStoryHeaderStyling)
+
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyActionClicked, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresented, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryDismissed, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
 
 @end
