@@ -1,4 +1,12 @@
 # Release Notes
+### 1.8.0
+* added rating component for interactive stories
+* added language support for en, tr, de, fr, ru, es locales
+* added StoryGroupIconStyling to support custom size story groups, added 'storyGroupIconWidth', 'storyGroupIconHeight', 'storyGroupIconCornerRadius' and 'storyGroupPaddingBetweenItems' as storyboard and programmatic attributes
+* added StoryGroupTextStyling for visibility handling of elements, added 'storyGroupTextIsVisible' as storyboard and programmatic attribute
+* added StoryHeaderStyling for visibility handling of elements, added 'storyHeaderIconIsVisible', 'storyHeaderTextIsVisible' as storyboard and programmatic attributes
+* added runtime update feature for StorylyInit's segmentation parameters
+
 ### 1.7.3
 * fixed compile issue due to swift backward compatibility
 
