@@ -9,7 +9,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, PixelRatio, Dimensions } from 'react-native';
 import { Storyly } from 'storyly-react-native';
 
 export default class App extends Component<{}> {
@@ -22,6 +22,7 @@ export default class App extends Component<{}> {
                     storylyId=[YOUR_APP_ID_FROM_DASHBOARD]
                     onLoad={storyGroupList => {
                         console.log("[Storyly] onLoad");
+                        // this.storyly.openStoryWithId(story_group_id, story_id)
                     }}
                     onFail={errorMessage => {
                         console.log("[Storyly] onFail");
@@ -34,6 +35,10 @@ export default class App extends Component<{}> {
                     }}
                     onStoryClose={() => {
                         console.log("[Storyly] onStoryClose");
+                    }}
+                    onUserInteracted={interactionEvent => {
+                        // console.log(interactionEvent.nativeEvent);
+                        console.log("[Storyly] onStoryUserInteracted");
                     }}/>
                 <Button
                     onPress={() => { this.storyly.refresh(); }}
