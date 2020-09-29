@@ -4,7 +4,7 @@ import { requireNativeComponent,
     findNodeHandle,
     ViewPropTypes,
     processColor} from 'react-native';
-import { string, arrayOf, func, number, boolean } from 'prop-types';
+import { string, arrayOf, func, number, bool } from 'prop-types';
 
 class Storyly extends Component {
     refresh = () => {
@@ -40,10 +40,10 @@ class Storyly extends Component {
         );
     };
 
-    openStory = (storyGroupId, storyId) => {
+    openStoryWithId = (storyGroupId, storyId) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
-            UIManager.getViewManagerConfig('STStoryly').Commands.openStory,
+            UIManager.getViewManagerConfig('STStoryly').Commands.openStoryWithId,
             [storyGroupId, storyId],
         );
     };
@@ -124,9 +124,9 @@ Storyly.propTypes = {
     storyGroupIconWidth: number,
     storyGroupIconCornerRadius: number,
     storyGroupPaddingBetweenItems: number,
-    storyGroupTextIsVisible: boolean,
-    storyHeaderTextIsVisible: boolean,
-    storyHeaderIconIsVisible: boolean,
+    storyGroupTextIsVisible: bool,
+    storyHeaderTextIsVisible: bool,
+    storyHeaderIconIsVisible: bool,
 
     onLoad: func,
     onFail: func,

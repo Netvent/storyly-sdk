@@ -58,17 +58,16 @@ RCT_EXPORT_METHOD(openStory:(nonnull NSNumber *)reactTag
     }];
 }
 
-RCT_EXPORT_METHOD(openStory:(nonnull NSNumber *)reactTag
+RCT_EXPORT_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
                   storyGroupId:(nonnull NSNumber *)storyGroupId
-                  storyId:(NSNumber *)storyId)
+                  storyId:(nonnull NSNumber *)storyId)
 {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
         STStorylyView *stStorylyView = viewRegistry[reactTag];
         if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
             RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
         } else {
-            [stStorylyView openStory:[NSNumber numberWithInt:1]
-                                    :[NSNumber numberWithInt:2]];
+            [stStorylyView openStoryWithId:storyGroupId storyId:storyId];
         }
     }];
 }

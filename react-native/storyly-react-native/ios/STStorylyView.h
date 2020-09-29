@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)open;
 - (void)close;
 - (BOOL)openStory:(NSURL *)payload;
-- (BOOL)openStory:(NSNumber *)storyGroupId:(NSNumber *)storyId;
+- (BOOL)openStoryWithId:(NSNumber *)storyGroupId storyId:(NSNumber *)storyId;
 - (BOOL)setExternalData:(NSArray<NSDictionary *> *)externalData;
 
 @end

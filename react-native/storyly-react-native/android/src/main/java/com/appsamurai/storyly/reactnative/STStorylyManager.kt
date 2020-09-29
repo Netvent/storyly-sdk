@@ -2,7 +2,6 @@ package com.appsamurai.storyly.reactnative
 
 import android.graphics.Color
 import android.net.Uri
-import android.util.Log
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylySegmentation
 import com.appsamurai.storyly.StoryGroupSize
@@ -48,7 +47,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_OPEN_STORY_CODE = 4
         private const val COMMAND_SET_EXTERNAL_DATA_NAME = "setExternalData"
         private const val COMMAND_SET_EXTERNAL_DATA_CODE = 5
-        private const val COMMAND_OPEN_STORY_V2_NAME = "openStory"
+        private const val COMMAND_OPEN_STORY_V2_NAME = "openStoryWithId"
         private const val COMMAND_OPEN_STORY_V2_CODE = 6
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
@@ -195,7 +194,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_GROUP_ICON_STYLING)
     fun setPropStoryGroupIconStyling(view: STStorylyView, storyGroupIconStylingMap: ReadableMap) {
-        Log.d("yigig","storyGroupIconStylingMap $storyGroupIconStylingMap")
         if (storyGroupIconStylingMap.hasKey("height") && storyGroupIconStylingMap.hasKey("width") &&
                 storyGroupIconStylingMap.hasKey("cornerRadius") && storyGroupIconStylingMap.hasKey("paddingBetweenItems")) {
             view.storylyView.setStoryGroupIconStyling(StoryGroupIconStyling(

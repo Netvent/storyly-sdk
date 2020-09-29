@@ -54,10 +54,9 @@
     return [_storylyView openStoryWithPayload:payload];
 }
 
-- (BOOL) openStory:(NSNumber *)storyGroupId
-           storyId:(NSNumber *)storyId {
-    return [_storylyView openStory:[NSNumber numberWithInt:1]
-                                  :[NSNumber numberWithInt:2]];
+- (BOOL) openStoryWithId:(NSNumber * _Nonnull)storyGroupId
+           storyId:(NSNumber * _Nonnull)storyId {
+    return [_storylyView openStoryWithId:storyGroupId storyId:storyId];
 }
 
 - (BOOL) setExternalData:(NSArray<NSDictionary *> *)externalData {
