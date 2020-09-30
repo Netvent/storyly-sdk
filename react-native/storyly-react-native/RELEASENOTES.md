@@ -1,4 +1,14 @@
 # Release Notes
+### 1.8.0
+* added countdown and rating component for interactive stories
+* added share feature to stories
+* added 'custom' story group size
+* added 'storylyUserInteracted' callback
+* added language support for en, tr, de, fr, ru, es locales
+* added 'openStory' methods to open stories by programmatically
+* added use_frameworks! constraint for iOS CocoaPods integrations
+* removed close button from stories
+
 ### 1.6.0
 * added quiz component for interactive stories
 * removed use_frameworks! constraint for iOS CocoaPods integrations
