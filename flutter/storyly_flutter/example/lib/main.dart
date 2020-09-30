@@ -29,7 +29,8 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Container(
-          height: 120,
+          margin: const EdgeInsets.only(top: 5.0),
+          height: 130,
           child: StorylyView(
             onStorylyViewCreated: onStorylyViewCreated,
             androidParam: StorylyParam()
@@ -40,7 +41,8 @@ class _MyAppState extends State<MyApp> {
             storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
             storylyActionClicked: (story) => print("storylyActionClicked"),
             storylyStoryShown: () => print("storylyStoryShown"),
-            storylyStoryDismissed: () => print("storylyStoryDismissed")
+            storylyStoryDismissed: () => print("storylyStoryDismissed"),
+            storylyUserInteracted: (eventPayload) => print("storylyUserInteracted")
           ),
         ),
       ),

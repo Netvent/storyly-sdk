@@ -15,6 +15,7 @@ class StorylyView extends StatefulWidget {
   final Function(Map) storylyActionClicked;
   final Function() storylyStoryShown;
   final Function() storylyStoryDismissed;
+  final Function(Map) storylyUserInteracted;
 
   const StorylyView(
       {Key key,
@@ -25,7 +26,8 @@ class StorylyView extends StatefulWidget {
       this.storylyLoadFailed,
       this.storylyActionClicked,
       this.storylyStoryShown,
-      this.storylyStoryDismissed})
+      this.storylyStoryDismissed,
+      this.storylyUserInteracted})
       : super(key: key);
 
   @override
@@ -78,6 +80,9 @@ class _StorylyViewState extends State<StorylyView> {
       case 'storylyStoryDismissed':
         widget.storylyStoryDismissed();
         break;
+      case 'storylyUserInteracted':
+        widget.storylyUserInteracted(call.arguments);
+        break;
     }
   }
 }
@@ -101,10 +106,40 @@ class StorylyViewController {
   Future<void> storyDismiss() {
     return _methodChannel.invokeMethod('dismiss');
   }
+
+  Future<void> openStory(int storyGroupId, int storyId) {
+    return _methodChannel.invokeMethod('openStory', <String, dynamic> {
+      'storyGroupId': storyGroupId,
+      'storyId': storyId
+    });
+  }
+
+  Future<void> openStoryUri(String uri) {
+    return _methodChannel.invokeMethod('openStoryUri', <String, dynamic> {
+      'uri': uri
+    });
+  }
+
+  Future<void> setExternalData(List<Map> externalData) {
+    return _methodChannel.invokeMethod('setExternalData', <String, dynamic> {
+      'externalData': externalData
+    });
+  }
 }
 
 class StorylyParam {
   @required String storylyId;
+  List<String> storylySegments;
+  String storylyCustomParameters;
+
+  String storyGroupSize;
+  int storyGroupIconWidth;
+  int storyGroupIconHeight;
+  int storyGroupIconCornerRadius;
+  int storyGroupPaddingBetweenItems;
+  bool storyGroupTextIsVisible;
+  bool storyHeaderTextIsVisible;
+  bool storyHeaderIconIsVisible;
 
   List<Color> storyGroupIconBorderColorSeen;
   List<Color> storyGroupIconBorderColorNotSeen;
@@ -116,7 +151,11 @@ class StorylyParam {
   List<Color> storyItemProgressBarColor;
 
   dynamic toMap() {
-    Map<String, dynamic> paramsMap = <String, dynamic>{ "storylyId": this.storylyId };
+    Map<String, dynamic> paramsMap = <String, dynamic>{ "storylyId": this.storylyId, "storylySegments": this.storylySegments, "storylyCustomParameters": this.storylyCustomParameters};
+    paramsMap['storyGroupIconStyling'] = {'width': this.storyGroupIconWidth, 'height': this.storyGroupIconHeight, 'cornerRadius': this.storyGroupIconCornerRadius, 'paddingBetweenItems': this.storyGroupPaddingBetweenItems};
+    paramsMap['storyGroupTextStyling'] = {'isVisible': this.storyGroupTextIsVisible};
+    paramsMap['storyHeaderStyling'] = {'isTextVisible': this.storyHeaderTextIsVisible, 'isIconVisible': this.storyHeaderIconIsVisible};
+    paramsMap['storyGroupSize'] = this.storyGroupSize != null ? this.storyGroupSize : "large";
     paramsMap['storyGroupIconBorderColorSeen'] = this.storyGroupIconBorderColorSeen != null ? this.storyGroupIconBorderColorSeen.map((color) => '#${color.value.toRadixString(16)}').toList() : null;
     paramsMap['storyGroupIconBorderColorNotSeen'] = this.storyGroupIconBorderColorNotSeen != null ? this.storyGroupIconBorderColorNotSeen.map((color) => '#${color.value.toRadixString(16)}').toList() : null;
     paramsMap['storyGroupIconBackgroundColor'] = this.storyGroupIconBackgroundColor != null ? '#${this.storyGroupIconBackgroundColor.value.toRadixString(16)}' : null;
