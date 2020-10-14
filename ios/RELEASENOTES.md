@@ -1,4 +1,10 @@
 # Release Notes
+### 1.8.2
+* added 'storyItemTextFont' as storyboard and programmatic attribute to support custom font for story title
+* added 'isCloseButtonVisible' attribute to StoryHeaderStyling and 'storyHeaderCloseButtonIsVisible' as storyboard and programmatic attribute for visibility option of close button
+* added 'showExternalActionView' and 'dismissExternalActionView' methods to support external custom view to show and dismiss while stories are being shown
+* added 'storylyLoadingView' attribute to support external custom loading view instead of using default loading view
+
 ### 1.8.0
 * added rating component for interactive stories
 * added language support for en, tr, de, fr, ru, es locales
