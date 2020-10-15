@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("[Storyly]", "storylyActionClicked")
 
                 // Edit and use the following method to open an external custom view
-                openExternalView(storylyView, story)
+//                openExternalView(storylyView, story)
 
                 return true
             }
@@ -71,6 +71,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // If you want your own loading view uncomment and edit the following lines
+//        val loadingViewGroup = View.inflate(this, R.layout.custom_loading_view, null)
+//        storyly_view.storylyLoadingView = CustomLoadingView(loadingViewGroup, context = this)
 
     }
 
@@ -78,13 +81,13 @@ class MainActivity : AppCompatActivity() {
     // Suggested usage is to use 'showExternalActionView()' in storylyActionClicked or storylyUserInteracted
     private fun openExternalView(storylyView: StorylyView, story: Story) {
         // Although layout params are wrap content these params will be overridden to full screen params
-        val externalView = View.inflate(applicationContext, R.layout.custom_external_view, null)
+        val externalView = View.inflate(this, R.layout.custom_external_view, null)
 
         externalView.external_view_dismiss_button.text = "DISMISS Story With ID: ${story.id}"
         externalView.external_view_dismiss_button.setOnClickListener {
             storylyView.dismissExternalActionView()
         }
 
-        storylyView.showExternalActionView(externalView as ViewGroup)
+        storylyView.showExternalActionView(externalView)
     }
 }
