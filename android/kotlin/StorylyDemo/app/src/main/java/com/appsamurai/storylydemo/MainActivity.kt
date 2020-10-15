@@ -1,16 +1,13 @@
 package com.appsamurai.storylydemo
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.custom_external_view.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("[Storyly]", "storylyActionClicked")
 
                 // Edit and use the following method to open an external custom view
-                //openExternalView(storylyView, story)
+                openExternalView(storylyView, story)
 
                 return true
             }
@@ -80,21 +77,14 @@ class MainActivity : AppCompatActivity() {
     // Design your view as you want but the parent view will be resized to full screen
     // Suggested usage is to use 'showExternalActionView()' in storylyActionClicked or storylyUserInteracted
     private fun openExternalView(storylyView: StorylyView, story: Story) {
-        val externalViewContainer = RelativeLayout(applicationContext)
         // Although layout params are wrap content these params will be overridden to full screen params
-        externalViewContainer.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        externalViewContainer.setBackgroundColor(Color.GREEN)
+        val externalView = View.inflate(applicationContext, R.layout.custom_external_view, null)
 
-        val button = Button(applicationContext)
-        val buttonLayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
-        buttonLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT)
-        button.layoutParams = buttonLayoutParams
-        button.text = "DISMISS Story With ID: ${story.id}"
-        button.setOnClickListener {
+        externalView.external_view_dismiss_button.text = "DISMISS Story With ID: ${story.id}"
+        externalView.external_view_dismiss_button.setOnClickListener {
             storylyView.dismissExternalActionView()
         }
-        externalViewContainer.addView(button)
 
-        storylyView.showExternalActionView(externalViewContainer)
+        storylyView.showExternalActionView(externalView as ViewGroup)
     }
 }
