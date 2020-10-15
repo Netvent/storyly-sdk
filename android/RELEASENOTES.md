@@ -1,4 +1,7 @@
 # Release Notes
+### 1.8.2
+* fixed crash related obfuscation on custom loading view usage
+
 ### 1.8.1
 * added 'setStoryItemTextTypeface' method to support custom font for story title
 * added 'isCloseButtonVisible' attribute to StoryHeaderStyling and 'storyHeaderCloseButtonIsVisible' as xml attribute for visibility option of close button
