@@ -1,3 +1,6 @@
+### 1.8.1
+* fixed default background color bug
+
 ### 1.8.0
 * added poll, quiz, emoji, countdown, rating interactive components
 * added share feature to stories

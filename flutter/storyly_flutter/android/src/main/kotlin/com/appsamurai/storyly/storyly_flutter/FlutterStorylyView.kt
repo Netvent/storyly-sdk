@@ -65,7 +65,6 @@ class FlutterStorylyView(
 
     private val storylyView: StorylyView by lazy {
         StorylyView(context).apply {
-            setBackgroundColor(Color.CYAN)
             val storylyId = args[ARGS_STORYLY_ID] as? String ?: throw Exception("StorylyId must be set.")
             val segments = args[ARGS_STORYLY_SEGMENTS] as? List<String>
             val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
