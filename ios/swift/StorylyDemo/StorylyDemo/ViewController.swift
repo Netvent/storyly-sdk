@@ -12,6 +12,7 @@ import Storyly
 class ViewController: UIViewController {
 
     @IBOutlet weak var storylyView: StorylyView!
+    private var customLoadingView = CustomLoadingView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,8 @@ class ViewController: UIViewController {
         self.storylyView.storylyInit = StorylyInit(storylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD)
         self.storylyView.rootViewController = self
         self.storylyView.delegate = self
+        // If you want your own loading view uncomment and edit the following lines
+//        self.storylyView.storylyLoadingView = customLoadingView
     }
 }
 
@@ -33,6 +36,10 @@ extension ViewController: StorylyDelegate {
     
     func storylyActionClicked(_ storylyView: Storyly.StorylyView, rootViewController: UIViewController, story: Storyly.Story) -> Bool {
         print("storylyActionClicked")
+        
+        // Edit and use the following method to open an external custom view
+//        self.showCustomExternalView(storylyView: storylyView, story: story)
+        
         return true // return false if sdk should handle click
     }
     

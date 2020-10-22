@@ -1,4 +1,13 @@
 # Release Notes
+### 1.8.2
+* fixed crash related obfuscation on custom loading view usage
+
+### 1.8.1
+* added 'setStoryItemTextTypeface' method to support custom font for story title
+* added 'isCloseButtonVisible' attribute to StoryHeaderStyling and 'storyHeaderCloseButtonIsVisible' as xml attribute for visibility option of close button
+* added 'showExternalActionView' and 'dismissExternalActionView' methods to support external custom view to show and dismiss while stories are being shown
+* added 'storylyLoadingView' programmatic attribute to support external custom loading view instead of using default loading view
+
 ### 1.8.0
 * added rating component for interactive stories
 * added language support for en, tr, de, fr, ru, es locales
