@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.3
+* improved UI components for better iOS14 support
+* improved status bar management
+
 ### 1.8.2
 * added 'storyItemTextFont' as storyboard and programmatic attribute to support custom font for story title
 * added 'isCloseButtonVisible' attribute to StoryHeaderStyling and 'storyHeaderCloseButtonIsVisible' as storyboard and programmatic attribute for visibility option of close button

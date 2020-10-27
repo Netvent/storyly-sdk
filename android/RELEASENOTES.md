@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.3
+* fixed crash related to missing permission 
+* updated android's compiledSdkVersion to 30
+
 ### 1.8.2
 * fixed crash related obfuscation on custom loading view usage
 
