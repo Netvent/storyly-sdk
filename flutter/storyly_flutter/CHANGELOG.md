@@ -1,3 +1,7 @@
+### 1.8.2
+* fixed crash related to missing permission 
+* updated android's compiledSdkVersion to 30
+
 ### 1.8.1
 * fixed default background color bug
 
