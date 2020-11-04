@@ -103,7 +103,8 @@ class FlutterStorylyView(
             (args[ARGS_STORY_HEADER_STYLING] as? Map<String, *>)?.let {
                 val isTextVisible = it["isTextVisible"] as? Boolean ?: return@let
                 val isIconVisible = it["isIconVisible"] as? Boolean ?: return@let
-                setStoryHeaderStyling(StoryHeaderStyling(isTextVisible, isIconVisible))
+                val isCloseButtonVisible = it["isCloseButtonVisible"] as? Boolean ?: return@let
+                setStoryHeaderStyling(StoryHeaderStyling(isTextVisible, isIconVisible, isCloseButtonVisible))
             }
 
             storylyListener = object : StorylyListener {

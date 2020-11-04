@@ -3,7 +3,7 @@ PODS:
   - SDWebImage (5.8.4):
     - SDWebImage/Core (= 5.8.4)
   - SDWebImage/Core (5.8.4)
-  - Storyly (1.8.1):
+  - Storyly (1.8.3):
     - SDWebImage (~> 5.8.0)
   - storyly_flutter (1.8.0):
     - Flutter
@@ -27,7 +27,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
-  Storyly: 0b540e70ea9f93497733ff2c6a08124e16bdf814
+  Storyly: 6aa894a292b9336ebb55873f6ddb909cf65b669e
   storyly_flutter: 6d0feba67f9aacbd847a662bbf4e3388d3790e64
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c

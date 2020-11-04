@@ -98,9 +98,11 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
             if let isTextVisible = storyHeaderStyling["isTextVisible"] as? Bool,
-                let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool {
+                let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool,
+                let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool{
                 storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
-                                                                    isIconVisible: isIconVisible)
+                                                                    isIconVisible: isIconVisible,
+                                                                    isCloseButtonVisible: isCloseButtonVisible)
             }
         }
         

@@ -1,3 +1,7 @@
+### 1.8.3
+* added close button to story header
+* added 'storyHeaderCloseButtonIsVisible' parameter
+
 ### 1.8.2
 * fixed crash related to missing permission 
 * updated android's compiledSdkVersion to 30

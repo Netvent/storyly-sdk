@@ -140,6 +140,7 @@ class StorylyParam {
   bool storyGroupTextIsVisible;
   bool storyHeaderTextIsVisible;
   bool storyHeaderIconIsVisible;
+  bool storyHeaderCloseButtonIsVisible;
 
   List<Color> storyGroupIconBorderColorSeen;
   List<Color> storyGroupIconBorderColorNotSeen;
@@ -154,7 +155,7 @@ class StorylyParam {
     Map<String, dynamic> paramsMap = <String, dynamic>{ "storylyId": this.storylyId, "storylySegments": this.storylySegments, "storylyCustomParameters": this.storylyCustomParameters};
     paramsMap['storyGroupIconStyling'] = {'width': this.storyGroupIconWidth, 'height': this.storyGroupIconHeight, 'cornerRadius': this.storyGroupIconCornerRadius, 'paddingBetweenItems': this.storyGroupPaddingBetweenItems};
     paramsMap['storyGroupTextStyling'] = {'isVisible': this.storyGroupTextIsVisible};
-    paramsMap['storyHeaderStyling'] = {'isTextVisible': this.storyHeaderTextIsVisible, 'isIconVisible': this.storyHeaderIconIsVisible};
+    paramsMap['storyHeaderStyling'] = {'isTextVisible': this.storyHeaderTextIsVisible, 'isIconVisible': this.storyHeaderIconIsVisible, 'isCloseButtonVisible': this.storyHeaderCloseButtonIsVisible};
     paramsMap['storyGroupSize'] = this.storyGroupSize != null ? this.storyGroupSize : "large";
     paramsMap['storyGroupIconBorderColorSeen'] = this.storyGroupIconBorderColorSeen != null ? this.storyGroupIconBorderColorSeen.map((color) => '#${color.value.toRadixString(16)}').toList() : null;
     paramsMap['storyGroupIconBorderColorNotSeen'] = this.storyGroupIconBorderColorNotSeen != null ? this.storyGroupIconBorderColorNotSeen.map((color) => '#${color.value.toRadixString(16)}').toList() : null;

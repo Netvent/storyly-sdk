@@ -21,5 +21,5 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
   s.swift_versions = ["5.0", "5.1", "5.2"]
 
-  s.dependency "Storyly", "~> 1.8.0"
+  s.dependency "Storyly", "1.8.3"
 end
