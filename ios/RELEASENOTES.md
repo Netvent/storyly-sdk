@@ -1,4 +1,11 @@
 # Release Notes
+### 1.8.4
+* added StoryGroupListStyling to support customization of story group list view, added 'storyGroupListEdgePadding' as storyboard and programmatic attributes
+* moved 'storyGroupListPaddingBetweenItems' to StoryGroupListStyling
+* improved share link generation
+* fixed story header font update bug
+* improved swipe down close animation for newer iPhone devices
+
 ### 1.8.3
 * improved UI components for better iOS14 support
 * improved status bar management
