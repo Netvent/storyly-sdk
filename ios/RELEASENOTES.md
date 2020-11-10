@@ -1,4 +1,7 @@
 # Release Notes
+### 1.8.5
+* improved initialization handling
+
 ### 1.8.4
 * added StoryGroupListStyling to support customization of story group list view, added 'storyGroupListEdgePadding' as storyboard and programmatic attributes
 * moved 'storyGroupListPaddingBetweenItems' to StoryGroupListStyling
