@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.1
+* added 'storyHeaderCloseButtonIsVisible' field
+* added 'storyGroupListEdgePadding' and 'storyGroupListPaddingBetweenItems' fields
+
 ### 1.8.0
 * added countdown and rating component for interactive stories
 * added share feature to stories

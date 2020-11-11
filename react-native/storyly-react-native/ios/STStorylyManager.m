@@ -98,6 +98,7 @@ RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, _storylyView.storyItemIconBord
 RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, _storylyView.storyItemTextColor, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyItemProgressBarColor, _storylyView.storylyItemProgressBarColor, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconStyling, _storylyView.storyGroupIconStyling, STStoryGroupIconStyling)
+RCT_REMAP_VIEW_PROPERTY(storyGroupListStyling, _storylyView.storyGroupListStyling, STStoryGroupListStyling)
 RCT_REMAP_VIEW_PROPERTY(storyGroupTextStyling, _storylyView.storyGroupTextStyling, STStoryGroupTextStyling)
 RCT_REMAP_VIEW_PROPERTY(storyHeaderStyling, _storylyView.storyHeaderStyling, STStoryHeaderStyling)
 

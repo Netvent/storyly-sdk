@@ -69,10 +69,12 @@ class Storyly extends Component {
             storyGroupIconHeight,
             storyGroupIconWidth,
             storyGroupIconCornerRadius,
-            storyGroupPaddingBetweenItems,
+            storyGroupListEdgePadding,
+            storyGroupListPaddingBetweenItems,
             storyGroupTextIsVisible,
             storyHeaderTextIsVisible,
             storyHeaderIconIsVisible,
+            storyHeaderCloseButtonIsVisible,
             onLoad,
             onFail,
             onPress,
@@ -85,9 +87,10 @@ class Storyly extends Component {
             <STStoryly
                 {...otherProps}
                 storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter}}
-                storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius, 'paddingBetweenItems': storyGroupPaddingBetweenItems}}
+                storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
+                storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupPaddingBetweenItems}}
                 storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible}}
-                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible}}
+                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
                 onStorylyLoaded={onLoad}
                 onStorylyLoadFailed={onFail}
                 onStorylyActionClicked={onPress}
@@ -123,10 +126,12 @@ Storyly.propTypes = {
     storyGroupIconHeight: number,
     storyGroupIconWidth: number,
     storyGroupIconCornerRadius: number,
-    storyGroupPaddingBetweenItems: number,
+    storyGroupListEdgePadding: number,
+    storyGroupListPaddingBetweenItems: number,
     storyGroupTextIsVisible: bool,
     storyHeaderTextIsVisible: bool,
     storyHeaderIconIsVisible: bool,
+    storyHeaderCloseButtonIsVisible: bool,
 
     onLoad: func,
     onFail: func,

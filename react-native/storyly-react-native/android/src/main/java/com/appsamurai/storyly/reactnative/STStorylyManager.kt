@@ -6,6 +6,7 @@ import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylySegmentation
 import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.styling.StoryGroupIconStyling
+import com.appsamurai.storyly.styling.StoryGroupListStyling
 import com.appsamurai.storyly.styling.StoryGroupTextStyling
 import com.appsamurai.storyly.styling.StoryHeaderStyling
 import com.facebook.react.bridge.ReadableArray
@@ -34,6 +35,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val PROP_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
         private const val PROP_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
+        private const val PROP_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
         private const val PROP_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
         private const val PROP_STORY_HEADER_STYLING = "storyHeaderStyling"
 
@@ -169,7 +171,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_GROUP_SIZE)
     fun setPropStoryGroupSize(view: STStorylyView, size: String) {
-        when(size) {
+        when (size) {
             "small" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Small)
             "xlarge" -> view.storylyView.setStoryGroupSize(StoryGroupSize.XLarge)
             "custom" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Custom)
@@ -194,13 +196,23 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_GROUP_ICON_STYLING)
     fun setPropStoryGroupIconStyling(view: STStorylyView, storyGroupIconStylingMap: ReadableMap) {
-        if (storyGroupIconStylingMap.hasKey("height") && storyGroupIconStylingMap.hasKey("width") &&
-                storyGroupIconStylingMap.hasKey("cornerRadius") && storyGroupIconStylingMap.hasKey("paddingBetweenItems")) {
+        if (storyGroupIconStylingMap.hasKey("height") &&
+                storyGroupIconStylingMap.hasKey("width") &&
+                storyGroupIconStylingMap.hasKey("cornerRadius")) {
             view.storylyView.setStoryGroupIconStyling(StoryGroupIconStyling(
-                    storyGroupIconStylingMap.getInt("height"),
-                    storyGroupIconStylingMap.getInt("width"),
-                    storyGroupIconStylingMap.getDouble("cornerRadius").toFloat(),
-                    storyGroupIconStylingMap.getInt("paddingBetweenItems")))
+                    storyGroupIconStylingMap.getInt("height").toFloat(),
+                    storyGroupIconStylingMap.getInt("width").toFloat(),
+                    storyGroupIconStylingMap.getDouble("cornerRadius").toFloat()))
+        }
+    }
+
+    @ReactProp(name = PROP_STORY_GROUP_LIST_STYLING)
+    fun setPropStoryGroupListStyling(view: STStorylyView, storyGroupListStylingMap: ReadableMap) {
+        if (storyGroupListStylingMap.hasKey("edgePadding") &&
+                storyGroupListStylingMap.hasKey("paddingBetweenItems")) {
+            view.storylyView.setStoryGroupListStyling(StoryGroupListStyling(
+                    storyGroupListStylingMap.getInt("edgePadding").toFloat(),
+                    storyGroupListStylingMap.getInt("paddingBetweenItems").toFloat()))
         }
     }
 
@@ -213,10 +225,13 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_HEADER_STYLING)
     fun setPropStoryHeaderStyling(view: STStorylyView, storyHeaderStylingMap: ReadableMap) {
-        if (storyHeaderStylingMap.hasKey("isTextVisible") && storyHeaderStylingMap.hasKey("isIconVisible")) {
+        if (storyHeaderStylingMap.hasKey("isTextVisible") &&
+                storyHeaderStylingMap.hasKey("isIconVisible") &&
+                storyHeaderStylingMap.hasKey("isCloseButtonVisible")) {
             view.storylyView.setStoryHeaderStyling(StoryHeaderStyling(
                     storyHeaderStylingMap.getBoolean("isTextVisible"),
-                    storyHeaderStylingMap.getBoolean("isIconVisible")))
+                    storyHeaderStylingMap.getBoolean("isIconVisible"),
+                    storyHeaderStylingMap.getBoolean("isCloseButtonVisible")))
         }
     }
 
