@@ -136,7 +136,8 @@ class StorylyParam {
   int storyGroupIconWidth;
   int storyGroupIconHeight;
   int storyGroupIconCornerRadius;
-  int storyGroupPaddingBetweenItems;
+  int storyGroupListEdgePadding;
+  int storyGroupListPaddingBetweenItems;
   bool storyGroupTextIsVisible;
   bool storyHeaderTextIsVisible;
   bool storyHeaderIconIsVisible;
@@ -153,7 +154,8 @@ class StorylyParam {
 
   dynamic toMap() {
     Map<String, dynamic> paramsMap = <String, dynamic>{ "storylyId": this.storylyId, "storylySegments": this.storylySegments, "storylyCustomParameters": this.storylyCustomParameters};
-    paramsMap['storyGroupIconStyling'] = {'width': this.storyGroupIconWidth, 'height': this.storyGroupIconHeight, 'cornerRadius': this.storyGroupIconCornerRadius, 'paddingBetweenItems': this.storyGroupPaddingBetweenItems};
+    paramsMap['storyGroupIconStyling'] = {'width': this.storyGroupIconWidth, 'height': this.storyGroupIconHeight, 'cornerRadius': this.storyGroupIconCornerRadius};
+    paramsMap['storyGroupListStyling'] = {'edgePadding': this.storyGroupListEdgePadding, 'paddingBetweenItems': this.storyGroupListPaddingBetweenItems};
     paramsMap['storyGroupTextStyling'] = {'isVisible': this.storyGroupTextIsVisible};
     paramsMap['storyHeaderStyling'] = {'isTextVisible': this.storyHeaderTextIsVisible, 'isIconVisible': this.storyHeaderIconIsVisible, 'isCloseButtonVisible': this.storyHeaderCloseButtonIsVisible};
     paramsMap['storyGroupSize'] = this.storyGroupSize != null ? this.storyGroupSize : "large";

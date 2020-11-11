@@ -6,6 +6,7 @@ import android.net.Uri
 import android.view.View
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.styling.StoryGroupIconStyling
+import com.appsamurai.storyly.styling.StoryGroupListStyling
 import com.appsamurai.storyly.styling.StoryGroupTextStyling
 import com.appsamurai.storyly.styling.StoryHeaderStyling
 import io.flutter.plugin.common.BinaryMessenger
@@ -50,6 +51,7 @@ class FlutterStorylyView(
 
         private const val ARGS_STORY_GROUP_SIZE = "storyGroupSize"
         private const val ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
+        private const val ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
         private const val ARGS_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
         private const val ARGS_STORY_HEADER_STYLING = "storyHeaderStyling"
 
@@ -91,8 +93,13 @@ class FlutterStorylyView(
                 val width = it["width"] as? Int ?: return@let
                 val height = it["height"] as? Int ?: return@let
                 val cornerRadius = it["cornerRadius"] as? Int ?: return@let
+                setStoryGroupIconStyling(StoryGroupIconStyling(height.toFloat(), width.toFloat(), cornerRadius.toFloat()))
+            }
+
+            (args[ARGS_STORY_GROUP_LIST_STYLING] as? Map<String, *>)?.let {
+                val edgePadding = it["edgePadding"] as? Int ?: return@let
                 val paddingBetweenItems = it["paddingBetweenItems"] as? Int ?: return@let
-                setStoryGroupIconStyling(StoryGroupIconStyling(height, width, cornerRadius.toFloat(), paddingBetweenItems))
+                setStoryGroupListStyling(StoryGroupListStyling(edgePadding.toFloat(), paddingBetweenItems.toFloat()))
             }
 
             (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let {

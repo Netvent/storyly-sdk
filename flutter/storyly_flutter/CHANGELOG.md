@@ -1,3 +1,6 @@
+### 1.8.4
+* added 'storyGroupListEdgePadding' and 'storyGroupListPaddingBetweenItems' fields
+
 ### 1.8.3
 * added close button to story header
 * added 'storyHeaderCloseButtonIsVisible' parameter

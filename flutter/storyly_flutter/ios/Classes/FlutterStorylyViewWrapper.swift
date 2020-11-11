@@ -8,6 +8,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     
     private let ARGS_STORY_GROUP_SIZE = "storyGroupSize"
     private let ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
+    private let ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
     private let ARGS_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
     private let ARGS_STORY_HEADER_STYLING = "storyHeaderStyling"
     
@@ -81,11 +82,17 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         if let storyGroupIconStyling = args[ARGS_STORY_GROUP_ICON_STYLING] as? [String: Any] {
             if let width = storyGroupIconStyling["width"] as? Int,
                 let height = storyGroupIconStyling["height"] as? Int,
-                let cornerRadius = storyGroupIconStyling["cornerRadius"] as? Int,
-                let paddingBetweenItems = storyGroupIconStyling["paddingBetweenItems"] as? Int {
+                let cornerRadius = storyGroupIconStyling["cornerRadius"] as? Int {
                 storylyView.storyGroupIconStyling = StoryGroupIconStyling(height: CGFloat(height),
                                                                           width: CGFloat(width),
-                                                                          cornerRadius: CGFloat(cornerRadius),
+                                                                          cornerRadius: CGFloat(cornerRadius))
+            }
+        }
+        
+        if let storyGroupListStyling = args[ARGS_STORY_GROUP_LIST_STYLING] as? [String: Any] {
+            if let edgePadding = storyGroupListStyling["edgePadding"] as? Int,
+               let paddingBetweenItems = storyGroupListStyling["paddingBetweenItems"] as? Int {
+                storylyView.storyGroupListStyling = StoryGroupListStyling(edgePadding: CGFloat(edgePadding),
                                                                           paddingBetweenItems: CGFloat(paddingBetweenItems))
             }
         }
