@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Storyly Dashboard
+    url: https://dashboard.storyly.io/login
+    about: Please ask questions that are not related to SDKs.
+  - name: Storyly
+    url: https://storyly.io/
+    about: Please check detailed usage of Storyly.
