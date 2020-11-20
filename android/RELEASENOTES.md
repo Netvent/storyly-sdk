@@ -1,4 +1,7 @@
 # Release Notes
+### 1.8.5
+* fixed integration error, [#42](https://github.com/Netvent/storyly-mobile/issues/42)
+
 ### 1.8.3
 * fixed crash related to missing permission 
 * updated android's compiledSdkVersion to 30
