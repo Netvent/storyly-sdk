@@ -1,4 +1,9 @@
 # Release Notes
+### 1.8.7
+* added storylyEvents method to StorylyListener
+* added 'seen' field to StoryGroup and Story
+* improved Xcode12 support(Swift 5.3 support)
+
 ### 1.8.5
 * improved initialization handling
 
