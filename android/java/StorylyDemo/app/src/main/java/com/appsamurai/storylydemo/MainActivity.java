@@ -15,6 +15,7 @@ import com.appsamurai.storyly.StoryQuizComponent;
 import com.appsamurai.storyly.StorylyInit;
 import com.appsamurai.storyly.StorylyListener;
 import com.appsamurai.storyly.StorylyView;
+import com.appsamurai.storyly.analytics.StorylyEvent;
 
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
             // return true if app wants to handle redirection, otherwise return false
             @Override
-            public boolean storylyActionClicked(@NonNull StorylyView storylyView, @NonNull Story story) {
+            public boolean storylyActionClicked(@NonNull StorylyView storylyView,
+                                                @NonNull Story story) {
                 Log.d("[Storyly]", "storylyActionClicked");
                 return true;
             }
@@ -60,7 +62,10 @@ public class MainActivity extends AppCompatActivity {
             //StoryComponent can be one of the following subclasses: StoryEmojiComponent, StoryQuizComponent, StoryPollComponent.
             //Based on "type" property of storyComponent, cast this argument to the proper subclass
             @Override
-            public void storylyUserInteracted(@NonNull StorylyView storylyView, @NonNull StoryGroup storyGroup, @NonNull Story story, @NonNull StoryComponent storyComponent) {
+            public void storylyUserInteracted(@NonNull StorylyView storylyView,
+                                              @NonNull StoryGroup storyGroup,
+                                              @NonNull Story story,
+                                              @NonNull StoryComponent storyComponent) {
                 switch (storyComponent.type) {
                     case Quiz:
                         StoryQuizComponent interactedQuiz = (StoryQuizComponent) storyComponent;
@@ -77,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+            }
+
+            @Override
+            public void storylyEvent(@NonNull StorylyView storylyView,
+                                     @NonNull StorylyEvent storylyEvent,
+                                     StoryGroup storyGroup,
+                                     Story story,
+                                     StoryComponent storyComponent) {
+                Log.d("[Storyly]", "storylyEvent");
             }
         });
     }

@@ -24,11 +24,13 @@
     self.storylyView.delegate = self;
 }
 
--(void)storylyLoaded:(StorylyView *)storylyView storyGroupList:(NSArray<StoryGroup *> *)storyGroupList {
+-(void)storylyLoaded:(StorylyView *)storylyView
+      storyGroupList:(NSArray<StoryGroup *> *)storyGroupList {
     NSLog(@"storylyLoaded");
 }
 
-- (void)storylyLoadFailed:(StorylyView *)storylyView errorMessage:(NSString *)errorMessage {
+- (void)storylyLoadFailed:(StorylyView *)storylyView
+             errorMessage:(NSString *)errorMessage {
     NSLog(@"storylyLoadFailed");
 }
 
@@ -46,6 +48,7 @@
 }
 
 - (void)storylyUserInteracted:(StorylyView *)storylyView storyGroup:(StoryGroup *)storyGroup story:(Story *)story storyComponent:(StoryComponent *)storyComponent {
+    NSLog(@"storylyUserInteracted");
     switch (storyComponent.type) {
         case StoryComponentTypeQuiz:
             {
@@ -70,6 +73,15 @@
         default:
             break;
     }
+}
+
+- (void)storylyEvent:(StorylyView *)storylyView
+               event:(enum StorylyEvent)event
+          storyGroup:(StoryGroup *)storyGroup
+               story:(Story *)story
+      storyComponent:(StoryComponent *)storyComponent {
+    NSLog(@"storylyEvent");
+    // Check StorylyEventHelper.storylyEventName function    to string representation
 }
 
 @end

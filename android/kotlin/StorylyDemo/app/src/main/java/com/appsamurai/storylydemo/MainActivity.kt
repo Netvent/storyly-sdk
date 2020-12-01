@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.*
+import com.appsamurai.storyly.analytics.StorylyEvent
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_external_view.view.*
 
@@ -68,6 +69,17 @@ class MainActivity : AppCompatActivity() {
                         Log.d("[Storyly]", emojiComponent.toString())
                     }
                 }
+            }
+
+            override fun storylyEvent(
+                storylyView: StorylyView,
+                event: StorylyEvent,
+                storyGroup: StoryGroup?,
+                story: Story?,
+                storyComponent: StoryComponent?
+            ) {
+                super.storylyEvent(storylyView, event, storyGroup, story, storyComponent)
+                Log.d("[Storyly]", "storylyEvent")
             }
         }
 

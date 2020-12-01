@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14312B69003EC88A003DFFC2 /* libPods-StorylyDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA90BBE4258E73B6AD0DDC9 /* libPods-StorylyDemo.a */; };
+		568301BB7602ED9444C8418B /* Pods_StorylyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1F4386905C77B5B2A41980 /* Pods_StorylyDemo.framework */; };
 		A1752CBC23FD0E43000CCB33 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1752CBB23FD0E43000CCB33 /* AppDelegate.m */; };
 		A1752CC223FD0E43000CCB33 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1752CC123FD0E43000CCB33 /* ViewController.m */; };
 		A1752CC523FD0E43000CCB33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1752CC323FD0E43000CCB33 /* Main.storyboard */; };
@@ -18,7 +18,7 @@
 
 /* Begin PBXFileReference section */
 		1D0A85522E993DBED89E899C /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
-		3BA90BBE4258E73B6AD0DDC9 /* libPods-StorylyDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B1F4386905C77B5B2A41980 /* Pods_StorylyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D94C51C9D15D913A3D14D0 /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A1752CB723FD0E43000CCB33 /* StorylyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorylyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1752CBA23FD0E43000CCB33 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14312B69003EC88A003DFFC2 /* libPods-StorylyDemo.a in Frameworks */,
+				568301BB7602ED9444C8418B /* Pods_StorylyDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +47,7 @@
 		333FAEB21179ED54E5625A33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3BA90BBE4258E73B6AD0DDC9 /* libPods-StorylyDemo.a */,
+				2B1F4386905C77B5B2A41980 /* Pods_StorylyDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -26,15 +26,19 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: StorylyDelegate {
-    func storylyLoaded(_ storylyView: StorylyView, storyGroupList: [StoryGroup]) {
+    func storylyLoaded(_ storylyView: StorylyView,
+                       storyGroupList: [StoryGroup]) {
         print("storylyLoaded")
     }
     
-    func storylyLoadFailed(_ storylyView: StorylyView, errorMessage: String) {
+    func storylyLoadFailed(_ storylyView: StorylyView,
+                           errorMessage: String) {
         print("storylyLoadFailed")
     }
     
-    func storylyActionClicked(_ storylyView: Storyly.StorylyView, rootViewController: UIViewController, story: Storyly.Story) -> Bool {
+    func storylyActionClicked(_ storylyView: Storyly.StorylyView,
+                              rootViewController: UIViewController,
+                              story: Storyly.Story) -> Bool {
         print("storylyActionClicked")
         
         // Edit and use the following method to open an external custom view
@@ -51,22 +55,37 @@ extension ViewController: StorylyDelegate {
         print("storylyStoryDismissed")
     }
     
-    func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
+    func storylyUserInteracted(_ storylyView: StorylyView,
+                               storyGroup: StoryGroup,
+                               story: Story,
+                               storyComponent: StoryComponent) {
+        print("storylyUserInteracted")
         switch storyComponent.type {
             case .Quiz:
                 if let quizComponent = storyComponent as? StoryQuizComponent {
                     // quizComponent actions
+                    print("storylyUserInteracted:\(quizComponent.title)")
                 }
             case .Poll:
                 if let pollComponent = storyComponent as? StoryPollComponent {
                     // pollComponent actions
+                    print("storylyUserInteracted:\(pollComponent.title)")
                 }
             case .Emoji:
                 if let emojiComponent = storyComponent as? StoryEmojiComponent {
                     // emojiComponent actions
+                    print("storylyUserInteracted:\(emojiComponent.emojiCodes)")
                 }
             case .Undefined: do {}
             default: do {}
         }
+    }
+    
+    func storylyEvent(_ storylyView: StorylyView,
+                      event: StorylyEvent,
+                      storyGroup: StoryGroup?,
+                      story: Story?,
+                      storyComponent: StoryComponent?) {
+        print("storylyEvent:\(event.rawValue)")
     }
 }
