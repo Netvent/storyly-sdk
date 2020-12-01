@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.6
+* added storylyEvents method to StorylyListener
+* added 'seen' field to StoryGroup and Story
+
 ### 1.8.5
 * fixed integration error, [#42](https://github.com/Netvent/storyly-mobile/issues/42)
 
