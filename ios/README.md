@@ -29,10 +29,10 @@ init(storylyId: String, segmentation: StorylySegmentation, customParameter: Stri
 ```
 
 #### Storyly Label Parameters
-In StorylyInit class, "label" parameter is related with the story group labels. In your storyly dashboard, if you set labels for your story groups you can use this parameter to filter these story groups. If label of the group group in dashboard is subset of your labels in SDK, SDK will show that story group. Here are a few examples: 
-- If you do not give any parameters to labels, SDK will show all active story groups with/without labels. This is the default behaviour.
-- If you set ["car", "man"] as label set in SDK, Storyly SDK will show the story groups whose label set is "car", "man", car" and "man" and lastly it will show the story groups without labels. 
-- If you set an empty label set in SDK, only the story groups without labels will be shown.
+In StorylyInit class, "segments" parameter is related with the story group labels. In your storyly dashboard, if you set labels for your story groups you can use this parameter to only show these story groups. If label of the group group in dashboard is subset of your labels(segments) in SDK, SDK will show that story group. Here are a few examples: 
+- If you do not give any parameters to "segments", SDK will show all active story groups with/without labels. This is the default behaviour.
+- If you set ["car", "man"] as "segments" in SDK, Storyly SDK will show the story groups whose label set is "car", "man", car" and "man" and lastly it will show the story groups without labels. 
+- If you set an empty "segments" in SDK, only the story groups without labels will be shown.
 
 StorylySegmentation has the following definition:
 ```swift
@@ -40,7 +40,7 @@ init(segments: Set<String>? = nil,
      isDynamicSegmentationEnabled: Bool = false, 
      dynamicSegmentationCallback: (StorylyDynamicSegmentationCallback? = nil) 
 ```
-It is enough to set labels parameter to use label feature. All labels in SDK are case insensitive and trimmed. 
+It is enough to set "segments" parameter to use label feature. All labels from SDK are case insensitive and trimmed. 
 
 If you want to get information about what other parameters are please check Dynamic Label in [Advanced](#advanced) section.
 
