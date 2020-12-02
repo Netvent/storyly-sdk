@@ -28,11 +28,11 @@ Storyly can be customized based on your initialization parameters. Currently, St
 init(storylyId: String, segmentation: StorylySegmentation, customParameter: String?)
 ```
 
-#### Storyly Segmentation Parameters
-In StorylyInit class, "segmentation" parameter is related with the story group segmentation. In your storyly dashboard, if you set segments for your story groups you can use this parameter to filter these story groups. If segment of the group group in dashboard is subset of your segments in SDK, SDK will show that story group. Here are a few examples: 
-- If you do not give any parameters to segments, SDK will show all active story groups with/without segments. This is the default behaviour.
-- If you set ["car", "man"] as segment set in SDK, Storyly SDK will show the story groups whose segment set is "car", "man", car" and "man" and lastly it will show the story groups without segments. 
-- If you set an empty segment set in SDK, only the story groups without segments will be shown.
+#### Storyly Label Parameters
+In StorylyInit class, "label" parameter is related with the story group labels. In your storyly dashboard, if you set labels for your story groups you can use this parameter to filter these story groups. If label of the group group in dashboard is subset of your labels in SDK, SDK will show that story group. Here are a few examples: 
+- If you do not give any parameters to labels, SDK will show all active story groups with/without labels. This is the default behaviour.
+- If you set ["car", "man"] as label set in SDK, Storyly SDK will show the story groups whose label set is "car", "man", car" and "man" and lastly it will show the story groups without labels. 
+- If you set an empty label set in SDK, only the story groups without labels will be shown.
 
 StorylySegmentation has the following definition:
 ```swift
@@ -40,9 +40,9 @@ init(segments: Set<String>? = nil,
      isDynamicSegmentationEnabled: Bool = false, 
      dynamicSegmentationCallback: (StorylyDynamicSegmentationCallback? = nil) 
 ```
-It is enough to set segments parameter to use segmentation feature. All segments in SDK are case insensitive and trimmed. 
+It is enough to set labels parameter to use label feature. All labels in SDK are case insensitive and trimmed. 
 
-If you want to get information about what other parameters are please check Dynamic Segmentation in [Advanced](#advanced) section.
+If you want to get information about what other parameters are please check Dynamic Label in [Advanced](#advanced) section.
 
 #### Custom Parameter
 In StorylyInit class, "customParameter" field can be used for analytical purposes. You can send a string value with this field which cannot have more than 200 characters. If you exceed the size limit, your value will be set to nil.
