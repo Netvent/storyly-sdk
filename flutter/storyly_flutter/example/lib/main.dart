@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
             androidParam: StorylyParam()
             ..storylyId = YOUR_APP_ID_FROM_DASHBOARD,
             iosParam: StorylyParam()
-            ..storylyId = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjg0NiwiYXBwX2lkIjo0NzAsImluc19pZCI6NDY2fQ.5Ag5dqOxAWzKwYnuM1Voo_bTl7RMXFRh2S1EzVeI01w",
+            ..storylyId = YOUR_APP_ID_FROM_DASHBOARD,
             storylyLoaded: (storyGroupList) => print("storylyLoaded"),
             storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
             storylyActionClicked: (story) => print("storylyActionClicked"),
