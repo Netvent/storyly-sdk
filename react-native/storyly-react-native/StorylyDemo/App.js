@@ -18,17 +18,20 @@ export default class App extends Component<{}> {
             <View>
                 <Storyly
                     ref={ref => { this.storyly = ref }}
-                    style={{ width: '100%', height: 120, marginTop: 4 }}
+                    style={{ width: '100%', height: 120, marginTop: 44 }}
                     storylyId=[YOUR_APP_ID_FROM_DASHBOARD]
                     onLoad={storyGroupList => {
                         console.log("[Storyly] onLoad");
-                        // this.storyly.openStoryWithId(story_group_id, story_id)
                     }}
                     onFail={errorMessage => {
                         console.log("[Storyly] onFail");
                     }}
                     onPress={story => {
                         console.log("[Storyly] onPress");
+                    }}
+                    onEvent={eventPayload => {
+                        // console.log(eventPayload.nativeEvent);
+                        console.log("[Storyly] onEvent");
                     }}
                     onStoryOpen={() => {
                         console.log("[Storyly] onStoryOpen");

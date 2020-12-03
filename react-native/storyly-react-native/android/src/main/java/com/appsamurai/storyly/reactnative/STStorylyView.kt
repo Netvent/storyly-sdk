@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.Choreographer
 import android.widget.FrameLayout
 import com.appsamurai.storyly.*
+import com.appsamurai.storyly.analytics.StorylyEvent
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
@@ -38,6 +39,15 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 })
             }
 
+            override fun storylyEvent(storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
+                sendEvent(STStorylyManager.EVENT_STORYLY_EVENT, Arguments.createMap().also { eventMap ->
+                    eventMap.putString("event", event.name)
+                    storyGroup?.let { eventMap.putMap("storyGroup", createStoryGroupMap(it)) }
+                    story?.let { eventMap.putMap("story", createStoryMap(it)) }
+                    storyComponent?.let { eventMap.putMap("storyComponent", createStoryComponentMap(it)) }
+                })
+            }
+
             override fun storylyStoryShown(storylyView: StorylyView) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_STORY_PRESENTED, null)
             }
@@ -53,7 +63,6 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                     eventMap.putMap("storyComponent", createStoryComponentMap(storyComponent))
                 })
             }
-
         }
 
         Choreographer.getInstance().postFrameCallback {
@@ -75,6 +84,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         return Arguments.createMap().also { storyGroupMap ->
             storyGroupMap.putInt("index", storyGroup.index)
             storyGroupMap.putString("title", storyGroup.title)
+            storyGroupMap.putBoolean("seen", storyGroup.seen)
             storyGroupMap.putArray("stories", Arguments.createArray().also { storiesArray ->
                 storyGroup.stories.forEach { story ->
                     storiesArray.pushMap(createStoryMap(story))
@@ -87,6 +97,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         return Arguments.createMap().also { storyMap ->
             storyMap.putInt("index", story.index)
             storyMap.putString("title", story.title)
+            storyMap.putBoolean("seen", story.seen)
             storyMap.putMap("media", Arguments.createMap().also { storyMediaMap ->
                 storyMediaMap.putInt("type", story.media.type.ordinal)
                 storyMediaMap.putString("url", story.media.url)

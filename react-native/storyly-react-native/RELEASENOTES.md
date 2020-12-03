@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.3
+* added 'onEvent' callback
+* added 'seen' field to StoryGroup and Story payloads
+
 ### 1.8.1
 * added 'storyHeaderCloseButtonIsVisible' field
 * added 'storyGroupListEdgePadding' and 'storyGroupListPaddingBetweenItems' fields

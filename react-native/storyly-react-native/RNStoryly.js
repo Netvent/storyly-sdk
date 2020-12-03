@@ -77,6 +77,7 @@ class Storyly extends Component {
             storyHeaderCloseButtonIsVisible,
             onLoad,
             onFail,
+            onEvent,
             onPress,
             onStoryOpen,
             onStoryClose,
@@ -88,11 +89,12 @@ class Storyly extends Component {
                 {...otherProps}
                 storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter}}
                 storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
-                storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupPaddingBetweenItems}}
+                storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
                 storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible}}
                 storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
                 onStorylyLoaded={onLoad}
                 onStorylyLoadFailed={onFail}
+                onStorylyEvent={onEvent}
                 onStorylyActionClicked={onPress}
                 onStorylyStoryPresented={onStoryOpen}
                 onStorylyStoryDismissed={onStoryClose}
@@ -136,6 +138,7 @@ Storyly.propTypes = {
     onLoad: func,
     onFail: func,
     onPress: func,
+    onEvent: func,
     onStoryOpen: func,
     onStoryClose: func,
     onUserInteracted: func

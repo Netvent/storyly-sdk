@@ -54,6 +54,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
+        internal const val EVENT_STORYLY_EVENT = "onStorylyEvent"
         internal const val EVENT_STORYLY_ACTION_CLICKED = "onStorylyActionClicked"
         internal const val EVENT_STORYLY_STORY_PRESENTED = "onStorylyStoryPresented"
         internal const val EVENT_STORYLY_STORY_DISMISSED = "onStorylyStoryDismissed"
@@ -71,6 +72,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val builder = MapBuilder.builder<String, Any>()
         arrayOf(EVENT_STORYLY_LOADED,
                 EVENT_STORYLY_LOAD_FAILED,
+                EVENT_STORYLY_EVENT,
                 EVENT_STORYLY_ACTION_CLICKED,
                 EVENT_STORYLY_STORY_PRESENTED,
                 EVENT_STORYLY_STORY_DISMISSED,

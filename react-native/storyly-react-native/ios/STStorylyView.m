@@ -32,8 +32,8 @@
     [_storylyView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_storylyView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = YES;
     [_storylyView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = YES;
-    [_storylyView.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor].active = YES;
-    [_storylyView.heightAnchor constraintEqualToConstant:self.frame.size.height].active = YES;
+    [_storylyView.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+    [_storylyView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
 }
 
 - (void) refresh {
@@ -91,6 +91,19 @@
     }
 }
 
+- (void)storylyEvent:(StorylyView *)storylyView
+               event:(enum StorylyEvent)event
+          storyGroup:(StoryGroup *)storyGroup
+               story:(Story *)story
+      storyComponent:(StoryComponent *)storyComponent {
+    if (self.onStorylyEvent) {
+        self.onStorylyEvent(@{@"event": [StorylyEventHelper storylyEventNameWithEvent:event],
+                              @"storyGroup": [self createStoryGroupMap:storyGroup],
+                              @"story": [self createStoryMap:story],
+                              @"storyComponent": [self createStoryComponentMap:storyComponent]});
+    }
+}
+
 - (void)storylyStoryPresented:(StorylyView * _Nonnull)storylyView {
     if (self.onStorylyStoryPresented) {
         self.onStorylyStoryPresented(@{});
@@ -122,6 +135,7 @@
     return @{
         @"index": @(storyGroup.index),
         @"title": storyGroup.title,
+        @"seen": @(storyGroup.seen),
         @"stories": stories
     };
 }
@@ -130,6 +144,7 @@
     return @{
         @"index": @(story.index),
         @"title": story.title,
+        @"seen": @(story.seen),
         @"media": @{
                 @"type": @(story.media.type),
                 @"url": story.media.url,
@@ -147,7 +162,7 @@
                     @"title": quizComponent.title,
                     @"options": quizComponent.options,
                     @"rightAnswerIndex": quizComponent.rightAnswerIndex,
-                    @"selectedOptionIndex": [NSNumber numberWithInt:quizComponent.selectedOptionIndex],
+                    @"selectedOptionIndex": [NSNumber numberWithLong:quizComponent.selectedOptionIndex],
                     @"customPayload": quizComponent.customPayload
                 };
             }
@@ -159,7 +174,7 @@
                     @"type": @(pollComponent.type),
                     @"title": pollComponent.title,
                     @"options": pollComponent.options,
-                    @"selectedOptionIndex": [NSNumber numberWithInt:pollComponent.selectedOptionIndex],
+                    @"selectedOptionIndex": [NSNumber numberWithLong:pollComponent.selectedOptionIndex],
                     @"customPayload": pollComponent.customPayload
                 }; 
             }
@@ -170,7 +185,7 @@
                 return @{
                     @"type": @(emojiComponent.type),
                     @"emojiCodes": emojiComponent.emojiCodes,
-                    @"selectedEmojiIndex": [NSNumber numberWithInt:emojiComponent.selectedEmojiIndex],
+                    @"selectedEmojiIndex": [NSNumber numberWithLong:emojiComponent.selectedEmojiIndex],
                     @"customPayload": emojiComponent.customPayload
                 };
             }
@@ -181,7 +196,7 @@
                 return @{
                     @"type": @(ratingComponent.type),
                     @"emojiCode": ratingComponent.emojiCode,
-                    @"rating": [NSNumber numberWithInt:ratingComponent.rating],
+                    @"rating": [NSNumber numberWithLong:ratingComponent.rating],
                     @"customPayload": ratingComponent.customPayload
                 };
             }
