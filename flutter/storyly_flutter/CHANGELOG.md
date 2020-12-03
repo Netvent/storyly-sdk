@@ -1,3 +1,7 @@
+### 1.8.5
+* added 'storylyEvent' callback
+* added 'seen' field to StoryGroup and Story
+
 ### 1.8.4
 * added 'storyGroupListEdgePadding' and 'storyGroupListPaddingBetweenItems' fields
 

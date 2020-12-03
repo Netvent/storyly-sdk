@@ -12,6 +12,7 @@ class StorylyView extends StatefulWidget {
 
   final Function(List) storylyLoaded;
   final Function(String) storylyLoadFailed;
+  final Function(Map) storylyEvent;
   final Function(Map) storylyActionClicked;
   final Function() storylyStoryShown;
   final Function() storylyStoryDismissed;
@@ -24,6 +25,7 @@ class StorylyView extends StatefulWidget {
       this.iosParam,
       this.storylyLoaded,
       this.storylyLoadFailed,
+      this.storylyEvent,
       this.storylyActionClicked,
       this.storylyStoryShown,
       this.storylyStoryDismissed,
@@ -69,6 +71,9 @@ class _StorylyViewState extends State<StorylyView> {
         break;
       case 'storylyLoadFailed':
         widget.storylyLoadFailed(call.arguments);
+        break;
+      case 'storylyEvent':
+        widget.storylyEvent(call.arguments);
         break;
       case 'storylyActionClicked':
         widget.storylyActionClicked(call.arguments);

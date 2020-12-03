@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.view.View
 import com.appsamurai.storyly.*
+import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.styling.StoryGroupIconStyling
 import com.appsamurai.storyly.styling.StoryGroupListStyling
 import com.appsamurai.storyly.styling.StoryGroupTextStyling
@@ -116,16 +117,26 @@ class FlutterStorylyView(
 
             storylyListener = object : StorylyListener {
                 override fun storylyActionClicked(storylyView: StorylyView, story: Story): Boolean {
-                    methodChannel.invokeMethod("storylyActionClicked", createStoryMap(story))
+                    methodChannel.invokeMethod("storylyActionClicked",
+                            createStoryMap(story))
                     return true
                 }
 
                 override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {
-                    methodChannel.invokeMethod("storylyLoaded", storyGroupList.map { storyGroup -> createStoryGroupMap(storyGroup) })
+                    methodChannel.invokeMethod("storylyLoaded",
+                            storyGroupList.map { storyGroup -> createStoryGroupMap(storyGroup) })
                 }
 
                 override fun storylyLoadFailed(storylyView: StorylyView, errorMessage: String) {
                     methodChannel.invokeMethod("storylyLoadFailed", errorMessage)
+                }
+
+                override fun storylyEvent(storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
+                    methodChannel.invokeMethod("storylyEvent",
+                            mapOf("event" to event.name,
+                                    "storyGroup" to storyGroup?.let { createStoryGroupMap(storyGroup) },
+                                    "story" to story?.let { createStoryMap(story) },
+                                    "storyComponent" to storyComponent?.let { createStoryComponentMap(storyComponent) }))
                 }
 
                 override fun storylyStoryShown(storylyView: StorylyView) {
@@ -159,6 +170,7 @@ class FlutterStorylyView(
         return mapOf("id" to storyGroup.id,
                 "title" to storyGroup.title,
                 "index" to storyGroup.index,
+                "seen" to storyGroup.seen,
                 "iconUrl" to storyGroup.iconUrl,
                 "stories" to storyGroup.stories.map { story -> createStoryMap(story) }
         )
@@ -168,6 +180,7 @@ class FlutterStorylyView(
         return mapOf("id" to story.id,
                 "title" to story.title,
                 "index" to story.index,
+                "seen" to story.seen,
                 "media" to with(story.media) {
                     mapOf("type" to this.type.ordinal,
                             "url" to this.url,
