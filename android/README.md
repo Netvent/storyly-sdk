@@ -61,6 +61,7 @@ In Storyly, there are 5 different optional methods that you can override and use
 * storylyStoryShown: This method is called when a story is shown in fullscreen.
 * storylyStoryDismissed: This method is called when story screen is dismissed.
 * storylyUserInteracted: This method is called when a user is interacted with a quiz, a poll or an emoji.
+* storylyEvent: This method is called when a story event is occurred.
 Sample usages can be seen below:
 
 Kotlin:
@@ -82,6 +83,14 @@ storyly_view.storylyListener = object: StorylyListener{
     //StoryComponent can be one of the following subclasses: StoryEmojiComponent, StoryQuizComponent, StoryPollComponent. 
     //Based on "type" property of storyComponent, cast this argument to the proper subclass
     override fun storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {}
+
+    override fun storylyEvent(
+                storylyView: StorylyView,
+                event: StorylyEvent,
+                storyGroup: StoryGroup?,
+                story: Story?,
+                storyComponent: StoryComponent?
+            ) {}
 }
 ```
 Java:
@@ -110,6 +119,12 @@ storylyView.setStorylyListener(new StorylyListener() {
     @Override
     public void storylyUserInteracted(@NonNull StorylyView storylyView, @NonNull StoryGroup storyGroup, @NonNull Story story, @NonNull StoryComponent storyComponent) {}
 
+    @Override
+            public void storylyEvent(@NonNull StorylyView storylyView,
+                                     @NonNull StorylyEvent storylyEvent,
+                                     StoryGroup storyGroup,
+                                     Story story,
+                                     StoryComponent storyComponent) {}
 });
 ```
 
@@ -121,6 +136,7 @@ data class StoryGroup(
     val title: String,
     val iconUrl: String,
     val index: Int,
+    val seen: Boolean,
     val stories: List<Story>
 )
 
@@ -128,6 +144,7 @@ data class Story(
     val id: Int,
     val title: String,
     val index: Int,
+    val seen: Boolean,
     val media: StoryMedia
 )
 
@@ -183,6 +200,33 @@ data class StoryEmojiComponent(
     val selectedEmojiIndex: Int,
     val customPayload: String?
 ): StoryComponent(StoryComponentType.Emoji)
+
+@Keep
+enum class StorylyEvent {
+    StoryGroupOpened,
+    StoryGroupDeepLinkOpened,
+    StoryGroupProgrammaticallyOpened,
+    StoryGroupCompleted,
+    StoryGroupPreviousSwiped,
+    StoryGroupNextSwiped,
+    StoryGroupClosed,
+
+    StoryImpression,
+    StoryCompleted,
+    StoryPreviousClicked,
+    StoryNextClicked,
+    StoryPaused,
+    StoryResumed,
+    StoryShared,
+
+    StoryCTAClicked,
+    StoryEmojiClicked,
+    StoryPollAnswered,
+    StoryQuizAnswered,
+    StoryCountdownReminderAdded,
+    StoryCountdownReminderRemoved,
+    StoryRated
+}
 ``` 
 
 Kotlin:

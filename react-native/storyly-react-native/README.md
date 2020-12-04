@@ -25,8 +25,8 @@ buildscript {
     ...
     dependencies {
         ...
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version'
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:$kotlin_version'
         ...
     }
 }
@@ -51,9 +51,11 @@ Adding as react element
     storylyId=[YOUR_APP_ID_FROM_DASHBOARD]
     onLoad={storyGroupList => {}}
     onFail={errorMessage => {}}
+    onEvent={eventPayload => {}}
     onPress={story => {}}
     onStoryOpen={() => {}}
     onStoryClose={() => {}}
+    onUserInteracted={interactionEvent => {}}
 />
 ```
 ## Storyly Events
@@ -88,6 +90,22 @@ In Storyly, there are 5 different optional methods that you can override and use
 ```
 * **onStoryOpen**: This method is called when a story is shown in fullscreen.
 * **onStoryClose**: This method is called when story screen is dismissed.
+* **onUserInteracted**: This method is called when a user is interacted with a quiz, a poll or an emoji. It contains json representation of `StoryComponent` object. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
+``` json
+{
+    "type":[string],
+    // other details related to component, please check [Creating Story Component function for details](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/android/src/main/java/com/appsamurai/storyly/reactnative/STStorylyView.kt#L110)
+}
+```
+* **onEvent**: This method is called when a story event is occurred. It contains json representation of `StoryGroup`, `Story` and `StoryComponent` object in addition to `event` field. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
+``` json
+{
+    "event":[string],
+    "storyGroup":[json],
+    "story":[json],
+    "storyComponent":[json]
+}
+```
 
 ## Storyly Methods
 * **refresh**: You can call this function to refresh storyly view and load stories again.

@@ -15,8 +15,8 @@ buildscript {
     ...
     dependencies {
         ...
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version'
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:$kotlin_version'
         ...
     }
 }
@@ -73,9 +73,11 @@ StorylyView(
     ..storyItemProgressBarColor = [Color],
     storylyLoaded: (storyGroupList) => print("storylyLoaded"),
     storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
+    storylyEvent: (eventPayload) => print("storylyEvent"),
     storylyActionClicked: (story) => print("storylyActionClicked"),
     storylyStoryShown: () => print("storylyStoryShown"),
     storylyStoryDismissed: () => print("storylyStoryDismissed")
+    storylyUserInteracted: (eventPayload) => print("storylyUserInteracted"))
 )
 ```
 
@@ -120,6 +122,22 @@ In Storyly, there are 5 different optional methods that you can override and use
 ```
 * **storylyStoryShown**: This method is called when a story is shown in fullscreen.
 * **storylyStoryDismissed**: This method is called when story screen is dismissed.
+* **storylyUserInteracted**: This method is called when a user is interacted with a quiz, a poll or an emoji. It contains json representation of `StoryComponent` object. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
+``` json
+{
+    "type":[string],
+    // other details related to component, please check [Creating Story Component function for details](https://github.com/Netvent/storyly-mobile/blob/master/flutter/storyly_flutter/android/src/main/kotlin/com/appsamurai/storyly/storyly_flutter/FlutterStorylyView.kt#L192)
+}
+```
+* **storylyEvent**: This method is called when a story event is occurred. It contains json representation of `StoryGroup`, `Story` and `StoryComponent` object in addition to `event` field. You can check native documentation for paratemers in detail, also here is the sample format of parameters;
+``` json
+{
+    "event":[string],
+    "storyGroup":[json],
+    "story":[json],
+    "storyComponent":[json]
+}
+```
 
 ## Storyly Methods
 * **refresh**: You can call this function to refresh storyly view and load stories again.

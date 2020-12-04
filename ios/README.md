@@ -60,6 +60,7 @@ In Storyly, there are 5 different optional methods that you can use in an extens
 * storylyStoryPresented: This method is called when a story is shown in fullscreen.
 * storylyStoryDismissed: This method is called when story screen is dismissed.
 * storylyUserInteracted: This method is called when a user is interacted with a quiz, a poll or an emoji.
+* storylyEvent: This method is called when a story event is occurred.
 
 Sample usages can be seen below:
 ```swift
@@ -81,6 +82,12 @@ extension ViewController: StorylyDelegate {
     //StoryComponent can be one of the following subclasses: StoryEmojiComponent, StoryQuizComponent, StoryPollComponent. 
     //Based on "type" property of storyComponent, cast this argument to the proper subclass
     func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {}
+
+    func storylyEvent(_ storylyView: StorylyView,
+                      event: StorylyEvent,
+                      storyGroup: StoryGroup?,
+                      story: Story?,
+                      storyComponent: StoryComponent?) {}
 }
 ```
 As it can be seen from `storylyActionClicked` method, there is an object called `Story`. This object represents the story in which action is done and has some information about the story to be used. The structure of the `Story`, `StoryMedia`, `StorylyData` and `StoryType` objects are as follows. In addition, `storylyUserInteracted` method has a parameter called `StoryComponent` which has the following subclasses `StoryQuizComponent`, `StoryEmojiComponent`, `StoryPollComponent` with type class `StoryComponentType`, details of these object also can be seen below:
@@ -94,28 +101,26 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
 }
 
 @objc public final class StoryGroup: NSObject {
-    @objc public let index: Int
+    @objc public let id: Int
     @objc public let title: String
+    @objc public let iconUrl: URL
+    @objc public let index: Int
+    @objc public let seen: Bool
     @objc public let stories: [Story]
 }
 
 @objc public final class Story: NSObject {
-    @objc public let index: Int
+    @objc public let id: Int
     @objc public let title: String
+    @objc public let index: Int
+    @objc public let seen: Bool
     @objc public let media: StoryMedia
 }
 
 @objc public final class StoryMedia: NSObject {
     @objc public let type: StoryType
-    @objc public let url: URL
-    @objc public let buttonText: String
-    @objc public var data: [StorylyData]?
-    @objc public var actionUrl: String
-}
-
-@objc public final class StoryData: NSObject {
-    @objc public let key: String
-    @objc public let value: String
+    @objc public let url: String
+    @objc public var actionUrl: String?
 }
 
 @objc public class StoryComponent: NSObject {
@@ -153,6 +158,35 @@ As it can be seen from `storylyActionClicked` method, there is an object called 
     @objc public var customPayload: String?
 }
 
+@objc public enum StorylyEvent: Int, RawRepresentable {
+    case StoryGroupOpened
+    case StoryGroupDeepLinkOpened
+    case StoryGroupProgrammaticallyOpened
+    case StoryGroupCompleted
+    case StoryGroupPreviousSwiped
+    case StoryGroupNextSwiped
+    case StoryGroupClosed
+    
+    case StoryImpression
+    case StoryCompleted
+    case StoryPreviousClicked
+    case StoryNextClicked
+    case StoryPaused
+    case StoryResumed
+    case StoryShared
+    
+    case StoryCTAClicked
+    case StoryEmojiClicked
+    case StoryPollAnswered
+    case StoryQuizAnswered
+    case StoryCountdownReminderAdded
+    case StoryCountdownReminderRemoved
+    case StoryRated
+    
+    public var rawValue: String {
+        return StorylyEventHelper.storylyEventName(event: self)
+    }
+}
 ``` 
 
 ## Third Party Library Integrations
