@@ -53,6 +53,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             }
 
             override fun storylyStoryDismissed(storylyView: StorylyView) {
+                manuallyLayout()
                 sendEvent(STStorylyManager.EVENT_STORYLY_STORY_DISMISSED, null)
             }
 

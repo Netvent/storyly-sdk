@@ -1,4 +1,7 @@
 # Release Notes
+### 1.8.4
+* improved screen rendering for seen/unseen feedback
+
 ### 1.8.3
 * added 'onEvent' callback
 * added 'seen' field to StoryGroup and Story payloads
