@@ -1,4 +1,9 @@
 # Release Notes
+### 1.8.7
+* added Story header animation during long press
+* replace emoji-bundled with emoji-compat to reduce effect on apk size 
+* fixed text mask/cut issue on poll component
+
 ### 1.8.6
 * added storylyEvents method to StorylyListener
 * added 'seen' field to StoryGroup and Story
