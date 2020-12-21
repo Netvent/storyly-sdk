@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.9
+* improved story header animation during long press
+* improved cache flow
+
 ### 1.8.8
 * added Story header animation during long press
 * improved Xcode12.2 support(Swift 5.3.1 support)
