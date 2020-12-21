@@ -1,6 +1,9 @@
 # Release Notes
+### 1.8.8
+* improved story header animation during long press
+
 ### 1.8.7
-* added Story header animation during long press
+* added story header animation during long press
 * replace emoji-bundled with emoji-compat to reduce effect on apk size 
 * fixed text mask/cut issue on poll component that occured on specific devices
 
