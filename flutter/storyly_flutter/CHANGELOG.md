@@ -1,3 +1,6 @@
+### 1.8.6
+* fixed ios methods not affecting bug
+
 ### 1.8.5
 * added 'storylyEvent' callback
 * added 'seen' field to StoryGroup and Story

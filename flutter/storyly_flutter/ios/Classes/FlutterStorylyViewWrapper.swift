@@ -37,8 +37,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             let callArguments = call.arguments as? [String: Any]
             switch call.method {
                 case "refresh": self?.storylyView.refresh()
-                case "show": self?.storylyView.present(animated: false)
-                case "dismiss": self?.storylyView.dismiss(animated: false)
+                case "show": self?.storylyView.present(animated: true)
+                case "dismiss": self?.storylyView.dismiss(animated: true)
                 case "openStory":
                     _ = self?.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? Int ?? 0,
                                                     storyId: callArguments?["storyId"] as? Int)
@@ -64,16 +64,16 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         guard let storylyId = self.args[ARGS_STORYLY_ID] as? String else { return }
         var storylySegments: Set<String>?
         if let argsSegments = self.args[ARGS_STORYLY_SEGMENTS] as? [String] { storylySegments = Set(argsSegments) }
-        let storylyView = StorylyView(frame: self.frame)
-        storylyView.translatesAutoresizingMaskIntoConstraints = false
-        storylyView.storylyInit = StorylyInit(storylyId: storylyId,
+        self.storylyView = StorylyView(frame: self.frame)
+        self.storylyView.translatesAutoresizingMaskIntoConstraints = false
+        self.storylyView.storylyInit = StorylyInit(storylyId: storylyId,
                                               segmentation: StorylySegmentation(segments: storylySegments),
                                               customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String)
-        storylyView.delegate = self
-        storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        self.storylyView.delegate = self
+        self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
         self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
-        storylyView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+        self.storylyView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
     }
     
     private func updateTheme(storylyView: StorylyView, args: [String: Any]) {
