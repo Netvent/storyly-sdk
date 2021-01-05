@@ -1,5 +1,5 @@
 # Release Notes
-### 1.8.8
+### 1.8.9
 * fixed a crash related with TextureView background usage for newer Android versions(api level 24+)
 
 ### 1.8.8
