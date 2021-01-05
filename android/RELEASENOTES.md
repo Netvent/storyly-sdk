@@ -1,5 +1,8 @@
 # Release Notes
 ### 1.8.8
+* fixed a crash related with TextureView background usage for newer Android versions(api level 24+)
+
+### 1.8.8
 * improved story header animation during long press
 
 ### 1.8.7
