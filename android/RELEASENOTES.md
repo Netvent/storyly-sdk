@@ -1,4 +1,11 @@
 # Release Notes
+### 1.9.0
+* added Interactive VOD feature
+* added vertical, horizontal and custom placement support for emoji component
+* improved cube animation during transitions
+* improved interactive layer rendering
+* IMPORTANT! changed storylyActionClicked signature(removed return type)
+
 ### 1.8.9
 * fixed a crash related with TextureView background usage for newer Android versions(api level 24+)
 
