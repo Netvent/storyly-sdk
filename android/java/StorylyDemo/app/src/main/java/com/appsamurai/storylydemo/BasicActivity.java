@@ -20,7 +20,7 @@ import com.appsamurai.storyly.analytics.StorylyEvent;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class BasicActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,5 @@ public class MainActivity extends AppCompatActivity {
         StorylyView storylyView = new StorylyView(this);
         storylyView.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
         storylyViewHolder.addView(storylyView);
-
     }
 }

@@ -26,5 +26,5 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-ads:19.6.0'
 
-    implementation 'com.appsamurai.storyly:storyly:1.8.6'
+    implementation 'com.appsamurai.storyly:storyly:1.9.0'
 }

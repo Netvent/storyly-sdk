@@ -1,16 +1,12 @@
 package com.appsamurai.storylydemo
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.appsamurai.storyly.*
-import com.appsamurai.storyly.analytics.StorylyEvent
+import com.appsamurai.storyly.StorylyInit
+import com.appsamurai.storyly.StorylyView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.custom_external_view.view.*
 
-class MainActivity : AppCompatActivity() {
+class BasicActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
