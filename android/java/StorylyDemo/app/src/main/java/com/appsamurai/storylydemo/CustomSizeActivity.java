@@ -21,51 +21,24 @@ public class CustomSizeActivity extends AppCompatActivity {
 
         StorylyView storyly_view_custom_xlarge = findViewById(R.id.storyly_view_custom_xlarge);
         storyly_view_custom_xlarge.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        /*
-        StorylyView storylyViewXLarge = new StorylyView(this);
-        storylyViewXLarge.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        storylyViewXLarge.setStoryGroupSize(StoryGroupSize.XLarge);
-        storylyViewHolder.addView(storylyViewXLarge);
-        */
+        // storyly_view_custom_xlarge.setStoryGroupSize(StoryGroupSize.XLarge);
 
         StorylyView storyly_view_custom_large = findViewById(R.id.storyly_view_custom_large);
         storyly_view_custom_large.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        /*
-        StorylyView storylyViewLarge = new StorylyView(this);
-        storylyViewLarge.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        storylyViewLarge.setStoryGroupSize(StoryGroupSize.Large);
-        storylyViewHolder.addView(storylyViewLarge);
-        */
+        // storyly_view_custom_large.setStoryGroupSize(StoryGroupSize.Large);
 
         StorylyView storyly_view_custom_small = findViewById(R.id.storyly_view_custom_small);
         storyly_view_custom_small.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        /*
-        StorylyView storylyViewSmall = new StorylyView(this);
-        storylyViewSmall.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        storylyViewSmall.setStoryGroupSize(StoryGroupSize.Small);
-        storylyViewHolder.addView(storylyViewSmall);
-        */
+        // storyly_view_custom_small.setStoryGroupSize(StoryGroupSize.Small);
 
         StorylyView storyly_view_custom_portrait = findViewById(R.id.storyly_view_custom_portrait);
         storyly_view_custom_portrait.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        /*
-        StorylyView storylyViewCustomPortrait = new StorylyView(this);
-        storylyViewCustomPortrait.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        storylyViewCustomPortrait.setStoryGroupSize(StoryGroupSize.Custom);
-        storylyViewCustomPortrait.setStoryGroupIconStyling(
-                new StoryGroupIconStyling(250F, 200F, 50F));
-        storylyViewHolder.addView(storylyViewCustomPortrait);
-        */
+        // storyly_view_custom_portrait.setStoryGroupSize(StoryGroupSize.Custom);
+        // storyly_view_custom_portrait.setStoryGroupIconStyling(new StoryGroupIconStyling(250F, 200F, 50F));
 
         StorylyView storyly_view_custom_landscape = findViewById(R.id.storyly_view_custom_landscape);
         storyly_view_custom_landscape.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        /*
-        StorylyView storylyViewCustomLandscape = new StorylyView(this);
-        storylyViewCustomLandscape.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        storylyViewCustomLandscape.setStoryGroupSize(StoryGroupSize.Custom);
-        storylyViewCustomLandscape.setStoryGroupIconStyling(
-                new StoryGroupIconStyling(200F, 250F, 50F));
-        storylyViewHolder.addView(storylyViewCustomLandscape);
-         */
+        // storyly_view_custom_landscape.setStoryGroupSize(StoryGroupSize.Custom);
+        // storyly_view_custom_landscape.setStoryGroupIconStyling(new StoryGroupIconStyling(200F, 250F, 50F));
     }
 }
