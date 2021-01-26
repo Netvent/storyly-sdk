@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="customGroupIconSeenColors">
+        <item>#C5ACA5</item>
+        <item>#000000</item>
+    </array>
+    <array name="customGroupIconNotSeenColors">
+        <item>#FB3200</item>
+        <item>#FFEB3B</item>
+    </array>
+    <array name="customItemIconBorderColor">
+        <item>#FB3200</item>
+        <item>#FFEB3B</item>
+    </array>
+    <array name="customItemProgressBarColor">
+        <item>#FB3200</item>
+        <item>#FFEB3B</item>
+    </array>
+</resources>
