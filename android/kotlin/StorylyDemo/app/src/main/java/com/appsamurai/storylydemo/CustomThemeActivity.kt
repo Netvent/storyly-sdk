@@ -1,5 +1,6 @@
 package com.appsamurai.storylydemo
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.StorylyInit
@@ -10,31 +11,30 @@ class CustomThemeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_theme)
 
-        storyly_view_group_text_color.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
-        // storyly_view_group_text_color.setStoryGroupTextColor(Color.parseColor("#f03932"))
+        storyly_view_default.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
 
-        storyly_view_group_icon_background_color.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
-        // storyly_view_group_text_color.setStoryGroupIconBackgroundColor( Color.parseColor("#4CAF50"))
 
-        storyly_view_group_icon_border_color.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+        storyly_custom_theme.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+
+        // storyly_custom_theme.setStoryGroupTextColor(Color.parseColor("#f03932"))
+
+        // storyly_custom_theme.setStoryGroupIconBackgroundColor( Color.parseColor("#4CAF50"))
+
         // val seenBorder = arrayOf(Color.parseColor("#C5ACA5"), Color.parseColor("#000000"))
-        // storyly_view_group_icon_border_color.setStoryGroupIconBorderColorSeen(seenBorder)
+        // storyly_custom_theme.setStoryGroupIconBorderColorSeen(seenBorder)
 
         // val notSeenBorder = arrayOf(Color.parseColor("#FB3200"), Color.parseColor("#FFEB3B"))
-        // storyly_view_group_icon_border_color.setStoryGroupIconBorderColorNotSeen(notSeenBorder)
+        // storyly_custom_theme.setStoryGroupIconBorderColorNotSeen(notSeenBorder)
 
-        storyly_view_group_pin_color.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
-        // storyly_view_group_pin_color.setStoryGroupPinIconColor(Color.parseColor("#3F51B5"))
+        // storyly_custom_theme.setStoryGroupPinIconColor(Color.parseColor("#3F51B5"))
 
-        storyly_view_item_text_color.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
-        // storyly_view_item_text_color.setStoryItemTextColor(Color.parseColor("#FF0057"))
+        // storyly_custom_theme.setStoryItemTextColor(Color.parseColor("#FF0057"))
 
-        storyly_view_item_icon_border_color.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         // val borderColor = arrayOf(Color.parseColor("#FB3200"), Color.parseColor("#FFEB3B"))
-        // storyly_view_item_icon_border_color.setStoryItemIconBorderColor(borderColor)
+        // storyly_custom_theme.setStoryItemIconBorderColor(borderColor)
 
-        storyly_view_item_progress_bar_color.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
-        // val borderColor = arrayOf(Color.parseColor("#FB3200"), Color.parseColor("#FFEB3B"))
-        // storyly_view_item_progress_bar_color.setStoryItemProgressBarColor(borderColor)
+        // val progressBar = arrayOf(Color.parseColor("#FB3200"), Color.parseColor("#FFEB3B"))
+        // storyly_custom_theme.setStoryItemProgressBarColor(progressBar)
+
     }
 }

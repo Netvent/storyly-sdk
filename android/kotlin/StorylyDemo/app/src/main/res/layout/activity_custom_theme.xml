@@ -14,53 +14,21 @@
         android:orientation="vertical" >
 
         <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_group_text_color"
-            app:storyGroupSize="small"
+            android:id="@+id/storyly_view_default"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:storyGroupTextColor="#f03932" />
+            android:layout_height="wrap_content" />
 
         <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_group_icon_background_color"
-            app:storyGroupSize="small"
+            android:id="@+id/storyly_custom_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:storyGroupIconBackgroundColor="#4CAF50" />
-
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_group_icon_border_color"
-            app:storyGroupSize="small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:storyGroupTextColor="#f03932"
+            app:storyGroupIconBackgroundColor="#4CAF50"
             app:storyGroupIconBorderColorSeen="@array/customGroupIconSeenColors"
-            app:storyGroupIconBorderColorNotSeen="@array/customGroupIconNotSeenColors" />
-
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_group_pin_color"
-            app:storyGroupSize="small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:storyGroupPinIconColor="#3F51B5" />
-
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_item_text_color"
-            app:storyGroupSize="small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:storyItemTextColor="#FF0057" />
-
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_item_icon_border_color"
-            app:storyGroupSize="small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:storyItemIconBorderColor="@array/customItemIconBorderColor" />
-
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_item_progress_bar_color"
-            app:storyGroupSize="small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:storyGroupIconBorderColorNotSeen="@array/customGroupIconNotSeenColors"
+            app:storyGroupPinIconColor="#3F51B5"
+            app:storyItemTextColor="#FF0057"
+            app:storyItemIconBorderColor="@array/customItemIconBorderColor"
             app:storyItemProgressBarColor="@array/customItemProgressBarColor" />
 
     </LinearLayout>
