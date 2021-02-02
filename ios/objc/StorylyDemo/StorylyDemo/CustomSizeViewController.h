@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@import Storyly;
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface UIViewController (CustomSizeViewController)
+@interface CustomSizeViewController : UIViewController
 
 @end
-
-NS_ASSUME_NONNULL_END
