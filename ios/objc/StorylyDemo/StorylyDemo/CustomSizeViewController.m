@@ -27,19 +27,19 @@
     
     self.storylyViewSmall.storylyInit = [[StorylyInit alloc] initWithStorylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyViewSmall.rootViewController = self;
-    self.storylyViewSmall.storyGroupSize = @"small";
+//    self.storylyViewSmall.storyGroupSize = @"small";
     
     self.storylyViewLarge.storylyInit = [[StorylyInit alloc] initWithStorylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyViewLarge.rootViewController = self;
-    self.storylyViewLarge.storyGroupSize = @"large";
+//    self.storylyViewLarge.storyGroupSize = @"large";
     
     self.storylyViewXLarge.storylyInit = [[StorylyInit alloc] initWithStorylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyViewXLarge.rootViewController = self;
-    self.storylyViewXLarge.storyGroupSize = @"xlarge";
+//    self.storylyViewXLarge.storyGroupSize = @"xlarge";
     
     self.storylyViewPortrait.storylyInit = [[StorylyInit alloc] initWithStorylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyViewPortrait.rootViewController = self;
-    self.storylyViewPortrait.storyGroupSize = @"custom";
+//    self.storylyViewPortrait.storyGroupSize = @"custom";
     
 //    self.storylyViewPortrait.storyGroupIconStyling = [[StoryGroupIconStyling alloc] initWithHeight:150 width:100 cornerRadius:15];
     
@@ -49,7 +49,7 @@
     
     self.storylyViewLandscape.storylyInit = [[StorylyInit alloc] initWithStorylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyViewLandscape.rootViewController = self;
-    self.storylyViewLandscape.storyGroupSize = @"custom";
+//    self.storylyViewLandscape.storyGroupSize = @"custom";
     
 //    self.storylyViewLandscape.storyGroupIconStyling = [[StoryGroupIconStyling alloc] initWithHeight:100 width:150 cornerRadius:15];
     
