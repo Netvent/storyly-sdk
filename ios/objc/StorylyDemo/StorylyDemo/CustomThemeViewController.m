@@ -20,13 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD = @"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjQ3LCJhcHBfaWQiOjEyODcsImluc19pZCI6MTYzMX0.mjY5nZ5mPk0H6v5xiexJnpNzGGsn335Cm2mYlzCWo4A";
-    
-    self.storylyViewDefaultTheme.storylyInit = [[StorylyInit alloc] initWithStorylyId: YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
+    self.storylyViewDefaultTheme.storylyInit = [[StorylyInit alloc] initWithStorylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyViewDefaultTheme.rootViewController = self;
 
     
-    self.storylyViewCustomTheme.storylyInit = [[StorylyInit alloc] initWithStorylyId: YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
+    self.storylyViewCustomTheme.storylyInit = [[StorylyInit alloc] initWithStorylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD];
     self.storylyViewCustomTheme.rootViewController = self;
     
 //    self.storylyViewCustomTheme.storyGroupTextColor = [UIColor colorWithRed: 240.0/255.0 green: 57.0/255.0 blue: 50.0/255.0 alpha: 1.0];
