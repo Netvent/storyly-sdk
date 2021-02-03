@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zGv-1R-KUr">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CustomTheme-->
+        <scene sceneID="s3c-UH-oW7">
+            <objects>
+                <viewController title="CustomSize" id="zGv-1R-KUr" userLabel="CustomTheme" customClass="CustomThemeViewController" customModule="StorylyDemo" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="clE-vZ-GZY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OxJ-ZS-LMj" userLabel="Storyly View Default Theme" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r2E-Mi-GHr" userLabel="Storyly View Custom Theme" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="192" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="storyGroupTextColor">
+                                        <color key="value" red="0.94117647058823528" green="0.22352941176470587" blue="0.19607843137254902" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="storyGroupIconBackground">
+                                        <color key="value" red="0.0" green="0.65000000000000002" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="storyGroupPinIconColor">
+                                        <color key="value" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="storyItemTextColor">
+                                        <color key="value" red="1" green="0.0" blue="0.3411764705882353" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qq3-hm-OpN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="r2E-Mi-GHr" firstAttribute="top" secondItem="OxJ-ZS-LMj" secondAttribute="bottom" constant="20" id="0C3-Uy-OZq"/>
+                            <constraint firstItem="r2E-Mi-GHr" firstAttribute="trailing" secondItem="qq3-hm-OpN" secondAttribute="trailing" id="Fas-59-Nos"/>
+                            <constraint firstItem="OxJ-ZS-LMj" firstAttribute="top" secondItem="qq3-hm-OpN" secondAttribute="top" id="Qj8-P2-REO"/>
+                            <constraint firstItem="OxJ-ZS-LMj" firstAttribute="leading" secondItem="qq3-hm-OpN" secondAttribute="leading" id="RHX-xx-fTJ"/>
+                            <constraint firstItem="OxJ-ZS-LMj" firstAttribute="trailing" secondItem="qq3-hm-OpN" secondAttribute="trailing" id="YO4-75-z9T"/>
+                            <constraint firstItem="r2E-Mi-GHr" firstAttribute="leading" secondItem="qq3-hm-OpN" secondAttribute="leading" id="jTw-52-2ld"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="storylyViewCustomTheme" destination="r2E-Mi-GHr" id="7nV-Ku-zjh"/>
+                        <outlet property="storylyViewDefaultTheme" destination="OxJ-ZS-LMj" id="HQq-1B-m3h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kgz-gS-Ay3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-92" y="105"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
