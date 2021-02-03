@@ -27,12 +27,12 @@ class CustomThemeViewController: UIViewController {
 //
 //        storylyViewCustomTheme.storyGroupIconBackgroundColor = UIColor(red: 76/255, green: 175/255, blue: 80/255, alpha: 1.0)
 
-        let seenBoder = [UIColor(red: 197/255, green: 172/255, blue: 165/255, alpha: 1.0), UIColor.black]
-        storylyViewCustomTheme.storyGroupIconBorderColorSeen = seenBoder
+        let seenBorder = [UIColor(red: 197/255, green: 172/255, blue: 165/255, alpha: 1.0), UIColor.black]
+        storylyViewCustomTheme.storyGroupIconBorderColorSeen = seenBorder
         
-        let notSeenBoder = [UIColor(red: 251/255, green: 50/255, blue: 0, alpha: 1.0),
+        let notSeenBorder = [UIColor(red: 251/255, green: 50/255, blue: 0, alpha: 1.0),
                             UIColor(red: 255/255, green: 235/255, blue: 59/255, alpha: 1.0)]
-        storylyViewCustomTheme.storyGroupIconBorderColorNotSeen = notSeenBoder
+        storylyViewCustomTheme.storyGroupIconBorderColorNotSeen = notSeenBorder
 //        
 //        storylyViewCustomTheme.storyGroupPinIconColor = UIColor(red: 63/255, green: 81/255, blue: 181/255, alpha: 1.0)
 //
