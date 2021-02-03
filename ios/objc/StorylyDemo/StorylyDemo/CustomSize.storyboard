@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E4c-5d-6rS">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CustomSize-->
+        <scene sceneID="5EA-sg-wLS">
+            <objects>
+                <viewController title="CustomSize" id="E4c-5d-6rS" customClass="CustomSizeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5ck-hW-4mm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tMx-3w-YSg" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="452" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="storyGroupSize" value="custom"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="storyGroupIconHeight">
+                                        <integer key="value" value="150"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="storyGroupIconWidth">
+                                        <integer key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="storyGroupIconCornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UDg-Wt-kdW" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="316" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="storyGroupSize" value="xlarge"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPP-lS-fnX" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="180" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="storyGroupSize" value="large"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N7c-R4-TlP" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="storyGroupSize" value="small"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GBr-qa-IPo" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="588" width="414" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="storyGroupSize" value="custom"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="storyGroupIconHeight">
+                                        <integer key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="storyGroupIconWidth">
+                                        <integer key="value" value="150"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="storyGroupIconCornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="u1o-E1-OV8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UDg-Wt-kdW" firstAttribute="top" secondItem="oPP-lS-fnX" secondAttribute="bottom" id="346-YY-Ud7"/>
+                            <constraint firstItem="N7c-R4-TlP" firstAttribute="leading" secondItem="u1o-E1-OV8" secondAttribute="leading" id="DWr-Xx-vmP"/>
+                            <constraint firstItem="GBr-qa-IPo" firstAttribute="top" secondItem="tMx-3w-YSg" secondAttribute="bottom" id="EVV-N5-vXW"/>
+                            <constraint firstItem="tMx-3w-YSg" firstAttribute="top" secondItem="UDg-Wt-kdW" secondAttribute="bottom" id="KKT-gJ-0X8"/>
+                            <constraint firstItem="N7c-R4-TlP" firstAttribute="top" secondItem="u1o-E1-OV8" secondAttribute="top" id="R9q-e1-JGK"/>
+                            <constraint firstItem="tMx-3w-YSg" firstAttribute="leading" secondItem="u1o-E1-OV8" secondAttribute="leading" id="Uqd-Lj-LRR"/>
+                            <constraint firstItem="u1o-E1-OV8" firstAttribute="trailing" secondItem="N7c-R4-TlP" secondAttribute="trailing" id="ecy-2L-JPA"/>
+                            <constraint firstItem="oPP-lS-fnX" firstAttribute="top" secondItem="N7c-R4-TlP" secondAttribute="bottom" id="h22-n8-wgI"/>
+                            <constraint firstItem="oPP-lS-fnX" firstAttribute="trailing" secondItem="u1o-E1-OV8" secondAttribute="trailing" id="k03-Sx-rgH"/>
+                            <constraint firstItem="oPP-lS-fnX" firstAttribute="leading" secondItem="u1o-E1-OV8" secondAttribute="leading" id="lxO-1a-JdG"/>
+                            <constraint firstItem="GBr-qa-IPo" firstAttribute="trailing" secondItem="u1o-E1-OV8" secondAttribute="trailing" id="nyF-TB-Hwv"/>
+                            <constraint firstItem="tMx-3w-YSg" firstAttribute="trailing" secondItem="u1o-E1-OV8" secondAttribute="trailing" id="o9e-Bg-6H9"/>
+                            <constraint firstItem="GBr-qa-IPo" firstAttribute="leading" secondItem="u1o-E1-OV8" secondAttribute="leading" id="pGF-Hf-TIb"/>
+                            <constraint firstItem="UDg-Wt-kdW" firstAttribute="leading" secondItem="u1o-E1-OV8" secondAttribute="leading" id="y8b-NW-39X"/>
+                            <constraint firstItem="UDg-Wt-kdW" firstAttribute="trailing" secondItem="u1o-E1-OV8" secondAttribute="trailing" id="zTa-Lr-bBv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="storylyViewLandscape" destination="GBr-qa-IPo" id="Msi-5Q-vlk"/>
+                        <outlet property="storylyViewLarge" destination="oPP-lS-fnX" id="CTL-jJ-1yA"/>
+                        <outlet property="storylyViewPortrait" destination="tMx-3w-YSg" id="Lbd-2y-tLP"/>
+                        <outlet property="storylyViewSmall" destination="N7c-R4-TlP" id="FOZ-Cx-yX2"/>
+                        <outlet property="storylyViewXLarge" destination="UDg-Wt-kdW" id="Guo-A6-4Pd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cYx-js-ZOm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-92" y="105"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
