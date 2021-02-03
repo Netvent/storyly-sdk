@@ -1,5 +1,5 @@
 //
-//  UIViewController+CustomThemeViewController.h
+//  CustomThemeViewController.h
 //  StorylyDemo
 //
 //  Created by Haldun Melih Fadillioglu on 3.02.2021.
