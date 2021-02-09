@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
+platform :ios, '9.0'
 
 target 'StorylyDemo' do
-  platform :ios, '9.0'
   pod 'Storyly'
 end

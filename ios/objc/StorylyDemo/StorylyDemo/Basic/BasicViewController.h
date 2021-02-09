@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @import Storyly;
 
-@interface BasicViewController : UIViewController<StorylyDelegate>
+@interface BasicViewController : UIViewController
 
 
 @end

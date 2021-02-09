@@ -8,25 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		19C7686A8439D88F52D8372F /* Pods_StorylyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736369B3007CB8524D1E56A7 /* Pods_StorylyDemo.framework */; };
-		30E9CDC825399EFB00B1FDCE /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9CDC725399EFB00B1FDCE /* CustomLoadingView.swift */; };
-		30E9CDCC2539C19200B1FDCE /* CustomExternalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9CDCB2539C19200B1FDCE /* CustomExternalView.swift */; };
+		41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BDE25D18A2500928E7C /* EventHandlingViewController.swift */; };
+		41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BE125D18AA600928E7C /* CustomSizeViewController.swift */; };
+		41501BE625D18AA700928E7C /* CustomThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BE225D18AA600928E7C /* CustomThemeViewController.swift */; };
+		41501BE725D18AA700928E7C /* CustomTheme.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BE325D18AA600928E7C /* CustomTheme.storyboard */; };
+		41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BE425D18AA600928E7C /* CustomSize.storyboard */; };
+		41501BEF25D1B2FB00928E7C /* EventHandling.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */; };
 		A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA836233B90E3000514FA /* AppDelegate.swift */; };
-		A16DA83B233B90E3000514FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA83A233B90E3000514FA /* ViewController.swift */; };
-		A16DA83E233B90E3000514FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83C233B90E3000514FA /* Main.storyboard */; };
+		A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA83A233B90E3000514FA /* BasicViewController.swift */; };
+		A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83C233B90E3000514FA /* Basic.storyboard */; };
 		A16DA840233B90E5000514FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83F233B90E5000514FA /* Assets.xcassets */; };
 		A16DA843233B90E5000514FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16DA841233B90E5000514FA /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		30E9CDC725399EFB00B1FDCE /* CustomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
-		30E9CDCB2539C19200B1FDCE /* CustomExternalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExternalView.swift; sourceTree = "<group>"; };
 		3CB5F4E3423BEB3D0BA0629B /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		41501BDE25D18A2500928E7C /* EventHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandlingViewController.swift; sourceTree = "<group>"; };
+		41501BE125D18AA600928E7C /* CustomSizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSizeViewController.swift; sourceTree = "<group>"; };
+		41501BE225D18AA600928E7C /* CustomThemeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomThemeViewController.swift; sourceTree = "<group>"; };
+		41501BE325D18AA600928E7C /* CustomTheme.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomTheme.storyboard; sourceTree = "<group>"; };
+		41501BE425D18AA600928E7C /* CustomSize.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomSize.storyboard; sourceTree = "<group>"; };
+		41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventHandling.storyboard; sourceTree = "<group>"; };
 		736369B3007CB8524D1E56A7 /* Pods_StorylyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8796B38706767D0054280E24 /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A16DA833233B90E3000514FA /* StorylyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorylyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16DA836233B90E3000514FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A16DA83A233B90E3000514FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A16DA83D233B90E3000514FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A16DA83A233B90E3000514FA /* BasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
+		A16DA83D233B90E3000514FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Basic.storyboard; sourceTree = "<group>"; };
 		A16DA83F233B90E5000514FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A16DA842233B90E5000514FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A16DA844233B90E5000514FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +61,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		41501BEB25D1B16F00928E7C /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				A16DA83A233B90E3000514FA /* BasicViewController.swift */,
+				A16DA83C233B90E3000514FA /* Basic.storyboard */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		41501BF125D1B30100928E7C /* EventHandling */ = {
+			isa = PBXGroup;
+			children = (
+				41501BDE25D18A2500928E7C /* EventHandlingViewController.swift */,
+				41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */,
+			);
+			path = EventHandling;
+			sourceTree = "<group>";
+		};
 		A16DA82A233B90E3000514FA = {
 			isa = PBXGroup;
 			children = (
@@ -74,14 +100,16 @@
 		A16DA835233B90E3000514FA /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
+				41501BEB25D1B16F00928E7C /* Basic */,
+				41501BF125D1B30100928E7C /* EventHandling */,
+				41501BE425D18AA600928E7C /* CustomSize.storyboard */,
+				41501BE125D18AA600928E7C /* CustomSizeViewController.swift */,
+				41501BE325D18AA600928E7C /* CustomTheme.storyboard */,
+				41501BE225D18AA600928E7C /* CustomThemeViewController.swift */,
 				A16DA836233B90E3000514FA /* AppDelegate.swift */,
-				A16DA83A233B90E3000514FA /* ViewController.swift */,
-				A16DA83C233B90E3000514FA /* Main.storyboard */,
 				A16DA83F233B90E5000514FA /* Assets.xcassets */,
 				A16DA841233B90E5000514FA /* LaunchScreen.storyboard */,
 				A16DA844233B90E5000514FA /* Info.plist */,
-				30E9CDC725399EFB00B1FDCE /* CustomLoadingView.swift */,
-				30E9CDCB2539C19200B1FDCE /* CustomExternalView.swift */,
 			);
 			path = StorylyDemo;
 			sourceTree = "<group>";
@@ -156,7 +184,10 @@
 			files = (
 				A16DA843233B90E5000514FA /* LaunchScreen.storyboard in Resources */,
 				A16DA840233B90E5000514FA /* Assets.xcassets in Resources */,
-				A16DA83E233B90E3000514FA /* Main.storyboard in Resources */,
+				A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */,
+				41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */,
+				41501BEF25D1B2FB00928E7C /* EventHandling.storyboard in Resources */,
+				41501BE725D18AA700928E7C /* CustomTheme.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,9 +240,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30E9CDCC2539C19200B1FDCE /* CustomExternalView.swift in Sources */,
-				A16DA83B233B90E3000514FA /* ViewController.swift in Sources */,
-				30E9CDC825399EFB00B1FDCE /* CustomLoadingView.swift in Sources */,
+				A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */,
+				41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */,
+				41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */,
+				41501BE625D18AA700928E7C /* CustomThemeViewController.swift in Sources */,
 				A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,12 +251,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A16DA83C233B90E3000514FA /* Main.storyboard */ = {
+		A16DA83C233B90E3000514FA /* Basic.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A16DA83D233B90E3000514FA /* Base */,
 			);
-			name = Main.storyboard;
+			name = Basic.storyboard;
 			sourceTree = "<group>";
 		};
 		A16DA841233B90E5000514FA /* LaunchScreen.storyboard */ = {
