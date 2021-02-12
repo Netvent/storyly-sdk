@@ -128,6 +128,8 @@ android {
     }
 
     defaultConfig {
+        multiDexEnabled true
+
         applicationId "com.storylydemo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -191,6 +193,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 // Run this once to be able to run the application with BUCK

@@ -63,13 +63,12 @@
     return [_storylyView setExternalData:externalData];
 }
 
-- (BOOL)storylyActionClicked:(StorylyView * _Nonnull)storylyView
+- (void)storylyActionClicked:(StorylyView * _Nonnull)storylyView
           rootViewController:(UIViewController * _Nonnull)rootViewController
                        story:(Story * _Nonnull)story {
     if (self.onStorylyActionClicked) {
         self.onStorylyActionClicked([self createStoryMap:story]);
     }
-    return YES;
 }
 
 - (void)storylyLoaded:(StorylyView * _Nonnull)storylyView
