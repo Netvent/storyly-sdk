@@ -2,6 +2,7 @@ package com.appsamurai.storyly.reactnative
 
 import android.content.Context
 import android.view.Choreographer
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
@@ -22,7 +23,6 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             }
 
             override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {
-                manuallyLayout()
                 sendEvent(STStorylyManager.EVENT_STORYLY_LOADED, Arguments.createMap().also { storyGroupListMap ->
                     storyGroupListMap.putArray("storyGroupList", Arguments.createArray().also { storyGroups ->
                         storyGroupList.forEach { storyGroup ->
@@ -52,7 +52,6 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             }
 
             override fun storylyStoryDismissed(storylyView: StorylyView) {
-                manuallyLayout()
                 sendEvent(STStorylyManager.EVENT_STORYLY_STORY_DISMISSED, null)
             }
 
@@ -65,15 +64,26 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             }
         }
 
-        Choreographer.getInstance().postFrameCallback {
-            manuallyLayout()
-            viewTreeObserver.dispatchOnGlobalLayout()
-        }
+        Choreographer.getInstance().postFrameCallback(object : Choreographer.FrameCallback {
+            override fun doFrame(frameTimeNanos: Long) {
+                manuallyLayout()
+                viewTreeObserver.dispatchOnGlobalLayout()
+                Choreographer.getInstance().postFrameCallback(this)
+            }
+        })
     }
 
     private fun manuallyLayout() {
-        storylyView.measure(MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY))
+        storylyView.measure(
+            MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
+            MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
+        )
         storylyView.layout(0, 0, storylyView.measuredWidth, storylyView.measuredHeight)
+
+        val innerStorylyView = storylyView.getChildAt(0) as? ViewGroup ?: return;
+        for (i in 0 until innerStorylyView.childCount) {
+            innerStorylyView.getChildAt(i).requestLayout()
+        }
     }
 
     private fun sendEvent(eventName: String, eventParameters: WritableMap?) {
