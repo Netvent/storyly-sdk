@@ -1,4 +1,9 @@
 # Release Notes
+### 1.9.0
+* added Interactive VOD feature
+* added vertical, horizontal and custom placement support for emoji component
+* fixed screen rendering issue on Android during animations
+
 ### 1.8.4
 * improved screen rendering for seen/unseen feedback
 
