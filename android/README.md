@@ -57,7 +57,7 @@ In StorylyInit class, "customParameter" field can be used for analytical purpose
 In Storyly, there are 5 different optional methods that you can override and use.  These are:
 * storylyLoaded: This method is called when your story groups are loaded without a problem. It informs about loaded story groups and stories in them.
 * storylyLoadFailed: This method is called if any problem occurs while loading story groups such as network problem etc… You can find detailed information from `errorMessage` parameter.
-* storylyActionClicked: This method is called when the user clicks to action button on a story or swipes up in a story.  If you want to handle how the story link should be opened, you should override this method and you must return true as a result. Otherwise, SDK will open the link in a new activity. 
+* storylyActionClicked: This method is called when the user clicks to action button on a story or swipes up in a story. You need to handle how the story link should be opened by overriding this method.
 * storylyStoryShown: This method is called when a story is shown in fullscreen.
 * storylyStoryDismissed: This method is called when story screen is dismissed.
 * storylyUserInteracted: This method is called when a user is interacted with a quiz, a poll or an emoji.
