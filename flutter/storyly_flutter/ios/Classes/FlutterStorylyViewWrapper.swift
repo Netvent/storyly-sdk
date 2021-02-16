@@ -173,10 +173,9 @@ extension FlutterStorylyViewWrapper {
                                                                     "storyComponent": storyComponentMap])
     }
     
-    func storylyActionClicked(_ storylyView: Storyly.StorylyView, rootViewController: UIViewController, story: Storyly.Story) -> Bool {
+    func storylyActionClicked(_ storylyView: Storyly.StorylyView, rootViewController: UIViewController, story: Storyly.Story) {
         self.methodChannel.invokeMethod("storylyActionClicked",
                                         arguments: self.createStoryMap(story: story))
-        return true
     }
     
     func storylyStoryPresented(_ storylyView: Storyly.StorylyView) {

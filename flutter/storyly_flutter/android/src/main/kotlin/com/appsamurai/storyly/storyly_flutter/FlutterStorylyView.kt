@@ -116,10 +116,9 @@ class FlutterStorylyView(
             }
 
             storylyListener = object : StorylyListener {
-                override fun storylyActionClicked(storylyView: StorylyView, story: Story): Boolean {
+                override fun storylyActionClicked(storylyView: StorylyView, story: Story) {
                     methodChannel.invokeMethod("storylyActionClicked",
                             createStoryMap(story))
-                    return true
                 }
 
                 override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {
