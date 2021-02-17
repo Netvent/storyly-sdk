@@ -50,31 +50,24 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                 default: do {}
             }
         }
-    }
-    
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    public override func willMove(toWindow newWindow: UIWindow?) {
-        super.willMove(toWindow: newWindow)
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        
         guard let storylyId = self.args[ARGS_STORYLY_ID] as? String else { return }
         var storylySegments: Set<String>?
         if let argsSegments = self.args[ARGS_STORYLY_SEGMENTS] as? [String] { storylySegments = Set(argsSegments) }
         self.storylyView = StorylyView(frame: self.frame)
         self.storylyView.translatesAutoresizingMaskIntoConstraints = false
         self.storylyView.storylyInit = StorylyInit(storylyId: storylyId,
-                                              segmentation: StorylySegmentation(segments: storylySegments),
-                                              customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String)
+                                                   segmentation: StorylySegmentation(segments: storylySegments),
+                                                   customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String)
         self.storylyView.delegate = self
         self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
         self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
-        self.storylyView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+        self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     private func updateTheme(storylyView: StorylyView, args: [String: Any]) {
         storylyView.storyGroupSize = args[self.ARGS_STORY_GROUP_SIZE] as? String ?? "large"
