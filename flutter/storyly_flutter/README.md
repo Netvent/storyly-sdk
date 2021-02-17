@@ -1,5 +1,5 @@
 # Storyly
-Storyly SDK is used for story representation provided by App Samurai. You can register from [Storyly Dashboard](http://dashboard.storyly.io) and add stories to your registered applications and represent them in application with the help of this package.
+Storyly SDK is used for story representation provided by App Samurai. You can register from [Storyly Dashboard](https://dashboard.storyly.io) and add stories to your registered applications and represent them in application with the help of this package.
 
 Flutter plugin for Storyly. It's compatible with Android and iOS using PlatformView.
 ## Getting Started
@@ -11,7 +11,7 @@ Storyly SDK requires minimum API level 17, but PlatformView requires minimum API
 You need to set Kotlin plugin to Android App if it's not created by using Kotlin option. You can add this to app's main gradle file which is located in android/build.gradle.
 ```
 buildscript {
-    ext.kotlin_version = '1.3.70'
+    ext.kotlin_version = '1.4.30'
     ...
     dependencies {
         ...

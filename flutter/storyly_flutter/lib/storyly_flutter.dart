@@ -113,27 +113,24 @@ class StorylyViewController {
   }
 
   Future<void> openStory(int storyGroupId, int storyId) {
-    return _methodChannel.invokeMethod('openStory', <String, dynamic> {
-      'storyGroupId': storyGroupId,
-      'storyId': storyId
-    });
+    return _methodChannel.invokeMethod('openStory',
+        <String, dynamic>{'storyGroupId': storyGroupId, 'storyId': storyId});
   }
 
   Future<void> openStoryUri(String uri) {
-    return _methodChannel.invokeMethod('openStoryUri', <String, dynamic> {
-      'uri': uri
-    });
+    return _methodChannel
+        .invokeMethod('openStoryUri', <String, dynamic>{'uri': uri});
   }
 
   Future<void> setExternalData(List<Map> externalData) {
-    return _methodChannel.invokeMethod('setExternalData', <String, dynamic> {
-      'externalData': externalData
-    });
+    return _methodChannel.invokeMethod(
+        'setExternalData', <String, dynamic>{'externalData': externalData});
   }
 }
 
 class StorylyParam {
-  @required String storylyId;
+  @required
+  String storylyId;
   List<String> storylySegments;
   String storylyCustomParameters;
 
@@ -158,22 +155,74 @@ class StorylyParam {
   List<Color> storyItemProgressBarColor;
 
   dynamic toMap() {
-    Map<String, dynamic> paramsMap = <String, dynamic>{ "storylyId": this.storylyId, "storylySegments": this.storylySegments, "storylyCustomParameters": this.storylyCustomParameters};
-    paramsMap['storyGroupIconStyling'] = {'width': this.storyGroupIconWidth, 'height': this.storyGroupIconHeight, 'cornerRadius': this.storyGroupIconCornerRadius};
-    paramsMap['storyGroupListStyling'] = {'edgePadding': this.storyGroupListEdgePadding, 'paddingBetweenItems': this.storyGroupListPaddingBetweenItems};
-    paramsMap['storyGroupTextStyling'] = {'isVisible': this.storyGroupTextIsVisible};
-    paramsMap['storyHeaderStyling'] = {'isTextVisible': this.storyHeaderTextIsVisible, 'isIconVisible': this.storyHeaderIconIsVisible, 'isCloseButtonVisible': this.storyHeaderCloseButtonIsVisible};
-    paramsMap['storyGroupSize'] = this.storyGroupSize != null ? this.storyGroupSize : "large";
-    paramsMap['storyGroupIconBorderColorSeen'] = this.storyGroupIconBorderColorSeen != null ? this.storyGroupIconBorderColorSeen.map((color) => toHexString(color)).toList() : null;
-    paramsMap['storyGroupIconBorderColorNotSeen'] = this.storyGroupIconBorderColorNotSeen != null ? this.storyGroupIconBorderColorNotSeen.map((color) => toHexString(color)).toList() : null;
-    paramsMap['storyGroupIconBackgroundColor'] = this.storyGroupIconBackgroundColor != null ? toHexString(storyGroupIconBackgroundColor) : null;
-    paramsMap['storyGroupTextColor'] = this.storyGroupTextColor != null ? toHexString(storyGroupTextColor) : null;
-    paramsMap['storyGroupPinIconColor'] = this.storyGroupPinIconColor != null ? toHexString(storyGroupPinIconColor) : null;
-    paramsMap['storyItemIconBorderColor'] = this.storyItemIconBorderColor != null ? this.storyItemIconBorderColor.map((color) => toHexString(color)).toList() : null;
-    paramsMap['storyItemTextColor'] = this.storyItemTextColor != null ? toHexString(storyItemTextColor) : null;
-    paramsMap['storyItemProgressBarColor'] = this.storyItemProgressBarColor != null ? this.storyItemProgressBarColor.map((color) => toHexString(color)).toList() : null;
+    Map<String, dynamic> paramsMap = <String, dynamic>{
+      "storylyId": this.storylyId,
+      "storylySegments": this.storylySegments,
+      "storylyCustomParameters": this.storylyCustomParameters
+    };
+    paramsMap['storyGroupIconStyling'] = {
+      'width': this.storyGroupIconWidth,
+      'height': this.storyGroupIconHeight,
+      'cornerRadius': this.storyGroupIconCornerRadius
+    };
+    paramsMap['storyGroupListStyling'] = {
+      'edgePadding': this.storyGroupListEdgePadding,
+      'paddingBetweenItems': this.storyGroupListPaddingBetweenItems
+    };
+    paramsMap['storyGroupTextStyling'] = {
+      'isVisible': this.storyGroupTextIsVisible
+    };
+    paramsMap['storyHeaderStyling'] = {
+      'isTextVisible': this.storyHeaderTextIsVisible,
+      'isIconVisible': this.storyHeaderIconIsVisible,
+      'isCloseButtonVisible': this.storyHeaderCloseButtonIsVisible
+    };
+    paramsMap['storyGroupSize'] =
+        this.storyGroupSize != null ? this.storyGroupSize : "large";
+    paramsMap['storyGroupIconBorderColorSeen'] =
+        this.storyGroupIconBorderColorSeen != null
+            ? this
+                .storyGroupIconBorderColorSeen
+                .map((color) => toHexString(color))
+                .toList()
+            : null;
+    paramsMap['storyGroupIconBorderColorNotSeen'] =
+        this.storyGroupIconBorderColorNotSeen != null
+            ? this
+                .storyGroupIconBorderColorNotSeen
+                .map((color) => toHexString(color))
+                .toList()
+            : null;
+    paramsMap['storyGroupIconBackgroundColor'] =
+        this.storyGroupIconBackgroundColor != null
+            ? toHexString(storyGroupIconBackgroundColor)
+            : null;
+    paramsMap['storyGroupTextColor'] = this.storyGroupTextColor != null
+        ? toHexString(storyGroupTextColor)
+        : null;
+    paramsMap['storyGroupPinIconColor'] = this.storyGroupPinIconColor != null
+        ? toHexString(storyGroupPinIconColor)
+        : null;
+    paramsMap['storyItemIconBorderColor'] =
+        this.storyItemIconBorderColor != null
+            ? this
+                .storyItemIconBorderColor
+                .map((color) => toHexString(color))
+                .toList()
+            : null;
+    paramsMap['storyItemTextColor'] = this.storyItemTextColor != null
+        ? toHexString(storyItemTextColor)
+        : null;
+    paramsMap['storyItemProgressBarColor'] =
+        this.storyItemProgressBarColor != null
+            ? this
+                .storyItemProgressBarColor
+                .map((color) => toHexString(color))
+                .toList()
+            : null;
     return paramsMap;
   }
 
-  String toHexString(Color color) => '#${color.value.toRadixString(16).padLeft(8, '0')}';
+  String toHexString(Color color) =>
+      '#${color.value.toRadixString(16).padLeft(8, '0')}';
 }

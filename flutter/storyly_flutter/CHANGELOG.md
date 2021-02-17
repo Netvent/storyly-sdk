@@ -1,3 +1,9 @@
+### 1.9.0
+* added Interactive VOD feature
+* added vertical, horizontal and custom placement support for emoji component
+* fixed color parsing issue 
+* fixed lag issue that occurs during scroll on iOS platform
+
 ### 1.8.6
 * fixed ios methods not affecting bug
 
