@@ -164,14 +164,16 @@ class StorylyParam {
     paramsMap['storyGroupTextStyling'] = {'isVisible': this.storyGroupTextIsVisible};
     paramsMap['storyHeaderStyling'] = {'isTextVisible': this.storyHeaderTextIsVisible, 'isIconVisible': this.storyHeaderIconIsVisible, 'isCloseButtonVisible': this.storyHeaderCloseButtonIsVisible};
     paramsMap['storyGroupSize'] = this.storyGroupSize != null ? this.storyGroupSize : "large";
-    paramsMap['storyGroupIconBorderColorSeen'] = this.storyGroupIconBorderColorSeen != null ? this.storyGroupIconBorderColorSeen.map((color) => '#${color.value.toRadixString(16)}').toList() : null;
-    paramsMap['storyGroupIconBorderColorNotSeen'] = this.storyGroupIconBorderColorNotSeen != null ? this.storyGroupIconBorderColorNotSeen.map((color) => '#${color.value.toRadixString(16)}').toList() : null;
-    paramsMap['storyGroupIconBackgroundColor'] = this.storyGroupIconBackgroundColor != null ? '#${this.storyGroupIconBackgroundColor.value.toRadixString(16)}' : null;
-    paramsMap['storyGroupTextColor'] = this.storyGroupTextColor != null ? '#${this.storyGroupTextColor.value.toRadixString(16)}' : null;
-    paramsMap['storyGroupPinIconColor'] = this.storyGroupPinIconColor != null ? '#${this.storyGroupPinIconColor.value.toRadixString(16)}' : null;
-    paramsMap['storyItemIconBorderColor'] = this.storyItemIconBorderColor != null ? this.storyItemIconBorderColor.map((color) => '#${color.value.toRadixString(16)}').toList() : null;
-    paramsMap['storyItemTextColor'] = this.storyItemTextColor != null ? '#${this.storyItemTextColor.value.toRadixString(16)}' : null;
-    paramsMap['storyItemProgressBarColor'] = this.storyItemProgressBarColor != null ? this.storyItemProgressBarColor.map((color) => '#${color.value.toRadixString(16)}').toList() : null;
+    paramsMap['storyGroupIconBorderColorSeen'] = this.storyGroupIconBorderColorSeen != null ? this.storyGroupIconBorderColorSeen.map((color) => toHexString(color)).toList() : null;
+    paramsMap['storyGroupIconBorderColorNotSeen'] = this.storyGroupIconBorderColorNotSeen != null ? this.storyGroupIconBorderColorNotSeen.map((color) => toHexString(color)).toList() : null;
+    paramsMap['storyGroupIconBackgroundColor'] = this.storyGroupIconBackgroundColor != null ? toHexString(storyGroupIconBackgroundColor) : null;
+    paramsMap['storyGroupTextColor'] = this.storyGroupTextColor != null ? toHexString(storyGroupTextColor) : null;
+    paramsMap['storyGroupPinIconColor'] = this.storyGroupPinIconColor != null ? toHexString(storyGroupPinIconColor) : null;
+    paramsMap['storyItemIconBorderColor'] = this.storyItemIconBorderColor != null ? this.storyItemIconBorderColor.map((color) => toHexString(color)).toList() : null;
+    paramsMap['storyItemTextColor'] = this.storyItemTextColor != null ? toHexString(storyItemTextColor) : null;
+    paramsMap['storyItemProgressBarColor'] = this.storyItemProgressBarColor != null ? this.storyItemProgressBarColor.map((color) => toHexString(color)).toList() : null;
     return paramsMap;
   }
+
+  String toHexString(Color color) => '#${color.value.toRadixString(16).padLeft(8, '0')}';
 }
