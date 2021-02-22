@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/gestures.dart';
 
 typedef void StorylyViewCreatedCallback(StorylyViewController controller);
 
@@ -43,12 +44,22 @@ class _StorylyViewState extends State<StorylyView> {
       return AndroidView(
           viewType: 'FlutterStorylyView',
           onPlatformViewCreated: _onPlatformViewCreated,
+          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+            new Factory<OneSequenceGestureRecognizer>(
+              () => new EagerGestureRecognizer(),
+            ),
+          ].toSet(),
           creationParams: widget.androidParam.toMap(),
           creationParamsCodec: const StandardMessageCodec());
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
           viewType: 'FlutterStorylyView',
           onPlatformViewCreated: _onPlatformViewCreated,
+          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+            new Factory<OneSequenceGestureRecognizer>(
+              () => new EagerGestureRecognizer(),
+            ),
+          ].toSet(),
           creationParams: widget.iosParam.toMap(),
           creationParamsCodec: const StandardMessageCodec());
     }
