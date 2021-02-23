@@ -3,11 +3,11 @@ PODS:
   - SDWebImage (5.10.0):
     - SDWebImage/Core (= 5.10.0)
   - SDWebImage/Core (5.10.0)
-  - Storyly (1.9.1):
+  - Storyly (1.9.2):
     - SDWebImage (= 5.10.0)
-  - storyly_flutter (1.8.7):
+  - storyly_flutter (1.9.0):
     - Flutter
-    - Storyly (= 1.9.1)
+    - Storyly (= 1.9.2)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -27,8 +27,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
-  Storyly: bb718527cc9e44e87efc01ede09c2e7213d19c45
-  storyly_flutter: 680cea46f80b6883e92f9bdbd1743003278f3f15
+  Storyly: 0cbf26deba97194e297bed6aa32014165adb1825
+  storyly_flutter: 934c9e7a7bb9f9babcd9e27a22626d0328e05151
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
