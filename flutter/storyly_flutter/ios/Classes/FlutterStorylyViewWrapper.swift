@@ -6,6 +6,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_SEGMENTS = "storylySegments"
     private let ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
     
+    private let ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
+
     private let ARGS_STORY_GROUP_SIZE = "storyGroupSize"
     private let ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
     private let ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
@@ -70,6 +72,10 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     private func updateTheme(storylyView: StorylyView, args: [String: Any]) {
+        if let storylyBackgroundColor = args[ARGS_STORYLY_BACKGROUND_COLOR] as? String {
+            storylyView.backgroundColor = UIColor(hexString: storylyBackgroundColor)
+        }
+
         storylyView.storyGroupSize = args[self.ARGS_STORY_GROUP_SIZE] as? String ?? "large"
         
         if let storyGroupIconStyling = args[ARGS_STORY_GROUP_ICON_STYLING] as? [String: Any] {
