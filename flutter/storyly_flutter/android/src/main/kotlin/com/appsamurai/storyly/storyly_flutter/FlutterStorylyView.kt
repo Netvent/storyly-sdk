@@ -50,6 +50,8 @@ class FlutterStorylyView(
         private const val ARGS_STORYLY_SEGMENTS = "storylySegments"
         private const val ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
 
+        private const val ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
+
         private const val ARGS_STORY_GROUP_SIZE = "storyGroupSize"
         private const val ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
         private const val ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
@@ -81,6 +83,7 @@ class FlutterStorylyView(
                     else -> StoryGroupSize.Large
                 })
             }
+            (args[ARGS_STORYLY_BACKGROUND_COLOR] as? String)?.let { setBackgroundColor(Color.parseColor(it)) }
             (args[ARGS_STORY_GROUP_ICON_BORDER_COLOR_SEEN] as? List<String>)?.let { colors -> setStoryGroupIconBorderColorSeen(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN] as? List<String>)?.let { colors -> setStoryGroupIconBorderColorNotSeen(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_GROUP_ICON_BACKGROUND_COLOR] as? String)?.let { setStoryGroupIconBackgroundColor(Color.parseColor(it)) }

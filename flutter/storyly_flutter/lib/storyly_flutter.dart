@@ -145,6 +145,8 @@ class StorylyParam {
   List<String> storylySegments;
   String storylyCustomParameters;
 
+  Color storylyBackgroundColor;
+
   String storyGroupSize;
   int storyGroupIconWidth;
   int storyGroupIconHeight;
@@ -169,12 +171,17 @@ class StorylyParam {
     Map<String, dynamic> paramsMap = <String, dynamic>{
       "storylyId": this.storylyId,
       "storylySegments": this.storylySegments,
-      "storylyCustomParameters": this.storylyCustomParameters
+      "storylyCustomParameters": this.storylyCustomParameters,
     };
+
+    paramsMap['storylyBackgroundColor'] = this.storylyBackgroundColor != null
+        ? toHexString(storylyBackgroundColor)
+        : null;
+
     paramsMap['storyGroupIconStyling'] = {
       'width': this.storyGroupIconWidth,
       'height': this.storyGroupIconHeight,
-      'cornerRadius': this.storyGroupIconCornerRadius
+      'cornerRadius': this.storyGroupIconCornerRadius,
     };
     paramsMap['storyGroupListStyling'] = {
       'edgePadding': this.storyGroupListEdgePadding,
