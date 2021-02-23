@@ -1,4 +1,7 @@
 # Release Notes
+### 1.9.2
+* added actionUrlList to Story data
+
 ### 1.9.1
 * added support for interactive components without titles
 * added animation to swipe up icon and text
