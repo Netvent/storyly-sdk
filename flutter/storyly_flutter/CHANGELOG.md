@@ -1,3 +1,7 @@
+### 1.9.1
+* added 'storylyBackgroundColor' parameter
+* fixed scrolling issue that occurs if StorylyView is used inside SingleChildScrollView
+
 ### 1.9.0
 * added Interactive VOD feature
 * added vertical, horizontal and custom placement support for emoji component
