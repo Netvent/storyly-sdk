@@ -1,4 +1,8 @@
 # Release Notes
+### 1.9.2
+* added actionUrlList to Story data
+* fixed crash if storyHeaderIconIsVisible=false used [#52](https://github.com/Netvent/storyly-mobile/issues/52)
+
 ### 1.9.1
 * added support for interactive components without titles
 * added animation to swipe up icon and text
