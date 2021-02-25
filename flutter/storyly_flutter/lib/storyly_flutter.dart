@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 
-typedef void StorylyViewCreatedCallback(StorylyViewController controller);
+typedef StorylyViewCreatedCallback = void Function(
+  StorylyViewController controller,
+);
 
 class StorylyView extends StatefulWidget {
   final StorylyViewCreatedCallback onStorylyViewCreated;
@@ -19,19 +21,19 @@ class StorylyView extends StatefulWidget {
   final Function() storylyStoryDismissed;
   final Function(Map) storylyUserInteracted;
 
-  const StorylyView(
-      {Key key,
-      this.onStorylyViewCreated,
-      this.androidParam,
-      this.iosParam,
-      this.storylyLoaded,
-      this.storylyLoadFailed,
-      this.storylyEvent,
-      this.storylyActionClicked,
-      this.storylyStoryShown,
-      this.storylyStoryDismissed,
-      this.storylyUserInteracted})
-      : super(key: key);
+  const StorylyView({
+    Key key,
+    this.onStorylyViewCreated,
+    this.androidParam,
+    this.iosParam,
+    this.storylyLoaded,
+    this.storylyLoadFailed,
+    this.storylyEvent,
+    this.storylyActionClicked,
+    this.storylyStoryShown,
+    this.storylyStoryDismissed,
+    this.storylyUserInteracted,
+  }) : super(key: key);
 
   @override
   State<StorylyView> createState() => _StorylyViewState();
@@ -42,33 +44,36 @@ class _StorylyViewState extends State<StorylyView> {
   Widget build(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(
-          viewType: 'FlutterStorylyView',
-          onPlatformViewCreated: _onPlatformViewCreated,
-          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
-            new Factory<OneSequenceGestureRecognizer>(
-              () => new EagerGestureRecognizer(),
-            ),
-          ].toSet(),
-          creationParams: widget.androidParam.toMap(),
-          creationParamsCodec: const StandardMessageCodec());
+        viewType: 'FlutterStorylyView',
+        onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+          Factory<OneSequenceGestureRecognizer>(
+            () => EagerGestureRecognizer(),
+          ),
+        ].toSet(),
+        creationParams: widget.androidParam.toMap(),
+        creationParamsCodec: const StandardMessageCodec(),
+      );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
-          viewType: 'FlutterStorylyView',
-          onPlatformViewCreated: _onPlatformViewCreated,
-          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
-            new Factory<OneSequenceGestureRecognizer>(
-              () => new EagerGestureRecognizer(),
-            ),
-          ].toSet(),
-          creationParams: widget.iosParam.toMap(),
-          creationParamsCodec: const StandardMessageCodec());
+        viewType: 'FlutterStorylyView',
+        onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+          Factory<OneSequenceGestureRecognizer>(
+            () => EagerGestureRecognizer(),
+          ),
+        ].toSet(),
+        creationParams: widget.iosParam.toMap(),
+        creationParamsCodec: const StandardMessageCodec(),
+      );
     }
     return Text(
-        '$defaultTargetPlatform is not supported yet for Storyly Flutter plugin.');
+      '$defaultTargetPlatform is not supported yet for Storyly Flutter plugin.',
+    );
   }
 
   void _onPlatformViewCreated(int _id) {
-    final StorylyViewController controller = StorylyViewController.init(_id);
+    final controller = StorylyViewController.init(_id);
     controller._methodChannel.setMethodCallHandler(handleMethod);
     if (widget.onStorylyViewCreated != null) {
       widget.onStorylyViewCreated(controller);
@@ -107,8 +112,9 @@ class StorylyViewController {
   MethodChannel _methodChannel;
 
   StorylyViewController.init(int id) {
-    _methodChannel =
-        new MethodChannel('com.appsamurai.storyly/flutter_storyly_view_$id');
+    _methodChannel = MethodChannel(
+      'com.appsamurai.storyly/flutter_storyly_view_$id',
+    );
   }
 
   Future<void> refresh() {
@@ -124,18 +130,31 @@ class StorylyViewController {
   }
 
   Future<void> openStory(int storyGroupId, int storyId) {
-    return _methodChannel.invokeMethod('openStory',
-        <String, dynamic>{'storyGroupId': storyGroupId, 'storyId': storyId});
+    return _methodChannel.invokeMethod(
+      'openStory',
+      <String, dynamic>{
+        'storyGroupId': storyGroupId,
+        'storyId': storyId,
+      },
+    );
   }
 
   Future<void> openStoryUri(String uri) {
-    return _methodChannel
-        .invokeMethod('openStoryUri', <String, dynamic>{'uri': uri});
+    return _methodChannel.invokeMethod(
+      'openStoryUri',
+      <String, dynamic>{
+        'uri': uri,
+      },
+    );
   }
 
   Future<void> setExternalData(List<Map> externalData) {
     return _methodChannel.invokeMethod(
-        'setExternalData', <String, dynamic>{'externalData': externalData});
+      'setExternalData',
+      <String, dynamic>{
+        'externalData': externalData,
+      },
+    );
   }
 }
 
@@ -167,80 +186,81 @@ class StorylyParam {
   Color storyItemTextColor;
   List<Color> storyItemProgressBarColor;
 
-  dynamic toMap() {
-    Map<String, dynamic> paramsMap = <String, dynamic>{
-      "storylyId": this.storylyId,
-      "storylySegments": this.storylySegments,
-      "storylyCustomParameters": this.storylyCustomParameters,
+  Map<String, dynamic> toMap() {
+    final paramsMap = <String, dynamic>{
+      'storylyId': storylyId,
+      'storylySegments': storylySegments,
+      'storylyCustomParameters': storylyCustomParameters,
     };
 
-    paramsMap['storylyBackgroundColor'] = this.storylyBackgroundColor != null
+    paramsMap['storylyBackgroundColor'] = storylyBackgroundColor != null
         ? toHexString(storylyBackgroundColor)
         : null;
 
     paramsMap['storyGroupIconStyling'] = {
-      'width': this.storyGroupIconWidth,
-      'height': this.storyGroupIconHeight,
-      'cornerRadius': this.storyGroupIconCornerRadius,
+      'width': storyGroupIconWidth,
+      'height': storyGroupIconHeight,
+      'cornerRadius': storyGroupIconCornerRadius,
     };
+
     paramsMap['storyGroupListStyling'] = {
-      'edgePadding': this.storyGroupListEdgePadding,
-      'paddingBetweenItems': this.storyGroupListPaddingBetweenItems
+      'edgePadding': storyGroupListEdgePadding,
+      'paddingBetweenItems': storyGroupListPaddingBetweenItems
     };
+
     paramsMap['storyGroupTextStyling'] = {
-      'isVisible': this.storyGroupTextIsVisible
+      'isVisible': storyGroupTextIsVisible,
     };
+
     paramsMap['storyHeaderStyling'] = {
-      'isTextVisible': this.storyHeaderTextIsVisible,
-      'isIconVisible': this.storyHeaderIconIsVisible,
-      'isCloseButtonVisible': this.storyHeaderCloseButtonIsVisible
+      'isTextVisible': storyHeaderTextIsVisible,
+      'isIconVisible': storyHeaderIconIsVisible,
+      'isCloseButtonVisible': storyHeaderCloseButtonIsVisible
     };
-    paramsMap['storyGroupSize'] =
-        this.storyGroupSize != null ? this.storyGroupSize : "large";
+
+    paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
+
     paramsMap['storyGroupIconBorderColorSeen'] =
-        this.storyGroupIconBorderColorSeen != null
-            ? this
-                .storyGroupIconBorderColorSeen
+        storyGroupIconBorderColorSeen != null
+            ? storyGroupIconBorderColorSeen
                 .map((color) => toHexString(color))
                 .toList()
             : null;
+
     paramsMap['storyGroupIconBorderColorNotSeen'] =
-        this.storyGroupIconBorderColorNotSeen != null
-            ? this
-                .storyGroupIconBorderColorNotSeen
+        storyGroupIconBorderColorNotSeen != null
+            ? storyGroupIconBorderColorNotSeen
                 .map((color) => toHexString(color))
                 .toList()
             : null;
+
     paramsMap['storyGroupIconBackgroundColor'] =
-        this.storyGroupIconBackgroundColor != null
+        storyGroupIconBackgroundColor != null
             ? toHexString(storyGroupIconBackgroundColor)
             : null;
-    paramsMap['storyGroupTextColor'] = this.storyGroupTextColor != null
-        ? toHexString(storyGroupTextColor)
-        : null;
-    paramsMap['storyGroupPinIconColor'] = this.storyGroupPinIconColor != null
+
+    paramsMap['storyGroupTextColor'] =
+        storyGroupTextColor != null ? toHexString(storyGroupTextColor) : null;
+
+    paramsMap['storyGroupPinIconColor'] = storyGroupPinIconColor != null
         ? toHexString(storyGroupPinIconColor)
         : null;
-    paramsMap['storyItemIconBorderColor'] =
-        this.storyItemIconBorderColor != null
-            ? this
-                .storyItemIconBorderColor
-                .map((color) => toHexString(color))
-                .toList()
-            : null;
-    paramsMap['storyItemTextColor'] = this.storyItemTextColor != null
-        ? toHexString(storyItemTextColor)
+
+    paramsMap['storyItemIconBorderColor'] = storyItemIconBorderColor != null
+        ? storyItemIconBorderColor.map((color) => toHexString(color)).toList()
         : null;
-    paramsMap['storyItemProgressBarColor'] =
-        this.storyItemProgressBarColor != null
-            ? this
-                .storyItemProgressBarColor
-                .map((color) => toHexString(color))
-                .toList()
-            : null;
+
+    paramsMap['storyItemTextColor'] =
+        storyItemTextColor != null ? toHexString(storyItemTextColor) : null;
+
+    paramsMap['storyItemProgressBarColor'] = storyItemProgressBarColor != null
+        ? storyItemProgressBarColor.map((color) => toHexString(color)).toList()
+        : null;
+
     return paramsMap;
   }
 
-  String toHexString(Color color) =>
-      '#${color.value.toRadixString(16).padLeft(8, '0')}';
+  String toHexString(Color color) {
+    return '#${color.value.toRadixString(16).padLeft(8, '0')}';
+  }
 }
