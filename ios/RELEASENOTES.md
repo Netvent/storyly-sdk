@@ -1,4 +1,7 @@
 # Release Notes
+### 1.9.3
+* fixed crash runtime segmentation changes [#58](https://github.com/Netvent/storyly-mobile/issues/58)
+
 ### 1.9.2
 * added actionUrlList to Story data
 * fixed crash if storyHeaderIconIsVisible=false used [#52](https://github.com/Netvent/storyly-mobile/issues/52)
