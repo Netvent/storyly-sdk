@@ -82,11 +82,11 @@ class _StorylyViewState extends State<StorylyView> {
       return AndroidView(
         viewType: 'FlutterStorylyView',
         onPlatformViewCreated: _onPlatformViewCreated,
-        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
           Factory<OneSequenceGestureRecognizer>(
             () => EagerGestureRecognizer(),
           ),
-        ].toSet(),
+        },
         creationParams: widget.androidParam._toMap(),
         creationParamsCodec: const StandardMessageCodec(),
       );
@@ -94,11 +94,11 @@ class _StorylyViewState extends State<StorylyView> {
       return UiKitView(
         viewType: 'FlutterStorylyView',
         onPlatformViewCreated: _onPlatformViewCreated,
-        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
           Factory<OneSequenceGestureRecognizer>(
             () => EagerGestureRecognizer(),
           ),
-        ].toSet(),
+        },
         creationParams: widget.iosParam._toMap(),
         creationParamsCodec: const StandardMessageCodec(),
       );
