@@ -20,20 +20,14 @@
         UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
         UIViewController *rootViewController = [keyWindow rootViewController];
         _storylyView = [[StorylyView alloc] initWithFrame:frame];
+        [_storylyView setTranslatesAutoresizingMaskIntoConstraints:NO];
         _storylyView.delegate = self;
         _storylyView.rootViewController = rootViewController;
         [self addSubview:_storylyView];
+        [_storylyView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = YES;
+        [_storylyView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = YES;
     }
     return self;
-}
-
--(void)layoutSubviews {
-    [super layoutSubviews];
-    [_storylyView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_storylyView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = YES;
-    [_storylyView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = YES;
-    [_storylyView.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
-    [_storylyView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
 }
 
 - (void) refresh {
@@ -117,10 +111,10 @@
 
 - (void)storylyUserInteracted:(StorylyView * _Nonnull)storylyView
                storyGroup:(StoryGroup  *)storyGroup
-                    story:(Story *)story 
+                    story:(Story *)story
            storyComponent:(StoryComponent *)storyComponent {
     if (self.onStorylyUserInteracted) {
-        self.onStorylyUserInteracted(@{@"storyGroup": [self createStoryGroupMap:storyGroup], 
+        self.onStorylyUserInteracted(@{@"storyGroup": [self createStoryGroupMap:storyGroup],
                                        @"story": [self createStoryMap:story],
                                        @"storyComponent": [self createStoryComponentMap:storyComponent]});
     }
@@ -147,7 +141,7 @@
         @"media": @{
                 @"type": @(story.media.type),
                 @"url": story.media.url,
-                @"actionUrl": story.media.actionUrl
+                @"actionUrl": story.media.actionUrl == nil ? [NSNull null] : story.media.actionUrl
         }};
 }
 
@@ -162,7 +156,7 @@
                     @"options": quizComponent.options,
                     @"rightAnswerIndex": quizComponent.rightAnswerIndex,
                     @"selectedOptionIndex": [NSNumber numberWithLong:quizComponent.selectedOptionIndex],
-                    @"customPayload": quizComponent.customPayload
+                    @"customPayload": quizComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
                 };
             }
             break;
@@ -174,8 +168,8 @@
                     @"title": pollComponent.title,
                     @"options": pollComponent.options,
                     @"selectedOptionIndex": [NSNumber numberWithLong:pollComponent.selectedOptionIndex],
-                    @"customPayload": pollComponent.customPayload
-                }; 
+                    @"customPayload": pollComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
+                };
             }
             break;
         case StoryComponentTypeEmoji:
@@ -185,7 +179,7 @@
                     @"type": @(emojiComponent.type),
                     @"emojiCodes": emojiComponent.emojiCodes,
                     @"selectedEmojiIndex": [NSNumber numberWithLong:emojiComponent.selectedEmojiIndex],
-                    @"customPayload": emojiComponent.customPayload
+                    @"customPayload": emojiComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
                 };
             }
             break;
@@ -196,7 +190,7 @@
                     @"type": @(ratingComponent.type),
                     @"emojiCode": ratingComponent.emojiCode,
                     @"rating": [NSNumber numberWithLong:ratingComponent.rating],
-                    @"customPayload": ratingComponent.customPayload
+                    @"customPayload": ratingComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
                 };
             }
             break;
