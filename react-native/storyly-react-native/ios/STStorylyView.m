@@ -168,7 +168,7 @@
                     @"title": pollComponent.title,
                     @"options": pollComponent.options,
                     @"selectedOptionIndex": [NSNumber numberWithLong:pollComponent.selectedOptionIndex],
-                    @"customPayload": pollComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
+                    @"customPayload": pollComponent.customPayload == nil ? [NSNull null] : pollComponent.customPayload
                 };
             }
             break;
@@ -179,7 +179,7 @@
                     @"type": @(emojiComponent.type),
                     @"emojiCodes": emojiComponent.emojiCodes,
                     @"selectedEmojiIndex": [NSNumber numberWithLong:emojiComponent.selectedEmojiIndex],
-                    @"customPayload": emojiComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
+                    @"customPayload": emojiComponent.customPayload == nil ? [NSNull null] : emojiComponent.customPayload
                 };
             }
             break;
@@ -190,7 +190,7 @@
                     @"type": @(ratingComponent.type),
                     @"emojiCode": ratingComponent.emojiCode,
                     @"rating": [NSNumber numberWithLong:ratingComponent.rating],
-                    @"customPayload": ratingComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
+                    @"customPayload": ratingComponent.customPayload == nil ? [NSNull null] : ratingComponent.customPayload
                 };
             }
             break;
