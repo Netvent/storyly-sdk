@@ -1,3 +1,7 @@
+### 1.9.2
+* added documentation
+* updated flutter version to 1.20.0
+
 ### 1.9.1
 * added 'storylyBackgroundColor' parameter
 * fixed scrolling issue that occurs if StorylyView is used inside SingleChildScrollView
