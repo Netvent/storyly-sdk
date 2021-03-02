@@ -72,8 +72,7 @@
         for (StoryGroup *storyGroup in storyGroupList) {
             [storyGroups addObject:[self createStoryGroupMap:storyGroup]];
         }
-        self.onStorylyLoaded([NSDictionary dictionaryWithObjects:storyGroups
-                                                         forKeys:[storyGroups valueForKey:@"intField"]]);
+        self.onStorylyLoaded(@{@"storyGroupList": storyGroups});
     }
     
 }
