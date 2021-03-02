@@ -19,7 +19,7 @@ export default class App extends Component<{}> {
                 <Storyly
                     ref={ref => { this.storyly = ref }}
                     style={{ width: '100%', height: 120, marginTop: 44 }}
-                    storylyId=[YOUR_APP_ID_FROM_DASHBOARD]
+                    storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
                     onLoad={storyGroupList => {
                         console.log("[Storyly] onLoad");
                     }}
