@@ -1,4 +1,7 @@
 # Release Notes
+### 1.9.3
+* fixed a bug that can cause a memory leak, [#62](https://github.com/Netvent/storyly-mobile/issues/62)
+
 ### 1.9.2
 * added actionUrlList to Story data
 
