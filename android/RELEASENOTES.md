@@ -1,4 +1,8 @@
 # Release Notes
+### 1.9.5
+* fixed a rare crash, [#70](https://github.com/Netvent/storyly-mobile/issues/70)
+* changed custom animation handling
+
 ### 1.9.4
 * improved EmojiCompat handling for devices that doesn't contain Google APIs 
 
