@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* StorylyDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* StorylyDemoTests.m */; };
-		1000231F53590A6CC8BD40F1 /* libPods-StorylyDemo-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 108F1A3F7D040117E15E68E2 /* libPods-StorylyDemo-tvOSTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -16,10 +15,11 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* StorylyDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* StorylyDemoTests.m */; };
-		4EC21612B73F18300C32C4E9 /* libPods-StorylyDemo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBBC7F8D2C7D84358BE679 /* libPods-StorylyDemo-tvOS.a */; };
-		5E49B2835B93867DA0C9300F /* libPods-StorylyDemo-StorylyDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9E6E87EC45C8CA56097E11 /* libPods-StorylyDemo-StorylyDemoTests.a */; };
+		577FA471E56A2C1272412699 /* libPods-StorylyDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D40FFB6289EDE123B6373CF0 /* libPods-StorylyDemo.a */; };
+		707088DE2197151882387DC7 /* libPods-StorylyDemo-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6FC0DCB8D3180B6B01AD60 /* libPods-StorylyDemo-tvOSTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		FBF2CEF2AF87DE58BBD42CF6 /* libPods-StorylyDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8A784B4EDE181838672C8F0 /* libPods-StorylyDemo.a */; };
+		932DAFFF9E6D398CCB78EC93 /* libPods-StorylyDemo-StorylyDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F1E22ACDDD895D4D1C7497B /* libPods-StorylyDemo-StorylyDemoTests.a */; };
+		BAD661723702F38ADC8521FA /* libPods-StorylyDemo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9742542A9D0F41355CA948 /* libPods-StorylyDemo-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,6 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* StorylyDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorylyDemoTests.m; sourceTree = "<group>"; };
 		00F079FF5C3195E985D4EFD7 /* Pods-StorylyDemo-StorylyDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-StorylyDemoTests.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests.release.xcconfig"; sourceTree = "<group>"; };
-		108F1A3F7D040117E15E68E2 /* libPods-StorylyDemo-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* StorylyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorylyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = StorylyDemo/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = StorylyDemo/AppDelegate.m; sourceTree = "<group>"; };
@@ -54,19 +53,20 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = StorylyDemo/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* StorylyDemo-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StorylyDemo-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* StorylyDemo-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StorylyDemo-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D9742542A9D0F41355CA948 /* libPods-StorylyDemo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C6FC0DCB8D3180B6B01AD60 /* libPods-StorylyDemo-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = StorylyDemo/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		84EBBC7F8D2C7D84358BE679 /* libPods-StorylyDemo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F1E22ACDDD895D4D1C7497B /* libPods-StorylyDemo-StorylyDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo-StorylyDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BEEDA438B4518E1673CA3C7 /* Pods-StorylyDemo-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-tvOSTests/Pods-StorylyDemo-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		AE39C4945349E86A2CE1B604 /* Pods-StorylyDemo-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-tvOS/Pods-StorylyDemo-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B32023F24975DEBC98F83A8B /* Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BDB335C9087E16B62F087C7D /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C1825380643217D91B312FEB /* Pods-StorylyDemo-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-tvOSTests/Pods-StorylyDemo-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C8A784B4EDE181838672C8F0 /* libPods-StorylyDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40FFB6289EDE123B6373CF0 /* libPods-StorylyDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C093B77525520ECB0CB544 /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F480D71BDE9624EFAB7E2C5F /* Pods-StorylyDemo-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-tvOS.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-tvOS/Pods-StorylyDemo-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		FB9E6E87EC45C8CA56097E11 /* libPods-StorylyDemo-StorylyDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyDemo-StorylyDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E49B2835B93867DA0C9300F /* libPods-StorylyDemo-StorylyDemoTests.a in Frameworks */,
+				932DAFFF9E6D398CCB78EC93 /* libPods-StorylyDemo-StorylyDemoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBF2CEF2AF87DE58BBD42CF6 /* libPods-StorylyDemo.a in Frameworks */,
+				577FA471E56A2C1272412699 /* libPods-StorylyDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EC21612B73F18300C32C4E9 /* libPods-StorylyDemo-tvOS.a in Frameworks */,
+				BAD661723702F38ADC8521FA /* libPods-StorylyDemo-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1000231F53590A6CC8BD40F1 /* libPods-StorylyDemo-tvOSTests.a in Frameworks */,
+				707088DE2197151882387DC7 /* libPods-StorylyDemo-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,10 +141,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				C8A784B4EDE181838672C8F0 /* libPods-StorylyDemo.a */,
-				FB9E6E87EC45C8CA56097E11 /* libPods-StorylyDemo-StorylyDemoTests.a */,
-				84EBBC7F8D2C7D84358BE679 /* libPods-StorylyDemo-tvOS.a */,
-				108F1A3F7D040117E15E68E2 /* libPods-StorylyDemo-tvOSTests.a */,
+				D40FFB6289EDE123B6373CF0 /* libPods-StorylyDemo.a */,
+				8F1E22ACDDD895D4D1C7497B /* libPods-StorylyDemo-StorylyDemoTests.a */,
+				2D9742542A9D0F41355CA948 /* libPods-StorylyDemo-tvOS.a */,
+				7C6FC0DCB8D3180B6B01AD60 /* libPods-StorylyDemo-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,7 +210,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				2DD03D57EE6246B63F9FDF22 /* [CP] Embed Pods Frameworks */,
-				2CB45CF7E549AAB52DA63128 /* [CP] Copy Pods Resources */,
+				6DDC568BAE76348C4764B3C5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,7 +233,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				50525D8A70E2FCE45BF1974B /* [CP] Embed Pods Frameworks */,
-				CDF53A3416E0BDC404F67342 /* [CP] Copy Pods Resources */,
+				137A0F9E1C3FAC2219B5B16D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,6 +379,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		137A0F9E1C3FAC2219B5B16D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		16B2A94174FE62B9DCC320C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,24 +441,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2CB45CF7E549AAB52DA63128 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,11 +462,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Storyly/Storyly.framework/Storyly",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Storyly.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -502,24 +504,26 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Storyly/Storyly.framework/Storyly",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Storyly.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CDF53A3416E0BDC404F67342 /* [CP] Copy Pods Resources */ = {
+		6DDC568BAE76348C4764B3C5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -528,7 +532,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D6B2BE99DF7D8C91E0483737 /* [CP] Check Pods Manifest.lock */ = {

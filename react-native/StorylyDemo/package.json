@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.3",
-    "storyly-react-native": "^1.9.1"
+    "storyly-react-native": "^1.8.4"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
