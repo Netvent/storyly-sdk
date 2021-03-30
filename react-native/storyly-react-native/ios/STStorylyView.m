@@ -131,7 +131,7 @@
         @"index": @(storyGroup.index),
         @"title": storyGroup.title,
         @"seen": @(storyGroup.seen),
-        @"iconUrl": storyGroup.iconUrl,
+        @"iconUrl": storyGroup.iconUrl.absoluteString,
         @"stories": stories
     };
 }
