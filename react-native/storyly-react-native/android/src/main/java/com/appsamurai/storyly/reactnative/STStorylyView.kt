@@ -92,9 +92,11 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     private fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
         return Arguments.createMap().also { storyGroupMap ->
+            storyGroupMap.putInt("id", storyGroup.id)
             storyGroupMap.putInt("index", storyGroup.index)
             storyGroupMap.putString("title", storyGroup.title)
             storyGroupMap.putBoolean("seen", storyGroup.seen)
+            storyGroupMap.putString("iconUrl", storyGroup.iconUrl)
             storyGroupMap.putArray("stories", Arguments.createArray().also { storiesArray ->
                 storyGroup.stories.forEach { story ->
                     storiesArray.pushMap(createStoryMap(story))
@@ -105,6 +107,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     private fun createStoryMap(story: Story): WritableMap {
         return Arguments.createMap().also { storyMap ->
+            storyMap.putInt("id", story.id)
             storyMap.putInt("index", story.index)
             storyMap.putString("title", story.title)
             storyMap.putBoolean("seen", story.seen)
