@@ -1,4 +1,7 @@
 # Release Notes
+### 1.9.5
+* fixed crash on iOS 12 devices, NSInternalInconsistencyException, [#72](https://github.com/Netvent/storyly-mobile/issues/72)
+
 ### 1.9.4
 * fixed crash on iOS 12 devices, [#72](https://github.com/Netvent/storyly-mobile/issues/72)
 
