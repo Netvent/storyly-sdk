@@ -26,6 +26,8 @@
         [self addSubview:_storylyView];
         [_storylyView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = YES;
         [_storylyView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = YES;
+        [_storylyView.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
+        [_storylyView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
     }
     return self;
 }
