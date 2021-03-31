@@ -127,15 +127,18 @@
         [stories addObject:[self createStoryMap:story]];
     }
     return @{
+        @"id": @(storyGroup.id),
         @"index": @(storyGroup.index),
         @"title": storyGroup.title,
         @"seen": @(storyGroup.seen),
+        @"iconUrl": storyGroup.iconUrl.absoluteString,
         @"stories": stories
     };
 }
 
 -(NSDictionary *)createStoryMap:(Story * _Nonnull)story {
     return @{
+        @"id": @(story.id),
         @"index": @(story.index),
         @"title": story.title,
         @"seen": @(story.seen),
