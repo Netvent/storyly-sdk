@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-fast-image": "^8.3.4",
     "storyly-react-native": "^1.8.4"
   },
   "devDependencies": {

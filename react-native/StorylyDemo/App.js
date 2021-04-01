@@ -7,6 +7,7 @@ import {
   Easing
 } from 'react-native';
 
+import FastImage from 'react-native-fast-image';
 import { Storyly } from 'storyly-react-native';
 
 const HEIGHT = 100;
@@ -48,6 +49,12 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
+      <FastImage
+        style={{ width: 200, height: 200 }}
+            source={{
+                uri: 'https://unsplash.it/400/400?image=1',  
+            }}
+        />
         <Button title={'Open'} onPress={openStoryly}/>
         <Button title={'Close'} onPress={closeStoryly}/>
         <Animated.View
