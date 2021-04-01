@@ -1,4 +1,8 @@
 # Release Notes
+### 1.9.2
+* added story group id and story id to data payloads
+* fixed iOS view rendering bug during animation, [#69](https://github.com/Netvent/storyly-mobile/issues/69)
+
 ### 1.9.1
 * fixed crash with onLoad callback
 
