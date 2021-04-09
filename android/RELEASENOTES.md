@@ -1,4 +1,10 @@
 # Release Notes
+### 1.10.0
+* added product tag component for interactive stories
+* improved story area usage 
+* fixed pinned story groups ordering 
+* fixed a rare crash, [#76](https://github.com/Netvent/storyly-mobile/issues/76)
+
 ### 1.9.5
 * fixed a rare crash, [#70](https://github.com/Netvent/storyly-mobile/issues/70)
 * changed custom animation handling
