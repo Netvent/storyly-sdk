@@ -1,3 +1,8 @@
+### 1.10.0
+* added product tag component for interactive stories
+* improved story area usage
+* fixed pinned story groups ordering
+
 ### 1.9.2
 * added documentation
 * updated flutter version to 1.20.0

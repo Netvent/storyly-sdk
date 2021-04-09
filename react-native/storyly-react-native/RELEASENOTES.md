@@ -1,4 +1,9 @@
 # Release Notes
+### 1.10.0
+* added product tag component for interactive stories
+* improved story area usage
+* fixed pinned story groups ordering
+
 ### 1.9.2
 * added story group id and story id to data payloads
 * fixed iOS view rendering bug during animation, [#69](https://github.com/Netvent/storyly-mobile/issues/69)
