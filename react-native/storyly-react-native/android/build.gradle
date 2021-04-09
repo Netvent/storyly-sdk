@@ -76,7 +76,7 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlin_version', DEFAULT_KOTLIN_VERSION)}"
 
-    implementation 'com.appsamurai.storyly:storyly:1.9.2'
+    implementation 'com.appsamurai.storyly:storyly:1.10.0'
 }
 
 def configureReactNativePom(def pom) {

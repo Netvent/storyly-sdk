@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
   s.swift_versions = ["5.0", "5.1", "5.2", "5.3"]
 
   s.dependency "React"
-  s.dependency "Storyly", "1.9.2"
+  s.dependency "Storyly", "1.10.0"
 end
 
