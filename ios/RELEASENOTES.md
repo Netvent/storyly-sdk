@@ -1,4 +1,11 @@
 # Release Notes
+### 1.10.0
+* added product tag component for interactive stories
+* improved story area usage 
+* fixed pinned story groups ordering 
+* fixed emoji rendering on text interactive components
+* fixed font rendering on text interactive components
+
 ### 1.9.5
 * fixed crash on iOS 12 devices, NSInternalInconsistencyException, [#72](https://github.com/Netvent/storyly-mobile/issues/72)
 
