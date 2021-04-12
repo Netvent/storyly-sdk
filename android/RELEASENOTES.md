@@ -1,5 +1,6 @@
 # Release Notes
 ### 1.10.0
+* IMPORTANT! moved to mavenCentral from jCenter, please update dependencies accordingly
 * added product tag component for interactive stories
 * improved story area usage 
 * fixed pinned story groups ordering 
