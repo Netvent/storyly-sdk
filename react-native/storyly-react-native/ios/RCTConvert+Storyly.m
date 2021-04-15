@@ -46,8 +46,7 @@
     NSDictionary *storyGroupIconStyling = [self NSDictionary:json];
     if ([storyGroupIconStyling.allKeys containsObject:@"height"] && storyGroupIconStyling[@"height"] != NULL &&
         [storyGroupIconStyling.allKeys containsObject:@"width"] && storyGroupIconStyling[@"width"] != NULL &&
-        [storyGroupIconStyling.allKeys containsObject:@"cornerRadius"] && storyGroupIconStyling[@"cornerRadius"] != NULL &&
-        [storyGroupIconStyling.allKeys containsObject:@"paddingBetweenItems"] && storyGroupIconStyling[@"paddingBetweenItems"] != NULL) 
+        [storyGroupIconStyling.allKeys containsObject:@"cornerRadius"] && storyGroupIconStyling[@"cornerRadius"] != NULL) 
     {
         return [[StoryGroupIconStyling alloc] initWithHeight:[storyGroupIconStyling[@"height"] floatValue]
                                                        width:[storyGroupIconStyling[@"width"] floatValue]
