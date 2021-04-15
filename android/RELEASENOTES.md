@@ -1,4 +1,8 @@
 # Release Notes
+### 1.10.2
+* fixed a rare crash occurs on older devices, [#74](https://github.com/Netvent/storyly-mobile/issues/74) and [#75](https://github.com/Netvent/storyly-mobile/issues/75)
+* improved handling for a rare crash, [#85](https://github.com/Netvent/storyly-mobile/issues/85) and [#86](https://github.com/Netvent/storyly-mobile/issues/86)
+
 ### 1.10.0
 * IMPORTANT! moved to mavenCentral from jCenter, please update dependencies accordingly
 * added product tag component for interactive stories
