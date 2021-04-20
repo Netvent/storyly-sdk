@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
@@ -34,16 +36,29 @@ class _MyAppState extends State<MyApp> {
           child: StorylyView(
             onStorylyViewCreated: onStorylyViewCreated,
             androidParam: StorylyParam()
-            ..storylyId = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40",
+              ..storylyId =
+                  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40",
             iosParam: StorylyParam()
-            ..storylyId = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40",
-            storylyLoaded: (storyGroupList) => print("storylyLoaded"),
+              ..storylyId =
+                  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40",
+            storylyLoaded: (storyGroupList) {
+              print(storyGroupList[0].stories[0].title);
+            },
             storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
-            storylyActionClicked: (story) => print("storylyActionClicked"),
-            storylyEvent: (event) => print("storylyEvent"),
+            storylyActionClicked: (story) {
+              print(story.id);
+              print(story.title);
+              print(story.media.actionUrl);
+              print(story.media.url);
+            },
+            storylyEvent: (event) {
+              log("event: $event");
+            },
             storylyStoryShown: () => print("storylyStoryShown"),
             storylyStoryDismissed: () => print("storylyStoryDismissed"),
-            storylyUserInteracted: (eventPayload) => print("storylyUserInteracted")
+            storylyUserInteracted: (eventPayload) {
+              log("eventPayload: $eventPayload");
+            },
           ),
         ),
       ),

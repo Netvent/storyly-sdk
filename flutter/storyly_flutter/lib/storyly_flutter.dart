@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class StorylyView extends StatefulWidget {
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and story group list has just shown to the user.
-  final Function(List) storylyLoaded;
+  final Function(List<StoryGroup>) storylyLoaded;
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and had a problem while fetching your stories.
@@ -43,7 +45,7 @@ class StorylyView extends StatefulWidget {
 
   /// This callback function will notify your application in case of Swipe Up
   /// or CTA Button action.
-  final Function(Map) storylyActionClicked;
+  final Function(Story) storylyActionClicked;
 
   /// This callback function will let you know that stories are started to be
   /// shown to the users.
@@ -124,7 +126,9 @@ class _StorylyViewState extends State<StorylyView> {
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case 'storylyLoaded':
-        widget.storylyLoaded(call.arguments);
+        widget.storylyLoaded(
+          storyGroupFromJson(jsonEncode(call.arguments)),
+        );
         break;
       case 'storylyLoadFailed':
         widget.storylyLoadFailed(call.arguments);
@@ -133,7 +137,9 @@ class _StorylyViewState extends State<StorylyView> {
         widget.storylyEvent(call.arguments);
         break;
       case 'storylyActionClicked':
-        widget.storylyActionClicked(call.arguments);
+        widget.storylyActionClicked(
+          Story.fromJson(jsonDecode(jsonEncode(call.arguments))),
+        );
         break;
       case 'storylyStoryShown':
       case 'storylyStoryPresented':
@@ -389,4 +395,81 @@ class StorylyParam {
   String _toHexString(Color color) {
     return '#${color.value.toRadixString(16).padLeft(8, '0')}';
   }
+}
+
+List<StoryGroup> storyGroupFromJson(String str) {
+  return List<StoryGroup>.from(
+    json.decode(str).map((x) => StoryGroup.fromJson(x)),
+  );
+}
+
+class StoryGroup {
+  StoryGroup({
+    this.seen,
+    this.title,
+    this.index,
+    this.iconUrl,
+    this.stories,
+    this.id,
+  });
+
+  final bool seen;
+  final String title;
+  final int index;
+  final String iconUrl;
+  final List<Story> stories;
+  final int id;
+
+  factory StoryGroup.fromJson(Map<String, dynamic> json) => StoryGroup(
+        seen: json['seen'],
+        title: json['title'],
+        index: json['index'],
+        iconUrl: json['iconUrl'],
+        stories: List<Story>.from(
+          json['stories'].map((x) => Story.fromJson(x)),
+        ),
+        id: json['id'],
+      );
+}
+
+class Story {
+  Story({
+    this.media,
+    this.title,
+    this.seen,
+    this.index,
+    this.id,
+  });
+
+  final Media media;
+  final String title;
+  final bool seen;
+  final int index;
+  final int id;
+
+  factory Story.fromJson(Map<String, dynamic> json) => Story(
+        media: Media.fromJson(json['media']),
+        title: json['title'],
+        seen: json['seen'],
+        index: json['index'],
+        id: json['id'],
+      );
+}
+
+class Media {
+  Media({
+    this.actionUrl,
+    this.url,
+    this.type,
+  });
+
+  final dynamic actionUrl;
+  final String url;
+  final int type;
+
+  factory Media.fromJson(Map<String, dynamic> json) => Media(
+        actionUrl: json['actionUrl'],
+        url: json['url'],
+        type: json['type'],
+      );
 }
