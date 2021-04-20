@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
@@ -42,22 +40,19 @@ class _MyAppState extends State<MyApp> {
               ..storylyId =
                   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40",
             storylyLoaded: (storyGroupList) {
-              print(storyGroupList[0].stories[0].title);
+              print("storylyLoaded: ${storyGroupList[0].stories[0].title}");
             },
             storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
             storylyActionClicked: (story) {
-              print(story.id);
-              print(story.title);
-              print(story.media.actionUrl);
-              print(story.media.url);
+              print("storylyActionClicked: ${story.title}");
             },
             storylyEvent: (event) {
-              log("event: $event");
+              print("storylyEvent: ${event.story.title}");
             },
             storylyStoryShown: () => print("storylyStoryShown"),
             storylyStoryDismissed: () => print("storylyStoryDismissed"),
             storylyUserInteracted: (eventPayload) {
-              log("eventPayload: $eventPayload");
+              print("storylyUserInteracted: ${eventPayload.story.title}");
             },
           ),
         ),
