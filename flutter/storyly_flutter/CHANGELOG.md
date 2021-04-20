@@ -1,4 +1,7 @@
 ### 1.10.0
+* updated native dependecies
+
+### 1.10.0
 * added product tag component for interactive stories
 * improved story area usage
 * fixed pinned story groups ordering
