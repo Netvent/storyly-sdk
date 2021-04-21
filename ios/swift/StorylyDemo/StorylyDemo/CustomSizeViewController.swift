@@ -20,20 +20,20 @@ class CustomSizeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        storylyViewSmall.storylyInit = StorylyInit(storylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD)
+        storylyViewSmall.storylyInit = StorylyInit(storylyId: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40")
         storylyViewSmall.rootViewController = self
         //storylyViewSmall.storyGroupSize = "small"
         
-        storylyViewLarge.storylyInit = StorylyInit(storylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD)
+        storylyViewLarge.storylyInit = StorylyInit(storylyId: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40")
         storylyViewLarge.rootViewController = self
         //storylyViewLarge.storyGroupSize = "large"
         
-        storylyViewXLarge.storylyInit = StorylyInit(storylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD)
+        storylyViewXLarge.storylyInit = StorylyInit(storylyId: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40")
         storylyViewXLarge.rootViewController = self
         //storylyViewXLarge.storyGroupSize = "xlarge"
         
         
-        storylyViewPortrait.storylyInit = StorylyInit(storylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD)
+        storylyViewPortrait.storylyInit = StorylyInit(storylyId: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40")
         storylyViewPortrait.rootViewController = self
         //storylyViewPortrait.storyGroupSize = "custom"
         
@@ -43,7 +43,7 @@ class CustomSizeViewController: UIViewController {
          //storylyViewPortrait.storyGroupIconWidth = 100
          //storylyViewPortrait.storyGroupIconCornerRadius = 15
         
-        storylyViewLandscape.storylyInit = StorylyInit(storylyId: @YOUR_APP_INSTANCE_TOKEN_FROM_DASHBOARD)
+        storylyViewLandscape.storylyInit = StorylyInit(storylyId: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40")
         storylyViewLandscape.rootViewController = self
         //storylyViewLandscape.storyGroupSize = "custom"
         
