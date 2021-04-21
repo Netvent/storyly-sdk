@@ -155,10 +155,10 @@
             {
                 StoryQuizComponent *quizComponent = (StoryQuizComponent *)storyComponent;
                 return @{
-                    @"type": @(quizComponent.type),
+                    @"type": @"quiz",
                     @"title": quizComponent.title,
                     @"options": quizComponent.options,
-                    @"rightAnswerIndex": quizComponent.rightAnswerIndex,
+                    @"rightAnswerIndex": quizComponent.rightAnswerIndex == nil ? [NSNull null] : quizComponent.rightAnswerIndex,
                     @"selectedOptionIndex": [NSNumber numberWithLong:quizComponent.selectedOptionIndex],
                     @"customPayload": quizComponent.customPayload == nil ? [NSNull null] : quizComponent.customPayload
                 };
@@ -168,7 +168,7 @@
             {
                 StoryPollComponent *pollComponent = (StoryPollComponent *)storyComponent;
                 return @{
-                    @"type": @(pollComponent.type),
+                    @"type": @"poll",
                     @"title": pollComponent.title,
                     @"options": pollComponent.options,
                     @"selectedOptionIndex": [NSNumber numberWithLong:pollComponent.selectedOptionIndex],
@@ -180,7 +180,7 @@
             {
                 StoryEmojiComponent *emojiComponent = (StoryEmojiComponent *)storyComponent;
                 return @{
-                    @"type": @(emojiComponent.type),
+                    @"type": @"emoji",
                     @"emojiCodes": emojiComponent.emojiCodes,
                     @"selectedEmojiIndex": [NSNumber numberWithLong:emojiComponent.selectedEmojiIndex],
                     @"customPayload": emojiComponent.customPayload == nil ? [NSNull null] : emojiComponent.customPayload
@@ -191,7 +191,7 @@
             {
                 StoryRatingComponent *ratingComponent = (StoryRatingComponent *)storyComponent;
                 return @{
-                    @"type": @(ratingComponent.type),
+                    @"type": @"rating",
                     @"emojiCode": ratingComponent.emojiCode,
                     @"rating": [NSNumber numberWithLong:ratingComponent.rating],
                     @"customPayload": ratingComponent.customPayload == nil ? [NSNull null] : ratingComponent.customPayload

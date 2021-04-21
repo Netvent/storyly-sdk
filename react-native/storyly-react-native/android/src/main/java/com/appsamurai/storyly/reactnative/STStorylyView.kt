@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.Choreographer
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.Keep
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.facebook.react.bridge.Arguments
@@ -124,7 +125,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             when (storyComponent.type) {
                 StoryComponentType.Quiz -> {
                     val quizComponent = storyComponent as StoryQuizComponent
-                    storyComponentMap.putString("type", quizComponent.type.name)
+                    storyComponentMap.putString("type", "quiz")
                     storyComponentMap.putString("title", quizComponent.title)
                     storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
                         quizComponent.options.forEach { option ->
@@ -141,7 +142,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 }
                 StoryComponentType.Poll -> {
                     val pollComponent = storyComponent as StoryPollComponent
-                    storyComponentMap.putString("type", pollComponent.type.name)
+                    storyComponentMap.putString("type", "poll")
                     storyComponentMap.putString("title", pollComponent.title)
                     storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
                         pollComponent.options.forEach { option ->
@@ -153,7 +154,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 }
                 StoryComponentType.Emoji -> {
                     val emojiComponent = storyComponent as StoryEmojiComponent
-                    storyComponentMap.putString("type", emojiComponent.type.name)
+                    storyComponentMap.putString("type", "emoji")
                     storyComponentMap.putArray("emojiCodes", Arguments.createArray().also { emojiCodesArray ->
                         emojiComponent.emojiCodes.forEach { emojiCode ->
                             emojiCodesArray.pushString(emojiCode)
@@ -165,7 +166,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 }
                 StoryComponentType.Rating -> {
                     val ratingComponent = storyComponent as StoryRatingComponent
-                    storyComponentMap.putString("type", ratingComponent.type.name)
+                    storyComponentMap.putString("type", "rating")
                     storyComponentMap.putString("emojiCode", ratingComponent.emojiCode)
                     storyComponentMap.putInt("rating", ratingComponent.rating)
                     storyComponentMap.putString("customPayload", ratingComponent.customPayload)
