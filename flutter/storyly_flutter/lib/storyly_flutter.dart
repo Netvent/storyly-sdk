@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -417,8 +418,12 @@ class StorylyParam {
   }
 }
 
-StoryComponent getStorylyComponent(Map<String, dynamic> json) {
+StoryComponent getStorylyComponent(dynamic json) {
   StoryComponent storyComponent;
+
+  if (json == null) {
+    return storyComponent;
+  }
 
   if (json['type'] == 'quiz') {
     storyComponent = StoryQuizComponent.fromJson(json);
@@ -428,8 +433,6 @@ StoryComponent getStorylyComponent(Map<String, dynamic> json) {
     storyComponent = StoryEmojiComponent.fromJson(json);
   } else if (json['type'] == 'rating') {
     storyComponent = StoryRatingComponent.fromJson(json);
-  } else {
-    storyComponent = null;
   }
 
   return storyComponent;
