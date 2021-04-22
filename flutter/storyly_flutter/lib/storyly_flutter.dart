@@ -453,7 +453,7 @@ dynamic getStorylyComponent(Map<String, dynamic> json) {
     storyComponent = StoryPollComponent.fromJson(json);
   } else if (json['type'] == 'emoji') {
     storyComponent = StoryEmojiComponent.fromJson(json);
-  } else if (json['type'] == 'ratings') {
+  } else if (json['type'] == 'rating') {
     storyComponent = StoryRatingComponent.fromJson(json);
   } else {
     storyComponent = null;
