@@ -1,4 +1,8 @@
 # Release Notes
+### 1.10.2
+* fixed onUserInteracted's event type representation; "quiz", "poll", "emoji", "rating"
+* fixed crash on quiz payload handling on iOS
+
 ### 1.10.1
 * fixed custom size handling in iOS
 
