@@ -38,7 +38,8 @@ class FlutterStorylyView(
                 "refresh" -> storylyView.refresh()
                 "show" -> storylyView.show()
                 "dismiss" -> storylyView.dismiss()
-                "openStory" -> storylyView.openStory(callArguments?.get("storyGroupId") as? Int ?: 0,
+                "openStory" -> storylyView.openStory(callArguments?.get("storyGroupId") as? Int
+                        ?: 0,
                         callArguments?.getOrElse("storyId", { null }) as? Int)
                 "openStoryUri" -> storylyView.openStory(Uri.parse(callArguments?.get("uri") as? String))
             }
@@ -70,7 +71,8 @@ class FlutterStorylyView(
 
     private val storylyView: StorylyView by lazy {
         StorylyView(context).apply {
-            val storylyId = args[ARGS_STORYLY_ID] as? String ?: throw Exception("StorylyId must be set.")
+            val storylyId = args[ARGS_STORYLY_ID] as? String
+                    ?: throw Exception("StorylyId must be set.")
             val segments = args[ARGS_STORYLY_SEGMENTS] as? List<String>
             val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
             storylyInit = StorylyInit(storylyId, StorylySegmentation(segments = segments?.toSet()), customParameter = customParameters)
@@ -185,7 +187,6 @@ class FlutterStorylyView(
                 "seen" to story.seen,
                 "media" to with(story.media) {
                     mapOf("type" to this.type.ordinal,
-                            "url" to this.url,
                             "actionUrl" to this.actionUrl)
                 }
         )

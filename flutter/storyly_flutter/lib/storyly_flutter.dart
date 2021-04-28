@@ -612,18 +612,15 @@ class Story {
 class Media {
   Media({
     this.actionUrl,
-    this.url,
     this.type,
   });
 
   final String actionUrl;
-  final String url;
   final int type;
 
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       actionUrl: json['actionUrl'],
-      url: json['url'],
       type: json['type'],
     );
   }
