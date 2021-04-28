@@ -1,4 +1,11 @@
 # Release Notes
+### 1.11.0
+* added image component for interactive stories
+* added video component for interactive stories
+* IMPORTANT! removed advertising id usage
+* IMPORTANT! removed url field from StoryMedia
+* reduced memory signature
+
 ### 1.10.2
 * fixed a rare crash occurs on older devices, [#74](https://github.com/Netvent/storyly-mobile/issues/74) and [#75](https://github.com/Netvent/storyly-mobile/issues/75)
 * improved handling for a rare crash, [#85](https://github.com/Netvent/storyly-mobile/issues/85) and [#86](https://github.com/Netvent/storyly-mobile/issues/86)
