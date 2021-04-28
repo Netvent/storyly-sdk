@@ -53,12 +53,10 @@ class _HomePageState extends State<HomePage> {
                 onStorylyViewCreated: onStorylyViewCreated,
                 androidParam: StorylyParam()
                   ..storylyId = STORYLY_INSTANCE_TOKEN
-                  ..storyGroupSize = 'large'
                   ..storyGroupListEdgePadding = 20
                   ..storyGroupListPaddingBetweenItems = 20,
                 iosParam: StorylyParam()
                   ..storylyId = STORYLY_INSTANCE_TOKEN
-                  ..storyGroupSize = 'large'
                   ..storyGroupListEdgePadding = 20
                   ..storyGroupListPaddingBetweenItems = 20,
                 storylyLoaded: (storyGroupList) => print("storylyLoaded"),
