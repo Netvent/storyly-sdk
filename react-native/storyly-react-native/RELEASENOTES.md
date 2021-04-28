@@ -1,4 +1,9 @@
 # Release Notes
+### 1.11.0
+* added image component for interactive stories
+* added video component for interactive stories
+* IMPORTANT! removed advertising id(idfa compatibility for iOS 14.5) usage
+
 ### 1.10.2
 * fixed onUserInteracted's event type representation; "quiz", "poll", "emoji", "rating"
 * fixed crash on quiz payload handling on iOS

@@ -1,4 +1,9 @@
-### 1.10.0
+### 1.11.0
+* added image component for interactive stories
+* added video component for interactive stories
+* IMPORTANT! removed advertising id(idfa compatibility for iOS 14.5) usage
+
+### 1.10.1
 * updated native dependecies
 
 ### 1.10.0
