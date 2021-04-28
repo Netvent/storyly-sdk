@@ -1,4 +1,10 @@
 # Release Notes
+### 1.11.0
+* added image component for interactive stories
+* added video component for interactive stories
+* IMPORTANT! removed advertising id(idfa compatibility for iOS 14.5) usage
+* IMPORTANT! removed url field from StoryMedia
+
 ### 1.10.1
 * fixed a crash on fallback scenarios
 
