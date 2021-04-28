@@ -144,7 +144,6 @@
         @"seen": @(story.seen),
         @"media": @{
                 @"type": @(story.media.type),
-                @"url": story.media.url,
                 @"actionUrl": story.media.actionUrl == nil ? [NSNull null] : story.media.actionUrl
         }};
 }
