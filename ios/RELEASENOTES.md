@@ -4,6 +4,7 @@
 * added video component for interactive stories
 * IMPORTANT! removed advertising id(idfa compatibility for iOS 14.5) usage
 * IMPORTANT! removed url field from StoryMedia
+* IMPORTANT! renamed rawValue of StorylyEvent to stringValue
 
 ### 1.10.1
 * fixed a crash on fallback scenarios
