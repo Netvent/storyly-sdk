@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -31,19 +33,24 @@ class StorylyView extends StatefulWidget {
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and story group list has just shown to the user.
-  final Function(List) storylyLoaded;
+  final Function(List<StoryGroup> storyGroups) storylyLoaded;
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and had a problem while fetching your stories.
-  final Function(String) storylyLoadFailed;
+  final Function(String message) storylyLoadFailed;
 
   /// This callback function will notify you about all Storyly events and let
   /// you to send these events to specific data platforms
-  final Function(Map) storylyEvent;
+  final Function(
+    String event,
+    StoryGroup storyGroup,
+    Story story,
+    StoryComponent storyComponent,
+  ) storylyEvent;
 
   /// This callback function will notify your application in case of Swipe Up
   /// or CTA Button action.
-  final Function(Map) storylyActionClicked;
+  final Function(Story story) storylyActionClicked;
 
   /// This callback function will let you know that stories are started to be
   /// shown to the users.
@@ -55,7 +62,11 @@ class StorylyView extends StatefulWidget {
 
   /// This callback function will allow you to get reactions of users from
   /// specific interactive components.
-  final Function(Map) storylyUserInteracted;
+  final Function(
+    StoryGroup storyGroup,
+    Story story,
+    StoryComponent storyComponent,
+  ) storylyUserInteracted;
 
   const StorylyView({
     Key key,
@@ -124,16 +135,26 @@ class _StorylyViewState extends State<StorylyView> {
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case 'storylyLoaded':
-        widget.storylyLoaded(call.arguments);
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        widget.storylyLoaded(storyGroupFromJson(jsonData));
         break;
       case 'storylyLoadFailed':
         widget.storylyLoadFailed(call.arguments);
         break;
       case 'storylyEvent':
-        widget.storylyEvent(call.arguments);
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        widget.storylyEvent(
+          jsonData['event'],
+          StoryGroup.fromJson(jsonData['storyGroup']),
+          Story.fromJson(jsonData['story']),
+          getStorylyComponent(jsonData['storyComponent']),
+        );
         break;
       case 'storylyActionClicked':
-        widget.storylyActionClicked(call.arguments);
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        widget.storylyActionClicked(
+          Story.fromJson(jsonData),
+        );
         break;
       case 'storylyStoryShown':
       case 'storylyStoryPresented':
@@ -143,7 +164,12 @@ class _StorylyViewState extends State<StorylyView> {
         widget.storylyStoryDismissed();
         break;
       case 'storylyUserInteracted':
-        widget.storylyUserInteracted(call.arguments);
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        widget.storylyUserInteracted(
+          StoryGroup.fromJson(jsonData['storyGroup']),
+          Story.fromJson(jsonData['story']),
+          getStorylyComponent(jsonData['storyComponent']),
+        );
         break;
     }
   }
@@ -388,5 +414,217 @@ class StorylyParam {
 
   String _toHexString(Color color) {
     return '#${color.value.toRadixString(16).padLeft(8, '0')}';
+  }
+}
+
+StoryComponent getStorylyComponent(dynamic json) {
+  StoryComponent storyComponent;
+
+  if (json == null) {
+    return storyComponent;
+  }
+
+  if (json['type'] == 'quiz') {
+    storyComponent = StoryQuizComponent.fromJson(json);
+  } else if (json['type'] == 'poll') {
+    storyComponent = StoryPollComponent.fromJson(json);
+  } else if (json['type'] == 'emoji') {
+    storyComponent = StoryEmojiComponent.fromJson(json);
+  } else if (json['type'] == 'rating') {
+    storyComponent = StoryRatingComponent.fromJson(json);
+  }
+
+  return storyComponent;
+}
+
+abstract class StoryComponent {
+  final String type;
+
+  StoryComponent(this.type);
+
+  static dynamic fromJson(Map<String, dynamic> json) {}
+}
+
+class StoryQuizComponent implements StoryComponent {
+  StoryQuizComponent({
+    this.type,
+    this.rightAnswerIndex,
+    this.customPayload,
+    this.title,
+    this.options,
+    this.selectedOptionIndex,
+  });
+
+  @override
+  final String type;
+  final int rightAnswerIndex;
+  final String customPayload;
+  final String title;
+  final List<String> options;
+  final int selectedOptionIndex;
+
+  factory StoryQuizComponent.fromJson(Map<String, dynamic> json) {
+    return StoryQuizComponent(
+      type: json['type'],
+      rightAnswerIndex: json['rightAnswerIndex'],
+      customPayload: json['customPayload'],
+      title: json['title'],
+      options: List<String>.from(json['options'].map((x) => x)),
+      selectedOptionIndex: json['selectedOptionIndex'],
+    );
+  }
+}
+
+class StoryPollComponent implements StoryComponent {
+  StoryPollComponent({
+    this.type,
+    this.options,
+    this.customPayload,
+    this.selectedOptionIndex,
+    this.title,
+  });
+
+  @override
+  final String type;
+  final List<String> options;
+  final String customPayload;
+  final int selectedOptionIndex;
+  final String title;
+
+  factory StoryPollComponent.fromJson(Map<String, dynamic> json) {
+    return StoryPollComponent(
+      type: json['type'],
+      options: List<String>.from(json['options'].map((x) => x)),
+      customPayload: json['customPayload'],
+      selectedOptionIndex: json['selectedOptionIndex'],
+      title: json['title'],
+    );
+  }
+}
+
+class StoryEmojiComponent implements StoryComponent {
+  StoryEmojiComponent({
+    this.type,
+    this.customPayload,
+    this.selectedEmojiIndex,
+    this.emojiCodes,
+  });
+
+  @override
+  final String type;
+  final String customPayload;
+  final int selectedEmojiIndex;
+  final List<String> emojiCodes;
+
+  factory StoryEmojiComponent.fromJson(Map<String, dynamic> json) {
+    return StoryEmojiComponent(
+      type: json['type'],
+      customPayload: json['customPayload'],
+      selectedEmojiIndex: json['selectedEmojiIndex'],
+      emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)),
+    );
+  }
+}
+
+class StoryRatingComponent implements StoryComponent {
+  StoryRatingComponent({
+    this.type,
+    this.customPayload,
+    this.rating,
+    this.emojiCode,
+  });
+
+  @override
+  final String type;
+  final String customPayload;
+  final int rating;
+  final String emojiCode;
+
+  factory StoryRatingComponent.fromJson(Map<String, dynamic> json) {
+    return StoryRatingComponent(
+      type: json['type'],
+      customPayload: json['customPayload'],
+      rating: json['rating'],
+      emojiCode: json['emojiCode'],
+    );
+  }
+}
+
+List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
+  return List<StoryGroup>.from(json.map((x) => StoryGroup.fromJson(x)));
+}
+
+class StoryGroup {
+  StoryGroup({
+    this.seen,
+    this.title,
+    this.index,
+    this.iconUrl,
+    this.stories,
+    this.id,
+  });
+
+  final bool seen;
+  final String title;
+  final int index;
+  final String iconUrl;
+  final List<Story> stories;
+  final int id;
+
+  factory StoryGroup.fromJson(Map<String, dynamic> json) {
+    return StoryGroup(
+      seen: json['seen'],
+      title: json['title'],
+      index: json['index'],
+      iconUrl: json['iconUrl'],
+      stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
+      id: json['id'],
+    );
+  }
+}
+
+class Story {
+  Story({
+    this.media,
+    this.title,
+    this.seen,
+    this.index,
+    this.id,
+  });
+
+  final Media media;
+  final String title;
+  final bool seen;
+  final int index;
+  final int id;
+
+  factory Story.fromJson(Map<String, dynamic> json) {
+    return Story(
+      media: Media.fromJson(json['media']),
+      title: json['title'],
+      seen: json['seen'],
+      index: json['index'],
+      id: json['id'],
+    );
+  }
+}
+
+class Media {
+  Media({
+    this.actionUrl,
+    this.url,
+    this.type,
+  });
+
+  final String actionUrl;
+  final String url;
+  final int type;
+
+  factory Media.fromJson(Map<String, dynamic> json) {
+    return Media(
+      actionUrl: json['actionUrl'],
+      url: json['url'],
+      type: json['type'],
+    );
   }
 }

@@ -3,6 +3,9 @@ import 'package:storyly_flutter/storyly_flutter.dart';
 
 void main() => runApp(MyApp());
 
+const STORYLY_TOKEN =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -26,24 +29,39 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: Text('Flutter Plugin example app'),
         ),
         body: Container(
-          margin: const EdgeInsets.only(top: 5.0),
+          margin: EdgeInsets.only(top: 5.0),
           height: 120,
           child: StorylyView(
             onStorylyViewCreated: onStorylyViewCreated,
-            androidParam: StorylyParam()
-            ..storylyId = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40",
-            iosParam: StorylyParam()
-            ..storylyId = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40",
-            storylyLoaded: (storyGroupList) => print("storylyLoaded"),
+            androidParam: StorylyParam()..storylyId = STORYLY_TOKEN,
+            iosParam: StorylyParam()..storylyId = STORYLY_TOKEN,
+            storylyLoaded: (storyGroups) {
+              print("storylyLoaded -> ${storyGroups.length}");
+            },
             storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
-            storylyActionClicked: (story) => print("storylyActionClicked"),
-            storylyEvent: (event) => print("storylyEvent"),
+            storylyActionClicked: (story) {
+              print("storylyActionClicked -> ${story.title}");
+            },
+            storylyEvent: (event, storyGroup, story, storyComponent) {
+              print("storylyEvent -> event: ${event}");
+              print("storylyEvent -> storyGroup: ${storyGroup.title}");
+              print("storylyEvent -> story: ${story.title}");
+              print(
+                "storylyEvent storyComponent: ${storyComponent.type}",
+              );
+            },
             storylyStoryShown: () => print("storylyStoryShown"),
             storylyStoryDismissed: () => print("storylyStoryDismissed"),
-            storylyUserInteracted: (eventPayload) => print("storylyUserInteracted")
+            storylyUserInteracted: (storyGroup, story, storyComponent) {
+              print("userInteracted -> storyGroup: ${storyGroup.title}");
+              print("userInteracted -> story: ${story.title}");
+              print(
+                "userInteracted -> storyComponent: ${storyComponent.type}",
+              );
+            },
           ),
         ),
       ),

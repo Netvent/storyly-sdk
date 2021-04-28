@@ -233,7 +233,7 @@ extension FlutterStorylyViewWrapper {
                         "selectedEmojiIndex": emojiComponent.selectedEmojiIndex,
                         "customPayload": emojiComponent.customPayload]
             case let ratingComponent as StoryRatingComponent:
-                return ["type": "ratings",
+                return ["type": "rating",
                         "emojiCode": ratingComponent.emojiCode,
                         "rating": ratingComponent.rating,
                         "customPayload": ratingComponent.customPayload]
