@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.Choreographer
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.annotation.Keep
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.facebook.react.bridge.Arguments
@@ -76,8 +75,8 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     private fun manuallyLayout() {
         storylyView.measure(
-            MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
-            MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
+                MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
         )
         storylyView.layout(0, 0, storylyView.measuredWidth, storylyView.measuredHeight)
 
@@ -114,7 +113,6 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             storyMap.putBoolean("seen", story.seen)
             storyMap.putMap("media", Arguments.createMap().also { storyMediaMap ->
                 storyMediaMap.putInt("type", story.media.type.ordinal)
-                storyMediaMap.putString("url", story.media.url)
                 storyMediaMap.putString("actionUrl", story.media.actionUrl)
             })
         }
