@@ -166,7 +166,7 @@ extension FlutterStorylyViewWrapper {
        
         var storyComponentMap: [String: Any?]? = nil
         if let storyComponent = storyComponent { storyComponentMap = self.createStoryComponentMap(storyComponent: storyComponent) }
-        self.methodChannel.invokeMethod("storylyEvent", arguments: ["event": event.rawValue,
+        self.methodChannel.invokeMethod("storylyEvent", arguments: ["event": event.stringValue,
                                                                     "storyGroup": storyGroupMap,
                                                                     "story": storyMap,
                                                                     "storyComponent": storyComponentMap])
@@ -208,7 +208,6 @@ extension FlutterStorylyViewWrapper {
                 "index": story.index,
                 "seen": story.seen,
                 "media": ["type": story.media.type.rawValue,
-                          "url": story.media.url,
                           "actionUrl": story.media.actionUrl]]
     }
     

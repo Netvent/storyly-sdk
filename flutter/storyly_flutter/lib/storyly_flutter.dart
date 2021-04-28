@@ -437,7 +437,9 @@ StoryComponent getStorylyComponent(dynamic json) {
   return storyComponent;
 }
 
+/// This parent class represents the interactive components which users are interacted with.
 abstract class StoryComponent {
+  /// type Type of the interactive component
   final String type;
 
   StoryComponent(this.type);
@@ -445,6 +447,7 @@ abstract class StoryComponent {
   static dynamic fromJson(Map<String, dynamic> json) {}
 }
 
+/// This data class represents the Quiz component.
 class StoryQuizComponent implements StoryComponent {
   StoryQuizComponent({
     this.type,
@@ -457,10 +460,20 @@ class StoryQuizComponent implements StoryComponent {
 
   @override
   final String type;
+
+  /// rightAnswerIndex Index of the right answer if exists
   final int rightAnswerIndex;
+
+  /// customPayload Custom payload for this quiz if exists
   final String customPayload;
+
+  /// title Title of the quiz if exists
   final String title;
+
+  /// options List of options in the quiz
   final List<String> options;
+
+  /// selectedOptionIndex Option index that the user selected
   final int selectedOptionIndex;
 
   factory StoryQuizComponent.fromJson(Map<String, dynamic> json) {
@@ -475,6 +488,7 @@ class StoryQuizComponent implements StoryComponent {
   }
 }
 
+/// This data class represents the Poll component.
 class StoryPollComponent implements StoryComponent {
   StoryPollComponent({
     this.type,
@@ -486,9 +500,17 @@ class StoryPollComponent implements StoryComponent {
 
   @override
   final String type;
+
+  /// options List of options in the poll
   final List<String> options;
+
+  /// customPayload Custom payload for this poll if exists
   final String customPayload;
+
+  /// selectedOptionIndex Option index that the user selected
   final int selectedOptionIndex;
+
+  /// title Title of the poll if exists
   final String title;
 
   factory StoryPollComponent.fromJson(Map<String, dynamic> json) {
@@ -502,6 +524,7 @@ class StoryPollComponent implements StoryComponent {
   }
 }
 
+/// This data class represents the Emoji component.
 class StoryEmojiComponent implements StoryComponent {
   StoryEmojiComponent({
     this.type,
@@ -512,8 +535,14 @@ class StoryEmojiComponent implements StoryComponent {
 
   @override
   final String type;
+
+  /// customPayload Custom payload for this emoji if exists
   final String customPayload;
+
+  /// selectedEmojiIndex Emoji index that the user selected
   final int selectedEmojiIndex;
+
+  /// emojiCodes List of the emojis in the component
   final List<String> emojiCodes;
 
   factory StoryEmojiComponent.fromJson(Map<String, dynamic> json) {
@@ -526,6 +555,7 @@ class StoryEmojiComponent implements StoryComponent {
   }
 }
 
+/// This data class represents the Rating component.
 class StoryRatingComponent implements StoryComponent {
   StoryRatingComponent({
     this.type,
@@ -536,8 +566,14 @@ class StoryRatingComponent implements StoryComponent {
 
   @override
   final String type;
+
+  /// customPayload Custom payload for this rating if exists
   final String customPayload;
+
+  /// rating Rating value which user rated in the component
   final int rating;
+
+  /// emojiCode Emoji code as the thumb emoji
   final String emojiCode;
 
   factory StoryRatingComponent.fromJson(Map<String, dynamic> json) {
@@ -554,6 +590,7 @@ List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
   return List<StoryGroup>.from(json.map((x) => StoryGroup.fromJson(x)));
 }
 
+/// This data class represents a story group in the StorylyView.
 class StoryGroup {
   StoryGroup({
     this.seen,
@@ -564,11 +601,22 @@ class StoryGroup {
     this.id,
   });
 
+  /// seen State of the story group that shows whether all of the stories are seen or not
   final bool seen;
+
+  /// title Title of the story group
   final String title;
+
+  /// index Order index of the story group
   final int index;
+
+  /// iconUrl URL of the story group icon image
   final String iconUrl;
+
+  /// stories List of stories in the story group
   final List<Story> stories;
+
+  /// id ID of the story group
   final int id;
 
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
@@ -583,6 +631,7 @@ class StoryGroup {
   }
 }
 
+/// This data class represents a story inside a story group.
 class Story {
   Story({
     this.media,
@@ -592,10 +641,19 @@ class Story {
     this.id,
   });
 
+  /// media Media content of the story
   final Media media;
+
+  /// title Title of the story
   final String title;
+
+  /// seen State of the story that shows whether the story is seen or not
   final bool seen;
+
+  /// index Index of the story among other stories of the story group
   final int index;
+
+  /// id ID of the story
   final int id;
 
   factory Story.fromJson(Map<String, dynamic> json) {
@@ -609,21 +667,22 @@ class Story {
   }
 }
 
+/// This data class represents the media of a story.
 class Media {
   Media({
     this.actionUrl,
-    this.url,
     this.type,
   });
 
+  /// actionUrl URL which the user has just interacted with
   final String actionUrl;
-  final String url;
+
+  /// type Type of the story
   final int type;
 
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       actionUrl: json['actionUrl'],
-      url: json['url'],
       type: json['type'],
     );
   }
