@@ -19,6 +19,9 @@ android {
             minifyEnabled false
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -29,5 +32,5 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-ads:19.6.0'
 
-    implementation 'com.appsamurai.storyly:storyly:1.9.0'
+    implementation 'com.appsamurai.storyly:storyly:1.11.0'
 }
