@@ -1,13 +1,7 @@
 package com.appsamurai.storylydemo.use_cases
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
-import android.view.animation.AccelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.StoryGroup
 import com.appsamurai.storyly.StorylyInit
@@ -37,7 +31,9 @@ class HideActivity: AppCompatActivity() {
                 storylyView: StorylyView,
                 storyGroupList: List<StoryGroup>
             ) {
-                storylyLoaded = true
+                if (storyGroupList.isNotEmpty()) {
+                    storylyLoaded = true
+                }
             }
 
             override fun storylyLoadFailed(
@@ -47,33 +43,15 @@ class HideActivity: AppCompatActivity() {
                 // if cached before not hide
                 if (!storylyLoaded) {
                     Handler(mainLooper).postDelayed({
-                        storylyHideAnimation()
+                        storylyRemove()
                     }, 200)
                 }
             }
         }
     }
 
-    private fun storylyHideAnimation() {
-        binding.storylyView.animate().apply { duration = 500; interpolator = AccelerateInterpolator() }
-            .translationY((-binding.storylyView.height).toFloat())
-            .alpha(0.0F)
-            .setListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
-                    super.onAnimationEnd(animation)
-                    binding.storylyView.visibility = View.GONE
-                }
-            })
-
-        AnimatorSet().apply {
-            interpolator = AccelerateInterpolator()
-            play(ValueAnimator.ofInt(binding.storylyViewHolder.height, 0).apply {
-                duration = 500
-                addUpdateListener {
-                    binding.storylyViewHolder.layoutParams.height = it.animatedValue as Int
-                    binding.storylyViewHolder.requestLayout()
-                }
-            })
-        }.start()
+    private fun storylyRemove() {
+        binding.storylyViewFrame.removeView(binding.storylyView)
+        binding.storylyViewHolder.removeView(binding.storylyViewFrame)
     }
 }
