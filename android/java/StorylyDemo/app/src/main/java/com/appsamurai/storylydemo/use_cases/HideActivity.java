@@ -1,7 +1,10 @@
 package com.appsamurai.storylydemo.use_cases;
 
+import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -56,7 +59,7 @@ public class HideActivity extends AppCompatActivity {
                     new Handler(getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            storylyRemove();
+                            removeStorylyView();
                         }
                     }, 200);
                 }
@@ -79,8 +82,20 @@ public class HideActivity extends AppCompatActivity {
         });
     }
 
-    private void storylyRemove() {
-        storylyViewFrame.removeView(storylyView);
+    private void removeStorylyView() {
+        storylyViewHolder.getLayoutTransition().addTransitionListener(new LayoutTransition.TransitionListener() {
+            @Override
+            public void startTransition(LayoutTransition transition, ViewGroup container, View view, int transitionType) { }
+
+            @Override
+            public void endTransition(LayoutTransition transition, ViewGroup container, View view, int transitionType) {
+                if  (storylyView.getVisibility() != View.GONE) {
+                    storylyView.setVisibility(View.GONE);
+                    storylyViewHolder.getLayoutTransition().removeTransitionListener(this);
+                }
+            }
+        });
         storylyViewHolder.removeView(storylyViewFrame);
+        storylyViewFrame.removeView(storylyView);
     }
 }

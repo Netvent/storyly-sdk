@@ -1,7 +1,10 @@
 package com.appsamurai.storylydemo.use_cases
 
+import android.animation.LayoutTransition
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.StoryGroup
 import com.appsamurai.storyly.StorylyInit
@@ -43,15 +46,25 @@ class HideActivity: AppCompatActivity() {
                 // if cached before not hide
                 if (!storylyLoaded) {
                     Handler(mainLooper).postDelayed({
-                        storylyRemove()
+                        removeStorylyView()
                     }, 200)
                 }
             }
         }
     }
 
-    private fun storylyRemove() {
-        binding.storylyViewFrame.removeView(binding.storylyView)
+    private fun removeStorylyView() {
+        binding.storylyViewHolder.layoutTransition.addTransitionListener(object: LayoutTransition.TransitionListener{
+            override fun startTransition(transition: LayoutTransition?, container: ViewGroup?, view: View?, transitionType: Int) {}
+
+            override fun endTransition(transition: LayoutTransition?, container: ViewGroup?, view: View?, transitionType: Int) {
+                if  (binding.storylyView.visibility != View.GONE) {
+                    binding.storylyView. visibility = View.GONE
+                    binding.storylyViewHolder.layoutTransition.removeTransitionListener(this)
+                }
+            }
+        })
         binding.storylyViewHolder.removeView(binding.storylyViewFrame)
+        binding.storylyViewFrame.removeView(binding.storylyView)
     }
 }

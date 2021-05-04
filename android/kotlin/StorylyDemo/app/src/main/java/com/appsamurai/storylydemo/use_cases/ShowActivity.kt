@@ -38,14 +38,14 @@ class ShowActivity: AppCompatActivity() {
                     initialLoad = false
 
                     Handler(mainLooper).postDelayed({
-                        storylyShowAnimation()
+                        addStorylyView()
                     }, 200)
                 }
             }
         }
     }
 
-    private fun storylyShowAnimation() {
+    private fun addStorylyView() {
         val relativeLayout = RelativeLayout(this)
         binding.storylyViewHolder.addView(relativeLayout, 2)
         relativeLayout.addView(storylyView)

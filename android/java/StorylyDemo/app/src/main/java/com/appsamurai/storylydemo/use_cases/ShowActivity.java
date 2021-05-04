@@ -52,7 +52,7 @@ public class ShowActivity extends AppCompatActivity {
                     new Handler(getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            storylyShowAnimation();
+                            addStorylyView();
                         }
                     }, 200);
                 }
@@ -79,7 +79,7 @@ public class ShowActivity extends AppCompatActivity {
 
     }
 
-    private void storylyShowAnimation() {
+    private void addStorylyView() {
         RelativeLayout relativeLayout = new RelativeLayout(this);
         storylyViewHolder.addView(relativeLayout, 2);
         relativeLayout.addView(storylyView);
