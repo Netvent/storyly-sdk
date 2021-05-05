@@ -27,7 +27,6 @@ class ShowActivity: AppCompatActivity() {
 
         storylyView = StorylyView(this)
         storylyView.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
-        storylyView.setStoryGroupTextColor(Color.BLACK)
 
         storylyView.storylyListener = object : StorylyListener {
             var initialLoad = true
@@ -38,16 +37,10 @@ class ShowActivity: AppCompatActivity() {
                     initialLoad = false
 
                     Handler(mainLooper).postDelayed({
-                        addStorylyView()
-                    }, 200)
+                        binding.storylyViewHolder.addView(storylyView, 2)
+                    }, 400)
                 }
             }
         }
-    }
-
-    private fun addStorylyView() {
-        val relativeLayout = RelativeLayout(this)
-        binding.storylyViewHolder.addView(relativeLayout, 2)
-        relativeLayout.addView(storylyView)
     }
 }

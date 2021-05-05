@@ -46,25 +46,10 @@ class HideActivity: AppCompatActivity() {
                 // if cached before not hide
                 if (!storylyLoaded) {
                     Handler(mainLooper).postDelayed({
-                        removeStorylyView()
-                    }, 200)
+                        binding.storylyViewHolder.removeView(binding.storylyView)
+                    }, 400)
                 }
             }
         }
-    }
-
-    private fun removeStorylyView() {
-        binding.storylyViewHolder.layoutTransition.addTransitionListener(object: LayoutTransition.TransitionListener{
-            override fun startTransition(transition: LayoutTransition?, container: ViewGroup?, view: View?, transitionType: Int) {}
-
-            override fun endTransition(transition: LayoutTransition?, container: ViewGroup?, view: View?, transitionType: Int) {
-                if  (binding.storylyView.visibility != View.GONE) {
-                    binding.storylyView. visibility = View.GONE
-                    binding.storylyViewHolder.layoutTransition.removeTransitionListener(this)
-                }
-            }
-        })
-        binding.storylyViewHolder.removeView(binding.storylyViewFrame)
-        binding.storylyViewFrame.removeView(binding.storylyView)
     }
 }

@@ -38,7 +38,6 @@ public class ShowActivity extends AppCompatActivity {
 
         storylyView = new StorylyView(this);
         storylyView.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
-        storylyView.setStoryGroupTextColor(Color.BLACK);
 
         storylyView.setStorylyListener(new StorylyListener() {
             boolean initialLoad = true;
@@ -52,9 +51,9 @@ public class ShowActivity extends AppCompatActivity {
                     new Handler(getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            addStorylyView();
+                            storylyViewHolder.addView(ShowActivity.this.storylyView, 2);
                         }
-                    }, 200);
+                    }, 400);
                 }
             }
 
@@ -77,11 +76,5 @@ public class ShowActivity extends AppCompatActivity {
             public void storylyEvent(@NotNull StorylyView storylyView, @NotNull StorylyEvent storylyEvent, @org.jetbrains.annotations.Nullable StoryGroup storyGroup, @org.jetbrains.annotations.Nullable Story story, @org.jetbrains.annotations.Nullable StoryComponent storyComponent) { }
         });
 
-    }
-
-    private void addStorylyView() {
-        RelativeLayout relativeLayout = new RelativeLayout(this);
-        storylyViewHolder.addView(relativeLayout, 2);
-        relativeLayout.addView(storylyView);
     }
 }

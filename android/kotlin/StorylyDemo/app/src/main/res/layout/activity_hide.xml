@@ -20,18 +20,12 @@
             android:layout_height="100dp"
             android:background="#242450" />
 
-        <RelativeLayout
-            android:id="@+id/storyly_view_frame"
+        <com.appsamurai.storyly.StorylyView
+            android:id="@+id/storyly_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <com.appsamurai.storyly.StorylyView
-                android:id="@+id/storyly_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp" />
-        </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp" />
 
         <View
             android:layout_width="match_parent"
