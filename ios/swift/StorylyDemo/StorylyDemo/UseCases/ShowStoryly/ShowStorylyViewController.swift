@@ -49,7 +49,7 @@ extension ShowStorylyViewController: StorylyDelegate {
                        storyGroupList: [Storyly.StoryGroup]) {
         if initialLoad {
             initialLoad = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.addStorylyViewWithConstraints()
             }
         }
