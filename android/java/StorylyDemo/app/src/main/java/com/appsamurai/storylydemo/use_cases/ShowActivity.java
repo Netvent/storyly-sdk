@@ -48,12 +48,7 @@ public class ShowActivity extends AppCompatActivity {
                 if (initialLoad) {
                     initialLoad = false;
 
-                    new Handler(getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            storylyViewHolder.addView(ShowActivity.this.storylyView, 2);
-                        }
-                    }, 400);
+                    storylyViewHolder.addView(ShowActivity.this.storylyView, 2);
                 }
             }
 

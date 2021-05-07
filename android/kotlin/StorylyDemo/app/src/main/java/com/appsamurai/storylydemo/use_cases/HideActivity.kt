@@ -45,9 +45,7 @@ class HideActivity: AppCompatActivity() {
             ) {
                 // if cached before not hide
                 if (!storylyLoaded) {
-                    Handler(mainLooper).postDelayed({
-                        binding.storylyViewHolder.removeView(binding.storylyView)
-                    }, 400)
+                    binding.storylyViewHolder.removeView(binding.storylyView)
                 }
             }
         }

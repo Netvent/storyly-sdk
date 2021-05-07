@@ -51,12 +51,7 @@ public class HideActivity extends AppCompatActivity {
             public void storylyLoadFailed(@NotNull StorylyView storylyView, @NotNull String s) {
                 // if cached before not hide
                 if (!storylyLoaded) {
-                    new Handler(getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            storylyViewHolder.removeView(HideActivity.this.storylyView);
-                        }
-                    }, 400);
+                    storylyViewHolder.removeView(HideActivity.this.storylyView);
                 }
             }
 

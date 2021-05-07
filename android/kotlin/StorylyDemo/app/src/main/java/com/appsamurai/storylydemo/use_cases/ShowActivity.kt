@@ -36,9 +36,7 @@ class ShowActivity: AppCompatActivity() {
                 if (initialLoad) {
                     initialLoad = false
 
-                    Handler(mainLooper).postDelayed({
-                        binding.storylyViewHolder.addView(storylyView, 2)
-                    }, 400)
+                    binding.storylyViewHolder.addView(storylyView, 2)
                 }
             }
         }
