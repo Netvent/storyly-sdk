@@ -26,11 +26,11 @@ class HideStorylyViewController: UIViewController {
         storylyView.rootViewController = self
         storylyView.delegate = self
         
-        addColoredViewWithConstraints(color: UIColor.red)
-        addColoredViewWithConstraints(color: UIColor.blue)
+        addColoredViewWithConstraints(color: UIColor(red: 0.00, green: 0.88, blue: 0.89, alpha: 1.00))
+        addColoredViewWithConstraints(color: UIColor(red: 0.14, green: 0.14, blue: 0.31, alpha: 1.00))
         addStorylyViewWithConstraints()
-        addColoredViewWithConstraints(color: UIColor.green)
-        addColoredViewWithConstraints(color: UIColor.yellow)
+        addColoredViewWithConstraints(color: UIColor(red: 0.74, green: 0.74, blue: 0.80, alpha: 1.00))
+        addColoredViewWithConstraints(color: UIColor(red: 1.00, green: 0.80, blue: 0.00, alpha: 1.00))
     }
 
     private func addStorylyViewWithConstraints() {
@@ -61,9 +61,8 @@ extension HideStorylyViewController: StorylyDelegate {
 
     func storylyLoadFailed(_ storylyView: Storyly.StorylyView, errorMessage: String) {
         if !initialLoad {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.storylyHolder.removeArrangedSubview(self.storylyView)
-            }
+            self.storylyView.isHidden = true
+            self.storylyHolder.removeArrangedSubview(self.storylyView)
         }
     }
     

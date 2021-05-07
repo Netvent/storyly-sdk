@@ -32,10 +32,10 @@
     self.storylyView.rootViewController = self;
     self.storylyView.delegate = self;
     
-    [self addColoredViewWithConstraints: UIColor.redColor];
-    [self addColoredViewWithConstraints: UIColor.blueColor];
-    [self addColoredViewWithConstraints: UIColor.greenColor];
-    [self addColoredViewWithConstraints: UIColor.yellowColor];
+    [self addColoredViewWithConstraints: [UIColor colorWithRed: 0.00 green: 0.88 blue: 0.89 alpha: 1.00]];
+    [self addColoredViewWithConstraints: [UIColor colorWithRed: 0.14 green: 0.14 blue: 0.31 alpha: 1.00]];
+    [self addColoredViewWithConstraints: [UIColor colorWithRed: 0.74 green: 0.74 blue: 0.80 alpha: 1.00]];
+    [self addColoredViewWithConstraints: [UIColor colorWithRed: 1.00 green: 0.80 blue: 0.00 alpha: 1.00]];
 }
 
 - (void)storylyLoaded:(StorylyView *)storylyView
