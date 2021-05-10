@@ -42,6 +42,13 @@ class ShowStorylyViewController: UIViewController {
         view.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
 
+    private func addStorylyViewWithConstraints() {
+        self.storylyHolder.insertArrangedSubview(self.storylyView, at: 2)
+        self.storylyView.translatesAutoresizingMaskIntoConstraints = false
+        self.storylyView.leftAnchor.constraint(equalTo: self.storylyHolder.leftAnchor).isActive = true
+        self.storylyView.rightAnchor.constraint(equalTo: self.storylyHolder.rightAnchor).isActive = true
+        self.storylyView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+    }
 }
 
 
@@ -53,13 +60,5 @@ extension ShowStorylyViewController: StorylyDelegate {
             initialLoad = false
             self.addStorylyViewWithConstraints()
         }
-    }
-
-    private func addStorylyViewWithConstraints() {
-        self.storylyHolder.insertArrangedSubview(self.storylyView, at: 2)
-        self.storylyView.translatesAutoresizingMaskIntoConstraints = false
-        self.storylyView.leftAnchor.constraint(equalTo: self.storylyHolder.leftAnchor).isActive = true
-        self.storylyView.rightAnchor.constraint(equalTo: self.storylyHolder.rightAnchor).isActive = true
-        self.storylyView.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
 }
