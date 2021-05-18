@@ -33,7 +33,7 @@ class ShowActivity: AppCompatActivity() {
 
             override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {
                 //  for not to re-animate already loaded StorylyView
-                if (initialLoad) {
+                if (initialLoad && storyGroupList.isNotEmpty()) {
                     initialLoad = false
 
                     binding.storylyViewHolder.addView(storylyView, 2)

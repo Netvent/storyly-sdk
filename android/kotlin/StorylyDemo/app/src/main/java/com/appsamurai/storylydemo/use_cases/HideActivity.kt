@@ -45,7 +45,7 @@ class HideActivity: AppCompatActivity() {
             ) {
                 // if cached before not hide
                 if (!storylyLoaded) {
-                    binding.storylyViewHolder.removeView(binding.storylyView)
+                    binding.storylyViewHolder.removeView(storylyView)
                 }
             }
         }

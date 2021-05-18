@@ -43,12 +43,12 @@ public class ShowActivity extends AppCompatActivity {
             boolean initialLoad = true;
 
             @Override
-            public void storylyLoaded(@NotNull StorylyView storylyView, @NotNull List<StoryGroup> list) {
+            public void storylyLoaded(@NotNull StorylyView storylyView, @NotNull List<StoryGroup> storyGroupList) {
                 //  for not to re-animate already loaded StorylyView
-                if (initialLoad) {
+                if (initialLoad && storyGroupList.size() > 0) {
                     initialLoad = false;
 
-                    storylyViewHolder.addView(ShowActivity.this.storylyView, 2);
+                    storylyViewHolder.addView(storylyView, 2);
                 }
             }
 

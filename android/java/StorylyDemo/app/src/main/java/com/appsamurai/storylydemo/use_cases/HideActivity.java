@@ -48,10 +48,10 @@ public class HideActivity extends AppCompatActivity {
             }
 
             @Override
-            public void storylyLoadFailed(@NotNull StorylyView storylyView, @NotNull String s) {
+            public void storylyLoadFailed(@NotNull StorylyView storylyView, @NotNull String errorMessage) {
                 // if cached before not hide
                 if (!storylyLoaded) {
-                    storylyViewHolder.removeView(HideActivity.this.storylyView);
+                    storylyViewHolder.removeView(storylyView);
                 }
             }
 
