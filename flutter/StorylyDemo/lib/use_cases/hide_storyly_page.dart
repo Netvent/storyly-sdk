@@ -18,6 +18,20 @@ class _HideStorylyPageState extends State<HideStorylyPage> {
     this.storylyViewController = storylyViewController;
   }
 
+  void onStorylyLoaded(List<dynamic> storyGroupList) {
+    if (!storylyVisible && storyGroupList.length > 0) {
+      storylyLoaded = true;
+    }
+  }
+
+  void onStorylyLoadFailed(String err) {
+    if (!storylyLoaded && storylyVisible) {
+      setState(() {
+        storylyVisible = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,16 +51,8 @@ class _HideStorylyPageState extends State<HideStorylyPage> {
                   androidParam: StorylyParam()
                     ..storylyId = STORYLY_INSTANCE_TOKEN,
                   iosParam: StorylyParam()..storylyId = STORYLY_INSTANCE_TOKEN,
-                  storylyLoaded: (List storyGroupList) {
-                    storylyLoaded = true;
-                  },
-                  storylyLoadFailed: (String err) {
-                    if (!storylyLoaded && storylyVisible) {
-                      setState(() {
-                        storylyVisible = false;
-                      });
-                    }
-                  },
+                  storylyLoaded: onStorylyLoaded,
+                  storylyLoadFailed: onStorylyLoadFailed,
                 ),
               ),
             ),

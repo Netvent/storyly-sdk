@@ -13,7 +13,6 @@ class HideStorylyViewController: UIViewController {
 
     @IBOutlet weak var storylyHolder: UIStackView!
     var storylyView: StorylyView!
-    
     var initialLoad: Bool = false
     
     override func viewDidLoad() {
