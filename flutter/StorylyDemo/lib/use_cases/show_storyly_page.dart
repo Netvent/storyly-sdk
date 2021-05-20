@@ -9,13 +9,7 @@ class _ShowStorylyPageState extends State<ShowStorylyPage> {
   static const STORYLY_INSTANCE_TOKEN =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
 
-  StorylyViewController storylyViewController;
-  StorylyView storylyView;
   bool storylyVisible = false;
-
-  void onStorylyViewCreated(StorylyViewController storylyViewController) {
-    this.storylyViewController = storylyViewController;
-  }
 
   void onStorylyLoaded(List<dynamic> storyGroupList) {
     print("storylyLoaded");
@@ -41,7 +35,6 @@ class _ShowStorylyPageState extends State<ShowStorylyPage> {
               child: Container(
                 height: 120,
                 child: StorylyView(
-                  onStorylyViewCreated: onStorylyViewCreated,
                   androidParam: StorylyParam()
                     ..storylyId = STORYLY_INSTANCE_TOKEN,
                   iosParam: StorylyParam()..storylyId = STORYLY_INSTANCE_TOKEN,
