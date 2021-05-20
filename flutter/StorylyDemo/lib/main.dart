@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storyly_demo/scroll_example.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
 void main() {
@@ -62,13 +63,25 @@ class _HomePageState extends State<HomePage> {
                 storylyLoaded: (storyGroupList) => print("storylyLoaded"),
                 storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
                 storylyActionClicked: (story) => print("storylyActionClicked"),
-                storylyEvent: (event) => print("storylyEvent"),
+                storylyEvent: (event, storyGroup, story, storyComponent) {
+                  print("storylyEvent -> $event");
+                },
                 storylyStoryShown: () => print("storylyStoryShown"),
                 storylyStoryDismissed: () => print("storylyStoryDismissed"),
-                storylyUserInteracted: (eventPayload) =>
-                    print("storylyUserInteracted"),
+                storylyUserInteracted: (storyGroup, story, storyComponent) {
+                  print("storylyUserInteracted");
+                },
               ),
-            )
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ScrollExample()),
+                );
+              },
+              child: Text("Scroll Example"),
+            ),
           ],
         ),
       ),
