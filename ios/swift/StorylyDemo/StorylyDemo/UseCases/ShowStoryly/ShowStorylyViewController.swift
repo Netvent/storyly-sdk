@@ -25,9 +25,11 @@ class ShowStorylyViewController: UIViewController {
         storylyView.storylyInit = StorylyInit(storylyId: STORYLY_TOKEN)
         storylyView.rootViewController = self
         storylyView.delegate = self
+        storylyView.isHidden = true
         
         addColoredViewWithConstraints(color: UIColor(red: 0.00, green: 0.88, blue: 0.89, alpha: 1.00))
         addColoredViewWithConstraints(color: UIColor(red: 0.14, green: 0.14, blue: 0.31, alpha: 1.00))
+        addStorylyViewWithConstraints()
         addColoredViewWithConstraints(color: UIColor(red: 0.74, green: 0.74, blue: 0.80, alpha: 1.00))
         addColoredViewWithConstraints(color: UIColor(red: 1.00, green: 0.80, blue: 0.00, alpha: 1.00))
     }
@@ -41,6 +43,14 @@ class ShowStorylyViewController: UIViewController {
         view.rightAnchor.constraint(equalTo: storylyHolder.rightAnchor).isActive = true
         view.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
+    
+    private func addStorylyViewWithConstraints() {
+       self.storylyHolder.addArrangedSubview(self.storylyView)
+       self.storylyView.translatesAutoresizingMaskIntoConstraints = false
+       self.storylyView.leftAnchor.constraint(equalTo: self.storylyHolder.leftAnchor).isActive = true
+       self.storylyView.rightAnchor.constraint(equalTo: self.storylyHolder.rightAnchor).isActive = true
+       self.storylyView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+   }
 }
 
 
@@ -50,15 +60,7 @@ extension ShowStorylyViewController: StorylyDelegate {
                        storyGroupList: [Storyly.StoryGroup]) {
         if initialLoad {
             initialLoad = false
-            self.addStorylyViewWithConstraints()
+            storylyView.isHidden = false
         }
-    }
-
-     private func addStorylyViewWithConstraints() {
-        self.storylyHolder.insertArrangedSubview(self.storylyView, at: 2)
-        self.storylyView.translatesAutoresizingMaskIntoConstraints = false
-        self.storylyView.leftAnchor.constraint(equalTo: self.storylyHolder.leftAnchor).isActive = true
-        self.storylyView.rightAnchor.constraint(equalTo: self.storylyHolder.rightAnchor).isActive = true
-        self.storylyView.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
 }

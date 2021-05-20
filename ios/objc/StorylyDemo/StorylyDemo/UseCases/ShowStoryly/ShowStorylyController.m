@@ -31,9 +31,11 @@
     self.storylyView.storylyInit = [[StorylyInit alloc] initWithStorylyId: STORYLY_TOKEN];
     self.storylyView.rootViewController = self;
     self.storylyView.delegate = self;
+    [self.storylyView setHidden:YES];
     
     [self addColoredViewWithConstraints: [UIColor colorWithRed: 0.00 green: 0.88 blue: 0.89 alpha: 1.00]];
     [self addColoredViewWithConstraints: [UIColor colorWithRed: 0.14 green: 0.14 blue: 0.31 alpha: 1.00]];
+    [self addStorylyViewWithConstraint];
     [self addColoredViewWithConstraints: [UIColor colorWithRed: 0.74 green: 0.74 blue: 0.80 alpha: 1.00]];
     [self addColoredViewWithConstraints: [UIColor colorWithRed: 1.00 green: 0.80 blue: 0.00 alpha: 1.00]];
 }
@@ -42,7 +44,7 @@
        storyGroupList:(NSArray<StoryGroup *> *)storyGroupList {
     if (!self.initialLoad) {
         self.initialLoad = true;
-        [self addStorylyViewWithConstraint];
+        [self.storylyView setHidden:NO];
    }
 }
 

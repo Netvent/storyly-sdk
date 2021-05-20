@@ -3,6 +3,7 @@ package com.appsamurai.storylydemo.use_cases;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -33,11 +34,12 @@ public class ShowActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         storylyViewHolder = findViewById(R.id.storyly_view_holder);
+        storylyView = findViewById(R.id.storyly_view);
 
         String STORYLY_INSTANCE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
 
-        storylyView = new StorylyView(this);
         storylyView.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
+        storylyView.setVisibility(View.GONE);
 
         storylyView.setStorylyListener(new StorylyListener() {
             boolean initialLoad = true;
@@ -48,7 +50,7 @@ public class ShowActivity extends AppCompatActivity {
                 if (initialLoad && storyGroupList.size() > 0) {
                     initialLoad = false;
 
-                    storylyViewHolder.addView(storylyView, 2);
+                    storylyView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -70,6 +72,5 @@ public class ShowActivity extends AppCompatActivity {
             @Override
             public void storylyEvent(@NotNull StorylyView storylyView, @NotNull StorylyEvent storylyEvent, @org.jetbrains.annotations.Nullable StoryGroup storyGroup, @org.jetbrains.annotations.Nullable Story story, @org.jetbrains.annotations.Nullable StoryComponent storyComponent) { }
         });
-
     }
 }

@@ -44,7 +44,6 @@
              errorMessage:(NSString *)errorMessage {
     if (!self.initialLoad) {
         [self.storylyView setHidden:YES];
-        [self.storylyViewHolder removeArrangedSubview:self.storylyView];
     }
 }
 

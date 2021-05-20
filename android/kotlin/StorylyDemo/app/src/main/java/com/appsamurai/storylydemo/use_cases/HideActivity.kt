@@ -1,10 +1,7 @@
 package com.appsamurai.storylydemo.use_cases
 
-import android.animation.LayoutTransition
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.StoryGroup
 import com.appsamurai.storyly.StorylyInit
@@ -30,22 +27,16 @@ class HideActivity: AppCompatActivity() {
         binding.storylyView.storylyListener = object : StorylyListener {
             var storylyLoaded = false
 
-            override fun storylyLoaded(
-                storylyView: StorylyView,
-                storyGroupList: List<StoryGroup>
-            ) {
+            override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {
                 if (storyGroupList.isNotEmpty()) {
                     storylyLoaded = true
                 }
             }
 
-            override fun storylyLoadFailed(
-                storylyView: StorylyView,
-                errorMessage: String
-            ) {
+            override fun storylyLoadFailed(storylyView: StorylyView, errorMessage: String) {
                 // if cached before not hide
                 if (!storylyLoaded) {
-                    binding.storylyViewHolder.removeView(storylyView)
+                    storylyView.visibility = View.GONE;
                 }
             }
         }

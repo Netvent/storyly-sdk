@@ -2,6 +2,7 @@ package com.appsamurai.storylydemo.use_cases;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,7 +52,7 @@ public class HideActivity extends AppCompatActivity {
             public void storylyLoadFailed(@NotNull StorylyView storylyView, @NotNull String errorMessage) {
                 // if cached before not hide
                 if (!storylyLoaded) {
-                    storylyViewHolder.removeView(storylyView);
+                    storylyView.setVisibility(View.GONE);
                 }
             }
 

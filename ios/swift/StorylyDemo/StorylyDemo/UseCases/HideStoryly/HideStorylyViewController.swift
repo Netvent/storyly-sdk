@@ -61,8 +61,6 @@ extension HideStorylyViewController: StorylyDelegate {
     func storylyLoadFailed(_ storylyView: Storyly.StorylyView, errorMessage: String) {
         if !initialLoad {
             self.storylyView.isHidden = true
-            self.storylyHolder.removeArrangedSubview(self.storylyView)
         }
     }
-    
 }
