@@ -36,7 +36,9 @@ class _MyAppState extends State<MyApp> {
           height: 120,
           child: StorylyView(
             onStorylyViewCreated: onStorylyViewCreated,
-            androidParam: StorylyParam()..storylyId = STORYLY_TOKEN,
+            androidParam: StorylyParam()
+              ..storylyId = STORYLY_TOKEN
+              ..storylyIsTestMode = true,
             iosParam: StorylyParam()..storylyId = STORYLY_TOKEN,
             storylyLoaded: (storyGroups) {
               print("storylyLoaded -> ${storyGroups.length}");
