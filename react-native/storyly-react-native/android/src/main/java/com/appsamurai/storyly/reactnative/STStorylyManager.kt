@@ -24,6 +24,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORYLY_ID = "storylyId"
         private const val PROP_STORYLY_SEGMENTS = "storylySegments"
         private const val PROP_CUSTOM_PARAMETER = "customParameter"
+        private const val PROP_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
         private const val PROP_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
@@ -117,26 +118,27 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORYLY_INIT)
     fun setPropStorylyInit(view: STStorylyView, storylyInit: ReadableMap) {
         val storylyId: String = storylyInit.getString(PROP_STORYLY_ID) ?: return
+        val isTestMode = if (storylyInit.hasKey(PROP_STORYLY_IS_TEST_MODE)) storylyInit.getBoolean(PROP_STORYLY_IS_TEST_MODE) else false
         if (storylyInit.hasKey(PROP_STORYLY_SEGMENTS)) {
             storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.let { storylySegments ->
                 val segmentationParams = StorylySegmentation(segments = (storylySegments.toArrayList() as? ArrayList<String>)?.toSet())
                 if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER))
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER), isTestMode = isTestMode)
                 } else {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams)
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams, isTestMode = isTestMode)
                 }
             } ?: run {
                 if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER))
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER), isTestMode = isTestMode)
                 } else {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, isTestMode = isTestMode)
                 }
             }
         } else {
             if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
-                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER))
+                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER), isTestMode = isTestMode)
             } else {
-                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId)
+                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, isTestMode = isTestMode)
             }
         }
     }
