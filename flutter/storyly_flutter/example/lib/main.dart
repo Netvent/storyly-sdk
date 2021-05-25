@@ -39,7 +39,9 @@ class _MyAppState extends State<MyApp> {
             androidParam: StorylyParam()
               ..storylyId = STORYLY_TOKEN
               ..storylyIsTestMode = true,
-            iosParam: StorylyParam()..storylyId = STORYLY_TOKEN,
+            iosParam: StorylyParam()
+              ..storylyId = STORYLY_TOKEN
+              ..storylyIsTestMode = true,
             storylyLoaded: (storyGroups) {
               print("storylyLoaded -> ${storyGroups.length}");
             },
