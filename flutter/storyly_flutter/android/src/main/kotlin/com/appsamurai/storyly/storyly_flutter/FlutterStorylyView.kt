@@ -3,7 +3,6 @@ package com.appsamurai.storyly.storyly_flutter
 import android.content.Context
 import android.graphics.Color
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
