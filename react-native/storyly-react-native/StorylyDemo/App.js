@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { View, Button, PixelRatio, Dimensions } from 'react-native';
 import { Storyly } from 'storyly-react-native';
 
-export default class App extends Component<{}> {
+export default class App extends Component {
     render() {
         return (
             <View>
