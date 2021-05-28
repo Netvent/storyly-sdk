@@ -5,6 +5,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_ID = "storylyId"
     private let ARGS_STORYLY_SEGMENTS = "storylySegments"
     private let ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
+    private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
     
     private let ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
 
@@ -60,7 +61,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         self.storylyView.translatesAutoresizingMaskIntoConstraints = false
         self.storylyView.storylyInit = StorylyInit(storylyId: storylyId,
                                                    segmentation: StorylySegmentation(segments: storylySegments),
-                                                   customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String)
+                                                   customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String,
+                                                   isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false)
         self.storylyView.delegate = self
         self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
         self.updateTheme(storylyView: storylyView, args: self.args)

@@ -50,6 +50,7 @@ class FlutterStorylyView(
         private const val ARGS_STORYLY_ID = "storylyId"
         private const val ARGS_STORYLY_SEGMENTS = "storylySegments"
         private const val ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
+        private const val ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
 
         private const val ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
 
@@ -75,8 +76,8 @@ class FlutterStorylyView(
                     ?: throw Exception("StorylyId must be set.")
             val segments = args[ARGS_STORYLY_SEGMENTS] as? List<String>
             val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
-            storylyInit = StorylyInit(storylyId, StorylySegmentation(segments = segments?.toSet()), customParameter = customParameters)
-
+            val isTestMode = args[ARGS_STORYLY_IS_TEST_MODE] as? Boolean ?: false
+            storylyInit = StorylyInit(storylyId, StorylySegmentation(segments = segments?.toSet()), customParameter = customParameters, isTestMode = isTestMode)
             (args[ARGS_STORY_GROUP_SIZE] as? String)?.let {
                 setStoryGroupSize(when (it) {
                     "small" -> StoryGroupSize.Small

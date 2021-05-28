@@ -61,6 +61,7 @@ class Storyly extends Component {
             storylyId,
             storylySegments,
             customParameter,
+            storylyTestMode,
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
             storyGroupIconForegroundColors,
@@ -87,7 +88,7 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
-                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter}}
+                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter, 'storylyIsTestMode': storylyTestMode}}
                 storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
                 storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible}}
@@ -114,7 +115,8 @@ Storyly.propTypes = {
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
     customParameter: string,
-
+    storylyTestMode: bool,
+    
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),
     storyGroupIconBackgroundColor: string,
