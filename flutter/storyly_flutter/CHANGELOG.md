@@ -1,5 +1,5 @@
 ### 1.11.1
-* * added isTestMode field to StorylyParam to show test story groups, check [Test Mode](https://integration.storyly.io/flutter/test-mode.html)
+* added isTestMode field to StorylyParam to show test story groups, check [Test Mode](https://integration.storyly.io/flutter/test-mode.html)
 
 ### 1.11.0
 * added image component for interactive stories
