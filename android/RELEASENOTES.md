@@ -1,4 +1,8 @@
 # Release Notes
+### 1.11.1
+* added support external fragment usage, check [Fragment Overlay](https://integration.storyly.io/android/fragment-overlay.html)
+* added isTestMode field to StorylyInit to show test story groups, check [Test Mode](https://integration.storyly.io/android/test-mode.html)
+
 ### 1.11.0
 * added image component for interactive stories
 * added video component for interactive stories
