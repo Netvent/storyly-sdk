@@ -248,7 +248,7 @@ class StorylyParam {
 
   /// This attribute defines whether it is a test device or not. If true,
   /// test groups are sent from the server.
-  bool storylyIsTestMode;
+  bool storylyTestMode;
 
   /// This attribute allows you to change the background color of the
   /// [StorylyView]
@@ -347,7 +347,7 @@ class StorylyParam {
       'storylyId': storylyId,
       'storylySegments': storylySegments,
       'storylyCustomParameters': storylyCustomParameters,
-      'storylyIsTestMode': storylyIsTestMode,
+      'storylyIsTestMode': storylyTestMode,
     };
 
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor != null
