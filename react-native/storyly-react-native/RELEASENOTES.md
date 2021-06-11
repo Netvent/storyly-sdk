@@ -1,5 +1,8 @@
 # Release Notes
 ### 1.11.0
+* added isTestMode field to attributes to show test story groups, check [Test Mode](https://integration.storyly.io/react-native/test-mode.html)
+
+### 1.11.0
 * added image component for interactive stories
 * added video component for interactive stories
 * IMPORTANT! removed advertising id(idfa compatibility for iOS 14.5) usage

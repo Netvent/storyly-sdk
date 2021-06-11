@@ -18,9 +18,13 @@
                                        isDynamicSegmentationEnabled:NO
                                         dynamicSegmentationCallback:NULL];
     }
+    
+    bool isTestMode = ([storylyInit.allKeys containsObject:@"storylyIsTestMode"]) ? [storylyInit[@"storylyIsTestMode"] boolValue] : NO;
+
     return [[StorylyInit alloc] initWithStorylyId:storylyInit[@"storylyId"]
                                      segmentation:storylySegmentation
-                                     customParameter:storylyInit[@"customParameter"]];
+                                  customParameter:storylyInit[@"customParameter"]
+                                       isTestMode:isTestMode];
 }
 
 @end

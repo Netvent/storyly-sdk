@@ -246,6 +246,10 @@ class StorylyParam {
   ///   size limit, your value will be set to null.
   String storylyCustomParameters;
 
+  /// This attribute defines whether it is a test device or not. If true,
+  /// test groups are sent from the server.
+  bool storylyTestMode;
+
   /// This attribute allows you to change the background color of the
   /// [StorylyView]
   Color storylyBackgroundColor;
@@ -343,6 +347,7 @@ class StorylyParam {
       'storylyId': storylyId,
       'storylySegments': storylySegments,
       'storylyCustomParameters': storylyCustomParameters,
+      'storylyIsTestMode': storylyTestMode,
     };
 
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor != null

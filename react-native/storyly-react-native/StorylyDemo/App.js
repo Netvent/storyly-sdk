@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { View, Button, PixelRatio, Dimensions } from 'react-native';
 import { Storyly } from 'storyly-react-native';
 
-export default class App extends Component<{}> {
+export default class App extends Component {
     render() {
         return (
             <View>
@@ -20,6 +20,7 @@ export default class App extends Component<{}> {
                     ref={ref => { this.storyly = ref }}
                     style={{ width: '100%', height: 120, marginTop: 44 }}
                     storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
+                    storylyTestMode={true}
                     onLoad={storyGroupList => {
                         console.log("[Storyly] onLoad");
                     }}
