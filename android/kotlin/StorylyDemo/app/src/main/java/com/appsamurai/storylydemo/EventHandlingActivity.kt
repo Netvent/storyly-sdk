@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storylydemo.databinding.ActivityEventHandlingBinding
-import kotlinx.android.synthetic.main.activity_event_handling.*
 
 class EventHandlingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEventHandlingBinding

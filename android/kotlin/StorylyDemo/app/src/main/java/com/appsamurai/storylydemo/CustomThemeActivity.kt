@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storylydemo.databinding.ActivityCustomThemeBinding
-import kotlinx.android.synthetic.main.activity_custom_theme.*
 
 class CustomThemeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCustomThemeBinding
@@ -17,9 +16,9 @@ class CustomThemeActivity : AppCompatActivity() {
 
         val STORYLY_INSTANCE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
 
-        storyly_view_default.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+        binding.storylyViewDefault.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
 
-        storyly_custom_theme.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+        binding.storylyCustomTheme.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
 
         // storyly_custom_theme.setStoryGroupTextColor(Color.parseColor("#f03932"))
 
