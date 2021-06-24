@@ -1,4 +1,7 @@
 # Release Notes
+### 1.11.3
+* updated PendingIntent handling to comply Android 12 security updates
+
 ### 1.11.2
 * improved story group border thickness for low resolution devices
 
