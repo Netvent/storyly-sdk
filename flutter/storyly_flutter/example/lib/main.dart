@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  StorylyViewController storylyViewController;
+  StorylyViewController? storylyViewController;
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
               print("storylyEvent -> storyGroup: ${storyGroup.title}");
               print("storylyEvent -> story: ${story.title}");
               print(
-                "storylyEvent storyComponent: ${storyComponent.type}",
+                "storylyEvent storyComponent: ${storyComponent?.type}",
               );
             },
             storylyStoryShown: () => print("storylyStoryShown"),
@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
               print("userInteracted -> storyGroup: ${storyGroup.title}");
               print("userInteracted -> story: ${story.title}");
               print(
-                "userInteracted -> storyComponent: ${storyComponent.type}",
+                "userInteracted -> storyComponent: ${storyComponent?.type}",
               );
             },
           ),

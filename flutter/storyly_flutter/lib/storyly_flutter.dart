@@ -98,7 +98,7 @@ class _StorylyViewState extends State<StorylyView> {
             () => EagerGestureRecognizer(),
           ),
         },
-        creationParams: widget.androidParam!._toMap(),
+        creationParams: widget.androidParam?._toMap() ?? {},
         creationParamsCodec: const StandardMessageCodec(),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
@@ -110,7 +110,7 @@ class _StorylyViewState extends State<StorylyView> {
             () => EagerGestureRecognizer(),
           ),
         },
-        creationParams: widget.iosParam!._toMap(),
+        creationParams: widget.iosParam?._toMap() ?? {},
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
@@ -125,25 +125,21 @@ class _StorylyViewState extends State<StorylyView> {
     );
     methodChannel.setMethodCallHandler(_handleMethod);
 
-    if (widget.onStorylyViewCreated != null) {
-      widget.onStorylyViewCreated!(
-        StorylyViewController(methodChannel),
-      );
-    }
+    widget.onStorylyViewCreated?.call(StorylyViewController(methodChannel));
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case 'storylyLoaded':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyLoaded!(storyGroupFromJson(jsonData));
+        widget.storylyLoaded?.call(storyGroupFromJson(jsonData));
         break;
       case 'storylyLoadFailed':
-        widget.storylyLoadFailed!(call.arguments);
+        widget.storylyLoadFailed?.call(call.arguments);
         break;
       case 'storylyEvent':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyEvent!(
+        widget.storylyEvent?.call(
           jsonData['event'],
           StoryGroup.fromJson(jsonData['storyGroup']),
           Story.fromJson(jsonData['story']),
@@ -152,20 +148,20 @@ class _StorylyViewState extends State<StorylyView> {
         break;
       case 'storylyActionClicked':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyActionClicked!(
+        widget.storylyActionClicked?.call(
           Story.fromJson(jsonData),
         );
         break;
       case 'storylyStoryShown':
       case 'storylyStoryPresented':
-        widget.storylyStoryShown!();
+        widget.storylyStoryShown?.call();
         break;
       case 'storylyStoryDismissed':
-        widget.storylyStoryDismissed!();
+        widget.storylyStoryDismissed?.call();
         break;
       case 'storylyUserInteracted':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyUserInteracted!(
+        widget.storylyUserInteracted?.call(
           StoryGroup.fromJson(jsonData['storyGroup']),
           Story.fromJson(jsonData['story']),
           getStorylyComponent(jsonData['storyComponent']),
@@ -350,9 +346,7 @@ class StorylyParam {
       'storylyIsTestMode': storylyTestMode,
     };
 
-    paramsMap['storylyBackgroundColor'] = storylyBackgroundColor != null
-        ? _toHexString(storylyBackgroundColor!)
-        : null;
+    paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
 
     paramsMap['storyGroupIconStyling'] = {
       'width': storyGroupIconWidth,
@@ -377,48 +371,31 @@ class StorylyParam {
 
     paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
 
-    paramsMap['storyGroupIconBorderColorSeen'] =
-        storyGroupIconBorderColorSeen != null
-            ? storyGroupIconBorderColorSeen!
-                .map((color) => _toHexString(color))
-                .toList()
-            : null;
+    paramsMap['storyGroupIconBorderColorSeen'] = storyGroupIconBorderColorSeen
+        ?.map((color) => color.toHexString())
+        .toList();
 
     paramsMap['storyGroupIconBorderColorNotSeen'] =
-        storyGroupIconBorderColorNotSeen != null
-            ? storyGroupIconBorderColorNotSeen!
-                .map((color) => _toHexString(color))
-                .toList()
-            : null;
+        storyGroupIconBorderColorNotSeen
+            ?.map((color) => color.toHexString())
+            .toList();
 
     paramsMap['storyGroupIconBackgroundColor'] =
-        storyGroupIconBackgroundColor != null
-            ? _toHexString(storyGroupIconBackgroundColor!)
-            : null;
+        storyGroupIconBackgroundColor?.toHexString();
 
-    paramsMap['storyGroupTextColor'] =
-        storyGroupTextColor != null ? _toHexString(storyGroupTextColor!) : null;
+    paramsMap['storyGroupTextColor'] = storyGroupTextColor?.toHexString();
 
-    paramsMap['storyGroupPinIconColor'] = storyGroupPinIconColor != null
-        ? _toHexString(storyGroupPinIconColor!)
-        : null;
+    paramsMap['storyGroupPinIconColor'] = storyGroupPinIconColor?.toHexString();
 
-    paramsMap['storyItemIconBorderColor'] = storyItemIconBorderColor != null
-        ? storyItemIconBorderColor!.map((color) => _toHexString(color)).toList()
-        : null;
+    paramsMap['storyItemIconBorderColor'] =
+        storyItemIconBorderColor?.map((color) => color.toHexString()).toList();
 
-    paramsMap['storyItemTextColor'] =
-        storyItemTextColor != null ? _toHexString(storyItemTextColor!) : null;
+    paramsMap['storyItemTextColor'] = storyItemTextColor?.toHexString();
 
-    paramsMap['storyItemProgressBarColor'] = storyItemProgressBarColor != null
-        ? storyItemProgressBarColor!.map((color) => _toHexString(color)).toList()
-        : null;
+    paramsMap['storyItemProgressBarColor'] =
+        storyItemProgressBarColor?.map((color) => color.toHexString()).toList();
 
     return paramsMap;
-  }
-
-  String _toHexString(Color color) {
-    return '#${color.value.toRadixString(16).padLeft(8, '0')}';
   }
 }
 
@@ -690,5 +667,11 @@ class Media {
       actionUrl: json['actionUrl'],
       type: json['type'],
     );
+  }
+}
+
+extension StorylyHexColor on Color {
+  String toHexString() {
+    return '#${value.toRadixString(16).padLeft(8, '0')}';
   }
 }
