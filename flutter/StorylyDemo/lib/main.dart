@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:storyly_demo/scroll_example.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
+
+import 'scroll_example.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,9 +22,12 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, this.title}) : super(key: key);
+  HomePage({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
-  final String? title;
+  final String title;
 
   _HomePageState createState() => _HomePageState();
 }
@@ -32,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   static const STORYLY_INSTANCE_TOKEN =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
 
-  StorylyViewController? storylyViewController;
+  late StorylyViewController storylyViewController;
 
   void onStorylyViewCreated(StorylyViewController storylyViewController) {
     this.storylyViewController = storylyViewController;
@@ -42,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? ""),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(

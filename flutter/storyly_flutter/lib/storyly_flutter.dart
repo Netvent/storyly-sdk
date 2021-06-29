@@ -10,6 +10,36 @@ typedef StorylyViewCreatedCallback = void Function(
   StorylyViewController controller,
 );
 
+/// [StorylyView] loaded callback
+typedef StorylyViewLoadedCallback = void Function(
+  List<StoryGroup> storyGroups,
+);
+
+/// [StorylyView] load failed callback
+typedef StorylyViewLoadFailedCallback = void Function(
+  String message,
+);
+
+/// [StorylyView] event callback
+typedef StorylyViewEventCallback = void Function(
+  String event,
+  StoryGroup? storyGroup,
+  Story? story,
+  StoryComponent? storyComponent,
+);
+
+/// [StorylyView] action clicked callback
+typedef StorylyViewActionClickedCallback = void Function(
+  Story story,
+);
+
+/// [StorylyView] user interacted callback
+typedef StorylyViewUserInteractedCallback = void Function(
+  StoryGroup storyGroup,
+  Story story,
+  StoryComponent storyComponent,
+);
+
 /// Storyly UI Widget
 class StorylyView extends StatefulWidget {
   /// This callback function allows you to access `StorylyViewController`
@@ -33,40 +63,31 @@ class StorylyView extends StatefulWidget {
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and story group list has just shown to the user.
-  final Function(List<StoryGroup> storyGroups)? storylyLoaded;
+  final StorylyViewLoadedCallback? storylyLoaded;
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and had a problem while fetching your stories.
-  final Function(String? message)? storylyLoadFailed;
+  final StorylyViewLoadFailedCallback? storylyLoadFailed;
 
   /// This callback function will notify you about all Storyly events and let
   /// you to send these events to specific data platforms
-  final Function(
-    String? event,
-    StoryGroup storyGroup,
-    Story story,
-    StoryComponent? storyComponent,
-  )? storylyEvent;
+  final StorylyViewEventCallback? storylyEvent;
 
   /// This callback function will notify your application in case of Swipe Up
   /// or CTA Button action.
-  final Function(Story story)? storylyActionClicked;
+  final StorylyViewActionClickedCallback? storylyActionClicked;
 
   /// This callback function will let you know that stories are started to be
   /// shown to the users.
-  final Function()? storylyStoryShown;
+  final VoidCallback? storylyStoryShown;
 
   /// This callback function will let you know that user dismissed the current
   /// story while watching it.
-  final Function()? storylyStoryDismissed;
+  final VoidCallback? storylyStoryDismissed;
 
   /// This callback function will allow you to get reactions of users from
   /// specific interactive components.
-  final Function(
-    StoryGroup storyGroup,
-    Story story,
-    StoryComponent? storyComponent,
-  )? storylyUserInteracted;
+  final StorylyViewUserInteractedCallback? storylyUserInteracted;
 
   const StorylyView({
     Key? key,
@@ -399,12 +420,8 @@ class StorylyParam {
   }
 }
 
-StoryComponent? getStorylyComponent(dynamic json) {
-  StoryComponent? storyComponent;
-
-  if (json == null) {
-    return storyComponent;
-  }
+StoryComponent getStorylyComponent(Map<String, dynamic> json) {
+  var storyComponent = StoryComponent('undefined');
 
   if (json['type'] == 'quiz') {
     storyComponent = StoryQuizComponent.fromJson(json);
@@ -420,9 +437,9 @@ StoryComponent? getStorylyComponent(dynamic json) {
 }
 
 /// This parent class represents the interactive components which users are interacted with.
-abstract class StoryComponent {
+class StoryComponent {
   /// type Type of the interactive component
-  final String? type;
+  final String type;
 
   StoryComponent(this.type);
 
@@ -432,16 +449,16 @@ abstract class StoryComponent {
 /// This data class represents the Quiz component.
 class StoryQuizComponent implements StoryComponent {
   StoryQuizComponent({
-    this.type,
+    required this.type,
     this.rightAnswerIndex,
     this.customPayload,
-    this.title,
-    this.options,
-    this.selectedOptionIndex,
+    required this.title,
+    required this.options,
+    required this.selectedOptionIndex,
   });
 
   @override
-  final String? type;
+  final String type;
 
   /// rightAnswerIndex Index of the right answer if exists
   final int? rightAnswerIndex;
@@ -450,13 +467,13 @@ class StoryQuizComponent implements StoryComponent {
   final String? customPayload;
 
   /// title Title of the quiz if exists
-  final String? title;
+  final String title;
 
   /// options List of options in the quiz
-  final List<String>? options;
+  final List<String> options;
 
   /// selectedOptionIndex Option index that the user selected
-  final int? selectedOptionIndex;
+  final int selectedOptionIndex;
 
   factory StoryQuizComponent.fromJson(Map<String, dynamic> json) {
     return StoryQuizComponent(
@@ -473,27 +490,27 @@ class StoryQuizComponent implements StoryComponent {
 /// This data class represents the Poll component.
 class StoryPollComponent implements StoryComponent {
   StoryPollComponent({
-    this.type,
-    this.options,
+    required this.type,
+    required this.options,
     this.customPayload,
-    this.selectedOptionIndex,
-    this.title,
+    required this.selectedOptionIndex,
+    required this.title,
   });
 
   @override
-  final String? type;
+  final String type;
 
   /// options List of options in the poll
-  final List<String>? options;
+  final List<String> options;
 
   /// customPayload Custom payload for this poll if exists
   final String? customPayload;
 
   /// selectedOptionIndex Option index that the user selected
-  final int? selectedOptionIndex;
+  final int selectedOptionIndex;
 
   /// title Title of the poll if exists
-  final String? title;
+  final String title;
 
   factory StoryPollComponent.fromJson(Map<String, dynamic> json) {
     return StoryPollComponent(
@@ -509,23 +526,23 @@ class StoryPollComponent implements StoryComponent {
 /// This data class represents the Emoji component.
 class StoryEmojiComponent implements StoryComponent {
   StoryEmojiComponent({
-    this.type,
+    required this.type,
     this.customPayload,
-    this.selectedEmojiIndex,
-    this.emojiCodes,
+    required this.selectedEmojiIndex,
+    required this.emojiCodes,
   });
 
   @override
-  final String? type;
+  final String type;
 
   /// customPayload Custom payload for this emoji if exists
   final String? customPayload;
 
   /// selectedEmojiIndex Emoji index that the user selected
-  final int? selectedEmojiIndex;
+  final int selectedEmojiIndex;
 
   /// emojiCodes List of the emojis in the component
-  final List<String>? emojiCodes;
+  final List<String> emojiCodes;
 
   factory StoryEmojiComponent.fromJson(Map<String, dynamic> json) {
     return StoryEmojiComponent(
@@ -540,23 +557,23 @@ class StoryEmojiComponent implements StoryComponent {
 /// This data class represents the Rating component.
 class StoryRatingComponent implements StoryComponent {
   StoryRatingComponent({
-    this.type,
+    required this.type,
     this.customPayload,
-    this.rating,
-    this.emojiCode,
+    required this.rating,
+    required this.emojiCode,
   });
 
   @override
-  final String? type;
+  final String type;
 
   /// customPayload Custom payload for this rating if exists
   final String? customPayload;
 
   /// rating Rating value which user rated in the component
-  final int? rating;
+  final int rating;
 
   /// emojiCode Emoji code as the thumb emoji
-  final String? emojiCode;
+  final String emojiCode;
 
   factory StoryRatingComponent.fromJson(Map<String, dynamic> json) {
     return StoryRatingComponent(
@@ -575,31 +592,31 @@ List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
 /// This data class represents a story group in the StorylyView.
 class StoryGroup {
   StoryGroup({
-    this.seen,
-    this.title,
-    this.index,
-    this.iconUrl,
-    this.stories,
-    this.id,
+    required this.seen,
+    required this.title,
+    required this.index,
+    required this.iconUrl,
+    required this.stories,
+    required this.id,
   });
 
   /// seen State of the story group that shows whether all of the stories are seen or not
-  final bool? seen;
+  final bool seen;
 
   /// title Title of the story group
-  final String? title;
+  final String title;
 
   /// index Order index of the story group
-  final int? index;
+  final int index;
 
   /// iconUrl URL of the story group icon image
-  final String? iconUrl;
+  final String iconUrl;
 
   /// stories List of stories in the story group
-  final List<Story>? stories;
+  final List<Story> stories;
 
   /// id ID of the story group
-  final int? id;
+  final int id;
 
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
     return StoryGroup(
@@ -616,27 +633,27 @@ class StoryGroup {
 /// This data class represents a story inside a story group.
 class Story {
   Story({
-    this.media,
-    this.title,
-    this.seen,
-    this.index,
-    this.id,
+    required this.media,
+    required this.title,
+    required this.seen,
+    required this.index,
+    required this.id,
   });
 
-  /// media Media content of the story
-  final Media? media;
+  /// Media content of the story
+  final Media media;
 
-  /// title Title of the story
-  final String? title;
+  /// Title of the story
+  final String title;
 
-  /// seen State of the story that shows whether the story is seen or not
-  final bool? seen;
+  /// State of the story that shows whether the story is seen or not
+  final bool seen;
 
-  /// index Index of the story among other stories of the story group
-  final int? index;
+  /// Index of the story among other stories of the story group
+  final int index;
 
-  /// id ID of the story
-  final int? id;
+  /// ID of the story
+  final int id;
 
   factory Story.fromJson(Map<String, dynamic> json) {
     return Story(
@@ -653,14 +670,14 @@ class Story {
 class Media {
   Media({
     this.actionUrl,
-    this.type,
+    required this.type,
   });
 
-  /// actionUrl URL which the user has just interacted with
+  /// URL which the user has just interacted with
   final String? actionUrl;
 
-  /// type Type of the story
-  final int? type;
+  /// Type of the story
+  final int type;
 
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
