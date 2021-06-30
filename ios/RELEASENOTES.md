@@ -1,4 +1,8 @@
 # Release Notes
+### 1.12.0
+* added storyInteractiveFont to support customizable fonts for interactive components
+* added systemFont usage in interactive fonts
+
 ### 1.11.1
 * added isTestMode field to StorylyInit to show test story groups, check [Test Mode](https://integration.storyly.io/ios/test-mode.html)
 * improved status bar handling for specific devices, [#88](https://github.com/Netvent/storyly-mobile/issues/88)
