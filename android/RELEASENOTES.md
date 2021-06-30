@@ -1,4 +1,8 @@
 # Release Notes
+### 1.12.0
+* added setStoryInteractiveTextTypeface to support customizable fonts for interactive components
+* added systemFont usage in interactive fonts
+
 ### 1.11.3
 * updated PendingIntent handling to comply Android 12 security updates
 
