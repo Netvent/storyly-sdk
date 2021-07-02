@@ -293,6 +293,10 @@ class StorylyParam {
   /// icons.
   int storyGroupListPaddingBetweenItems;
 
+  /// This attribute allows you to use different story groups images for
+  /// different labels.
+  String storyGroupIconImageThematicLabel;
+
   /// This attribute allows you to changes the visibility of story group
   /// text.
   bool storyGroupTextIsVisible;
@@ -364,6 +368,9 @@ class StorylyParam {
       'edgePadding': storyGroupListEdgePadding,
       'paddingBetweenItems': storyGroupListPaddingBetweenItems
     };
+
+    paramsMap['storyGroupIconImageThematicLabel'] =
+        storyGroupIconImageThematicLabel;
 
     paramsMap['storyGroupTextStyling'] = {
       'isVisible': storyGroupTextIsVisible,

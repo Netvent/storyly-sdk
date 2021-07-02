@@ -12,6 +12,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORY_GROUP_SIZE = "storyGroupSize"
     private let ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
     private let ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
+    private let ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL = "storyGroupIconImageThematicLabel"
     private let ARGS_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
     private let ARGS_STORY_HEADER_STYLING = "storyHeaderStyling"
     
@@ -96,6 +97,10 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                 storylyView.storyGroupListStyling = StoryGroupListStyling(edgePadding: CGFloat(edgePadding),
                                                                           paddingBetweenItems: CGFloat(paddingBetweenItems))
             }
+        }
+
+        if let storyGroupIconImageThematicLabel = args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String {
+            storylyView.storyGroupIconImageThematicLabel = storyGroupIconImageThematicLabel
         }
         
         if let storyGroupTextStyling = args[ARGS_STORY_GROUP_TEXT_STYLING] as? [String: Any] {

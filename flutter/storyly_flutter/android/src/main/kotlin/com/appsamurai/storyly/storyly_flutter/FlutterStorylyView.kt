@@ -57,6 +57,7 @@ class FlutterStorylyView(
         private const val ARGS_STORY_GROUP_SIZE = "storyGroupSize"
         private const val ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
         private const val ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
+        private const val ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL = "storyGroupIconImageThematicLabel"
         private const val ARGS_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
         private const val ARGS_STORY_HEADER_STYLING = "storyHeaderStyling"
 
@@ -108,6 +109,8 @@ class FlutterStorylyView(
                 val paddingBetweenItems = it["paddingBetweenItems"] as? Int ?: return@let
                 setStoryGroupListStyling(StoryGroupListStyling(edgePadding.toFloat(), paddingBetweenItems.toFloat()))
             }
+
+            (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }
 
             (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let {
                 val isVisible = it["isVisible"] as? Boolean ?: return@let
