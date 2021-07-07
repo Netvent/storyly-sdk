@@ -10,6 +10,36 @@ typedef StorylyViewCreatedCallback = void Function(
   StorylyViewController controller,
 );
 
+/// [StorylyView] loaded callback
+typedef StorylyViewLoadedCallback = void Function(
+  List<StoryGroup> storyGroups,
+);
+
+/// [StorylyView] load failed callback
+typedef StorylyViewLoadFailedCallback = void Function(
+  String message,
+);
+
+/// [StorylyView] event callback
+typedef StorylyViewEventCallback = void Function(
+  String event,
+  StoryGroup? storyGroup,
+  Story? story,
+  StoryComponent? storyComponent,
+);
+
+/// [StorylyView] action clicked callback
+typedef StorylyViewActionClickedCallback = void Function(
+  Story story,
+);
+
+/// [StorylyView] user interacted callback
+typedef StorylyViewUserInteractedCallback = void Function(
+  StoryGroup storyGroup,
+  Story story,
+  StoryComponent storyComponent,
+);
+
 /// Storyly UI Widget
 class StorylyView extends StatefulWidget {
   /// This callback function allows you to access `StorylyViewController`
@@ -23,53 +53,44 @@ class StorylyView extends StatefulWidget {
   ///   this.storylyViewController = storylyViewController;
   /// }
   /// ```
-  final StorylyViewCreatedCallback onStorylyViewCreated;
+  final StorylyViewCreatedCallback? onStorylyViewCreated;
 
   /// Android specific [StorylyParam]
-  final StorylyParam androidParam;
+  final StorylyParam? androidParam;
 
   /// iOS specific [StorylyParam]
-  final StorylyParam iosParam;
+  final StorylyParam? iosParam;
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and story group list has just shown to the user.
-  final Function(List<StoryGroup> storyGroups) storylyLoaded;
+  final StorylyViewLoadedCallback? storylyLoaded;
 
   /// This callback function will let you know that Storyly has completed
   /// its network operations and had a problem while fetching your stories.
-  final Function(String message) storylyLoadFailed;
+  final StorylyViewLoadFailedCallback? storylyLoadFailed;
 
   /// This callback function will notify you about all Storyly events and let
   /// you to send these events to specific data platforms
-  final Function(
-    String event,
-    StoryGroup storyGroup,
-    Story story,
-    StoryComponent storyComponent,
-  ) storylyEvent;
+  final StorylyViewEventCallback? storylyEvent;
 
   /// This callback function will notify your application in case of Swipe Up
   /// or CTA Button action.
-  final Function(Story story) storylyActionClicked;
+  final StorylyViewActionClickedCallback? storylyActionClicked;
 
   /// This callback function will let you know that stories are started to be
   /// shown to the users.
-  final Function() storylyStoryShown;
+  final VoidCallback? storylyStoryShown;
 
   /// This callback function will let you know that user dismissed the current
   /// story while watching it.
-  final Function() storylyStoryDismissed;
+  final VoidCallback? storylyStoryDismissed;
 
   /// This callback function will allow you to get reactions of users from
   /// specific interactive components.
-  final Function(
-    StoryGroup storyGroup,
-    Story story,
-    StoryComponent storyComponent,
-  ) storylyUserInteracted;
+  final StorylyViewUserInteractedCallback? storylyUserInteracted;
 
   const StorylyView({
-    Key key,
+    Key? key,
     this.onStorylyViewCreated,
     this.androidParam,
     this.iosParam,
@@ -98,7 +119,7 @@ class _StorylyViewState extends State<StorylyView> {
             () => EagerGestureRecognizer(),
           ),
         },
-        creationParams: widget.androidParam._toMap(),
+        creationParams: widget.androidParam?._toMap() ?? {},
         creationParamsCodec: const StandardMessageCodec(),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
@@ -110,7 +131,7 @@ class _StorylyViewState extends State<StorylyView> {
             () => EagerGestureRecognizer(),
           ),
         },
-        creationParams: widget.iosParam._toMap(),
+        creationParams: widget.iosParam?._toMap() ?? {},
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
@@ -125,25 +146,21 @@ class _StorylyViewState extends State<StorylyView> {
     );
     methodChannel.setMethodCallHandler(_handleMethod);
 
-    if (widget.onStorylyViewCreated != null) {
-      widget.onStorylyViewCreated(
-        StorylyViewController(methodChannel),
-      );
-    }
+    widget.onStorylyViewCreated?.call(StorylyViewController(methodChannel));
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case 'storylyLoaded':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyLoaded(storyGroupFromJson(jsonData));
+        widget.storylyLoaded?.call(storyGroupFromJson(jsonData));
         break;
       case 'storylyLoadFailed':
-        widget.storylyLoadFailed(call.arguments);
+        widget.storylyLoadFailed?.call(call.arguments);
         break;
       case 'storylyEvent':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyEvent(
+        widget.storylyEvent?.call(
           jsonData['event'],
           StoryGroup.fromJson(jsonData['storyGroup']),
           Story.fromJson(jsonData['story']),
@@ -152,20 +169,20 @@ class _StorylyViewState extends State<StorylyView> {
         break;
       case 'storylyActionClicked':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyActionClicked(
+        widget.storylyActionClicked?.call(
           Story.fromJson(jsonData),
         );
         break;
       case 'storylyStoryShown':
       case 'storylyStoryPresented':
-        widget.storylyStoryShown();
+        widget.storylyStoryShown?.call();
         break;
       case 'storylyStoryDismissed':
-        widget.storylyStoryDismissed();
+        widget.storylyStoryDismissed?.call();
         break;
       case 'storylyUserInteracted':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyUserInteracted(
+        widget.storylyUserInteracted?.call(
           StoryGroup.fromJson(jsonData['storyGroup']),
           Story.fromJson(jsonData['story']),
           getStorylyComponent(jsonData['storyComponent']),
@@ -233,26 +250,26 @@ class StorylyViewController {
 class StorylyParam {
   /// This attribute required for your app's correct initialization.
   @required
-  String storylyId;
+  String? storylyId;
 
   /// This attribute takes a list of string which will be used in process
   /// of segmentation to show sepecific story groups to the users.
-  List<String> storylySegments;
+  List<String>? storylySegments;
 
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
   ///
   /// * This value cannot have more than 200 characters. If you exceed the
   ///   size limit, your value will be set to null.
-  String storylyCustomParameters;
+  String? storylyCustomParameters;
 
   /// This attribute defines whether it is a test device or not. If true,
   /// test groups are sent from the server.
-  bool storylyTestMode;
+  bool? storylyTestMode;
 
   /// This attribute allows you to change the background color of the
   /// [StorylyView]
-  Color storylyBackgroundColor;
+  Color? storylyBackgroundColor;
 
   /// This attribute changes the size of the story group. Currently,
   /// supported sizes are `small`, `large`, `xlarge` and `custom` sizes.
@@ -273,74 +290,78 @@ class StorylyParam {
   /// ```
   ///
   /// * You need to set all parameters to this customization to be effective.
-  String storyGroupSize;
+  String? storyGroupSize;
 
   /// This attribute allows you to changes the width of story group icon.
-  int storyGroupIconWidth;
+  int? storyGroupIconWidth;
 
   /// This attribute allows you to changes the height of story group icon.
-  int storyGroupIconHeight;
+  int? storyGroupIconHeight;
 
   /// This attribute allows you to changes the corner radius of story group
   /// icon.
-  int storyGroupIconCornerRadius;
+  int? storyGroupIconCornerRadius;
 
   /// This attribute allows you to changes the edge padding of story group
   /// list.
-  int storyGroupListEdgePadding;
+  int? storyGroupListEdgePadding;
 
   /// This attribute allows you to changes the distance between of story group
   /// icons.
-  int storyGroupListPaddingBetweenItems;
+  int? storyGroupListPaddingBetweenItems;
+
+  /// This attribute allows you to use different story groups images for
+  /// different labels.
+  String storyGroupIconImageThematicLabel;
 
   /// This attribute allows you to changes the visibility of story group
   /// text.
-  bool storyGroupTextIsVisible;
+  bool? storyGroupTextIsVisible;
 
   /// This attribute allows you to changes the visibility of story
   /// header text.
-  bool storyHeaderTextIsVisible;
+  bool? storyHeaderTextIsVisible;
 
   /// This attribute allows you to changes the visibility of story
   /// header icon.
-  bool storyHeaderIconIsVisible;
+  bool? storyHeaderIconIsVisible;
 
   /// This attribute allows you to changes the visibility of story
   /// header close button.
-  bool storyHeaderCloseButtonIsVisible;
+  bool? storyHeaderCloseButtonIsVisible;
 
   /// This attribute allows you to the border color of the story group
   /// icons which are watched by the user.
-  List<Color> storyGroupIconBorderColorSeen;
+  List<Color>? storyGroupIconBorderColorSeen;
 
   /// This attribute allows you to change the border color of the story
   /// group icons which are unwatched by the user.
-  List<Color> storyGroupIconBorderColorNotSeen;
+  List<Color>? storyGroupIconBorderColorNotSeen;
 
   /// This attribute allows you to change the background color of the story
   /// group icon which is shown to the user as skeleton view till the stories
   /// are loaded.
-  Color storyGroupIconBackgroundColor;
+  Color? storyGroupIconBackgroundColor;
 
   /// This attribute allows you to change the text color of the story group.
-  Color storyGroupTextColor;
+  Color? storyGroupTextColor;
 
   /// If any of the story group is selected as pinned group from dashboard,
   /// a little star icon will appear along with the story group icon. This
   /// attribute allows you to change the background color of this pin icon.
-  Color storyGroupPinIconColor;
+  Color? storyGroupPinIconColor;
 
   /// This attribute allows you to change the header icon border
   /// color of the story view.
-  List<Color> storyItemIconBorderColor;
+  List<Color>? storyItemIconBorderColor;
 
   /// This attribute allows you to change the header text color of the
   /// story view.
-  Color storyItemTextColor;
+  Color? storyItemTextColor;
 
   /// This attribute allows you to change the progress bar colors of
   /// the story view.
-  List<Color> storyItemProgressBarColor;
+  List<Color>? storyItemProgressBarColor;
 
   Map<String, dynamic> _toMap() {
     final paramsMap = <String, dynamic>{
@@ -350,9 +371,7 @@ class StorylyParam {
       'storylyIsTestMode': storylyTestMode,
     };
 
-    paramsMap['storylyBackgroundColor'] = storylyBackgroundColor != null
-        ? _toHexString(storylyBackgroundColor)
-        : null;
+    paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
 
     paramsMap['storyGroupIconStyling'] = {
       'width': storyGroupIconWidth,
@@ -364,6 +383,9 @@ class StorylyParam {
       'edgePadding': storyGroupListEdgePadding,
       'paddingBetweenItems': storyGroupListPaddingBetweenItems
     };
+
+    paramsMap['storyGroupIconImageThematicLabel'] =
+        storyGroupIconImageThematicLabel;
 
     paramsMap['storyGroupTextStyling'] = {
       'isVisible': storyGroupTextIsVisible,
@@ -377,57 +399,36 @@ class StorylyParam {
 
     paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
 
-    paramsMap['storyGroupIconBorderColorSeen'] =
-        storyGroupIconBorderColorSeen != null
-            ? storyGroupIconBorderColorSeen
-                .map((color) => _toHexString(color))
-                .toList()
-            : null;
+    paramsMap['storyGroupIconBorderColorSeen'] = storyGroupIconBorderColorSeen
+        ?.map((color) => color.toHexString())
+        .toList();
 
     paramsMap['storyGroupIconBorderColorNotSeen'] =
-        storyGroupIconBorderColorNotSeen != null
-            ? storyGroupIconBorderColorNotSeen
-                .map((color) => _toHexString(color))
-                .toList()
-            : null;
+        storyGroupIconBorderColorNotSeen
+            ?.map((color) => color.toHexString())
+            .toList();
 
     paramsMap['storyGroupIconBackgroundColor'] =
-        storyGroupIconBackgroundColor != null
-            ? _toHexString(storyGroupIconBackgroundColor)
-            : null;
+        storyGroupIconBackgroundColor?.toHexString();
 
-    paramsMap['storyGroupTextColor'] =
-        storyGroupTextColor != null ? _toHexString(storyGroupTextColor) : null;
+    paramsMap['storyGroupTextColor'] = storyGroupTextColor?.toHexString();
 
-    paramsMap['storyGroupPinIconColor'] = storyGroupPinIconColor != null
-        ? _toHexString(storyGroupPinIconColor)
-        : null;
+    paramsMap['storyGroupPinIconColor'] = storyGroupPinIconColor?.toHexString();
 
-    paramsMap['storyItemIconBorderColor'] = storyItemIconBorderColor != null
-        ? storyItemIconBorderColor.map((color) => _toHexString(color)).toList()
-        : null;
+    paramsMap['storyItemIconBorderColor'] =
+        storyItemIconBorderColor?.map((color) => color.toHexString()).toList();
 
-    paramsMap['storyItemTextColor'] =
-        storyItemTextColor != null ? _toHexString(storyItemTextColor) : null;
+    paramsMap['storyItemTextColor'] = storyItemTextColor?.toHexString();
 
-    paramsMap['storyItemProgressBarColor'] = storyItemProgressBarColor != null
-        ? storyItemProgressBarColor.map((color) => _toHexString(color)).toList()
-        : null;
+    paramsMap['storyItemProgressBarColor'] =
+        storyItemProgressBarColor?.map((color) => color.toHexString()).toList();
 
     return paramsMap;
   }
-
-  String _toHexString(Color color) {
-    return '#${color.value.toRadixString(16).padLeft(8, '0')}';
-  }
 }
 
-StoryComponent getStorylyComponent(dynamic json) {
-  StoryComponent storyComponent;
-
-  if (json == null) {
-    return storyComponent;
-  }
+StoryComponent getStorylyComponent(Map<String, dynamic> json) {
+  var storyComponent = StoryComponent('undefined');
 
   if (json['type'] == 'quiz') {
     storyComponent = StoryQuizComponent.fromJson(json);
@@ -443,7 +444,7 @@ StoryComponent getStorylyComponent(dynamic json) {
 }
 
 /// This parent class represents the interactive components which users are interacted with.
-abstract class StoryComponent {
+class StoryComponent {
   /// type Type of the interactive component
   final String type;
 
@@ -455,22 +456,22 @@ abstract class StoryComponent {
 /// This data class represents the Quiz component.
 class StoryQuizComponent implements StoryComponent {
   StoryQuizComponent({
-    this.type,
+    required this.type,
     this.rightAnswerIndex,
     this.customPayload,
-    this.title,
-    this.options,
-    this.selectedOptionIndex,
+    required this.title,
+    required this.options,
+    required this.selectedOptionIndex,
   });
 
   @override
   final String type;
 
   /// rightAnswerIndex Index of the right answer if exists
-  final int rightAnswerIndex;
+  final int? rightAnswerIndex;
 
   /// customPayload Custom payload for this quiz if exists
-  final String customPayload;
+  final String? customPayload;
 
   /// title Title of the quiz if exists
   final String title;
@@ -496,11 +497,11 @@ class StoryQuizComponent implements StoryComponent {
 /// This data class represents the Poll component.
 class StoryPollComponent implements StoryComponent {
   StoryPollComponent({
-    this.type,
-    this.options,
+    required this.type,
+    required this.options,
     this.customPayload,
-    this.selectedOptionIndex,
-    this.title,
+    required this.selectedOptionIndex,
+    required this.title,
   });
 
   @override
@@ -510,7 +511,7 @@ class StoryPollComponent implements StoryComponent {
   final List<String> options;
 
   /// customPayload Custom payload for this poll if exists
-  final String customPayload;
+  final String? customPayload;
 
   /// selectedOptionIndex Option index that the user selected
   final int selectedOptionIndex;
@@ -532,17 +533,17 @@ class StoryPollComponent implements StoryComponent {
 /// This data class represents the Emoji component.
 class StoryEmojiComponent implements StoryComponent {
   StoryEmojiComponent({
-    this.type,
+    required this.type,
     this.customPayload,
-    this.selectedEmojiIndex,
-    this.emojiCodes,
+    required this.selectedEmojiIndex,
+    required this.emojiCodes,
   });
 
   @override
   final String type;
 
   /// customPayload Custom payload for this emoji if exists
-  final String customPayload;
+  final String? customPayload;
 
   /// selectedEmojiIndex Emoji index that the user selected
   final int selectedEmojiIndex;
@@ -563,17 +564,17 @@ class StoryEmojiComponent implements StoryComponent {
 /// This data class represents the Rating component.
 class StoryRatingComponent implements StoryComponent {
   StoryRatingComponent({
-    this.type,
+    required this.type,
     this.customPayload,
-    this.rating,
-    this.emojiCode,
+    required this.rating,
+    required this.emojiCode,
   });
 
   @override
   final String type;
 
   /// customPayload Custom payload for this rating if exists
-  final String customPayload;
+  final String? customPayload;
 
   /// rating Rating value which user rated in the component
   final int rating;
@@ -598,12 +599,12 @@ List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
 /// This data class represents a story group in the StorylyView.
 class StoryGroup {
   StoryGroup({
-    this.seen,
-    this.title,
-    this.index,
-    this.iconUrl,
-    this.stories,
-    this.id,
+    required this.seen,
+    required this.title,
+    required this.index,
+    required this.iconUrl,
+    required this.stories,
+    required this.id,
   });
 
   /// seen State of the story group that shows whether all of the stories are seen or not
@@ -639,26 +640,26 @@ class StoryGroup {
 /// This data class represents a story inside a story group.
 class Story {
   Story({
-    this.media,
-    this.title,
-    this.seen,
-    this.index,
-    this.id,
+    required this.media,
+    required this.title,
+    required this.seen,
+    required this.index,
+    required this.id,
   });
 
-  /// media Media content of the story
+  /// Media content of the story
   final Media media;
 
-  /// title Title of the story
+  /// Title of the story
   final String title;
 
-  /// seen State of the story that shows whether the story is seen or not
+  /// State of the story that shows whether the story is seen or not
   final bool seen;
 
-  /// index Index of the story among other stories of the story group
+  /// Index of the story among other stories of the story group
   final int index;
 
-  /// id ID of the story
+  /// ID of the story
   final int id;
 
   factory Story.fromJson(Map<String, dynamic> json) {
@@ -676,13 +677,13 @@ class Story {
 class Media {
   Media({
     this.actionUrl,
-    this.type,
+    required this.type,
   });
 
-  /// actionUrl URL which the user has just interacted with
-  final String actionUrl;
+  /// URL which the user has just interacted with
+  final String? actionUrl;
 
-  /// type Type of the story
+  /// Type of the story
   final int type;
 
   factory Media.fromJson(Map<String, dynamic> json) {
@@ -690,5 +691,11 @@ class Media {
       actionUrl: json['actionUrl'],
       type: json['type'],
     );
+  }
+}
+
+extension StorylyHexColor on Color {
+  String toHexString() {
+    return '#${value.toRadixString(16).padLeft(8, '0')}';
   }
 }

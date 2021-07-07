@@ -1,5 +1,5 @@
 # Release Notes
-### 1.11.0
+### 1.11.1
 * added isTestMode field to attributes to show test story groups, check [Test Mode](https://integration.storyly.io/react-native/test-mode.html)
 
 ### 1.11.0
