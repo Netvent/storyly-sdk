@@ -312,7 +312,7 @@ class StorylyParam {
 
   /// This attribute allows you to use different story groups images for
   /// different labels.
-  String storyGroupIconImageThematicLabel;
+  String? storyGroupIconImageThematicLabel;
 
   /// This attribute allows you to changes the visibility of story group
   /// text.
