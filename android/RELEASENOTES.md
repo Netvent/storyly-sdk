@@ -1,4 +1,11 @@
 # Release Notes
+### 1.13.0
+* added multiple story group support for external data usage
+* fixed [#114](https://github.com/Netvent/storyly-mobile/issues/114)
+* fixed [#111](https://github.com/Netvent/storyly-mobile/issues/111)
+* fixed [#107](https://github.com/Netvent/storyly-mobile/issues/107)
+* removed client side dynamic filtering feature
+
 ### 1.12.0
 * added setStoryInteractiveTextTypeface to support customizable fonts for interactive components
 * added systemFont usage in interactive fonts
