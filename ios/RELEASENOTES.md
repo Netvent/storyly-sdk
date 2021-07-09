@@ -1,4 +1,8 @@
 # Release Notes
+### 1.13.0
+* added multiple story group support for external data usage
+* removed client side dynamic filtering feature 
+
 ### 1.12.0
 * added storyInteractiveFont to support customizable fonts for interactive components
 * added systemFont usage in interactive fonts
