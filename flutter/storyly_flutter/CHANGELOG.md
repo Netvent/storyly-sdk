@@ -1,3 +1,7 @@
+### 1.12.0
+* added null support to package
+* added storyGroupIconImageThematicLabel field to StorylyParam to show dark/light story group icons, check [Thematic Story Group Icon](https://integration.storyly.io/flutter/ui-customizations.html#story-group-thematic-icon-image)
+
 ### 1.11.1
 * added isTestMode field to StorylyParam to show test story groups, check [Test Mode](https://integration.storyly.io/flutter/test-mode.html)
 
