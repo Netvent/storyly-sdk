@@ -1,5 +1,6 @@
 # Storyly SDK
-[![alt text](https://appsamurai.com/wp-content/uploads/2018/10/as_dark_logotype-8.png "AppSamurai")](https://dashboard.storyly.io)
+
+Please check [Storyly Integration Documentation](https://integration.storyly.io/)
 
 ## Author
 App Samurai Mobile Team, mobile@appsamurai.com
