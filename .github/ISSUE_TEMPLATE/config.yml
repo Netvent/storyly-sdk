@@ -6,3 +6,6 @@ contact_links:
   - name: Storyly
     url: https://storyly.io/
     about: Please check detailed usage of Storyly.
+  - name: Storyly Integration Documentation
+    url: https://integration.storyly.io/
+    about: Please check integration documentation of Storyly SDKs

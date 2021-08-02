@@ -1,0 +1,1 @@
+Please check [Storyly Monetization Documentation](https://integration.storyly.io/android/monetization-quick-start.html)
