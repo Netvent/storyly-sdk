@@ -1,4 +1,8 @@
 # Release Notes
+### 1.13.2 (02.08.2021)
+* fixed Fragment$InstantiationException [#123](https://github.com/Netvent/storyly-mobile/issues/123)
+* fixed rtl enabled/disabled handling on interactive components [#124](https://github.com/Netvent/storyly-mobile/issues/124)
+
 ### 1.13.0
 * added multiple story group support for external data usage
 * fixed [#114](https://github.com/Netvent/storyly-mobile/issues/114)
