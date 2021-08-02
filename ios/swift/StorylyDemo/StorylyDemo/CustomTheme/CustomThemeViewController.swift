@@ -17,10 +17,10 @@ class CustomThemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        storylyViewDefaultTheme.storylyInit = StorylyInit(storylyId: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40")
+        storylyViewDefaultTheme.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         storylyViewDefaultTheme.rootViewController = self
         
-        storylyViewCustomTheme.storylyInit = StorylyInit(storylyId: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40")
+        storylyViewCustomTheme.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         storylyViewCustomTheme.rootViewController = self
         
         storylyViewCustomTheme.storyGroupTextColor = UIColor(red: 240/255, green: 57/255, blue: 50/255, alpha: 1.0)

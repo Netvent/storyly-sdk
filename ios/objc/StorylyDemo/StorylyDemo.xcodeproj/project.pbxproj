@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		413318A926B804A00086C34D /* Tokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 413318A826B804A00086C34D /* Tokens.m */; };
+		41AC1F6726B0A8B5007CA47A /* AdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AC1F6626B0A8B5007CA47A /* AdsViewController.m */; };
+		41AC1F6926B0A8E7007CA47A /* Ads.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41AC1F6826B0A8E7007CA47A /* Ads.storyboard */; };
 		41BC5D5325D1BF35002876EF /* CustomSize.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BC5D5025D1BF34002876EF /* CustomSize.storyboard */; };
 		41BC5D5425D1BF35002876EF /* CustomSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC5D5225D1BF35002876EF /* CustomSizeViewController.m */; };
 		41BC5D5825D1BF4F002876EF /* EventHandling.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BC5D5725D1BF4F002876EF /* EventHandling.storyboard */; };
@@ -27,6 +30,11 @@
 /* Begin PBXFileReference section */
 		1D0A85522E993DBED89E899C /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
 		2B1F4386905C77B5B2A41980 /* Pods_StorylyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		413318A726B804A00086C34D /* Tokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tokens.h; sourceTree = "<group>"; };
+		413318A826B804A00086C34D /* Tokens.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tokens.m; sourceTree = "<group>"; };
+		41AC1F6526B0A8B5007CA47A /* AdsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsViewController.h; sourceTree = "<group>"; };
+		41AC1F6626B0A8B5007CA47A /* AdsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsViewController.m; sourceTree = "<group>"; };
+		41AC1F6826B0A8E7007CA47A /* Ads.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ads.storyboard; sourceTree = "<group>"; };
 		41BC5D5025D1BF34002876EF /* CustomSize.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomSize.storyboard; sourceTree = "<group>"; };
 		41BC5D5125D1BF35002876EF /* CustomSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSizeViewController.h; sourceTree = "<group>"; };
 		41BC5D5225D1BF35002876EF /* CustomSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSizeViewController.m; sourceTree = "<group>"; };
@@ -72,6 +80,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		41AC1F6426B0A897007CA47A /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				41AC1F6626B0A8B5007CA47A /* AdsViewController.m */,
+				41AC1F6526B0A8B5007CA47A /* AdsViewController.h */,
+				41AC1F6826B0A8E7007CA47A /* Ads.storyboard */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		41BC5D5625D1BF3A002876EF /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,16 +131,19 @@
 		A1752CB923FD0E43000CCB33 /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
-				DCC2C0FB2643D46B00854DF7 /* UseCases */,
-				DCC2C0FA2643D45400854DF7 /* CustomSize */,
 				41BC5D5625D1BF3A002876EF /* Basic */,
+				41AC1F6426B0A897007CA47A /* Ads */,
 				41BC5D5E25D1BF6E002876EF /* EventHandling */,
+				DCC2C0FA2643D45400854DF7 /* CustomSize */,
+				DCC2C0FB2643D46B00854DF7 /* UseCases */,
 				A1752CBA23FD0E43000CCB33 /* AppDelegate.h */,
 				A1752CBB23FD0E43000CCB33 /* AppDelegate.m */,
 				A1752CC623FD0E45000CCB33 /* Assets.xcassets */,
 				A1752CC823FD0E45000CCB33 /* LaunchScreen.storyboard */,
 				A1752CCB23FD0E45000CCB33 /* Info.plist */,
 				A1752CCC23FD0E45000CCB33 /* main.m */,
+				413318A726B804A00086C34D /* Tokens.h */,
+				413318A826B804A00086C34D /* Tokens.m */,
 			);
 			path = StorylyDemo;
 			sourceTree = "<group>";
@@ -239,6 +260,7 @@
 				DCC2C1172644006700854DF7 /* ShowStoryly.storyboard in Resources */,
 				41BC5D5325D1BF35002876EF /* CustomSize.storyboard in Resources */,
 				41BC5D5825D1BF4F002876EF /* EventHandling.storyboard in Resources */,
+				41AC1F6926B0A8E7007CA47A /* Ads.storyboard in Resources */,
 				DCC2C11A264401B500854DF7 /* HideStoryly.storyboard in Resources */,
 				A1752CC523FD0E43000CCB33 /* Basic.storyboard in Resources */,
 			);
@@ -298,6 +320,8 @@
 				41BC5D5425D1BF35002876EF /* CustomSizeViewController.m in Sources */,
 				41BC5D5C25D1BF69002876EF /* EventHandlingViewController.m in Sources */,
 				DCC2C1052643D4C100854DF7 /* HideStorylyViewController.m in Sources */,
+				41AC1F6726B0A8B5007CA47A /* AdsViewController.m in Sources */,
+				413318A926B804A00086C34D /* Tokens.m in Sources */,
 				A1752CCD23FD0E45000CCB33 /* main.m in Sources */,
 				DCC2C1002643D4A300854DF7 /* ShowStorylyController.m in Sources */,
 			);

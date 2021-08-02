@@ -1,6 +1,5 @@
 package com.appsamurai.storylydemo
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.StorylyInit
@@ -13,8 +12,6 @@ class CustomThemeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCustomThemeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val STORYLY_INSTANCE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
 
         binding.storylyViewDefault.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
 
@@ -39,6 +36,5 @@ class CustomThemeActivity : AppCompatActivity() {
 
         // val progressBar = arrayOf(Color.parseColor("#FB3200"), Color.parseColor("#FFEB3B"))
         // storyly_custom_theme.setStoryItemProgressBarColor(progressBar)
-
     }
 }

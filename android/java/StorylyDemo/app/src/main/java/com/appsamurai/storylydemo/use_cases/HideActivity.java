@@ -16,6 +16,7 @@ import com.appsamurai.storyly.StorylyView;
 import com.appsamurai.storyly.analytics.StorylyEvent;
 import com.appsamurai.storylydemo.R;
 
+import com.appsamurai.storylydemo.Tokens;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,9 +35,7 @@ public class HideActivity extends AppCompatActivity {
         storylyView = findViewById(R.id.storyly_view);
         storylyViewHolder = findViewById(R.id.storyly_view_holder);
 
-        String STORYLY_INSTANCE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
-
-        storylyView.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
+        storylyView.setStorylyInit(new StorylyInit(Tokens.STORYLY_INSTANCE_TOKEN));
 
         storylyView.setStorylyListener(new StorylyListener() {
             boolean storylyLoaded = false;

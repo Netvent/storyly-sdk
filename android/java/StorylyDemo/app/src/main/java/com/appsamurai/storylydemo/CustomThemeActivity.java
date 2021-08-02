@@ -13,14 +13,12 @@ public class CustomThemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_theme);
 
-        String STORYLY_INSTANCE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
-
         StorylyView storyly_view_default = findViewById(R.id.storyly_view_default);
-        storyly_view_default.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
+        storyly_view_default.setStorylyInit(new StorylyInit(Tokens.STORYLY_INSTANCE_TOKEN));
 
 
         StorylyView storyly_custom_theme = findViewById(R.id.storyly_custom_theme);
-        storyly_custom_theme.setStorylyInit(new StorylyInit(STORYLY_INSTANCE_TOKEN));
+        storyly_custom_theme.setStorylyInit(new StorylyInit(Tokens.STORYLY_INSTANCE_TOKEN));
 
         // storyly_custom_theme.setStoryGroupTextColor(Color.parseColor("#f03932"));
 

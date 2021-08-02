@@ -7,6 +7,7 @@
 //
 
 #import "HideStorylyViewController.h"
+#import "Tokens.h"
 
 @interface HideStorylyViewController ()
 @property StorylyView *storylyView;
@@ -21,10 +22,8 @@
     
     self.initialLoad = false;
     
-    NSString *STORYLY_TOKEN = @"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
-    
     self.storylyView = [[StorylyView alloc] init];
-    self.storylyView.storylyInit = [[StorylyInit alloc] initWithStorylyId: STORYLY_TOKEN];
+    self.storylyView.storylyInit = [[StorylyInit alloc] initWithStorylyId: STORYLY_INSTANCE_TOKEN];
     self.storylyView.rootViewController = self;
     self.storylyView.delegate = self;
     

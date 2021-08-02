@@ -14,8 +14,6 @@ class EventHandlingActivity : AppCompatActivity() {
         binding = ActivityEventHandlingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val STORYLY_INSTANCE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
-
         binding.storylyView.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.storylyView.storylyListener = object : StorylyListener {
             override fun storylyLoaded(

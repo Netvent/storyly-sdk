@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		19C7686A8439D88F52D8372F /* Pods_StorylyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736369B3007CB8524D1E56A7 /* Pods_StorylyDemo.framework */; };
+		4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */; };
+		4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127AA2E26B0A539004CDE30 /* Ads.storyboard */; };
+		4127AA3126B0A5E4004CDE30 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127AA3026B0A5E4004CDE30 /* Tokens.swift */; };
 		41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BDE25D18A2500928E7C /* EventHandlingViewController.swift */; };
 		41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BE125D18AA600928E7C /* CustomSizeViewController.swift */; };
 		41501BE625D18AA700928E7C /* CustomThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BE225D18AA600928E7C /* CustomThemeViewController.swift */; };
@@ -27,6 +30,9 @@
 
 /* Begin PBXFileReference section */
 		3CB5F4E3423BEB3D0BA0629B /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewController.swift; sourceTree = "<group>"; };
+		4127AA2E26B0A539004CDE30 /* Ads.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ads.storyboard; sourceTree = "<group>"; };
+		4127AA3026B0A5E4004CDE30 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		41501BDE25D18A2500928E7C /* EventHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandlingViewController.swift; sourceTree = "<group>"; };
 		41501BE125D18AA600928E7C /* CustomSizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSizeViewController.swift; sourceTree = "<group>"; };
 		41501BE225D18AA600928E7C /* CustomThemeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomThemeViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +75,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4127AA2B26B0A4C8004CDE30 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */,
+				4127AA2E26B0A539004CDE30 /* Ads.storyboard */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		41501BEB25D1B16F00928E7C /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,15 +123,17 @@
 		A16DA835233B90E3000514FA /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
-				DC620EE4263FFCBE00CE8688 /* UseCases */,
-				DC620EE3263FFCAE00CE8688 /* CustomTheme */,
-				DC620EE2263FFC9800CE8688 /* CustomSize */,
 				41501BEB25D1B16F00928E7C /* Basic */,
 				41501BF125D1B30100928E7C /* EventHandling */,
+				DC620EE2263FFC9800CE8688 /* CustomSize */,
+				DC620EE3263FFCAE00CE8688 /* CustomTheme */,
+				4127AA2B26B0A4C8004CDE30 /* Ads */,
+				DC620EE4263FFCBE00CE8688 /* UseCases */,
 				A16DA836233B90E3000514FA /* AppDelegate.swift */,
 				A16DA83F233B90E5000514FA /* Assets.xcassets */,
 				A16DA841233B90E5000514FA /* LaunchScreen.storyboard */,
 				A16DA844233B90E5000514FA /* Info.plist */,
+				4127AA3026B0A5E4004CDE30 /* Tokens.swift */,
 			);
 			path = StorylyDemo;
 			sourceTree = "<group>";
@@ -240,6 +257,7 @@
 				A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */,
 				DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */,
 				41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */,
+				4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */,
 				41501BEF25D1B2FB00928E7C /* EventHandling.storyboard in Resources */,
 				41501BE725D18AA700928E7C /* CustomTheme.storyboard in Resources */,
 			);
@@ -295,12 +313,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */,
+				4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */,
 				41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */,
 				DC620EF4263FFDFB00CE8688 /* ShowStorylyViewController.swift in Sources */,
 				41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */,
 				41501BE625D18AA700928E7C /* CustomThemeViewController.swift in Sources */,
 				A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */,
 				DCD96E6526415285001E823C /* HideStorylyViewController.swift in Sources */,
+				4127AA3126B0A5E4004CDE30 /* Tokens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

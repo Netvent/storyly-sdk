@@ -19,10 +19,8 @@ class ShowStorylyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let STORYLY_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
-        
         storylyView = StorylyView()
-        storylyView.storylyInit = StorylyInit(storylyId: STORYLY_TOKEN)
+        storylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         storylyView.rootViewController = self
         storylyView.delegate = self
         storylyView.isHidden = true

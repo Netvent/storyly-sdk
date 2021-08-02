@@ -7,6 +7,7 @@ import com.appsamurai.storyly.StoryGroup
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylyListener
 import com.appsamurai.storyly.StorylyView
+import com.appsamurai.storylydemo.STORYLY_INSTANCE_TOKEN
 import com.appsamurai.storylydemo.databinding.ActivityShowBinding
 
 
@@ -18,8 +19,6 @@ class ShowActivity: AppCompatActivity() {
         binding = ActivityShowBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-
-        val STORYLY_INSTANCE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
 
         binding.storylyView.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.storylyView.visibility = View.GONE
