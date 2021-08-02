@@ -1,4 +1,7 @@
 # Release Notes
+### 1.13.2 (02.08.2021)
+* improved Split Mode handling on iPad devices, [#119](https://github.com/Netvent/storyly-mobile/issues/119)
+
 ### 1.13.0
 * added multiple story group support for external data usage
 * removed client side dynamic filtering feature 
