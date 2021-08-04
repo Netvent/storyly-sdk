@@ -1,4 +1,8 @@
 # Release Notes
+### 1.13.3 (04.08.2021)
+* improved Fragment usage related crashes
+* removed obsolete dependency, 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
 ### 1.13.2 (02.08.2021)
 * fixed Fragment$InstantiationException [#123](https://github.com/Netvent/storyly-mobile/issues/123)
 * fixed rtl enabled/disabled handling on interactive components [#124](https://github.com/Netvent/storyly-mobile/issues/124)
