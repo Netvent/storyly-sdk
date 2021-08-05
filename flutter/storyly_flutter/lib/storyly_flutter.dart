@@ -267,6 +267,9 @@ class StorylyParam {
   /// test groups are sent from the server.
   bool? storylyTestMode;
 
+  /// This attribute allows you to specify data of custom template groups
+  List<Map<String, dynamic>>? storylyExternalData;
+
   /// This attribute allows you to change the background color of the
   /// [StorylyView]
   Color? storylyBackgroundColor;
@@ -369,6 +372,7 @@ class StorylyParam {
       'storylySegments': storylySegments,
       'storylyCustomParameters': storylyCustomParameters,
       'storylyIsTestMode': storylyTestMode,
+      'storylyExternalData': storylyExternalData,
     };
 
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();

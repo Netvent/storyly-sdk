@@ -51,6 +51,7 @@ class FlutterStorylyView(
         private const val ARGS_STORYLY_SEGMENTS = "storylySegments"
         private const val ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
         private const val ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
+        private const val ARGS_STORYLY_EXTERNAL_DATA = "storylyExternalData"
 
         private const val ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
 
@@ -79,6 +80,7 @@ class FlutterStorylyView(
             val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
             val isTestMode = args[ARGS_STORYLY_IS_TEST_MODE] as? Boolean ?: false
             storylyInit = StorylyInit(storylyId, StorylySegmentation(segments = segments?.toSet()), customParameter = customParameters, isTestMode = isTestMode)
+            (args[ARGS_STORYLY_EXTERNAL_DATA] as? List<Map<String, Any?>>)?.let { setExternalData(it) }
             (args[ARGS_STORY_GROUP_SIZE] as? String)?.let {
                 setStoryGroupSize(when (it) {
                     "small" -> StoryGroupSize.Small
