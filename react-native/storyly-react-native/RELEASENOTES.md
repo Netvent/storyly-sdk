@@ -1,4 +1,7 @@
 # Release Notes
+### 1.13.0
+* added setExternalData method for personalized content, check [Integrations with Personalization Platforms](https://integration.storyly.io/react-native/integrations.html#personalization-platforms)
+
 ### 1.11.1
 * added isTestMode field to attributes to show test story groups, check [Test Mode](https://integration.storyly.io/react-native/test-mode.html)
 
