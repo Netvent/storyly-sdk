@@ -1,4 +1,7 @@
 # Release Notes
+### 1.13.4 (06.08.2021)
+* updated project dependencies, reverted kotlin version to 1.4.32
+
 ### 1.13.3 (04.08.2021)
 * improved Fragment usage related crashes
 * removed obsolete dependency, 'androidx.lifecycle:lifecycle-extensions:2.2.0'
