@@ -69,7 +69,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                                                    customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String,
                                                    isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false)
         self.storylyView.delegate = self
-        self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController        
+        self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
         self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
         self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
