@@ -1,3 +1,6 @@
+### 1.13.0
+* added setExternalData method for personalized content, check [Integrations with Personalization Platforms](https://integration.storyly.io/flutter/integrations.html#personalization-platforms)
+
 ### 1.12.0
 * added null support to package
 * added storyGroupIconImageThematicLabel field to StorylyParam to show dark/light story group icons, check [Thematic Story Group Icon](https://integration.storyly.io/flutter/ui-customizations.html#story-group-thematic-icon-image)
