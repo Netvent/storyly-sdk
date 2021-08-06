@@ -42,6 +42,7 @@ class FlutterStorylyView(
                         ?: 0,
                         callArguments?.getOrElse("storyId", { null }) as? Int)
                 "openStoryUri" -> storylyView.openStory(Uri.parse(callArguments?.get("uri") as? String))
+                "setExternalData" -> (callArguments?.get("externalData") as List<Map<String, Any?>>)?.let { storylyView.setExternalData(it) }
             }
         }
     }

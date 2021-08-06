@@ -51,6 +51,10 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                         let payloadUrl = URL(string: payloadString) {
                         _ = self?.storylyView.openStory(payload: payloadUrl)
                     }
+                case "setExternalData":
+                    if let externalData = callArguments?["externalData"] as? [[String : Any?]] {
+                        _ = self?.storylyView.setExternalData(externalData: externalData)
+                    }
                 default: do {}
             }
         }
