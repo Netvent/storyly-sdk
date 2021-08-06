@@ -104,7 +104,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 root.storylyView.openStory(Uri.parse(payloadStr))
             }
             COMMAND_SET_EXTERNAL_DATA_CODE -> {
-                root.storylyView.setExternalData(args?.getArray(0)?.toArrayList() as? ArrayList<Map<String, Any>>)
+                (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
+                    root.storylyView.setExternalData(it)
+                }
             }
             COMMAND_OPEN_STORY_V2_CODE -> {
                 val storyGroupId: Int = args?.getInt(0) ?: return

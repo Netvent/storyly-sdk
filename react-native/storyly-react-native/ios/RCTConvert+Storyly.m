@@ -14,9 +14,7 @@
     StorylySegmentation *storylySegmentation = [StorylySegmentation alloc];
     if ([storylyInit.allKeys containsObject:@"storylySegments"] &&
         storylyInit[@"storylySegments"] != NULL) {
-        storylySegmentation = [storylySegmentation initWithSegments:storylyInit[@"storylySegments"]
-                                       isDynamicSegmentationEnabled:NO
-                                        dynamicSegmentationCallback:NULL];
+        storylySegmentation = [storylySegmentation initWithSegments:storylyInit[@"storylySegments"]];
     }
     
     bool isTestMode = ([storylyInit.allKeys containsObject:@"storylyIsTestMode"]) ? [storylyInit[@"storylyIsTestMode"] boolValue] : NO;
