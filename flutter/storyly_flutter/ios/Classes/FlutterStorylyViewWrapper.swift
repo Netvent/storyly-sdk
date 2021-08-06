@@ -6,7 +6,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_SEGMENTS = "storylySegments"
     private let ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
     private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
-    private let ARGS_STORYLY_EXTERNAL_DATA = "storylyExternalData"
     
     private let ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
 
@@ -52,6 +51,10 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                         let payloadUrl = URL(string: payloadString) {
                         _ = self?.storylyView.openStory(payload: payloadUrl)
                     }
+                case "setExternalData":
+                    if let externalData = callArguments?["externalData"] as? [[String : Any?]] {
+                        _ = self?.storylyView.setExternalData(externalData: externalData)
+                    }
                 default: do {}
             }
         }
@@ -66,12 +69,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                                                    customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String,
                                                    isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false)
         self.storylyView.delegate = self
-        self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
-                
-        if let storylyExternalData = args[ARGS_STORYLY_EXTERNAL_DATA] as? [[String : Any?]] {
-            _ = self.storylyView.setExternalData(externalData: storylyExternalData)
-        }
-        
+        self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController        
         self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
         self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
