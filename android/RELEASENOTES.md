@@ -1,4 +1,7 @@
 # Release Notes
+### 1.13.5 (13.08.2021)
+* improved image component for interactive stories
+
 ### 1.13.4 (06.08.2021)
 * updated project dependencies, reverted kotlin version to 1.4.32
 
