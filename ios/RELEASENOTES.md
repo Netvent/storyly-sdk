@@ -1,4 +1,7 @@
 # Release Notes
+### 1.13.3 (13.08.2021)
+* improved video sound handling for silent/ringer modes
+
 ### 1.13.2 (02.08.2021)
 * improved Split Mode handling on iPad devices, [#119](https://github.com/Netvent/storyly-mobile/issues/119)
 
