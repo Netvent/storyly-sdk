@@ -1,4 +1,7 @@
 # Release Notes
+### 1.13.1 (13.08.2021)
+* updated native sdk depencies
+
 ### 1.13.0
 * added setExternalData method for personalized content, check [Integrations with Personalization Platforms](https://integration.storyly.io/react-native/integrations.html#personalization-platforms)
 
