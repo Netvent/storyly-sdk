@@ -1,4 +1,7 @@
 # Release Notes
+### 1.14.0 (27.08.2021)
+* added play modes for programmatic story opens, check [Deep Linking and Programmatic Open](https://integration.storyly.io/ios/deep-linking.html)
+
 ### 1.13.3 (13.08.2021)
 * improved video sound handling for silent/ringer modes
 
