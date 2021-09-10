@@ -1,4 +1,8 @@
 # Release Notes
+### 1.15.0 (10.09.2021)
+* added RTL support
+* added language support for Hebrew(HE-IW)
+
 ### 1.14.0 (27.08.2021)
 * added play modes for programmatic story opens, check [Deep Linking and Programmatic Open](https://integration.storyly.io/android/deep-linking.html)
 
