@@ -1,4 +1,9 @@
 # Release Notes
+### 1.15.1 (23.09.2021)
+* fixed a crash on interactive vod stories
+* fixed [#131](https://github.com/Netvent/storyly-mobile/issues/131)
+* improved handling for a crash, [#132](https://github.com/Netvent/storyly-mobile/issues/132)
+
 ### 1.15.0 (10.09.2021)
 * added RTL support
 * added language support for Hebrew(HE-IW)
