@@ -1,4 +1,8 @@
 # Release Notes
+### 1.15.2 (24.09.2021)
+* improved poll animation and result text alignment 
+* fixed [#127](https://github.com/Netvent/storyly-mobile/issues/127)
+
 ### 1.15.1 (23.09.2021)
 * fixed a crash on interactive vod stories
 * fixed [#131](https://github.com/Netvent/storyly-mobile/issues/131)
