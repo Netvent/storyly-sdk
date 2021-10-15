@@ -1,5 +1,5 @@
 # Release Notes
-### 1.16.0 (10.09.2021)
+### 1.16.0 (15.10.2021)
 * added customized story group style usage, check [Custom Story Group Styling](https://integration.storyly.io/ios/custom-story-group-styling.html)
 * removed XLarge default style on story group size
 * added previous story group automatic swipe when previous click on first story
