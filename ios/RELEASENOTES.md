@@ -1,4 +1,12 @@
 # Release Notes
+### 1.16.0 (10.09.2021)
+* added customized story group style usage, check [Custom Story Group Styling](https://integration.storyly.io/ios/custom-story-group-styling.html)
+* removed XLarge default style on story group size
+* added previous story group automatic swipe when previous click on first story
+* improved text size arrangements on text interactive components
+* improved events to identify reach of story groups
+* improved GIF rendering on image components
+
 ### 1.15.0 (10.09.2021)
 * added RTL support
 * added language support for Hebrew(HE-IW)
