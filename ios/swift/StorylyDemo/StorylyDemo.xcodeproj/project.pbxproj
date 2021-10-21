@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		19C7686A8439D88F52D8372F /* Pods_StorylyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736369B3007CB8524D1E56A7 /* Pods_StorylyDemo.framework */; };
+		30351CB727218602008A2A64 /* LandscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30351CAF27218602008A2A64 /* LandscapeView.swift */; };
+		30351CB827218602008A2A64 /* GradientPortraitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30351CB027218602008A2A64 /* GradientPortraitView.swift */; };
+		30351CB927218602008A2A64 /* PortraitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30351CB127218602008A2A64 /* PortraitView.swift */; };
+		30351CBA27218602008A2A64 /* LandscapeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30351CB227218602008A2A64 /* LandscapeView.xib */; };
+		30351CBB27218602008A2A64 /* WideLandscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30351CB327218602008A2A64 /* WideLandscapeView.swift */; };
+		30351CBC27218602008A2A64 /* GradientPortraitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30351CB427218602008A2A64 /* GradientPortraitView.xib */; };
+		30351CBD27218602008A2A64 /* WideLandscapeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30351CB527218602008A2A64 /* WideLandscapeView.xib */; };
+		30351CBE27218602008A2A64 /* PortraitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30351CB627218602008A2A64 /* PortraitView.xib */; };
+		30351CC027218665008A2A64 /* UI in Resources */ = {isa = PBXBuildFile; fileRef = 30351CBF27218665008A2A64 /* UI */; };
+		30351CC2272186D3008A2A64 /* CustomStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30351CC1272186D3008A2A64 /* CustomStyleViewController.swift */; };
 		4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */; };
 		4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127AA2E26B0A539004CDE30 /* Ads.storyboard */; };
 		4127AA3126B0A5E4004CDE30 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127AA3026B0A5E4004CDE30 /* Tokens.swift */; };
@@ -29,6 +39,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30351CAF27218602008A2A64 /* LandscapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeView.swift; sourceTree = "<group>"; };
+		30351CB027218602008A2A64 /* GradientPortraitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientPortraitView.swift; sourceTree = "<group>"; };
+		30351CB127218602008A2A64 /* PortraitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitView.swift; sourceTree = "<group>"; };
+		30351CB227218602008A2A64 /* LandscapeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandscapeView.xib; sourceTree = "<group>"; };
+		30351CB327218602008A2A64 /* WideLandscapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WideLandscapeView.swift; sourceTree = "<group>"; };
+		30351CB427218602008A2A64 /* GradientPortraitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GradientPortraitView.xib; sourceTree = "<group>"; };
+		30351CB527218602008A2A64 /* WideLandscapeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WideLandscapeView.xib; sourceTree = "<group>"; };
+		30351CB627218602008A2A64 /* PortraitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PortraitView.xib; path = "../../../../../../storyly-ios-sdk/StorylyDemo/StorylyDemo/Templates/PortraitView.xib"; sourceTree = "<group>"; };
+		30351CBF27218665008A2A64 /* UI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = UI; sourceTree = "<group>"; };
+		30351CC1272186D3008A2A64 /* CustomStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStyleViewController.swift; sourceTree = "<group>"; };
 		3CB5F4E3423BEB3D0BA0629B /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewController.swift; sourceTree = "<group>"; };
 		4127AA2E26B0A539004CDE30 /* Ads.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ads.storyboard; sourceTree = "<group>"; };
@@ -73,6 +93,23 @@
 				8796B38706767D0054280E24 /* Pods-StorylyDemo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		30351CAC27218566008A2A64 /* StylingTemplates */ = {
+			isa = PBXGroup;
+			children = (
+				30351CC1272186D3008A2A64 /* CustomStyleViewController.swift */,
+				30351CBF27218665008A2A64 /* UI */,
+				30351CB027218602008A2A64 /* GradientPortraitView.swift */,
+				30351CB427218602008A2A64 /* GradientPortraitView.xib */,
+				30351CAF27218602008A2A64 /* LandscapeView.swift */,
+				30351CB227218602008A2A64 /* LandscapeView.xib */,
+				30351CB127218602008A2A64 /* PortraitView.swift */,
+				30351CB627218602008A2A64 /* PortraitView.xib */,
+				30351CB327218602008A2A64 /* WideLandscapeView.swift */,
+				30351CB527218602008A2A64 /* WideLandscapeView.xib */,
+			);
+			path = StylingTemplates;
 			sourceTree = "<group>";
 		};
 		4127AA2B26B0A4C8004CDE30 /* Ads */ = {
@@ -123,6 +160,7 @@
 		A16DA835233B90E3000514FA /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
+				30351CAC27218566008A2A64 /* StylingTemplates */,
 				41501BEB25D1B16F00928E7C /* Basic */,
 				41501BF125D1B30100928E7C /* EventHandling */,
 				DC620EE2263FFC9800CE8688 /* CustomSize */,
@@ -254,11 +292,16 @@
 				A16DA843233B90E5000514FA /* LaunchScreen.storyboard in Resources */,
 				A16DA840233B90E5000514FA /* Assets.xcassets in Resources */,
 				DC941B6E2645422800A2042B /* HideStoryly.storyboard in Resources */,
+				30351CBC27218602008A2A64 /* GradientPortraitView.xib in Resources */,
 				A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */,
+				30351CBD27218602008A2A64 /* WideLandscapeView.xib in Resources */,
 				DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */,
 				41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */,
+				30351CBA27218602008A2A64 /* LandscapeView.xib in Resources */,
 				4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */,
+				30351CC027218665008A2A64 /* UI in Resources */,
 				41501BEF25D1B2FB00928E7C /* EventHandling.storyboard in Resources */,
+				30351CBE27218602008A2A64 /* PortraitView.xib in Resources */,
 				41501BE725D18AA700928E7C /* CustomTheme.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,13 +355,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30351CB727218602008A2A64 /* LandscapeView.swift in Sources */,
+				30351CB827218602008A2A64 /* GradientPortraitView.swift in Sources */,
 				A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */,
 				4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */,
 				41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */,
 				DC620EF4263FFDFB00CE8688 /* ShowStorylyViewController.swift in Sources */,
 				41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */,
 				41501BE625D18AA700928E7C /* CustomThemeViewController.swift in Sources */,
+				30351CBB27218602008A2A64 /* WideLandscapeView.swift in Sources */,
+				30351CC2272186D3008A2A64 /* CustomStyleViewController.swift in Sources */,
 				A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */,
+				30351CB927218602008A2A64 /* PortraitView.swift in Sources */,
 				DCD96E6526415285001E823C /* HideStorylyViewController.swift in Sources */,
 				4127AA3126B0A5E4004CDE30 /* Tokens.swift in Sources */,
 			);
