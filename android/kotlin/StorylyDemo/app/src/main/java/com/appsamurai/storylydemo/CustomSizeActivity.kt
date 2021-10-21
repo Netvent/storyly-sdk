@@ -13,9 +13,6 @@ class CustomSizeActivity : AppCompatActivity() {
         binding = ActivityCustomSizeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.storylyViewCustomXlarge.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
-        // storyly_view_custom_xlarge.setStoryGroupSize(StoryGroupSize.XLarge)
-
         binding.storylyViewCustomLarge.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         // storyly_view_custom_large.setStoryGroupSize(StoryGroupSize.Large)
 

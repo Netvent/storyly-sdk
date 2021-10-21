@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="178dp">
+
+        <com.appsamurai.storylydemo.styling_templates.ui.RoundImageView
+                android:id="@+id/background_story"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cornerRadius="8dp"/>
+
+        <View
+                android:id="@+id/story_foreground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/story_foreground"/>
+
+        <com.appsamurai.storylydemo.styling_templates.ui.RoundImageView
+            android:id="@+id/pin_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:cornerRadius="12dp"
+            android:visibility="invisible"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <FrameLayout
+            android:layout_width="24dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:id="@+id/vod_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="8dp">
+
+            <TextView
+                    android:id="@+id/group_title"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"/>
+
+            <com.appsamurai.storylydemo.styling_templates.ui.RoundImageView
+                    android:id="@+id/group_icon"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
