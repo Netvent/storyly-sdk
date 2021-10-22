@@ -15,8 +15,6 @@
 		30351CBB27218602008A2A64 /* WideLandscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30351CB327218602008A2A64 /* WideLandscapeView.swift */; };
 		30351CBC27218602008A2A64 /* GradientPortraitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30351CB427218602008A2A64 /* GradientPortraitView.xib */; };
 		30351CBD27218602008A2A64 /* WideLandscapeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30351CB527218602008A2A64 /* WideLandscapeView.xib */; };
-		30351CBE27218602008A2A64 /* PortraitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30351CB627218602008A2A64 /* PortraitView.xib */; };
-		30351CC027218665008A2A64 /* UI in Resources */ = {isa = PBXBuildFile; fileRef = 30351CBF27218665008A2A64 /* UI */; };
 		30351CC2272186D3008A2A64 /* CustomStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30351CC1272186D3008A2A64 /* CustomStyleViewController.swift */; };
 		4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */; };
 		4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127AA2E26B0A539004CDE30 /* Ads.storyboard */; };
@@ -27,6 +25,11 @@
 		41501BE725D18AA700928E7C /* CustomTheme.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BE325D18AA600928E7C /* CustomTheme.storyboard */; };
 		41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BE425D18AA600928E7C /* CustomSize.storyboard */; };
 		41501BEF25D1B2FB00928E7C /* EventHandling.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */; };
+		41BB11BE2722EC7700453F78 /* UIImage+ImageWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB11BB2722EC7700453F78 /* UIImage+ImageWithInsets.swift */; };
+		41BB11BF2722EC7700453F78 /* UIRoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB11BC2722EC7700453F78 /* UIRoundImageView.swift */; };
+		41BB11C02722EC7700453F78 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB11BD2722EC7700453F78 /* GradientView.swift */; };
+		41BB11C32722ECCB00453F78 /* PortraitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BB11C22722ECCB00453F78 /* PortraitView.xib */; };
+		41BB11C52722ECE200453F78 /* CustomStyle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BB11C42722ECE200453F78 /* CustomStyle.storyboard */; };
 		A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA836233B90E3000514FA /* AppDelegate.swift */; };
 		A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA83A233B90E3000514FA /* BasicViewController.swift */; };
 		A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83C233B90E3000514FA /* Basic.storyboard */; };
@@ -46,8 +49,6 @@
 		30351CB327218602008A2A64 /* WideLandscapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WideLandscapeView.swift; sourceTree = "<group>"; };
 		30351CB427218602008A2A64 /* GradientPortraitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GradientPortraitView.xib; sourceTree = "<group>"; };
 		30351CB527218602008A2A64 /* WideLandscapeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WideLandscapeView.xib; sourceTree = "<group>"; };
-		30351CB627218602008A2A64 /* PortraitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PortraitView.xib; path = "../../../../../../storyly-ios-sdk/StorylyDemo/StorylyDemo/Templates/PortraitView.xib"; sourceTree = "<group>"; };
-		30351CBF27218665008A2A64 /* UI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = UI; sourceTree = "<group>"; };
 		30351CC1272186D3008A2A64 /* CustomStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStyleViewController.swift; sourceTree = "<group>"; };
 		3CB5F4E3423BEB3D0BA0629B /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +60,11 @@
 		41501BE325D18AA600928E7C /* CustomTheme.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomTheme.storyboard; sourceTree = "<group>"; };
 		41501BE425D18AA600928E7C /* CustomSize.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomSize.storyboard; sourceTree = "<group>"; };
 		41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventHandling.storyboard; sourceTree = "<group>"; };
+		41BB11BB2722EC7700453F78 /* UIImage+ImageWithInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ImageWithInsets.swift"; sourceTree = "<group>"; };
+		41BB11BC2722EC7700453F78 /* UIRoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRoundImageView.swift; sourceTree = "<group>"; };
+		41BB11BD2722EC7700453F78 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		41BB11C22722ECCB00453F78 /* PortraitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PortraitView.xib; sourceTree = "<group>"; };
+		41BB11C42722ECE200453F78 /* CustomStyle.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomStyle.storyboard; sourceTree = "<group>"; };
 		736369B3007CB8524D1E56A7 /* Pods_StorylyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8796B38706767D0054280E24 /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A16DA833233B90E3000514FA /* StorylyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorylyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,14 +104,15 @@
 		30351CAC27218566008A2A64 /* StylingTemplates */ = {
 			isa = PBXGroup;
 			children = (
+				41BB11C12722ECAA00453F78 /* UI */,
 				30351CC1272186D3008A2A64 /* CustomStyleViewController.swift */,
-				30351CBF27218665008A2A64 /* UI */,
+				41BB11C42722ECE200453F78 /* CustomStyle.storyboard */,
 				30351CB027218602008A2A64 /* GradientPortraitView.swift */,
 				30351CB427218602008A2A64 /* GradientPortraitView.xib */,
 				30351CAF27218602008A2A64 /* LandscapeView.swift */,
 				30351CB227218602008A2A64 /* LandscapeView.xib */,
 				30351CB127218602008A2A64 /* PortraitView.swift */,
-				30351CB627218602008A2A64 /* PortraitView.xib */,
+				41BB11C22722ECCB00453F78 /* PortraitView.xib */,
 				30351CB327218602008A2A64 /* WideLandscapeView.swift */,
 				30351CB527218602008A2A64 /* WideLandscapeView.xib */,
 			);
@@ -137,6 +144,16 @@
 				41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */,
 			);
 			path = EventHandling;
+			sourceTree = "<group>";
+		};
+		41BB11C12722ECAA00453F78 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				41BB11BD2722EC7700453F78 /* GradientView.swift */,
+				41BB11BB2722EC7700453F78 /* UIImage+ImageWithInsets.swift */,
+				41BB11BC2722EC7700453F78 /* UIRoundImageView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		A16DA82A233B90E3000514FA = {
@@ -297,11 +314,11 @@
 				30351CBD27218602008A2A64 /* WideLandscapeView.xib in Resources */,
 				DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */,
 				41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */,
+				41BB11C52722ECE200453F78 /* CustomStyle.storyboard in Resources */,
 				30351CBA27218602008A2A64 /* LandscapeView.xib in Resources */,
 				4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */,
-				30351CC027218665008A2A64 /* UI in Resources */,
 				41501BEF25D1B2FB00928E7C /* EventHandling.storyboard in Resources */,
-				30351CBE27218602008A2A64 /* PortraitView.xib in Resources */,
+				41BB11C32722ECCB00453F78 /* PortraitView.xib in Resources */,
 				41501BE725D18AA700928E7C /* CustomTheme.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,11 +377,14 @@
 				A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */,
 				4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */,
 				41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */,
+				41BB11C02722EC7700453F78 /* GradientView.swift in Sources */,
+				41BB11BF2722EC7700453F78 /* UIRoundImageView.swift in Sources */,
 				DC620EF4263FFDFB00CE8688 /* ShowStorylyViewController.swift in Sources */,
 				41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */,
 				41501BE625D18AA700928E7C /* CustomThemeViewController.swift in Sources */,
 				30351CBB27218602008A2A64 /* WideLandscapeView.swift in Sources */,
 				30351CC2272186D3008A2A64 /* CustomStyleViewController.swift in Sources */,
+				41BB11BE2722EC7700453F78 /* UIImage+ImageWithInsets.swift in Sources */,
 				A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */,
 				30351CB927218602008A2A64 /* PortraitView.swift in Sources */,
 				DCD96E6526415285001E823C /* HideStorylyViewController.swift in Sources */,

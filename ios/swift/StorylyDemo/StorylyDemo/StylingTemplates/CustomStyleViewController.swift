@@ -28,7 +28,7 @@ class CustomStyleViewController: UIViewController {
         // Do any additional setup after loading the view
         customStorylyView1.translatesAutoresizingMaskIntoConstraints = false
 
-        customStorylyView1.storylyInit = StorylyInit(storylyId: STORYLY_DEFAULT_TOKEN)
+        customStorylyView1.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         customStorylyView1.rootViewController = self
         customStorylyView1.storyGroupViewFactory = factory1
         self.view.addSubview(customStorylyView1)
@@ -43,7 +43,7 @@ class CustomStyleViewController: UIViewController {
         
         customStorylyView2.translatesAutoresizingMaskIntoConstraints = false
 
-        customStorylyView2.storylyInit = StorylyInit(storylyId: STORYLY_DEFAULT_TOKEN)
+        customStorylyView2.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         customStorylyView2.rootViewController = self
         customStorylyView2.storyGroupViewFactory = factory2
         self.view.addSubview(customStorylyView2)
@@ -56,7 +56,7 @@ class CustomStyleViewController: UIViewController {
         
         customStorylyView3.translatesAutoresizingMaskIntoConstraints = false
 
-        customStorylyView3.storylyInit = StorylyInit(storylyId: STORYLY_DEFAULT_TOKEN)
+        customStorylyView3.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         customStorylyView3.rootViewController = self
         customStorylyView3.storyGroupViewFactory = factory3
         self.view.addSubview(customStorylyView3)
@@ -69,7 +69,7 @@ class CustomStyleViewController: UIViewController {
         
         customStorylyView4.translatesAutoresizingMaskIntoConstraints = false
 
-        customStorylyView4.storylyInit = StorylyInit(storylyId: STORYLY_DEFAULT_TOKEN)
+        customStorylyView4.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         customStorylyView4.rootViewController = self
         customStorylyView4.storyGroupViewFactory = factory4
         self.view.addSubview(customStorylyView4)
@@ -79,35 +79,5 @@ class CustomStyleViewController: UIViewController {
         customStorylyView4.topAnchor.constraint(equalTo: self.customStorylyView3.bottomAnchor, constant: 5).isActive = true
         
         customStorylyView4.heightAnchor.constraint(equalToConstant: 100).isActive = true
-    }
-}
-
-extension CustomStyleViewController: StorylyDelegate {
-    func storylyLoaded(_ storylyView: StorylyView, storyGroupList: [StoryGroup]) {
-        print("storylyLoaded \(storyGroupList.count)")
-    }
-    
-    func storylyLoadFailed(_ storylyView: StorylyView, errorMessage: String) {
-        print("storylyLoadFailed:\(errorMessage)")
-    }
-
-    func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        print("storylyActionClicked:\(story)")
-    }
-    
-    func storylyStoryPresented(_ storylyView: StorylyView) {
-        print("storylyStoryPresented")
-    }
-    
-    func storylyStoryDismissed(_ storylyView: StorylyView) {
-        print("storylyStoryDismissed")
-    }
-    
-    func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
-        print("storylyStoryLayerInteracted")
-    }
-    
-    func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
-        print("storylyEvent:\(event.rawValue):\(event.stringValue):\(storyGroup?.id):\(story?.id):\(storyComponent?.type)")
     }
 }
