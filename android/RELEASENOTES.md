@@ -1,4 +1,7 @@
 # Release Notes
+### 1.17.0 (21.10.2021)
+* added image cta interactive component, a clickable image component
+
 ### 1.16.0 (15.10.2021)
 * added customized story group style usage, check [Custom Story Group Styling](https://integration.storyly.io/android/custom-story-group-styling.html)
 * removed XLarge default style on story group size
