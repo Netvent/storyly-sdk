@@ -1,4 +1,4 @@
-package com.appsamurai.storyly.demo.templates
+package com.appsamurai.storylydemo.styling_templates
 
 import android.annotation.SuppressLint
 import android.content.Context
