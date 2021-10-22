@@ -12,7 +12,6 @@ import Storyly
 class CustomSizeViewController: UIViewController {
     @IBOutlet weak var storylyViewSmall: StorylyView!
     @IBOutlet weak var storylyViewLarge: StorylyView!
-    @IBOutlet weak var storylyViewXLarge: StorylyView!
     @IBOutlet weak var storylyViewPortrait: StorylyView!
     @IBOutlet weak var storylyViewLandscape: StorylyView!
 
@@ -27,11 +26,6 @@ class CustomSizeViewController: UIViewController {
         storylyViewLarge.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         storylyViewLarge.rootViewController = self
         //storylyViewLarge.storyGroupSize = "large"
-        
-        storylyViewXLarge.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
-        storylyViewXLarge.rootViewController = self
-        //storylyViewXLarge.storyGroupSize = "xlarge"
-        
         
         storylyViewPortrait.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         storylyViewPortrait.rootViewController = self

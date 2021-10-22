@@ -13,12 +13,6 @@
         android:orientation="vertical" >
 
         <com.appsamurai.storyly.StorylyView
-            android:id="@+id/storyly_view_custom_xlarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:storyGroupSize="xlarge" />
-
-        <com.appsamurai.storyly.StorylyView
             android:id="@+id/storyly_view_custom_large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

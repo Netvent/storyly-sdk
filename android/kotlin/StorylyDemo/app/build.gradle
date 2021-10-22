@@ -35,6 +35,6 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
-    implementation 'com.appsamurai.storyly:storyly:1.15.2'
-    implementation 'com.appsamurai.storyly:storyly-monetization:1.0.1'
+    implementation 'com.appsamurai.storyly:storyly:1.17.0'
+    implementation 'com.appsamurai.storyly:storyly-monetization:1.1.0'
 }
