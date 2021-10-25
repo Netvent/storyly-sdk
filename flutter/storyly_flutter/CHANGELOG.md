@@ -4,6 +4,7 @@
 * added RTL support
 * removed XLarge default style on story group size
 * added previous story group automatic swipe when previous click on first story
+* fixed storylyEvent callback issue, [#136](https://github.com/Netvent/storyly-mobile/issues/136)
 
 ### 1.13.1 (13.08.2021)
 * updated native sdk dependencies
