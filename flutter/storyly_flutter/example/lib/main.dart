@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
               print("storylyEvent -> storyGroup: ${storyGroup?.title}");
               print("storylyEvent -> story: ${story?.title}");
               print(
-                "storylyEvent storyComponent: ${storyComponent}",
+                "storylyEvent -> storyComponent: ${storyComponent}",
               );
             },
             storylyStoryShown: () => print("storylyStoryShown"),

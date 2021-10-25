@@ -37,7 +37,7 @@ typedef StorylyViewActionClickedCallback = void Function(
 typedef StorylyViewUserInteractedCallback = void Function(
   StoryGroup storyGroup,
   Story story,
-  StoryComponent storyComponent,
+  StoryComponent? storyComponent,
 );
 
 /// Storyly UI Widget
@@ -164,7 +164,7 @@ class _StorylyViewState extends State<StorylyView> {
           jsonData['event'],
           StoryGroup.fromJson(jsonData['storyGroup']),
           Story.fromJson(jsonData['story']),
-          getStorylyComponent(jsonData['storyComponent']),
+            getStorylyComponent(jsonData['storyComponent']),
         );
         break;
       case 'storylyActionClicked':
@@ -427,20 +427,16 @@ class StorylyParam {
   }
 }
 
-StoryComponent getStorylyComponent(Map<String, dynamic> json) {
-  var storyComponent = StoryComponent('undefined');
+StoryComponent? getStorylyComponent(Map<String, dynamic>? json) {
+  if (json == null) return null;
 
-  if (json['type'] == 'quiz') {
-    storyComponent = StoryQuizComponent.fromJson(json);
-  } else if (json['type'] == 'poll') {
-    storyComponent = StoryPollComponent.fromJson(json);
-  } else if (json['type'] == 'emoji') {
-    storyComponent = StoryEmojiComponent.fromJson(json);
-  } else if (json['type'] == 'rating') {
-    storyComponent = StoryRatingComponent.fromJson(json);
+  switch(json['type']) {
+    case 'quiz': return StoryQuizComponent.fromJson(json);
+    case 'poll': return StoryPollComponent.fromJson(json);
+    case 'emoji': return StoryEmojiComponent.fromJson(json);
+    case 'rating': return StoryRatingComponent.fromJson(json);
   }
-
-  return storyComponent;
+  return null;
 }
 
 /// This parent class represents the interactive components which users are interacted with.

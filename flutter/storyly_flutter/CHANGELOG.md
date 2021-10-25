@@ -1,5 +1,12 @@
+### 1.17.0 (25.10.2021)
+* added image cta component for interactive stories
+* added play modes handling for [openStoryUri method](https://github.com/Netvent/storyly-mobile/blob/master/flutter/storyly_flutter/lib/storyly_flutter.dart#L229), check for available modes from [Play Modes for Deep Links](https://integration.storyly.io/ios/deep-linking.html#play-modes)
+* added RTL support
+* removed XLarge default style on story group size
+* added previous story group automatic swipe when previous click on first story
+
 ### 1.13.1 (13.08.2021)
-* updated native sdk depencies
+* updated native sdk dependencies
 
 ### 1.13.0
 * added setExternalData method for personalized content, check [Integrations with Personalization Platforms](https://integration.storyly.io/flutter/integrations.html#personalization-platforms)
@@ -17,7 +24,7 @@
 * IMPORTANT! removed advertising id(idfa compatibility for iOS 14.5) usage
 
 ### 1.10.1
-* updated native dependecies
+* updated native dependencies
 
 ### 1.10.0
 * added product tag component for interactive stories
