@@ -30,7 +30,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
         private const val PROP_STORY_GROUP_TEXT_COLOR = "storyGroupTextColor"
         private const val PROP_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
-        private const val PROP_STORY_GROUP_ICON_FOREGROUND_COLORS = "storyGroupIconForegroundColors"
         private const val PROP_STORY_GROUP_SIZE = "storyGroupSize"
         private const val PROP_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val PROP_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
@@ -170,16 +169,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         view.storylyView.setStoryGroupPinIconColor(Color.parseColor(color))
     }
 
-    @ReactProp(name = PROP_STORY_GROUP_ICON_FOREGROUND_COLORS)
-    fun setPropStoryGroupIconForegroundColors(view: STStorylyView, colors: ReadableArray?) {
-        colors?.let { view.storylyView.setStoryGroupIconForegroundColor(convertColorArray(colors)) }
-    }
-
     @ReactProp(name = PROP_STORY_GROUP_SIZE)
     fun setPropStoryGroupSize(view: STStorylyView, size: String) {
         when (size) {
             "small" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Small)
-            "xlarge" -> view.storylyView.setStoryGroupSize(StoryGroupSize.XLarge)
             "custom" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Custom)
             else -> view.storylyView.setStoryGroupSize(StoryGroupSize.Large)
         }

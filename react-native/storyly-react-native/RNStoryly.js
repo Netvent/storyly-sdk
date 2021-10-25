@@ -64,7 +64,6 @@ class Storyly extends Component {
             storylyTestMode,
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
-            storyGroupIconForegroundColors,
             storyItemIconBorderColor,
             storyItemProgressBarColor,
             storyGroupIconHeight,
@@ -102,7 +101,6 @@ class Storyly extends Component {
                 onStorylyUserInteracted={onUserInteracted}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
                 storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
-                storyGroupIconForegroundColors={storyGroupIconForegroundColors ? storyGroupIconForegroundColors.map(processColor) : null}
                 storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
                 storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
                 ref={el => (this._storylyView = el)}/>
@@ -122,7 +120,6 @@ Storyly.propTypes = {
     storyGroupIconBackgroundColor: string,
     storyGroupTextColor: string,
     storyGroupPinIconColor: string,
-    storyGroupIconForegroundColors: arrayOf(string),
     storyGroupSize: string,
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,

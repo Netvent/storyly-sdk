@@ -92,7 +92,6 @@ RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorNotSeen, _storylyView.storyGrou
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBackgroundColor, _storylyView.storyGroupIconBackgroundColor, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyGroupTextColor, _storylyView.storyGroupTextColor, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyGroupPinIconColor, _storylyView.storyGroupPinIconColor, UIColor)
-RCT_REMAP_VIEW_PROPERTY(storyGroupIconForegroundColors, _storylyView.storyGroupIconForegroundColors, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyGroupSize, _storylyView.storyGroupSize, NSString)
 RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, _storylyView.storyItemIconBorderColor, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, _storylyView.storyItemTextColor, UIColor)

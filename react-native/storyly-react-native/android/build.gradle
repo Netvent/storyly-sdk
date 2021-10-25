@@ -22,7 +22,6 @@ def safeExtGet(prop, fallback) {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven'
 
 buildscript {
@@ -76,7 +75,7 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlin_version', DEFAULT_KOTLIN_VERSION)}"
 
-    implementation 'com.appsamurai.storyly:storyly:1.13.5'
+    implementation 'com.appsamurai.storyly:storyly:1.17.+'
 }
 
 def configureReactNativePom(def pom) {
