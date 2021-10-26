@@ -1,6 +1,13 @@
 # Release Notes
+### 1.17.0 (25.10.2021)
+* added image cta component for interactive stories
+* added play modes handling for [openStory method](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RNStoryly.js#L35), check for available modes from [Play Modes for Deep Links](https://integration.storyly.io/ios/deep-linking.html#play-modes)
+* added RTL support
+* removed XLarge default style on story group size
+* added previous story group automatic swipe when previous click on first story
+
 ### 1.13.1 (13.08.2021)
-* updated native sdk depencies
+* updated native sdk dependencies
 
 ### 1.13.0
 * added setExternalData method for personalized content, check [Integrations with Personalization Platforms](https://integration.storyly.io/react-native/integrations.html#personalization-platforms)

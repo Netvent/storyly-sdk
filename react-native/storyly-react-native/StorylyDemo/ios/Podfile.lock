@@ -270,11 +270,11 @@ PODS:
   - SDWebImage (5.10.0):
     - SDWebImage/Core (= 5.10.0)
   - SDWebImage/Core (5.10.0)
-  - Storyly (1.13.2):
+  - Storyly (1.17.0):
     - SDWebImage (= 5.10.0)
-  - storyly-react-native (1.13.0):
+  - storyly-react-native (1.17.0):
     - React
-    - Storyly (= 1.13.2)
+    - Storyly (~> 1.17.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -380,7 +380,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: e6ec9c1eb3e3c1d28d9cfa23f814c636eddd3a6a
+  FBReactNativeSpec: 53eaecec2e6f867c87fa385517e9a3402779c6e3
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: 6d3e854f0e7260a648badd0d44fc364bc9da9728
@@ -406,10 +406,10 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: a9904c6d0218fb9f8b19d6dd88607225927668f9
   ReactCommon: 149906e01aa51142707a10665185db879898e966
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
-  Storyly: af024693aafc7c2d24aef236d043a6e656a95de2
-  storyly-react-native: ed7f42ebacb330ed748c91811cea14cd2827e2db
+  Storyly: 72403fa005da36885f608d90231116a0b8b80779
+  storyly-react-native: 072adce5f1e9d8c7385e1eb1f62d2aaf032b09a5
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
 
 PODFILE CHECKSUM: e7334e298379b24abff53900e1ee75d7467e84d1
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2
