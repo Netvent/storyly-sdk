@@ -1,6 +1,7 @@
 # Release Notes
 ### 1.17.0 (21.10.2021)
 * added image cta interactive component, a clickable image component
+* fixed crash for multiple story group clicks, [#134](https://github.com/Netvent/storyly-mobile/issues/134)
 
 ### 1.16.0 (15.10.2021)
 * added customized story group style usage, check [Custom Story Group Styling](https://integration.storyly.io/android/custom-story-group-styling.html)
