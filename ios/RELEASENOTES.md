@@ -1,4 +1,7 @@
 # Release Notes
+### 1.17.1 (03.11.2021)
+* released version with Xcode 12.5.1 for backward compatibility
+
 ### 1.17.0 (21.10.2021)
 * added image cta interactive component, a clickable image component
 
