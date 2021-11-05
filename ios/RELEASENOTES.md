@@ -1,4 +1,7 @@
 # Release Notes
+### 1.17.3 (05.11.2021)
+* changed SDWebImage dependency as SDWebImage 5.10.x version to be minimum requirement
+
 ### 1.17.1 (03.11.2021)
 * released version with Xcode 12.5.1 for backward compatibility
 
