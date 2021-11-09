@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storylydemo.databinding.ActivityCustomStylingBinding
-import com.appsamurai.storylydemo.styling_templates.GradientPortraitViewFactory
-import com.appsamurai.storylydemo.styling_templates.LandscapeViewFactory
-import com.appsamurai.storylydemo.styling_templates.PortraitViewFactory
-import com.appsamurai.storylydemo.styling_templates.WideLandscapeViewFactory
+import com.appsamurai.storylydemo.styling_templates.*
 
 class CustomStylingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCustomStylingBinding
@@ -22,10 +19,14 @@ class CustomStylingActivity : AppCompatActivity() {
         binding.stylingGradientPortrait.storyGroupViewFactory = GradientPortraitViewFactory(this)
         binding.stylingPortrait.storyGroupViewFactory = PortraitViewFactory(this)
         binding.stylingWideLandscape.storyGroupViewFactory = WideLandscapeViewFactory(this)
+        binding.stylingSmall.storyGroupViewFactory = SmallViewFactory(this)
+        binding.stylingLarge.storyGroupViewFactory = LargeViewFactory(this)
 
         binding.stylingLandscape.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingGradientPortrait.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingPortrait.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingWideLandscape.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+        binding.stylingSmall.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+        binding.stylingLarge.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
     }
 }
