@@ -35,6 +35,8 @@
 		A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83C233B90E3000514FA /* Basic.storyboard */; };
 		A16DA840233B90E5000514FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16DA83F233B90E5000514FA /* Assets.xcassets */; };
 		A16DA843233B90E5000514FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16DA841233B90E5000514FA /* LaunchScreen.storyboard */; };
+		DC521BC4273A9C3B002E7BDF /* SmallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC521BC3273A9C3B002E7BDF /* SmallView.xib */; };
+		DC521BC7273A9C5C002E7BDF /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC521BC6273A9C5C002E7BDF /* SmallView.swift */; };
 		DC620EF4263FFDFB00CE8688 /* ShowStorylyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC620EF3263FFDFB00CE8688 /* ShowStorylyViewController.swift */; };
 		DC941B6E2645422800A2042B /* HideStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC941B6D2645422800A2042B /* HideStoryly.storyboard */; };
 		DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC941B702645428400A2042B /* ShowStoryly.storyboard */; };
@@ -74,6 +76,8 @@
 		A16DA83F233B90E5000514FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A16DA842233B90E5000514FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A16DA844233B90E5000514FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC521BC3273A9C3B002E7BDF /* SmallView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallView.xib; sourceTree = "<group>"; };
+		DC521BC6273A9C5C002E7BDF /* SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallView.swift; sourceTree = "<group>"; };
 		DC620EF3263FFDFB00CE8688 /* ShowStorylyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowStorylyViewController.swift; sourceTree = "<group>"; };
 		DC941B6D2645422800A2042B /* HideStoryly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HideStoryly.storyboard; sourceTree = "<group>"; };
 		DC941B702645428400A2042B /* ShowStoryly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowStoryly.storyboard; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				41BB11C22722ECCB00453F78 /* PortraitView.xib */,
 				30351CB327218602008A2A64 /* WideLandscapeView.swift */,
 				30351CB527218602008A2A64 /* WideLandscapeView.xib */,
+				DC521BC3273A9C3B002E7BDF /* SmallView.xib */,
+				DC521BC6273A9C5C002E7BDF /* SmallView.swift */,
 			);
 			path = StylingTemplates;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 				A16DA840233B90E5000514FA /* Assets.xcassets in Resources */,
 				DC941B6E2645422800A2042B /* HideStoryly.storyboard in Resources */,
 				30351CBC27218602008A2A64 /* GradientPortraitView.xib in Resources */,
+				DC521BC4273A9C3B002E7BDF /* SmallView.xib in Resources */,
 				A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */,
 				30351CBD27218602008A2A64 /* WideLandscapeView.xib in Resources */,
 				DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */,
@@ -388,6 +395,7 @@
 				A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */,
 				30351CB927218602008A2A64 /* PortraitView.swift in Sources */,
 				DCD96E6526415285001E823C /* HideStorylyViewController.swift in Sources */,
+				DC521BC7273A9C5C002E7BDF /* SmallView.swift in Sources */,
 				4127AA3126B0A5E4004CDE30 /* Tokens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

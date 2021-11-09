@@ -15,12 +15,14 @@ class CustomStyleViewController: UIViewController {
     private let portraitViewFactory: StoryGroupViewFactory = PortraitViewFactory()
     private let landspaceViewFactory: StoryGroupViewFactory = LandscapeViewFactory()
     private let wideLandspaceViewFactory: StoryGroupViewFactory = WideLandscapeViewFactory()
+    private let smallViewFactory: StoryGroupViewFactory = SmallViewFactory()
 
     @IBOutlet var gradientPortraitStorylyView: StorylyView!
     @IBOutlet var portraitStorylyView: StorylyView!
     @IBOutlet var landscapeStorylyView: StorylyView!
     @IBOutlet var wideLandscapeStorylyView: StorylyView!
-    
+    @IBOutlet var smallStorylyView: StorylyView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -41,5 +43,9 @@ class CustomStyleViewController: UIViewController {
         wideLandscapeStorylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         wideLandscapeStorylyView.rootViewController = self
         wideLandscapeStorylyView.storyGroupViewFactory = wideLandspaceViewFactory
+        
+        smallStorylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
+        smallStorylyView.rootViewController = self
+        smallStorylyView.storyGroupViewFactory = smallViewFactory
     }
 }
