@@ -1,5 +1,5 @@
 //
-//  SmallView.swift
+//  LargeView.swift
 //  StorylyDemo
 //
 //  Created by Haldun Fadillioglu on 20.09.2021.
@@ -10,9 +10,9 @@ import UIKit
 import Storyly
 
 
-public class SmallView: StoryGroupView {
+public class LargeView: StoryGroupView {
     
-    let kCONTENT_XIB_NAME = "SmallView"
+    let kCONTENT_XIB_NAME = "LargeView"
     
 
     @IBOutlet weak var groupTitle: UILabel!
@@ -57,7 +57,7 @@ public class SmallView: StoryGroupView {
     
     public override func populateView(storyGroup: StoryGroup?) {
         if let storyGroup = storyGroup {
-            self.groupTitle.text = storyGroup.title
+            self.groupTitle.text = storyGroup.title.replacingOccurrences(of: "test", with: "melih")
             self.groupIcon.setImage(iconUrl: storyGroup.iconUrl, contentMode: .scaleAspectFill)
             self.pinIcon.isHidden = storyGroup.pinned ? false : true
             self.vodIcon.isHidden = storyGroup.type == .IVod ? false : true
@@ -75,12 +75,12 @@ public class SmallView: StoryGroupView {
     
 }
 
-public class SmallViewFactory: StoryGroupViewFactory {
+public class LargeViewFactory: StoryGroupViewFactory {
     public func getSize() -> CGSize {
-        return CGSize(width: 70, height: 95)
+        return CGSize(width: 90, height: 120)
     }
     
     public func createView() -> StoryGroupView {
-        return SmallView(frame: .zero)
+        return LargeView(frame: .zero)
     }
 }

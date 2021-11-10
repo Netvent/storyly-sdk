@@ -52,12 +52,20 @@
                                     <constraint firstAttribute="height" constant="110" id="pDC-e8-cMF"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOv-Wh-s1h" userLabel="Large Storyly View" customClass="StorylyView">
+                                <rect key="frame" x="0.0" y="751" width="414" height="120"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="yS8-yG-f5m"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iMs-c7-NSq" secondAttribute="trailing" id="2FY-gS-QMj"/>
                             <constraint firstItem="6u7-Xg-QUQ" firstAttribute="top" secondItem="iMs-c7-NSq" secondAttribute="bottom" constant="22" id="ApT-9U-0aT"/>
+                            <constraint firstItem="ZOv-Wh-s1h" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="DQa-59-CwV"/>
                             <constraint firstItem="p5b-4w-9N6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="F0S-XX-IXT"/>
                             <constraint firstItem="iMs-c7-NSq" firstAttribute="top" secondItem="p5b-4w-9N6" secondAttribute="bottom" constant="20" id="KAp-Ej-YbJ"/>
                             <constraint firstItem="VeD-ch-Kwr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Ost-j6-MqS"/>
@@ -66,8 +74,10 @@
                             <constraint firstItem="iMs-c7-NSq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="V09-ZC-TDH"/>
                             <constraint firstItem="p5b-4w-9N6" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="VCT-WM-mcT"/>
                             <constraint firstItem="6u7-Xg-QUQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="VtK-9U-nDB"/>
+                            <constraint firstItem="ZOv-Wh-s1h" firstAttribute="top" secondItem="VeD-ch-Kwr" secondAttribute="bottom" constant="8" symbolic="YES" id="ZED-gF-XGx"/>
                             <constraint firstItem="Dk2-VC-e73" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ciG-A8-y1F"/>
                             <constraint firstItem="VeD-ch-Kwr" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="g82-N9-FHt"/>
+                            <constraint firstItem="ZOv-Wh-s1h" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gM9-u0-edA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="p5b-4w-9N6" secondAttribute="trailing" id="gOQ-qE-EUa"/>
                             <constraint firstItem="VeD-ch-Kwr" firstAttribute="top" secondItem="Dk2-VC-e73" secondAttribute="bottom" constant="8" id="nh5-0g-NVU"/>
                             <constraint firstItem="Dk2-VC-e73" firstAttribute="top" secondItem="6u7-Xg-QUQ" secondAttribute="bottom" constant="33" id="x9V-9Q-9up"/>
@@ -76,6 +86,7 @@
                     <connections>
                         <outlet property="gradientPortraitStorylyView" destination="p5b-4w-9N6" id="EOp-EA-nvt"/>
                         <outlet property="landscapeStorylyView" destination="6u7-Xg-QUQ" id="QU8-ml-Ilb"/>
+                        <outlet property="largeStorylyView" destination="ZOv-Wh-s1h" id="Luh-YY-0l1"/>
                         <outlet property="portraitStorylyView" destination="iMs-c7-NSq" id="BkD-wo-wlj"/>
                         <outlet property="smallStorylyView" destination="VeD-ch-Kwr" id="gBR-Ol-Pbf"/>
                         <outlet property="wideLandscapeStorylyView" destination="Dk2-VC-e73" id="d1g-co-FRo"/>
