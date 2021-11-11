@@ -22,11 +22,11 @@
             <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ge5-Yy-9Rt">
-                    <rect key="frame" x="5" y="87" width="80" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ge5-Yy-9Rt">
+                    <rect key="frame" x="5" y="87" width="80" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="9Oe-Ca-uOH"/>
-                        <constraint firstAttribute="height" constant="30" id="jei-n5-4sg"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="jei-n5-4sg"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,9 +81,9 @@
                 <constraint firstItem="Ah4-Ob-1l1" firstAttribute="top" secondItem="XoV-uL-TAF" secondAttribute="top" constant="62" id="Hc4-G7-p88"/>
                 <constraint firstItem="ge5-Yy-9Rt" firstAttribute="leading" secondItem="XoV-uL-TAF" secondAttribute="leading" constant="5" id="IRF-wj-6Ec"/>
                 <constraint firstItem="g30-oF-FCw" firstAttribute="leading" secondItem="XoV-uL-TAF" secondAttribute="leading" constant="5" id="PVY-FP-n6V"/>
-                <constraint firstAttribute="bottom" secondItem="ge5-Yy-9Rt" secondAttribute="bottom" constant="3" id="S8f-Yi-mqQ"/>
                 <constraint firstItem="W7c-hc-Tef" firstAttribute="top" secondItem="XoV-uL-TAF" secondAttribute="top" constant="65" id="krq-Zj-qSd"/>
                 <constraint firstItem="g30-oF-FCw" firstAttribute="top" secondItem="XoV-uL-TAF" secondAttribute="top" constant="5" id="now-6E-xDW"/>
+                <constraint firstItem="ge5-Yy-9Rt" firstAttribute="top" secondItem="W7c-hc-Tef" secondAttribute="bottom" constant="1" id="zPj-sc-AYQ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-115.94202898550725" y="-208.25892857142856"/>
