@@ -15,9 +15,9 @@ import com.appsamurai.storylydemo.styling_templates.ui.dpToPixel
 import com.bumptech.glide.Glide
 
 @SuppressLint("ViewConstructor")
-class LargeView(context: Context) : StoryGroupView(context) {
+open class LargeView(context: Context) : StoryGroupView(context) {
 
-    private val binding: StylingLargeBinding = StylingLargeBinding.inflate(LayoutInflater.from(context))
+    internal val binding: StylingLargeBinding = StylingLargeBinding.inflate(LayoutInflater.from(context))
 
     init {
         addView(binding.root)
