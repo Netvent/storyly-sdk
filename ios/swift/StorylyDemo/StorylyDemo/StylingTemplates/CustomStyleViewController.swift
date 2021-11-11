@@ -16,7 +16,7 @@ class CustomStyleViewController: UIViewController {
     private let landspaceViewFactory: StoryGroupViewFactory = LandscapeViewFactory()
     private let wideLandspaceViewFactory: StoryGroupViewFactory = WideLandscapeViewFactory()
     private let smallViewFactory: StoryGroupViewFactory = SmallViewFactory()
-    private let largeViewFactory: StoryGroupViewFactory = LargeViewFactory()
+    private let largeViewFactory: StoryGroupViewFactory = TitleParameterLargeViewFactory()
 
     @IBOutlet var gradientPortraitStorylyView: StorylyView!
     @IBOutlet var portraitStorylyView: StorylyView!
