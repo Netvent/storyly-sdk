@@ -21,6 +21,7 @@ class CustomStylingActivity : AppCompatActivity() {
         binding.stylingWideLandscape.storyGroupViewFactory = WideLandscapeViewFactory(this)
         binding.stylingSmall.storyGroupViewFactory = SmallViewFactory(this)
         binding.stylingLarge.storyGroupViewFactory = LargeViewFactory(this)
+        binding.stylingTitleParameterLarge.storyGroupViewFactory = TitleParameterLargeViewFactory(this)
 
         binding.stylingLandscape.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingGradientPortrait.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
@@ -28,5 +29,6 @@ class CustomStylingActivity : AppCompatActivity() {
         binding.stylingWideLandscape.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingSmall.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingLarge.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+        binding.stylingTitleParameterLarge.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
     }
 }

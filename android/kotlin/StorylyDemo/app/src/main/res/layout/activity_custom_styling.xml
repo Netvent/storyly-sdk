@@ -21,12 +21,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.appsamurai.storyly.StorylyView
-                    android:id="@+id/storyly_default"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
-                <com.appsamurai.storyly.StorylyView
                     android:id="@+id/styling_large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -53,6 +47,11 @@
 
                 <com.appsamurai.storyly.StorylyView
                     android:id="@+id/styling_wide_landscape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_title_parameter_large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
