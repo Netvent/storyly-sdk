@@ -1,4 +1,11 @@
 # Release Notes
+### 1.18.0 (18.11.2021)
+* removed SDWebImage dependency
+* added promo code interactive component
+* fixed sdk version handling error due to Xcode 13
+* added personalized story group name, story group icon and story title usage to setExternalData flow
+* IMPORTANT! added dataSource field to storylyLoaded callback 
+
 ### 1.17.3 (05.11.2021)
 * changed SDWebImage dependency as SDWebImage 5.10.x version to be minimum requirement
 
