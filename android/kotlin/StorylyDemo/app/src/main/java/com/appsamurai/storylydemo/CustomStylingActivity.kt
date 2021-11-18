@@ -22,6 +22,7 @@ class CustomStylingActivity : AppCompatActivity() {
         binding.stylingSmall.storyGroupViewFactory = SmallViewFactory(this)
         binding.stylingLarge.storyGroupViewFactory = LargeViewFactory(this)
         binding.stylingTitleParameterLarge.storyGroupViewFactory = TitleParameterLargeViewFactory(this)
+        binding.stylingNetflix.storyGroupViewFactory = NetflixStyleViewFactory(this)
 
         binding.stylingLandscape.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingGradientPortrait.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
@@ -30,5 +31,6 @@ class CustomStylingActivity : AppCompatActivity() {
         binding.stylingSmall.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingLarge.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
         binding.stylingTitleParameterLarge.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
+        binding.stylingNetflix.storylyInit = StorylyInit(STORYLY_INSTANCE_TOKEN)
     }
 }

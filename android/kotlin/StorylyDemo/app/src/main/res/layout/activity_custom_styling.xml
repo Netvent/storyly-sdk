@@ -55,6 +55,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
+                <com.appsamurai.storyly.StorylyView
+                    android:background="#1A1A1A"
+                    android:id="@+id/styling_netflix"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
             </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
