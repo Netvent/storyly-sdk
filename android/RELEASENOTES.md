@@ -1,4 +1,10 @@
 # Release Notes
+### 1.18.0 (18.11.2021)
+* added promo code interactive component
+* improved video playback, please check java 1.8 compatibility during integration
+* added personalized story group name, story group icon and story title usage to setExternalData flow
+* IMPORTANT! added dataSource field to storylyLoaded callback 
+
 ### 1.17.0 (21.10.2021)
 * added image cta interactive component, a clickable image component
 * fixed crash for multiple story group clicks, [#134](https://github.com/Netvent/storyly-mobile/issues/134)
