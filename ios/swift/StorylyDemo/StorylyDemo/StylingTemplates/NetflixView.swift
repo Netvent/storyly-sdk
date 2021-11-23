@@ -52,6 +52,11 @@ public class NetflixView: StoryGroupView {
     
     public override func populateView(storyGroup: StoryGroup?) {
         if let storyGroup = storyGroup {
+            //  In storyly dashboard, update story group title giving a parameter (that would not affect normal texts)
+            //  that will programmatically update border color with custom factory.
+            //  For example:
+            //    - Add parameters to title, such as {r}, {g}, {b} to understand which predefined border color to use
+            //    - Check and remove before setting to groupTitle
             let (title, borderColor) = customBorderColor(storyGroupTitle: storyGroup.title)
             
             self.groupTitle.text = title

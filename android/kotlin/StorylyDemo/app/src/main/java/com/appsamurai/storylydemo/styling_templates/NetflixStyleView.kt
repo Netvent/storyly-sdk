@@ -27,6 +27,11 @@ class NetflixStyleView(context: Context) : StoryGroupView(context) {
     override fun populateView(storyGroup: StoryGroup?) {
         Glide.with(context.applicationContext).load(storyGroup?.iconUrl).into(binding.groupIcon)
 
+        //  In storyly dashboard, update story group title giving a parameter (that would not affect normal texts)
+        //  that will programmatically update border color with custom factory.
+        //  For example:
+        //    - Add parameters to title, such as {r}, {g}, {b} to understand which predefined border color to use
+        //    - Check and remove before setting to groupTitle
         val (cleanTitle, borderColor) = storyGroup?.title?.let {
             when {
                 it.contains("{r}") -> Pair(it.replace("{r}", ""), arrayOf(Color.parseColor("#bd181a"), Color.parseColor("#bd181a")))
