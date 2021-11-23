@@ -53,7 +53,6 @@ public class NetflixView: StoryGroupView {
     public override func populateView(storyGroup: StoryGroup?) {
         if let storyGroup = storyGroup {
             let (title, borderColor) = customBorderColor(storyGroupTitle: storyGroup.title)
-            print("title: \(title) - borderColor: \(borderColor)")
             
             self.groupTitle.text = title
             self.groupIcon.setImage(iconUrl: storyGroup.iconUrl, contentMode: .scaleAspectFill)
