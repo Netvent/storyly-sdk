@@ -44,6 +44,8 @@
 		DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC941B702645428400A2042B /* ShowStoryly.storyboard */; };
 		DCA6E7CC273D26630035EC2A /* TitleParameterLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA6E7CB273D26630035EC2A /* TitleParameterLargeView.swift */; };
 		DCD96E6526415285001E823C /* HideStorylyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD96E6426415285001E823C /* HideStorylyViewController.swift */; };
+		DCE5DFEB274CC47900DCF2AD /* NetflixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5DFE9274CC47900DCF2AD /* NetflixView.swift */; };
+		DCE5DFF0274CC87500DCF2AD /* NetflixView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE5DFEF274CC87500DCF2AD /* NetflixView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +90,8 @@
 		DC941B702645428400A2042B /* ShowStoryly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowStoryly.storyboard; sourceTree = "<group>"; };
 		DCA6E7CB273D26630035EC2A /* TitleParameterLargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleParameterLargeView.swift; sourceTree = "<group>"; };
 		DCD96E6426415285001E823C /* HideStorylyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideStorylyViewController.swift; sourceTree = "<group>"; };
+		DCE5DFE9274CC47900DCF2AD /* NetflixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetflixView.swift; sourceTree = "<group>"; };
+		DCE5DFEF274CC87500DCF2AD /* NetflixView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetflixView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 				DC034CA3273BAE8D0095E82F /* LargeView.swift */,
 				DC034CA6273BAEC50095E82F /* LargeView.xib */,
 				DCA6E7CB273D26630035EC2A /* TitleParameterLargeView.swift */,
+				DCE5DFE9274CC47900DCF2AD /* NetflixView.swift */,
+				DCE5DFEF274CC87500DCF2AD /* NetflixView.xib */,
 			);
 			path = StylingTemplates;
 			sourceTree = "<group>";
@@ -328,6 +334,7 @@
 				DC034CA7273BAEC50095E82F /* LargeView.xib in Resources */,
 				DC521BC4273A9C3B002E7BDF /* SmallView.xib in Resources */,
 				A16DA83E233B90E3000514FA /* Basic.storyboard in Resources */,
+				DCE5DFF0274CC87500DCF2AD /* NetflixView.xib in Resources */,
 				30351CBD27218602008A2A64 /* WideLandscapeView.xib in Resources */,
 				DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */,
 				41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */,
@@ -395,6 +402,7 @@
 				4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */,
 				DC034CA4273BAE8D0095E82F /* LargeView.swift in Sources */,
 				DCA6E7CC273D26630035EC2A /* TitleParameterLargeView.swift in Sources */,
+				DCE5DFEB274CC47900DCF2AD /* NetflixView.swift in Sources */,
 				41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */,
 				41BB11C02722EC7700453F78 /* GradientView.swift in Sources */,
 				41BB11BF2722EC7700453F78 /* UIRoundImageView.swift in Sources */,

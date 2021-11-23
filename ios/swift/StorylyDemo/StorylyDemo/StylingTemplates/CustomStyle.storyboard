@@ -17,79 +17,97 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5b-4w-9N6" customClass="StorylyView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="178"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="178" id="7gl-M5-TRo"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-c7-NSq" customClass="StorylyView">
-                                <rect key="frame" x="0.0" y="242" width="414" height="178"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="178" id="u6U-91-IbV"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6u7-Xg-QUQ" customClass="StorylyView">
-                                <rect key="frame" x="0.0" y="442" width="414" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Obq-02-Bo4"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dk2-VC-e73" customClass="StorylyView">
-                                <rect key="frame" x="0.0" y="525" width="414" height="100"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="UEO-TP-Rio"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeD-ch-Kwr" userLabel="Small Storyly View" customClass="StorylyView">
-                                <rect key="frame" x="0.0" y="633" width="414" height="110"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="pDC-e8-cMF"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOv-Wh-s1h" userLabel="Large Storyly View" customClass="StorylyView">
-                                <rect key="frame" x="0.0" y="751" width="414" height="120"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="yS8-yG-f5m"/>
-                                </constraints>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iik-da-eF5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4S6-I0-urX">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1161"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rW-fH-s2P" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="178"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="178" id="TgS-dc-YC6"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7T0-ub-Lte" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="198" width="414" height="178"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="178" id="SkJ-ES-bAr"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwQ-Gb-Kge" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="396" width="414" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="ct4-9h-Elg"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNz-tu-3Ml" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="466" width="414" height="100"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="pg6-QT-hKv"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="liK-PZ-wsv" userLabel="Netflix Storyly View" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="586" width="414" height="180"/>
+                                                <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="180" id="55i-1w-EdF"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9q-Yg-oVb" userLabel="Small Storyly View" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="786" width="414" height="95"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="95" id="utn-bc-x9G"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mkr-Fr-6Zm" userLabel="Large Storyly View" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="901" width="414" height="120"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="H8i-dm-Ube"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpu-kU-hmW" userLabel="Title Parameter Large Storyly View" customClass="StorylyView">
+                                                <rect key="frame" x="0.0" y="1041" width="414" height="120"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="qGE-In-5aK"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iMs-c7-NSq" secondAttribute="trailing" id="2FY-gS-QMj"/>
-                            <constraint firstItem="6u7-Xg-QUQ" firstAttribute="top" secondItem="iMs-c7-NSq" secondAttribute="bottom" constant="22" id="ApT-9U-0aT"/>
-                            <constraint firstItem="ZOv-Wh-s1h" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="DQa-59-CwV"/>
-                            <constraint firstItem="p5b-4w-9N6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="F0S-XX-IXT"/>
-                            <constraint firstItem="iMs-c7-NSq" firstAttribute="top" secondItem="p5b-4w-9N6" secondAttribute="bottom" constant="20" id="KAp-Ej-YbJ"/>
-                            <constraint firstItem="VeD-ch-Kwr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Ost-j6-MqS"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Dk2-VC-e73" secondAttribute="trailing" id="QFb-Pn-m1A"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6u7-Xg-QUQ" secondAttribute="trailing" id="Qhf-jS-a9a"/>
-                            <constraint firstItem="iMs-c7-NSq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="V09-ZC-TDH"/>
-                            <constraint firstItem="p5b-4w-9N6" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="VCT-WM-mcT"/>
-                            <constraint firstItem="6u7-Xg-QUQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="VtK-9U-nDB"/>
-                            <constraint firstItem="ZOv-Wh-s1h" firstAttribute="top" secondItem="VeD-ch-Kwr" secondAttribute="bottom" constant="8" symbolic="YES" id="ZED-gF-XGx"/>
-                            <constraint firstItem="Dk2-VC-e73" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ciG-A8-y1F"/>
-                            <constraint firstItem="VeD-ch-Kwr" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="g82-N9-FHt"/>
-                            <constraint firstItem="ZOv-Wh-s1h" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gM9-u0-edA"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="p5b-4w-9N6" secondAttribute="trailing" id="gOQ-qE-EUa"/>
-                            <constraint firstItem="VeD-ch-Kwr" firstAttribute="top" secondItem="Dk2-VC-e73" secondAttribute="bottom" constant="8" id="nh5-0g-NVU"/>
-                            <constraint firstItem="Dk2-VC-e73" firstAttribute="top" secondItem="6u7-Xg-QUQ" secondAttribute="bottom" constant="33" id="x9V-9Q-9up"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4S6-I0-urX" secondAttribute="trailing" id="191-OU-Huu"/>
+                            <constraint firstItem="4S6-I0-urX" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" id="MXq-3l-OCO"/>
+                            <constraint firstItem="Iik-da-eF5" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" id="OSg-wg-4Rx"/>
+                            <constraint firstItem="Iik-da-eF5" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="akP-cK-RYH"/>
+                            <constraint firstItem="4S6-I0-urX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="f47-g4-RTO"/>
+                            <constraint firstItem="Iik-da-eF5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hop-F4-2r1"/>
+                            <constraint firstItem="4S6-I0-urX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lc4-VR-Y21"/>
+                            <constraint firstItem="Iik-da-eF5" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="rut-kV-yuf"/>
+                            <constraint firstItem="Iik-da-eF5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="u1l-ko-aOV"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="gradientPortraitStorylyView" destination="p5b-4w-9N6" id="EOp-EA-nvt"/>
-                        <outlet property="landscapeStorylyView" destination="6u7-Xg-QUQ" id="QU8-ml-Ilb"/>
-                        <outlet property="largeStorylyView" destination="ZOv-Wh-s1h" id="Luh-YY-0l1"/>
-                        <outlet property="portraitStorylyView" destination="iMs-c7-NSq" id="BkD-wo-wlj"/>
-                        <outlet property="smallStorylyView" destination="VeD-ch-Kwr" id="gBR-Ol-Pbf"/>
-                        <outlet property="wideLandscapeStorylyView" destination="Dk2-VC-e73" id="d1g-co-FRo"/>
+                        <outlet property="gradientPortraitStorylyView" destination="9rW-fH-s2P" id="PbK-Da-3iZ"/>
+                        <outlet property="landscapeStorylyView" destination="SwQ-Gb-Kge" id="yoJ-cl-g7O"/>
+                        <outlet property="largeStorylyView" destination="Mkr-Fr-6Zm" id="rrb-ea-Yc9"/>
+                        <outlet property="netflixStorylyView" destination="liK-PZ-wsv" id="1hE-Sl-pYx"/>
+                        <outlet property="portraitStorylyView" destination="7T0-ub-Lte" id="hFk-eM-HiG"/>
+                        <outlet property="smallStorylyView" destination="p9q-Yg-oVb" id="bKG-L4-1hs"/>
+                        <outlet property="stackView" destination="4S6-I0-urX" id="ixn-kp-lGn"/>
+                        <outlet property="titleParameterLargeView" destination="cpu-kU-hmW" id="gVh-up-MKK"/>
+                        <outlet property="wideLandscapeStorylyView" destination="lNz-tu-3Ml" id="0aM-y0-V1o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

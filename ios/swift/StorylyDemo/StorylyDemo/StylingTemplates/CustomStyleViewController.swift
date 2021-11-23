@@ -16,7 +16,9 @@ class CustomStyleViewController: UIViewController {
     private let landspaceViewFactory: StoryGroupViewFactory = LandscapeViewFactory()
     private let wideLandspaceViewFactory: StoryGroupViewFactory = WideLandscapeViewFactory()
     private let smallViewFactory: StoryGroupViewFactory = SmallViewFactory()
-    private let largeViewFactory: StoryGroupViewFactory = TitleParameterLargeViewFactory()
+    private let largeViewFactory: StoryGroupViewFactory = LargeViewFactory()
+    private let titleParameterLargeViewFactory: StoryGroupViewFactory = TitleParameterLargeViewFactory()
+    private let netflixViewFactory: StoryGroupViewFactory = NetflixViewFactory()
 
     @IBOutlet var gradientPortraitStorylyView: StorylyView!
     @IBOutlet var portraitStorylyView: StorylyView!
@@ -24,6 +26,10 @@ class CustomStyleViewController: UIViewController {
     @IBOutlet var wideLandscapeStorylyView: StorylyView!
     @IBOutlet var smallStorylyView: StorylyView!
     @IBOutlet var largeStorylyView: StorylyView!
+    @IBOutlet var titleParameterLargeView: StorylyView!
+    @IBOutlet weak var netflixStorylyView: StorylyView!
+    
+    @IBOutlet weak var stackView: UIStackView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,5 +59,13 @@ class CustomStyleViewController: UIViewController {
         largeStorylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         largeStorylyView.rootViewController = self
         largeStorylyView.storyGroupViewFactory = largeViewFactory
+        
+        titleParameterLargeView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
+        titleParameterLargeView.rootViewController = self
+        titleParameterLargeView.storyGroupViewFactory = titleParameterLargeViewFactory
+        
+        netflixStorylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
+        netflixStorylyView.rootViewController = self
+        netflixStorylyView.storyGroupViewFactory = netflixViewFactory
     }
 }
