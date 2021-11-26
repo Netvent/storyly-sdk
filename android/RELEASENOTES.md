@@ -1,4 +1,9 @@
 # Release Notes
+### 1.18.1 (26.11.2021)
+* fixed [#142](https://github.com/Netvent/storyly-mobile/issues/142)
+* fixed [#144](https://github.com/Netvent/storyly-mobile/issues/144)
+* fixed crash for multiple story group clicks, [#134](https://github.com/Netvent/storyly-mobile/issues/134)
+
 ### 1.18.0 (18.11.2021)
 * added promo code interactive component
 * improved video playback, please check java 1.8 compatibility during integration
