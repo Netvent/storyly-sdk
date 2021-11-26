@@ -1,4 +1,8 @@
 # Release Notes
+### 1.18.1 (26.11.2021)
+* fixed unexpeted story group transitions issue
+* fixed [#144](https://github.com/Netvent/storyly-mobile/issues/144)
+
 ### 1.18.0 (18.11.2021)
 * removed SDWebImage dependency
 * added promo code interactive component
