@@ -1,5 +1,5 @@
 # Release Notes
-### 1.18.1 (26.11.2021)
+### 1.18.2 (26.11.2021)
 * fixed unexpeted story group transitions issue
 * fixed [#144](https://github.com/Netvent/storyly-mobile/issues/144)
 
