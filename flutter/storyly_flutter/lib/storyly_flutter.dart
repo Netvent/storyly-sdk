@@ -13,6 +13,7 @@ typedef StorylyViewCreatedCallback = void Function(
 /// [StorylyView] loaded callback
 typedef StorylyViewLoadedCallback = void Function(
   List<StoryGroup> storyGroups,
+  String dataSource,
 );
 
 /// [StorylyView] load failed callback
@@ -153,7 +154,10 @@ class _StorylyViewState extends State<StorylyView> {
     switch (call.method) {
       case 'storylyLoaded':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylyLoaded?.call(storyGroupFromJson(jsonData));
+        widget.storylyLoaded?.call(
+            storyGroupFromJson(jsonData['storyGroups']),
+            jsonData['dataSource']
+        );
         break;
       case 'storylyLoadFailed':
         widget.storylyLoadFailed?.call(call.arguments);

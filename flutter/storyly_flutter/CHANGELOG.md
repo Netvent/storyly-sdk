@@ -1,3 +1,8 @@
+### 1.18.0 (26.11.2021)
+* added promo code for interactive stories
+* fixed unexpeted story group transitions issue
+* IMPORTANT! added dataSource field to storylyLoaded callback
+
 ### 1.17.0 (25.10.2021)
 * added image cta component for interactive stories
 * added play modes handling for [openStoryUri method](https://github.com/Netvent/storyly-mobile/blob/master/flutter/storyly_flutter/lib/storyly_flutter.dart#L229), check for available modes from [Play Modes for Deep Links](https://integration.storyly.io/ios/deep-linking.html#play-modes)

@@ -8,7 +8,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
     
     private let ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
-
+    
     private let ARGS_STORY_GROUP_SIZE = "storyGroupSize"
     private let ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
     private let ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
@@ -48,7 +48,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                                                     storyId: callArguments?["storyId"] as? Int)
                 case "openStoryUri":
                     if let payloadString = callArguments?["uri"] as? String,
-                        let payloadUrl = URL(string: payloadString) {
+                       let payloadUrl = URL(string: payloadString) {
                         _ = self?.storylyView.openStory(payload: payloadUrl)
                     }
                 case "setExternalData":
@@ -82,13 +82,13 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         if let storylyBackgroundColor = args[ARGS_STORYLY_BACKGROUND_COLOR] as? String {
             storylyView.backgroundColor = UIColor(hexString: storylyBackgroundColor)
         }
-
+        
         storylyView.storyGroupSize = args[self.ARGS_STORY_GROUP_SIZE] as? String ?? "large"
         
         if let storyGroupIconStyling = args[ARGS_STORY_GROUP_ICON_STYLING] as? [String: Any] {
             if let width = storyGroupIconStyling["width"] as? Int,
-                let height = storyGroupIconStyling["height"] as? Int,
-                let cornerRadius = storyGroupIconStyling["cornerRadius"] as? Int {
+               let height = storyGroupIconStyling["height"] as? Int,
+               let cornerRadius = storyGroupIconStyling["cornerRadius"] as? Int {
                 storylyView.storyGroupIconStyling = StoryGroupIconStyling(height: CGFloat(height),
                                                                           width: CGFloat(width),
                                                                           cornerRadius: CGFloat(cornerRadius))
@@ -97,12 +97,12 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         if let storyGroupListStyling = args[ARGS_STORY_GROUP_LIST_STYLING] as? [String: Any] {
             if let edgePadding = storyGroupListStyling["edgePadding"] as? Int,
-                let paddingBetweenItems = storyGroupListStyling["paddingBetweenItems"] as? Int {
+               let paddingBetweenItems = storyGroupListStyling["paddingBetweenItems"] as? Int {
                 storylyView.storyGroupListStyling = StoryGroupListStyling(edgePadding: CGFloat(edgePadding),
                                                                           paddingBetweenItems: CGFloat(paddingBetweenItems))
             }
         }
-
+        
         if let storyGroupIconImageThematicLabel = args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String {
             storylyView.storyGroupIconImageThematicLabel = storyGroupIconImageThematicLabel
         }
@@ -115,8 +115,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
             if let isTextVisible = storyHeaderStyling["isTextVisible"] as? Bool,
-                let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool,
-                let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool {
+               let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool,
+               let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool {
                 storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
                                                                     isIconVisible: isIconVisible,
                                                                     isCloseButtonVisible: isCloseButtonVisible)
@@ -158,10 +158,12 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
 }
 
 extension FlutterStorylyViewWrapper {
-    func storylyLoaded(_ storylyView: Storyly.StorylyView, storyGroupList: [Storyly.StoryGroup]) {
-        self.methodChannel.invokeMethod("storylyLoaded", arguments: storyGroupList.map { storyGroup in
-            self.createStoryGroupMap(storyGroup: storyGroup)
-        })
+    func storylyLoaded(_ storylyView: Storyly.StorylyView,
+                       storyGroupList: [Storyly.StoryGroup],
+                       dataSource: StorylyDataSource) {
+        self.methodChannel.invokeMethod("storylyLoaded",
+                                        arguments: ["storyGroups": storyGroupList.map { storyGroup in self.createStoryGroupMap(storyGroup: storyGroup)},
+                                                    "dataSource": dataSource.description])
     }
     
     func storylyLoadFailed(_ storylyView: Storyly.StorylyView, errorMessage: String) {
@@ -174,16 +176,19 @@ extension FlutterStorylyViewWrapper {
         
         var storyMap: [String: Any?]? = nil
         if let story = story { storyMap = self.createStoryMap(story: story) }
-       
+        
         var storyComponentMap: [String: Any?]? = nil
         if let storyComponent = storyComponent { storyComponentMap = self.createStoryComponentMap(storyComponent: storyComponent) }
-        self.methodChannel.invokeMethod("storylyEvent", arguments: ["event": event.stringValue,
-                                                                    "storyGroup": storyGroupMap,
-                                                                    "story": storyMap,
-                                                                    "storyComponent": storyComponentMap])
+        self.methodChannel.invokeMethod("storylyEvent",
+                                        arguments: ["event": event.stringValue,
+                                                    "storyGroup": storyGroupMap,
+                                                    "story": storyMap,
+                                                    "storyComponent": storyComponentMap])
     }
     
-    func storylyActionClicked(_ storylyView: Storyly.StorylyView, rootViewController: UIViewController, story: Storyly.Story) {
+    func storylyActionClicked(_ storylyView: Storyly.StorylyView,
+                              rootViewController: UIViewController,
+                              story: Storyly.Story) {
         self.methodChannel.invokeMethod("storylyActionClicked",
                                         arguments: self.createStoryMap(story: story))
     }
@@ -196,10 +201,14 @@ extension FlutterStorylyViewWrapper {
         self.methodChannel.invokeMethod("storylyStoryDismissed", arguments: nil)
     }
     
-    func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
-        self.methodChannel.invokeMethod("storylyUserInteracted", arguments: ["storyGroup": self.createStoryGroupMap(storyGroup: storyGroup),
-                                                                             "story": self.createStoryMap(story: story),
-                                                                             "storyComponent": self.createStoryComponentMap(storyComponent: storyComponent)])
+    func storylyUserInteracted(_ storylyView: StorylyView,
+                               storyGroup: StoryGroup,
+                               story: Story,
+                               storyComponent: StoryComponent) {
+        self.methodChannel.invokeMethod("storylyUserInteracted",
+                                        arguments: ["storyGroup": self.createStoryGroupMap(storyGroup: storyGroup),
+                                                    "story": self.createStoryMap(story: story),
+                                                    "storyComponent": self.createStoryComponentMap(storyComponent: storyComponent)])
     }
     
     private func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
@@ -208,9 +217,7 @@ extension FlutterStorylyViewWrapper {
                 "index": storyGroup.index,
                 "seen": storyGroup.seen,
                 "iconUrl": storyGroup.iconUrl.absoluteString,
-                "stories": storyGroup.stories.map { story in
-                    self.createStoryMap(story: story)
-        }]
+                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)}]
     }
     
     private func createStoryMap(story: Story) -> [String: Any?] {

@@ -38,8 +38,8 @@ class FlutterStorylyView(
                 "refresh" -> storylyView.refresh()
                 "show" -> storylyView.show()
                 "dismiss" -> storylyView.dismiss()
-                "openStory" -> storylyView.openStory(callArguments?.get("storyGroupId") as? Int
-                    ?: 0,
+                "openStory" -> storylyView.openStory(
+                    callArguments?.get("storyGroupId") as? Int ?: 0,
                     callArguments?.getOrElse("storyId", { null }) as? Int
                 )
                 "openStoryUri" -> storylyView.openStory(Uri.parse(callArguments?.get("uri") as? String))
@@ -135,16 +135,34 @@ class FlutterStorylyView(
                     )
                 }
 
-                override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {
-                    methodChannel.invokeMethod("storylyLoaded",
-                        storyGroupList.map { storyGroup -> createStoryGroupMap(storyGroup) })
+                override fun storylyLoaded(
+                    storylyView: StorylyView,
+                    storyGroupList: List<StoryGroup>,
+                    dataSource: StorylyDataSource
+                ) {
+                    methodChannel.invokeMethod(
+                        "storylyLoaded",
+                        mapOf(
+                            "storyGroups" to storyGroupList.map { storyGroup -> createStoryGroupMap(storyGroup) },
+                            "dataSource" to dataSource.value
+                        )
+                    )
                 }
 
-                override fun storylyLoadFailed(storylyView: StorylyView, errorMessage: String) {
+                override fun storylyLoadFailed(
+                    storylyView: StorylyView,
+                    errorMessage: String
+                ) {
                     methodChannel.invokeMethod("storylyLoadFailed", errorMessage)
                 }
 
-                override fun storylyEvent(storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
+                override fun storylyEvent(
+                    storylyView: StorylyView,
+                    event: StorylyEvent,
+                    storyGroup: StoryGroup?,
+                    story: Story?,
+                    storyComponent: StoryComponent?
+                ) {
                     methodChannel.invokeMethod(
                         "storylyEvent",
                         mapOf("event" to event.name,
