@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
 class ScrollExample extends StatefulWidget {
+  const ScrollExample({Key? key}) : super(key: key);
+
   @override
   _ScrollExampleState createState() => _ScrollExampleState();
 }
 
 class _ScrollExampleState extends State<ScrollExample> {
-  static const STORYLY_INSTANCE_TOKEN =
+  static const storylyInstanceToken =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
 
   late StorylyViewController storylyViewController;
@@ -22,11 +24,11 @@ class _ScrollExampleState extends State<ScrollExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scroll Example"),
+        title: const Text("Scroll Example"),
       ),
       body: ListView(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               "Welcome to Storyly",
@@ -37,7 +39,7 @@ class _ScrollExampleState extends State<ScrollExample> {
             ),
           ),
           storylyArea(),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               "Latest from our blog",
@@ -57,15 +59,15 @@ class _ScrollExampleState extends State<ScrollExample> {
   Widget storylyArea() {
     return Container(
       height: 120,
-      margin: EdgeInsets.symmetric(vertical: 10.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: StorylyView(
         onStorylyViewCreated: onStorylyViewCreated,
         androidParam: StorylyParam()
-          ..storylyId = STORYLY_INSTANCE_TOKEN
+          ..storylyId = storylyInstanceToken
           ..storyGroupListEdgePadding = 20
           ..storyGroupListPaddingBetweenItems = 20,
         iosParam: StorylyParam()
-          ..storylyId = STORYLY_INSTANCE_TOKEN
+          ..storylyId = storylyInstanceToken
           ..storyGroupListEdgePadding = 20
           ..storyGroupListPaddingBetweenItems = 20,
       ),
