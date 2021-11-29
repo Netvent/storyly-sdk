@@ -12,4 +12,4 @@
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   [SwiftStorylyFlutterPlugin registerWithRegistrar:registrar];
 }
-@end    
+@end

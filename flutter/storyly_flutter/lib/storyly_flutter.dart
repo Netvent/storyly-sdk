@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 /// [StorylyView] created callback
@@ -111,21 +112,38 @@ class StorylyView extends StatefulWidget {
 class _StorylyViewState extends State<StorylyView> {
   @override
   Widget build(BuildContext context) {
+    const viewType = 'FlutterStorylyView';
+
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return AndroidView(
-        viewType: 'FlutterStorylyView',
-        onPlatformViewCreated: _onPlatformViewCreated,
-        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-          Factory<OneSequenceGestureRecognizer>(
-            () => EagerGestureRecognizer(),
-          ),
+      return PlatformViewLink(
+        viewType: viewType,
+        surfaceFactory:
+            (BuildContext context, PlatformViewController controller) {
+          return AndroidViewSurface(
+            controller: controller as AndroidViewController,
+            gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+            hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+          );
         },
-        creationParams: widget.androidParam?._toMap() ?? {},
-        creationParamsCodec: const StandardMessageCodec(),
+        onCreatePlatformView: (PlatformViewCreationParams params) {
+          return PlatformViewsService.initSurfaceAndroidView(
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            creationParams: widget.androidParam?._toMap() ?? {},
+            creationParamsCodec: const StandardMessageCodec(),
+            onFocus: () {
+              params.onFocusChanged(true);
+            },
+          )
+            ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+            ..addOnPlatformViewCreatedListener(_onPlatformViewCreated)
+            ..create();
+        },
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
-        viewType: 'FlutterStorylyView',
+        viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
           Factory<OneSequenceGestureRecognizer>(
@@ -155,8 +173,8 @@ class _StorylyViewState extends State<StorylyView> {
       case 'storylyLoaded':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
         widget.storylyLoaded?.call(
-            storyGroupFromJson(jsonData['storyGroups']),
-            jsonData['dataSource']
+          storyGroupFromJson(jsonData['storyGroups']),
+          jsonData['dataSource'],
         );
         break;
       case 'storylyLoadFailed':
@@ -168,7 +186,7 @@ class _StorylyViewState extends State<StorylyView> {
           jsonData['event'],
           StoryGroup.fromJson(jsonData['storyGroup']),
           Story.fromJson(jsonData['story']),
-            getStorylyComponent(jsonData['storyComponent']),
+          getStorylyComponent(jsonData['storyComponent']),
         );
         break;
       case 'storylyActionClicked':
@@ -434,11 +452,15 @@ class StorylyParam {
 StoryComponent? getStorylyComponent(Map<String, dynamic>? json) {
   if (json == null) return null;
 
-  switch(json['type']) {
-    case 'quiz': return StoryQuizComponent.fromJson(json);
-    case 'poll': return StoryPollComponent.fromJson(json);
-    case 'emoji': return StoryEmojiComponent.fromJson(json);
-    case 'rating': return StoryRatingComponent.fromJson(json);
+  switch (json['type']) {
+    case 'quiz':
+      return StoryQuizComponent.fromJson(json);
+    case 'poll':
+      return StoryPollComponent.fromJson(json);
+    case 'emoji':
+      return StoryEmojiComponent.fromJson(json);
+    case 'rating':
+      return StoryRatingComponent.fromJson(json);
   }
   return null;
 }

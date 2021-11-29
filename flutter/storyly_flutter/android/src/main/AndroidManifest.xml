@@ -1,1 +1,3 @@
-<manifest package="com.appsamurai.storyly.storyly_flutter" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.appsamurai.storyly.storyly_flutter">
+</manifest>
