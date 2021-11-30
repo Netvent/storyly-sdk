@@ -1,3 +1,6 @@
+### 1.18.1 (30.11.2021)
+* implemented Android plugin using [Hybrid Composition](https://github.com/flutter/flutter/wiki/Hybrid-Composition), for details check [Hosting native Android and iOS views in your Flutter app with Platform Views](https://docs.flutter.dev/development/platform-integration/platform-views)
+
 ### 1.18.0 (26.11.2021)
 * added promo code for interactive stories
 * fixed unexpeted story group transitions issue
