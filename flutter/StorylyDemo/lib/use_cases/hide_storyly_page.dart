@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
 class HideStorylyPage extends StatefulWidget {
+  const HideStorylyPage({Key? key}) : super(key: key);
+
+  @override
   _HideStorylyPageState createState() => _HideStorylyPageState();
 }
 
 class _HideStorylyPageState extends State<HideStorylyPage> {
-  static const STORYLY_INSTANCE_TOKEN =
+  static const storylyInstanceToken =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
 
   bool storylyVisible = true;
   bool storylyLoaded = false;
 
-  void onStorylyLoaded(List<dynamic> storyGroupList) {
-    if (!storylyVisible && storyGroupList.length > 0) {
+  void onStorylyLoaded(List<dynamic> storyGroupList, String dataSource) {
+    if (!storylyVisible && storyGroupList.isNotEmpty) {
       storylyLoaded = true;
     }
   }
@@ -38,12 +41,12 @@ class _HideStorylyPageState extends State<HideStorylyPage> {
             Visibility(
               visible: storylyVisible,
               maintainState: true,
-              child: Container(
+              child: SizedBox(
                 height: 120,
                 child: StorylyView(
                   androidParam: StorylyParam()
-                    ..storylyId = STORYLY_INSTANCE_TOKEN,
-                  iosParam: StorylyParam()..storylyId = STORYLY_INSTANCE_TOKEN,
+                    ..storylyId = storylyInstanceToken,
+                  iosParam: StorylyParam()..storylyId = storylyInstanceToken,
                   storylyLoaded: onStorylyLoaded,
                   storylyLoadFailed: onStorylyLoadFailed,
                 ),

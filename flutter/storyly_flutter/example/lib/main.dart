@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
-const STORYLY_TOKEN =
+const storylyToken =
     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -24,43 +26,40 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Plugin example app'),
+          title: const Text('Flutter Plugin example app'),
         ),
         body: Container(
-          margin: EdgeInsets.only(top: 5.0),
+          margin: const EdgeInsets.only(top: 5.0),
           height: 120,
           child: StorylyView(
             onStorylyViewCreated: onStorylyViewCreated,
             androidParam: StorylyParam()
-              ..storylyId = STORYLY_TOKEN
+              ..storylyId = storylyToken
               ..storylyTestMode = true,
             iosParam: StorylyParam()
-              ..storylyId = STORYLY_TOKEN
+              ..storylyId = storylyToken
               ..storylyTestMode = true,
             storylyLoaded: (storyGroups, dataSource) {
-              print("storylyLoaded -> storyGroups: ${storyGroups.length}");
-              print("storylyLoaded -> dataSource: ${dataSource}");
+              debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
+              debugPrint("storylyLoaded -> dataSource: $dataSource");
             },
-            storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
+            storylyLoadFailed: (errorMessage) =>
+                debugPrint("storylyLoadFailed"),
             storylyActionClicked: (story) {
-              print("storylyActionClicked -> ${story.title}");
+              debugPrint("storylyActionClicked -> ${story.title}");
             },
             storylyEvent: (event, storyGroup, story, storyComponent) {
-              print("storylyEvent -> event: ${event}");
-              print("storylyEvent -> storyGroup: ${storyGroup?.title}");
-              print("storylyEvent -> story: ${story?.title}");
-              print(
-                "storylyEvent -> storyComponent: ${storyComponent}",
-              );
+              debugPrint("storylyEvent -> event: $event");
+              debugPrint("storylyEvent -> storyGroup: ${storyGroup?.title}");
+              debugPrint("storylyEvent -> story: ${story?.title}");
+              debugPrint("storylyEvent -> storyComponent: $storyComponent");
             },
-            storylyStoryShown: () => print("storylyStoryShown"),
-            storylyStoryDismissed: () => print("storylyStoryDismissed"),
+            storylyStoryShown: () => debugPrint("storylyStoryShown"),
+            storylyStoryDismissed: () => debugPrint("storylyStoryDismissed"),
             storylyUserInteracted: (storyGroup, story, storyComponent) {
-              print("userInteracted -> storyGroup: ${storyGroup.title}");
-              print("userInteracted -> story: ${story.title}");
-              print(
-                "userInteracted -> storyComponent: ${storyComponent}",
-              );
+              debugPrint("userInteracted -> storyGroup: ${storyGroup.title}");
+              debugPrint("userInteracted -> story: ${story.title}");
+              debugPrint("userInteracted -> storyComponent: $storyComponent");
             },
           ),
         ),

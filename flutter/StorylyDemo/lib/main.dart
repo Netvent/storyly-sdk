@@ -4,10 +4,12 @@ import 'package:storyly_flutter/storyly_flutter.dart';
 import 'scroll_example.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -16,24 +18,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(title: 'Storyly Demo Page'),
+      home: const HomePage(title: 'Storyly Demo Page'),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({
+  const HomePage({
     Key? key,
     required this.title,
   }) : super(key: key);
 
   final String title;
 
+  @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  static const STORYLY_INSTANCE_TOKEN =
+  static const storylyInstanceToken =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
 
   late StorylyViewController storylyViewController;
@@ -57,23 +60,44 @@ class _HomePageState extends State<HomePage> {
               child: StorylyView(
                 onStorylyViewCreated: onStorylyViewCreated,
                 androidParam: StorylyParam()
-                  ..storylyId = STORYLY_INSTANCE_TOKEN
+                  ..storylyId = storylyInstanceToken
                   ..storyGroupListEdgePadding = 20
                   ..storyGroupListPaddingBetweenItems = 20,
                 iosParam: StorylyParam()
-                  ..storylyId = STORYLY_INSTANCE_TOKEN
+                  ..storylyId = storylyInstanceToken
                   ..storyGroupListEdgePadding = 20
                   ..storyGroupListPaddingBetweenItems = 20,
-                storylyLoaded: (storyGroupList) => print("storylyLoaded"),
-                storylyLoadFailed: (errorMessage) => print("storylyLoadFailed"),
-                storylyActionClicked: (story) => print("storylyActionClicked"),
-                storylyEvent: (event, storyGroup, story, storyComponent) {
-                  print("storylyEvent -> $event");
+                storylyLoaded: (storyGroups, dataSource) {
+                  debugPrint(
+                    "storylyLoaded -> storyGroups: ${storyGroups.length}",
+                  );
+                  debugPrint("storylyLoaded -> dataSource: $dataSource");
                 },
-                storylyStoryShown: () => print("storylyStoryShown"),
-                storylyStoryDismissed: () => print("storylyStoryDismissed"),
+                storylyLoadFailed: (errorMessage) =>
+                    debugPrint("storylyLoadFailed"),
+                storylyActionClicked: (story) {
+                  debugPrint("storylyActionClicked -> ${story.title}");
+                },
+                storylyEvent: (event, storyGroup, story, storyComponent) {
+                  debugPrint("storylyEvent -> event: $event");
+                  debugPrint(
+                    "storylyEvent -> storyGroup: ${storyGroup?.title}",
+                  );
+                  debugPrint("storylyEvent -> story: ${story?.title}");
+                  debugPrint("storylyEvent -> storyComponent: $storyComponent");
+                },
+                storylyStoryShown: () => debugPrint("storylyStoryShown"),
+                storylyStoryDismissed: () => debugPrint(
+                  "storylyStoryDismissed",
+                ),
                 storylyUserInteracted: (storyGroup, story, storyComponent) {
-                  print("storylyUserInteracted");
+                  debugPrint(
+                    "userInteracted -> storyGroup: ${storyGroup.title}",
+                  );
+                  debugPrint("userInteracted -> story: ${story.title}");
+                  debugPrint(
+                    "userInteracted -> storyComponent: $storyComponent",
+                  );
                 },
               ),
             ),
@@ -81,10 +105,12 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScrollExample()),
+                  MaterialPageRoute(
+                    builder: (context) => const ScrollExample(),
+                  ),
                 );
               },
-              child: Text("Scroll Example"),
+              child: const Text("Scroll Example"),
             ),
           ],
         ),
