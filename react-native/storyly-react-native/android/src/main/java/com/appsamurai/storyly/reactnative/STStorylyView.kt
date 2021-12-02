@@ -22,23 +22,36 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_ACTION_CLICKED, createStoryMap(story))
             }
 
-            override fun storylyLoaded(storylyView: StorylyView, storyGroupList: List<StoryGroup>) {
+            override fun storylyLoaded(
+                storylyView: StorylyView,
+                storyGroupList: List<StoryGroup>,
+                dataSource: StorylyDataSource
+            ) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_LOADED, Arguments.createMap().also { storyGroupListMap ->
                     storyGroupListMap.putArray("storyGroupList", Arguments.createArray().also { storyGroups ->
                         storyGroupList.forEach { storyGroup ->
                             storyGroups.pushMap(createStoryGroupMap(storyGroup))
                         }
                     })
+                    storyGroupListMap.putString("dataSource", dataSource.value)
                 })
             }
 
-            override fun storylyLoadFailed(storylyView: StorylyView, errorMessage: String) {
+            override fun storylyLoadFailed(
+                storylyView: StorylyView,
+                errorMessage: String
+            ) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_LOAD_FAILED, Arguments.createMap().also { eventMap ->
                     eventMap.putString("errorMessage", errorMessage)
                 })
             }
 
-            override fun storylyEvent(storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
+            override fun storylyEvent(
+                storylyView: StorylyView,
+                event: StorylyEvent,
+                storyGroup: StoryGroup?,
+                story: Story?, storyComponent: StoryComponent?
+            ) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_EVENT, Arguments.createMap().also { eventMap ->
                     eventMap.putString("event", event.name)
                     storyGroup?.let { eventMap.putMap("storyGroup", createStoryGroupMap(it)) }
@@ -55,7 +68,12 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_STORY_DISMISSED, null)
             }
 
-            override fun storylyUserInteracted(storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
+            override fun storylyUserInteracted(
+                storylyView: StorylyView,
+                storyGroup: StoryGroup,
+                story: Story,
+                storyComponent: StoryComponent
+            ) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().also { eventMap ->
                     eventMap.putMap("storyGroup", createStoryGroupMap(storyGroup))
                     eventMap.putMap("story", createStoryMap(story))
@@ -75,8 +93,8 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     private fun manuallyLayout() {
         storylyView.measure(
-                MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
+            MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
+            MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
         )
         storylyView.layout(0, 0, storylyView.measuredWidth, storylyView.measuredHeight)
 

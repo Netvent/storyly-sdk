@@ -5776,7 +5776,7 @@ static-extend@^0.1.1:
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
 
 "storyly-react-native@file:..":
-  version "1.17.0"
+  version "1.18.0"
 
 stream-buffers@~2.2.0:
   version "2.2.0"

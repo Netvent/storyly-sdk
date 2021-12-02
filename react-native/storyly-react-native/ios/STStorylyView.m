@@ -68,13 +68,15 @@
 }
 
 - (void)storylyLoaded:(StorylyView * _Nonnull)storylyView
-       storyGroupList:(NSArray<StoryGroup *> *)storyGroupList {
+       storyGroupList:(NSArray<StoryGroup *> *)storyGroupList
+           dataSource:(enum StorylyDataSource)dataSource {
     if (self.onStorylyLoaded) {
         NSMutableArray* storyGroups = [NSMutableArray new];
         for (StoryGroup *storyGroup in storyGroupList) {
             [storyGroups addObject:[self createStoryGroupMap:storyGroup]];
         }
-        self.onStorylyLoaded(@{@"storyGroupList": storyGroups});
+        self.onStorylyLoaded(@{@"storyGroupList": storyGroups,
+                               @"dataSource": [self convertStorylyDataSource:dataSource]});
     }
     
 }
@@ -208,6 +210,14 @@
             }
             break;
     }
+}
+
+
+-(NSString *) convertStorylyDataSource:(enum StorylyDataSource)dataSource {
+    if (dataSource == StorylyDataSourceAPI) { return @"api"; }
+    else if (dataSource == StorylyDataSourceCDN) { return @"cdn"; }
+    else if (dataSource == StorylyDataSourceLocal) { return @"local"; }
+    else return @"";
 }
 
 @end

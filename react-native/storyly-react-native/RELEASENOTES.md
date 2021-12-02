@@ -1,4 +1,9 @@
 # Release Notes
+### 1.18.0 (2.12.2021)
+* added promo code for interactive stories
+* fixed unexpeted story group transitions issue
+* IMPORTANT! added dataSource field to storylyLoaded callback
+
 ### 1.17.0 (25.10.2021)
 * added image cta component for interactive stories
 * added play modes handling for [openStory method](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RNStoryly.js#L35), check for available modes from [Play Modes for Deep Links](https://integration.storyly.io/ios/deep-linking.html#play-modes)

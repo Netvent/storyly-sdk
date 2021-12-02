@@ -83,11 +83,15 @@
     {
         return [[StoryHeaderStyling alloc] initWithIsTextVisible:storyHeaderStyling[@"isTextVisible"] 
                                                    isIconVisible:storyHeaderStyling[@"isIconVisible"]
-                                            isCloseButtonVisible:storyHeaderStyling[@"isCloseButtonVisible"]];
+                                            isCloseButtonVisible:storyHeaderStyling[@"isCloseButtonVisible"]
+                                                 closeButtonIcon:NULL
+                                                 shareButtonIcon:NULL];
     }
     return [[StoryHeaderStyling alloc] initWithIsTextVisible:YES
                                                isIconVisible:YES
-                                        isCloseButtonVisible:YES];
+                                        isCloseButtonVisible:YES
+                                             closeButtonIcon:NULL
+                                             shareButtonIcon:NULL];
 }
 
 @end
