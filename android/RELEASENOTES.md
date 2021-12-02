@@ -1,4 +1,9 @@
 # Release Notes
+### 1.18.3 (2.12.2021)
+* added close and share button icon change api
+* added StoryGroupUserOpened event for story open with user selection action
+* fixed StoryShared event 
+
 ### 1.18.2 (26.11.2021)
 * fixed [#142](https://github.com/Netvent/storyly-mobile/issues/142)
 * fixed [#144](https://github.com/Netvent/storyly-mobile/issues/144)
