@@ -1,4 +1,7 @@
 # Release Notes
+### 1.18.4 (17.12.2021)
+* added name parameter to Story instance
+
 ### 1.18.3 (2.12.2021)
 * added close and share button icon change api
 * added StoryGroupUserOpened event for story open with user selection action
