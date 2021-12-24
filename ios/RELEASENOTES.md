@@ -1,4 +1,7 @@
 # Release Notes
+### 1.18.5 (24.12.2021)
+* fixed play mode handling of openStory method
+
 ### 1.18.4 (17.12.2021)
 * added name parameter to Story instance
 
