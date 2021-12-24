@@ -1,4 +1,7 @@
 # Release Notes
+### 1.18.5 (17.12.2021)
+* fixed border color visual bug for seen state changes
+
 ### 1.18.4 (17.12.2021)
 * added name parameter to Story instance
 
