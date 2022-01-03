@@ -7,35 +7,61 @@
     android:layout_height="match_parent"
     tools:context=".CustomStylingActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:divider="@drawable/st_shape"
-        android:orientation="vertical"
-        android:showDividers="middle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:divider="@drawable/st_shape"
+                android:orientation="vertical"
+                android:showDividers="middle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/styling_landscape"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/styling_gradient_portrait"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/styling_portrait"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_landscape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        <com.appsamurai.storyly.StorylyView
-            android:id="@+id/styling_wide_landscape"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_gradient_portrait"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-    </LinearLayout>
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_portrait"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_wide_landscape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.appsamurai.storyly.StorylyView
+                    android:id="@+id/styling_title_parameter_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.appsamurai.storyly.StorylyView
+                    android:background="#1A1A1A"
+                    android:id="@+id/styling_netflix"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

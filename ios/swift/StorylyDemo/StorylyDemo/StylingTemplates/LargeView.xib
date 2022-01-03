@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LargeView" customModule="StorylyDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="XoV-uL-TAF" id="IBF-pb-5I3"/>
+                <outlet property="groupIcon" destination="g30-oF-FCw" id="qUG-Pf-wic"/>
+                <outlet property="groupTitle" destination="ge5-Yy-9Rt" id="Yxv-Tx-aRP"/>
+                <outlet property="pinIcon" destination="W7c-hc-Tef" id="bcH-t7-e8d"/>
+                <outlet property="vodIcon" destination="Ah4-Ob-1l1" id="f7z-Ej-f1l"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XoV-uL-TAF">
+            <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ge5-Yy-9Rt">
+                    <rect key="frame" x="5" y="87" width="80" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="9Oe-Ca-uOH"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="jei-n5-4sg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g30-oF-FCw" userLabel="Group Icon" customClass="UIRoundImageView" customModule="StorylyDemo" customModuleProvider="target">
+                    <rect key="frame" x="5" y="5" width="80" height="80"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="ajW-Tg-45O"/>
+                        <constraint firstAttribute="height" constant="80" id="ijN-Xs-yfh"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7c-hc-Tef" userLabel="Pin Icon" customClass="UIRoundImageView" customModule="StorylyDemo" customModuleProvider="target">
+                    <rect key="frame" x="65" y="65" width="21" height="21"/>
+                    <color key="backgroundColor" red="0.46274509800000002" green="0.31764705879999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="21" id="RFm-VX-ZMc"/>
+                        <constraint firstAttribute="height" constant="21" id="YpN-kK-u50"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="11"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ah4-Ob-1l1" userLabel="Vod Icon" customClass="UIRoundImageView" customModule="StorylyDemo" customModuleProvider="target">
+                    <rect key="frame" x="29" y="62" width="36" height="27"/>
+                    <color key="backgroundColor" red="0.46274509800000002" green="0.31764705879999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="OsR-Vb-icn"/>
+                        <constraint firstAttribute="width" constant="36" id="gBC-Le-wbI"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="W7c-hc-Tef" secondAttribute="trailing" constant="4" id="CwP-Yw-dgi"/>
+                <constraint firstItem="Ah4-Ob-1l1" firstAttribute="leading" secondItem="XoV-uL-TAF" secondAttribute="leading" constant="29" id="DWg-wG-hwW"/>
+                <constraint firstItem="Ah4-Ob-1l1" firstAttribute="top" secondItem="XoV-uL-TAF" secondAttribute="top" constant="62" id="Hc4-G7-p88"/>
+                <constraint firstItem="ge5-Yy-9Rt" firstAttribute="leading" secondItem="XoV-uL-TAF" secondAttribute="leading" constant="5" id="IRF-wj-6Ec"/>
+                <constraint firstItem="g30-oF-FCw" firstAttribute="leading" secondItem="XoV-uL-TAF" secondAttribute="leading" constant="5" id="PVY-FP-n6V"/>
+                <constraint firstItem="W7c-hc-Tef" firstAttribute="top" secondItem="XoV-uL-TAF" secondAttribute="top" constant="65" id="krq-Zj-qSd"/>
+                <constraint firstItem="g30-oF-FCw" firstAttribute="top" secondItem="XoV-uL-TAF" secondAttribute="top" constant="5" id="now-6E-xDW"/>
+                <constraint firstItem="ge5-Yy-9Rt" firstAttribute="top" secondItem="W7c-hc-Tef" secondAttribute="bottom" constant="1" id="zPj-sc-AYQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-115.94202898550725" y="-208.25892857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
