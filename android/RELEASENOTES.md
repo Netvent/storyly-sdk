@@ -1,4 +1,7 @@
 # Release Notes
+### 1.18.6 (3.1.2022)
+* added textSize, minLines, maxLines and lines fields to [StoryGroupTextStyling](https://integration.storyly.io/api/android/storyly/com.appsamurai.storyly.styling/-story-group-text-styling/index.html), check [Story Group Text Styling Customization](https://integration.storyly.io/android/ui-customizations.html#story-group-text-styling)
+
 ### 1.18.5 (24.12.2021)
 * fixed border color visual bug for seen state changes
 
