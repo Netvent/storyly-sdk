@@ -1,4 +1,7 @@
 # Release Notes
+### 1.18.6 (3.1.2022)
+* added lines field to [StoryGroupTextStyling](https://integration.storyly.io/api/ios/Classes/StoryGroupTextStyling.html), removed override flow of font size from textFont field. check [Story Group Text Styling Customization](https://integration.storyly.io/ios/ui-customizations.html#story-group-text-styling)
+
 ### 1.18.5 (24.12.2021)
 * fixed play mode handling of openStory method
 
