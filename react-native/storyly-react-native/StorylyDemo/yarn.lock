@@ -5778,6 +5778,9 @@ static-extend@^0.1.1:
 "storyly-react-native@file:..":
   version "1.18.0"
 
+"storyly-react-native@file:../":
+  version "1.18.0"
+
 stream-buffers@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"

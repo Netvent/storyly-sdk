@@ -2,7 +2,9 @@ package com.appsamurai.storyly.storyly_flutter
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
+import android.util.TypedValue
 import android.view.View
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
@@ -16,7 +18,6 @@ import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import java.util.*
-import kotlin.collections.HashMap
 
 class FlutterStorylyViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     internal lateinit var context: Context
@@ -66,7 +67,6 @@ class FlutterStorylyView(
         private const val ARGS_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
         private const val ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
         private const val ARGS_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
-        private const val ARGS_STORY_GROUP_TEXT_COLOR = "storyGroupTextColor"
         private const val ARGS_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
         private const val ARGS_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val ARGS_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
@@ -94,7 +94,6 @@ class FlutterStorylyView(
             (args[ARGS_STORY_GROUP_ICON_BORDER_COLOR_SEEN] as? List<String>)?.let { colors -> setStoryGroupIconBorderColorSeen(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN] as? List<String>)?.let { colors -> setStoryGroupIconBorderColorNotSeen(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_GROUP_ICON_BACKGROUND_COLOR] as? String)?.let { setStoryGroupIconBackgroundColor(Color.parseColor(it)) }
-            (args[ARGS_STORY_GROUP_TEXT_COLOR] as? String)?.let { setStoryGroupTextColor(Color.parseColor(it)) }
             (args[ARGS_STORY_GROUP_PIN_ICON_COLOR] as? String)?.let { setStoryGroupPinIconColor(Color.parseColor(it)) }
             (args[ARGS_STORY_ITEM_ICON_BORDER_COLOR] as? List<String>)?.let { colors -> setStoryItemIconBorderColor(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_ITEM_TEXT_COLOR] as? String)?.let { setStoryItemTextColor(Color.parseColor(it)) }
@@ -116,8 +115,22 @@ class FlutterStorylyView(
             (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }
 
             (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let {
-                val isVisible = it["isVisible"] as? Boolean ?: return@let
-                setStoryGroupTextStyling(StoryGroupTextStyling(isVisible))
+                val isVisible = it["isVisible"] as? Boolean ?: true
+                val textSize = it["textSize"] as? Int
+                val lines = it["lines"] as? Int
+                val color = Color.parseColor(it["color"] as? String ?: "#FF000000")
+                Color.BLACK
+                setStoryGroupTextStyling(
+                    StoryGroupTextStyling(
+                        isVisible = isVisible,
+                        typeface = Typeface.DEFAULT,
+                        textSize = Pair(TypedValue.COMPLEX_UNIT_PX, textSize),
+                        minLines = null,
+                        maxLines = null,
+                        lines = lines,
+                        color = color
+                    )
+                )
             }
 
             (args[ARGS_STORY_HEADER_STYLING] as? Map<String, *>)?.let {

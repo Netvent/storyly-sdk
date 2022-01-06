@@ -72,6 +72,9 @@ class Storyly extends Component {
             storyGroupListEdgePadding,
             storyGroupListPaddingBetweenItems,
             storyGroupTextIsVisible,
+            storyGroupTextSize,
+            storyGroupTextLines,
+            storyGroupTextColor,
             storyHeaderTextIsVisible,
             storyHeaderIconIsVisible,
             storyHeaderCloseButtonIsVisible,
@@ -90,8 +93,9 @@ class Storyly extends Component {
                 storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter, 'storylyIsTestMode': storylyTestMode}}
                 storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
-                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible}}
+                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'color': storyGroupTextColor}}
                 storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
+                storyGroupTextColor={storyGroupTextColor}
                 onStorylyLoaded={onLoad}
                 onStorylyLoadFailed={onFail}
                 onStorylyEvent={onEvent}
@@ -118,6 +122,9 @@ Storyly.propTypes = {
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),
     storyGroupIconBackgroundColor: string,
+    storyGroupTextIsVisible: bool,
+    storyGroupTextSize: number,
+    storyGroupTextLines: number,
     storyGroupTextColor: string,
     storyGroupPinIconColor: string,
     storyGroupSize: string,
@@ -129,7 +136,6 @@ Storyly.propTypes = {
     storyGroupIconCornerRadius: number,
     storyGroupListEdgePadding: number,
     storyGroupListPaddingBetweenItems: number,
-    storyGroupTextIsVisible: bool,
     storyHeaderTextIsVisible: bool,
     storyHeaderIconIsVisible: bool,
     storyHeaderCloseButtonIsVisible: bool,

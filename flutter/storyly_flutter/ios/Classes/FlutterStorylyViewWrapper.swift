@@ -19,7 +19,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
     private let ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
     private let ARGS_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
-    private let ARGS_STORY_GROUP_TEXT_COLOR = "storyGroupTextColor"
     private let ARGS_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
     private let ARGS_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
     private let ARGS_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
@@ -108,9 +107,14 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         }
         
         if let storyGroupTextStyling = args[ARGS_STORY_GROUP_TEXT_STYLING] as? [String: Any] {
-            if let isVisible = storyGroupTextStyling["isVisible"] as? Bool {
-                storylyView.storyGroupTextStyling = StoryGroupTextStyling(isVisible: isVisible)
-            }
+            let isVisible = storyGroupTextStyling["isVisible"] as? Bool ?? true
+            var textColor: UIColor = .black
+            if let color = storyGroupTextStyling["color"] as? String { textColor = UIColor(hexString: color) }
+//            let fontSize = storyGroupTextStyling["textSize"] as? Int
+//            let lines = storyGroupTextStyling["lines"] as? Int ?? 2
+            
+            storylyView.storyGroupTextStyling = StoryGroupTextStyling(isVisible: isVisible)
+            storylyView.storyGroupTextColor = textColor
         }
         
         if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
@@ -129,10 +133,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         if let storyGroupIconBorderColorNotSeen = args[ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN] as? [String] {
             storylyView.storyGroupIconBorderColorNotSeen = storyGroupIconBorderColorNotSeen.map { UIColor(hexString: $0) }
-        }
-        
-        if let storyGroupTextColor = args[ARGS_STORY_GROUP_TEXT_COLOR] as? String {
-            storylyView.storyGroupTextColor = UIColor(hexString: storyGroupTextColor)
         }
         
         if let storyGroupIconBackgroundColor = args[ARGS_STORY_GROUP_ICON_BACKGROUND_COLOR] as? String {

@@ -1,4 +1,7 @@
 # Release Notes
+### 1.18.0 (6.1.2022)
+* added storyGroupTextSize and storyGroupTextLines fields for story group title text customizations
+
 ### 1.18.0 (2.12.2021)
 * added promo code for interactive stories
 * fixed unexpeted story group transitions issue

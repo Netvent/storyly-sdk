@@ -1,7 +1,9 @@
 package com.appsamurai.storyly.reactnative
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
+import android.util.TypedValue
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylySegmentation
 import com.appsamurai.storyly.StoryGroupSize
@@ -28,7 +30,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
         private const val PROP_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
-        private const val PROP_STORY_GROUP_TEXT_COLOR = "storyGroupTextColor"
         private const val PROP_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
         private const val PROP_STORY_GROUP_SIZE = "storyGroupSize"
         private const val PROP_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
@@ -159,11 +160,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         view.storylyView.setStoryGroupIconBackgroundColor(Color.parseColor(color))
     }
 
-    @ReactProp(name = PROP_STORY_GROUP_TEXT_COLOR)
-    fun setPropStoryGroupTextColor(view: STStorylyView, color: String) {
-        view.storylyView.setStoryGroupTextColor(Color.parseColor(color))
-    }
-
     @ReactProp(name = PROP_STORY_GROUP_PIN_ICON_COLOR)
     fun setPropStoryGroupPinIconColor(view: STStorylyView, color: String) {
         view.storylyView.setStoryGroupPinIconColor(Color.parseColor(color))
@@ -217,9 +213,21 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_GROUP_TEXT_STYLING)
     fun setPropStoryGroupTextStyling(view: STStorylyView, storyGroupTextStylingMap: ReadableMap) {
-        if (storyGroupTextStylingMap.hasKey("isVisible")) {
-            view.storylyView.setStoryGroupTextStyling(StoryGroupTextStyling(storyGroupTextStylingMap.getBoolean("isVisible")))
-        }
+        val isVisible = if (storyGroupTextStylingMap.hasKey("isVisible")) storyGroupTextStylingMap.getBoolean("isVisible") else true
+        val textSize = if (storyGroupTextStylingMap.hasKey("textSize")) storyGroupTextStylingMap.getInt("textSize") else null
+        val lines = if (storyGroupTextStylingMap.hasKey("lines")) storyGroupTextStylingMap.getInt("lines") else null
+        val color = Color.parseColor(if (storyGroupTextStylingMap.hasKey("color")) storyGroupTextStylingMap.getString("color") else "#FF000000")
+        view.storylyView.setStoryGroupTextStyling(
+            StoryGroupTextStyling(
+                isVisible = isVisible,
+                typeface = Typeface.DEFAULT,
+                textSize = Pair(TypedValue.COMPLEX_UNIT_PX, textSize),
+                minLines = null,
+                maxLines = null,
+                lines = lines,
+                color = color
+            )
+        )
     }
 
     @ReactProp(name = PROP_STORY_HEADER_STYLING)

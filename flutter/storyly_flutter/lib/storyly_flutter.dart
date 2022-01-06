@@ -340,6 +340,17 @@ class StorylyParam {
   /// text.
   bool? storyGroupTextIsVisible;
 
+  /// This attribute allows you to change text size story group
+  /// text.
+  int? storyGroupTextSize;
+
+  /// This attribute allows you to change line count of story group
+  /// text.
+  int? storyGroupTextLines;
+
+  /// This attribute allows you to change the text color of the story group.
+  Color? storyGroupTextColor;
+
   /// This attribute allows you to changes the visibility of story
   /// header text.
   bool? storyHeaderTextIsVisible;
@@ -364,9 +375,6 @@ class StorylyParam {
   /// group icon which is shown to the user as skeleton view till the stories
   /// are loaded.
   Color? storyGroupIconBackgroundColor;
-
-  /// This attribute allows you to change the text color of the story group.
-  Color? storyGroupTextColor;
 
   /// If any of the story group is selected as pinned group from dashboard,
   /// a little star icon will appear along with the story group icon. This
@@ -411,6 +419,9 @@ class StorylyParam {
 
     paramsMap['storyGroupTextStyling'] = {
       'isVisible': storyGroupTextIsVisible,
+      'textSize': storyGroupTextSize,
+      'lines': storyGroupTextLines,
+      'color': storyGroupTextColor?.toHexString(),
     };
 
     paramsMap['storyHeaderStyling'] = {
@@ -432,8 +443,6 @@ class StorylyParam {
 
     paramsMap['storyGroupIconBackgroundColor'] =
         storyGroupIconBackgroundColor?.toHexString();
-
-    paramsMap['storyGroupTextColor'] = storyGroupTextColor?.toHexString();
 
     paramsMap['storyGroupPinIconColor'] = storyGroupPinIconColor?.toHexString();
 

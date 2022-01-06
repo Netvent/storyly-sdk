@@ -1,3 +1,6 @@
+### 1.18.2 (6.1.2022)
+* added storyGroupTextSize and storyGroupTextLines fields for story group title text customizations
+
 ### 1.18.1 (30.11.2021)
 * implemented Android plugin using [Hybrid Composition](https://github.com/flutter/flutter/wiki/Hybrid-Composition), for details check [Hosting native Android and iOS views in your Flutter app with Platform Views](https://docs.flutter.dev/development/platform-integration/platform-views)
 
