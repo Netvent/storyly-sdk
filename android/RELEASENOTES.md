@@ -1,4 +1,7 @@
 # Release Notes
+### 1.19.1 (18.1.2022)
+* fixed visual bug related ui customization, story group icons rendered with wrong size during scroll
+
 ### 1.19.0 (18.1.2022)
 * added theme options to product tag interactive component
 * improved text interactive component rendering
