@@ -20,6 +20,10 @@ export default class App extends Component {
                     ref={ref => { this.storyly = ref }}
                     style={{ width: '100%', height: 120, marginTop: 44 }}
                     storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
+                    storyGroupTextIsVisible={true}
+                    storyGroupTextSize={14}
+                    storyGroupTextLines={2}
+                    storyGroupTextColor={'#ff0000'}
                     storylyTestMode={true}
                     onLoad={storyGroupList => {
                         console.log("[Storyly] onLoad");

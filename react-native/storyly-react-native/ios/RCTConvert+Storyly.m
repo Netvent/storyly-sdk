@@ -65,10 +65,57 @@
 
 + (StoryGroupTextStyling *)STStoryGroupTextStyling:(id)json {
     NSDictionary *storyGroupTextStyling = [self NSDictionary:json];
+    
+    BOOL isVisible = YES;
     if ([storyGroupTextStyling.allKeys containsObject:@"isVisible"] && storyGroupTextStyling[@"isVisible"] != NULL) {
-        return [[StoryGroupTextStyling alloc] initWithIsVisible:storyGroupTextStyling[@"isVisible"]];
+        isVisible = [storyGroupTextStyling[@"isVisible"] boolValue];
     }
-    return [[StoryGroupTextStyling alloc] initWithIsVisible:YES];
+    
+    
+    UIColor* textColor = UIColor.blackColor;
+    if ([storyGroupTextStyling.allKeys containsObject:@"color"] && storyGroupTextStyling[@"color"] != NULL) {
+        textColor = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"color"]];
+    }
+    
+    int fontSize = 12;
+    if ([storyGroupTextStyling.allKeys containsObject:@"textSize"] && storyGroupTextStyling[@"textSize"] != NULL) {
+        fontSize = [storyGroupTextStyling[@"textSize"] intValue];
+    }
+    
+    int lines = 2;
+    if ([storyGroupTextStyling.allKeys containsObject:@"lines"] && storyGroupTextStyling[@"lines"] != NULL) {
+        lines = [storyGroupTextStyling[@"lines"] intValue];
+    }
+    
+    return [[StoryGroupTextStyling alloc] initWithIsVisible:isVisible
+                                                      color:textColor
+                                                       font:[UIFont systemFontOfSize:fontSize]
+                                                      lines:lines];
+}
+
++ (UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr {
+    unsigned int hexInt = 0;
+    NSString *noHashString = [hexStr stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    NSScanner *scanner = [NSScanner scannerWithString:noHashString];
+    [scanner setCharactersToBeSkipped:[NSCharacterSet symbolCharacterSet]];
+    [scanner scanHexInt:&hexInt];
+    
+    CGFloat alpha, red, green, blue;
+    if ([hexStr length] == 9) {
+        alpha = ((hexInt & 0xFF000000) >> 24) / 255.0f;
+        red = ((hexInt & 0x00FF0000) >> 16) / 255.0f;
+        green = ((hexInt & 0x0000FF00) >> 8) / 255.0f;
+        blue = (hexInt & 0x000000FF) / 255.0f;
+    } else {
+        alpha = 1;
+        red = ((hexInt & 0xFF0000) >> 16) / 255.0f;
+        green = ((hexInt & 0x00FF00) >>  8) / 255.0f;
+        blue = (hexInt & 0x0000FF) / 255.0f;
+    }
+    return [[UIColor alloc] initWithRed:red
+                                  green:green
+                                   blue:blue
+                                  alpha:alpha];
 }
 
 @end

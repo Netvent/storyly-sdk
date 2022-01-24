@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (StoryGroupTextStyling *)STStoryGroupTextStyling:(id)json;
 
++ (UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr;
+
 @end
 
 @interface RCTConvert (StoryHeaderStyling)

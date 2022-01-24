@@ -95,7 +95,6 @@ class Storyly extends Component {
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
                 storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'color': storyGroupTextColor}}
                 storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
-                storyGroupTextColor={storyGroupTextColor}
                 onStorylyLoaded={onLoad}
                 onStorylyLoadFailed={onFail}
                 onStorylyEvent={onEvent}

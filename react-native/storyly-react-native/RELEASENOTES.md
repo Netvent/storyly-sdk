@@ -1,4 +1,8 @@
 # Release Notes
+### 1.19.0 (24.1.2022)
+* added thematic product tag component for interactive stories
+* fix StoryGroupTextStyling customization fields
+
 ### 1.18.1 (6.1.2022)
 * added storyGroupTextSize and storyGroupTextLines fields for story group title text customizations
 
