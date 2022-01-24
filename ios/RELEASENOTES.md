@@ -1,4 +1,7 @@
 # Release Notes
+### 1.19.2 (21.1.2022)
+* fixed integration bug if [Add Storyly View Programmatically](https://integration.storyly.io/ios/initial-sdksetup.html#add-storyly-view-programmatically) is used
+
 ### 1.19.1 (18.1.2022)
 * fixed visual bug related ui customization, story group icons rendered with wrong size during scroll
 
