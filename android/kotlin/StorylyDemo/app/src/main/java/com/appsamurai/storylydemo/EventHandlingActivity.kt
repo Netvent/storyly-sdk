@@ -18,7 +18,8 @@ class EventHandlingActivity : AppCompatActivity() {
         binding.storylyView.storylyListener = object : StorylyListener {
             override fun storylyLoaded(
                 storylyView: StorylyView,
-                storyGroupList: List<StoryGroup>
+                storyGroupList: List<StoryGroup>,
+                dataSource: StorylyDataSource
             ) {
             }
 
