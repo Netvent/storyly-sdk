@@ -43,6 +43,9 @@
 		DC941B6E2645422800A2042B /* HideStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC941B6D2645422800A2042B /* HideStoryly.storyboard */; };
 		DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC941B702645428400A2042B /* ShowStoryly.storyboard */; };
 		DCA6E7CC273D26630035EC2A /* TitleParameterLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA6E7CB273D26630035EC2A /* TitleParameterLargeView.swift */; };
+		DCB2164927AE935300EEE69C /* IntegrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB2164827AE935300EEE69C /* IntegrationViewController.swift */; };
+		DCB2164B27AE937A00EEE69C /* Demo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCB2164A27AE937A00EEE69C /* Demo.storyboard */; };
+		DCB2164D27AE993700EEE69C /* UICustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB2164C27AE993700EEE69C /* UICustomizationViewController.swift */; };
 		DCD96E6526415285001E823C /* HideStorylyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD96E6426415285001E823C /* HideStorylyViewController.swift */; };
 		DCE5DFEB274CC47900DCF2AD /* NetflixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5DFE9274CC47900DCF2AD /* NetflixView.swift */; };
 		DCE5DFF0274CC87500DCF2AD /* NetflixView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE5DFEF274CC87500DCF2AD /* NetflixView.xib */; };
@@ -89,6 +92,9 @@
 		DC941B6D2645422800A2042B /* HideStoryly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HideStoryly.storyboard; sourceTree = "<group>"; };
 		DC941B702645428400A2042B /* ShowStoryly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowStoryly.storyboard; sourceTree = "<group>"; };
 		DCA6E7CB273D26630035EC2A /* TitleParameterLargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleParameterLargeView.swift; sourceTree = "<group>"; };
+		DCB2164827AE935300EEE69C /* IntegrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationViewController.swift; sourceTree = "<group>"; };
+		DCB2164A27AE937A00EEE69C /* Demo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Demo.storyboard; sourceTree = "<group>"; };
+		DCB2164C27AE993700EEE69C /* UICustomizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICustomizationViewController.swift; sourceTree = "<group>"; };
 		DCD96E6426415285001E823C /* HideStorylyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideStorylyViewController.swift; sourceTree = "<group>"; };
 		DCE5DFE9274CC47900DCF2AD /* NetflixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetflixView.swift; sourceTree = "<group>"; };
 		DCE5DFEF274CC87500DCF2AD /* NetflixView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetflixView.xib; sourceTree = "<group>"; };
@@ -198,6 +204,7 @@
 		A16DA835233B90E3000514FA /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DCB2164E27AE9B1B00EEE69C /* IntegrationDemo */,
 				30351CAC27218566008A2A64 /* StylingTemplates */,
 				41501BEB25D1B16F00928E7C /* Basic */,
 				41501BF125D1B30100928E7C /* EventHandling */,
@@ -257,6 +264,16 @@
 				DC941B6D2645422800A2042B /* HideStoryly.storyboard */,
 			);
 			path = HideStoryly;
+			sourceTree = "<group>";
+		};
+		DCB2164E27AE9B1B00EEE69C /* IntegrationDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DCB2164827AE935300EEE69C /* IntegrationViewController.swift */,
+				DCB2164A27AE937A00EEE69C /* Demo.storyboard */,
+				DCB2164C27AE993700EEE69C /* UICustomizationViewController.swift */,
+			);
+			path = IntegrationDemo;
 			sourceTree = "<group>";
 		};
 		FCDFECCC10AD456918056776 /* Frameworks */ = {
@@ -338,6 +355,7 @@
 				30351CBD27218602008A2A64 /* WideLandscapeView.xib in Resources */,
 				DC941B712645428400A2042B /* ShowStoryly.storyboard in Resources */,
 				41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */,
+				DCB2164B27AE937A00EEE69C /* Demo.storyboard in Resources */,
 				41BB11C52722ECE200453F78 /* CustomStyle.storyboard in Resources */,
 				30351CBA27218602008A2A64 /* LandscapeView.xib in Resources */,
 				4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */,
@@ -397,9 +415,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				30351CB727218602008A2A64 /* LandscapeView.swift in Sources */,
+				DCB2164927AE935300EEE69C /* IntegrationViewController.swift in Sources */,
 				30351CB827218602008A2A64 /* GradientPortraitView.swift in Sources */,
 				A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */,
 				4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */,
+				DCB2164D27AE993700EEE69C /* UICustomizationViewController.swift in Sources */,
 				DC034CA4273BAE8D0095E82F /* LargeView.swift in Sources */,
 				DCA6E7CC273D26630035EC2A /* TitleParameterLargeView.swift in Sources */,
 				DCE5DFEB274CC47900DCF2AD /* NetflixView.swift in Sources */,
