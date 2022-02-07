@@ -25,7 +25,8 @@ class EventHandlingViewController: UIViewController {
 
 extension EventHandlingViewController: StorylyDelegate {
     func storylyLoaded(_ storylyView: Storyly.StorylyView,
-                       storyGroupList: [Storyly.StoryGroup]) {
+                       storyGroupList: [Storyly.StoryGroup],
+                       dataSource: StorylyDataSource) {
     }
 
     func storylyLoadFailed(_ storylyView: Storyly.StorylyView,
