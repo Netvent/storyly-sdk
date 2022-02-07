@@ -29,8 +29,7 @@
     NSURL * actionUrl = [NSURL URLWithString: url];
     if (actionUrl == nil || ![actionUrl.scheme  isEqual: @"app"] || ![actionUrl.host isEqual: @"storyly-demo"]) { return nil; }
     NSString * segueId = actionUrl.path;
-    if (![self canPerformSegueWithIdentifier:segueId]) { return nil; }
-    return segueId;
+    return [self canPerformSegueWithIdentifier:segueId] ? segueId : nil;
 }
 
 - (BOOL)canPerformSegueWithIdentifier:(NSString *)identifier {
