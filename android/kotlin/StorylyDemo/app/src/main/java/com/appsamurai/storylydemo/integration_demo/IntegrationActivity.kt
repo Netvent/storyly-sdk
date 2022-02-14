@@ -1,4 +1,4 @@
-package com.appsamurai.storylydemo
+package com.appsamurai.storylydemo.integration_demo
 
 import android.content.Intent
 import android.net.Uri
@@ -12,7 +12,7 @@ import com.appsamurai.storylydemo.databinding.ActivityIntegrationBinding
 
 class IntegrationActivity : AppCompatActivity() {
     companion object {
-        const val STORYLY_DEMO_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjEwNDA5fQ.kXqBdpUcKaJe7eA98PqHahMDf-123Uhb82t_mYzbBUM"
+        const val STORYLY_DEMO_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjM3MzAsImFwcF9pZCI6OTkwNSwiaW5zX2lkIjoxMDQxOX0.eBNUkBBLrdd30175KsntgLhq9hqJ1K9PZRR5IZqG8gk"
     }
 
     private lateinit var binding: ActivityIntegrationBinding
@@ -21,6 +21,7 @@ class IntegrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityIntegrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         binding.storylyView.storylyInit = StorylyInit(STORYLY_DEMO_TOKEN)
         binding.storylyView.storylyListener = object : StorylyListener {
@@ -49,7 +50,7 @@ class IntegrationActivity : AppCompatActivity() {
                         Log.d("[storyly]", "IntegrationActivity:storylyActionClicked - forwarding to url {$url}")
                         startActivity(
                             Intent(Intent.ACTION_VIEW).apply {
-                                data = Uri.parse(url)
+                                data = Uri.parse("app://storyly-demo/custom-ui")
                             }
                         )
                     }
