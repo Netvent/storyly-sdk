@@ -1,4 +1,9 @@
 # Release Notes
+### 1.19.3 (16.2.2022)
+* fixed a crash during UI customization update from non main-thread
+* improved text area usage of promo code interactive component
+* fixed text alignment handling of text interacive component
+
 ### 1.19.2 (21.1.2022)
 * fixed integration bug if [Add Storyly View Programmatically](https://integration.storyly.io/ios/initial-sdksetup.html#add-storyly-view-programmatically) is used
 
