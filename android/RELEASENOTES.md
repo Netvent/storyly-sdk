@@ -1,4 +1,9 @@
 # Release Notes
+### 1.19.2 (16.2.2022)
+* fixed [#148](https://github.com/Netvent/storyly-mobile/issues/148)
+* fixed IllegalStateException with openStory method usage
+* fixed 'storyGroupTextIsVisible' not affecting UI bug for first open of StorylyView
+
 ### 1.19.1 (18.1.2022)
 * fixed visual bug related ui customization, story group icons rendered with wrong size during scroll
 
