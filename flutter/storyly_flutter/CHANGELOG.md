@@ -1,3 +1,6 @@
+### 1.19.1 (21.2.2022)
+* fixed scrolling issue that occurs if StorylyView is used inside nested scrolling views
+
 ### 1.19.0 (21.1.2022)
 * added thematic product tag component for interactive stories
 
