@@ -1,4 +1,7 @@
 # Release Notes
+### 1.19.1 (23.2.2022)
+* fixed story not opening bug when a user clicks a story group
+
 ### 1.19.0 (24.1.2022)
 * added thematic product tag component for interactive stories
 * fix StoryGroupTextStyling customization fields

@@ -66,7 +66,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     override fun getName(): String = REACT_CLASS
 
     override fun createViewInstance(reactContext: ThemedReactContext): STStorylyView {
-        return STStorylyView(reactContext)
+        return STStorylyView(reactContext.currentActivity ?: reactContext)
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
