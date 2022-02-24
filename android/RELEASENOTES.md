@@ -1,4 +1,8 @@
 # Release Notes
+### 1.19.3 (24.2.2022)
+* fixed story group lis visual bug, flickering some cases
+* fixed thematic icon management for story header view
+
 ### 1.19.2 (16.2.2022)
 * fixed [#148](https://github.com/Netvent/storyly-mobile/issues/148)
 * fixed IllegalStateException with openStory method usage
