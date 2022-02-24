@@ -1,4 +1,7 @@
 # Release Notes
+### 1.19.2 (24.2.2022)
+* added onStoryOpenFailed callback, check native documentation for details [StorylyStoryShowFailed Event](https://integration.storyly.io/android/deep-linking.html#storylystoryshowfailed-event) and [StorylyStoryPresentFailed Event](https://integration.storyly.io/ios/deep-linking.html#storylystorypresentfailed-event)
+
 ### 1.19.1 (23.2.2022)
 * fixed story not opening bug when a user clicks a story group
 

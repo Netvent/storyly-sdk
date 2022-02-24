@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyEvent;
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyActionClicked;
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyStoryPresented;
+@property(nonatomic, copy) RCTBubblingEventBlock onStorylyStoryPresentFailed;
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyStoryDismissed;
 @property(nonatomic, copy) RCTBubblingEventBlock onStorylyUserInteracted;
 

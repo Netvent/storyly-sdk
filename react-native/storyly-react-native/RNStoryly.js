@@ -83,6 +83,7 @@ class Storyly extends Component {
             onEvent,
             onPress,
             onStoryOpen,
+            onStoryOpenFailed,
             onStoryClose,
             onUserInteracted,
             ...otherProps
@@ -100,6 +101,7 @@ class Storyly extends Component {
                 onStorylyEvent={onEvent}
                 onStorylyActionClicked={onPress}
                 onStorylyStoryPresented={onStoryOpen}
+                onStorylyStoryPresentFailed={onStoryOpenFailed}
                 onStorylyStoryDismissed={onStoryClose}
                 onStorylyUserInteracted={onUserInteracted}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
@@ -144,6 +146,7 @@ Storyly.propTypes = {
     onPress: func,
     onEvent: func,
     onStoryOpen: func,
+    onStoryOpenFailed: func,
     onStoryClose: func,
     onUserInteracted: func
 }

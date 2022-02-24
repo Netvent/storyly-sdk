@@ -64,6 +64,13 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_STORY_PRESENTED, null)
             }
 
+            override fun storylyStoryShowFailed(storylyView: StorylyView, errorMessage: String) {
+                sendEvent(STStorylyManager.EVENT_STORYLY_STORY_PRESENT_FAILED, Arguments.createMap().also { eventMap ->
+                    eventMap.putString("errorMessage", errorMessage)
+                })
+                sendEvent(STStorylyManager.EVENT_STORYLY_STORY_PRESENTED, null)
+            }
+
             override fun storylyStoryDismissed(storylyView: StorylyView) {
                 sendEvent(STStorylyManager.EVENT_STORYLY_STORY_DISMISSED, null)
             }

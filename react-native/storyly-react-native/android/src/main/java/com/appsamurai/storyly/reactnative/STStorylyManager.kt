@@ -58,6 +58,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         internal const val EVENT_STORYLY_EVENT = "onStorylyEvent"
         internal const val EVENT_STORYLY_ACTION_CLICKED = "onStorylyActionClicked"
         internal const val EVENT_STORYLY_STORY_PRESENTED = "onStorylyStoryPresented"
+        internal const val EVENT_STORYLY_STORY_PRESENT_FAILED = "onStorylyStoryPresentFailed"
         internal const val EVENT_STORYLY_STORY_DISMISSED = "onStorylyStoryDismissed"
         internal const val EVENT_STORYLY_USER_INTERACTED = "onStorylyUserInteracted"
 

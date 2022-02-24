@@ -106,6 +106,12 @@
     }
 }
 
+-(void)storylyStoryPresentFailed:(StorylyView *)storylyView errorMessage:(NSString *)errorMessage {
+    if (self.onStorylyStoryPresentFailed) {
+        self.onStorylyStoryPresentFailed(@{@"errorMessage": errorMessage});
+    }
+}
+
 - (void)storylyStoryDismissed:(StorylyView * _Nonnull)storylyView {
     if (self.onStorylyStoryDismissed) {
         self.onStorylyStoryDismissed(@{});
