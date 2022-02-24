@@ -1,4 +1,8 @@
 # Release Notes
+### 1.19.4 (24.2.2022)
+* fixed story group lis visual bug, flickering some cases
+* fixed thematic icon management for story header view
+
 ### 1.19.3 (16.2.2022)
 * fixed a crash during UI customization update from non main-thread
 * improved text area usage of promo code interactive component
