@@ -1,4 +1,8 @@
 # Release Notes
+### 1.20.0 (14.3.2022)
+* added StorylyInit.userData to support personalized story rendering
+* added StoryComponent list to StoryMedia
+
 ### 1.19.4 (24.2.2022)
 * fixed story group lis visual bug, flickering some cases
 * fixed thematic icon management for story header view
