@@ -1,4 +1,10 @@
 # Release Notes
+### 1.20.0 (14.3.2022)
+* added StorylyInit.userData to support personalized story rendering
+* added StoryComponent list to StoryMedia
+* updated ExoPlayer to 31 2.17.1 and targetSdk to 31
+* fixed crash during restore instace handling
+
 ### 1.19.3 (24.2.2022)
 * fixed story group lis visual bug, flickering some cases
 * fixed thematic icon management for story header view
