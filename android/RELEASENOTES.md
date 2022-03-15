@@ -1,4 +1,7 @@
 # Release Notes
+### 1.20.1 (15.3.2022)
+* fixed a bug in setExternalData method
+
 ### 1.20.0 (14.3.2022)
 * added StorylyInit.userData to support personalized story rendering
 * added StoryComponent list to StoryMedia
