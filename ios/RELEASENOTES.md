@@ -1,4 +1,7 @@
 # Release Notes
+### 1.20.2 (22.3.2022)
+* fixed a possible crash on StoryComponent casting for storylyEvent
+
 ### 1.20.1 (15.3.2022)
 * fixed a bug in setExternalData method
 * fixed a crash in several opening of story group case
