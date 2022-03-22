@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.appsamurai.storyly.Story;
 import com.appsamurai.storyly.StoryComponent;
 import com.appsamurai.storyly.StoryGroup;
+import com.appsamurai.storyly.StorylyDataSource;
 import com.appsamurai.storyly.StorylyInit;
 import com.appsamurai.storyly.StorylyListener;
 import com.appsamurai.storyly.StorylyView;
@@ -34,7 +35,8 @@ public class EventHandlingActivity extends AppCompatActivity {
 
             @Override
             public void storylyLoaded(@NonNull StorylyView storylyView,
-                                      @NonNull List<StoryGroup> storyGroupList) {
+                                      @NonNull List<StoryGroup> storyGroupList,
+                                      @NonNull StorylyDataSource dataSource) {
 
             }
 
@@ -46,6 +48,11 @@ public class EventHandlingActivity extends AppCompatActivity {
 
             @Override
             public void storylyStoryShown(@NonNull StorylyView storylyView) {
+
+            }
+
+            @Override
+            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String s) {
 
             }
 

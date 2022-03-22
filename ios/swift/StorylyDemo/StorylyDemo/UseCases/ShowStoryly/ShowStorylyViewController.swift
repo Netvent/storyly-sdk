@@ -55,7 +55,8 @@ class ShowStorylyViewController: UIViewController {
 extension ShowStorylyViewController: StorylyDelegate {
 
     func storylyLoaded(_ storylyView: Storyly.StorylyView,
-                       storyGroupList: [Storyly.StoryGroup]) {
+                       storyGroupList: [Storyly.StoryGroup],
+                       dataSource: StorylyDataSource) {
         if initialLoad {
             initialLoad = false
             storylyView.isHidden = false

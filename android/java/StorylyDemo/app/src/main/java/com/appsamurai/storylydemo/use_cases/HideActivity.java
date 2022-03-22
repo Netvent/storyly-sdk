@@ -1,15 +1,17 @@
 package com.appsamurai.storylydemo.use_cases;
 
 import android.os.Bundle;
-import android.os.Handler;
+
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.appsamurai.storyly.Story;
 import com.appsamurai.storyly.StoryComponent;
 import com.appsamurai.storyly.StoryGroup;
+import com.appsamurai.storyly.StorylyDataSource;
 import com.appsamurai.storyly.StorylyInit;
 import com.appsamurai.storyly.StorylyListener;
 import com.appsamurai.storyly.StorylyView;
@@ -41,7 +43,7 @@ public class HideActivity extends AppCompatActivity {
             boolean storylyLoaded = false;
 
             @Override
-            public void storylyLoaded(@NotNull StorylyView storylyView, @NotNull List<StoryGroup> list) {
+            public void storylyLoaded(@NonNull StorylyView storylyView, @NonNull List<StoryGroup> list, @NonNull StorylyDataSource storylyDataSource) {
                 if (list.size() > 0) {
                     storylyLoaded = true;
                 }
@@ -60,6 +62,9 @@ public class HideActivity extends AppCompatActivity {
 
             @Override
             public void storylyStoryShown(@NotNull StorylyView storylyView) { }
+
+            @Override
+            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String s) { }
 
             @Override
             public void storylyStoryDismissed(@NotNull StorylyView storylyView) { }

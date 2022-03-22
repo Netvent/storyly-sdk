@@ -3,6 +3,6 @@ use_frameworks!
 platform :ios, '9.0'
 
 target 'StorylyDemo' do
-  pod 'Storyly'
+  pod 'Storyly', "1.19.1"
   pod 'StorylyMonetization'
 end

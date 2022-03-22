@@ -16,4 +16,10 @@
         <item>#FB3200</item>
         <item>#FFEB3B</item>
     </array>
+    
+    <string-array name="storyGroupSizeValues">
+        <item>Small</item>
+        <item>Large</item>
+        <item>Custom</item>
+    </string-array>
 </resources>

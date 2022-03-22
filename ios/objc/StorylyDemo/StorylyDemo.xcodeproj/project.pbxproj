@@ -21,6 +21,9 @@
 		A1752CC723FD0E45000CCB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1752CC623FD0E45000CCB33 /* Assets.xcassets */; };
 		A1752CCA23FD0E45000CCB33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1752CC823FD0E45000CCB33 /* LaunchScreen.storyboard */; };
 		A1752CCD23FD0E45000CCB33 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1752CCC23FD0E45000CCB33 /* main.m */; };
+		DCC275EB27B105EF004CE064 /* IntegrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC275EA27B105EF004CE064 /* IntegrationViewController.m */; };
+		DCC275ED27B1066D004CE064 /* Demo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCC275EC27B1066D004CE064 /* Demo.storyboard */; };
+		DCC275F027B106B9004CE064 /* UICustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC275EF27B106B9004CE064 /* UICustomizationViewController.m */; };
 		DCC2C1002643D4A300854DF7 /* ShowStorylyController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C0FF2643D4A300854DF7 /* ShowStorylyController.m */; };
 		DCC2C1052643D4C100854DF7 /* HideStorylyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C1042643D4C100854DF7 /* HideStorylyViewController.m */; };
 		DCC2C1172644006700854DF7 /* ShowStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C1162644006700854DF7 /* ShowStoryly.storyboard */; };
@@ -52,6 +55,11 @@
 		A1752CC923FD0E45000CCB33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1752CCB23FD0E45000CCB33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1752CCC23FD0E45000CCB33 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DCC275E927B105EF004CE064 /* IntegrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegrationViewController.h; sourceTree = "<group>"; };
+		DCC275EA27B105EF004CE064 /* IntegrationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegrationViewController.m; sourceTree = "<group>"; };
+		DCC275EC27B1066D004CE064 /* Demo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Demo.storyboard; sourceTree = "<group>"; };
+		DCC275EE27B106B9004CE064 /* UICustomizationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICustomizationViewController.h; sourceTree = "<group>"; };
+		DCC275EF27B106B9004CE064 /* UICustomizationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICustomizationViewController.m; sourceTree = "<group>"; };
 		DCC2C0FE2643D4A300854DF7 /* ShowStorylyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowStorylyController.h; sourceTree = "<group>"; };
 		DCC2C0FF2643D4A300854DF7 /* ShowStorylyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowStorylyController.m; sourceTree = "<group>"; };
 		DCC2C1032643D4C100854DF7 /* HideStorylyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HideStorylyViewController.h; sourceTree = "<group>"; };
@@ -131,6 +139,7 @@
 		A1752CB923FD0E43000CCB33 /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DCC275E327B105A3004CE064 /* IntegrationDemo */,
 				41BC5D5625D1BF3A002876EF /* Basic */,
 				41AC1F6426B0A897007CA47A /* Ads */,
 				41BC5D5E25D1BF6E002876EF /* EventHandling */,
@@ -155,6 +164,18 @@
 				1D0A85522E993DBED89E899C /* Pods-StorylyDemo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DCC275E327B105A3004CE064 /* IntegrationDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DCC275E927B105EF004CE064 /* IntegrationViewController.h */,
+				DCC275EA27B105EF004CE064 /* IntegrationViewController.m */,
+				DCC275EC27B1066D004CE064 /* Demo.storyboard */,
+				DCC275EE27B106B9004CE064 /* UICustomizationViewController.h */,
+				DCC275EF27B106B9004CE064 /* UICustomizationViewController.m */,
+			);
+			path = IntegrationDemo;
 			sourceTree = "<group>";
 		};
 		DCC2C0FA2643D45400854DF7 /* CustomSize */ = {
@@ -229,6 +250,7 @@
 				TargetAttributes = {
 					A1752CB623FD0E43000CCB33 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -257,6 +279,7 @@
 			files = (
 				A1752CCA23FD0E45000CCB33 /* LaunchScreen.storyboard in Resources */,
 				A1752CC723FD0E45000CCB33 /* Assets.xcassets in Resources */,
+				DCC275ED27B1066D004CE064 /* Demo.storyboard in Resources */,
 				DCC2C1172644006700854DF7 /* ShowStoryly.storyboard in Resources */,
 				41BC5D5325D1BF35002876EF /* CustomSize.storyboard in Resources */,
 				41BC5D5825D1BF4F002876EF /* EventHandling.storyboard in Resources */,
@@ -316,8 +339,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1752CC223FD0E43000CCB33 /* BasicViewController.m in Sources */,
+				DCC275F027B106B9004CE064 /* UICustomizationViewController.m in Sources */,
 				A1752CBC23FD0E43000CCB33 /* AppDelegate.m in Sources */,
 				41BC5D5425D1BF35002876EF /* CustomSizeViewController.m in Sources */,
+				DCC275EB27B105EF004CE064 /* IntegrationViewController.m in Sources */,
 				41BC5D5C25D1BF69002876EF /* EventHandlingViewController.m in Sources */,
 				DCC2C1052643D4C100854DF7 /* HideStorylyViewController.m in Sources */,
 				41AC1F6726B0A8B5007CA47A /* AdsViewController.m in Sources */,
@@ -464,6 +489,7 @@
 			baseConfigurationReference = 53D94C51C9D15D913A3D14D0 /* Pods-StorylyDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9HWCG6YGG;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
@@ -474,6 +500,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appsamurai.storyly.StorylyDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StorylyDemo/IntegrationDemo/StorylyDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -483,6 +512,7 @@
 			baseConfigurationReference = 1D0A85522E993DBED89E899C /* Pods-StorylyDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9HWCG6YGG;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
@@ -493,6 +523,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appsamurai.storyly.StorylyDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StorylyDemo/IntegrationDemo/StorylyDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -52,7 +52,7 @@ class HideStorylyViewController: UIViewController {
 
 extension HideStorylyViewController: StorylyDelegate {
 
-    func storylyLoaded(_ storylyView: Storyly.StorylyView, storyGroupList: [Storyly.StoryGroup]) {
+    func storylyLoaded(_ storylyView: Storyly.StorylyView, storyGroupList: [Storyly.StoryGroup], dataSource: StorylyDataSource) {
         initialLoad = true
     }
 
