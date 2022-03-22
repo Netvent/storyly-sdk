@@ -31,13 +31,19 @@
 
 + (StoryGroupListStyling *)STStoryGroupListStyling:(id)json {
     NSDictionary *storyGroupListStyling = [self NSDictionary:json];
-    if ([storyGroupListStyling.allKeys containsObject:@"edgePadding"] && storyGroupListStyling[@"edgePadding"] != NULL &&
-        [storyGroupListStyling.allKeys containsObject:@"paddingBetweenItems"] && storyGroupListStyling[@"paddingBetweenItems"] != NULL) {
-        return [[StoryGroupListStyling alloc] initWithEdgePadding:[storyGroupListStyling[@"edgePadding"] floatValue]
-                                               paddingBetweenItems:[storyGroupListStyling[@"paddingBetweenItems"] floatValue]];
+    
+    float edgePadding = 4;
+    if ([storyGroupListStyling.allKeys containsObject:@"edgePadding"] && storyGroupListStyling[@"edgePadding"] != NULL) {
+        edgePadding = [storyGroupListStyling[@"edgePadding"] floatValue];
     }
-    return [[StoryGroupListStyling alloc] initWithEdgePadding:4
-                                          paddingBetweenItems:8];
+    
+    float paddingBetweenItems = 8;
+    if ([storyGroupListStyling.allKeys containsObject:@"paddingBetweenItems"] && storyGroupListStyling[@"paddingBetweenItems"] != NULL) {
+        paddingBetweenItems = [storyGroupListStyling[@"paddingBetweenItems"] floatValue];
+    }
+
+    return [[StoryGroupListStyling alloc] initWithEdgePadding:edgePadding
+                                          paddingBetweenItems:paddingBetweenItems];
 }
 
 @end
@@ -46,17 +52,26 @@
 
 + (StoryGroupIconStyling *)STStoryGroupIconStyling:(id)json {
     NSDictionary *storyGroupIconStyling = [self NSDictionary:json];
-    if ([storyGroupIconStyling.allKeys containsObject:@"height"] && storyGroupIconStyling[@"height"] != NULL &&
-        [storyGroupIconStyling.allKeys containsObject:@"width"] && storyGroupIconStyling[@"width"] != NULL &&
-        [storyGroupIconStyling.allKeys containsObject:@"cornerRadius"] && storyGroupIconStyling[@"cornerRadius"] != NULL) 
-    {
-        return [[StoryGroupIconStyling alloc] initWithHeight:[storyGroupIconStyling[@"height"] floatValue]
-                                                       width:[storyGroupIconStyling[@"width"] floatValue]
-                                                cornerRadius:[storyGroupIconStyling[@"cornerRadius"] floatValue]];
-    } 
-    return [[StoryGroupIconStyling alloc] initWithHeight:80
-                                                   width:80
-                                            cornerRadius:40];
+    
+    float height = 80;
+    if ([storyGroupIconStyling.allKeys containsObject:@"height"] && storyGroupIconStyling[@"height"] != NULL) {
+        height = [storyGroupIconStyling[@"height"] floatValue];
+    }
+    
+    float width = 80;
+    if ([storyGroupIconStyling.allKeys containsObject:@"width"] && storyGroupIconStyling[@"width"] != NULL) {
+        width = [storyGroupIconStyling[@"width"] floatValue];
+    }
+    
+    float cornerRadius = 40;
+    if ([storyGroupIconStyling.allKeys containsObject:@"cornerRadius"] && storyGroupIconStyling[@"cornerRadius"] != NULL) {
+        cornerRadius = [storyGroupIconStyling[@"cornerRadius"] floatValue];
+    }
+    
+
+    return [[StoryGroupIconStyling alloc] initWithHeight:height
+                                                   width:width
+                                            cornerRadius:cornerRadius];
 }
 
 @end
@@ -124,19 +139,25 @@
 
 + (StoryHeaderStyling *)STStoryHeaderStyling:(id)json {
     NSDictionary *storyHeaderStyling = [self NSDictionary:json];
-    if ([storyHeaderStyling.allKeys containsObject:@"isTextVisible"] && storyHeaderStyling[@"isTextVisible"] != NULL &&
-        [storyHeaderStyling.allKeys containsObject:@"isIconVisible"] && storyHeaderStyling[@"isIconVisible"] != NULL &&
-        [storyHeaderStyling.allKeys containsObject:@"isCloseButtonVisible"] && storyHeaderStyling[@"isCloseButtonVisible"] != NULL)
-    {
-        return [[StoryHeaderStyling alloc] initWithIsTextVisible:storyHeaderStyling[@"isTextVisible"] 
-                                                   isIconVisible:storyHeaderStyling[@"isIconVisible"]
-                                            isCloseButtonVisible:storyHeaderStyling[@"isCloseButtonVisible"]
-                                                 closeButtonIcon:NULL
-                                                 shareButtonIcon:NULL];
+    
+    BOOL isTextVisible = YES;
+    if ([storyHeaderStyling.allKeys containsObject:@"isTextVisible"] && storyHeaderStyling[@"isTextVisible"] != NULL) {
+        isTextVisible = [storyHeaderStyling[@"isTextVisible"] boolValue];
     }
-    return [[StoryHeaderStyling alloc] initWithIsTextVisible:YES
-                                               isIconVisible:YES
-                                        isCloseButtonVisible:YES
+    
+    BOOL isIconVisible = YES;
+    if ([storyHeaderStyling.allKeys containsObject:@"isIconVisible"] && storyHeaderStyling[@"isIconVisible"] != NULL) {
+        isIconVisible = [storyHeaderStyling[@"isIconVisible"] boolValue];
+    }
+    
+    BOOL isCloseButtonVisible = YES;
+    if ([storyHeaderStyling.allKeys containsObject:@"isCloseButtonVisible"] && storyHeaderStyling[@"isCloseButtonVisible"] != NULL) {
+        isCloseButtonVisible = [storyHeaderStyling[@"isCloseButtonVisible"] boolValue];
+    }
+
+    return [[StoryHeaderStyling alloc] initWithIsTextVisible:isTextVisible
+                                               isIconVisible:isIconVisible
+                                        isCloseButtonVisible:isCloseButtonVisible
                                              closeButtonIcon:NULL
                                              shareButtonIcon:NULL];
 }

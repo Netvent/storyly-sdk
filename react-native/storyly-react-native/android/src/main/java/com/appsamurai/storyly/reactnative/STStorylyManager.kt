@@ -1,12 +1,14 @@
 package com.appsamurai.storyly.reactnative
 
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
+import android.util.DisplayMetrics
 import android.util.TypedValue
+import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylySegmentation
-import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.styling.StoryGroupIconStyling
 import com.appsamurai.storyly.styling.StoryGroupListStyling
 import com.appsamurai.storyly.styling.StoryGroupTextStyling
@@ -67,18 +69,20 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     override fun getName(): String = REACT_CLASS
 
     override fun createViewInstance(reactContext: ThemedReactContext): STStorylyView {
-        return STStorylyView(reactContext.currentActivity ?: reactContext)
+        return STStorylyView(reactContext)
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         val builder = MapBuilder.builder<String, Any>()
-        arrayOf(EVENT_STORYLY_LOADED,
-                EVENT_STORYLY_LOAD_FAILED,
-                EVENT_STORYLY_EVENT,
-                EVENT_STORYLY_ACTION_CLICKED,
-                EVENT_STORYLY_STORY_PRESENTED,
-                EVENT_STORYLY_STORY_DISMISSED,
-                EVENT_STORYLY_USER_INTERACTED).forEach {
+        arrayOf(
+            EVENT_STORYLY_LOADED,
+            EVENT_STORYLY_LOAD_FAILED,
+            EVENT_STORYLY_EVENT,
+            EVENT_STORYLY_ACTION_CLICKED,
+            EVENT_STORYLY_STORY_PRESENTED,
+            EVENT_STORYLY_STORY_DISMISSED,
+            EVENT_STORYLY_USER_INTERACTED
+        ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
         }
         return builder.build()
@@ -86,12 +90,12 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     override fun getCommandsMap(): Map<String, Int> {
         return MapBuilder.of(
-                COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE,
-                COMMAND_OPEN_NAME, COMMAND_OPEN_CODE,
-                COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
-                COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
-                COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE,
-                COMMAND_OPEN_STORY_V2_NAME, COMMAND_OPEN_STORY_V2_CODE
+            COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE,
+            COMMAND_OPEN_NAME, COMMAND_OPEN_CODE,
+            COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
+            COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
+            COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE,
+            COMMAND_OPEN_STORY_V2_NAME, COMMAND_OPEN_STORY_V2_CODE
         )
     }
 
@@ -192,24 +196,30 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_GROUP_ICON_STYLING)
     fun setPropStoryGroupIconStyling(view: STStorylyView, storyGroupIconStylingMap: ReadableMap) {
-        if (storyGroupIconStylingMap.hasKey("height") &&
-                storyGroupIconStylingMap.hasKey("width") &&
-                storyGroupIconStylingMap.hasKey("cornerRadius")) {
-            view.storylyView.setStoryGroupIconStyling(StoryGroupIconStyling(
-                    storyGroupIconStylingMap.getInt("height").toFloat(),
-                    storyGroupIconStylingMap.getInt("width").toFloat(),
-                    storyGroupIconStylingMap.getDouble("cornerRadius").toFloat()))
-        }
+        val height = if (storyGroupIconStylingMap.hasKey("height")) storyGroupIconStylingMap.getInt("height").toFloat() else dpToPixel(80)
+        val width = if (storyGroupIconStylingMap.hasKey("width")) storyGroupIconStylingMap.getInt("width").toFloat() else dpToPixel(80)
+        val cornerRadius = if (storyGroupIconStylingMap.hasKey("cornerRadius")) storyGroupIconStylingMap.getInt("cornerRadius").toFloat() else dpToPixel(40)
+
+        view.storylyView.setStoryGroupIconStyling(
+            StoryGroupIconStyling(
+                height = height,
+                width = width,
+                cornerRadius = cornerRadius
+            )
+        )
     }
 
     @ReactProp(name = PROP_STORY_GROUP_LIST_STYLING)
     fun setPropStoryGroupListStyling(view: STStorylyView, storyGroupListStylingMap: ReadableMap) {
-        if (storyGroupListStylingMap.hasKey("edgePadding") &&
-                storyGroupListStylingMap.hasKey("paddingBetweenItems")) {
-            view.storylyView.setStoryGroupListStyling(StoryGroupListStyling(
-                    storyGroupListStylingMap.getInt("edgePadding").toFloat(),
-                    storyGroupListStylingMap.getInt("paddingBetweenItems").toFloat()))
-        }
+        val edgePadding = if (storyGroupListStylingMap.hasKey("edgePadding")) storyGroupListStylingMap.getInt("edgePadding").toFloat() else dpToPixel(4)
+        val paddingBetweenItems = if (storyGroupListStylingMap.hasKey("paddingBetweenItems")) storyGroupListStylingMap.getInt("paddingBetweenItems").toFloat() else dpToPixel(4)
+
+        view.storylyView.setStoryGroupListStyling(
+            StoryGroupListStyling(
+                edgePadding = edgePadding,
+                paddingBetweenItems = paddingBetweenItems
+            )
+        )
     }
 
     @ReactProp(name = PROP_STORY_GROUP_TEXT_STYLING)
@@ -233,14 +243,16 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_HEADER_STYLING)
     fun setPropStoryHeaderStyling(view: STStorylyView, storyHeaderStylingMap: ReadableMap) {
-        if (storyHeaderStylingMap.hasKey("isTextVisible") &&
-                storyHeaderStylingMap.hasKey("isIconVisible") &&
-                storyHeaderStylingMap.hasKey("isCloseButtonVisible")) {
-            view.storylyView.setStoryHeaderStyling(StoryHeaderStyling(
-                    storyHeaderStylingMap.getBoolean("isTextVisible"),
-                    storyHeaderStylingMap.getBoolean("isIconVisible"),
-                    storyHeaderStylingMap.getBoolean("isCloseButtonVisible")))
-        }
+        val isTextVisible = if (storyHeaderStylingMap.hasKey("isTextVisible")) storyHeaderStylingMap.getBoolean("isTextVisible") else true
+        val isIconVisible = if (storyHeaderStylingMap.hasKey("isIconVisible")) storyHeaderStylingMap.getBoolean("isIconVisible") else true
+        val isCloseButtonVisible = if (storyHeaderStylingMap.hasKey("isCloseButtonVisible")) storyHeaderStylingMap.getBoolean("isCloseButtonVisible") else true
+        view.storylyView.setStoryHeaderStyling(
+            StoryHeaderStyling(
+                isTextVisible = isTextVisible,
+                isIconVisible = isIconVisible,
+                isCloseButtonVisible = isCloseButtonVisible,
+            )
+        )
     }
 
     private fun convertColorArray(colors: ReadableArray): Array<Int> {
@@ -249,5 +261,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             colorsNative.add(colors.getInt(i))
         }
         return colorsNative.toTypedArray()
+    }
+
+    private fun dpToPixel(dpValue: Int): Float {
+        return dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
     }
 }

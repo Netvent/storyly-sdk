@@ -13,7 +13,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 
 
 class STStorylyView(context: Context) : FrameLayout(context) {
-    internal var storylyView: StorylyView = StorylyView(context)
+    internal var storylyView: StorylyView = StorylyView((context as? ReactContext)?.currentActivity ?: context)
 
     init {
         addView(storylyView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
