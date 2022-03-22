@@ -1,4 +1,10 @@
 # Release Notes
+### 1.20.3 (22.3.2022)
+* fixed a possible crash on StoryComponent casting for storylyEvent
+
+### 1.20.2 (17.3.2022)
+* removed kotlin-parcelize dependency requirement
+
 ### 1.20.1 (15.3.2022)
 * fixed a bug in setExternalData method
 
