@@ -1,5 +1,5 @@
 # Release Notes
-### 1.20.0 (16.3.2022)
+### 1.20.0 (22.3.2022)
 * updated Android native project dependencies, [React Upgrade Helper; from 0.64.2 to 0.67.3](https://react-native-community.github.io/upgrade-helper/?from=0.64.2&to=0.67.3), fixed [#151](https://github.com/Netvent/storyly-mobile/issues/151) and [#150](https://github.com/Netvent/storyly-mobile/issues/150)
 * removed constraint for setting all field for ui customizations, fixed [#157](https://github.com/Netvent/storyly-mobile/issues/157)
 * fixed [#166](https://github.com/Netvent/storyly-mobile/issues/166)
