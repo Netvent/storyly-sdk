@@ -18,10 +18,6 @@ public class CustomSizeActivity extends AppCompatActivity {
 
         LinearLayout storylyViewHolder = findViewById(R.id.storyly_view_holder);
 
-        StorylyView storyly_view_custom_xlarge = findViewById(R.id.storyly_view_custom_xlarge);
-        storyly_view_custom_xlarge.setStorylyInit(new StorylyInit(Tokens.STORYLY_INSTANCE_TOKEN));
-        // storyly_view_custom_xlarge.setStoryGroupSize(StoryGroupSize.XLarge);
-
         StorylyView storyly_view_custom_large = findViewById(R.id.storyly_view_custom_large);
         storyly_view_custom_large.setStorylyInit(new StorylyInit(Tokens.STORYLY_INSTANCE_TOKEN));
         // storyly_view_custom_large.setStoryGroupSize(StoryGroupSize.Large);
