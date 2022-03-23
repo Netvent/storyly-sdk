@@ -62,7 +62,7 @@ public class IntegrationActivity extends AppCompatActivity {
             public void storylyStoryShown(@NonNull StorylyView storylyView) {}
 
             @Override
-            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String s) {}
+            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String errorMessage) {}
 
             @Override
             public void storylyStoryDismissed(@NonNull StorylyView storylyView) {}

@@ -52,7 +52,7 @@ public class EventHandlingActivity extends AppCompatActivity {
             }
 
             @Override
-            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String s) {
+            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String errorMessage) {
 
             }
 

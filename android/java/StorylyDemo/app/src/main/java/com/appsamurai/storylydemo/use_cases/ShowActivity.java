@@ -63,7 +63,7 @@ public class ShowActivity extends AppCompatActivity {
             public void storylyStoryShown(@NotNull StorylyView storylyView) { }
 
             @Override
-            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String s) { }
+            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String errorMessage) { }
 
             @Override
             public void storylyStoryDismissed(@NotNull StorylyView storylyView) { }
