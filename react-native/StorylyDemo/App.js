@@ -63,6 +63,13 @@ const App = () => {
             }}
             storyGroupSize="small"
             storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
+            onLoad={storyGroupList => { console.log("[Storyly] onLoad"); }}
+            onFail={errorMessage => { console.log("[Storyly] onFail"); }}
+            onPress={story => { console.log("[Storyly] onPress"); }}
+            onEvent={eventPayload => { console.log("[Storyly] onEvent"); }}
+            onStoryOpen={() => { console.log("[Storyly] onStoryOpen"); }}
+            onStoryClose={() => { console.log("[Storyly] onStoryClose"); }}
+            onUserInteracted={interactionEvent => { console.log("[Storyly] onStoryUserInteracted"); }}
           />
         </Animated.View>
       </SafeAreaView>
