@@ -57,12 +57,28 @@ class _ScrollExampleState extends State<ScrollExample> {
   }
 
   Widget storylyArea() {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    print("width:$width:height:$height");
+
+    var pixelRatio = WidgetsBinding.instance?.window.devicePixelRatio ?? 0;
+
+    //Size in physical pixels
+    var physicalScreenSize = WidgetsBinding.instance?.window.physicalSize;
+    var physicalWidth = physicalScreenSize?.width ?? 0;
+    var physicalHeight = physicalScreenSize?.height ?? 0;
+
+    print("physicalWidth:$physicalWidth:physicalHeight:$physicalHeight");
     return Container(
-      height: 120,
+      height: (physicalHeight * 0.2) / pixelRatio + 20,
       margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: StorylyView(
         onStorylyViewCreated: onStorylyViewCreated,
         androidParam: StorylyParam()
+          ..storyGroupSize = "custom"
+          ..storyGroupIconWidth = (physicalWidth * 0.3).toInt()
+          ..storyGroupIconHeight = (physicalHeight * 0.2).toInt()
+          ..storyGroupIconCornerRadius = 38
           ..storylyId = storylyInstanceToken
           ..storyGroupListEdgePadding = 20
           ..storyGroupListPaddingBetweenItems = 20,
