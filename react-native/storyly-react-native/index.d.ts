@@ -4,7 +4,7 @@ declare module "storyly-react-native" {
 
   export namespace Storyly {
     export interface Props extends ViewProps {
-      storylyId: string;
+      storylyId?: string;
       customParameter?: string;
       storylyTestMode?: boolean;
       storylySegments?: string[];
@@ -35,18 +35,18 @@ declare module "storyly-react-native" {
       storyHeaderTextIsVisible?: boolean;
       storyHeaderCloseButtonIsVisible?: boolean;
 
-      onLoad?: (event: StoryLoadEvent) => void;
-      onFail?: (event: String) => void;
       onStoryOpen?: () => void;
       onStoryClose?: () => void;
+      onFail?: (event: String) => void;
+      onPress?: (story: Story) => void;
       onEvent?: (event: StoryEvent) => void;
-      onPress?: (event: StoryPressEvent) => void;
+      onLoad?: (event: StoryLoadEvent) => void;
       onUserInteracted?: (event: StoryInteractiveEvent) => void;
     }
 
     export interface StoryLoadEvent {
-      storyGroupList: StoryGroup[];
       dataSource: string;
+      storyGroupList: StoryGroup[];
     }
 
     export interface StoryFailEvent {
@@ -87,7 +87,8 @@ declare module "storyly-react-native" {
       title: string;
       index: number;
       seen: boolean;
-      media: {
+
+      media?: {
         url: string;
         type: number;
         actionUrl: string | null;
@@ -95,10 +96,10 @@ declare module "storyly-react-native" {
     }
 
     export type ReactionType =
-      | "emoji"
-      | "rating"
       | "poll"
       | "quiz"
+      | "emoji"
+      | "rating"
       | "countdown"
       | "promocode";
   }
