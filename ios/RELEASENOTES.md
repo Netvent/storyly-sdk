@@ -1,4 +1,12 @@
 # Release Notes
+### 1.21.0 (14.4.2022)
+* added support for 9:20 media assets
+* increased swipe up interactive area
+* added support for promo code interactive layer in external data
+* fixed a wrong thread exception during ui customizations
+* fixed SDWebImage conflicts, [#161](https://github.com/Netvent/storyly-mobile/issues/161)
+* fixed SDWebImage related warnings, [#145](https://github.com/Netvent/storyly-mobile/issues/145)
+
 ### 1.20.2 (22.3.2022)
 * fixed a possible crash on StoryComponent casting for storylyEvent
 
