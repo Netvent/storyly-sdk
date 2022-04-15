@@ -1,4 +1,18 @@
 # Release Notes
+### 1.21.0 (14.4.2022)
+* added support for 9:20 media assets
+* increased swipe up interactive area
+* added support for promo code interactive layer in external data
+* updated RecyclerView dependency to 1.2.1
+* fixed ContextThemeWrapper handling for not opening story bug
+* fixed ConcurrentModificationException
+
+### 1.20.5 (1.4.2022)
+* fixed a PendingIntent crash on story share for Android S+ devices
+
+### 1.20.4 (31.3.2022)
+* fixed a possible crash on StoryComponent casting for storylyEvent
+
 ### 1.20.3 (22.3.2022)
 * fixed a possible crash on StoryComponent casting for storylyEvent
 

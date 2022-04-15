@@ -1,3 +1,7 @@
+### 1.20.0 (26.3.2022)
+* updated native sdk dependencies
+* updated Android native project dependencies; compileSdkVersion and targetSdk to 31
+
 ### 1.19.1 (21.2.2022)
 * fixed scrolling issue that occurs if StorylyView is used inside nested scrolling views
 

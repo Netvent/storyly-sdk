@@ -35,24 +35,42 @@ declare module "storyly-react-native" {
       storyHeaderTextIsVisible?: boolean;
       storyHeaderCloseButtonIsVisible?: boolean;
 
-      onLoad?: () => void;
-      onFail?: () => void;
+      onLoad?: (event: StoryLoadEvent) => void;
+      onFail?: (event: String) => void;
       onStoryOpen?: () => void;
       onStoryClose?: () => void;
-      onEvent?: (event: StorylyEvent) => void;
+      onEvent?: (event: StoryEvent) => void;
       onPress?: (event: StoryPressEvent) => void;
-      onUserInteracted?: (event: InteractiveEvent) => void;
+      onUserInteracted?: (event: StoryInteractiveEvent) => void;
+    }
+
+    export interface StoryLoadEvent {
+      storyGroupList: StoryGroup[];
+      dataSource: string;
+    }
+
+    export interface StoryFailEvent {
+      errorMessage: string;
     }
 
     export interface StoryPressEvent {
-      nativeEvent: Story;
+      story: Story;
     }
 
-    export interface StorylyEvent {
+    export interface StoryEvent {
       event: string;
       story: Story;
       storyGroup: StoryGroup;
       storyComponent: unknown | null;
+    }
+
+    export interface StoryInteractiveEvent {
+      story: Story;
+      storyGroup: StoryGroup;
+      storyComponent: {
+        type: ReactionType;
+        customPayload: string;
+      };
     }
 
     export interface StoryGroup {
@@ -76,21 +94,13 @@ declare module "storyly-react-native" {
       };
     }
 
-    export interface InteractiveEvent {
-      story: Story;
-      storyGroup: StoryGroup;
-      storyComponent: {
-        type: ReactionType;
-        customPayload: string;
-      };
-    }
-
     export type ReactionType =
       | "emoji"
       | "rating"
       | "poll"
       | "quiz"
-      | "countdown";
+      | "countdown"
+      | "promocode";
   }
 
   export type ExternalData = Record<string, string>[];

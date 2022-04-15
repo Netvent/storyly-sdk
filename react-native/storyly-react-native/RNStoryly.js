@@ -56,6 +56,36 @@ class Storyly extends Component {
         );
     }
 
+    _onStorylyLoaded = (eventPayload) => {
+        if (this.props.onLoad) {
+            this.props.onLoad(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyLoadFailed = (eventPayload) => {
+        if (this.props.onFail) {
+            this.props.onFail(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyEvent = (eventPayload) => {
+        if (this.props.onEvent) {
+            this.props.onEvent(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyActionClicked = (eventPayload) => {
+        if (this.props.onPress) {
+            this.props.onPress(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyUserInteracted = (eventPayload) => {
+        if (this.props.onUserInteracted) {
+            this.props.onUserInteracted(eventPayload.nativeEvent);
+        }
+    }
+
     render() {
         const {
             storylyId,
@@ -96,14 +126,14 @@ class Storyly extends Component {
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
                 storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'color': storyGroupTextColor}}
                 storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
-                onStorylyLoaded={onLoad}
-                onStorylyLoadFailed={onFail}
-                onStorylyEvent={onEvent}
-                onStorylyActionClicked={onPress}
+                onStorylyLoaded={this._onStorylyLoaded}
+                onStorylyLoadFailed={this._onStorylyLoadFailed}
+                onStorylyEvent={this._onStorylyEvent}
+                onStorylyActionClicked={this._onStorylyActionClicked}
                 onStorylyStoryPresented={onStoryOpen}
                 onStorylyStoryPresentFailed={onStoryOpenFailed}
                 onStorylyStoryDismissed={onStoryClose}
-                onStorylyUserInteracted={onUserInteracted}
+                onStorylyUserInteracted={this._onStorylyUserInteracted}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
                 storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
                 storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
