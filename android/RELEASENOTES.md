@@ -1,4 +1,8 @@
 # Release Notes
+### 1.21.1 (16.4.2022)
+* fixed crash on save/restore instance flow
+* reduced compileSdk and targetSdk to 30
+
 ### 1.21.0 (14.4.2022)
 * added support for 9:20 media assets
 * increased swipe up interactive area
