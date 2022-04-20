@@ -13,19 +13,33 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
     implementation 'com.android.support:multidex:1.0.3'
 
-    implementation 'com.appsamurai.storyly:storyly:1.19.1'
-    implementation 'com.appsamurai.storyly:storyly-monetization:1.1.0'
+    implementation('com.appsamurai.storyly:storyly:1.21.1-rc7') {
+        exclude group: 'com.google.android.exoplayer', module: 'exoplayer-core'
+        exclude group: 'com.google.android.exoplayer', module: 'exoplayer-hls'
+    }
+
+    implementation('com.google.android.exoplayer:exoplayer-core:2.17.1') {
+        exclude group: 'androidx.core', module: 'core'
+        exclude group: 'androidx.core', module: 'core-ktx'
+    }
+    implementation("com.google.android.exoplayer:exoplayer-hls:2.17.1") {
+        exclude group: 'com.google.android.exoplayer', module: 'exoplayer-core'
+    }
 }
