@@ -1,4 +1,11 @@
 # Release Notes
+### 1.22.0 (21.4.2022)
+* introduced Moments by Storyly features, check for integration [Moment by Storyly iOS Integration Docs](https://integration.storyly.io/moments-ios/quick-start.html#installation) 
+  * display user generated content in Storyly 
+  * add customization to show Moments views
+  * add like feature to user generated content
+  * add reporting feature to user generated content
+
 ### 1.21.0 (14.4.2022)
 * added support for 9:20 media assets
 * increased swipe up interactive area
