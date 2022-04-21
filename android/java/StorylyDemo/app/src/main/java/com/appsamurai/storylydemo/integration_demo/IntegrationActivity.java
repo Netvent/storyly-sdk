@@ -1,7 +1,10 @@
-package com.appsamurai.storylydemo;
+package com.appsamurai.storylydemo.integration_demo;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,20 +18,37 @@ import com.appsamurai.storyly.StorylyInit;
 import com.appsamurai.storyly.StorylyListener;
 import com.appsamurai.storyly.StorylyView;
 import com.appsamurai.storyly.analytics.StorylyEvent;
+import com.appsamurai.storylydemo.R;
 
 import java.util.List;
 
-public class UICustomizationActivity  extends AppCompatActivity {
+public class IntegrationActivity extends AppCompatActivity {
+    private static final String STORYLY_DEMO_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjEwNDA5fQ.kXqBdpUcKaJe7eA98PqHahMDf-123Uhb82t_mYzbBUM";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ui_customization);
-
+        setContentView(R.layout.activity_integration);
 
         StorylyView storylyView = findViewById(R.id.storyly_view);
-//        storylyView.setStorylyInit(new StorylyInit(STORYLY_DEMO_TOKEN));
+        storylyView.setStorylyInit(new StorylyInit(STORYLY_DEMO_TOKEN));
         storylyView.setStorylyListener(new StorylyListener() {
+            @Override
+            public void storylyActionClicked(@NonNull StorylyView storylyView, @NonNull Story story) {
+                Log.d("[storyly]", "IntegrationActivity:storylyActionClicked - story {"+story+"}");
+                try {
+                    String actionUrl = story.getMedia().getActionUrl();
+                    if (actionUrl == null) return;
+
+                    Log.d("[storyly]", "IntegrationActivity:storylyActionClicked - forwarding to url {"+actionUrl+"}");
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(actionUrl));
+                    startActivity(intent);
+                } catch (Exception exception) {
+                    Toast.makeText(getBaseContext(), exception.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+
             @Override
             public void storylyLoaded(@NonNull StorylyView storylyView, @NonNull List<StoryGroup> storyGroupList, @NonNull StorylyDataSource storylyDataSource) {
                 Log.d("[storyly]", "IntegrationActivity:storylyLoaded - storyGroupList size {"+storyGroupList.size()+"} - source {"+storylyDataSource+"}");
@@ -40,13 +60,10 @@ public class UICustomizationActivity  extends AppCompatActivity {
             }
 
             @Override
-            public void storylyActionClicked(@NonNull StorylyView storylyView, @NonNull Story story) {}
-
-            @Override
             public void storylyStoryShown(@NonNull StorylyView storylyView) {}
 
             @Override
-            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String s) {}
+            public void storylyStoryShowFailed(@NonNull StorylyView storylyView, @NonNull String errorMessage) {}
 
             @Override
             public void storylyStoryDismissed(@NonNull StorylyView storylyView) {}
