@@ -10,19 +10,21 @@
 @implementation RCTConvert (StorylyInit)
 
 + (StorylyInit *)STStorylyInit:(id)json {
-    NSDictionary *storylyInit = [self NSDictionary:json];
+    NSDictionary *storylyInitJson = [self NSDictionary:json];
     StorylySegmentation *storylySegmentation = [StorylySegmentation alloc];
-    if ([storylyInit.allKeys containsObject:@"storylySegments"] &&
-        storylyInit[@"storylySegments"] != NULL) {
-        storylySegmentation = [storylySegmentation initWithSegments:storylyInit[@"storylySegments"]];
+    if ([storylyInitJson.allKeys containsObject:@"storylySegments"] &&
+        storylyInitJson[@"storylySegments"] != NULL) {
+        storylySegmentation = [storylySegmentation initWithSegments:storylyInitJson[@"storylySegments"]];
     }
     
-    bool isTestMode = ([storylyInit.allKeys containsObject:@"storylyIsTestMode"]) ? [storylyInit[@"storylyIsTestMode"] boolValue] : NO;
+    bool isTestMode = ([storylyInitJson.allKeys containsObject:@"storylyIsTestMode"]) ? [storylyInitJson[@"storylyIsTestMode"] boolValue] : NO;
 
-    return [[StorylyInit alloc] initWithStorylyId:storylyInit[@"storylyId"]
-                                     segmentation:storylySegmentation
-                                  customParameter:storylyInit[@"customParameter"]
-                                       isTestMode:isTestMode];
+    StorylyInit *storylyInit = [[StorylyInit alloc] initWithStorylyId:storylyInitJson[@"storylyId"]
+                                                         segmentation:storylySegmentation
+                                                      customParameter:storylyInitJson[@"customParameter"]
+                                                           isTestMode:isTestMode];
+    [storylyInit setUserData:storylyInitJson[@"userProperty"]];
+    return storylyInit;
 }
 
 @end

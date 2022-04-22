@@ -1,4 +1,9 @@
 # Release Notes
+### 1.21.0 (22.4.2022)
+* added support for 9:20 media assets
+* added storylyUserProperty field
+* updated native sdk dependencies
+
 ### 1.20.1 (31.3.2022)
 * updated react-native and react dependencies
 * improved typescript support

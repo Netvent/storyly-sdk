@@ -4,7 +4,7 @@ import { requireNativeComponent,
     findNodeHandle,
     ViewPropTypes,
     processColor} from 'react-native';
-import { string, arrayOf, func, number, bool } from 'prop-types';
+import { string, arrayOf, func, number, bool, object } from 'prop-types';
 
 class Storyly extends Component {
     refresh = () => {
@@ -90,6 +90,7 @@ class Storyly extends Component {
         const {
             storylyId,
             storylySegments,
+            storylyUserProperty,
             customParameter,
             storylyTestMode,
             storyGroupIconBorderColorSeen,
@@ -121,7 +122,7 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
-                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'customParameter': customParameter, 'storylyIsTestMode': storylyTestMode}}
+                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyIsTestMode': storylyTestMode}}
                 storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
                 storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'color': storyGroupTextColor}}
@@ -147,6 +148,7 @@ Storyly.propTypes = {
     ...ViewPropTypes,
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
+    storylyUserProperty: object,
     customParameter: string,
     storylyTestMode: bool,
     
