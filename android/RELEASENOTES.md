@@ -1,4 +1,7 @@
 # Release Notes
+### 1.21.2 (22.4.2022)
+* fixed ContextWrapper(nested wrappers) handling for not opening story bug
+
 ### 1.21.1 (16.4.2022)
 * fixed crash on save/restore instance flow
 * reduced compileSdk and targetSdk to 30
