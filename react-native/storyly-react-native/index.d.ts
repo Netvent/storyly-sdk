@@ -8,21 +8,21 @@ declare module "storyly-react-native" {
       customParameter?: string;
       storylyTestMode?: boolean;
       storylySegments?: string[];
+      storylyUserProperty?: Record<string, string>[];
 
-      storyGroupPinIconColor?: string;
       storyGroupSize?: "small" | "large" | "custom";
-
-      storyGroupTextSize?: number;
-      storyGroupTextLines?: number;
-      storyGroupTextColor?: string;
-      storyGroupTextIsVisible?: boolean;
-
       storyGroupIconWidth?: number;
       storyGroupIconHeight?: number;
       storyGroupIconCornerRadius?: number;
       storyGroupIconBackgroundColor?: string;
       storyGroupIconBorderColorSeen?: string[];
       storyGroupIconBorderColorNotSeen?: string[];
+
+      storyGroupTextSize?: number;
+      storyGroupTextLines?: number;
+      storyGroupTextColor?: string;
+      storyGroupTextIsVisible?: boolean;
+      storyGroupPinIconColor?: string;
 
       storyGroupListEdgePadding?: number;
       storyGroupListPaddingBetweenItems?: number;

@@ -27,6 +27,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORYLY_INIT = "storylyInit"
         private const val PROP_STORYLY_ID = "storylyId"
         private const val PROP_STORYLY_SEGMENTS = "storylySegments"
+        private const val PROP_STORYLY_USER_PROPERTY = "userProperty"
         private const val PROP_CUSTOM_PARAMETER = "customParameter"
         private const val PROP_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
@@ -126,27 +127,17 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     fun setPropStorylyInit(view: STStorylyView, storylyInit: ReadableMap) {
         val storylyId: String = storylyInit.getString(PROP_STORYLY_ID) ?: return
         val isTestMode = if (storylyInit.hasKey(PROP_STORYLY_IS_TEST_MODE)) storylyInit.getBoolean(PROP_STORYLY_IS_TEST_MODE) else false
-        if (storylyInit.hasKey(PROP_STORYLY_SEGMENTS)) {
-            storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.let { storylySegments ->
-                val segmentationParams = StorylySegmentation(segments = (storylySegments.toArrayList() as? ArrayList<String>)?.toSet())
-                if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER), isTestMode = isTestMode)
-                } else {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, segmentation = segmentationParams, isTestMode = isTestMode)
-                }
-            } ?: run {
-                if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER), isTestMode = isTestMode)
-                } else {
-                    view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, isTestMode = isTestMode)
-                }
-            }
-        } else {
-            if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) {
-                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, customParameter = storylyInit.getString(PROP_CUSTOM_PARAMETER), isTestMode = isTestMode)
-            } else {
-                view.storylyView.storylyInit = StorylyInit(storylyId = storylyId, isTestMode = isTestMode)
-            }
+        val segments = if (storylyInit.hasKey(PROP_STORYLY_SEGMENTS)) (storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.toArrayList() as? ArrayList<String>)?.toSet() else null
+        val customParameter = if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) storylyInit.getString(PROP_CUSTOM_PARAMETER) else null
+        val userProperty = if (storylyInit.hasKey(PROP_STORYLY_USER_PROPERTY)) storylyInit.getMap(PROP_STORYLY_USER_PROPERTY)?.toHashMap() as? Map<String, String> else null
+
+        view.storylyView.storylyInit = StorylyInit(
+            storylyId = storylyId,
+            segmentation = StorylySegmentation(segments = segments),
+            customParameter = customParameter,
+            isTestMode = isTestMode
+        ).apply {
+            userProperty?.let { setUserData(userProperty) }
         }
     }
 
