@@ -1,5 +1,5 @@
 # Release Notes
-### 1.21.1 (28.4.2022)
+### 1.21.2 (28.4.2022)
 * changed Android compileSdk and targetSdk dependency to 30
 
 ### 1.21.0 (22.4.2022)
