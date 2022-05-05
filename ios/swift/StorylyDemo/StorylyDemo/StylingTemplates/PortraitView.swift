@@ -9,7 +9,6 @@
 import UIKit
 import Storyly
 
-
 public class PortraitView: StoryGroupView {
     
     let kCONTENT_XIB_NAME = "PortraitView"

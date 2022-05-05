@@ -19,6 +19,8 @@
 		4127AA2D26B0A4F5004CDE30 /* AdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */; };
 		4127AA2F26B0A539004CDE30 /* Ads.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127AA2E26B0A539004CDE30 /* Ads.storyboard */; };
 		4127AA3126B0A5E4004CDE30 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127AA3026B0A5E4004CDE30 /* Tokens.swift */; };
+		41356EAA2823BB82009D7E39 /* StorylyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41356EA82823BB82009D7E39 /* StorylyCollectionViewController.swift */; };
+		41356EAD2823BBCB009D7E39 /* StorylyCollectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41356EAC2823BBCB009D7E39 /* StorylyCollectionView.storyboard */; };
 		41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BDE25D18A2500928E7C /* EventHandlingViewController.swift */; };
 		41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BE125D18AA600928E7C /* CustomSizeViewController.swift */; };
 		41501BE625D18AA700928E7C /* CustomThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BE225D18AA600928E7C /* CustomThemeViewController.swift */; };
@@ -64,6 +66,8 @@
 		4127AA2C26B0A4F5004CDE30 /* AdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewController.swift; sourceTree = "<group>"; };
 		4127AA2E26B0A539004CDE30 /* Ads.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ads.storyboard; sourceTree = "<group>"; };
 		4127AA3026B0A5E4004CDE30 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		41356EA82823BB82009D7E39 /* StorylyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylyCollectionViewController.swift; sourceTree = "<group>"; };
+		41356EAC2823BBCB009D7E39 /* StorylyCollectionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StorylyCollectionView.storyboard; sourceTree = "<group>"; };
 		41501BDE25D18A2500928E7C /* EventHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandlingViewController.swift; sourceTree = "<group>"; };
 		41501BE125D18AA600928E7C /* CustomSizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSizeViewController.swift; sourceTree = "<group>"; };
 		41501BE225D18AA600928E7C /* CustomThemeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomThemeViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +159,15 @@
 			path = Ads;
 			sourceTree = "<group>";
 		};
+		41356EA52823B5A2009D7E39 /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				41356EA82823BB82009D7E39 /* StorylyCollectionViewController.swift */,
+				41356EAC2823BBCB009D7E39 /* StorylyCollectionView.storyboard */,
+			);
+			path = UICollectionView;
+			sourceTree = "<group>";
+		};
 		41501BEB25D1B16F00928E7C /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +257,7 @@
 			children = (
 				DC620F002640245400CE8688 /* HideStoryly */,
 				DC620EF2263FFDDD00CE8688 /* ShowStoryly */,
+				41356EA52823B5A2009D7E39 /* UICollectionView */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -344,6 +358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41356EAD2823BBCB009D7E39 /* StorylyCollectionView.storyboard in Resources */,
 				A16DA843233B90E5000514FA /* LaunchScreen.storyboard in Resources */,
 				A16DA840233B90E5000514FA /* Assets.xcassets in Resources */,
 				DC941B6E2645422800A2042B /* HideStoryly.storyboard in Resources */,
@@ -414,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41356EAA2823BB82009D7E39 /* StorylyCollectionViewController.swift in Sources */,
 				30351CB727218602008A2A64 /* LandscapeView.swift in Sources */,
 				DCB2164927AE935300EEE69C /* IntegrationViewController.swift in Sources */,
 				30351CB827218602008A2A64 /* GradientPortraitView.swift in Sources */,
@@ -585,7 +601,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6M3HAPKN9X;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,7 +623,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6M3HAPKN9X;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

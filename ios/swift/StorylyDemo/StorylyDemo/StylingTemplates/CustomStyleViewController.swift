@@ -8,6 +8,7 @@
 
 import UIKit
 import Storyly
+import SDWebImage
 
 class CustomStyleViewController: UIViewController {
     
@@ -38,7 +39,7 @@ class CustomStyleViewController: UIViewController {
         // Do any additional setup after loading the view
         gradientPortraitStorylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         gradientPortraitStorylyView.rootViewController = self
-        gradientPortraitStorylyView.storyGroupViewFactory = GradientPortraitViewFactory()
+        gradientPortraitStorylyView.storyGroupViewFactory = gradientPortraitViewFactory
         
         portraitStorylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         portraitStorylyView.rootViewController = self
