@@ -1,4 +1,7 @@
 # Release Notes
+### 1.21.3 (13.5.2022)
+* added storylyShareUrl field for customized share urls 
+
 ### 1.21.2 (22.4.2022)
 * fixed ContextWrapper(nested wrappers) handling for not opening story bug
 
