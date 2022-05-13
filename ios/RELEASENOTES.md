@@ -1,4 +1,7 @@
 # Release Notes
+### 1.22.1 (13.4.2022)
+* added storylyShareUrl field for customized share urls 
+
 ### 1.22.0 (21.4.2022)
 * introduced Moments by Storyly features, check for integration [Moment by Storyly iOS Integration Docs](https://integration.storyly.io/moments-ios/quick-start.html#installation) 
   * display user generated content in Storyly 
