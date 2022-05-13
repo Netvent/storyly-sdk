@@ -2,7 +2,7 @@
 name: iOS Monetization Bug Report
 about: Reporting bugs related to iOS Monetization SDK
 title:
-labels: 'bug, monetization, ios'
+labels: 'bug, monetization, ios, in progress'
 assignees: ''
 ---
 
