@@ -9,6 +9,7 @@ declare module "storyly-react-native" {
       storylyTestMode?: boolean;
       storylySegments?: string[];
       storylyUserProperty?: Record<string, string>[];
+      storylyShareUrl: string;
 
       storyGroupSize?: "small" | "large" | "custom";
       storyGroupIconWidth?: number;
@@ -85,8 +86,10 @@ declare module "storyly-react-native" {
     export interface Story {
       id: number;
       title: string;
+      name: string;
       index: number;
       seen: boolean;
+      currentTime: number;
       media: {
         url: string;
         type: number;

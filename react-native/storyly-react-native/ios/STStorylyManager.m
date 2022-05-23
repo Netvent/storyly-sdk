@@ -86,6 +86,7 @@ RCT_EXPORT_METHOD(setExternalData:(nonnull NSNumber *)reactTag
 }
 
 RCT_REMAP_VIEW_PROPERTY(storylyInit, _storylyView.storylyInit, STStorylyInit)
+RCT_REMAP_VIEW_PROPERTY(storylyShareUrl, _storylyView.storylyShareUrl, NSString)
 
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorSeen, _storylyView.storyGroupIconBorderColorSeen, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorNotSeen, _storylyView.storyGroupIconBorderColorNotSeen, NSArray<UIColor *>)

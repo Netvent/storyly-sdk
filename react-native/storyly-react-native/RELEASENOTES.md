@@ -1,4 +1,8 @@
 # Release Notes
+### 1.22.0 (23.5.2022)
+* added storylyShareUrl field for customized share urls
+* added name and currentTime field to Story object
+
 ### 1.21.2 (28.4.2022)
 * changed Android compileSdk and targetSdk dependency to 30
 

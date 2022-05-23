@@ -28,6 +28,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORYLY_ID = "storylyId"
         private const val PROP_STORYLY_SEGMENTS = "storylySegments"
         private const val PROP_STORYLY_USER_PROPERTY = "userProperty"
+        private const val PROP_STORYLY_SHARE_URL = "storylyShareUrl"
         private const val PROP_CUSTOM_PARAMETER = "customParameter"
         private const val PROP_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
@@ -139,6 +140,11 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         ).apply {
             userProperty?.let { setUserData(userProperty) }
         }
+    }
+
+    @ReactProp(name = PROP_STORYLY_SHARE_URL)
+    fun setPropStorylyShareUrl(view: STStorylyView, storylyShareUrl: String?) {
+        view.storylyView.storylyShareUrl = storylyShareUrl
     }
 
     @ReactProp(name = PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN)
