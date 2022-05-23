@@ -1,4 +1,7 @@
 # Release Notes
+### 1.21.4 (23.5.2022)
+* added currentTime field to Story object
+
 ### 1.21.3 (13.5.2022)
 * added storylyShareUrl field for customized share urls 
 
