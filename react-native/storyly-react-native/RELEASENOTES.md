@@ -1,4 +1,8 @@
 # Release Notes
+### 1.22.1 (26.5.2022)
+* changed Android compileSdk and targetSdk dependency to 31
+* fixed [#182](https://github.com/Netvent/storyly-mobile/issues/182)
+
 ### 1.22.0 (23.5.2022)
 * added storylyShareUrl field for customized share urls
 * added name and currentTime field to Story object
