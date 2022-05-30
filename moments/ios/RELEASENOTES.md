@@ -1,4 +1,8 @@
 # Release Notes
+### 0.0.4 (30.05.2022)
+* renamed StorylyMomentsDelegate to MomentsDelegate
+* changed text of views and feedbacks
+
 ### 0.0.2 (21.04.2022)
 * removed benchmark test screen
 
