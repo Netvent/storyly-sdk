@@ -1,4 +1,7 @@
 # Release Notes
+### 1.23.0 (29.5.2022)
+* added comment interactive component
+
 ### 1.21.4 (23.5.2022)
 * added currentTime field to Story object
 
