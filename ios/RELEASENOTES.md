@@ -1,4 +1,11 @@
 # Release Notes
+### 1.23.1 (30.05.2022)
+* added comment interactive component
+* added StorylyMomentsDelegate for moments specific events
+* fixed like/unlike click area
+* added like/unlike haptic feedback 
+* changed animation duration of bottom sheets
+
 ### 1.22.2 (23.4.2022)
 * added currentTime field to Story object
 
