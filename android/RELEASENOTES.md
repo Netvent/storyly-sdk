@@ -1,4 +1,9 @@
 # Release Notes
+### 1.23.1 (02.06.2022)
+* fixed resuming story on wrong index for show/dismiss methods
+* fixed promo code interactive component rendering for templates
+* removed cdn fallback flow
+
 ### 1.23.0 (29.5.2022)
 * added comment interactive component
 
