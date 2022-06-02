@@ -1,4 +1,9 @@
 # Release Notes
+### 1.23.2 (02.06.2022)
+* fixed story placement error on devices with notch for SwiftUI projects
+* fixed promo code interactive component rendering for templates
+* removed cdn fallback flow
+
 ### 1.23.1 (30.05.2022)
 * added comment interactive component
 * added StorylyMomentsDelegate for moments specific events
