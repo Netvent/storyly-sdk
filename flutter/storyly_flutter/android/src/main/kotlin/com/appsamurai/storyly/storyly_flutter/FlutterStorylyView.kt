@@ -22,7 +22,7 @@ import java.util.*
 class FlutterStorylyViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     internal lateinit var context: Context
 
-    override fun create(context: Context, viewId: Int, args: Any?): PlatformView = FlutterStorylyView(this.context, messenger, viewId, args as HashMap<String, Any>)
+    override fun create(context: Context?, viewId: Int, args: Any?): PlatformView = FlutterStorylyView(this.context, messenger, viewId, args as HashMap<String, Any>)
 }
 
 class FlutterStorylyView(
