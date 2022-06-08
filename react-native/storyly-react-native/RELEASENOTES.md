@@ -1,4 +1,8 @@
 # Release Notes
+### 1.23.0 (08.06.2022)
+* updated Storyly Native SDK dependencies to 1.23 minor version
+* added comment interactive components
+
 ### 1.22.1 (26.5.2022)
 * changed Android compileSdk and targetSdk dependency to 31
 * fixed [#182](https://github.com/Netvent/storyly-mobile/issues/182)
