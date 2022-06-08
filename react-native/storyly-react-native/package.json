@@ -1,7 +1,7 @@
 {
   "name": "storyly-react-native",
   "title": "Storyly React Native",
-  "version": "1.22.1",
+  "version": "1.23.0",
   "description": "A react-native component for Storyly",
   "main": "index.js",
   "scripts": {
