@@ -223,7 +223,6 @@
 
 -(NSString *) convertStorylyDataSource:(enum StorylyDataSource)dataSource {
     if (dataSource == StorylyDataSourceAPI) { return @"api"; }
-    else if (dataSource == StorylyDataSourceCDN) { return @"cdn"; }
     else if (dataSource == StorylyDataSourceLocal) { return @"local"; }
     else return @"";
 }
