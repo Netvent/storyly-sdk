@@ -1,4 +1,11 @@
 # Release Notes
+### 1.23.2 (17.06.2022)
+* introduced Moments by Storyly features
+  * display user generated content in Storyly 
+  * add customization to show Moments views
+  * add like feature to user generated content
+  * add reporting feature to user generated content
+
 ### 1.23.1 (02.06.2022)
 * fixed resuming story on wrong index for show/dismiss methods
 * fixed promo code interactive component rendering for templates
