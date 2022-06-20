@@ -241,7 +241,7 @@ class StorylyViewController {
 
   /// This function allows you to open a specific story using
   /// `storyGroupId` and `storyId`.
-  Future<void> openStory(int storyGroupId, int storyId) {
+  Future<void> openStory(String storyGroupId, String storyId) {
     return _methodChannel.invokeMethod(
       'openStory',
       <String, dynamic>{
@@ -281,6 +281,13 @@ class StorylyParam {
   /// This attribute takes a list of string which will be used in process
   /// of segmentation to show sepecific story groups to the users.
   List<String>? storylySegments;
+
+  /// This attribue takes a map which will be used to replace user data set in
+  /// dashboard to show user specific content.
+  Map<String, String>? storylyUserProperty;
+
+  /// This attibute allows you to change share URL of stories.
+  String? storylyShareUrl;
 
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
@@ -401,7 +408,9 @@ class StorylyParam {
     final paramsMap = <String, dynamic>{
       'storylyId': storylyId,
       'storylySegments': storylySegments,
+      'storylyUserProperty': storylyUserProperty,
       'storylyCustomParameters': storylyCustomParameters,
+      'storylyShareUrl': storylyShareUrl,
       'storylyIsTestMode': storylyTestMode,
     };
 
@@ -634,16 +643,15 @@ List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
 /// This data class represents a story group in the StorylyView.
 class StoryGroup {
   StoryGroup({
-    required this.seen,
+    required this.id,
     required this.title,
     required this.index,
+    required this.seen,
     required this.iconUrl,
     required this.stories,
-    required this.id,
   });
-
-  /// seen State of the story group that shows whether all of the stories are seen or not
-  final bool seen;
+  /// id ID of the story group
+  final String id;
 
   /// title Title of the story group
   final String title;
@@ -651,14 +659,14 @@ class StoryGroup {
   /// index Order index of the story group
   final int index;
 
+  /// seen State of the story group that shows whether all of the stories are seen or not
+  final bool seen;
+
   /// iconUrl URL of the story group icon image
   final String iconUrl;
 
   /// stories List of stories in the story group
   final List<Story> stories;
-
-  /// id ID of the story group
-  final int id;
 
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
     return StoryGroup(
@@ -675,35 +683,45 @@ class StoryGroup {
 /// This data class represents a story inside a story group.
 class Story {
   Story({
-    required this.media,
-    required this.title,
-    required this.seen,
-    required this.index,
     required this.id,
+    required this.title,
+    this.name,
+    required this.index,
+    required this.seen,
+    this.currentTime,
+    required this.media,
   });
 
-  /// Media content of the story
-  final Media media;
+  /// ID of the story
+  final String id;
 
   /// Title of the story
   final String title;
 
-  /// State of the story that shows whether the story is seen or not
-  final bool seen;
+  /// Name of the story
+  final String? name;
 
   /// Index of the story among other stories of the story group
   final int index;
 
-  /// ID of the story
-  final int id;
+  /// State of the story that shows whether the story is seen or not
+  final bool seen;
+
+  /// Time of the story that user watched
+  final int? currentTime;
+
+  /// Media content of the story
+  final Media media;
 
   factory Story.fromJson(Map<String, dynamic> json) {
     return Story(
-      media: Media.fromJson(json['media']),
-      title: json['title'],
-      seen: json['seen'],
-      index: json['index'],
       id: json['id'],
+      title: json['title'],
+      name: json['name'],
+      index: json['index'],
+      seen: json['seen'],
+      currentTime: json['currentTime'],
+      media: Media.fromJson(json['media']),
     );
   }
 }
