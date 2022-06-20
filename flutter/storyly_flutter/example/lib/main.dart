@@ -1,24 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
-void main() => runApp(const MyApp());
-
-const storylyToken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
+void main() {
+  runApp(const MyApp());
 }
 
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'StorylyDemo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomePage(title: 'Storyly Demo Page'),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  static const storylyToken =
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
+
   late StorylyViewController storylyViewController;
 
   void onStorylyViewCreated(StorylyViewController storylyViewController) {
     this.storylyViewController = storylyViewController;
-    // You can call any function after this.
   }
 
   @override
@@ -30,21 +52,18 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Container(
           margin: const EdgeInsets.only(top: 5.0),
-          height: 120,
           child: StorylyView(
             onStorylyViewCreated: onStorylyViewCreated,
             androidParam: StorylyParam()
-              ..storylyId = storylyToken
-              ..storylyTestMode = true,
+              ..storylyId = storylyToken,
             iosParam: StorylyParam()
-              ..storylyId = storylyToken
-              ..storylyTestMode = true,
+              ..storylyId = storylyToken,
             storylyLoaded: (storyGroups, dataSource) {
               debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
               debugPrint("storylyLoaded -> dataSource: $dataSource");
             },
             storylyLoadFailed: (errorMessage) =>
-                debugPrint("storylyLoadFailed"),
+                debugPrint("storylyLoadFailed -> $errorMessage"),
             storylyActionClicked: (story) {
               debugPrint("storylyActionClicked -> ${story.title}");
             },

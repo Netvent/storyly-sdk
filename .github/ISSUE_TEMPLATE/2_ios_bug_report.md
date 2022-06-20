@@ -2,7 +2,7 @@
 name: iOS Bug Report
 about: Reporting bugs related to iOS SDK
 title:
-labels: 'bug, ios'
+labels: 'bug, ios, in progress'
 assignees: ''
 ---
 

@@ -1,4 +1,25 @@
 # Release Notes
+### 1.23.2 (17.06.2022)
+* introduced Moments by Storyly features
+  * display user generated content in Storyly 
+  * add customization to show Moments views
+  * add like feature to user generated content
+  * add reporting feature to user generated content
+
+### 1.23.1 (02.06.2022)
+* fixed resuming story on wrong index for show/dismiss methods
+* fixed promo code interactive component rendering for templates
+* removed cdn fallback flow
+
+### 1.23.0 (29.5.2022)
+* added comment interactive component
+
+### 1.21.4 (23.5.2022)
+* added currentTime field to Story object
+
+### 1.21.3 (13.5.2022)
+* added storylyShareUrl field for customized share urls 
+
 ### 1.21.2 (22.4.2022)
 * fixed ContextWrapper(nested wrappers) handling for not opening story bug
 

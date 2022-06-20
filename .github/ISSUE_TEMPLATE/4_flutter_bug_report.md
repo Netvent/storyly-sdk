@@ -2,7 +2,7 @@
 name: Flutter Bug Report
 about: Reporting bugs related to Flutter SDK
 title:
-labels: 'bug, flutter'
+labels: 'bug, flutter, in progress'
 assignees: ''
 ---
 

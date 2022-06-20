@@ -2,7 +2,7 @@
 name: React Native Bug Report
 about: Reporting bugs related to React Native SDK
 title:
-labels: 'bug, react native'
+labels: 'bug, react native, in progress'
 assignees: ''
 ---
 

@@ -40,8 +40,8 @@ class FlutterStorylyView(
                 "show" -> storylyView.show()
                 "dismiss" -> storylyView.dismiss()
                 "openStory" -> storylyView.openStory(
-                    callArguments?.get("storyGroupId") as? Int ?: 0,
-                    callArguments?.getOrElse("storyId", { null }) as? Int
+                    callArguments?.get("storyGroupId") as? String ?: "",
+                    callArguments?.getOrElse("storyId", { null }) as? String
                 )
                 "openStoryUri" -> storylyView.openStory(Uri.parse(callArguments?.get("uri") as? String))
                 "setExternalData" -> (callArguments?.get("externalData") as List<Map<String, Any?>>)?.let { storylyView.setExternalData(it) }
@@ -52,7 +52,9 @@ class FlutterStorylyView(
     companion object {
         private const val ARGS_STORYLY_ID = "storylyId"
         private const val ARGS_STORYLY_SEGMENTS = "storylySegments"
+        private const val ARGS_STORYLY_USER_PROPERTY = "storylyUserProperty"
         private const val ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
+        private const val ARGS_STORYLY_SHARE_URL = "storylyShareUrl"
         private const val ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
 
         private const val ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
@@ -80,7 +82,17 @@ class FlutterStorylyView(
             val segments = args[ARGS_STORYLY_SEGMENTS] as? List<String>
             val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
             val isTestMode = args[ARGS_STORYLY_IS_TEST_MODE] as? Boolean ?: false
-            storylyInit = StorylyInit(storylyId, StorylySegmentation(segments = segments?.toSet()), customParameter = customParameters, isTestMode = isTestMode)
+            val userProperty = args[ARGS_STORYLY_USER_PROPERTY] as? Map<String, String> ?: null
+            storylyInit = StorylyInit(
+                storylyId,
+                StorylySegmentation(segments = segments?.toSet()),
+                customParameter = customParameters,
+                isTestMode = isTestMode
+            ).apply {
+                userProperty?.let { setUserData(userProperty) }
+            }
+            (args[ARGS_STORYLY_SHARE_URL] as? String)?.let { storylyShareUrl = it }
+
             (args[ARGS_STORY_GROUP_SIZE] as? String)?.let {
                 setStoryGroupSize(
                     when (it) {
@@ -231,8 +243,10 @@ class FlutterStorylyView(
     private fun createStoryMap(story: Story): Map<String, *> {
         return mapOf("id" to story.id,
             "title" to story.title,
+            "name" to story.name,
             "index" to story.index,
             "seen" to story.seen,
+            "currentTime" to story.currentTime,
             "media" to with(story.media) {
                 mapOf(
                     "type" to this.type.ordinal,

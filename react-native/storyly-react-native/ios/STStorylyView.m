@@ -50,9 +50,9 @@
     return [_storylyView openStoryWithPayload:payload];
 }
 
-- (BOOL) openStoryWithId:(NSNumber * _Nonnull)storyGroupId
-           storyId:(NSNumber * _Nonnull)storyId {
-    return [_storylyView openStoryWithId:storyGroupId storyId:storyId];
+- (BOOL) openStoryWithId:(NSString * _Nonnull)storyGroupId
+                 storyId:(NSString * _Nonnull)storyId {
+    return [_storylyView openStoryWithPayload:[[NSURL alloc] initWithString: [NSString stringWithFormat:@"test://storyly?g=%@&s=%@", storyGroupId, storyId]]];
 }
 
 - (BOOL) setExternalData:(NSArray<NSDictionary *> *)externalData {
@@ -135,7 +135,7 @@
         [stories addObject:[self createStoryMap:story]];
     }
     return @{
-        @"id": @(storyGroup.id),
+        @"id": storyGroup.uniqueId,
         @"index": @(storyGroup.index),
         @"title": storyGroup.title,
         @"seen": @(storyGroup.seen),
@@ -146,10 +146,12 @@
 
 -(NSDictionary *)createStoryMap:(Story * _Nonnull)story {
     return @{
-        @"id": @(story.id),
+        @"id": story.uniqueId,
         @"index": @(story.index),
         @"title": story.title,
+        @"name": story.name == nil ? [NSNull null] : story.name,
         @"seen": @(story.seen),
+        @"currentTime": @(story.currentTime),
         @"media": @{
                 @"type": @(story.media.type),
                 @"actionUrl": story.media.actionUrl == nil ? [NSNull null] : story.media.actionUrl
@@ -221,7 +223,6 @@
 
 -(NSString *) convertStorylyDataSource:(enum StorylyDataSource)dataSource {
     if (dataSource == StorylyDataSourceAPI) { return @"api"; }
-    else if (dataSource == StorylyDataSourceCDN) { return @"cdn"; }
     else if (dataSource == StorylyDataSourceLocal) { return @"local"; }
     else return @"";
 }

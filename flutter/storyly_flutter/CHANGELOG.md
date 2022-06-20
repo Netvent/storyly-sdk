@@ -1,3 +1,10 @@
+### 1.22.0 (20.06.2022)
+* added support for 9:20 media assets
+* added storylyUserProperty field
+* added storylyShareUrl field for customized share urls
+* added name and currentTime field to Story object
+* added comment interactive components
+
 ### 1.20.0 (26.3.2022)
 * updated native sdk dependencies
 * updated Android native project dependencies; compileSdkVersion and targetSdk to 31
