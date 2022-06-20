@@ -54,8 +54,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_OPEN_STORY_CODE = 4
         private const val COMMAND_SET_EXTERNAL_DATA_NAME = "setExternalData"
         private const val COMMAND_SET_EXTERNAL_DATA_CODE = 5
-        private const val COMMAND_OPEN_STORY_V2_NAME = "openStoryWithId"
-        private const val COMMAND_OPEN_STORY_V2_CODE = 6
+        private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
+        private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 6
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -97,7 +97,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
             COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
             COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE,
-            COMMAND_OPEN_STORY_V2_NAME, COMMAND_OPEN_STORY_V2_CODE
+            COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE
         )
     }
 
@@ -115,9 +115,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                     root.storylyView.setExternalData(it)
                 }
             }
-            COMMAND_OPEN_STORY_V2_CODE -> {
-                val storyGroupId: Int = args?.getInt(0) ?: return
-                val storyId: Int? = if (args.size() > 1) args.getInt(1) else null
+            COMMAND_OPEN_STORY_WITH_ID_CODE -> {
+                val storyGroupId: String = args?.getString(0) ?: return
+                val storyId: String? = if (args.size() > 1) args.getString(1) else null
 
                 root.storylyView.openStory(storyGroupId, storyId)
             }

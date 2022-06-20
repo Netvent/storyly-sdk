@@ -50,8 +50,8 @@
     return [_storylyView openStoryWithPayload:payload];
 }
 
-- (BOOL) openStoryWithId:(NSNumber * _Nonnull)storyGroupId
-           storyId:(NSNumber * _Nonnull)storyId {
+- (BOOL) openStoryWithId:(NSString * _Nonnull)storyGroupId
+                 storyId:(NSString * _Nonnull)storyId {
     return [_storylyView openStoryWithPayload:[[NSURL alloc] initWithString: [NSString stringWithFormat:@"test://storyly?g=%@&s=%@", storyGroupId, storyId]]];
 }
 

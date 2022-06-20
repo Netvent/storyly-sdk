@@ -114,6 +114,6 @@ declare module "storyly-react-native" {
     refresh: () => void;
     openStory: (storyUriFromTheDashboard: string) => void;
     setExternalData: (externalData: ExternalData) => void;
-    openStoryWithId: (storyGroupId: number, storyId: number) => void;
+    openStoryWithId: (storyGroupId: string, storyId: string) => void;
   }
 }
