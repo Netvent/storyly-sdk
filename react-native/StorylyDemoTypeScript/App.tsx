@@ -62,7 +62,7 @@ HomeScreen.options = {
 
 // Settings screen declaration - this is the screen we'll be pushing into the stack
 const SettingsScreen = () => {
-  console.log("levo:SettingsScreen:render");
+  console.log("Storyly:SettingsScreen:render");
   return (
     <View style={styles.root}>
       <Text>Settings Screen</Text>
