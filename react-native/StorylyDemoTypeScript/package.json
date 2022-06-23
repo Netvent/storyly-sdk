@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "17.0.2",
     "react-native": "0.67.4",
-    "storyly-react-native": "^1.20.0"
+    "react-native-navigation": "^7.28.0",
+    "storyly-react-native": "^1.23.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
