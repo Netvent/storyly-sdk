@@ -1,6 +1,6 @@
 name: storyly_flutter
 description: storyly_flutter is the official flutter package of Storyly. You can easily add stories to your Flutter app with this package.
-version: 1.22.0
+version: 1.22.1
 homepage: "https://github.com/Netvent/storyly-mobile/"
 
 environment:

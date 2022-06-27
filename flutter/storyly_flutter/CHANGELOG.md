@@ -1,3 +1,7 @@
+### 1.22.1 (27.06.2022)
+* added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
+* IMPORTANT! changed storyGroup:id and story:id fields' type to string
+
 ### 1.22.0 (20.06.2022)
 * added support for 9:20 media assets
 * added storylyUserProperty field
