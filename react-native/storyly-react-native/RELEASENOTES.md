@@ -1,9 +1,12 @@
 # Release Notes
+### 1.23.4 (27.06.2022)
+* added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
+* IMPORTANT! changed storyGroup:id and story:id fields' types to string
+
 ### 1.23.3 (24.06.2022)
 * fixed ANR issue on older Android devices
 
 ### 1.23.2 (20.06.2022)
-* IMPORTANT! changed story:id and storyGroup:id field to string
 * IMPORTANT! changed openStory method parameter types to string
 
 ### 1.23.1 (09.06.2022)

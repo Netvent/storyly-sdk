@@ -75,7 +75,7 @@ declare module "storyly-react-native" {
     }
 
     export interface StoryGroup {
-      id: number;
+      id: string;
       title: string;
       index: number;
       seen: boolean;
@@ -84,7 +84,7 @@ declare module "storyly-react-native" {
     }
 
     export interface Story {
-      id: number;
+      id: string;
       title: string;
       name: string;
       index: number;
