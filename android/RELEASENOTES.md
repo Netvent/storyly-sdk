@@ -1,4 +1,8 @@
 # Release Notes
+### 1.23.3 (27.06.2022)
+* added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
+* IMPORTANT! renamed storyGroup:uniqueId and story:uniqueId fields and change types to string
+
 ### 1.23.2 (17.06.2022)
 * introduced Moments by Storyly features
   * display user generated content in Storyly 
