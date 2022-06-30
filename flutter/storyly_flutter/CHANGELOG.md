@@ -1,3 +1,8 @@
+### 1.23.0 (27.06.2022)
+* added Flutter 3.0 compatibility
+* fixed [#189](https://github.com/Netvent/storyly-mobile/issues/189)
+* fixed [#184](https://github.com/Netvent/storyly-mobile/issues/184)
+
 ### 1.22.1 (27.06.2022)
 * added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
 * IMPORTANT! changed storyGroup:id and story:id fields' type to string

@@ -1,7 +1,7 @@
 PODS:
   - Flutter (1.0.0)
   - Storyly (1.23.2)
-  - storyly_flutter (1.22.0):
+  - storyly_flutter (1.23.0):
     - Flutter
     - Storyly (~> 1.23.0)
 
@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   Storyly: f4218f5e4ff820e58e0bb7f78c86a9401265e266
-  storyly_flutter: 80611c994408a4feab3e084229c27dfdde24a6ce
+  storyly_flutter: 823793f29dcd8ab64e3775d8ef95e08375581213
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
