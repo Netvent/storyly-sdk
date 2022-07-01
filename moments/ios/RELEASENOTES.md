@@ -1,4 +1,7 @@
 # Release Notes
+### 0.0.6 (01.07.2022)
+* IMPORTANT! renamed StorylyMomentsDelegate to MomentsDelegate
+
 ### 0.0.5 (01.06.2022)
 * added live photo support for story creation
 * improved library update flow for new images
