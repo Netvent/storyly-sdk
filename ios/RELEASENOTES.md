@@ -1,4 +1,9 @@
 # Release Notes
+### 1.24.0 (01.07.2022)
+* added swipe up designs with a/b test option
+* added outlink parameter to countdown interactive component
+* added accessibility features for navigation, story open/close, swipe/button/image cta interactive components
+
 ### 1.23.2 (02.06.2022)
 * fixed story placement error on devices with notch for SwiftUI projects
 * fixed promo code interactive component rendering for templates
