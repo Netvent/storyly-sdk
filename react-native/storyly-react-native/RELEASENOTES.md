@@ -4,7 +4,7 @@
 * added outlink parameter to countdown interactive component
 * added application icon to countdown notification
 * added accessibility features for navigation, story open/close, swipe/button/image cta interactive components
-* fixed [#200](https://github.com/Netvent/storyly-mobile/issues/200)
+* fixed [#201](https://github.com/Netvent/storyly-mobile/issues/201)
 
 ### 1.23.4 (27.06.2022)
 * added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
