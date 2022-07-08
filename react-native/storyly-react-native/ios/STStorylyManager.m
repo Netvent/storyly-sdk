@@ -59,8 +59,8 @@ RCT_EXPORT_METHOD(openStory:(nonnull NSNumber *)reactTag
 }
 
 RCT_EXPORT_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
-                  storyGroupId:(nonnull NSNumber *)storyGroupId
-                  storyId:(nonnull NSNumber *)storyId)
+                  storyGroupId:(nonnull NSString *)storyGroupId
+                  storyId:(nonnull NSString *)storyId)
 {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
         STStorylyView *stStorylyView = viewRegistry[reactTag];
