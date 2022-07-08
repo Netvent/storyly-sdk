@@ -1,3 +1,9 @@
+### 1.24.0 (07.07.2022)
+* added swipe up designs with a/b test option
+* added outlink parameter to countdown interactive component
+* added application icon to countdown notification
+* added accessibility features for navigation, story open/close, swipe/button/image cta interactive components
+
 ### 1.23.0 (27.06.2022)
 * added Flutter 3.0 compatibility
 * fixed [#189](https://github.com/Netvent/storyly-mobile/issues/189)
