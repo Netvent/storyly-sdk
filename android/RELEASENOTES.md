@@ -1,4 +1,15 @@
 # Release Notes
+### 1.24.0 (01.07.2022)
+* added swipe up designs with a/b test option
+* added outlink parameter to countdown interactive component
+* added application icon to countdown notification
+* IMPORTANT! removed NOTIFICATION_GROUP_ID, added NOTIFICATION_LINK in StorylyNotificationReceiver
+* added accessibility features for navigation, story open/close, swipe/button/image cta interactive components
+
+### 1.23.3 (27.06.2022)
+* added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
+* IMPORTANT! renamed storyGroup:uniqueId and story:uniqueId fields and change types to string
+
 ### 1.23.2 (17.06.2022)
 * introduced Moments by Storyly features
   * display user generated content in Storyly 

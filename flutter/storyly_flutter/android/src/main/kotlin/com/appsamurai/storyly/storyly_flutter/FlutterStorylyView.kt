@@ -22,7 +22,7 @@ import java.util.*
 class FlutterStorylyViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     internal lateinit var context: Context
 
-    override fun create(context: Context, viewId: Int, args: Any?): PlatformView = FlutterStorylyView(this.context, messenger, viewId, args as HashMap<String, Any>)
+    override fun create(context: Context?, viewId: Int, args: Any?): PlatformView = FlutterStorylyView(this.context, messenger, viewId, args as HashMap<String, Any>)
 }
 
 class FlutterStorylyView(
@@ -231,7 +231,7 @@ class FlutterStorylyView(
     override fun dispose() {}
 
     private fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, *> {
-        return mapOf("id" to storyGroup.id,
+        return mapOf("id" to storyGroup.uniqueId,
             "title" to storyGroup.title,
             "index" to storyGroup.index,
             "seen" to storyGroup.seen,
@@ -241,7 +241,7 @@ class FlutterStorylyView(
     }
 
     private fun createStoryMap(story: Story): Map<String, *> {
-        return mapOf("id" to story.id,
+        return mapOf("id" to story.uniqueId,
             "title" to story.title,
             "name" to story.name,
             "index" to story.index,
