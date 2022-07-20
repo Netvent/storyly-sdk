@@ -1,0 +1,6 @@
+rootProject.name = 'StorylyMomentsReactNativeExample'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':storyly-moments-react-native'
+project(':storyly-moments-react-native').projectDir = new File(rootProject.projectDir, '../../android')
