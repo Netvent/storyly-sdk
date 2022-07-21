@@ -93,6 +93,16 @@
     if ([storyGroupTextStyling.allKeys containsObject:@"color"] && storyGroupTextStyling[@"color"] != NULL) {
         textColor = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"color"]];
     }
+
+    UIColor textColorSeen = NULL;
+    if ([storyGroupTextStyling.allKeys containsObject:@"colorSeen"] && storyGroupTextStyling[@"colorSeen"] != NULL) {
+        textColorSeen = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"colorSeen"]];
+    }
+
+    UIColor textColorSeen = NULL;
+    if ([storyGroupTextStyling.allKeys containsObject:@"colorUnseen"] && storyGroupTextStyling[@"colorUnseen"] != NULL) {
+        textColorSeen = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"colorUnseen"]];
+    }
     
     int fontSize = 12;
     if ([storyGroupTextStyling.allKeys containsObject:@"textSize"] && storyGroupTextStyling[@"textSize"] != NULL) {
@@ -106,7 +116,8 @@
     
     return [[StoryGroupTextStyling alloc] initWithIsVisible:isVisible
                                                       color:textColor
-                                                       font:[UIFont systemFontOfSize:fontSize]
+                                                      colorSeen:colorSeen
+                                                      font:[UIFont systemFontOfSize:fontSize]
                                                       lines:lines];
 }
 
