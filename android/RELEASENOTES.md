@@ -1,4 +1,8 @@
 # Release Notes
+### 1.24.1 (23.07.2022)
+* removed ExoPlayer2 dependency
+* added Storyly-ExoPlayer2 dependency, a custom fork of ExoPkayer2
+
 ### 1.24.0 (01.07.2022)
 * added swipe up designs with a/b test option
 * added outlink parameter to countdown interactive component
