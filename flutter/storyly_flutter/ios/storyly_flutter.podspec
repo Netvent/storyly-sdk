@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'storyly_flutter'
-  s.version          = '1.20.0'
+  s.version          = '1.24.0'
   s.summary          = 'Storyly flutter plugin.'
   s.description      = <<-DESC
   Storyly for flutter
@@ -21,5 +21,5 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
   s.swift_versions = ["5.0", "5.1", "5.2", "5.3"]
 
-  s.dependency "Storyly", "~> 1.20.0"
+  s.dependency "Storyly", "~> 1.24.0"
 end

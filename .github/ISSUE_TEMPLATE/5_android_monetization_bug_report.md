@@ -2,7 +2,7 @@
 name: Android Monetization Bug Report
 about: Reporting bugs related to Android Monetization SDK
 title:
-labels: 'bug, monetization, android'
+labels: 'bug, monetization, android, in progress'
 assignees: ''
 ---
 

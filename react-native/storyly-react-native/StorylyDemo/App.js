@@ -20,7 +20,6 @@ export default class App extends Component {
                     ref={ref => { this.storyly = ref }}
                     style={{ width: '100%', height: 120, marginTop: 44 }}
                     storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
-                    storylyTestMode={true}
                     onLoad={storyGroupList => {
                         console.log("[Storyly] onLoad");
                     }}
@@ -31,7 +30,6 @@ export default class App extends Component {
                         console.log("[Storyly] onPress");
                     }}
                     onEvent={eventPayload => {
-                        // console.log(eventPayload.nativeEvent);
                         console.log("[Storyly] onEvent");
                     }}
                     onStoryOpen={() => {
@@ -41,7 +39,6 @@ export default class App extends Component {
                         console.log("[Storyly] onStoryClose");
                     }}
                     onUserInteracted={interactionEvent => {
-                        // console.log(interactionEvent.nativeEvent);
                         console.log("[Storyly] onStoryUserInteracted");
                     }}/>
                 <Button

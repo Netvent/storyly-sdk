@@ -2,7 +2,7 @@
 name: Android Bug Report
 about: Reporting bugs related to Android SDK
 title:
-labels: 'bug, android'
+labels: 'bug, android, in progress'
 assignees: ''
 ---
 

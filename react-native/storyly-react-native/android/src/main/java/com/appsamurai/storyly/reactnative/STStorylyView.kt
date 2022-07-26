@@ -15,6 +15,16 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 class STStorylyView(context: Context) : FrameLayout(context) {
     internal var storylyView: StorylyView = StorylyView((context as? ReactContext)?.currentActivity ?: context)
 
+    private val choreographerFrameCallback: Choreographer.FrameCallback by lazy {
+        Choreographer.FrameCallback {
+            if (isAttachedToWindow && storylyView.isAttachedToWindow) {
+                manuallyLayout()
+                viewTreeObserver.dispatchOnGlobalLayout()
+                Choreographer.getInstance().postFrameCallback(choreographerFrameCallback)
+            }
+        }
+    }
+
     init {
         addView(storylyView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         storylyView.storylyListener = object : StorylyListener {
@@ -88,14 +98,16 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 })
             }
         }
+    }
 
-        Choreographer.getInstance().postFrameCallback(object : Choreographer.FrameCallback {
-            override fun doFrame(frameTimeNanos: Long) {
-                manuallyLayout()
-                viewTreeObserver.dispatchOnGlobalLayout()
-                Choreographer.getInstance().postFrameCallback(this)
-            }
-        })
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        Choreographer.getInstance().postFrameCallback(choreographerFrameCallback)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        Choreographer.getInstance().removeFrameCallback(choreographerFrameCallback)
     }
 
     private fun manuallyLayout() {
@@ -117,7 +129,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     private fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
         return Arguments.createMap().also { storyGroupMap ->
-            storyGroupMap.putInt("id", storyGroup.id)
+            storyGroupMap.putString("id", storyGroup.uniqueId)
             storyGroupMap.putInt("index", storyGroup.index)
             storyGroupMap.putString("title", storyGroup.title)
             storyGroupMap.putBoolean("seen", storyGroup.seen)
@@ -132,10 +144,12 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     private fun createStoryMap(story: Story): WritableMap {
         return Arguments.createMap().also { storyMap ->
-            storyMap.putInt("id", story.id)
+            storyMap.putString("id", story.uniqueId)
             storyMap.putInt("index", story.index)
             storyMap.putString("title", story.title)
+            storyMap.putString("name", story.name)
             storyMap.putBoolean("seen", story.seen)
+            storyMap.putInt("currentTime", story.currentTime.toInt())
             storyMap.putMap("media", Arguments.createMap().also { storyMediaMap ->
                 storyMediaMap.putInt("type", story.media.type.ordinal)
                 storyMediaMap.putString("actionUrl", story.media.actionUrl)

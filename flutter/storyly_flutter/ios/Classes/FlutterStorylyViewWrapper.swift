@@ -4,7 +4,9 @@ import UIKit
 internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_ID = "storylyId"
     private let ARGS_STORYLY_SEGMENTS = "storylySegments"
+    private let ARGS_STORYLY_USER_PROPERTY = "storylyUserProperty"
     private let ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
+    private let ARGS_STORYLY_SHARE_URL = "storylyShareUrl"
     private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
     
     private let ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
@@ -43,8 +45,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                 case "show": self?.storylyView.present(animated: true)
                 case "dismiss": self?.storylyView.dismiss(animated: true)
                 case "openStory":
-                    _ = self?.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? Int ?? 0,
-                                                    storyId: callArguments?["storyId"] as? Int)
+                    _ = self?.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
+                                                    storyId: callArguments?["storyId"] as? String)
                 case "openStoryUri":
                     if let payloadString = callArguments?["uri"] as? String,
                        let payloadUrl = URL(string: payloadString) {
@@ -67,6 +69,12 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                                                    segmentation: StorylySegmentation(segments: storylySegments),
                                                    customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String,
                                                    isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false)
+        if let userProperty = self.args[ARGS_STORYLY_USER_PROPERTY] as? [String: String] {
+            self.storylyView.storylyInit.setUserData(userProperty)
+        }
+        if let shareUrl = self.args[ARGS_STORYLY_SHARE_URL] as? String {
+            self.storylyView.storylyShareUrl = shareUrl
+        }
         self.storylyView.delegate = self
         self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
         self.updateTheme(storylyView: storylyView, args: self.args)
@@ -214,7 +222,7 @@ extension FlutterStorylyViewWrapper {
     }
     
     private func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
-        return ["id": storyGroup.id,
+        return ["id": storyGroup.uniqueId,
                 "title": storyGroup.title,
                 "index": storyGroup.index,
                 "seen": storyGroup.seen,
@@ -223,10 +231,12 @@ extension FlutterStorylyViewWrapper {
     }
     
     private func createStoryMap(story: Story) -> [String: Any?] {
-        return ["id": story.id,
+        return ["id": story.uniqueId,
                 "title": story.title,
+                "name": story.name,
                 "index": story.index,
                 "seen": story.seen,
+                "currentTime": story.currentTime,
                 "media": ["type": story.media.type.rawValue,
                           "actionUrl": story.media.actionUrl]]
     }

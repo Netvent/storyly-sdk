@@ -1,4 +1,36 @@
 # Release Notes
+### 1.24.0 (08.07.2022)
+* added swipe up designs with a/b test option
+* added outlink parameter to countdown interactive component
+* added application icon to countdown notification
+* added accessibility features for navigation, story open/close, swipe/button/image cta interactive components
+* fixed [#201](https://github.com/Netvent/storyly-mobile/issues/201)
+
+### 1.23.4 (27.06.2022)
+* added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
+* IMPORTANT! changed storyGroup:id and story:id fields' types to string
+
+### 1.23.3 (24.06.2022)
+* fixed ANR issue on older Android devices
+
+### 1.23.2 (20.06.2022)
+* IMPORTANT! changed openStory method parameter types to string
+
+### 1.23.1 (09.06.2022)
+* removed cdn fallback flow
+
+### 1.23.0 (08.06.2022)
+* updated Storyly Native SDK dependencies to 1.23 minor version
+* added comment interactive components
+
+### 1.22.1 (26.5.2022)
+* changed Android compileSdk and targetSdk dependency to 31
+* fixed [#182](https://github.com/Netvent/storyly-mobile/issues/182)
+
+### 1.22.0 (23.5.2022)
+* added storylyShareUrl field for customized share urls
+* added name and currentTime field to Story object
+
 ### 1.21.2 (28.4.2022)
 * changed Android compileSdk and targetSdk dependency to 30
 

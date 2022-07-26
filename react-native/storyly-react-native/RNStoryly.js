@@ -150,6 +150,7 @@ Storyly.propTypes = {
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
     storylyUserProperty: object,
+    storylyShareUrl: string,
     customParameter: string,
     storylyTestMode: bool,
     

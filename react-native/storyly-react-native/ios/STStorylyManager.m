@@ -59,8 +59,8 @@ RCT_EXPORT_METHOD(openStory:(nonnull NSNumber *)reactTag
 }
 
 RCT_EXPORT_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
-                  storyGroupId:(nonnull NSNumber *)storyGroupId
-                  storyId:(nonnull NSNumber *)storyId)
+                  storyGroupId:(nonnull NSString *)storyGroupId
+                  storyId:(nonnull NSString *)storyId)
 {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
         STStorylyView *stStorylyView = viewRegistry[reactTag];
@@ -86,6 +86,7 @@ RCT_EXPORT_METHOD(setExternalData:(nonnull NSNumber *)reactTag
 }
 
 RCT_REMAP_VIEW_PROPERTY(storylyInit, _storylyView.storylyInit, STStorylyInit)
+RCT_REMAP_VIEW_PROPERTY(storylyShareUrl, _storylyView.storylyShareUrl, NSString)
 
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorSeen, _storylyView.storyGroupIconBorderColorSeen, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorNotSeen, _storylyView.storyGroupIconBorderColorNotSeen, NSArray<UIColor *>)

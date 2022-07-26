@@ -1,4 +1,40 @@
 # Release Notes
+### 1.24.1 (23.07.2022)
+* removed ExoPlayer2 dependency
+* added Storyly-ExoPlayer2 dependency, a custom fork of ExoPkayer2
+
+### 1.24.0 (01.07.2022)
+* added swipe up designs with a/b test option
+* added outlink parameter to countdown interactive component
+* added application icon to countdown notification
+* IMPORTANT! removed NOTIFICATION_GROUP_ID, added NOTIFICATION_LINK in StorylyNotificationReceiver
+* added accessibility features for navigation, story open/close, swipe/button/image cta interactive components
+
+### 1.23.3 (27.06.2022)
+* added exported=false decleration to StorylyNotificationReceiver for countdown reminder for Android 31 support
+* IMPORTANT! renamed storyGroup:uniqueId and story:uniqueId fields and change types to string
+
+### 1.23.2 (17.06.2022)
+* introduced Moments by Storyly features
+  * display user generated content in Storyly 
+  * add customization to show Moments views
+  * add like feature to user generated content
+  * add reporting feature to user generated content
+
+### 1.23.1 (02.06.2022)
+* fixed resuming story on wrong index for show/dismiss methods
+* fixed promo code interactive component rendering for templates
+* removed cdn fallback flow
+
+### 1.23.0 (29.5.2022)
+* added comment interactive component
+
+### 1.21.4 (23.5.2022)
+* added currentTime field to Story object
+
+### 1.21.3 (13.5.2022)
+* added storylyShareUrl field for customized share urls 
+
 ### 1.21.2 (22.4.2022)
 * fixed ContextWrapper(nested wrappers) handling for not opening story bug
 
