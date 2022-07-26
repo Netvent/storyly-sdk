@@ -118,7 +118,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 val storyGroupId: Int = args?.getInt(0) ?: return
                 val storyId: Int? = if (args.size() > 1) args.getInt(1) else null
 
-                root.storylyView.openStory(storyGroupId.toString(), storyId.toString())
+                root.storylyView.openStory(storyGroupId, storyId)
             }
         }
     }
