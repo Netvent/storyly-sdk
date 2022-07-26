@@ -115,8 +115,8 @@
     }
     
     return [[StoryGroupTextStyling alloc] initWithIsVisible:isVisible
-                                                      color:textColor
                                                       colorSeen:colorSeen
+                                                      colorUnseen:colorUnseen
                                                       font:[UIFont systemFontOfSize:fontSize]
                                                       lines:lines];
 }

@@ -105,7 +105,6 @@ class Storyly extends Component {
             storyGroupTextIsVisible,
             storyGroupTextSize,
             storyGroupTextLines,
-            storyGroupTextColor,
             storyGroupTextColorSeen,
             storyGroupTextColorUnseen,
             storyHeaderTextIsVisible,
@@ -127,7 +126,7 @@ class Storyly extends Component {
                 storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyIsTestMode': storylyTestMode}}
                 storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
-                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'color': storyGroupTextColor,'colorSeen': storyGroupTextColorSeen,'colorUnseen': storyGroupTextColorUnseen}}
+                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines,'colorSeen': storyGroupTextColorSeen,'colorUnseen': storyGroupTextColorUnseen}}
                 storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
                 onStorylyLoaded={this._onStorylyLoaded}
                 onStorylyLoadFailed={this._onStorylyLoadFailed}
@@ -160,7 +159,6 @@ Storyly.propTypes = {
     storyGroupTextIsVisible: bool,
     storyGroupTextSize: number,
     storyGroupTextLines: number,
-    storyGroupTextColor: string,
     storyGroupTextColorSeen: string,
     storyGroupTextColorUnseen: string,
     storyGroupPinIconColor: string,
