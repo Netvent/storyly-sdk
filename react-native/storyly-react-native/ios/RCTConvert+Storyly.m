@@ -87,21 +87,15 @@
     if ([storyGroupTextStyling.allKeys containsObject:@"isVisible"] && storyGroupTextStyling[@"isVisible"] != NULL) {
         isVisible = [storyGroupTextStyling[@"isVisible"] boolValue];
     }
-    
-    
-    UIColor* textColor = UIColor.blackColor;
-    if ([storyGroupTextStyling.allKeys containsObject:@"color"] && storyGroupTextStyling[@"color"] != NULL) {
-        textColor = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"color"]];
-    }
 
-    UIColor textColorSeen = NULL;
+    UIColor* textColorSeen = UIColor.blackColor;
     if ([storyGroupTextStyling.allKeys containsObject:@"colorSeen"] && storyGroupTextStyling[@"colorSeen"] != NULL) {
         textColorSeen = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"colorSeen"]];
-    }
+    } 
 
-    UIColor textColorSeen = NULL;
+    UIColor* textColorUnseen = UIColor.blackColor;
     if ([storyGroupTextStyling.allKeys containsObject:@"colorUnseen"] && storyGroupTextStyling[@"colorUnseen"] != NULL) {
-        textColorSeen = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"colorUnseen"]];
+        textColorUnseen = [self getUIColorObjectFromHexString:storyGroupTextStyling[@"colorUnseen"]];
     }
     
     int fontSize = 12;
@@ -115,8 +109,8 @@
     }
     
     return [[StoryGroupTextStyling alloc] initWithIsVisible:isVisible
-                                                      colorSeen:colorSeen
-                                                      colorUnseen:colorUnseen
+                                                      colorSeen:textColorSeen
+                                                      colorUnseen:textColorUnseen
                                                       font:[UIFont systemFontOfSize:fontSize]
                                                       lines:lines];
 }
