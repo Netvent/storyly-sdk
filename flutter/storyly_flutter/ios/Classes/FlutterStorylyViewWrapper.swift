@@ -17,6 +17,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL = "storyGroupIconImageThematicLabel"
     private let ARGS_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
     private let ARGS_STORY_HEADER_STYLING = "storyHeaderStyling"
+    private let ARGS_STORYLY_LAYOUT_DIRECTION = "storylyLayoutDirection"
     
     private let ARGS_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
     private let ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
@@ -134,6 +135,14 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                 storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
                                                                     isIconVisible: isIconVisible,
                                                                     isCloseButtonVisible: isCloseButtonVisible)
+            }
+        }
+
+        if let storylyLayoutDirection = args[self.ARGS_STORYLY_LAYOUT_DIRECTION] as? String {
+            switch storylyLayoutDirection {
+                case "ltr": storylyView.storylyLayoutDirection = .Ltr
+                case "rtl": storylyView.storylyLayoutDirection = .Rtl
+                default:  storylyView.storylyLayoutDirection = .Locale
             }
         }
         

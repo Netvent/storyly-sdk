@@ -59,6 +59,8 @@ class FlutterStorylyView(
 
         private const val ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
 
+        private const val ARGS_STORYLY_LAYOUT_DIRECTION = "storylyLayoutDirection"
+
         private const val ARGS_STORY_GROUP_SIZE = "storyGroupSize"
         private const val ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
         private const val ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
@@ -150,6 +152,16 @@ class FlutterStorylyView(
                 val isIconVisible = it["isIconVisible"] as? Boolean ?: return@let
                 val isCloseButtonVisible = it["isCloseButtonVisible"] as? Boolean ?: return@let
                 setStoryHeaderStyling(StoryHeaderStyling(isTextVisible, isIconVisible, isCloseButtonVisible))
+            }
+
+            (args[ARGS_STORYLY_LAYOUT_DIRECTION] as? String)?.let {
+                setStorylyLayoutDirection(
+                    when (it) {
+                        "ltr" -> StorylyLayoutDirection.Ltr
+                        "rtl" -> StorylyLayoutDirection.Rtl
+                        else -> StorylyLayoutDirection.Locale
+                    }
+                )
             }
 
             storylyListener = object : StorylyListener {
