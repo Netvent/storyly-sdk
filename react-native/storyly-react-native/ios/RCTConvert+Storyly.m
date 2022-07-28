@@ -165,3 +165,17 @@
 }
 
 @end
+
+@implementation RCTConvert (StorylyLayoutDirection)
+
++ (StorylyLayoutDirection)STStorylyLayoutDirection:(NSString *)direction {
+    if ([direction isEqualToString:@"ltr"]) {
+        return StorylyLayoutDirectionLtr;
+    } else if ([direction isEqualToString:@"rtl"]) {
+        return StorylyLayoutDirectionRtl;
+    } else {
+        return StorylyLayoutDirectionLocale;
+    }
+}
+
+@end

@@ -173,6 +173,7 @@ Storyly.propTypes = {
     storyHeaderTextIsVisible: bool,
     storyHeaderIconIsVisible: bool,
     storyHeaderCloseButtonIsVisible: bool,
+    storylyLayoutDirection: string,
 
     onLoad: func,
     onFail: func,
