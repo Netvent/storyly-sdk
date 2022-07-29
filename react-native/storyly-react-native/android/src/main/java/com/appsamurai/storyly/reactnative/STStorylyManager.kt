@@ -224,7 +224,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val isVisible = if (storyGroupTextStylingMap.hasKey("isVisible")) storyGroupTextStylingMap.getBoolean("isVisible") else true
         val textSize = if (storyGroupTextStylingMap.hasKey("textSize")) storyGroupTextStylingMap.getInt("textSize") else null
         val lines = if (storyGroupTextStylingMap.hasKey("lines")) storyGroupTextStylingMap.getInt("lines") else null
-        val color = Color.parseColor(if (storyGroupTextStylingMap.hasKey("color")) storyGroupTextStylingMap.getString("color") else "#FF000000")
+
+        val colorSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorSeen")) storyGroupTextStylingMap.getString("colorSeen") else "#FF000000")
+        val colorUnseen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorUnseen")) storyGroupTextStylingMap.getString("colorUnseen") else "#FF000000")
+
         view.storylyView.setStoryGroupTextStyling(
             StoryGroupTextStyling(
                 isVisible = isVisible,
@@ -233,7 +236,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 minLines = null,
                 maxLines = null,
                 lines = lines,
-                color = color
+                colorSeen = colorSeen,
+                colorUnseen = colorUnseen
             )
         )
     }
