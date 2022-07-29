@@ -131,7 +131,7 @@ class FlutterStorylyView(
                 val textSize = it["textSize"] as? Int
                 val lines = it["lines"] as? Int
                 val colorSeen = Color.parseColor(it["colorSeen"] as? String ?: "#FF000000") 
-                val colorUnseen = Color.parseColor(it["colorUnseen"] as? String ?: "#FF000000")
+                val colorNotSeen = Color.parseColor(it["colorNotSeen"] as? String ?: "#FF000000")
 
                 setStoryGroupTextStyling(
                     StoryGroupTextStyling(
@@ -142,7 +142,7 @@ class FlutterStorylyView(
                         maxLines = null,
                         lines = lines,
                         colorSeen = colorSeen,
-                        colorUnseen = colorUnseen,
+                        colorNotSeen = colorNotSeen,
                     )
                 )
             }

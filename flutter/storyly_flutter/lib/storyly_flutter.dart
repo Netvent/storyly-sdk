@@ -362,8 +362,8 @@ class StorylyParam {
   /// This attribute allows you to change the text color of the seen story group.
   Color? storyGroupTextColorSeen;
 
-  /// This attribute allows you to change the text color of the unseen story group.
-  Color? storyGroupTextColorUnseen;
+  /// This attribute allows you to change the text color of the not seen story group.
+  Color? storyGroupTextColorNotSeen;
 
   /// This attribute allows you to changes the visibility of story
   /// header text.
@@ -438,7 +438,7 @@ class StorylyParam {
       'textSize': storyGroupTextSize,
       'lines': storyGroupTextLines,
       'colorSeen': storyGroupTextColorSeen?.toHexString(),
-      'colorUnseen': storyGroupTextColorUnseen?.toHexString(),
+      'colorNotSeen': storyGroupTextColorNotSeen?.toHexString(),
     };
 
     paramsMap['storyHeaderStyling'] = {
