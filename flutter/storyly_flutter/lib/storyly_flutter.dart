@@ -377,6 +377,10 @@ class StorylyParam {
   /// header close button.
   bool? storyHeaderCloseButtonIsVisible;
 
+  /// This attribute allows you to change the layout direction
+  /// the story view.
+  String? storylyLayoutDirection;
+
   /// This attribute allows you to the border color of the story group
   /// icons which are watched by the user.
   List<Color>? storyGroupIconBorderColorSeen;
@@ -448,6 +452,8 @@ class StorylyParam {
     };
 
     paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
+
+    paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
 
     paramsMap['storyGroupIconBorderColorSeen'] = storyGroupIconBorderColorSeen
         ?.map((color) => color.toHexString())
