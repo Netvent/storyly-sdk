@@ -157,9 +157,9 @@ class FlutterStorylyView(
             (args[ARGS_STORYLY_LAYOUT_DIRECTION] as? String)?.let {
                 setStorylyLayoutDirection(
                     when (it) {
-                        "ltr" -> StorylyLayoutDirection.Ltr
-                        "rtl" -> StorylyLayoutDirection.Rtl
-                        else -> StorylyLayoutDirection.Locale
+                        "ltr" -> StorylyLayoutDirection.LTR
+                        "rtl" -> StorylyLayoutDirection.RTL
+                        else -> StorylyLayoutDirection.LTR
                     }
                 )
             }

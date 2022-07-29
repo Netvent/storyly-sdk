@@ -449,7 +449,7 @@ class StorylyParam {
 
     paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
 
-    paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'locale';
+    paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
 
     paramsMap['storyGroupIconBorderColorSeen'] = storyGroupIconBorderColorSeen
         ?.map((color) => color.toHexString())

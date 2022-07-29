@@ -140,9 +140,9 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
 
         if let storylyLayoutDirection = args[self.ARGS_STORYLY_LAYOUT_DIRECTION] as? String {
             switch storylyLayoutDirection {
-                case "ltr": storylyView.storylyLayoutDirection = .Ltr
-                case "rtl": storylyView.storylyLayoutDirection = .Rtl
-                default:  storylyView.storylyLayoutDirection = .Locale
+                case "ltr": storylyView.storylyLayoutDirection = .LTR
+                case "rtl": storylyView.storylyLayoutDirection = .RTL
+                default:  storylyView.storylyLayoutDirection = .LTR
             }
         }
         
