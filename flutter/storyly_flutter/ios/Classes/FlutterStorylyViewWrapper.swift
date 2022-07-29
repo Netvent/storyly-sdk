@@ -116,13 +116,14 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         if let storyGroupTextStyling = args[ARGS_STORY_GROUP_TEXT_STYLING] as? [String: Any] {
             let isVisible = storyGroupTextStyling["isVisible"] as? Bool ?? true
-            var textColor: UIColor = .black
-            if let color = storyGroupTextStyling["color"] as? String { textColor = UIColor(hexString: color) }
             let fontSize = CGFloat(storyGroupTextStyling["textSize"] as? Int ?? 12)
             let lines = storyGroupTextStyling["lines"] as? Int ?? 2
+            let colorSeen = UIColor(hexString: storyGroupTextStyling["colorSeen"] as? String ?? "#FF000000")
+            let colorNotSeen = UIColor(hexString: storyGroupTextStyling["colorNotSeen"] as? String ?? "#FF000000") 
             
             storylyView.storyGroupTextStyling = StoryGroupTextStyling(isVisible: isVisible,
-                                                                      color: textColor,
+                                                                      colorSeen: colorSeen,
+                                                                      colorNotSeen: colorNotSeen,
                                                                       font: .systemFont(ofSize: fontSize),
                                                                       lines: lines)
         }
