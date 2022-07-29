@@ -170,11 +170,11 @@
 
 + (StorylyLayoutDirection)STStorylyLayoutDirection:(NSString *)direction {
     if ([direction isEqualToString:@"ltr"]) {
-        return StorylyLayoutDirectionLtr;
+        return StorylyLayoutDirectionLTR;
     } else if ([direction isEqualToString:@"rtl"]) {
-        return StorylyLayoutDirectionRtl;
+        return StorylyLayoutDirectionRTL;
     } else {
-        return StorylyLayoutDirectionLocale;
+        return StorylyLayoutDirectionLTR;
     }
 }
 

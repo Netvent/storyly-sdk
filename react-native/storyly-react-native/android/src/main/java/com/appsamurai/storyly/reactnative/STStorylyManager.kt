@@ -257,9 +257,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORYLY_LAYOUT_DIRECTION)
     fun setPropStorylyLayoutDirection(view: STStorylyView, layoutDirection: String) {
         when (layoutDirection) {
-            "ltr" ->  view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.Ltr)
-            "rtl" -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.Rtl)
-            else -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.Locale)
+            "ltr" ->  view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.LTR)
+            "rtl" -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.RTL)
+            else -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.LTR)
         }
     }
 
