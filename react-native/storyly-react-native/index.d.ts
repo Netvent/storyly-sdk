@@ -37,6 +37,8 @@ declare module "storyly-react-native" {
       storyHeaderTextIsVisible?: boolean;
       storyHeaderCloseButtonIsVisible?: boolean;
 
+      storylyLayoutDirection?: "ltr" | "rtl";
+
       onLoad?: (event: StoryLoadEvent) => void;
       onFail?: (event: String) => void;
       onStoryOpen?: () => void;

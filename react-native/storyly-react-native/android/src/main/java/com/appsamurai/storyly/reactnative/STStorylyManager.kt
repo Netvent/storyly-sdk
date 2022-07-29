@@ -8,6 +8,7 @@ import android.util.DisplayMetrics
 import android.util.TypedValue
 import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.StorylyInit
+import com.appsamurai.storyly.StorylyLayoutDirection
 import com.appsamurai.storyly.StorylySegmentation
 import com.appsamurai.storyly.styling.StoryGroupIconStyling
 import com.appsamurai.storyly.styling.StoryGroupListStyling
@@ -43,6 +44,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
         private const val PROP_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
         private const val PROP_STORY_HEADER_STYLING = "storyHeaderStyling"
+        private const val PROP_STORYLY_LAYOUT_DIRECTION = "storylyLayoutDirection"
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
@@ -254,6 +256,15 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 isCloseButtonVisible = isCloseButtonVisible,
             )
         )
+    }
+
+    @ReactProp(name = PROP_STORYLY_LAYOUT_DIRECTION)
+    fun setPropStorylyLayoutDirection(view: STStorylyView, layoutDirection: String) {
+        when (layoutDirection) {
+            "ltr" ->  view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.LTR)
+            "rtl" -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.RTL)
+            else -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.LTR)
+        }
     }
 
     private fun convertColorArray(colors: ReadableArray): Array<Int> {

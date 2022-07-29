@@ -102,7 +102,7 @@ RCT_REMAP_VIEW_PROPERTY(storyGroupIconStyling, _storylyView.storyGroupIconStylin
 RCT_REMAP_VIEW_PROPERTY(storyGroupListStyling, _storylyView.storyGroupListStyling, STStoryGroupListStyling)
 RCT_REMAP_VIEW_PROPERTY(storyGroupTextStyling, _storylyView.storyGroupTextStyling, STStoryGroupTextStyling)
 RCT_REMAP_VIEW_PROPERTY(storyHeaderStyling, _storylyView.storyHeaderStyling, STStoryHeaderStyling)
-
+RCT_REMAP_VIEW_PROPERTY(storylyLayoutDirection, _storylyView.storylyLayoutDirection, STStorylyLayoutDirection)
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)
