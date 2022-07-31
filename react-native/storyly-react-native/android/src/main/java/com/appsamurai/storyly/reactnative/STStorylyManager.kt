@@ -228,7 +228,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val lines = if (storyGroupTextStylingMap.hasKey("lines")) storyGroupTextStylingMap.getInt("lines") else null
 
         val colorSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorSeen")) storyGroupTextStylingMap.getString("colorSeen") else "#FF000000")
-        val colorUnseen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorUnseen")) storyGroupTextStylingMap.getString("colorUnseen") else "#FF000000")
+        val colorNotSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorNotSeen")) storyGroupTextStylingMap.getString("colorNotSeen") else "#FF000000")
 
         view.storylyView.setStoryGroupTextStyling(
             StoryGroupTextStyling(
@@ -239,7 +239,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 maxLines = null,
                 lines = lines,
                 colorSeen = colorSeen,
-                colorUnseen = colorUnseen
+                colorNotSeen = colorNotSeen
             )
         )
     }

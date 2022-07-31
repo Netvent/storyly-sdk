@@ -1,4 +1,10 @@
 # Release Notes
+### 1.24.1 (31.07.2022)
+* IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
+* IMPORTANT! removed storyGroupTextColor field
+* IMPORTANT! added storylyLayoutDirection field
+* fixed [#202](https://github.com/Netvent/storyly-mobile/issues/202)
+
 ### 1.24.0 (08.07.2022)
 * added swipe up designs with a/b test option
 * added outlink parameter to countdown interactive component
