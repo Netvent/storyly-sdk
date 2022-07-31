@@ -5,7 +5,7 @@
 * IMPORTANT! removed color field from StoryGroupTextStyling
 * IMPORTANT! removed storyGroupTextColor field
 * IMPORTANT! added storylyLayoutDirection field
-* fix text truncate issue for some devices for text interactive and promo code interative
+* fixed text truncate issue for some devices for text interactive and promo code interative, [#192](https://github.com/Netvent/storyly-mobile/issues/192)
 
 ### 1.24.0 (01.07.2022)
 * added swipe up designs with a/b test option
