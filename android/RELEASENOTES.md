@@ -8,6 +8,7 @@
 * IMPORTANT! removed color field from StoryGroupTextStyling
 * IMPORTANT! removed storyGroupTextColor field
 * IMPORTANT! added storylyLayoutDirection field
+* fixed a crash during reinitialization of StorylyView with MomentsItems
 * fixed [#202](https://github.com/Netvent/storyly-mobile/issues/202)
 
 ### 1.24.1 (23.07.2022)
