@@ -1,4 +1,7 @@
 # Release Notes
+### 1.25.0 (03.08.2022)
+* IMPORTANT! changed StorylyInit constructors, check [StorylyInit API Reference](https://integration.storyly.io/api/android/storyly/com.appsamurai.storyly/-storyly-init/index.html)
+
 ### 1.24.2 (29.07.2022)
 * IMPORTANT! added colorSeen and colorNotSeen fields to StoryGroupTextStyling
 * IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
