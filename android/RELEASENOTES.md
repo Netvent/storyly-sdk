@@ -1,4 +1,7 @@
 # Release Notes
+### 1.25.1 (04.08.2022)
+* changed Storyly-ExoPlayer2 dependency to 1.28.0-1
+
 ### 1.25.0 (03.08.2022)
 * IMPORTANT! changed StorylyInit constructors, check [StorylyInit API Reference](https://integration.storyly.io/api/android/storyly/com.appsamurai.storyly/-storyly-init/index.html)
 
