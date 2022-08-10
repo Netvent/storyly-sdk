@@ -32,6 +32,29 @@ export default function App() {
           color="#7A4BFF"
         />
       </View>
+      <View style={styles.box}>
+        <Button
+         title="Initialize events"
+         color="#00E0E4"
+          onPress={() => {
+            StorylyMoments.addEventListener("storylyMomentsEvent", (event: Object) => {
+              console.log(`app - storylyMomentsEvent - ${event.eventName} - ${JSON.stringify(event.storyGroup)} - ${JSON.stringify(event.stories)}`)
+            })
+            StorylyMoments.addEventListener("onOpenCreateStory", (event: Object) => {
+              console.log(`onOpenCreateStory - ${JSON.stringify(event)}`)
+            })
+            StorylyMoments.addEventListener("onOpenMyStory", (event: Object) => {
+              console.log(`onOpenMyStory - ${JSON.stringify(event)}`)
+            })
+            StorylyMoments.addEventListener("onUserStoriesLoaded", (event: Object) => {
+              console.log(`onUserStoriesLoaded - ${JSON.stringify(event)}`)
+            })
+            StorylyMoments.addEventListener("onUserStoriesLoadFailed", (event: Object) => {
+              console.log(`onUserStoriesLoadFailed - ${JSON.stringify(event)}`)
+            })
+          }}
+        />
+      </View>
     </SafeAreaView>
   );
 }
