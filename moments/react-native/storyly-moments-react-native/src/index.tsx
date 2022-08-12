@@ -29,7 +29,7 @@ const openStoryCreator = function() {
   StorylyMoments.openStoryCreator()
 }
 
-interface MomentsStory {
+export interface MomentsStory {
   id: string
   title: string
   seen: boolean
@@ -39,7 +39,7 @@ interface MomentsStory {
   }
 }
 
-interface MomentsStoryGroup {
+export interface MomentsStoryGroup {
   id: string,
   iconUrl: string
   seen: boolean,
@@ -55,29 +55,32 @@ enum Events {
 }
 type MomentsEventType = keyof typeof Events
 
+export interface MomentsEvent {}
 
-interface StorylyMomentsEvent { 
+export interface StorylyMomentsEvent extends MomentsEvent { 
   eventName: string
   storyGroup?: MomentsStoryGroup
   stories?: MomentsStory[]
 }
-interface OpenCreateStoryEvent { 
+export interface OpenCreateStoryEvent extends MomentsEvent { 
   isDirectMediaUploaded: boolean
 }
-interface OpenMyStoryEvent {}
-interface UserStoriesLoadedEvent { 
+export interface OpenMyStoryEvent extends MomentsEvent {}
+export interface UserStoriesLoadedEvent extends MomentsEvent { 
   storyGroup: MomentsStoryGroup
 }
-interface UserStoriesLoadFailedEvent { 
+export interface UserStoriesLoadFailedEvent extends MomentsEvent { 
   errorMessage: string
 }
 
-type MomentsEvents = (event: StorylyMomentsEvent | OpenCreateStoryEvent | OpenMyStoryEvent | UserStoriesLoadedEvent | UserStoriesLoadFailedEvent) => void
+export interface OnMomentsEvent {
+  (event: MomentsEvent): void
+}
 
 const _eventEmitter = new NativeEventEmitter(StorylyMoments)
-const _eventsSubscriptions = new Map<MomentsEvents, EmitterSubscription>()
+const _eventsSubscriptions = new Map<OnMomentsEvent, EmitterSubscription>()
 
-const addEventListener = (event: MomentsEventType, handler: MomentsEvents) => {
+const addEventListener = (event: MomentsEventType, handler: OnMomentsEvent) => {
   let isValidEventType = Object.keys(Events).includes(event)
   if (isValidEventType) {
     let listener = _eventEmitter.addListener(event, handler)
@@ -100,7 +103,7 @@ const setupInitialListeners = () => {
 }
 
 
-const removeEventListener = (handler: MomentsEvents) => {
+const removeEventListener = (handler: OnMomentsEvent) => {
   const listener = _eventsSubscriptions.get(handler)
   if (!listener) {
     return
@@ -119,7 +122,6 @@ const removeAllListeners = () => {
 setupInitialListeners()
 
 export default {
-  ...StorylyMoments,
   initialize,
   openUserStories,
   openStoryCreator,

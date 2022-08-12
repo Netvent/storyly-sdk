@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Button, SafeAreaView } from 'react-native';
-import StorylyMoments from 'storyly-moments-react-native';
+import StorylyMoments, { OpenCreateStoryEvent, OpenMyStoryEvent, StorylyMomentsEvent, UserStoriesLoadedEvent, UserStoriesLoadFailedEvent } from 'storyly-moments-react-native';
 
 export default function App() {
   return (
@@ -37,20 +37,25 @@ export default function App() {
          title="Initialize events"
          color="#00E0E4"
           onPress={() => {
-            StorylyMoments.addEventListener("storylyMomentsEvent", (event: Object) => {
-              console.log(`app - storylyMomentsEvent - ${event.eventName} - ${JSON.stringify(event.storyGroup)} - ${JSON.stringify(event.stories)}`)
+            StorylyMoments.addEventListener("storylyMomentsEvent", (event) => {
+              let momentsEvent = event as StorylyMomentsEvent
+              console.log(`app - storylyMomentsEvent - ${momentsEvent.eventName} - ${JSON.stringify(momentsEvent.storyGroup)} - ${JSON.stringify(momentsEvent.stories)}`)
             })
-            StorylyMoments.addEventListener("onOpenCreateStory", (event: Object) => {
-              console.log(`onOpenCreateStory - ${JSON.stringify(event)}`)
+            StorylyMoments.addEventListener("onOpenCreateStory", (event) => {
+              let openCreateStoryEvent = event as OpenCreateStoryEvent
+              console.log(`onOpenCreateStory - ${JSON.stringify(openCreateStoryEvent)}`)
             })
-            StorylyMoments.addEventListener("onOpenMyStory", (event: Object) => {
-              console.log(`onOpenMyStory - ${JSON.stringify(event)}`)
+            StorylyMoments.addEventListener("onOpenMyStory", (event) => {
+              let openMyStoryEvent = event as OpenMyStoryEvent
+              console.log(`onOpenMyStory - ${JSON.stringify(openMyStoryEvent)}`)
             })
-            StorylyMoments.addEventListener("onUserStoriesLoaded", (event: Object) => {
-              console.log(`onUserStoriesLoaded - ${JSON.stringify(event)}`)
+            StorylyMoments.addEventListener("onUserStoriesLoaded", (event) => {
+              let userStoriesLoaded = event as UserStoriesLoadedEvent
+              console.log(`onUserStoriesLoaded - ${JSON.stringify(userStoriesLoaded.storyGroup)}`)
             })
             StorylyMoments.addEventListener("onUserStoriesLoadFailed", (event: Object) => {
-              console.log(`onUserStoriesLoadFailed - ${JSON.stringify(event)}`)
+              let userStoriesLoadFailed = event as UserStoriesLoadFailedEvent
+              console.log(`onUserStoriesLoadFailed - ${userStoriesLoadFailed.errorMessage}`)
             })
           }}
         />
