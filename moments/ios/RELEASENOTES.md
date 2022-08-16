@@ -1,4 +1,8 @@
 # Release Notes
+### 0.0.7 (16.08.2022)
+* IMPORTANT! removed momentsDelegate field from MomentsManager constructor
+* IMPORTANT! added momentsDelegete field to MomentsManager
+
 ### 0.0.6 (01.07.2022)
 * IMPORTANT! renamed StorylyMomentsDelegate to MomentsDelegate
 
