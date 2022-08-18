@@ -103,6 +103,16 @@
         fontSize = [storyGroupTextStyling[@"textSize"] intValue];
     }
     
+    UIFont* font = [UIFont systemFontOfSize: fontSize];
+    if ([storyGroupTextStyling.allKeys containsObject:@"typeface"] && storyGroupTextStyling[@"typeface"] != NULL) {
+        NSString* typeface = storyGroupTextStyling[@"typeface"];
+        NSString* fontName = typeface.stringByDeletingPathExtension;
+        UIFont* updateFont = [UIFont fontWithName:fontName size:fontSize];
+        if (updateFont != nil) {
+            font = updateFont;
+        }
+    }
+    
     int lines = 2;
     if ([storyGroupTextStyling.allKeys containsObject:@"lines"] && storyGroupTextStyling[@"lines"] != NULL) {
         lines = [storyGroupTextStyling[@"lines"] intValue];
@@ -111,7 +121,7 @@
     return [[StoryGroupTextStyling alloc] initWithIsVisible:isVisible
                                                       colorSeen:textColorSeen
                                                       colorNotSeen:textColorNotSeen
-                                                      font:[UIFont systemFontOfSize:fontSize]
+                                                      font:font
                                                       lines:lines];
 }
 

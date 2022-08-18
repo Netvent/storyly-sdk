@@ -24,6 +24,7 @@ declare module "storyly-react-native" {
       storyGroupTextColorSeen?: string;
       storyGroupTextColorNotSeen?: string;
       storyGroupTextIsVisible?: boolean;
+      storyGroupTextTypeface?: string;
       storyGroupPinIconColor?: string;
 
       storyGroupListEdgePadding?: number;
