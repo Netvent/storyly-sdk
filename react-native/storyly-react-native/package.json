@@ -5,7 +5,10 @@
   "description": "A react-native component for Storyly",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "StorylyDemo": "yarn --cwd StorylyDemo",
+    "pods": "cd StorylyDemo && pod-install --quiet",
+    "bootstrap": "yarn StorylyDemo && yarn && yarn pods"
   },
   "repository": {
     "type": "git",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "react": "17.0.2",
-    "react-native": "0.67.4"
+    "react-native": "0.67.4",
+    "pod-install": "^0.1.0"
   }
 }
