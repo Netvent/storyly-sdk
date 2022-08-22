@@ -33,6 +33,8 @@ declare module "storyly-react-native" {
       storyItemTextColor?: string;
       storyItemIconBorderColor?: string[];
       storyItemProgressBarColor?: string[];
+      storyItemTextTypeface?: string;
+      storyInteractiveTextTypeface?: string;
 
       storyHeaderIconIsVisible?: boolean;
       storyHeaderTextIsVisible?: boolean;

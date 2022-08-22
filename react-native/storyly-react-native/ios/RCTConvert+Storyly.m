@@ -194,3 +194,27 @@
 }
 
 @end
+
+
+@implementation RCTConvert (UIFont)
+    
++ (UIFont *)STStoryItemTextTypeface:(NSString *)typeface {
+    UIFont* font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+    UIFont* updateFont = [UIFont fontWithName:typeface.stringByDeletingPathExtension size:14];
+    if (updateFont != nil) {
+        font = updateFont;
+    }
+    return font;
+}
+    
++ (UIFont *)STStoryInteractiveTextTypeface:(NSString *)typeface {
+    UIFont* font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    UIFont* updateFont = [UIFont fontWithName:typeface.stringByDeletingPathExtension size:14];
+    if (updateFont != nil) {
+        font = updateFont;
+    }
+    return font;
+}
+
+@end
+
