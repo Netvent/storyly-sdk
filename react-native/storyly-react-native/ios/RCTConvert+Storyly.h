@@ -48,4 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface RCTConvert (UIFont)
+
++ (UIFont *)STStoryItemTextTypeface:(NSString *)typeface;
+
++ (UIFont *)STStoryInteractiveTextTypeface:(NSString *)typeface;
+
+@end
+
 NS_ASSUME_NONNULL_END

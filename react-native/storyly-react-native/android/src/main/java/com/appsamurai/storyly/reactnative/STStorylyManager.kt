@@ -44,6 +44,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val PROP_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val PROP_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
+        private const val PROP_STORY_ITEM_TEXT_TYPEFACE = "storyItemTextTypeface"
+        private const val PROP_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
         private const val PROP_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
         private const val PROP_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
         private const val PROP_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
@@ -230,16 +232,19 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORY_GROUP_TEXT_STYLING)
     fun setPropStoryGroupTextStyling(view: STStorylyView, storyGroupTextStylingMap: ReadableMap) {
         val isVisible = if (storyGroupTextStylingMap.hasKey("isVisible")) storyGroupTextStylingMap.getBoolean("isVisible") else true
+        val typefaceName = if (storyGroupTextStylingMap.hasKey("typeface")) storyGroupTextStylingMap.getString("typeface") else null
         val textSize = if (storyGroupTextStylingMap.hasKey("textSize")) storyGroupTextStylingMap.getInt("textSize") else null
         val lines = if (storyGroupTextStylingMap.hasKey("lines")) storyGroupTextStylingMap.getInt("lines") else null
 
         val colorSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorSeen")) storyGroupTextStylingMap.getString("colorSeen") else "#FF000000")
         val colorNotSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorNotSeen")) storyGroupTextStylingMap.getString("colorNotSeen") else "#FF000000")
 
+        val customTypeface = typefaceName?.let { try { Typeface.createFromAsset(view.context.applicationContext.assets, it) } catch(_: Exception) { null } } ?: Typeface.DEFAULT
+
         view.storylyView.setStoryGroupTextStyling(
             StoryGroupTextStyling(
                 isVisible = isVisible,
-                typeface = Typeface.DEFAULT,
+                typeface = customTypeface,
                 textSize = Pair(TypedValue.COMPLEX_UNIT_PX, textSize),
                 minLines = null,
                 maxLines = null,
@@ -271,6 +276,18 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 shareButtonIcon = shareIconDrawable
             )
         )
+    }
+
+    @ReactProp(name = PROP_STORY_ITEM_TEXT_TYPEFACE)
+    fun setPropStoryItemTextTypeface(view: STStorylyView, typeface: String) {
+        val customTypeface = try { Typeface.createFromAsset(view.context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+        view.storylyView.setStoryItemTextTypeface(customTypeface)
+    }
+
+    @ReactProp(name = PROP_STORY_INTERACTIVE_TEXT_TYPEFACE)
+    fun setPropStoryInteractiveTextTypeface(view: STStorylyView, typeface: String) {
+        val customTypeface = try { Typeface.createFromAsset(view.context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+        view.storylyView.setStoryInteractiveTextTypeface(customTypeface)
     }
 
     @ReactProp(name = PROP_STORYLY_LAYOUT_DIRECTION)
