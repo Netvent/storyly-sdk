@@ -1,11 +1,14 @@
 package com.appsamurai.storyly.reactnative
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylyLayoutDirection
@@ -252,11 +255,20 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val isTextVisible = if (storyHeaderStylingMap.hasKey("isTextVisible")) storyHeaderStylingMap.getBoolean("isTextVisible") else true
         val isIconVisible = if (storyHeaderStylingMap.hasKey("isIconVisible")) storyHeaderStylingMap.getBoolean("isIconVisible") else true
         val isCloseButtonVisible = if (storyHeaderStylingMap.hasKey("isCloseButtonVisible")) storyHeaderStylingMap.getBoolean("isCloseButtonVisible") else true
+
+        val closeIcon = if (storyHeaderStylingMap.hasKey("closeIcon")) storyHeaderStylingMap.getString("closeIcon") else null
+        val closeIconDrawable = closeIcon?.let { getDrawable(view.context.applicationContext, it) }
+
+        val shareIcon = if (storyHeaderStylingMap.hasKey("shareIcon")) storyHeaderStylingMap.getString("shareIcon") else null
+        val shareIconDrawable = shareIcon?.let { getDrawable(view.context.applicationContext, it) }
+
         view.storylyView.setStoryHeaderStyling(
             StoryHeaderStyling(
                 isTextVisible = isTextVisible,
                 isIconVisible = isIconVisible,
                 isCloseButtonVisible = isCloseButtonVisible,
+                closeButtonIcon = closeIconDrawable,
+                shareButtonIcon = shareIconDrawable
             )
         )
     }
@@ -280,5 +292,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     private fun dpToPixel(dpValue: Int): Float {
         return dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    }
+
+    private fun getDrawable(context: Context, name: String): Drawable? {
+        val id = context.resources.getIdentifier(name, "drawable", context.packageName)
+        return ContextCompat.getDrawable(context, id)
     }
 }

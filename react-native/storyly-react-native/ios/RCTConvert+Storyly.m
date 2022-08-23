@@ -163,11 +163,23 @@
         isCloseButtonVisible = [storyHeaderStyling[@"isCloseButtonVisible"] boolValue];
     }
 
+    UIImage* closeIconImage = NULL;
+    if ([storyHeaderStyling.allKeys containsObject:@"closeIcon"] && storyHeaderStyling[@"closeIcon"] != NULL) {
+        NSString* closeIcon = storyHeaderStyling[@"closeIcon"];
+        closeIconImage = [UIImage imageNamed:closeIcon];
+    }
+
+    UIImage* shareIconImage = NULL;
+    if ([storyHeaderStyling.allKeys containsObject:@"shareIcon"] && storyHeaderStyling[@"shareIcon"] != NULL) {
+        NSString* shareIcon = storyHeaderStyling[@"shareIcon"];
+        shareIconImage = [UIImage imageNamed:shareIcon];
+    }
+
     return [[StoryHeaderStyling alloc] initWithIsTextVisible:isTextVisible
                                                isIconVisible:isIconVisible
                                         isCloseButtonVisible:isCloseButtonVisible
-                                             closeButtonIcon:NULL
-                                             shareButtonIcon:NULL];
+                                             closeButtonIcon:closeIconImage
+                                             shareButtonIcon:shareIconImage];
 }
 
 @end

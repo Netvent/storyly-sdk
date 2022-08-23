@@ -111,6 +111,8 @@ class Storyly extends Component {
             storyHeaderTextIsVisible,
             storyHeaderIconIsVisible,
             storyHeaderCloseButtonIsVisible,
+            storyHeaderCloseIcon,
+            storyHeaderShareIcon,
             onLoad,
             onFail,
             onEvent,
@@ -128,7 +130,7 @@ class Storyly extends Component {
                 storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
                 storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines,'colorSeen': storyGroupTextColorSeen,'colorNotSeen': storyGroupTextColorNotSeen}}
-                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
+                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon}}
                 onStorylyLoaded={this._onStorylyLoaded}
                 onStorylyLoadFailed={this._onStorylyLoadFailed}
                 onStorylyEvent={this._onStorylyEvent}
@@ -177,6 +179,8 @@ Storyly.propTypes = {
     storyHeaderTextIsVisible: bool,
     storyHeaderIconIsVisible: bool,
     storyHeaderCloseButtonIsVisible: bool,
+    storyHeaderCloseIcon: string,
+    storyHeaderShareIcon: string,
     storylyLayoutDirection: string,
 
     onLoad: func,
