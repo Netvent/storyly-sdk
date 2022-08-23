@@ -69,18 +69,50 @@ declare module "storyly-react-native" {
 
     export interface StoryEvent {
       event: string;
-      story: Story;
-      storyGroup: StoryGroup;
-      storyComponent: unknown | null;
+      story:? Story;
+      storyGroup:? StoryGroup;
+      storyComponent:? StoryComponent;
+    }
+
+    export interface StoryComponent {
+      id: string;
+      type: ReactionType;
+    }
+
+    export interface StoryQuizComponent extends StoryComponent {
+      title: string;
+      options: string[];
+      rightAnswerIndex?: number;
+      selectedOptionIndex: number;
+      customPayload?: string;
+    }
+
+    export interface StoryPollComponent extends StoryComponent {
+      title: string;
+      emojiCodes: string[];
+      selectedEmojiIndex: number;
+      customPayload?: string;
+    }
+
+    export interface StoryRatingComponent extends StoryComponent {
+      title: string;
+      emojiCodes: string[];
+      selectedEmojiIndex: number;
+      customPayload?: string;
+    }
+
+    export interface StoryPromoCodeComponent extends StoryComponent {
+      text: string;
+    }
+
+    export interface StoryCommentComponent extends StoryComponent {
+      text: string;
     }
 
     export interface StoryInteractiveEvent {
       story: Story;
       storyGroup: StoryGroup;
-      storyComponent: {
-        type: ReactionType;
-        customPayload: string;
-      };
+      storyComponent: StoryComponent;
     }
 
     export interface StoryGroup {
@@ -112,7 +144,15 @@ declare module "storyly-react-native" {
       | "poll"
       | "quiz"
       | "countdown"
-      | "promocode";
+      | "promocode"
+      | "swipeaction"
+      | "buttonaction"
+      | "text"
+      | "image"
+      | "producttag"
+      | "comment"
+      | "video"
+      | "vod";
   }
 
   export type ExternalData = Record<string, string>[];
