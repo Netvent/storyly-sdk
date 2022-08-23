@@ -69,9 +69,9 @@ declare module "storyly-react-native" {
 
     export interface StoryEvent {
       event: string;
-      story:? Story;
-      storyGroup:? StoryGroup;
-      storyComponent:? StoryComponent;
+      story?: Story;
+      storyGroup?: StoryGroup;
+      storyComponent?: StoryComponent;
     }
 
     export interface StoryComponent {

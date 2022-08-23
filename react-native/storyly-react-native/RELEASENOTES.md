@@ -1,4 +1,10 @@
 # Release Notes
+### 1.26.0 (24.08.2022)
+* added StoryComponent implementations
+* added storyGroupTextTypeface, storyItemTextTypeface and storyInteractiveTextTypeface to support custom fonts
+* added storyHeaderCloseIcon and storyHeaderShareIcon to support customazible icons
+* added storylyPayload for Storyly Moments usage
+
 ### 1.24.1 (31.07.2022)
 * IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
 * IMPORTANT! removed storyGroupTextColor field
