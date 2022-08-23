@@ -8,7 +8,7 @@ declare module "storyly-react-native" {
       customParameter?: string;
       storylyTestMode?: boolean;
       storylySegments?: string[];
-      storylyUserProperty?: Record<string, string>[];
+      storylyUserProperty?: Record<string, string>;
       storylyPayload?: string;
       storylyShareUrl?: string;
 
