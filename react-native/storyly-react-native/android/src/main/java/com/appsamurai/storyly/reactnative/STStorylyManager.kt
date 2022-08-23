@@ -31,6 +31,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORYLY_USER_PROPERTY = "userProperty"
         private const val PROP_STORYLY_SHARE_URL = "storylyShareUrl"
         private const val PROP_CUSTOM_PARAMETER = "customParameter"
+        private const val PROP_STORYLY_PAYLOAD = "storylyPayload"
         private const val PROP_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
@@ -132,15 +133,17 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val isTestMode = if (storylyInit.hasKey(PROP_STORYLY_IS_TEST_MODE)) storylyInit.getBoolean(PROP_STORYLY_IS_TEST_MODE) else false
         val segments = if (storylyInit.hasKey(PROP_STORYLY_SEGMENTS)) (storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.toArrayList() as? ArrayList<String>)?.toSet() else null
         val customParameter = if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) storylyInit.getString(PROP_CUSTOM_PARAMETER) else null
+        val storylyPayload = if (storylyInit.hasKey(PROP_STORYLY_PAYLOAD)) storylyInit.getString(PROP_STORYLY_PAYLOAD) else null
         val userProperty = if (storylyInit.hasKey(PROP_STORYLY_USER_PROPERTY)) storylyInit.getMap(PROP_STORYLY_USER_PROPERTY)?.toHashMap() as? Map<String, String> else null
 
         view.storylyView.storylyInit = StorylyInit(
             storylyId = storylyId,
             segmentation = StorylySegmentation(segments = segments),
             customParameter = customParameter,
-            isTestMode = isTestMode
+            isTestMode = isTestMode,
+            storylyPayload = storylyPayload
         ).apply {
-            userProperty?.let { setUserData(userProperty) }
+            userProperty?.let { this.userData = it }
         }
     }
 

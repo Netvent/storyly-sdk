@@ -22,8 +22,9 @@
     StorylyInit *storylyInit = [[StorylyInit alloc] initWithStorylyId:storylyInitJson[@"storylyId"]
                                                          segmentation:storylySegmentation
                                                       customParameter:storylyInitJson[@"customParameter"]
-                                                           isTestMode:isTestMode];
-    [storylyInit setUserData:storylyInitJson[@"userProperty"]];
+                                                           isTestMode:isTestMode
+                                                       storylyPayload:storylyInitJson[@"storylyPayload"]
+                                                             userData:storylyInitJson[@"userProperty"]];
     return storylyInit;
 }
 
