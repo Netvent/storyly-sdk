@@ -1,4 +1,9 @@
 # Release Notes
+### 1.26.0 (23.08.2022)
+* added story bar animations with a/b test option
+* improved story bar scrolling performance with pagination
+* fixed text alignment issue in interactive components if style is given
+
 ### 1.25.1 (04.08.2022)
 * changed Storyly-ExoPlayer2 dependency to 1.28.0-1
 

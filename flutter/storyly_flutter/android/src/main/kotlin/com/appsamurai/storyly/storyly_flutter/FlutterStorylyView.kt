@@ -76,6 +76,8 @@ class FlutterStorylyView(
         private const val ARGS_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val ARGS_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val ARGS_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
+        private const val ARGS_STORY_ITEM_TEXT_TYPEFACE = "storyItemTextTypeface"
+        private const val ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
     }
 
     private val storylyView: StorylyView by lazy {
@@ -115,6 +117,14 @@ class FlutterStorylyView(
             (args[ARGS_STORY_ITEM_ICON_BORDER_COLOR] as? List<String>)?.let { colors -> setStoryItemIconBorderColor(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_ITEM_TEXT_COLOR] as? String)?.let { setStoryItemTextColor(Color.parseColor(it)) }
             (args[ARGS_STORY_ITEM_PROGRESS_BAR_COLOR] as? List<String>)?.let { colors -> setStoryItemProgressBarColor(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
+            (args[ARGS_STORY_ITEM_TEXT_TYPEFACE] as? String)?.let { typeface ->
+                val customTypeface = try { Typeface.createFromAsset(context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+                setStoryItemTextTypeface(customTypeface)
+            }
+            (args[ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE] as? String)?.let { typeface ->
+                val customTypeface = try { Typeface.createFromAsset(context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+                setStoryInteractiveTextTypeface(customTypeface)
+            }
 
             (args[ARGS_STORY_GROUP_ICON_STYLING] as? Map<String, *>)?.let {
                 val width = it["width"] as? Int ?: return@let
@@ -131,17 +141,20 @@ class FlutterStorylyView(
 
             (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }
 
-            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let {
+            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let { it ->
                 val isVisible = it["isVisible"] as? Boolean ?: true
                 val textSize = it["textSize"] as? Int
                 val lines = it["lines"] as? Int
-                val colorSeen = Color.parseColor(it["colorSeen"] as? String ?: "#FF000000") 
+                val typeface = it["typeface"] as? String
+                val colorSeen = Color.parseColor(it["colorSeen"] as? String ?: "#FF000000")
                 val colorNotSeen = Color.parseColor(it["colorNotSeen"] as? String ?: "#FF000000")
+
+                val customTypeface = typeface?.let { try { Typeface.createFromAsset(context.applicationContext.assets, it) } catch(_: Exception) { null } } ?: Typeface.DEFAULT
 
                 setStoryGroupTextStyling(
                     StoryGroupTextStyling(
                         isVisible = isVisible,
-                        typeface = Typeface.DEFAULT,
+                        typeface = customTypeface,
                         textSize = Pair(TypedValue.COMPLEX_UNIT_PX, textSize),
                         minLines = null,
                         maxLines = null,

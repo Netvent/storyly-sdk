@@ -1,11 +1,14 @@
 package com.appsamurai.storyly.reactnative
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylyLayoutDirection
@@ -31,6 +34,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORYLY_USER_PROPERTY = "userProperty"
         private const val PROP_STORYLY_SHARE_URL = "storylyShareUrl"
         private const val PROP_CUSTOM_PARAMETER = "customParameter"
+        private const val PROP_STORYLY_PAYLOAD = "storylyPayload"
         private const val PROP_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
         private const val PROP_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
@@ -40,6 +44,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val PROP_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val PROP_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
+        private const val PROP_STORY_ITEM_TEXT_TYPEFACE = "storyItemTextTypeface"
+        private const val PROP_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
         private const val PROP_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
         private const val PROP_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
         private const val PROP_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
@@ -132,15 +138,17 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val isTestMode = if (storylyInit.hasKey(PROP_STORYLY_IS_TEST_MODE)) storylyInit.getBoolean(PROP_STORYLY_IS_TEST_MODE) else false
         val segments = if (storylyInit.hasKey(PROP_STORYLY_SEGMENTS)) (storylyInit.getArray(PROP_STORYLY_SEGMENTS)?.toArrayList() as? ArrayList<String>)?.toSet() else null
         val customParameter = if (storylyInit.hasKey(PROP_CUSTOM_PARAMETER)) storylyInit.getString(PROP_CUSTOM_PARAMETER) else null
+        val storylyPayload = if (storylyInit.hasKey(PROP_STORYLY_PAYLOAD)) storylyInit.getString(PROP_STORYLY_PAYLOAD) else null
         val userProperty = if (storylyInit.hasKey(PROP_STORYLY_USER_PROPERTY)) storylyInit.getMap(PROP_STORYLY_USER_PROPERTY)?.toHashMap() as? Map<String, String> else null
 
         view.storylyView.storylyInit = StorylyInit(
             storylyId = storylyId,
             segmentation = StorylySegmentation(segments = segments),
             customParameter = customParameter,
-            isTestMode = isTestMode
+            isTestMode = isTestMode,
+            storylyPayload = storylyPayload
         ).apply {
-            userProperty?.let { setUserData(userProperty) }
+            userProperty?.let { this.userData = it }
         }
     }
 
@@ -224,16 +232,19 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORY_GROUP_TEXT_STYLING)
     fun setPropStoryGroupTextStyling(view: STStorylyView, storyGroupTextStylingMap: ReadableMap) {
         val isVisible = if (storyGroupTextStylingMap.hasKey("isVisible")) storyGroupTextStylingMap.getBoolean("isVisible") else true
+        val typefaceName = if (storyGroupTextStylingMap.hasKey("typeface")) storyGroupTextStylingMap.getString("typeface") else null
         val textSize = if (storyGroupTextStylingMap.hasKey("textSize")) storyGroupTextStylingMap.getInt("textSize") else null
         val lines = if (storyGroupTextStylingMap.hasKey("lines")) storyGroupTextStylingMap.getInt("lines") else null
 
         val colorSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorSeen")) storyGroupTextStylingMap.getString("colorSeen") else "#FF000000")
         val colorNotSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorNotSeen")) storyGroupTextStylingMap.getString("colorNotSeen") else "#FF000000")
 
+        val customTypeface = typefaceName?.let { try { Typeface.createFromAsset(view.context.applicationContext.assets, it) } catch(_: Exception) { null } } ?: Typeface.DEFAULT
+
         view.storylyView.setStoryGroupTextStyling(
             StoryGroupTextStyling(
                 isVisible = isVisible,
-                typeface = Typeface.DEFAULT,
+                typeface = customTypeface,
                 textSize = Pair(TypedValue.COMPLEX_UNIT_PX, textSize),
                 minLines = null,
                 maxLines = null,
@@ -249,13 +260,34 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val isTextVisible = if (storyHeaderStylingMap.hasKey("isTextVisible")) storyHeaderStylingMap.getBoolean("isTextVisible") else true
         val isIconVisible = if (storyHeaderStylingMap.hasKey("isIconVisible")) storyHeaderStylingMap.getBoolean("isIconVisible") else true
         val isCloseButtonVisible = if (storyHeaderStylingMap.hasKey("isCloseButtonVisible")) storyHeaderStylingMap.getBoolean("isCloseButtonVisible") else true
+
+        val closeIcon = if (storyHeaderStylingMap.hasKey("closeIcon")) storyHeaderStylingMap.getString("closeIcon") else null
+        val closeIconDrawable = closeIcon?.let { getDrawable(view.context.applicationContext, it) }
+
+        val shareIcon = if (storyHeaderStylingMap.hasKey("shareIcon")) storyHeaderStylingMap.getString("shareIcon") else null
+        val shareIconDrawable = shareIcon?.let { getDrawable(view.context.applicationContext, it) }
+
         view.storylyView.setStoryHeaderStyling(
             StoryHeaderStyling(
                 isTextVisible = isTextVisible,
                 isIconVisible = isIconVisible,
                 isCloseButtonVisible = isCloseButtonVisible,
+                closeButtonIcon = closeIconDrawable,
+                shareButtonIcon = shareIconDrawable
             )
         )
+    }
+
+    @ReactProp(name = PROP_STORY_ITEM_TEXT_TYPEFACE)
+    fun setPropStoryItemTextTypeface(view: STStorylyView, typeface: String) {
+        val customTypeface = try { Typeface.createFromAsset(view.context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+        view.storylyView.setStoryItemTextTypeface(customTypeface)
+    }
+
+    @ReactProp(name = PROP_STORY_INTERACTIVE_TEXT_TYPEFACE)
+    fun setPropStoryInteractiveTextTypeface(view: STStorylyView, typeface: String) {
+        val customTypeface = try { Typeface.createFromAsset(view.context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+        view.storylyView.setStoryInteractiveTextTypeface(customTypeface)
     }
 
     @ReactProp(name = PROP_STORYLY_LAYOUT_DIRECTION)
@@ -277,5 +309,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     private fun dpToPixel(dpValue: Int): Float {
         return dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    }
+
+    private fun getDrawable(context: Context, name: String): Drawable? {
+        val id = context.resources.getIdentifier(name, "drawable", context.packageName)
+        return ContextCompat.getDrawable(context, id)
     }
 }

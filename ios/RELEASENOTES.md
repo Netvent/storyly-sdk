@@ -1,4 +1,10 @@
 # Release Notes
+### 1.26.0 (23.08.2022)
+* added story bar animations with a/b test option
+* improved story bar scrolling performance with pagination
+* fixed story start bug for accessibility enabled cases
+* fixed [#213](https://github.com/Netvent/storyly-mobile/issues/213)
+
 ### 1.25.0 (03.08.2022)
 * IMPORTANT! changed StorylyInit constructors, check [StorylyInit API Reference](https://integration.storyly.io/api/ios/Classes/StorylyInit.html)
 

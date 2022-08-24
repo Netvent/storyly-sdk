@@ -26,6 +26,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
     private let ARGS_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
     private let ARGS_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
+    private let ARGS_STORY_ITEM_TEXT_TYPEFACE = "storyItemTextTypeface"
+    private let ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
     private let ARGS_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
     
     private lazy var storylyView: StorylyView = StorylyView(frame: self.frame)
@@ -121,13 +123,21 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             let isVisible = storyGroupTextStyling["isVisible"] as? Bool ?? true
             let fontSize = CGFloat(storyGroupTextStyling["textSize"] as? Int ?? 12)
             let lines = storyGroupTextStyling["lines"] as? Int ?? 2
+            let typeface = storyGroupTextStyling["typeface"] as? String
             let colorSeen = UIColor(hexString: storyGroupTextStyling["colorSeen"] as? String ?? "#FF000000")
-            let colorNotSeen = UIColor(hexString: storyGroupTextStyling["colorNotSeen"] as? String ?? "#FF000000") 
+            let colorNotSeen = UIColor(hexString: storyGroupTextStyling["colorNotSeen"] as? String ?? "#FF000000")
+
+            var font = UIFont.systemFont(ofSize: fontSize)
+            if let fontName = (typeface as? NSString)?.deletingPathExtension {
+                if let updateFont = UIFont(name: fontName, size: fontSize) {
+                    font = updateFont
+                }
+            }
             
             storylyView.storyGroupTextStyling = StoryGroupTextStyling(isVisible: isVisible,
                                                                       colorSeen: colorSeen,
                                                                       colorNotSeen: colorNotSeen,
-                                                                      font: .systemFont(ofSize: fontSize),
+                                                                      font: font,
                                                                       lines: lines)
         }
         
@@ -171,6 +181,20 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         if let storyItemTextColor = args[ARGS_STORY_ITEM_TEXT_COLOR] as? String {
             storylyView.storyItemTextColor = UIColor(hexString: storyItemTextColor)
+        }
+        
+        if let storyItemTextTypeface = args[ARGS_STORY_ITEM_TEXT_TYPEFACE] as? String {
+            let fontName = (storyItemTextTypeface as NSString).deletingPathExtension
+            if let updateFont = UIFont(name: fontName, size: 14) {
+                storylyView.storyItemTextFont = updateFont
+            }
+        }
+        
+        if let storyInteractiveTextTypeface = args[ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE] as? String {
+            let fontName = (storyInteractiveTextTypeface as NSString).deletingPathExtension
+            if let updateFont = UIFont(name: fontName, size: 14) {
+                storylyView.storyInteractiveFont = updateFont
+            }
         }
         
         if let storyItemProgressBarColor = args[ARGS_STORY_ITEM_PROGRESS_BAR_COLOR] as? [String] {
