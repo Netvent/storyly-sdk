@@ -359,6 +359,10 @@ class StorylyParam {
   /// text.
   int? storyGroupTextLines;
 
+  /// This attribute allows you to change font of story group
+  /// text.
+  String? storyGroupTextTypeface;
+
   /// This attribute allows you to change the text color of the seen story group.
   Color? storyGroupTextColorSeen;
 
@@ -411,6 +415,14 @@ class StorylyParam {
   /// the story view.
   List<Color>? storyItemProgressBarColor;
 
+  /// This attribute allows you to change the header text font of the
+  /// story view.
+  String? storyItemTextTypeface;
+
+  /// This attribute allows you to change the interactive component font of the
+  /// story view.
+  String? storyInteractiveTextTypeface;
+
   Map<String, dynamic> _toMap() {
     final paramsMap = <String, dynamic>{
       'storylyId': storylyId,
@@ -441,6 +453,7 @@ class StorylyParam {
       'isVisible': storyGroupTextIsVisible,
       'textSize': storyGroupTextSize,
       'lines': storyGroupTextLines,
+      'typeface': storyGroupTextTypeface,
       'colorSeen': storyGroupTextColorSeen?.toHexString(),
       'colorNotSeen': storyGroupTextColorNotSeen?.toHexString(),
     };
@@ -476,6 +489,10 @@ class StorylyParam {
 
     paramsMap['storyItemProgressBarColor'] =
         storyItemProgressBarColor?.map((color) => color.toHexString()).toList();
+
+    paramsMap['storyItemTextTypeface'] = storyItemTextTypeface;
+
+    paramsMap['storyInteractiveTextTypeface'] = storyInteractiveTextTypeface;
 
     return paramsMap;
   }
