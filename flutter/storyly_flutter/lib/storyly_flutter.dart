@@ -296,6 +296,9 @@ class StorylyParam {
   ///   size limit, your value will be set to null.
   String? storylyCustomParameters;
 
+  // This attribute is for user payload to use for Moments by Storyly
+  String? storylyPayload;
+
   /// This attribute defines whether it is a test device or not. If true,
   /// test groups are sent from the server.
   bool? storylyTestMode;
@@ -429,6 +432,7 @@ class StorylyParam {
       'storylySegments': storylySegments,
       'storylyUserProperty': storylyUserProperty,
       'storylyCustomParameters': storylyCustomParameters,
+      'storylyPayload': storylyPayload,
       'storylyShareUrl': storylyShareUrl,
       'storylyIsTestMode': storylyTestMode,
     };
@@ -677,6 +681,7 @@ class StoryGroup {
     required this.iconUrl,
     required this.stories,
   });
+
   /// id ID of the story group
   final String id;
 
