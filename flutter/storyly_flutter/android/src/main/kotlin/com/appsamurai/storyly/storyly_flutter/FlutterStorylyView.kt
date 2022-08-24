@@ -141,7 +141,7 @@ class FlutterStorylyView(
 
             (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }
 
-            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let { it ->
+            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let {
                 val isVisible = it["isVisible"] as? Boolean ?: true
                 val textSize = it["textSize"] as? Int
                 val lines = it["lines"] as? Int
