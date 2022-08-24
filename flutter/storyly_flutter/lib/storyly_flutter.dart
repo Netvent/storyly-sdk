@@ -681,6 +681,7 @@ class StoryGroup {
     required this.iconUrl,
     required this.stories,
   });
+
   /// id ID of the story group
   final String id;
 
