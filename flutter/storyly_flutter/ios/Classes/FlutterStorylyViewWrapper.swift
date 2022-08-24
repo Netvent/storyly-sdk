@@ -5,6 +5,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_ID = "storylyId"
     private let ARGS_STORYLY_SEGMENTS = "storylySegments"
     private let ARGS_STORYLY_USER_PROPERTY = "storylyUserProperty"
+    private let ARGS_STORYLY_PAYLOAD = "storylyPayload"
     private let ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
     private let ARGS_STORYLY_SHARE_URL = "storylyShareUrl"
     private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
@@ -69,9 +70,10 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         self.storylyView.storylyInit = StorylyInit(storylyId: storylyId,
                                                    segmentation: StorylySegmentation(segments: storylySegments),
                                                    customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String,
-                                                   isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false)
+                                                   isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false,
+                                                   storylyPayload: self.args[ARGS_STORYLY_PAYLOAD] as? String)
         if let userProperty = self.args[ARGS_STORYLY_USER_PROPERTY] as? [String: String] {
-            self.storylyView.storylyInit.setUserData(userProperty)
+            self.storylyView.storylyInit.userData = userProperty
         }
         if let shareUrl = self.args[ARGS_STORYLY_SHARE_URL] as? String {
             self.storylyView.storylyShareUrl = shareUrl

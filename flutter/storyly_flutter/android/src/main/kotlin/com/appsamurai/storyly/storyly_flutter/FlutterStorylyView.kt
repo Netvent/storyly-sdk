@@ -53,6 +53,7 @@ class FlutterStorylyView(
         private const val ARGS_STORYLY_ID = "storylyId"
         private const val ARGS_STORYLY_SEGMENTS = "storylySegments"
         private const val ARGS_STORYLY_USER_PROPERTY = "storylyUserProperty"
+        private const val ARGS_STORYLY_PAYLOAD = "storylyPayload"
         private const val ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
         private const val ARGS_STORYLY_SHARE_URL = "storylyShareUrl"
         private const val ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
@@ -82,16 +83,18 @@ class FlutterStorylyView(
             val storylyId = args[ARGS_STORYLY_ID] as? String
                 ?: throw Exception("StorylyId must be set.")
             val segments = args[ARGS_STORYLY_SEGMENTS] as? List<String>
-            val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
             val isTestMode = args[ARGS_STORYLY_IS_TEST_MODE] as? Boolean ?: false
+            val storylyPayload = args[ARGS_STORYLY_PAYLOAD] as? String
+            val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
             val userProperty = args[ARGS_STORYLY_USER_PROPERTY] as? Map<String, String> ?: null
             storylyInit = StorylyInit(
                 storylyId,
                 StorylySegmentation(segments = segments?.toSet()),
+                isTestMode = isTestMode,
+                storylyPayload = storylyPayload,
                 customParameter = customParameters,
-                isTestMode = isTestMode
             ).apply {
-                userProperty?.let { setUserData(userProperty) }
+                userProperty?.let { userData = it }
             }
             (args[ARGS_STORYLY_SHARE_URL] as? String)?.let { storylyShareUrl = it }
 
