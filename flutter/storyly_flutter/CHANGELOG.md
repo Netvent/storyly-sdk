@@ -1,3 +1,8 @@
+### 1.26.0 (24.08.2022)
+* added storyGroupTextTypeface, storyItemTextTypeface and storyInteractiveTextTypeface to support custom fonts
+* added storylyPayload for Storyly Moments usage
+* fixed [#210](https://github.com/Netvent/storyly-mobile/issues/210)
+
 ### 1.24.1 (30.07.2022)
 * IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
 * IMPORTANT! removed storyGroupTextColor field 
