@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { requireNativeComponent,
     UIManager,
     findNodeHandle,
-    ViewPropTypes,
     processColor} from 'react-native';
 import { string, arrayOf, func, number, bool, object } from 'prop-types';
 
@@ -154,7 +153,6 @@ class Storyly extends Component {
 }
 
 Storyly.propTypes = {
-    ...ViewPropTypes,
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
     storylyUserProperty: object,
