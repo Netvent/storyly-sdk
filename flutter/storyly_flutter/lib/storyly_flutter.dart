@@ -524,8 +524,13 @@ StoryComponent? getStorylyComponent(Map<String, dynamic>? json) {
       return StoryEmojiComponent.fromJson(json);
     case 'rating':
       return StoryRatingComponent.fromJson(json);
+    case 'promocode':
+      return StoryPromocodeComponent.fromJson(json);
+    case 'commment':
+      return StoryCommentComponent.fromJson(json);
+    default:
+      return StoryComponent.fromJson(json);
   }
-  return null;
 }
 
 /// This parent class represents the interactive components which users are interacted with.
@@ -533,15 +538,21 @@ class StoryComponent {
   /// type Type of the interactive component
   final String type;
 
-  StoryComponent(this.type);
+  /// id of the interactive component
+  final String id;
 
-  static dynamic fromJson(Map<String, dynamic> json) {}
+  StoryComponent(this.type, this.id);
+
+  factory StoryComponent.fromJson(Map<String, dynamic> json) {
+    return StoryComponent(json['type'], json['id']);
+  }
 }
 
 /// This data class represents the Quiz component.
 class StoryQuizComponent implements StoryComponent {
   StoryQuizComponent({
     required this.type,
+    required this.id,
     this.rightAnswerIndex,
     this.customPayload,
     required this.title,
@@ -551,6 +562,9 @@ class StoryQuizComponent implements StoryComponent {
 
   @override
   final String type;
+
+  @override
+  final String id;
 
   /// rightAnswerIndex Index of the right answer if exists
   final int? rightAnswerIndex;
@@ -570,6 +584,7 @@ class StoryQuizComponent implements StoryComponent {
   factory StoryQuizComponent.fromJson(Map<String, dynamic> json) {
     return StoryQuizComponent(
       type: json['type'],
+      id: json['id'],
       rightAnswerIndex: json['rightAnswerIndex'],
       customPayload: json['customPayload'],
       title: json['title'],
@@ -583,6 +598,7 @@ class StoryQuizComponent implements StoryComponent {
 class StoryPollComponent implements StoryComponent {
   StoryPollComponent({
     required this.type,
+    required this.id,
     required this.options,
     this.customPayload,
     required this.selectedOptionIndex,
@@ -591,6 +607,9 @@ class StoryPollComponent implements StoryComponent {
 
   @override
   final String type;
+
+  @override
+  final String id;
 
   /// options List of options in the poll
   final List<String> options;
@@ -607,6 +626,7 @@ class StoryPollComponent implements StoryComponent {
   factory StoryPollComponent.fromJson(Map<String, dynamic> json) {
     return StoryPollComponent(
       type: json['type'],
+      id: json['id'],
       options: List<String>.from(json['options'].map((x) => x)),
       customPayload: json['customPayload'],
       selectedOptionIndex: json['selectedOptionIndex'],
@@ -619,6 +639,7 @@ class StoryPollComponent implements StoryComponent {
 class StoryEmojiComponent implements StoryComponent {
   StoryEmojiComponent({
     required this.type,
+    required this.id,
     this.customPayload,
     required this.selectedEmojiIndex,
     required this.emojiCodes,
@@ -626,6 +647,9 @@ class StoryEmojiComponent implements StoryComponent {
 
   @override
   final String type;
+
+  @override
+  final String id;
 
   /// customPayload Custom payload for this emoji if exists
   final String? customPayload;
@@ -639,6 +663,7 @@ class StoryEmojiComponent implements StoryComponent {
   factory StoryEmojiComponent.fromJson(Map<String, dynamic> json) {
     return StoryEmojiComponent(
       type: json['type'],
+      id: json['id'],
       customPayload: json['customPayload'],
       selectedEmojiIndex: json['selectedEmojiIndex'],
       emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)),
@@ -650,6 +675,7 @@ class StoryEmojiComponent implements StoryComponent {
 class StoryRatingComponent implements StoryComponent {
   StoryRatingComponent({
     required this.type,
+    required this.id,
     this.customPayload,
     required this.rating,
     required this.emojiCode,
@@ -657,6 +683,9 @@ class StoryRatingComponent implements StoryComponent {
 
   @override
   final String type;
+
+  @override
+  final String id;
 
   /// customPayload Custom payload for this rating if exists
   final String? customPayload;
@@ -670,6 +699,7 @@ class StoryRatingComponent implements StoryComponent {
   factory StoryRatingComponent.fromJson(Map<String, dynamic> json) {
     return StoryRatingComponent(
       type: json['type'],
+      id: json['id'],
       customPayload: json['customPayload'],
       rating: json['rating'],
       emojiCode: json['emojiCode'],
@@ -677,9 +707,63 @@ class StoryRatingComponent implements StoryComponent {
   }
 }
 
+/// This data class represents the Promocode component.
+class StoryPromocodeComponent implements StoryComponent {
+  StoryPromocodeComponent({
+    required this.type,
+    required this.id,
+    required this.text,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  /// copied value from user in Promocode component
+  final String text;
+
+  factory StoryPromocodeComponent.fromJson(Map<String, dynamic> json) {
+    return StoryPromocodeComponent(
+      type: json['type'],
+      id: json['id'],
+      text: json['text'],
+    );
+  }
+}
+
+
+/// This data class represents the Comment component.
+class StoryCommentComponent implements StoryComponent {
+  StoryCommentComponent({
+    required this.type,
+    required this.id,
+    required this.text,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  /// user sent value in Comment component
+  final String text;
+
+  factory StoryCommentComponent.fromJson(Map<String, dynamic> json) {
+    return StoryCommentComponent(
+      type: json['type'],
+      id: json['id'],
+      text: json['text'],
+    );
+  }
+}
+
 List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
   return List<StoryGroup>.from(json.map((x) => StoryGroup.fromJson(x)));
 }
+
 
 /// This data class represents a story group in the StorylyView.
 class StoryGroup {
@@ -771,20 +855,32 @@ class Story {
 /// This data class represents the media of a story.
 class Media {
   Media({
-    this.actionUrl,
     required this.type,
+    this.storyComponentList,
+    this.actionUrlList,
+    this.actionUrl,
+    this.previewUrl,
   });
-
-  /// URL which the user has just interacted with
-  final String? actionUrl;
 
   /// Type of the story
   final int type;
 
+  final List<StoryComponent?>? storyComponentList;
+
+  final List<String>? actionUrlList;
+
+  /// URL which the user has just interacted with
+  final String? actionUrl;
+
+  final String? previewUrl;
+
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
-      actionUrl: json['actionUrl'],
       type: json['type'],
+      storyComponentList: List<StoryComponent?>.from(json['storyComponentList'].map((e) => getStorylyComponent(e))),
+      actionUrlList:  List<String>.from(json['actionUrlList'].map((e) => e as String)),
+      actionUrl: json['actionUrl'],
+      previewUrl: json['previewUrl'],
     );
   }
 }
