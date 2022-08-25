@@ -1,4 +1,7 @@
 # Release Notes
+### 1.26.1 (25.08.2022)
+* improved react-native@0.69 support
+
 ### 1.26.0 (24.08.2022)
 * added StoryComponent implementations
 * added storyGroupTextTypeface, storyItemTextTypeface and storyInteractiveTextTypeface to support custom fonts
