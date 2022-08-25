@@ -145,6 +145,10 @@
 }
 
 -(NSDictionary *)createStoryMap:(Story * _Nonnull)story {
+    NSMutableArray* componentList = [NSMutableArray new];
+    for (StoryComponent *component in story.media.storyComponentList) {
+        [componentList addObject:[self createStoryComponentMap: component]];
+    }
     return @{
         @"id": story.uniqueId,
         @"index": @(story.index),
@@ -153,8 +157,11 @@
         @"seen": @(story.seen),
         @"currentTime": @(story.currentTime),
         @"media": @{
-                @"type": @(story.media.type),
-                @"actionUrl": story.media.actionUrl == nil ? [NSNull null] : story.media.actionUrl
+            @"type": @(story.media.type),
+            @"storyComponentList": componentList,
+            @"actionUrl": story.media.actionUrl == nil ? [NSNull null] : story.media.actionUrl,
+            @"previewUrl": story.media.previewUrl == nil ? [NSNull null] : story.media.previewUrl,
+            @"actionUrlList": story.media.actionUrlList == nil ? [NSNull null] : story.media.actionUrlList
         }};
 }
 

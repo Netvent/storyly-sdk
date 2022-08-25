@@ -132,9 +132,11 @@ declare module "storyly-react-native" {
       seen: boolean;
       currentTime: number;
       media: {
-        url: string;
         type: number;
-        actionUrl: string | null;
+        storyComponentList?: StoryComponent[];
+        actionUrl?: string;
+        actionUrlList?: string[];
+        previewUrl?: string;
       };
     }
 
