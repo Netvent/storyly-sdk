@@ -3,9 +3,11 @@ package com.appsamurai.storyly.storyly_flutter
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.TypedValue
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.styling.StoryGroupIconStyling
@@ -141,7 +143,7 @@ class FlutterStorylyView(
 
             (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }
 
-            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let {
+            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let { it ->
                 val isVisible = it["isVisible"] as? Boolean ?: true
                 val textSize = it["textSize"] as? Int
                 val lines = it["lines"] as? Int
@@ -166,10 +168,16 @@ class FlutterStorylyView(
             }
 
             (args[ARGS_STORY_HEADER_STYLING] as? Map<String, *>)?.let {
-                val isTextVisible = it["isTextVisible"] as? Boolean ?: return@let
-                val isIconVisible = it["isIconVisible"] as? Boolean ?: return@let
-                val isCloseButtonVisible = it["isCloseButtonVisible"] as? Boolean ?: return@let
-                setStoryHeaderStyling(StoryHeaderStyling(isTextVisible, isIconVisible, isCloseButtonVisible))
+                val isTextVisible = it["isTextVisible"] as? Boolean ?: true
+                val isIconVisible = it["isIconVisible"] as? Boolean ?: true
+                val isCloseButtonVisible = it["isCloseButtonVisible"] as? Boolean ?: true
+                val shareIcon = it["shareIcon"] as? String
+                val closeIcon = it["closeIcon"] as? String
+
+                val shareIconDrawable = shareIcon?.let { icon -> getDrawable(context.applicationContext, icon) }
+                val closeIconDrawable = closeIcon?.let { icon -> getDrawable(context.applicationContext, icon) }
+
+                setStoryHeaderStyling(StoryHeaderStyling(isTextVisible, isIconVisible, isCloseButtonVisible, closeIconDrawable, shareIconDrawable))
             }
 
             (args[ARGS_STORYLY_LAYOUT_DIRECTION] as? String)?.let {
@@ -325,5 +333,10 @@ class FlutterStorylyView(
             }
         }
         return mapOf("type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH))
+    }
+
+    private fun getDrawable(context: Context, name: String): Drawable? {
+        val id = context.resources.getIdentifier(name, "drawable", context.packageName)
+        return ContextCompat.getDrawable(context, id)
     }
 }

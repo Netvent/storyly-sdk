@@ -141,14 +141,25 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                                                                       lines: lines)
         }
         
-        if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
-            if let isTextVisible = storyHeaderStyling["isTextVisible"] as? Bool,
-               let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool,
-               let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool {
-                storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
-                                                                    isIconVisible: isIconVisible,
-                                                                    isCloseButtonVisible: isCloseButtonVisible)
+      if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
+            let isTextVisible = storyHeaderStyling["isTextVisible"] as? Bool ?? true
+            let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool ?? true
+            let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool ?? true
+                
+            var closeIconImage: UIImage? = nil
+            if let closeIcon = storyHeaderStyling["closeIcon"] as? String {
+                 closeIconImage = UIImage(named: closeIcon)
             }
+            var shareIconImage: UIImage? = nil
+            if let shareIcon = storyHeaderStyling["shareIcon"] as? String {
+                shareIconImage = UIImage(named: shareIcon)
+            }
+                
+            storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
+                                                                isIconVisible: isIconVisible,
+                                                                isCloseButtonVisible: isCloseButtonVisible,
+                                                                closeButtonIcon: closeIconImage,
+                                                                shareButtonIcon: shareIconImage)
         }
 
         if let storylyLayoutDirection = args[self.ARGS_STORYLY_LAYOUT_DIRECTION] as? String {

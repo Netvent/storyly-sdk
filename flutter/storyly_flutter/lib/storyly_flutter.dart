@@ -384,6 +384,14 @@ class StorylyParam {
   /// header close button.
   bool? storyHeaderCloseButtonIsVisible;
 
+  /// This attribute allows you to use custom icon for 
+  /// header close button.
+  String? storyHeaderCloseIcon;
+
+  /// This attribute allows you to use custom icon for 
+  /// header share button.
+  String? storyHeaderShareIcon;
+
   /// This attribute allows you to change the layout direction
   /// the story view.
   String? storylyLayoutDirection;
@@ -465,7 +473,9 @@ class StorylyParam {
     paramsMap['storyHeaderStyling'] = {
       'isTextVisible': storyHeaderTextIsVisible,
       'isIconVisible': storyHeaderIconIsVisible,
-      'isCloseButtonVisible': storyHeaderCloseButtonIsVisible
+      'isCloseButtonVisible': storyHeaderCloseButtonIsVisible,
+      'closeIcon': storyHeaderCloseIcon,
+      'shareIcon': storyHeaderShareIcon,
     };
 
     paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
