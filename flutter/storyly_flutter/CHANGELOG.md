@@ -1,3 +1,6 @@
+### 1.26.1 (25.08.2022)
+* added storyHeaderCloseIcon and storyHeaderShareIcon to support customazible icons
+
 ### 1.26.0 (24.08.2022)
 * added storyGroupTextTypeface, storyItemTextTypeface and storyInteractiveTextTypeface to support custom fonts
 * added storylyPayload for Storyly Moments usage
