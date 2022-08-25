@@ -281,6 +281,7 @@ extension FlutterStorylyViewWrapper {
         switch storyComponent {
             case let quizComponent as StoryQuizComponent:
                 return ["type": "quiz",
+                        "id": quizComponent.id,
                         "title": quizComponent.title,
                         "options": quizComponent.options,
                         "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
@@ -288,22 +289,35 @@ extension FlutterStorylyViewWrapper {
                         "customPayload": quizComponent.customPayload]
             case let pollComponent as StoryPollComponent:
                 return ["type": "poll",
+                        "id": pollComponent.id,
                         "title": pollComponent.title,
                         "options": pollComponent.options,
                         "selectedOptionIndex": pollComponent.selectedOptionIndex,
                         "customPayload": pollComponent.customPayload]
             case let emojiComponent as StoryEmojiComponent:
                 return ["type": "emoji",
+                        "id": emojiComponent.id,
                         "emojiCodes": emojiComponent.emojiCodes,
                         "selectedEmojiIndex": emojiComponent.selectedEmojiIndex,
                         "customPayload": emojiComponent.customPayload]
             case let ratingComponent as StoryRatingComponent:
                 return ["type": "rating",
+                        "id": ratingComponent.id,
                         "emojiCode": ratingComponent.emojiCode,
                         "rating": ratingComponent.rating,
                         "customPayload": ratingComponent.customPayload]
+            case let promoCodeComponent as StoryPromoCodeComponent:
+                return ["type": "promocode",
+                        "id": promoCodeComponent.id,
+                        "text": promoCodeComponent.text]
+            case let commentComponent as StoryCommentComponent:
+                return ["type": "promocode",
+                        "id": commentComponent.id,
+                        "text": commentComponent.text]
             default:
-                return ["type": "undefined"]
+                return ["type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+                        "id": storyComponent.id]
+
         }
     }
 }

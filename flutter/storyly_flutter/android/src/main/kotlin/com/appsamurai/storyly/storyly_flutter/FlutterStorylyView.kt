@@ -291,6 +291,7 @@ class FlutterStorylyView(
             is StoryQuizComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "rightAnswerIndex" to storyComponent.rightAnswerIndex,
@@ -301,6 +302,7 @@ class FlutterStorylyView(
             is StoryPollComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "selectedOptionIndex" to storyComponent.selectedOptionIndex,
@@ -310,6 +312,7 @@ class FlutterStorylyView(
             is StoryEmojiComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "emojiCodes" to storyComponent.emojiCodes,
                     "selectedEmojiIndex" to storyComponent.selectedEmojiIndex,
                     "customPayload" to storyComponent.customPayload
@@ -318,12 +321,32 @@ class FlutterStorylyView(
             is StoryRatingComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "emojiCode" to storyComponent.emojiCode,
                     "rating" to storyComponent.rating,
                     "customPayload" to storyComponent.customPayload
                 )
             }
+            is StoryPromoCodeComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "text" to storyComponent.text
+                )
+            }
+            is StoryCommentComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "text" to storyComponent.text
+                )
+            }
+            else -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                )
+            }
         }
-        return mapOf("type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH))
     }
 }
