@@ -274,6 +274,7 @@ extension FlutterStorylyViewWrapper {
                 "seen": story.seen,
                 "currentTime": story.currentTime,
                 "media": ["type": story.media.type.rawValue,
+                          "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
                           "actionUrl": story.media.actionUrl]]
     }
     

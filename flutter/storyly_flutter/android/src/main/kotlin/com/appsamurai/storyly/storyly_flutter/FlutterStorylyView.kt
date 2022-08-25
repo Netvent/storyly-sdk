@@ -277,10 +277,13 @@ class FlutterStorylyView(
             "index" to story.index,
             "seen" to story.seen,
             "currentTime" to story.currentTime,
-            "media" to with(story.media) {
+            "media" to story.media.let {
                 mapOf(
-                    "type" to this.type.ordinal,
-                    "actionUrl" to this.actionUrl
+                    "type" to it.type.ordinal,
+                    "actionUrlList" to it.actionUrlList,
+                    "actionUrl" to it.actionUrl,
+                    "previewUrl" to it.previewUrl,
+                    "storyComponentList" to it.storyComponentList?.map { component -> createStoryComponentMap(component) }
                 )
             }
         )

@@ -845,20 +845,32 @@ class Story {
 /// This data class represents the media of a story.
 class Media {
   Media({
-    this.actionUrl,
     required this.type,
+    this.storyComponentList,
+    this.actionUrlList,
+    this.actionUrl,
+    this.previewUrl,
   });
-
-  /// URL which the user has just interacted with
-  final String? actionUrl;
 
   /// Type of the story
   final int type;
 
+  final List<StoryComponent?>? storyComponentList;
+
+  final List<String>? actionUrlList;
+
+  /// URL which the user has just interacted with
+  final String? actionUrl;
+
+  final String? previewUrl;
+
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
-      actionUrl: json['actionUrl'],
       type: json['type'],
+      storyComponentList: List<StoryComponent?>.from(json['storyComponentList'].map((e) => getStorylyComponent(e))),
+      actionUrlList:  List<String>.from(json['actionUrlList'].map((e) => e as String)),
+      actionUrl: json['actionUrl'],
+      previewUrl: json['previewUrl'],
     );
   }
 }
