@@ -1,4 +1,8 @@
 # Release Notes
+### 1.26.1 (06.09.2022)
+* fixed a crash during initialization with userPayload
+* improved accessibility features with talkback feature
+
 ### 1.26.0 (23.08.2022)
 * added story bar animations with a/b test option
 * improved story bar scrolling performance with pagination
