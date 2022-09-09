@@ -588,7 +588,7 @@ class StoryQuizComponent implements StoryComponent {
       rightAnswerIndex: json['rightAnswerIndex'],
       customPayload: json['customPayload'],
       title: json['title'],
-      options: List<String>.from(json['options']?.map((x) => x)),
+      options: json['options'] != null ? List<String>.from(json['options'].map((x) => x)) : null,
       selectedOptionIndex: json['selectedOptionIndex'],
     );
   }
@@ -627,7 +627,7 @@ class StoryPollComponent implements StoryComponent {
     return StoryPollComponent(
       type: json['type'],
       id: json['id'],
-      options: List<String?>.from(json['options']?.map((x) => x)),
+      options: json['options'] != null ?List<String?>.from(json['options'].map((x) => x)) : null,
       customPayload: json['customPayload'],
       selectedOptionIndex: json['selectedOptionIndex'],
       title: json['title'],
@@ -666,7 +666,7 @@ class StoryEmojiComponent implements StoryComponent {
       id: json['id'],
       customPayload: json['customPayload'],
       selectedEmojiIndex: json['selectedEmojiIndex'],
-      emojiCodes: List<String>.from(json['emojiCodes']?.map((x) => x)),
+      emojiCodes: json['emojiCodes'] != null ? List<String>.from(json['emojiCodes'].map((x) => x)) : null,
     );
   }
 }
@@ -800,7 +800,7 @@ class StoryGroup {
       title: json['title'],
       index: json['index'],
       iconUrl: json['iconUrl'],
-      stories: List<Story>.from(json['stories']?.map((x) => Story.fromJson(x))),
+      stories:json['stories'] != null ? List<Story>.from(json['stories'].map((x) => Story.fromJson(x))) : null,
       id: json['id'],
     );
   }
@@ -877,8 +877,8 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       type: json['type'],
-      storyComponentList:json['storyComponentList'] != null ? List<StoryComponent?>.from(json['storyComponentList']?.map((e) => getStorylyComponent(e))) : null,
-      actionUrlList:  json['actionUrlList'] != null ? List<String?>.from(json['actionUrlList']?.map((e) => e as String)) : null,
+      storyComponentList: json['storyComponentList'] != null ? List<StoryComponent?>.from(json['storyComponentList'].map((e) => getStorylyComponent(e))) : null,
+      actionUrlList:  json['actionUrlList'] != null ? List<String?>.from(json['actionUrlList'].map((e) => e as String)) : null,
       actionUrl: json['actionUrl'],
       previewUrl: json['previewUrl'],
     );
