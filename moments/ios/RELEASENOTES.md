@@ -1,4 +1,7 @@
 # Release Notes
+### 0.0.8 (12.09.2022)
+* added MomentsUserPayload to handle encrytion of user payload in mobile side
+
 ### 0.0.7 (16.08.2022)
 * IMPORTANT! removed momentsDelegate field from MomentsManager constructor
 * IMPORTANT! added momentsDelegete field to MomentsManager
