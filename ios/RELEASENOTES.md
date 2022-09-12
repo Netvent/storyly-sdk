@@ -1,4 +1,8 @@
 # Release Notes
+### 1.26.2 (12.09.2022)
+* fixed iVOD story group not showing issue
+* fixed crash on story opens in devices with iOS13-
+
 ### 1.26.0 (23.08.2022)
 * added story bar animations with a/b test option
 * improved story bar scrolling performance with pagination
