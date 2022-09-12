@@ -1,4 +1,8 @@
 # Release Notes
+### 1.26.2 (12.09.2022)
+* fixed iVOD story group not showing issue
+* fixed duplicate moments story group issue
+
 ### 1.26.1 (06.09.2022)
 * fixed a crash during initialization with userPayload
 * improved accessibility features with talkback feature
