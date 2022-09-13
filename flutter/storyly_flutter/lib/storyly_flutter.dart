@@ -865,7 +865,7 @@ class Media {
   /// Type of the story
   final int type;
 
-  final List<StoryComponent>? storyComponentList;
+  final List<StoryComponent?>? storyComponentList;
 
   final List<String>? actionUrlList;
 
@@ -877,7 +877,7 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       type: json['type'],
-      storyComponentList: json['storyComponentList'] != null ? List<StoryComponent>.from(json['storyComponentList'].map((e) => getStorylyComponent(e))) : null,
+      storyComponentList: json['storyComponentList'] != null ? List<StoryComponent?>.from(json['storyComponentList'].map((e) => getStorylyComponent(e))) : null,
       actionUrlList:  json['actionUrlList'] != null ? List<String>.from(json['actionUrlList'].map((e) => e as String)) : null,
       actionUrl: json['actionUrl'],
       previewUrl: json['previewUrl'],
