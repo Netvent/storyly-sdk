@@ -42,6 +42,8 @@ typedef StorylyViewUserInteractedCallback = void Function(
   StoryComponent? storyComponent,
 );
 
+T? castOrNull<T>(x) => x is T ? x : null;
+
 /// Storyly UI Widget
 class StorylyView extends StatefulWidget {
   /// This callback function allows you to access `StorylyViewController`
@@ -877,8 +879,8 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       type: json['type'],
-      storyComponentList: json['storyComponentList'] != null ? List<StoryComponent?>.from(json['storyComponentList'].map((e) => getStorylyComponent(e))) : null,
-      actionUrlList:  json['actionUrlList'] != null ? List<String>.from(json['actionUrlList'].map((e) => e as String)) : null,
+      storyComponentList: castOrNull(json['storyComponentList']?.map((e) => getStorylyComponent(e)).toList()),
+      actionUrlList: castOrNull(json['actionUrlList']?.map((e) => e as String?).toList()),
       actionUrl: json['actionUrl'],
       previewUrl: json['previewUrl'],
     );
