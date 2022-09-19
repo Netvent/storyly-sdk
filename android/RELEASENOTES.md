@@ -1,4 +1,9 @@
 # Release Notes
+### 1.26.3 (19.09.2022)
+* fixed duplicate moment view issue
+* fixed swipe up size calculation for some devices
+* fixed comment interactive layer rendering
+
 ### 1.26.2 (12.09.2022)
 * fixed iVOD story group not showing issue
 * fixed duplicate moments story group issue
