@@ -1,4 +1,8 @@
 # Release Notes
+### 1.27.0 (19.09.2022)
+* added link cta interactive component
+* added share screenshot of personalized story groups
+
 ### 1.26.2 (12.09.2022)
 * fixed iVOD story group not showing issue
 * fixed crash on story opens in devices with iOS13-
