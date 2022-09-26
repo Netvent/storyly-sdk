@@ -82,6 +82,9 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         }
         self.storylyView.delegate = self
         self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        while self.storylyView.rootViewController?.presentedViewController != nil {
+            self.storylyView.rootViewController = viewController?.presentedViewController
+        }
         self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
         self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
