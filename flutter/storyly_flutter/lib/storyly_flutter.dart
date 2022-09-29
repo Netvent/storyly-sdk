@@ -879,8 +879,8 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       type: json['type'],
-      storyComponentList: castOrNull(json['storyComponentList']?.map((e) => getStorylyComponent(e)).toList()),
-      actionUrlList: castOrNull(json['actionUrlList']?.map((e) => e as String?).toList()),
+      storyComponentList: castOrNull(json['storyComponentList']?.map<StoryComponent?>((e) => getStorylyComponent(e)).toList()),
+      actionUrlList: castOrNull(json['actionUrlList']?.map<String?>((e) => e as String?).toList()),
       actionUrl: json['actionUrl'],
       previewUrl: json['previewUrl'],
     );
