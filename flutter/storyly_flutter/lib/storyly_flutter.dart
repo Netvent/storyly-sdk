@@ -42,6 +42,8 @@ typedef StorylyViewUserInteractedCallback = void Function(
   StoryComponent? storyComponent,
 );
 
+T? castOrNull<T>(x) => x is T ? x : null;
+
 /// Storyly UI Widget
 class StorylyView extends StatefulWidget {
   /// This callback function allows you to access `StorylyViewController`
@@ -588,7 +590,7 @@ class StoryQuizComponent implements StoryComponent {
       rightAnswerIndex: json['rightAnswerIndex'],
       customPayload: json['customPayload'],
       title: json['title'],
-      options: List<String>.from(json['options'].map((x) => x)),
+      options:  List<String>.from(json['options'].map((x) => x)) ,
       selectedOptionIndex: json['selectedOptionIndex'],
     );
   }
@@ -627,7 +629,7 @@ class StoryPollComponent implements StoryComponent {
     return StoryPollComponent(
       type: json['type'],
       id: json['id'],
-      options: List<String>.from(json['options'].map((x) => x)),
+      options:  List<String>.from(json['options'].map((x) => x)) ,
       customPayload: json['customPayload'],
       selectedOptionIndex: json['selectedOptionIndex'],
       title: json['title'],
@@ -666,7 +668,7 @@ class StoryEmojiComponent implements StoryComponent {
       id: json['id'],
       customPayload: json['customPayload'],
       selectedEmojiIndex: json['selectedEmojiIndex'],
-      emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)),
+      emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)) ,
     );
   }
 }
@@ -800,7 +802,7 @@ class StoryGroup {
       title: json['title'],
       index: json['index'],
       iconUrl: json['iconUrl'],
-      stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
+      stories:List<Story>.from(json['stories'].map((x) => Story.fromJson(x))) ,
       id: json['id'],
     );
   }
@@ -877,8 +879,8 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       type: json['type'],
-      storyComponentList: List<StoryComponent?>.from(json['storyComponentList'].map((e) => getStorylyComponent(e))),
-      actionUrlList:  List<String>.from(json['actionUrlList'].map((e) => e as String)),
+      storyComponentList: castOrNull(json['storyComponentList']?.map<StoryComponent?>((e) => getStorylyComponent(e)).toList()),
+      actionUrlList: castOrNull(json['actionUrlList']?.map<String?>((e) => e as String?).toList()),
       actionUrl: json['actionUrl'],
       previewUrl: json['previewUrl'],
     );
