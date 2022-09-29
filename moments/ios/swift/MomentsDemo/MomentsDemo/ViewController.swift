@@ -11,22 +11,37 @@ import StorylyMoments
 
 let STORYLY_INSTANCE_TOKEN = ""
 let MOMENTS_INSTANCE_TOKEN = ""
-let ENCRYPTED_USER_PAYLOAD = ""
+let MOMENTS_INSTANCE_SECRET_KEY = ""
+let MOMENTS_INSTANCE_INITIALIZATION_VECTOR = ""
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let userId: String = ""
+        let username: String = ""
+        let avatarURL: String = ""
+        let followings: [String] = ["", ""]
+        let creatorTags: [String]? = nil
+        let consumerTags: [String]? = nil
+        // Give the expiration time given in seconds that you want to expire this payload at that time
+        let expirationTime: Int64 = Int64.max
+        
+        // This is just a sample for how to use helper method to create encrypted user payload
+        // Create this structure with your own user information
+        let momentsUserPayload = MomentsUserPayload(id: userId, username: username, avatarUrl: avatarURL, followings: followings, creatorTags: creatorTags, consumerTags: consumerTags, expirationTime: expirationTime)
+        let encryptedPayload = momentsUserPayload.encryptUserPayload(secretKey: MOMENTS_INSTANCE_SECRET_KEY, initializationVector: MOMENTS_INSTANCE_INITIALIZATION_VECTOR)
+        
         // Do any additional setup after loading the view.
         let storylyView = StorylyView()
         storylyView.translatesAutoresizingMaskIntoConstraints = false
-        storylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN, storylyPayload: ENCRYPTED_USER_PAYLOAD)
+        storylyView.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN, storylyPayload: encryptedPayload)
         storylyView.rootViewController = self
         storylyView.delegate = self
         storylyView.momentsDelegate = self
         
-        let storylyMoments = StorylyMomentsManager(config: Config(momentsToken: MOMENTS_INSTANCE_TOKEN, userPayload: ENCRYPTED_USER_PAYLOAD))
+        let storylyMoments = StorylyMomentsManager(config: Config(momentsToken: MOMENTS_INSTANCE_TOKEN, userPayload: encryptedPayload ?? ""))
         storylyMoments.rootViewController = self
         storylyMoments.momentsDelegate = self
         
