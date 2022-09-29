@@ -386,11 +386,11 @@ class StorylyParam {
   /// header close button.
   bool? storyHeaderCloseButtonIsVisible;
 
-  /// This attribute allows you to use custom icon for 
+  /// This attribute allows you to use custom icon for
   /// header close button.
   String? storyHeaderCloseIcon;
 
-  /// This attribute allows you to use custom icon for 
+  /// This attribute allows you to use custom icon for
   /// header share button.
   String? storyHeaderShareIcon;
 
@@ -590,7 +590,7 @@ class StoryQuizComponent implements StoryComponent {
       rightAnswerIndex: json['rightAnswerIndex'],
       customPayload: json['customPayload'],
       title: json['title'],
-      options:  List<String>.from(json['options'].map((x) => x)) ,
+      options: List<String>.from(json['options'].map((x) => x)),
       selectedOptionIndex: json['selectedOptionIndex'],
     );
   }
@@ -629,7 +629,7 @@ class StoryPollComponent implements StoryComponent {
     return StoryPollComponent(
       type: json['type'],
       id: json['id'],
-      options:  List<String>.from(json['options'].map((x) => x)) ,
+      options: List<String>.from(json['options'].map((x) => x)),
       customPayload: json['customPayload'],
       selectedOptionIndex: json['selectedOptionIndex'],
       title: json['title'],
@@ -668,7 +668,7 @@ class StoryEmojiComponent implements StoryComponent {
       id: json['id'],
       customPayload: json['customPayload'],
       selectedEmojiIndex: json['selectedEmojiIndex'],
-      emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)) ,
+      emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)),
     );
   }
 }
@@ -735,7 +735,6 @@ class StoryPromocodeComponent implements StoryComponent {
   }
 }
 
-
 /// This data class represents the Comment component.
 class StoryCommentComponent implements StoryComponent {
   StoryCommentComponent({
@@ -765,7 +764,6 @@ class StoryCommentComponent implements StoryComponent {
 List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
   return List<StoryGroup>.from(json.map((x) => StoryGroup.fromJson(x)));
 }
-
 
 /// This data class represents a story group in the StorylyView.
 class StoryGroup {
@@ -802,7 +800,7 @@ class StoryGroup {
       title: json['title'],
       index: json['index'],
       iconUrl: json['iconUrl'],
-      stories:List<Story>.from(json['stories'].map((x) => Story.fromJson(x))) ,
+      stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
     );
   }
@@ -879,8 +877,11 @@ class Media {
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
       type: json['type'],
-      storyComponentList: castOrNull(json['storyComponentList']?.map<StoryComponent?>((e) => getStorylyComponent(e)).toList()),
-      actionUrlList: castOrNull(json['actionUrlList']?.map<String?>((e) => e as String?).toList()),
+      storyComponentList: castOrNull(json['storyComponentList']
+          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
+          .toList()),
+      actionUrlList: castOrNull(
+          json['actionUrlList']?.map<String?>((e) => e as String?).toList()),
       actionUrl: json['actionUrl'],
       previewUrl: json['previewUrl'],
     );

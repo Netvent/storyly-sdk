@@ -1,3 +1,6 @@
+### 1.26.2 (29.09.2022)
+* improved Flutter 3+ support with nullability checks
+
 ### 1.26.1 (25.08.2022)
 * added storyHeaderCloseIcon and storyHeaderShareIcon to support customazible icons
 
