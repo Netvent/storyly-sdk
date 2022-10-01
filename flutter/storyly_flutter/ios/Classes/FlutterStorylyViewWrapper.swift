@@ -323,7 +323,7 @@ extension FlutterStorylyViewWrapper {
                         "id": promoCodeComponent.id,
                         "text": promoCodeComponent.text]
             case let commentComponent as StoryCommentComponent:
-                return ["type": "promocode",
+                return ["type": "comment",
                         "id": commentComponent.id,
                         "text": commentComponent.text]
             default:
