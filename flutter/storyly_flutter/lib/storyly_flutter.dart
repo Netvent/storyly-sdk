@@ -775,8 +775,8 @@ class StoryGroup {
     required this.seen,
     required this.iconUrl,
     required this.stories,
-    this.pinned,
-    this.type,
+    required this.pinned,
+    required this.type,
     this.groupTheme,
     this.thematicIconUrls,
     this.coverUrl,
@@ -806,9 +806,9 @@ class StoryGroup {
 
   final String? coverUrl;
 
-  final bool? pinned;
+  final bool pinned;
 
-  final int? type;
+  final int type;
 
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
     return StoryGroup(
@@ -819,7 +819,7 @@ class StoryGroup {
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
       groupTheme: json['grupTheme'],
-      thematicIconUrls: json['thematicIconUrls'],
+      thematicIconUrls: json[' thematicIconUrls'],
       coverUrl: json['coverUrl'],
       pinned: json['pinned'],
       type: json['type'],

@@ -274,7 +274,12 @@ extension FlutterStorylyViewWrapper {
                 "index": storyGroup.index,
                 "seen": storyGroup.seen,
                 "iconUrl": storyGroup.iconUrl.absoluteString,
-                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)}]
+                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
+                "groupTheme": storyGroup.groupTheme,
+                "thematicIconUrls": storyGroup.thematicIconUrls,
+                "coverUrl": storyGroup.coverUrl,
+                "pinned": storyGroup.pinned,
+                "type": storyGroup.type.rawValue]
     }
     
     private func createStoryMap(story: Story) -> [String: Any?] {
