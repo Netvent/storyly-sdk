@@ -1,8 +1,11 @@
 # Release Notes
+### 0.1.1 (04.10.2022)
+* fixed endpoints to support link cta interactive component 
+
 ### 0.1.0 (19.09.2022)
-- added video media support for create story for both gallery and camera
-- added text interactive component
-- added link cta interactive component
+* added video media support for create story for both gallery and camera
+* added text interactive component
+* added link cta interactive component
 
 ### 0.0.8 (12.09.2022)
 * added MomentsUserPayload to handle encrytion of user payload in mobile side
