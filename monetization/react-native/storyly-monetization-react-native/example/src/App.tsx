@@ -10,28 +10,11 @@ export default function App() {
   
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.box}>
-        <Button 
-          onPress={() => 
-            StorylyMonetization.initialize(
-              [MOMENTS_TOKEN], 
-              [MOMENTS_USER_PAYLOAD]
-            )
-          }
-          title="Initialize Monetization"
-          color="#242450"
-        />
-      </View>
-      <View style={styles.box}>
-        <Button 
-          onPress={() => StorylyMonetization.openUserStories() }
-          title="Show User Stories"
-          color="#00E0E4"
-        />
-      </View>
-      */}
        <Storyly
-          ref={ref => { storyly = ref }}
+          ref={ref => {
+            storyly = ref
+            if (ref) { setStorylyAdViewProvider(ref, "ca-app-pub-3940256099942544/2247696110") }
+          }}
           style={{ width: '100%', height: 120, marginTop: 44 }}
           storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE0Mjd9.cGTn_uElzFerKU-ul3EnrTn7pMZlhA3HvG4EEoygDcQ"
           onLoad={storyGroupList => {
@@ -57,8 +40,19 @@ export default function App() {
           }}/>
       <View style={styles.box}>
         <Button 
-          onPress={() => setStorylyAdViewProvider(storyly, "ca-app-pub-3940256099942544/2247696110") }
+          onPress={() => {
+            if (storyly) { setStorylyAdViewProvider(storyly, "ca-app-pub-3940256099942544/2247696110")  } 
+          }}
           title="Add Ad Provider To Storyly"
+          color="#7A4BFF"
+        />
+    </View> 
+      <View style={styles.box}>
+        <Button 
+          onPress={() => {
+            if (storyly) { setStorylyAdViewProvider(storyly, "ca-app-pub-3940256099942544/2521693316") }
+          }}
+          title="Add Video Ad Provider To Storyly"
           color="#7A4BFF"
         />
       </View> 
