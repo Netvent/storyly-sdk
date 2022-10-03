@@ -1,4 +1,9 @@
 # Release Notes
+### 1.26.3 (03.10.2022)
+* added MomentUser field to StoryGroup data
+* fixed duplicate moments story group issue
+* fixed a bug on report story feature 
+
 ### 1.26.3 (19.09.2022)
 * fixed duplicate moment view issue
 * fixed swipe up size calculation for some devices
