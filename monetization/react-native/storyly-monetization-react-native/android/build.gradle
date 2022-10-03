@@ -126,8 +126,11 @@ dependencies {
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-//  implementation("com.appsamurai.storyly:storyly-monetization:1.1.+") {
-//    exclude group: "com.appsamurai.storyly", module: "storyly"
-//  }
-  implementation project(path: ":storyly-react-native")
+  implementation("com.appsamurai.storyly:storyly-monetization:1.1.+") {
+   exclude group: "com.appsamurai.storyly", module: "storyly"
+  }
+
+  implementation(project(path: ":storyly-react-native")) {
+    transitive = true
+  }
 }

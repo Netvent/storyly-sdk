@@ -9,6 +9,7 @@ target 'StorylyMonetizationReactNativeExample' do
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'storyly-monetization-react-native', :path => '../..'
+  pod 'Google-Mobile-Ads-SDK', '~> 8.7'
 
   # Enables Flipper.
   #

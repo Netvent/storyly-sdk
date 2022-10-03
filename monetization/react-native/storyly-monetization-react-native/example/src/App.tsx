@@ -33,7 +33,7 @@ export default function App() {
        <Storyly
           ref={ref => { storyly = ref }}
           style={{ width: '100%', height: 120, marginTop: 44 }}
-          storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjk3NTl9.gnnS2YX5CdgbxbzBEXdK2stT_hlpX6OgXLT0hnztWMU"
+          storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE0Mjd9.cGTn_uElzFerKU-ul3EnrTn7pMZlhA3HvG4EEoygDcQ"
           onLoad={storyGroupList => {
               console.log("[Storyly] onLoad");
           }}
@@ -57,8 +57,8 @@ export default function App() {
           }}/>
       <View style={styles.box}>
         <Button 
-          onPress={() => setStorylyAdViewProvider(storyly, "test test") }
-          title="Create Story"
+          onPress={() => setStorylyAdViewProvider(storyly, "ca-app-pub-3940256099942544/2247696110") }
+          title="Add Ad Provider To Storyly"
           color="#7A4BFF"
         />
       </View> 

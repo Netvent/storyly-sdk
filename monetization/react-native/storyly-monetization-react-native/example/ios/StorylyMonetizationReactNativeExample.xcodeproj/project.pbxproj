@@ -288,10 +288,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyMonetizationReactNativeExample/Pods-StorylyMonetizationReactNativeExample-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Storyly/Storyly.framework/Storyly",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/StorylyMonetization/StorylyMonetization.framework/StorylyMonetization",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Storyly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StorylyMonetization.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
