@@ -1,4 +1,7 @@
 # Release Notes
+### 1.27.1 (04.10.2022)
+* added MomentUser field to StoryGroup data
+
 ### 1.27.0 (19.09.2022)
 * added link cta interactive component
 * added share screenshot of personalized story groups
