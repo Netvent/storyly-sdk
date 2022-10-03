@@ -6,6 +6,6 @@
 
 
 RCT_EXTERN_METHOD(setAdViewProvider: (NSNumber * _Nonnull)reactViewId
-                  withAdMobAdUnitId: (NSString * _Nonnull)adMobAdUnitId)
+                  withAdViewProvider: (NSDictionary *)adViewProvider)
 
 @end

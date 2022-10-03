@@ -17,9 +17,13 @@ const StorylyMonetization = NativeModules.RNStorylyMonetization
       }
     );
 
-export const setStorylyAdViewProvider = function(reactView: React.Component, adMobAdUnitId: string) {
+export interface StorylyAdViewProvider {
+  adMobAdUnitId: string
+  adMobAdExtras?: Map<string, any>
+}
+
+export const setStorylyAdViewProvider = function(reactView: React.Component, storylyAdViewProvider?: StorylyAdViewProvider) {
   let id = findNodeHandle(reactView);
-  console.log(id);
-  StorylyMonetization.setAdViewProvider(id, adMobAdUnitId);
+  StorylyMonetization.setAdViewProvider(id, storylyAdViewProvider);
 }
 

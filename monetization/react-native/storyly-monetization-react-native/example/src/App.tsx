@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Button, SafeAreaView } from 'react-native';
-import { setStorylyAdViewProvider } from 'storyly-monetization-react-native';
+import { setStorylyAdViewProvider, StorylyAdViewProvider } from 'storyly-monetization-react-native';
 import { Storyly } from 'storyly-react-native';
 
 
@@ -13,7 +13,7 @@ export default function App() {
        <Storyly
           ref={ref => {
             storyly = ref
-            if (ref) { setStorylyAdViewProvider(ref, "ca-app-pub-3940256099942544/2247696110") }
+            // if (ref) { setStorylyAdViewProvider(ref, "ca-app-pub-3940256099942544/2247696110") }
           }}
           style={{ width: '100%', height: 120, marginTop: 44 }}
           storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE0Mjd9.cGTn_uElzFerKU-ul3EnrTn7pMZlhA3HvG4EEoygDcQ"
@@ -41,18 +41,27 @@ export default function App() {
       <View style={styles.box}>
         <Button 
           onPress={() => {
-            if (storyly) { setStorylyAdViewProvider(storyly, "ca-app-pub-3940256099942544/2247696110")  } 
+            if (storyly) { setStorylyAdViewProvider(storyly, {adMobAdUnitId: "ca-app-pub-3940256099942544/2247696110", adMobAdExtras: {"npa": "1", "aa": {"test": "a"}}})  } 
           }}
           title="Add Ad Provider To Storyly"
           color="#7A4BFF"
         />
-    </View> 
+      </View> 
       <View style={styles.box}>
         <Button 
           onPress={() => {
-            if (storyly) { setStorylyAdViewProvider(storyly, "ca-app-pub-3940256099942544/2521693316") }
+            if (storyly) { setStorylyAdViewProvider(storyly,  {adMobAdUnitId: "ca-app-pub-3940256099942544/2521693316"}) }
           }}
           title="Add Video Ad Provider To Storyly"
+          color="#7A4BFF"
+        />
+      </View> 
+      <View style={styles.box}>
+        <Button 
+          onPress={() => {
+            if (storyly) { setStorylyAdViewProvider(storyly,  null) }
+          }}
+          title="Remove Ad Provider From Storyly"
           color="#7A4BFF"
         />
       </View> 
