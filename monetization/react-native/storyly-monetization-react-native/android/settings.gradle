@@ -1,0 +1,2 @@
+include ':storyly-react-native'
+project(':storyly-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/storyly-react-native/android')
