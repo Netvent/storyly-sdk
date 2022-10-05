@@ -819,7 +819,7 @@ class StoryGroup {
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
       groupTheme: json['grupTheme'],
-      thematicIconUrls: json[' thematicIconUrls'],
+      thematicIconUrls: json['thematicIconUrls'] != null ? Map<String,String>.from(json['thematicIconUrls']) : null,
       coverUrl: json['coverUrl'],
       pinned: json['pinned'],
       type: json['type'],
