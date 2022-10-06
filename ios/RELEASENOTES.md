@@ -1,4 +1,8 @@
 # Release Notes
+### 1.27.2 (06.10.2022)
+* added story group id support to storylyShareUrl
+* improved story bar scrolling performance with pagination
+
 ### 1.27.1 (04.10.2022)
 * added MomentUser field to StoryGroup data
 
