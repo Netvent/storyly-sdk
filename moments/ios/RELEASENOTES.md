@@ -1,4 +1,7 @@
 # Release Notes
+### 0.1.2 (06.10.2022)
+* fixed video playback issue on story upload screen
+
 ### 0.1.1 (04.10.2022)
 * fixed endpoints to support link cta interactive component 
 
