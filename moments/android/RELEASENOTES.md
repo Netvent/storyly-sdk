@@ -1,4 +1,7 @@
 # Release Notes
+### 0.0.7 (06.10.2022)
+* improved story bar scrolling performance with pagination
+
 ### 0.0.6 (03.10.2022)
 * fixed a crash on gallery page for prior to Android 19 devices
 
