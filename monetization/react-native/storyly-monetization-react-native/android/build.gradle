@@ -127,6 +127,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
   implementation("com.appsamurai.storyly:storyly-monetization:1.2.+") {
+    exclude group: "com.appsamurai.storyly", module: "storyly"
     exclude group: "storyly-android-sdk", module: "storyly"
   }
 
