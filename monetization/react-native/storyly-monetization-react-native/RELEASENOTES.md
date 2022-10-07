@@ -1,3 +1,3 @@
 # Release Notes
-### 0.0.1 (20.07.2022)
+### 1.2.0 (07.10.2022)
 * introduced react-native plugin for Monetization by Storyly
