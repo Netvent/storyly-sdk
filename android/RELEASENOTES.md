@@ -1,4 +1,23 @@
 # Release Notes
+### 1.26.5 (06.10.2022)
+* added story group id support to storylyShareUrl
+* fixed cast exception on StoryCommentComponent
+* fixed MomentUser field visibility modifiers
+
+### 1.26.4 (03.10.2022)
+* added MomentUser field to StoryGroup data
+* fixed duplicate moments story group issue
+* fixed a bug on report story feature 
+
+### 1.26.3 (19.09.2022)
+* fixed duplicate moment view issue
+* fixed swipe up size calculation for some devices
+* fixed comment interactive layer rendering
+
+### 1.26.2 (12.09.2022)
+* fixed iVOD story group not showing issue
+* fixed duplicate moments story group issue
+
 ### 1.26.1 (06.09.2022)
 * fixed a crash during initialization with userPayload
 * improved accessibility features with talkback feature
