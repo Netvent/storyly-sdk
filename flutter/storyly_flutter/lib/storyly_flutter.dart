@@ -8,39 +8,39 @@ import 'package:flutter/services.dart';
 
 /// [StorylyView] created callback
 typedef StorylyViewCreatedCallback = void Function(
-  StorylyViewController controller,
-);
+    StorylyViewController controller,
+    );
 
 /// [StorylyView] loaded callback
 typedef StorylyViewLoadedCallback = void Function(
-  List<StoryGroup> storyGroups,
-  String dataSource,
-);
+    List<StoryGroup> storyGroups,
+    String dataSource,
+    );
 
 /// [StorylyView] load failed callback
 typedef StorylyViewLoadFailedCallback = void Function(
-  String message,
-);
+    String message,
+    );
 
 /// [StorylyView] event callback
 typedef StorylyViewEventCallback = void Function(
-  String event,
-  StoryGroup? storyGroup,
-  Story? story,
-  StoryComponent? storyComponent,
-);
+    String event,
+    StoryGroup? storyGroup,
+    Story? story,
+    StoryComponent? storyComponent,
+    );
 
 /// [StorylyView] action clicked callback
 typedef StorylyViewActionClickedCallback = void Function(
-  Story story,
-);
+    Story story,
+    );
 
 /// [StorylyView] user interacted callback
 typedef StorylyViewUserInteractedCallback = void Function(
-  StoryGroup storyGroup,
-  Story story,
-  StoryComponent? storyComponent,
-);
+    StoryGroup storyGroup,
+    Story story,
+    StoryComponent? storyComponent,
+    );
 
 T? castOrNull<T>(x) => x is T ? x : null;
 
@@ -125,7 +125,7 @@ class _StorylyViewState extends State<StorylyView> {
             controller: controller as AndroidViewController,
             gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
               Factory<OneSequenceGestureRecognizer>(
-                () => EagerGestureRecognizer(),
+                    () => EagerGestureRecognizer(),
               ),
             },
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
@@ -153,7 +153,7 @@ class _StorylyViewState extends State<StorylyView> {
         onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
           Factory<OneSequenceGestureRecognizer>(
-            () => EagerGestureRecognizer(),
+                () => EagerGestureRecognizer(),
           ),
         },
         creationParams: widget.iosParam?._toMap() ?? {},
@@ -386,11 +386,11 @@ class StorylyParam {
   /// header close button.
   bool? storyHeaderCloseButtonIsVisible;
 
-  /// This attribute allows you to use custom icon for 
+  /// This attribute allows you to use custom icon for
   /// header close button.
   String? storyHeaderCloseIcon;
 
-  /// This attribute allows you to use custom icon for 
+  /// This attribute allows you to use custom icon for
   /// header share button.
   String? storyHeaderShareIcon;
 
@@ -590,7 +590,7 @@ class StoryQuizComponent implements StoryComponent {
       rightAnswerIndex: json['rightAnswerIndex'],
       customPayload: json['customPayload'],
       title: json['title'],
-      options:  List<String>.from(json['options'].map((x) => x)) ,
+      options: List<String>.from(json['options'].map((x) => x)),
       selectedOptionIndex: json['selectedOptionIndex'],
     );
   }
@@ -629,7 +629,7 @@ class StoryPollComponent implements StoryComponent {
     return StoryPollComponent(
       type: json['type'],
       id: json['id'],
-      options:  List<String>.from(json['options'].map((x) => x)) ,
+      options: List<String>.from(json['options'].map((x) => x)),
       customPayload: json['customPayload'],
       selectedOptionIndex: json['selectedOptionIndex'],
       title: json['title'],
@@ -668,7 +668,7 @@ class StoryEmojiComponent implements StoryComponent {
       id: json['id'],
       customPayload: json['customPayload'],
       selectedEmojiIndex: json['selectedEmojiIndex'],
-      emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)) ,
+      emojiCodes: List<String>.from(json['emojiCodes'].map((x) => x)),
     );
   }
 }
@@ -735,7 +735,6 @@ class StoryPromocodeComponent implements StoryComponent {
   }
 }
 
-
 /// This data class represents the Comment component.
 class StoryCommentComponent implements StoryComponent {
   StoryCommentComponent({
@@ -766,7 +765,6 @@ List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
   return List<StoryGroup>.from(json.map((x) => StoryGroup.fromJson(x)));
 }
 
-
 /// This data class represents a story group in the StorylyView.
 class StoryGroup {
   StoryGroup({
@@ -776,6 +774,11 @@ class StoryGroup {
     required this.seen,
     required this.iconUrl,
     required this.stories,
+    required this.pinned,
+    required this.type,
+    this.groupTheme,
+    this.thematicIconUrls,
+    this.coverUrl,
   });
 
   /// id ID of the story group
@@ -796,14 +799,29 @@ class StoryGroup {
   /// stories List of stories in the story group
   final List<Story> stories;
 
+  final String? groupTheme;
+
+  final Map<String,String>? thematicIconUrls;
+
+  final String? coverUrl;
+
+  final bool pinned;
+
+  final int type;
+
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
     return StoryGroup(
       seen: json['seen'],
       title: json['title'],
       index: json['index'],
       iconUrl: json['iconUrl'],
-      stories:List<Story>.from(json['stories'].map((x) => Story.fromJson(x))) ,
+      stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
+      groupTheme: json['grupTheme'],
+      thematicIconUrls: json['thematicIconUrls'] != null ? Map<String,String>.from(json['thematicIconUrls']) : null,
+      coverUrl: json['coverUrl'],
+      pinned: json['pinned'],
+      type: json['type'],
     );
   }
 }
@@ -813,11 +831,11 @@ class Story {
   Story({
     required this.id,
     required this.title,
-    this.name,
     required this.index,
     required this.seen,
-    this.currentTime,
+    required this.currentTime,
     required this.media,
+    this.name,
   });
 
   /// ID of the story
@@ -836,7 +854,7 @@ class Story {
   final bool seen;
 
   /// Time of the story that user watched
-  final int? currentTime;
+  final int currentTime;
 
   /// Media content of the story
   final Media media;
@@ -878,14 +896,11 @@ class Media {
 
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
-      type: json['type'],
-      storyComponentList: castOrNull(json['storyComponentList']
-          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
-          .toList()),
-      actionUrlList: castOrNull(
-          json['actionUrlList']?.map<String?>((e) => e as String?).toList()),
-      actionUrl: json['actionUrl'],
-      previewUrl: json['previewUrl'],
+        type: json['type'],
+        storyComponentList: castOrNull(json['storyComponentList']?.map<StoryComponent?>((e) => getStorylyComponent(e)).toList()),
+        actionUrlList: castOrNull(json['actionUrlList']?.map<String>((e) => e as String).toList()),
+        actionUrl: json['actionUrl'],
+        previewUrl: json['previewUrl'],
     );
   }
 }
