@@ -8,39 +8,39 @@ import 'package:flutter/services.dart';
 
 /// [StorylyView] created callback
 typedef StorylyViewCreatedCallback = void Function(
-    StorylyViewController controller,
-    );
+  StorylyViewController controller,
+);
 
 /// [StorylyView] loaded callback
 typedef StorylyViewLoadedCallback = void Function(
-    List<StoryGroup> storyGroups,
-    String dataSource,
-    );
+  List<StoryGroup> storyGroups,
+  String dataSource,
+);
 
 /// [StorylyView] load failed callback
 typedef StorylyViewLoadFailedCallback = void Function(
-    String message,
-    );
+  String message,
+);
 
 /// [StorylyView] event callback
 typedef StorylyViewEventCallback = void Function(
-    String event,
-    StoryGroup? storyGroup,
-    Story? story,
-    StoryComponent? storyComponent,
-    );
+  String event,
+  StoryGroup? storyGroup,
+  Story? story,
+  StoryComponent? storyComponent,
+);
 
 /// [StorylyView] action clicked callback
 typedef StorylyViewActionClickedCallback = void Function(
-    Story story,
-    );
+  Story story,
+);
 
 /// [StorylyView] user interacted callback
 typedef StorylyViewUserInteractedCallback = void Function(
-    StoryGroup storyGroup,
-    Story story,
-    StoryComponent? storyComponent,
-    );
+  StoryGroup storyGroup,
+  Story story,
+  StoryComponent? storyComponent,
+);
 
 T? castOrNull<T>(x) => x is T ? x : null;
 
@@ -125,7 +125,7 @@ class _StorylyViewState extends State<StorylyView> {
             controller: controller as AndroidViewController,
             gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
               Factory<OneSequenceGestureRecognizer>(
-                    () => EagerGestureRecognizer(),
+                  () => EagerGestureRecognizer(),
               ),
             },
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
