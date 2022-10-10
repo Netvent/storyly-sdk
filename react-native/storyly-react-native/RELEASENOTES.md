@@ -1,4 +1,7 @@
 # Release Notes
+### 1.26.2 (11.10.2022)
+* improved native dependency handling to support Monetization by Storyly
+
 ### 1.26.1 (25.08.2022)
 * improved react-native@0.69 support
 
