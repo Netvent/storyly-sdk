@@ -528,7 +528,7 @@ StoryComponent? getStorylyComponent(Map<String, dynamic>? json) {
       return StoryRatingComponent.fromJson(json);
     case 'promocode':
       return StoryPromocodeComponent.fromJson(json);
-    case 'commment':
+    case 'comment':
       return StoryCommentComponent.fromJson(json);
     default:
       return StoryComponent.fromJson(json);
