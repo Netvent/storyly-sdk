@@ -1,3 +1,6 @@
+### 1.26.3 (11.10.2022)
+* improved Flutter 3+ support with nullability checks
+
 ### 1.26.2 (29.09.2022)
 * improved Flutter 3+ support with nullability checks
 
