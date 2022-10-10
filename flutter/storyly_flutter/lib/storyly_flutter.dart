@@ -125,7 +125,7 @@ class _StorylyViewState extends State<StorylyView> {
             controller: controller as AndroidViewController,
             gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
               Factory<OneSequenceGestureRecognizer>(
-                () => EagerGestureRecognizer(),
+                  () => EagerGestureRecognizer(),
               ),
             },
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
@@ -153,7 +153,7 @@ class _StorylyViewState extends State<StorylyView> {
         onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
           Factory<OneSequenceGestureRecognizer>(
-            () => EagerGestureRecognizer(),
+                () => EagerGestureRecognizer(),
           ),
         },
         creationParams: widget.iosParam?._toMap() ?? {},
@@ -528,7 +528,7 @@ StoryComponent? getStorylyComponent(Map<String, dynamic>? json) {
       return StoryRatingComponent.fromJson(json);
     case 'promocode':
       return StoryPromocodeComponent.fromJson(json);
-    case 'commment':
+    case 'comment':
       return StoryCommentComponent.fromJson(json);
     default:
       return StoryComponent.fromJson(json);
@@ -774,6 +774,11 @@ class StoryGroup {
     required this.seen,
     required this.iconUrl,
     required this.stories,
+    required this.pinned,
+    required this.type,
+    this.groupTheme,
+    this.thematicIconUrls,
+    this.coverUrl,
   });
 
   /// id ID of the story group
@@ -794,6 +799,16 @@ class StoryGroup {
   /// stories List of stories in the story group
   final List<Story> stories;
 
+  final String? groupTheme;
+
+  final Map<String,String>? thematicIconUrls;
+
+  final String? coverUrl;
+
+  final bool pinned;
+
+  final int type;
+
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
     return StoryGroup(
       seen: json['seen'],
@@ -802,6 +817,11 @@ class StoryGroup {
       iconUrl: json['iconUrl'],
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
+      groupTheme: json['grupTheme'],
+      thematicIconUrls: json['thematicIconUrls'] != null ? Map<String,String>.from(json['thematicIconUrls']) : null,
+      coverUrl: json['coverUrl'],
+      pinned: json['pinned'],
+      type: json['type'],
     );
   }
 }
@@ -811,11 +831,11 @@ class Story {
   Story({
     required this.id,
     required this.title,
-    this.name,
     required this.index,
     required this.seen,
-    this.currentTime,
+    required this.currentTime,
     required this.media,
+    this.name,
   });
 
   /// ID of the story
@@ -834,7 +854,7 @@ class Story {
   final bool seen;
 
   /// Time of the story that user watched
-  final int? currentTime;
+  final int currentTime;
 
   /// Media content of the story
   final Media media;
@@ -876,14 +896,11 @@ class Media {
 
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
-      type: json['type'],
-      storyComponentList: castOrNull(json['storyComponentList']
-          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
-          .toList()),
-      actionUrlList: castOrNull(
-          json['actionUrlList']?.map<String?>((e) => e as String?).toList()),
-      actionUrl: json['actionUrl'],
-      previewUrl: json['previewUrl'],
+        type: json['type'],
+        storyComponentList: castOrNull(json['storyComponentList']?.map<StoryComponent?>((e) => getStorylyComponent(e)).toList()),
+        actionUrlList: castOrNull(json['actionUrlList']?.map<String>((e) => e as String).toList()),
+        actionUrl: json['actionUrl'],
+        previewUrl: json['previewUrl'],
     );
   }
 }

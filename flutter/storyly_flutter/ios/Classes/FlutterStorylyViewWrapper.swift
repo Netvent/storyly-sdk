@@ -274,7 +274,12 @@ extension FlutterStorylyViewWrapper {
                 "index": storyGroup.index,
                 "seen": storyGroup.seen,
                 "iconUrl": storyGroup.iconUrl.absoluteString,
-                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)}]
+                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
+                "groupTheme": storyGroup.groupTheme,
+                "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
+                "coverUrl": storyGroup.coverUrl,
+                "pinned": storyGroup.pinned,
+                "type": storyGroup.type.rawValue]
     }
     
     private func createStoryMap(story: Story) -> [String: Any?] {
@@ -286,7 +291,9 @@ extension FlutterStorylyViewWrapper {
                 "currentTime": story.currentTime,
                 "media": ["type": story.media.type.rawValue,
                           "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
-                          "actionUrl": story.media.actionUrl]]
+                          "actionUrl": story.media.actionUrl,
+                          "previewUrl": story.media.previewUrl?.absoluteString,
+                          "actionUrlList": story.media.actionUrlList ]]
     }
     
     private func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
@@ -323,7 +330,7 @@ extension FlutterStorylyViewWrapper {
                         "id": promoCodeComponent.id,
                         "text": promoCodeComponent.text]
             case let commentComponent as StoryCommentComponent:
-                return ["type": "promocode",
+                return ["type": "comment",
                         "id": commentComponent.id,
                         "text": commentComponent.text]
             default:

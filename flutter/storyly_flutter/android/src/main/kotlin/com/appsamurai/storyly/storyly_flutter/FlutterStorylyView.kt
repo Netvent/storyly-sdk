@@ -274,7 +274,12 @@ class FlutterStorylyView(
             "index" to storyGroup.index,
             "seen" to storyGroup.seen,
             "iconUrl" to storyGroup.iconUrl,
-            "stories" to storyGroup.stories.map { story -> createStoryMap(story) }
+            "stories" to storyGroup.stories.map { story -> createStoryMap(story) },
+            "groupTheme" to storyGroup.groupTheme,
+            "thematicIconUrls" to storyGroup.thematicIconUrls,
+            "coverUrl" to storyGroup.coverUrl,
+            "pinned" to storyGroup.pinned,
+            "type" to storyGroup.type.ordinal,
         )
     }
 
