@@ -47,7 +47,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "storyly-react-native": ">=1.26.1"
+    "storyly-react-native": "^1.26.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
