@@ -12,7 +12,7 @@ target 'StorylyDemoTypeScript' do
     :hermes_enabled => false
   )
 
-  pod 'Google-Mobile-Ads-SDK', '~> 8.7'
+  pod 'Google-Mobile-Ads-SDK', '~> 9.11'
 
   target 'StorylyDemoTypeScriptTests' do
     inherit! :complete
