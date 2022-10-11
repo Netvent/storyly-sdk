@@ -125,7 +125,7 @@ class _StorylyViewState extends State<StorylyView> {
             controller: controller as AndroidViewController,
             gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
               Factory<OneSequenceGestureRecognizer>(
-                  () => EagerGestureRecognizer(),
+                () => EagerGestureRecognizer(),
               ),
             },
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
@@ -153,7 +153,7 @@ class _StorylyViewState extends State<StorylyView> {
         onPlatformViewCreated: _onPlatformViewCreated,
         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
           Factory<OneSequenceGestureRecognizer>(
-                () => EagerGestureRecognizer(),
+            () => EagerGestureRecognizer(),
           ),
         },
         creationParams: widget.iosParam?._toMap() ?? {},
@@ -801,7 +801,7 @@ class StoryGroup {
 
   final String? groupTheme;
 
-  final Map<String,String>? thematicIconUrls;
+  final Map<String, String>? thematicIconUrls;
 
   final String? coverUrl;
 
@@ -818,7 +818,9 @@ class StoryGroup {
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
       groupTheme: json['grupTheme'],
-      thematicIconUrls: json['thematicIconUrls'] != null ? Map<String,String>.from(json['thematicIconUrls']) : null,
+      thematicIconUrls: json['thematicIconUrls'] != null
+          ? Map<String, String>.from(json['thematicIconUrls'])
+          : null,
       coverUrl: json['coverUrl'],
       pinned: json['pinned'],
       type: json['type'],
@@ -896,11 +898,14 @@ class Media {
 
   factory Media.fromJson(Map<String, dynamic> json) {
     return Media(
-        type: json['type'],
-        storyComponentList: castOrNull(json['storyComponentList']?.map<StoryComponent?>((e) => getStorylyComponent(e)).toList()),
-        actionUrlList: castOrNull(json['actionUrlList']?.map<String>((e) => e as String).toList()),
-        actionUrl: json['actionUrl'],
-        previewUrl: json['previewUrl'],
+      type: json['type'],
+      storyComponentList: castOrNull(json['storyComponentList']
+          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
+          .toList()),
+      actionUrlList: castOrNull(
+          json['actionUrlList']?.map<String>((e) => e as String).toList()),
+      actionUrl: json['actionUrl'],
+      previewUrl: json['previewUrl'],
     );
   }
 }
