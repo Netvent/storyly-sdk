@@ -30,7 +30,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
     private let ARGS_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
     
-    private lazy var storylyView: StorylyView = StorylyView(frame: self.frame)
+    internal lazy var storylyView: StorylyView = StorylyView(frame: self.frame)
     
     private let args: [String: Any]
     private let methodChannel: FlutterMethodChannel
