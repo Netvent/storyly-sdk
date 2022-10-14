@@ -43,83 +43,98 @@ class _HomePageState extends State<HomePage> {
   void onStorylyViewCreated(StorylyViewController storylyViewController) {
     this.storylyViewController = storylyViewController;
     debugPrint("aaa ${this.storylyViewController.getViewId()}");
-    StorylyMonetization.setAdViewProvider(storylyViewController.getViewId(), AdViewProvider(adMobAdUnitId: "ca-app-pub-3940256099942544/2247696110", adMobAdExtras: {"npa": "1", "aa": {"test": "a"}}));
+    StorylyMonetization.setAdViewProvider(
+        storylyViewController.getViewId(),
+        AdViewProvider(
+            adMobAdUnitId: "ca-app-pub-3940256099942544/2247696110",
+            adMobAdExtras: {
+              "npa": "1",
+              "aa": {"test": "a"}
+            }));
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Plugin example app'),
-        ),
-        body: Column(
+          appBar: AppBar(
+            title: const Text('Flutter Plugin example app'),
+          ),
+          body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-          Expanded(
-          child: StorylyView(
-            onStorylyViewCreated: onStorylyViewCreated,
-            androidParam: StorylyParam()
-              ..storylyId = storylyToken,
-            iosParam: StorylyParam()
-              ..storylyId = storylyToken,
-            storylyLoaded: (storyGroups, dataSource) {
-              debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
-              debugPrint("storylyLoaded -> dataSource: $dataSource");
-            },
-            storylyLoadFailed: (errorMessage) =>
-                debugPrint("storylyLoadFailed -> $errorMessage"),
-            storylyActionClicked: (story) {
-              debugPrint("storylyActionClicked -> ${story.title}");
-            },
-            storylyEvent: (event, storyGroup, story, storyComponent) {
-              debugPrint("storylyEvent -> event: $event");
-              debugPrint("storylyEvent -> storyGroup: ${storyGroup?.title}");
-              debugPrint("storylyEvent -> story: ${story?.title}");
-              debugPrint("storylyEvent -> storyComponent: $storyComponent");
-            },
-            storylyStoryShown: () => debugPrint("storylyStoryShown"),
-            storylyStoryDismissed: () => debugPrint("storylyStoryDismissed"),
-            storylyUserInteracted: (storyGroup, story, storyComponent) {
-              debugPrint("userInteracted -> storyGroup: ${storyGroup.title}");
-              debugPrint("userInteracted -> story: ${story.title}");
-              debugPrint("userInteracted -> storyComponent: $storyComponent");
-            },
-          ),
-        ),
-        Expanded(
-          child: StorylyView(
-            onStorylyViewCreated: onStorylyViewCreated,
-            androidParam: StorylyParam()
-              ..storylyId = storylyToken,
-            iosParam: StorylyParam()
-              ..storylyId = storylyToken,
-            storylyLoaded: (storyGroups, dataSource) {
-              debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
-              debugPrint("storylyLoaded -> dataSource: $dataSource");
-            },
-            storylyLoadFailed: (errorMessage) =>
-                debugPrint("storylyLoadFailed -> $errorMessage"),
-            storylyActionClicked: (story) {
-              debugPrint("storylyActionClicked -> ${story.title}");
-            },
-            storylyEvent: (event, storyGroup, story, storyComponent) {
-              debugPrint("storylyEvent -> event: $event");
-              debugPrint("storylyEvent -> storyGroup: ${storyGroup?.title}");
-              debugPrint("storylyEvent -> story: ${story?.title}");
-              debugPrint("storylyEvent -> storyComponent: $storyComponent");
-            },
-            storylyStoryShown: () => debugPrint("storylyStoryShown"),
-            storylyStoryDismissed: () => debugPrint("storylyStoryDismissed"),
-            storylyUserInteracted: (storyGroup, story, storyComponent) {
-              debugPrint("userInteracted -> storyGroup: ${storyGroup.title}");
-              debugPrint("userInteracted -> story: ${story.title}");
-              debugPrint("userInteracted -> storyComponent: $storyComponent");
-            },
-          ),
-        ),
-        ],)
-      ),
+            children: [
+              Expanded(
+                child: StorylyView(
+                  onStorylyViewCreated: onStorylyViewCreated,
+                  androidParam: StorylyParam()..storylyId = storylyToken,
+                  iosParam: StorylyParam()..storylyId = storylyToken,
+                  storylyLoaded: (storyGroups, dataSource) {
+                    debugPrint(
+                        "storylyLoaded -> storyGroups: ${storyGroups.length}");
+                    debugPrint("storylyLoaded -> dataSource: $dataSource");
+                  },
+                  storylyLoadFailed: (errorMessage) =>
+                      debugPrint("storylyLoadFailed -> $errorMessage"),
+                  storylyActionClicked: (story) {
+                    debugPrint("storylyActionClicked -> ${story.title}");
+                  },
+                  storylyEvent: (event, storyGroup, story, storyComponent) {
+                    debugPrint("storylyEvent -> event: $event");
+                    debugPrint(
+                        "storylyEvent -> storyGroup: ${storyGroup?.title}");
+                    debugPrint("storylyEvent -> story: ${story?.title}");
+                    debugPrint(
+                        "storylyEvent -> storyComponent: $storyComponent");
+                  },
+                  storylyStoryShown: () => debugPrint("storylyStoryShown"),
+                  storylyStoryDismissed: () =>
+                      debugPrint("storylyStoryDismissed"),
+                  storylyUserInteracted: (storyGroup, story, storyComponent) {
+                    debugPrint(
+                        "userInteracted -> storyGroup: ${storyGroup.title}");
+                    debugPrint("userInteracted -> story: ${story.title}");
+                    debugPrint(
+                        "userInteracted -> storyComponent: $storyComponent");
+                  },
+                ),
+              ),
+              Expanded(
+                child: StorylyView(
+                  onStorylyViewCreated: onStorylyViewCreated,
+                  androidParam: StorylyParam()..storylyId = storylyToken,
+                  iosParam: StorylyParam()..storylyId = storylyToken,
+                  storylyLoaded: (storyGroups, dataSource) {
+                    debugPrint(
+                        "storylyLoaded -> storyGroups: ${storyGroups.length}");
+                    debugPrint("storylyLoaded -> dataSource: $dataSource");
+                  },
+                  storylyLoadFailed: (errorMessage) =>
+                      debugPrint("storylyLoadFailed -> $errorMessage"),
+                  storylyActionClicked: (story) {
+                    debugPrint("storylyActionClicked -> ${story.title}");
+                  },
+                  storylyEvent: (event, storyGroup, story, storyComponent) {
+                    debugPrint("storylyEvent -> event: $event");
+                    debugPrint(
+                        "storylyEvent -> storyGroup: ${storyGroup?.title}");
+                    debugPrint("storylyEvent -> story: ${story?.title}");
+                    debugPrint(
+                        "storylyEvent -> storyComponent: $storyComponent");
+                  },
+                  storylyStoryShown: () => debugPrint("storylyStoryShown"),
+                  storylyStoryDismissed: () =>
+                      debugPrint("storylyStoryDismissed"),
+                  storylyUserInteracted: (storyGroup, story, storyComponent) {
+                    debugPrint(
+                        "userInteracted -> storyGroup: ${storyGroup.title}");
+                    debugPrint("userInteracted -> story: ${story.title}");
+                    debugPrint(
+                        "userInteracted -> storyComponent: $storyComponent");
+                  },
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
