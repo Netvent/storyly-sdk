@@ -51,7 +51,7 @@ PODS:
   - storyly_flutter (1.26.0):
     - Flutter
     - Storyly (~> 1.26.0)
-  - storyly_monetization_flutter (1.26.0):
+  - storyly_monetization_flutter (1.2.0):
     - Flutter
     - storyly_flutter
     - StorylyMonetization (~> 1.2.0)
@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Storyly: 9f7694d816cbe22d1d5604b7653e75feabf1915f
   storyly_flutter: 7b21add753cd8407b88fcbcfce32e06e1a20b798
-  storyly_monetization_flutter: e6a2b559559d115a95cfe2634519399966eea76b
+  storyly_monetization_flutter: ecbb7f3bd660631a729accd0d2f29401ec8b7d99
   StorylyMonetization: 6f8d2b6b67dec6b92b57a097dfaadef23fb78804
 
 PODFILE CHECKSUM: 1c55bb67f9da41fa023f80f450b252c4b1fb805c
