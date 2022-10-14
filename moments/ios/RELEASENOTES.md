@@ -1,4 +1,9 @@
 # Release Notes
+### 0.1.3 (10.10.2022)
+* fixed pre-moderation callback flow
+* fixed ui bug on cta link screen
+* improved permission flow
+
 ### 0.1.2 (06.10.2022)
 * fixed video playback issue on story upload screen
 
