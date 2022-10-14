@@ -11,10 +11,11 @@ import storyly_flutter
 
 class StorylyMonetizationFlutter {
     
-    private var methodChannel: FlutterMethodChannel
+    private let methodChannel: FlutterMethodChannel
     
     init(methodChannel: FlutterMethodChannel) {
         self.methodChannel = methodChannel
+
         self.methodChannel.setMethodCallHandler { [weak self] call, _ in
             guard let self = self else { return }
             let callArguments = call.arguments as? [String: Any]
@@ -31,14 +32,16 @@ class StorylyMonetizationFlutter {
     private static var strongAdViewProviderKey = "strongAdViewProviderKey"
     
     private func setAdViewProvider(viewId: Int, adViewProvider: [String: Any]?) {
-        guard let storylyView = FlutterStorylyViewFactory.instance?.getViewById(id: viewId) else { return }
+        guard let flutterPluginRegistry = UIApplication.shared.delegate?.window??.rootViewController as? FlutterPluginRegistry else { return }
+        guard let storylyFlutterPlugin = flutterPluginRegistry.valuePublished(byPlugin: "StorylyFlutterPlugin") as? FlutterStorylyViewFactory else { return }
+        guard let storylyView = storylyFlutterPlugin.getViewById(id: viewId) else { return }
         guard let rootViewController = storylyView.rootViewController else { return }
-        
+
         guard let adViewProvider = adViewProvider else {
             self.setAdViewProvider(storylyView: storylyView, adViewProvider: nil)
             return
         }
-                        
+
         guard let adMobUnitId = adViewProvider["adMobAdUnitId"] as? String else { return }
         let adMobAdExtras = adViewProvider["adMobAdExtras"] as? [String: Any]
 
