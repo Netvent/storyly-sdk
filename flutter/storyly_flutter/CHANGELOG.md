@@ -1,3 +1,6 @@
+### 1.26.4 (14.10.2022)
+* improved native dependency handling to support Monetization by Storyly
+
 ### 1.26.3 (11.10.2022)
 * improved Flutter 3+ support with nullability checks
 
