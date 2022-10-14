@@ -171,7 +171,7 @@ class _StorylyViewState extends State<StorylyView> {
     );
     methodChannel.setMethodCallHandler(_handleMethod);
 
-    widget.onStorylyViewCreated?.call(StorylyViewController(methodChannel));
+    widget.onStorylyViewCreated?.call(StorylyViewController(_id, methodChannel));
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {
@@ -222,10 +222,16 @@ class _StorylyViewState extends State<StorylyView> {
 
 class StorylyViewController {
   final MethodChannel _methodChannel;
+  final int _viewId;
 
-  StorylyViewController(this._methodChannel);
+  StorylyViewController(this._viewId, this._methodChannel);
 
-  /// This function allows you to refetch the data from network
+  // This function allows to get `StorylyView` viewId
+  int getViewId() {
+    return _viewId;
+  }
+
+ /// This function allows you to refetch the data from network
   /// by default you do not need to use this function.
   Future<void> refresh() {
     return _methodChannel.invokeMethod('refresh');
