@@ -36,7 +36,7 @@ public class FlutterStorylyView: NSObject, FlutterPlatformView {
     
     internal var onDispose: ((_ viewId: Int64) -> ())? = nil
 
-    private lazy var storylyViewWrapper = FlutterStorylyViewWrapper(frame: self.frame, args: self.args, viewId: self.viewId, methodChannel: self.methodChannel)
+    private lazy var storylyViewWrapper = FlutterStorylyViewWrapper(frame: self.frame, args: self.args, methodChannel: self.methodChannel)
 
     init(_ frame: CGRect, viewId: Int64, args: [String: Any], messenger: FlutterBinaryMessenger) {
         self.frame = frame
