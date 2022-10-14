@@ -5,13 +5,8 @@ public class FlutterStorylyViewFactory: NSObject, FlutterPlatformViewFactory {
     private let messenger: FlutterBinaryMessenger
     private var viewList: [Int64: Weak<FlutterStorylyView>] = [:]
     
-    public static weak var instance: FlutterStorylyViewFactory? = nil
-    
     init(messenger: FlutterBinaryMessenger) {
         self.messenger = messenger
-        super.init()
-
-        FlutterStorylyViewFactory.instance = self
     }
     
     public func create(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?) -> FlutterPlatformView {
