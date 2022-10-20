@@ -1,5 +1,8 @@
 # Release Notes
-### 1.26.5 (06.10.2022)
+### 1.26.7 (06.10.2022)
+* fixed story group disappear issue for several initialization case
+
+### 1.26.6 (06.10.2022)
 * added story group id support to storylyShareUrl
 * fixed cast exception on StoryCommentComponent
 * fixed MomentUser field visibility modifiers
