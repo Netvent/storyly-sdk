@@ -1,5 +1,10 @@
 # Release Notes
-### 1.26.7 (06.10.2022)
+### 1.26.8 (21.10.2022)
+* updated seen state of story groups with User Property when a new data set
+* removed pin from personalized story groups
+* fixed tracking event payload issue related to Reach
+
+### 1.26.7 (20.10.2022)
 * fixed story group disappear issue for several initialization case
 
 ### 1.26.6 (06.10.2022)
