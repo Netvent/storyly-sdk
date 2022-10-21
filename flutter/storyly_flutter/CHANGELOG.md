@@ -1,3 +1,6 @@
+### 1.26.5 (21.10.2022)
+* improved RootViewController handling on iOS side
+
 ### 1.26.4 (14.10.2022)
 * improved native dependency handling to support Monetization by Storyly
 
