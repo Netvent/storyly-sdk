@@ -1,4 +1,8 @@
 # Release Notes
+### 1.27.3 (21.10.2022)
+* updated seen state of story groups with User Property when a new data set
+* removed pin from personalized story groups
+
 ### 1.27.2 (06.10.2022)
 * added story group id support to storylyShareUrl
 * improved story bar scrolling performance with pagination
