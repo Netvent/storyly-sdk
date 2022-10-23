@@ -1,0 +1,11 @@
+framework module Storyly {
+  umbrella header "Storyly.h"
+
+  export *
+  module * { export * }
+}
+
+module Storyly.Swift {
+    header "Storyly-Swift.h"
+    requires objc
+}
