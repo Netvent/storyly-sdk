@@ -274,10 +274,10 @@ PODS:
     - React-jsi (= 0.67.3)
     - React-logger (= 0.67.3)
     - React-perflogger (= 0.67.3)
-  - Storyly (1.24.0)
-  - storyly-react-native (1.24.0):
+  - Storyly (1.26.2)
+  - storyly-react-native (1.26.2):
     - React
-    - Storyly (~> 1.24.0)
+    - Storyly (~> 1.26.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -312,7 +312,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - storyly-react-native (from `../node_modules/storyly-react-native`)
+  - storyly-react-native (from `../..`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -380,7 +380,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   storyly-react-native:
-    :path: "../node_modules/storyly-react-native"
+    :path: "../.."
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -415,10 +415,10 @@ SPEC CHECKSUMS:
   React-RCTVibration: d0361f15ea978958fab7ffb6960f475b5063d83f
   React-runtimeexecutor: af1946623656f9c5fd64ca6f36f3863516193446
   ReactCommon: 650e33cde4fb7d36781cd3143f5276da0abb2f96
-  Storyly: a532af158a58795a0c3efe6f13e7545b087fe3d9
-  storyly-react-native: 15a66fc16250e2f5edce786126a02438182d89f9
+  Storyly: 9f7694d816cbe22d1d5604b7653e75feabf1915f
+  storyly-react-native: 2e2e21c3b8d966327659948ab1bed55e1e05127c
   Yoga: 90dcd029e45d8a7c1ff059e8b3c6612ff409061a
 
-PODFILE CHECKSUM: c6194a454e1e60002a165fd35d288b7e52ead122
+PODFILE CHECKSUM: 6293267ebb6dadbbb6fcef19dcae80946bd9f1f0
 
 COCOAPODS: 1.11.3
