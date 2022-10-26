@@ -18,19 +18,19 @@ export default class App extends Component {
             <View>
                 <Storyly
                     ref={ref => { this.storyly = ref }}
-                    style={{ width: '100%', height: 120, marginTop: 44 }}
+                    style={{ width: '100%', height: 120, marginTop: 50 }}
                     storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
-                    onLoad={storyGroupList => {
-                        console.log("[Storyly] onLoad");
+                    onLoad={loadEvent => {
+                        console.log(`[Storyly] onLoad ${JSON.stringify(loadEvent)}`);
                     }}
                     onFail={errorMessage => {
-                        console.log("[Storyly] onFail");
+                        console.log(`[Storyly] onFail ${errorMessage}`);
                     }}
-                    onPress={story => {
-                        console.log("[Storyly] onPress");
+                    onPress={pressEvent => {
+                        console.log(`[Storyly] onPress ${JSON.stringify(pressEvent)}`);
                     }}
                     onEvent={eventPayload => {
-                        console.log("[Storyly] onEvent");
+                        console.log(`[Storyly] onEvent ${JSON.stringify(eventPayload)}`);
                     }}
                     onStoryOpen={() => {
                         console.log("[Storyly] onStoryOpen");
@@ -39,11 +39,62 @@ export default class App extends Component {
                         console.log("[Storyly] onStoryClose");
                     }}
                     onUserInteracted={interactionEvent => {
-                        console.log("[Storyly] onStoryUserInteracted");
+                        console.log(`[Storyly] onStoryUserInteracted ${JSON.stringify(interactionEvent)}`);
+                    }}/>
+                <Storyly
+                    ref={ref => { this.customStoryly = ref }}
+                    style={{ width: '100%', height: 180, marginTop: 10 }}
+                    storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
+                    storylyUserProperty={{"name": "TestUser", "surname": "TastLastName"}}
+                    storyGroupTextColorNotSeen={"#FF0000"}
+                    storyGroupIconBorderColorNotSeen={["#FFFF00", "#FF00FF"]}
+                    storyGroupIconBorderColorSeen={["#FFFFFF", "#FF000010"]}
+                    storyGroupIconBackgroundColor={"#000000"}
+                    storyGroupSize="custom"
+                    storyGroupIconHeight={70}
+                    storyGroupIconWidth={70}
+                    storyGroupIconCornerRadius={20}
+                    storyGroupTextSize={20}
+                    storyGroupTextLines={3}
+                    storyGroupTextTypeface={"Lobster1.4.otf"}
+                    storyGroupTextColorSeen={"#00FF00"}
+                    storyGroupPinIconColor={"#000000"}
+                    storyHeaderShareIcon={"share_icon"}
+                    storyHeaderCloseIcon={"close_icon"}
+                    storylyLayoutDirection={"ltr"}
+                    storyItemTextTypeface={"Lobster1.4.otf"}
+                    storyInteractiveTextTypeface={"Lobster1.4.otf"}
+                    onLoad={loadEvent => {
+                        this.customStoryly.setExternalData([{"{text_1}": "test 1", "{cta_name}": "TestCta", "{cta_url}": "http://testurl"}])
+                        console.log(`[Storyly] onLoad`);
+                    }}
+                    onFail={errorMessage => {
+                        console.log(`[Storyly-2] onFail ${errorMessage}`);
+                    }}
+                    onPress={pressEvent => {
+                        console.log(`[Storyly-2] onPress`);
+                    }}
+                    onEvent={eventPayload => {
+                        console.log(`[Storyly-2] onEvent`);
+                    }}
+                    onStoryOpen={() => {
+                        console.log("[Storyly-2] onStoryOpen");
+                    }}
+                    onStoryClose={() => {
+                        console.log("[Storyly-2] onStoryClose");
+                    }}
+                    onUserInteracted={interactionEvent => {
+                        console.log(`[Storyly-2] onStoryUserInteracted`);
                     }}/>
                 <Button
-                    onPress={() => { this.storyly.refresh(); }}
+                    onPress={() => { this.storyly.refresh(); this.customStoryly.refresh() }}
                     title="Refresh"
+                />
+                <Button 
+                    onPress={() => {
+                        this.storyly.openStoryWithId("2141", "283450")
+                    }}
+                    title="Open"
                 />
             </View>
         );
