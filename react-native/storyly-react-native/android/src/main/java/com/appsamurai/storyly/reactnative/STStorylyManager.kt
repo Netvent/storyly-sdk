@@ -296,7 +296,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val width = if (map.hasKey("width")) map.getInt("width") else return
         val height = if (map.hasKey("height")) map.getInt("height") else return
 
-        view.storylyView.storyGroupViewFactory = RNStoryGroupViewFactory(view.context, dpToPixel(width).roundToInt(), dpToPixel(height).roundToInt()).also {
+        view.storylyView.storyGroupViewFactory = RNStoryGroupViewFactory(view.context, width, height).also {
             it.onSendEvent = view::sendEvent
         }
     }
