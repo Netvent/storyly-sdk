@@ -13,6 +13,8 @@ class STStorylyManager: RCTViewManager {
        return STStorylyView()
     }
     
+    override class func requiresMainQueueSetup() -> Bool { true }
+    
     @objc(refresh:)
     func refresh(reactTag: NSNumber) {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
