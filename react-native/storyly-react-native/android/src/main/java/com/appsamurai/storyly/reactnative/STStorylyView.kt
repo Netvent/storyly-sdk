@@ -138,14 +138,27 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
 internal fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
     return Arguments.createMap().also { storyGroupMap ->
+        storyGroupMap.putString("groupTheme", storyGroup.groupTheme?.name)
         storyGroupMap.putString("id", storyGroup.uniqueId)
-        storyGroupMap.putInt("index", storyGroup.index)
         storyGroupMap.putString("title", storyGroup.title)
-        storyGroupMap.putBoolean("seen", storyGroup.seen)
         storyGroupMap.putString("iconUrl", storyGroup.iconUrl)
+        storyGroupMap.putMap("thematicIconUrls",  storyGroup.thematicIconUrls?.let { thematicIconUrls ->
+            Arguments.createMap().also {
+                thematicIconUrls.forEach { entry ->  it.putString(entry.key, entry.value) }
+            }
+        })
+        storyGroupMap.putString("coverUrl", storyGroup.coverUrl)
+        storyGroupMap.putInt("index", storyGroup.index)
+        storyGroupMap.putBoolean("seen", storyGroup.seen)
         storyGroupMap.putArray("stories", Arguments.createArray().also { storiesArray ->
-            storyGroup.stories.forEach { story ->
-                storiesArray.pushMap(createStoryMap(story))
+            storyGroup.stories.forEach { story -> storiesArray.pushMap(createStoryMap(story)) }
+        })
+        storyGroupMap.putString("type", storyGroup.type.customName)
+        storyGroupMap.putMap("momentsUser", storyGroup.momentsUser?.let { momentsUser ->
+            Arguments.createMap().also {
+                it.putString("id", momentsUser.userId)
+                it.putString("avatarUrl", momentsUser.userId)
+                it.putString("username", momentsUser.username)
             }
         })
     }

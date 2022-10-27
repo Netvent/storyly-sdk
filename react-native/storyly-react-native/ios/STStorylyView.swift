@@ -158,19 +158,28 @@ extension STStorylyView: StorylyDelegate {
     }
 }
 
-func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any]? {
+func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any?]? {
     guard let storyGroup = storyGroup else { return nil }
     return createStoryGroupMap(storyGroup: storyGroup)
 }
     
-func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any] {
-    let storyGroupMap: [String : Any] = [
+func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
+    let storyGroupMap: [String : Any?] = [
+        "groupTheme": storyGroup.groupTheme,
         "id": storyGroup.uniqueId,
-        "index": storyGroup.index,
         "title": storyGroup.title,
-        "seen": storyGroup.seen,
         "iconUrl": storyGroup.iconUrl.absoluteString,
-        "stories": storyGroup.stories.map { createStoryMap(story: $0) }
+        "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
+        "coverUrl": storyGroup.coverUrl?.absoluteString,
+        "index": storyGroup.index,
+        "seen": storyGroup.seen,
+        "stories": storyGroup.stories.map { createStoryMap(story: $0) },
+        "type": storyGroup.type.description,
+        "momentsUser": (storyGroup.momentsUser != nil) ? [
+            "id": storyGroup.momentsUser?.userId,
+            "avatarUrl": storyGroup.momentsUser?.avatarURL,
+            "username": storyGroup.momentsUser?.username,
+        ] : nil
     ]
     return storyGroupMap
 }

@@ -117,13 +117,24 @@ declare module "storyly-react-native" {
       storyComponent: StoryComponent;
     }
 
+    export interface MomentsUser {
+      id?: string;
+      avatarUrl?: string;
+      username?: string;
+    }
+
     export interface StoryGroup {
+      groupTheme?: number;
       id: string;
       title: string;
+      iconUrl: string;
+      thematicIconUrls?: Record<String, String>
+      coverUrl?: string;
       index: number;
       seen: boolean;
-      iconUrl: string;
       stories: Story[];
+      type: string,
+      momentsUser?: MomentsUser
     }
 
     export interface Story {
