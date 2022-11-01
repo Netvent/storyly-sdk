@@ -1,4 +1,9 @@
 # Release Notes
+### 0.1.0 (01.11.2022)
+* added video media support for create story for both gallery and camera
+* added text interactive component
+* added link cta interactive component
+
 ### 0.0.7 (06.10.2022)
 * improved story bar scrolling performance with pagination
 
