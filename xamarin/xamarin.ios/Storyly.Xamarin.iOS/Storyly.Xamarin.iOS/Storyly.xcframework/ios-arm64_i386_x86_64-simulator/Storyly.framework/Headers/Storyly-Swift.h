@@ -1081,7 +1081,7 @@ SWIFT_PROTOCOL("_TtP7Storyly22StorylyMomentsDelegate_")
 
 /// This class is used in Storyly initialization if you are planning to target
 /// labeled story groups which are set in dashboard
-SWIFT_CLASS("_TtC7Storyly19StorylySegmentation")
+SWIFT_CLASS_NAMED("StorylySegmentation")
 @interface StorylySegmentation : NSObject
 /// StorylySegmentation initialization
 /// \param segments Label set to target story groups
@@ -2401,7 +2401,7 @@ SWIFT_PROTOCOL("_TtP7Storyly22StorylyMomentsDelegate_")
 
 /// This class is used in Storyly initialization if you are planning to target
 /// labeled story groups which are set in dashboard
-SWIFT_CLASS("_TtC7Storyly19StorylySegmentation")
+SWIFT_CLASS_NAMED("StorylySegmentation")
 @interface StorylySegmentation : NSObject
 /// StorylySegmentation initialization
 /// \param segments Label set to target story groups
@@ -3721,7 +3721,7 @@ SWIFT_PROTOCOL("_TtP7Storyly22StorylyMomentsDelegate_")
 
 /// This class is used in Storyly initialization if you are planning to target
 /// labeled story groups which are set in dashboard
-SWIFT_CLASS("_TtC7Storyly19StorylySegmentation")
+SWIFT_CLASS_NAMED("StorylySegmentation")
 @interface StorylySegmentation : NSObject
 /// StorylySegmentation initialization
 /// \param segments Label set to target story groups

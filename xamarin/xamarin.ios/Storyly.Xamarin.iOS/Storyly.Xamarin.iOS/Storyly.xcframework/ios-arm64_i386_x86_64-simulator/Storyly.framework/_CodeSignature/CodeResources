@@ -102,7 +102,7 @@
 		</data>
 		<key>Headers/Storyly-Swift.h</key>
 		<data>
-		uBR3SEbE+43w0TamHPqYaBjmQq0=
+		Ofwbv0q0Ql5lvAJIHhZQOXTe3cQ=
 		</data>
 		<key>Headers/Storyly.h</key>
 		<data>
@@ -122,43 +122,43 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		jwfTpYTPeWdggFU/sLxecNH65HU=
+		nXqHkfUQjYoFFQeBoFZNFnVLqQM=
 		</data>
 		<key>Modules/Storyly.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Nu2+0ZRQhfmnpF6XZ6wc/4M/XhY=
+		nZBKP4Z9/4EUZQvnlajLVK1pf1M=
 		</data>
 		<key>Modules/Storyly.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		VMZxcTxws2qL8N6Mfb8xiXHA5Mc=
+		KquXWO2inZ2cpFFQwZkgJroxb2E=
 		</data>
 		<key>Modules/Storyly.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		5x3mR06yS925Sl0UolqR0OJM/28=
+		8+m+X+DsgzHHpfDsOgEtI7vqyVU=
 		</data>
 		<key>Modules/Storyly.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Kmq5x/uoNouZuY2TdbvlqTfcjY0=
+		1E1Aw2ju7dauT76KMBIUMOU5p2w=
 		</data>
 		<key>Modules/Storyly.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		imVS4/0fv0PDmR0Vj7RsFdfxU9Q=
+		cfmp9sU9TfjnzW1EJaHr4dMdJS4=
 		</data>
 		<key>Modules/Storyly.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		UDg1AuCnlr+vF6JxY0oPT42PYtc=
+		Rb5d9mxM+goEbncW4hU2y7kFcac=
 		</data>
 		<key>Modules/Storyly.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		UVJzAha0ZXtFRAFQqnU0tP9j5VU=
+		1rXnS6pbabU5doZEvFsQPHWoC7w=
 		</data>
 		<key>Modules/Storyly.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		gFiT1JznFMip0X7SYqJXj+MIH04=
+		JOQxrRE22GeiP4xuf3hfqjKxqtM=
 		</data>
 		<key>Modules/Storyly.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		G8DWl03tsVNtnhYxEIp/y1jghak=
+		7SWyr0NKO3mhXzfECBGoOHnxm7s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -650,11 +650,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			uBR3SEbE+43w0TamHPqYaBjmQq0=
+			Ofwbv0q0Ql5lvAJIHhZQOXTe3cQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			xJk1myOdOq0WIx6y6rbricaYDEpLZYAflDmlAZzRnAw=
+			Rq0wH5Csy1Qs3TlvW8AypiWzc38RIRpPqOjk/N5fIUk=
 			</data>
 		</dict>
 		<key>Headers/Storyly.h</key>
@@ -705,99 +705,99 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Nu2+0ZRQhfmnpF6XZ6wc/4M/XhY=
+			nZBKP4Z9/4EUZQvnlajLVK1pf1M=
 			</data>
 			<key>hash2</key>
 			<data>
-			INkEtkN9ivPtQ6spX6kWXtQ9wFXV5ZeLr+uZpzf6L8M=
+			Zg0emLF4h3N6vvJiOm5Z30dlqThoj3MXav3iHR1rfMM=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VMZxcTxws2qL8N6Mfb8xiXHA5Mc=
+			KquXWO2inZ2cpFFQwZkgJroxb2E=
 			</data>
 			<key>hash2</key>
 			<data>
-			bAcWC7Gz4KxLaVtAnrzLLk1ICCGFlpIXFXwZxbEH1ik=
+			1WQt+lYP+K30O9UL4Twm1lYJfowb9ZRXHg1Oxy1MiMs=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5x3mR06yS925Sl0UolqR0OJM/28=
+			8+m+X+DsgzHHpfDsOgEtI7vqyVU=
 			</data>
 			<key>hash2</key>
 			<data>
-			se7pvwPuO2zMfOM4DoMRpHIjq4DpwtnO9HZ09WmfD6g=
+			A2EzI4K+bbvNizUaEkiSbpk2bdb7vxAzctQwjxdNxkk=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Kmq5x/uoNouZuY2TdbvlqTfcjY0=
+			1E1Aw2ju7dauT76KMBIUMOU5p2w=
 			</data>
 			<key>hash2</key>
 			<data>
-			+zIECyfwiFiYTZQJ+IH+LE1aDTLOgqVmW72HchBT4Lk=
+			AgGtB/MTl2tdKGZnb524be0+AYNcrw3MS0e3bmNY4sc=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			imVS4/0fv0PDmR0Vj7RsFdfxU9Q=
+			cfmp9sU9TfjnzW1EJaHr4dMdJS4=
 			</data>
 			<key>hash2</key>
 			<data>
-			lkDI4xLVA4a0ABrAAyOW/tXZjiRgWzI45bhRlk8R98A=
+			XTLbNLJc5DkbOa94UhdD/wUpsUFikbYELh8KjK7gV+s=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UDg1AuCnlr+vF6JxY0oPT42PYtc=
+			Rb5d9mxM+goEbncW4hU2y7kFcac=
 			</data>
 			<key>hash2</key>
 			<data>
-			Bf9ZrszlhI6dC+3O69PNTNrRPax9Wm3vqgoLsC6gHoQ=
+			37ikbqNdTySu5zv2KJ2f9Wk2eHpF7OmD3g9ND2H/UpU=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UVJzAha0ZXtFRAFQqnU0tP9j5VU=
+			1rXnS6pbabU5doZEvFsQPHWoC7w=
 			</data>
 			<key>hash2</key>
 			<data>
-			bBJqOv/a25y+Y3u40MxNgc4I+p2zsSpRHT8oW2JlrCI=
+			mqQauJPR5FIDDCIIG9sVDjmQHC/GpIBZhXtBmYgUI5A=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gFiT1JznFMip0X7SYqJXj+MIH04=
+			JOQxrRE22GeiP4xuf3hfqjKxqtM=
 			</data>
 			<key>hash2</key>
 			<data>
-			crHFLeGCuaGRKoT0nRjz8lzVwPdROrJKjhT7d0R4qIU=
+			zN2+Qd8vJShAcfCqF1DgOwmFWZUmfYI7AgUGmbmi9bo=
 			</data>
 		</dict>
 		<key>Modules/Storyly.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G8DWl03tsVNtnhYxEIp/y1jghak=
+			7SWyr0NKO3mhXzfECBGoOHnxm7s=
 			</data>
 			<key>hash2</key>
 			<data>
-			/Rxxs7RqCPn6xXGYHQt4jSU6dfjVUVxuE8HhvnyH/WU=
+			bwIWGxmCTglW6w5jIzsUd8R1OH+8fZ7gcyZguzTW3VE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

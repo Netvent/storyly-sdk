@@ -329,7 +329,7 @@ extension UIKit.UIView {
   @objc public init(storylyId: Swift.String, segmentation: Storyly.StorylySegmentation = StorylySegmentation(segments: nil), customParameter: Swift.String? = nil, isTestMode: Swift.Bool = false, storylyPayload: Swift.String? = nil, userData: [Swift.String : Swift.String] = [:])
   @objc deinit
 }
-@objc final public class StorylySegmentation : ObjectiveC.NSObject {
+@objc(StorylySegmentation) final public class StorylySegmentation : ObjectiveC.NSObject {
   @objc public init(segments: Swift.Set<Swift.String>?)
   @objc deinit
 }

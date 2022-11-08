@@ -12,10 +12,35 @@ namespace Storyly
 	[Protocol]
 	interface StorylyInit
 	{
+		// @property (nonatomic, strong) StorylySegmentation * _Nonnull segmentation;
+		[Export("segmentation", ArgumentSemantic.Strong)]
+		StorylySegmentation Segmentation { get; set; }
+
+		// @property (copy, nonatomic) NSDictionary<NSString *,NSString *> * _Nonnull userData;
+		[Export("userData", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSString> UserData { get; set; }
+
 		// -(instancetype _Nonnull)initWithStorylyId:(NSString * _Nonnull)storylyId __attribute__((objc_designated_initializer));
 		[Export("initWithStorylyId:")]
 		[DesignatedInitializer]
 		IntPtr Constructor(string storylyId);
+
+		// -(instancetype _Nonnull)initWithStorylyId:(NSString * _Nonnull)storylyId segmentation:(StorylySegmentation * _Nonnull)segmentation customParameter:(NSString * _Nullable)customParameter isTestMode:(BOOL)isTestMode storylyPayload:(NSString * _Nullable)storylyPayload userData:(NSDictionary<NSString *,NSString *> * _Nonnull)userData __attribute__((objc_designated_initializer));
+		[Export("initWithStorylyId:segmentation:customParameter:isTestMode:storylyPayload:userData:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string storylyId, StorylySegmentation segmentation, [NullAllowed] string customParameter, bool isTestMode, [NullAllowed] string storylyPayload, NSDictionary<NSString, NSString> userData);
+	}
+
+	// @interface StorylySegmentation : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	[Protocol]
+	interface StorylySegmentation
+	{
+		// -(instancetype _Nonnull)initWithSegments:(NSSet<NSString *> * _Nullable)segments __attribute__((objc_designated_initializer));
+		[Export("initWithSegments:")]
+		[DesignatedInitializer]
+		IntPtr Constructor([NullAllowed] NSSet<NSString> segments);
 	}
 
 	// @interface StoryGroup : NSObject
@@ -207,6 +232,10 @@ namespace Storyly
 		// @property (nonatomic, weak) UIViewController * _Nullable rootViewController;
 		[NullAllowed, Export("rootViewController", ArgumentSemantic.Weak)]
 		UIViewController RootViewController { get; set; }
+
+		// -(BOOL)setExternalData:(NSArray<NSDictionary *> * _Nonnull)externalData __attribute__((warn_unused_result("")));
+		[Export("setExternalData:")]
+		bool SetExternalData(NSDictionary[] externalData);
 
 		[Wrap("WeakDelegate")]
 		[NullAllowed]
