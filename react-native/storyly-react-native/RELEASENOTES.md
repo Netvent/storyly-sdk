@@ -1,4 +1,8 @@
 # Release Notes
+### 1.27.0 (08.11.2022)
+* added STStorylyGroupViewFactory and STStorylyGroupView to support customized story list views
+* added link cta interactive component
+
 ### 1.26.2 (11.10.2022)
 * improved native dependency handling to support Monetization by Storyly
 
