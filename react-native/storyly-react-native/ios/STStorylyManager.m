@@ -40,6 +40,7 @@ RCT_REMAP_VIEW_PROPERTY(storyGroupListStyling, storylyView.storyGroupListStyling
 RCT_REMAP_VIEW_PROPERTY(storyGroupTextStyling, storylyView.storyGroupTextStyling, stStoryGroupTextStyling)
 RCT_REMAP_VIEW_PROPERTY(storyHeaderStyling, storylyView.storyHeaderStyling, stStoryHeaderStyling)
 RCT_REMAP_VIEW_PROPERTY(storylyLayoutDirection, storylyView.storylyLayoutDirection, stStorylyLayoutDirection)
+RCT_REMAP_VIEW_PROPERTY(storyGroupViewFactory, storyGroupViewFactorySize, stStoryGroupViewFactory)
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)
@@ -49,5 +50,7 @@ RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresented, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresentFailed, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryDismissed, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onCreateCustomView, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onUpdateCustomView, RCTBubblingEventBlock)
 
 @end

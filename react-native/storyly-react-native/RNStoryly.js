@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import { requireNativeComponent,
+import React, { Component, useState, forwardRef, useImperativeHandle } from 'react';
+import {
+    requireNativeComponent,
     UIManager,
     findNodeHandle,
-    processColor} from 'react-native';
+    processColor,
+} from 'react-native';
 import { string, arrayOf, func, number, bool, object } from 'prop-types';
 
 class Storyly extends Component {
@@ -79,10 +81,24 @@ class Storyly extends Component {
         }
     }
 
+    _onStorylyStoryPresentFailed = (eventPayload) => {
+        if (this.props.onStoryOpenFailed) {
+            this.props.onStoryOpenFailed(eventPayload.nativeEvent);
+        }
+    }
+
     _onStorylyUserInteracted = (eventPayload) => {
         if (this.props.onUserInteracted) {
             this.props.onUserInteracted(eventPayload.nativeEvent);
         }
+    }
+
+    _onCreateCustomView = (_) => {
+        this.customViewFactoryRef?.onCreateCustomView()
+    }
+
+    _onUpdateCustomView = (eventPayload) => {
+        this.customViewFactoryRef?.onUpdateCustomView(eventPayload.nativeEvent)
     }
 
     render() {
@@ -115,6 +131,7 @@ class Storyly extends Component {
             storyHeaderCloseButtonIsVisible,
             storyHeaderCloseIcon,
             storyHeaderShareIcon,
+            storyGroupViewFactory,
             onLoad,
             onFail,
             onEvent,
@@ -128,26 +145,36 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
-                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode}}
-                storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
-                storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
-                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'typeface': storyGroupTextTypeface, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines,'colorSeen': storyGroupTextColorSeen,'colorNotSeen': storyGroupTextColorNotSeen}}
-                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon}}
+                storylyInit={{ 'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode }}
+                storyGroupIconStyling={{ 'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius }}
+                storyGroupListStyling={{ 'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems }}
+                storyGroupTextStyling={{ 'isVisible': storyGroupTextIsVisible, 'typeface': storyGroupTextTypeface, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'colorSeen': storyGroupTextColorSeen, 'colorNotSeen': storyGroupTextColorNotSeen }}
+                storyHeaderStyling={{ 'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon }}
                 onStorylyLoaded={this._onStorylyLoaded}
                 onStorylyLoadFailed={this._onStorylyLoadFailed}
                 onStorylyEvent={this._onStorylyEvent}
                 onStorylyActionClicked={this._onStorylyActionClicked}
                 onStorylyStoryPresented={onStoryOpen}
-                onStorylyStoryPresentFailed={onStoryOpenFailed}
+                onStorylyStoryPresentFailed={this._onStorylyStoryPresentFailed}
                 onStorylyStoryDismissed={onStoryClose}
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
+                onCreateCustomView={this._onCreateCustomView}
+                onUpdateCustomView={this._onUpdateCustomView}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
                 storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
                 storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
                 storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
                 storyItemTextTypeface={storyItemTextTypeface}
                 storyInteractiveTextTypeface={storyInteractiveTextTypeface}
-                ref={el => (this._storylyView = el)}/>
+                storyGroupViewFactory={storyGroupViewFactory ? { width: storyGroupViewFactory.width, height: storyGroupViewFactory.height } : null}
+                ref={el => (this._storylyView = el)}>
+                {storyGroupViewFactory ?
+                    <STStorylyGroupViewFactory
+                        ref={(ref) => { this.customViewFactoryRef = ref }}
+                        width={storyGroupViewFactory.width}
+                        height={storyGroupViewFactory.height}
+                        CustomizedView={storyGroupViewFactory.customView} /> : <></>}
+            </STStoryly>
         )
     }
 }
@@ -160,7 +187,7 @@ Storyly.propTypes = {
     customParameter: string,
     storylyTestMode: bool,
     storylyPayload: string,
-    
+
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),
     storyGroupIconBackgroundColor: string,
@@ -188,6 +215,7 @@ Storyly.propTypes = {
     storyHeaderCloseIcon: string,
     storyHeaderShareIcon: string,
     storylyLayoutDirection: string,
+    storyGroupViewFactory: object,
 
     onLoad: func,
     onFail: func,
@@ -200,5 +228,41 @@ Storyly.propTypes = {
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);
+
+const STStorylyGroupViewFactory = forwardRef(({ width, height, CustomizedView }, ref) => {
+    const [customViewList, setCustomViewList] = useState([])
+
+    useImperativeHandle(ref, () => ({
+        onCreateCustomView, onUpdateCustomView
+    }))
+
+    const onCreateCustomView = (_) => {
+        setCustomViewList((current) => ([
+            ...current, (
+                <STStorylyGroupView key={current.length} style={{ width: width, height: height }}>
+                    <CustomizedView storyGroup={null} />
+                </STStorylyGroupView>
+            )
+        ]))
+    }
+
+    const onUpdateCustomView = ({ index, storyGroup }) => {
+        let updated = customViewList.map((value, i) => {
+            if (i === index) {
+                return (
+                    <STStorylyGroupView key={index} style={{ width: width, height: height }}>
+                        <CustomizedView storyGroup={storyGroup} />
+                    </STStorylyGroupView>
+                )
+            }
+            return value
+        })
+        setCustomViewList([...updated])
+    }
+
+    return (<>{customViewList}</>)
+})
+
+const STStorylyGroupView = requireNativeComponent('STStorylyGroupView', null);
 
 export default Storyly;

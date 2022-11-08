@@ -70,6 +70,13 @@ extension RCTConvert {
         return storyHeaderStyling
     }
     
+    @objc(stStoryGroupViewFactory:)
+    static func stStoryGroupViewFactory(json: NSDictionary?) -> CGSize {
+        let width = (json?["width"] as? CGFloat) ?? 0
+        let height = (json?["height"] as? CGFloat) ?? 0
+        return CGSize(width: width, height: height)
+    }
+    
     @objc(stStorylyLayoutDirection:)
     static func stStorylyLayoutDirection(direction: NSString) -> StorylyLayoutDirection {
         switch direction {

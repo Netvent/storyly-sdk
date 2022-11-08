@@ -37,6 +37,24 @@ class STStorylyView: UIView {
     @objc(onStorylyUserInteracted)
     var onStorylyUserInteracted: RCTBubblingEventBlock? = nil
     
+    @objc(onCreateCustomView)
+    var onCreateCustomView: RCTBubblingEventBlock? = nil
+    
+    @objc(onUpdateCustomView)
+    var onUpdateCustomView: RCTBubblingEventBlock? = nil
+    
+    @objc(storyGroupViewFactorySize)
+    var storyGroupViewFactorySize: CGSize = CGSize(width: 0, height: 0) {
+        didSet {
+            if storyGroupViewFactorySize.width <= 0 || storyGroupViewFactorySize.height <= 0 { return }
+            self.storyGroupViewFactory = STStoryGroupViewFactory(width: storyGroupViewFactorySize.width,
+                                                            height: storyGroupViewFactorySize.height)
+            self.storyGroupViewFactory?.onCreateCustomView = self.onCreateCustomView
+            self.storyGroupViewFactory?.onUpdateCustomView = self.onUpdateCustomView
+            self.storylyView.storyGroupViewFactory = self.storyGroupViewFactory
+        }
+    }
+    var storyGroupViewFactory: STStoryGroupViewFactory? = nil
     
     override init(frame: CGRect) {
         self.storylyView = StorylyView(frame: frame)
@@ -55,8 +73,11 @@ class STStorylyView: UIView {
         self.storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
+        guard let subview = subview as? STStorylyGroupView else { return }
+        storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
     }
 }
 
@@ -102,7 +123,7 @@ extension STStorylyView: StorylyDelegate {
     }
     
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        self.onStorylyActionClicked?(self.createStoryMap(story: story) as [AnyHashable: Any])
+        self.onStorylyActionClicked?(createStoryMap(story: story) as [AnyHashable: Any])
     }
     
     func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
@@ -134,103 +155,5 @@ extension STStorylyView: StorylyDelegate {
             "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
         self.onStorylyUserInteracted?(map)
-    }
-}
-
-private extension STStorylyView {
-    func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any]? {
-        guard let storyGroup = storyGroup else { return nil }
-        return createStoryGroupMap(storyGroup: storyGroup)
-    }
-        
-    func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any] {
-        let storyGroupMap: [String : Any] = [
-            "id": storyGroup.uniqueId,
-            "index": storyGroup.index,
-            "title": storyGroup.title,
-            "seen": storyGroup.seen,
-            "iconUrl": storyGroup.iconUrl.absoluteString,
-            "stories": storyGroup.stories.map { createStoryMap(story: $0) }
-        ]
-        return storyGroupMap
-    }
-    
-    func createStoryMap(_ story: Story?) -> [String: Any?]? {
-        guard let story = story else { return nil }
-        return createStoryMap(story: story)
-    }
-    
-    func createStoryMap(story: Story) -> [String: Any?] {
-        let storyMap: [String : Any?] = [
-            "id": story.uniqueId,
-            "index": story.index,
-            "title": story.title,
-            "name": story.name,
-            "seen": story.seen,
-            "currentTime": story.currentTime,
-            "media": [
-                "type": story.media.type.rawValue,
-                "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
-                "actionUrl": story.media.actionUrl,
-                "previewUrl": story.media.previewUrl?.absoluteString,
-                "actionUrlList": story.media.actionUrlList
-            ] as [String: Any?]
-        ]
-        return storyMap
-    }
-    
-    func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?]? {
-        guard let storyComponent = storyComponent else { return nil }
-        return createStoryComponentMap(storyComponent: storyComponent)
-    }
-    
-    func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
-        switch storyComponent {
-            case let storyComponent as StoryQuizComponent: return [
-                "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                "id": storyComponent.id,
-                "title": storyComponent.title,
-                "options": storyComponent.options,
-                "rightAnswerIndex": storyComponent.rightAnswerIndex,
-                "selectedOptionIndex": storyComponent.selectedOptionIndex,
-                "customPayload": storyComponent.customPayload
-            ]
-            case let storyComponent as StoryPollComponent: return [
-                "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                "id": storyComponent.id,
-                "title": storyComponent.title,
-                "options": storyComponent.options,
-                "selectedOptionIndex": storyComponent.selectedOptionIndex,
-                "customPayload": storyComponent.customPayload
-            ]
-            case let storyComponent as StoryEmojiComponent: return [
-                "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                "id": storyComponent.id,
-                "emojiCodes": storyComponent.emojiCodes,
-                "selectedEmojiIndex": storyComponent.selectedEmojiIndex,
-                "customPayload": storyComponent.customPayload
-            ]
-            case let storyComponent as StoryRatingComponent: return [
-                "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                "id": storyComponent.id,
-                "emojiCode": storyComponent.emojiCode,
-                "rating": storyComponent.rating,
-                "customPayload": storyComponent.customPayload
-            ]
-            case let storyComponent as StoryPromoCodeComponent: return [
-                "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                "id": storyComponent.id,
-                "text": storyComponent.text
-            ]
-            case let storyComponent as StoryCommentComponent: return [
-                "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                "id": storyComponent.id,
-                "text": storyComponent.text
-            ]
-            default: return [
-                "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                "id": storyComponent.id,
-            ]
-        }
     }
 }

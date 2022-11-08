@@ -1,5 +1,5 @@
 declare module "storyly-react-native" {
-  import { Component } from "react";
+  import { Component, JSX } from "react";
   import { ViewProps } from "react-native";
 
   export namespace Storyly {
@@ -19,6 +19,7 @@ declare module "storyly-react-native" {
       storyGroupIconBackgroundColor?: string;
       storyGroupIconBorderColorSeen?: string[];
       storyGroupIconBorderColorNotSeen?: string[];
+      storyGroupViewFactory?: StoryGroupViewFactory,
 
       storyGroupTextSize?: number;
       storyGroupTextLines?: number;
@@ -42,6 +43,7 @@ declare module "storyly-react-native" {
       storyHeaderCloseButtonIsVisible?: boolean;
       storyHeaderCloseIcon?: string,
       storyHeaderShareIcon?: string,
+
 
       storylyLayoutDirection?: "ltr" | "rtl";
 
@@ -115,13 +117,24 @@ declare module "storyly-react-native" {
       storyComponent: StoryComponent;
     }
 
+    export interface MomentsUser {
+      id?: string;
+      avatarUrl?: string;
+      username?: string;
+    }
+
     export interface StoryGroup {
+      groupTheme?: number;
       id: string;
       title: string;
+      iconUrl: string;
+      thematicIconUrls?: Record<String, String>
+      coverUrl?: string;
       index: number;
       seen: boolean;
-      iconUrl: string;
       stories: Story[];
+      type: string,
+      momentsUser?: MomentsUser
     }
 
     export interface Story {
@@ -129,6 +142,7 @@ declare module "storyly-react-native" {
       title: string;
       name: string;
       index: number;
+      pinned: boolean;
       seen: boolean;
       currentTime: number;
       media: {
@@ -158,6 +172,12 @@ declare module "storyly-react-native" {
   }
 
   export type ExternalData = Record<string, string>[];
+
+  export interface StoryGroupViewFactory {
+    width: number;
+    height: number;
+    customViewComponent: ({ storyGroup: StoryGroup }) => JSX.Element;
+  }
 
   export class Storyly extends Component<Storyly.Props> {
     open: () => void;
