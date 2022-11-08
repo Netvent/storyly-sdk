@@ -48,9 +48,9 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="Storyly.xcframework\ios-arm64_i386_x86_64-simulator\Storyly.framework">
+    <NativeReference Include="Storyly.framework">
       <Kind>Framework</Kind>
-      <Frameworks>Foundation UIKit</Frameworks>
+      <Frameworks>UIKit Foundation</Frameworks>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />

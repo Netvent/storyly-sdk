@@ -45,7 +45,7 @@ namespace Storyly.Xamarin.iOS.Demo
                     new NSString("{Description}"), new NSString("Update your wardrobe for winter with this fashionable and functional coat."),
                     new NSString("{CTA}"), new NSString("Buy Now"),
                     new NSString("{CTA_URL}"), new NSString("https://www3.next.co.uk/g65149s2/t60284#t60284")
-                 )
+                    )
             });
             View.AddSubview(womenStorylyView);
 
@@ -57,7 +57,7 @@ namespace Storyly.Xamarin.iOS.Demo
                 false,
                 null,
                 new NSDictionary<NSString, NSString>(
-                 new NSString("username"), new NSString("Levent")
+                    new NSString("username"), new NSString("Levent")
                 )),
                 RootViewController = this,
                 Delegate = new StorylyDelegateImpl()
