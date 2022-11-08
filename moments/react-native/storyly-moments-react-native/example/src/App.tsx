@@ -4,6 +4,26 @@ import { StyleSheet, View, Button, SafeAreaView } from 'react-native';
 import StorylyMoments, { OpenCreateStoryEvent, OpenMyStoryEvent, StorylyMomentsEvent, UserStoriesLoadedEvent, UserStoriesLoadFailedEvent } from 'storyly-moments-react-native';
 
 export default function App() {
+  const [userPayload, setUserPayload] = React.useState<string | undefined>();
+
+  const momentsUserPayload: StorylyMomentsUserPayload = {
+    id: "",
+    username: "",
+    avatarUrl: "",
+    followings: [""],
+    creatorTags: null,
+    consumerTags: null,
+    expirationTime: -1,
+  }
+
+  React.useEffect(() => {
+    StorylyMoments.encryptUserPayload(
+      momentsUserPayload,
+      [MOMENTS_SECRET_KEY],
+      [MOMENTS_INITIALIZATION_VECTOR]      
+    ).then(setUserPayload);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.box}>
@@ -11,7 +31,7 @@ export default function App() {
           onPress={() => 
             StorylyMoments.initialize(
               [MOMENTS_TOKEN], 
-              [MOMENTS_USER_PAYLOAD]
+              userPayload
             )
           }
           title="Initialize Moments"

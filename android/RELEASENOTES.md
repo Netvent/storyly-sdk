@@ -1,4 +1,40 @@
 # Release Notes
+### 1.26.8 (21.10.2022)
+* updated seen state of story groups with User Property when a new data set
+* removed pin from personalized story groups
+* fixed tracking event payload issue related to Reach
+
+### 1.26.7 (20.10.2022)
+* fixed story group disappear issue for several initialization case
+
+### 1.26.6 (06.10.2022)
+* added story group id support to storylyShareUrl
+* fixed cast exception on StoryCommentComponent
+* fixed MomentUser field visibility modifiers
+
+### 1.26.4 (03.10.2022)
+* added MomentUser field to StoryGroup data
+* fixed duplicate moments story group issue
+* fixed a bug on report story feature 
+
+### 1.26.3 (19.09.2022)
+* fixed duplicate moment view issue
+* fixed swipe up size calculation for some devices
+* fixed comment interactive layer rendering
+
+### 1.26.2 (12.09.2022)
+* fixed iVOD story group not showing issue
+* fixed duplicate moments story group issue
+
+### 1.26.1 (06.09.2022)
+* fixed a crash during initialization with userPayload
+* improved accessibility features with talkback feature
+
+### 1.26.0 (23.08.2022)
+* added story bar animations with a/b test option
+* improved story bar scrolling performance with pagination
+* fixed text alignment issue in interactive components if style is given
+
 ### 1.25.1 (04.08.2022)
 * changed Storyly-ExoPlayer2 dependency to 1.28.0-1
 

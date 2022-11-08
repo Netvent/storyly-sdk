@@ -3,9 +3,11 @@ package com.appsamurai.storyly.storyly_flutter
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.TypedValue
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.styling.StoryGroupIconStyling
@@ -53,6 +55,7 @@ class FlutterStorylyView(
         private const val ARGS_STORYLY_ID = "storylyId"
         private const val ARGS_STORYLY_SEGMENTS = "storylySegments"
         private const val ARGS_STORYLY_USER_PROPERTY = "storylyUserProperty"
+        private const val ARGS_STORYLY_PAYLOAD = "storylyPayload"
         private const val ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
         private const val ARGS_STORYLY_SHARE_URL = "storylyShareUrl"
         private const val ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
@@ -75,6 +78,8 @@ class FlutterStorylyView(
         private const val ARGS_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val ARGS_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val ARGS_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
+        private const val ARGS_STORY_ITEM_TEXT_TYPEFACE = "storyItemTextTypeface"
+        private const val ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
     }
 
     private val storylyView: StorylyView by lazy {
@@ -82,16 +87,18 @@ class FlutterStorylyView(
             val storylyId = args[ARGS_STORYLY_ID] as? String
                 ?: throw Exception("StorylyId must be set.")
             val segments = args[ARGS_STORYLY_SEGMENTS] as? List<String>
-            val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
             val isTestMode = args[ARGS_STORYLY_IS_TEST_MODE] as? Boolean ?: false
+            val storylyPayload = args[ARGS_STORYLY_PAYLOAD] as? String
+            val customParameters = args[ARGS_STORYLY_CUSTOM_PARAMETERS] as? String
             val userProperty = args[ARGS_STORYLY_USER_PROPERTY] as? Map<String, String> ?: null
             storylyInit = StorylyInit(
                 storylyId,
                 StorylySegmentation(segments = segments?.toSet()),
+                isTestMode = isTestMode,
+                storylyPayload = storylyPayload,
                 customParameter = customParameters,
-                isTestMode = isTestMode
             ).apply {
-                userProperty?.let { setUserData(userProperty) }
+                userProperty?.let { userData = it }
             }
             (args[ARGS_STORYLY_SHARE_URL] as? String)?.let { storylyShareUrl = it }
 
@@ -112,6 +119,14 @@ class FlutterStorylyView(
             (args[ARGS_STORY_ITEM_ICON_BORDER_COLOR] as? List<String>)?.let { colors -> setStoryItemIconBorderColor(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_ITEM_TEXT_COLOR] as? String)?.let { setStoryItemTextColor(Color.parseColor(it)) }
             (args[ARGS_STORY_ITEM_PROGRESS_BAR_COLOR] as? List<String>)?.let { colors -> setStoryItemProgressBarColor(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
+            (args[ARGS_STORY_ITEM_TEXT_TYPEFACE] as? String)?.let { typeface ->
+                val customTypeface = try { Typeface.createFromAsset(context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+                setStoryItemTextTypeface(customTypeface)
+            }
+            (args[ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE] as? String)?.let { typeface ->
+                val customTypeface = try { Typeface.createFromAsset(context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+                setStoryInteractiveTextTypeface(customTypeface)
+            }
 
             (args[ARGS_STORY_GROUP_ICON_STYLING] as? Map<String, *>)?.let {
                 val width = it["width"] as? Int ?: return@let
@@ -128,17 +143,20 @@ class FlutterStorylyView(
 
             (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }
 
-            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let {
+            (args[ARGS_STORY_GROUP_TEXT_STYLING] as? Map<String, *>)?.let { it ->
                 val isVisible = it["isVisible"] as? Boolean ?: true
                 val textSize = it["textSize"] as? Int
                 val lines = it["lines"] as? Int
-                val colorSeen = Color.parseColor(it["colorSeen"] as? String ?: "#FF000000") 
+                val typeface = it["typeface"] as? String
+                val colorSeen = Color.parseColor(it["colorSeen"] as? String ?: "#FF000000")
                 val colorNotSeen = Color.parseColor(it["colorNotSeen"] as? String ?: "#FF000000")
+
+                val customTypeface = typeface?.let { try { Typeface.createFromAsset(context.applicationContext.assets, it) } catch(_: Exception) { null } } ?: Typeface.DEFAULT
 
                 setStoryGroupTextStyling(
                     StoryGroupTextStyling(
                         isVisible = isVisible,
-                        typeface = Typeface.DEFAULT,
+                        typeface = customTypeface,
                         textSize = Pair(TypedValue.COMPLEX_UNIT_PX, textSize),
                         minLines = null,
                         maxLines = null,
@@ -150,10 +168,16 @@ class FlutterStorylyView(
             }
 
             (args[ARGS_STORY_HEADER_STYLING] as? Map<String, *>)?.let {
-                val isTextVisible = it["isTextVisible"] as? Boolean ?: return@let
-                val isIconVisible = it["isIconVisible"] as? Boolean ?: return@let
-                val isCloseButtonVisible = it["isCloseButtonVisible"] as? Boolean ?: return@let
-                setStoryHeaderStyling(StoryHeaderStyling(isTextVisible, isIconVisible, isCloseButtonVisible))
+                val isTextVisible = it["isTextVisible"] as? Boolean ?: true
+                val isIconVisible = it["isIconVisible"] as? Boolean ?: true
+                val isCloseButtonVisible = it["isCloseButtonVisible"] as? Boolean ?: true
+                val shareIcon = it["shareIcon"] as? String
+                val closeIcon = it["closeIcon"] as? String
+
+                val shareIconDrawable = shareIcon?.let { icon -> getDrawable(context.applicationContext, icon) }
+                val closeIconDrawable = closeIcon?.let { icon -> getDrawable(context.applicationContext, icon) }
+
+                setStoryHeaderStyling(StoryHeaderStyling(isTextVisible, isIconVisible, isCloseButtonVisible, closeIconDrawable, shareIconDrawable))
             }
 
             (args[ARGS_STORYLY_LAYOUT_DIRECTION] as? String)?.let {
@@ -250,7 +274,12 @@ class FlutterStorylyView(
             "index" to storyGroup.index,
             "seen" to storyGroup.seen,
             "iconUrl" to storyGroup.iconUrl,
-            "stories" to storyGroup.stories.map { story -> createStoryMap(story) }
+            "stories" to storyGroup.stories.map { story -> createStoryMap(story) },
+            "groupTheme" to storyGroup.groupTheme,
+            "thematicIconUrls" to storyGroup.thematicIconUrls,
+            "coverUrl" to storyGroup.coverUrl,
+            "pinned" to storyGroup.pinned,
+            "type" to storyGroup.type.ordinal,
         )
     }
 
@@ -261,10 +290,13 @@ class FlutterStorylyView(
             "index" to story.index,
             "seen" to story.seen,
             "currentTime" to story.currentTime,
-            "media" to with(story.media) {
+            "media" to story.media.let {
                 mapOf(
-                    "type" to this.type.ordinal,
-                    "actionUrl" to this.actionUrl
+                    "type" to it.type.ordinal,
+                    "actionUrlList" to it.actionUrlList,
+                    "actionUrl" to it.actionUrl,
+                    "previewUrl" to it.previewUrl,
+                    "storyComponentList" to it.storyComponentList?.map { component -> createStoryComponentMap(component) }
                 )
             }
         )
@@ -275,6 +307,7 @@ class FlutterStorylyView(
             is StoryQuizComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "rightAnswerIndex" to storyComponent.rightAnswerIndex,
@@ -285,6 +318,7 @@ class FlutterStorylyView(
             is StoryPollComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "selectedOptionIndex" to storyComponent.selectedOptionIndex,
@@ -294,6 +328,7 @@ class FlutterStorylyView(
             is StoryEmojiComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "emojiCodes" to storyComponent.emojiCodes,
                     "selectedEmojiIndex" to storyComponent.selectedEmojiIndex,
                     "customPayload" to storyComponent.customPayload
@@ -302,12 +337,37 @@ class FlutterStorylyView(
             is StoryRatingComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
                     "emojiCode" to storyComponent.emojiCode,
                     "rating" to storyComponent.rating,
                     "customPayload" to storyComponent.customPayload
                 )
             }
+            is StoryPromoCodeComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "text" to storyComponent.text
+                )
+            }
+            is StoryCommentComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "text" to storyComponent.text
+                )
+            }
+            else -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                )
+            }
         }
-        return mapOf("type" to storyComponent.type.name.toLowerCase(Locale.ENGLISH))
+    }
+
+    private fun getDrawable(context: Context, name: String): Drawable? {
+        val id = context.resources.getIdentifier(name, "drawable", context.packageName)
+        return ContextCompat.getDrawable(context, id)
     }
 }

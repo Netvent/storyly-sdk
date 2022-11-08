@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { requireNativeComponent,
     UIManager,
     findNodeHandle,
-    ViewPropTypes,
     processColor} from 'react-native';
 import { string, arrayOf, func, number, bool, object } from 'prop-types';
 
@@ -92,17 +91,21 @@ class Storyly extends Component {
             storylySegments,
             storylyUserProperty,
             customParameter,
+            storylyPayload,
             storylyTestMode,
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
             storyItemIconBorderColor,
             storyItemProgressBarColor,
+            storyItemTextTypeface,
+            storyInteractiveTextTypeface,
             storyGroupIconHeight,
             storyGroupIconWidth,
             storyGroupIconCornerRadius,
             storyGroupListEdgePadding,
             storyGroupListPaddingBetweenItems,
             storyGroupTextIsVisible,
+            storyGroupTextTypeface,
             storyGroupTextSize,
             storyGroupTextLines,
             storyGroupTextColorSeen,
@@ -110,6 +113,8 @@ class Storyly extends Component {
             storyHeaderTextIsVisible,
             storyHeaderIconIsVisible,
             storyHeaderCloseButtonIsVisible,
+            storyHeaderCloseIcon,
+            storyHeaderShareIcon,
             onLoad,
             onFail,
             onEvent,
@@ -123,11 +128,11 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
-                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyIsTestMode': storylyTestMode}}
+                storylyInit={{'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode}}
                 storyGroupIconStyling={{'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius}}
                 storyGroupListStyling={{'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems}}
-                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines,'colorSeen': storyGroupTextColorSeen,'colorNotSeen': storyGroupTextColorNotSeen}}
-                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible}}
+                storyGroupTextStyling={{'isVisible': storyGroupTextIsVisible, 'typeface': storyGroupTextTypeface, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines,'colorSeen': storyGroupTextColorSeen,'colorNotSeen': storyGroupTextColorNotSeen}}
+                storyHeaderStyling={{'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon}}
                 onStorylyLoaded={this._onStorylyLoaded}
                 onStorylyLoadFailed={this._onStorylyLoadFailed}
                 onStorylyEvent={this._onStorylyEvent}
@@ -140,24 +145,27 @@ class Storyly extends Component {
                 storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
                 storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
                 storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
+                storyItemTextTypeface={storyItemTextTypeface}
+                storyInteractiveTextTypeface={storyInteractiveTextTypeface}
                 ref={el => (this._storylyView = el)}/>
         )
     }
 }
 
 Storyly.propTypes = {
-    ...ViewPropTypes,
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
     storylyUserProperty: object,
     storylyShareUrl: string,
     customParameter: string,
     storylyTestMode: bool,
+    storylyPayload: string,
     
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),
     storyGroupIconBackgroundColor: string,
     storyGroupTextIsVisible: bool,
+    storyGroupTextTypeface: string,
     storyGroupTextSize: number,
     storyGroupTextLines: number,
     storyGroupTextColorSeen: string,
@@ -167,6 +175,8 @@ Storyly.propTypes = {
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,
     storyItemProgressBarColor: arrayOf(string),
+    storyItemTextTypeface: string,
+    storyInteractiveTextTypeface: string,
     storyGroupIconHeight: number,
     storyGroupIconWidth: number,
     storyGroupIconCornerRadius: number,
@@ -175,6 +185,8 @@ Storyly.propTypes = {
     storyHeaderTextIsVisible: bool,
     storyHeaderIconIsVisible: bool,
     storyHeaderCloseButtonIsVisible: bool,
+    storyHeaderCloseIcon: string,
+    storyHeaderShareIcon: string,
     storylyLayoutDirection: string,
 
     onLoad: func,

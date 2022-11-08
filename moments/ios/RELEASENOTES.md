@@ -1,4 +1,27 @@
 # Release Notes
+### 0.1.3 (10.10.2022)
+* fixed pre-moderation callback flow
+* fixed ui bug on cta link screen
+* improved permission flow
+
+### 0.1.2 (06.10.2022)
+* fixed video playback issue on story upload screen
+
+### 0.1.1 (04.10.2022)
+* fixed endpoints to support link cta interactive component 
+
+### 0.1.0 (19.09.2022)
+* added video media support for create story for both gallery and camera
+* added text interactive component
+* added link cta interactive component
+
+### 0.0.8 (12.09.2022)
+* added MomentsUserPayload to handle encrytion of user payload in mobile side
+
+### 0.0.7 (16.08.2022)
+* IMPORTANT! removed momentsDelegate field from MomentsManager constructor
+* IMPORTANT! added momentsDelegete field to MomentsManager
+
 ### 0.0.6 (01.07.2022)
 * IMPORTANT! renamed StorylyMomentsDelegate to MomentsDelegate
 

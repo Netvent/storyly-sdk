@@ -17,7 +17,7 @@ const StorylyMoments = NativeModules.RNStorylyMoments
       }
     );
 
-const initialize = function(token: String, userPayload: String) {
+const initialize = function(token: string, userPayload: string) {
   StorylyMoments.initialize(token, userPayload);
 }
 
@@ -27,6 +27,34 @@ const openUserStories = function() {
 
 const openStoryCreator = function() {
   StorylyMoments.openStoryCreator()
+}
+
+const encryptUserPayload = function(
+  momentsUserPayload: StorylyMomentsUserPayload, 
+  secretKey:string, 
+  initializationVector: string
+  ): Promise<string> {
+  return StorylyMoments.encryptUserPayload(
+    secretKey,
+    initializationVector,
+    momentsUserPayload.id,
+    momentsUserPayload.username,
+    momentsUserPayload.avatarUrl,
+    momentsUserPayload.followings,
+    momentsUserPayload.creatorTags,
+    momentsUserPayload.consumerTags,
+    momentsUserPayload.expirationTime
+  );
+};
+
+export class StorylyMomentsUserPayload {
+  id!: string;
+  username!: string;
+  avatarUrl!: string;
+  followings!: string[];
+  creatorTags?: string[];
+  consumerTags?: string[];
+  expirationTime!: number;
 }
 
 export interface MomentsStory {
@@ -122,9 +150,11 @@ const removeAllListeners = () => {
 setupInitialListeners()
 
 export default {
+  ...StorylyMomentsUserPayload,
   initialize,
   openUserStories,
   openStoryCreator,
+  encryptUserPayload,
   addEventListener,
   removeAllListeners,
 }

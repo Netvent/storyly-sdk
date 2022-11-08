@@ -1,4 +1,17 @@
 # Release Notes
+### 1.26.2 (11.10.2022)
+* improved native dependency handling to support Monetization by Storyly
+
+### 1.26.1 (25.08.2022)
+* improved react-native@0.69 support
+
+### 1.26.0 (24.08.2022)
+* added StoryComponent implementations
+* added storyGroupTextTypeface, storyItemTextTypeface and storyInteractiveTextTypeface to support custom fonts
+* added storyHeaderCloseIcon and storyHeaderShareIcon to support customazible icons
+* added storylyPayload for Storyly Moments usage
+* fixed [#210](https://github.com/Netvent/storyly-mobile/issues/210)
+
 ### 1.24.1 (31.07.2022)
 * IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
 * IMPORTANT! removed storyGroupTextColor field

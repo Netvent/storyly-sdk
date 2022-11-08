@@ -1,3 +1,23 @@
+### 1.26.5 (21.10.2022)
+* improved RootViewController handling on iOS side
+
+### 1.26.4 (14.10.2022)
+* improved native dependency handling to support Monetization by Storyly
+
+### 1.26.3 (11.10.2022)
+* improved Flutter 3+ support with nullability checks
+
+### 1.26.2 (29.09.2022)
+* improved Flutter 3+ support with nullability checks
+
+### 1.26.1 (25.08.2022)
+* added storyHeaderCloseIcon and storyHeaderShareIcon to support customazible icons
+
+### 1.26.0 (24.08.2022)
+* added storyGroupTextTypeface, storyItemTextTypeface and storyInteractiveTextTypeface to support custom fonts
+* added storylyPayload for Storyly Moments usage
+* fixed [#210](https://github.com/Netvent/storyly-mobile/issues/210)
+
 ### 1.24.1 (30.07.2022)
 * IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
 * IMPORTANT! removed storyGroupTextColor field 

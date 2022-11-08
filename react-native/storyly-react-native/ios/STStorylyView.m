@@ -96,7 +96,7 @@
         self.onStorylyEvent(@{@"event": [StorylyEventHelper storylyEventNameWithEvent:event],
                               @"storyGroup": [self createStoryGroupMap:storyGroup],
                               @"story": [self createStoryMap:story],
-                              @"storyComponent": [self createStoryComponentMap:storyComponent]});
+                              @"storyComponent": (storyComponent == nil ? [NSNull null] : [self createStoryComponentMap: storyComponent])});
     }
 }
 
@@ -125,7 +125,7 @@
     if (self.onStorylyUserInteracted) {
         self.onStorylyUserInteracted(@{@"storyGroup": [self createStoryGroupMap:storyGroup],
                                        @"story": [self createStoryMap:story],
-                                       @"storyComponent": [self createStoryComponentMap:storyComponent]});
+                                       @"storyComponent": (storyComponent == nil ? [NSNull null] : [self createStoryComponentMap: storyComponent])});
     }
 }
 
@@ -145,6 +145,10 @@
 }
 
 -(NSDictionary *)createStoryMap:(Story * _Nonnull)story {
+    NSMutableArray* componentList = [NSMutableArray new];
+    for (StoryComponent *component in story.media.storyComponentList) {
+        [componentList addObject:[self createStoryComponentMap: component]];
+    }
     return @{
         @"id": story.uniqueId,
         @"index": @(story.index),
@@ -153,8 +157,11 @@
         @"seen": @(story.seen),
         @"currentTime": @(story.currentTime),
         @"media": @{
-                @"type": @(story.media.type),
-                @"actionUrl": story.media.actionUrl == nil ? [NSNull null] : story.media.actionUrl
+            @"type": @(story.media.type),
+            @"storyComponentList": componentList,
+            @"actionUrl": story.media.actionUrl == nil ? [NSNull null] : story.media.actionUrl,
+            @"previewUrl": story.media.previewUrl == nil ? [NSNull null] : story.media.previewUrl,
+            @"actionUrlList": story.media.actionUrlList == nil ? [NSNull null] : story.media.actionUrlList
         }};
 }
 
@@ -165,6 +172,7 @@
                 StoryQuizComponent *quizComponent = (StoryQuizComponent *)storyComponent;
                 return @{
                     @"type": @"quiz",
+                    @"id": quizComponent.id,
                     @"title": quizComponent.title,
                     @"options": quizComponent.options,
                     @"rightAnswerIndex": quizComponent.rightAnswerIndex == nil ? [NSNull null] : quizComponent.rightAnswerIndex,
@@ -178,6 +186,7 @@
                 StoryPollComponent *pollComponent = (StoryPollComponent *)storyComponent;
                 return @{
                     @"type": @"poll",
+                    @"id": pollComponent.id,
                     @"title": pollComponent.title,
                     @"options": pollComponent.options,
                     @"selectedOptionIndex": [NSNumber numberWithLong:pollComponent.selectedOptionIndex],
@@ -190,6 +199,7 @@
                 StoryEmojiComponent *emojiComponent = (StoryEmojiComponent *)storyComponent;
                 return @{
                     @"type": @"emoji",
+                    @"id": emojiComponent.id,
                     @"emojiCodes": emojiComponent.emojiCodes,
                     @"selectedEmojiIndex": [NSNumber numberWithLong:emojiComponent.selectedEmojiIndex],
                     @"customPayload": emojiComponent.customPayload == nil ? [NSNull null] : emojiComponent.customPayload
@@ -201,20 +211,40 @@
                 StoryRatingComponent *ratingComponent = (StoryRatingComponent *)storyComponent;
                 return @{
                     @"type": @"rating",
+                    @"id": ratingComponent.id,
                     @"emojiCode": ratingComponent.emojiCode,
                     @"rating": [NSNumber numberWithLong:ratingComponent.rating],
                     @"customPayload": ratingComponent.customPayload == nil ? [NSNull null] : ratingComponent.customPayload
                 };
             }
             break;
-        case StoryComponentTypeUndefined:
+        case StoryComponentTypePromoCode:
             {
-                return @{};
+                StoryPromoCodeComponent *promoCodeComponent = (StoryPromoCodeComponent *)storyComponent;
+                return @{
+                    @"type": @"promocode",
+                    @"id": promoCodeComponent.id,
+                    @"text": promoCodeComponent.text,
+                };
+            }
+            break;
+        case StoryComponentTypeComment:
+            {
+                StoryCommentComponent *commentComponent = (StoryCommentComponent *)storyComponent;
+                return @{
+                    @"type": @"comment",
+                    @"id": commentComponent.id,
+                    @"text": commentComponent.text,
+                };
             }
             break;
         default:
             {
-                return @{};
+                NSString *componentType = [StoryComponentTypeHelper storyComponentNameWithComponentType: storyComponent.type];
+                return @{
+                    @"type": [componentType lowercaseString],
+                    @"id": storyComponent.id,
+                };
             }
             break;
     }

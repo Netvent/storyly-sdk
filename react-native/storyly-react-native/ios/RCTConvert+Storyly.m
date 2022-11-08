@@ -22,8 +22,9 @@
     StorylyInit *storylyInit = [[StorylyInit alloc] initWithStorylyId:storylyInitJson[@"storylyId"]
                                                          segmentation:storylySegmentation
                                                       customParameter:storylyInitJson[@"customParameter"]
-                                                           isTestMode:isTestMode];
-    [storylyInit setUserData:storylyInitJson[@"userProperty"]];
+                                                           isTestMode:isTestMode
+                                                       storylyPayload:storylyInitJson[@"storylyPayload"]
+                                                             userData:storylyInitJson[@"userProperty"]];
     return storylyInit;
 }
 
@@ -103,6 +104,16 @@
         fontSize = [storyGroupTextStyling[@"textSize"] intValue];
     }
     
+    UIFont* font = [UIFont systemFontOfSize: fontSize];
+    if ([storyGroupTextStyling.allKeys containsObject:@"typeface"] && storyGroupTextStyling[@"typeface"] != NULL) {
+        NSString* typeface = storyGroupTextStyling[@"typeface"];
+        NSString* fontName = typeface.stringByDeletingPathExtension;
+        UIFont* updateFont = [UIFont fontWithName:fontName size:fontSize];
+        if (updateFont != nil) {
+            font = updateFont;
+        }
+    }
+    
     int lines = 2;
     if ([storyGroupTextStyling.allKeys containsObject:@"lines"] && storyGroupTextStyling[@"lines"] != NULL) {
         lines = [storyGroupTextStyling[@"lines"] intValue];
@@ -111,7 +122,7 @@
     return [[StoryGroupTextStyling alloc] initWithIsVisible:isVisible
                                                       colorSeen:textColorSeen
                                                       colorNotSeen:textColorNotSeen
-                                                      font:[UIFont systemFontOfSize:fontSize]
+                                                      font:font
                                                       lines:lines];
 }
 
@@ -162,11 +173,23 @@
         isCloseButtonVisible = [storyHeaderStyling[@"isCloseButtonVisible"] boolValue];
     }
 
+    UIImage* closeIconImage = NULL;
+    if ([storyHeaderStyling.allKeys containsObject:@"closeIcon"] && storyHeaderStyling[@"closeIcon"] != NULL) {
+        NSString* closeIcon = storyHeaderStyling[@"closeIcon"];
+        closeIconImage = [UIImage imageNamed:closeIcon];
+    }
+
+    UIImage* shareIconImage = NULL;
+    if ([storyHeaderStyling.allKeys containsObject:@"shareIcon"] && storyHeaderStyling[@"shareIcon"] != NULL) {
+        NSString* shareIcon = storyHeaderStyling[@"shareIcon"];
+        shareIconImage = [UIImage imageNamed:shareIcon];
+    }
+
     return [[StoryHeaderStyling alloc] initWithIsTextVisible:isTextVisible
                                                isIconVisible:isIconVisible
                                         isCloseButtonVisible:isCloseButtonVisible
-                                             closeButtonIcon:NULL
-                                             shareButtonIcon:NULL];
+                                             closeButtonIcon:closeIconImage
+                                             shareButtonIcon:shareIconImage];
 }
 
 @end
@@ -184,3 +207,27 @@
 }
 
 @end
+
+
+@implementation RCTConvert (UIFont)
+    
++ (UIFont *)STStoryItemTextTypeface:(NSString *)typeface {
+    UIFont* font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+    UIFont* updateFont = [UIFont fontWithName:typeface.stringByDeletingPathExtension size:14];
+    if (updateFont != nil) {
+        font = updateFont;
+    }
+    return font;
+}
+    
++ (UIFont *)STStoryInteractiveTextTypeface:(NSString *)typeface {
+    UIFont* font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    UIFont* updateFont = [UIFont fontWithName:typeface.stringByDeletingPathExtension size:14];
+    if (updateFont != nil) {
+        font = updateFont;
+    }
+    return font;
+}
+
+@end
+

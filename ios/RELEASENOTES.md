@@ -1,4 +1,29 @@
 # Release Notes
+### 1.27.3 (21.10.2022)
+* updated seen state of story groups with User Property when a new data set
+* removed pin from personalized story groups
+
+### 1.27.2 (06.10.2022)
+* added story group id support to storylyShareUrl
+* improved story bar scrolling performance with pagination
+
+### 1.27.1 (04.10.2022)
+* added MomentUser field to StoryGroup data
+
+### 1.27.0 (19.09.2022)
+* added link cta interactive component
+* added share screenshot of personalized story groups
+
+### 1.26.2 (12.09.2022)
+* fixed iVOD story group not showing issue
+* fixed crash on story opens in devices with iOS13-
+
+### 1.26.0 (23.08.2022)
+* added story bar animations with a/b test option
+* improved story bar scrolling performance with pagination
+* fixed story start bug for accessibility enabled cases
+* fixed [#213](https://github.com/Netvent/storyly-mobile/issues/213)
+
 ### 1.25.0 (03.08.2022)
 * IMPORTANT! changed StorylyInit constructors, check [StorylyInit API Reference](https://integration.storyly.io/api/ios/Classes/StorylyInit.html)
 

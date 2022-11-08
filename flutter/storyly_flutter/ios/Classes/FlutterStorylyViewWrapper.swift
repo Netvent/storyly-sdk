@@ -5,6 +5,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_ID = "storylyId"
     private let ARGS_STORYLY_SEGMENTS = "storylySegments"
     private let ARGS_STORYLY_USER_PROPERTY = "storylyUserProperty"
+    private let ARGS_STORYLY_PAYLOAD = "storylyPayload"
     private let ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
     private let ARGS_STORYLY_SHARE_URL = "storylyShareUrl"
     private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
@@ -25,9 +26,11 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
     private let ARGS_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
     private let ARGS_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
+    private let ARGS_STORY_ITEM_TEXT_TYPEFACE = "storyItemTextTypeface"
+    private let ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
     private let ARGS_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
     
-    private lazy var storylyView: StorylyView = StorylyView(frame: self.frame)
+    internal lazy var storylyView: StorylyView = StorylyView(frame: self.frame)
     
     private let args: [String: Any]
     private let methodChannel: FlutterMethodChannel
@@ -69,15 +72,16 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         self.storylyView.storylyInit = StorylyInit(storylyId: storylyId,
                                                    segmentation: StorylySegmentation(segments: storylySegments),
                                                    customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String,
-                                                   isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false)
+                                                   isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false,
+                                                   storylyPayload: self.args[ARGS_STORYLY_PAYLOAD] as? String)
         if let userProperty = self.args[ARGS_STORYLY_USER_PROPERTY] as? [String: String] {
-            self.storylyView.storylyInit.setUserData(userProperty)
+            self.storylyView.storylyInit.userData = userProperty
         }
         if let shareUrl = self.args[ARGS_STORYLY_SHARE_URL] as? String {
             self.storylyView.storylyShareUrl = shareUrl
         }
         self.storylyView.delegate = self
-        self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController?.getPresentedViewController()
         self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
         self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -119,24 +123,43 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             let isVisible = storyGroupTextStyling["isVisible"] as? Bool ?? true
             let fontSize = CGFloat(storyGroupTextStyling["textSize"] as? Int ?? 12)
             let lines = storyGroupTextStyling["lines"] as? Int ?? 2
+            let typeface = storyGroupTextStyling["typeface"] as? String
             let colorSeen = UIColor(hexString: storyGroupTextStyling["colorSeen"] as? String ?? "#FF000000")
-            let colorNotSeen = UIColor(hexString: storyGroupTextStyling["colorNotSeen"] as? String ?? "#FF000000") 
+            let colorNotSeen = UIColor(hexString: storyGroupTextStyling["colorNotSeen"] as? String ?? "#FF000000")
+
+            var font = UIFont.systemFont(ofSize: fontSize)
+            if let fontName = (typeface as? NSString)?.deletingPathExtension {
+                if let updateFont = UIFont(name: fontName, size: fontSize) {
+                    font = updateFont
+                }
+            }
             
             storylyView.storyGroupTextStyling = StoryGroupTextStyling(isVisible: isVisible,
                                                                       colorSeen: colorSeen,
                                                                       colorNotSeen: colorNotSeen,
-                                                                      font: .systemFont(ofSize: fontSize),
+                                                                      font: font,
                                                                       lines: lines)
         }
         
-        if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
-            if let isTextVisible = storyHeaderStyling["isTextVisible"] as? Bool,
-               let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool,
-               let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool {
-                storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
-                                                                    isIconVisible: isIconVisible,
-                                                                    isCloseButtonVisible: isCloseButtonVisible)
+      if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
+            let isTextVisible = storyHeaderStyling["isTextVisible"] as? Bool ?? true
+            let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool ?? true
+            let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool ?? true
+                
+            var closeIconImage: UIImage? = nil
+            if let closeIcon = storyHeaderStyling["closeIcon"] as? String {
+                 closeIconImage = UIImage(named: closeIcon)
             }
+            var shareIconImage: UIImage? = nil
+            if let shareIcon = storyHeaderStyling["shareIcon"] as? String {
+                shareIconImage = UIImage(named: shareIcon)
+            }
+                
+            storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
+                                                                isIconVisible: isIconVisible,
+                                                                isCloseButtonVisible: isCloseButtonVisible,
+                                                                closeButtonIcon: closeIconImage,
+                                                                shareButtonIcon: shareIconImage)
         }
 
         if let storylyLayoutDirection = args[self.ARGS_STORYLY_LAYOUT_DIRECTION] as? String {
@@ -169,6 +192,20 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         if let storyItemTextColor = args[ARGS_STORY_ITEM_TEXT_COLOR] as? String {
             storylyView.storyItemTextColor = UIColor(hexString: storyItemTextColor)
+        }
+        
+        if let storyItemTextTypeface = args[ARGS_STORY_ITEM_TEXT_TYPEFACE] as? String {
+            let fontName = (storyItemTextTypeface as NSString).deletingPathExtension
+            if let updateFont = UIFont(name: fontName, size: 14) {
+                storylyView.storyItemTextFont = updateFont
+            }
+        }
+        
+        if let storyInteractiveTextTypeface = args[ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE] as? String {
+            let fontName = (storyInteractiveTextTypeface as NSString).deletingPathExtension
+            if let updateFont = UIFont(name: fontName, size: 14) {
+                storylyView.storyInteractiveFont = updateFont
+            }
         }
         
         if let storyItemProgressBarColor = args[ARGS_STORY_ITEM_PROGRESS_BAR_COLOR] as? [String] {
@@ -237,7 +274,12 @@ extension FlutterStorylyViewWrapper {
                 "index": storyGroup.index,
                 "seen": storyGroup.seen,
                 "iconUrl": storyGroup.iconUrl.absoluteString,
-                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)}]
+                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
+                "groupTheme": storyGroup.groupTheme,
+                "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
+                "coverUrl": storyGroup.coverUrl,
+                "pinned": storyGroup.pinned,
+                "type": storyGroup.type.rawValue]
     }
     
     private func createStoryMap(story: Story) -> [String: Any?] {
@@ -248,13 +290,17 @@ extension FlutterStorylyViewWrapper {
                 "seen": story.seen,
                 "currentTime": story.currentTime,
                 "media": ["type": story.media.type.rawValue,
-                          "actionUrl": story.media.actionUrl]]
+                          "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
+                          "actionUrl": story.media.actionUrl,
+                          "previewUrl": story.media.previewUrl?.absoluteString,
+                          "actionUrlList": story.media.actionUrlList ]]
     }
     
     private func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         switch storyComponent {
             case let quizComponent as StoryQuizComponent:
                 return ["type": "quiz",
+                        "id": quizComponent.id,
                         "title": quizComponent.title,
                         "options": quizComponent.options,
                         "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
@@ -262,23 +308,45 @@ extension FlutterStorylyViewWrapper {
                         "customPayload": quizComponent.customPayload]
             case let pollComponent as StoryPollComponent:
                 return ["type": "poll",
+                        "id": pollComponent.id,
                         "title": pollComponent.title,
                         "options": pollComponent.options,
                         "selectedOptionIndex": pollComponent.selectedOptionIndex,
                         "customPayload": pollComponent.customPayload]
             case let emojiComponent as StoryEmojiComponent:
                 return ["type": "emoji",
+                        "id": emojiComponent.id,
                         "emojiCodes": emojiComponent.emojiCodes,
                         "selectedEmojiIndex": emojiComponent.selectedEmojiIndex,
                         "customPayload": emojiComponent.customPayload]
             case let ratingComponent as StoryRatingComponent:
                 return ["type": "rating",
+                        "id": ratingComponent.id,
                         "emojiCode": ratingComponent.emojiCode,
                         "rating": ratingComponent.rating,
                         "customPayload": ratingComponent.customPayload]
+            case let promoCodeComponent as StoryPromoCodeComponent:
+                return ["type": "promocode",
+                        "id": promoCodeComponent.id,
+                        "text": promoCodeComponent.text]
+            case let commentComponent as StoryCommentComponent:
+                return ["type": "comment",
+                        "id": commentComponent.id,
+                        "text": commentComponent.text]
             default:
-                return ["type": "undefined"]
+                return ["type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+                        "id": storyComponent.id]
+
         }
+    }
+}
+
+extension UIViewController {
+    internal func getPresentedViewController() -> UIViewController? {
+        guard let vc = self.presentedViewController else {
+            return self
+        }
+        return vc.getPresentedViewController()
     }
 }
 

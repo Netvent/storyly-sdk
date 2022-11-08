@@ -54,10 +54,8 @@ class _HomePageState extends State<HomePage> {
           margin: const EdgeInsets.only(top: 5.0),
           child: StorylyView(
             onStorylyViewCreated: onStorylyViewCreated,
-            androidParam: StorylyParam()
-              ..storylyId = storylyToken,
-            iosParam: StorylyParam()
-              ..storylyId = storylyToken,
+            androidParam: StorylyParam()..storylyId = storylyToken,
+            iosParam: StorylyParam()..storylyId = storylyToken,
             storylyLoaded: (storyGroups, dataSource) {
               debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
               debugPrint("storylyLoaded -> dataSource: $dataSource");
