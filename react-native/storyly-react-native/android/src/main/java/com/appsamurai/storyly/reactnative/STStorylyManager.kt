@@ -24,7 +24,6 @@ import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
-import kotlin.math.roundToInt
 
 class STStorylyManager : ViewGroupManager<STStorylyView>() {
     companion object {
@@ -296,7 +295,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val width = if (map.hasKey("width")) map.getInt("width") else return
         val height = if (map.hasKey("height")) map.getInt("height") else return
 
-        view.storylyView.storyGroupViewFactory = RNStoryGroupViewFactory(view.context, width, height).also {
+        view.storylyView.storyGroupViewFactory = STStoryGroupViewFactory(view.context, width, height).also {
             it.onSendEvent = view::sendEvent
         }
     }

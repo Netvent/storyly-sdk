@@ -169,7 +169,7 @@ class Storyly extends Component {
                 storyGroupViewFactory={storyGroupViewFactory ? { width: storyGroupViewFactory.width, height: storyGroupViewFactory.height } : null}
                 ref={el => (this._storylyView = el)}>
                 {storyGroupViewFactory ?
-                    <STStorylyCustomViewFactory
+                    <STStorylyGroupViewFactory
                         ref={(ref) => { this.customViewFactoryRef = ref }}
                         width={storyGroupViewFactory.width}
                         height={storyGroupViewFactory.height}
@@ -229,7 +229,7 @@ Storyly.propTypes = {
 
 const STStoryly = requireNativeComponent('STStoryly', null);
 
-const STStorylyCustomViewFactory = forwardRef(({ width, height, CustomizedView }, ref) => {
+const STStorylyGroupViewFactory = forwardRef(({ width, height, CustomizedView }, ref) => {
     const [customViewList, setCustomViewList] = useState([])
 
     useImperativeHandle(ref, () => ({
@@ -239,9 +239,9 @@ const STStorylyCustomViewFactory = forwardRef(({ width, height, CustomizedView }
     const onCreateCustomView = (_) => {
         setCustomViewList((current) => ([
             ...current, (
-                <STStorylyCustomView key={current.length} style={{ width: width, height: height }}>
+                <STStorylyGroupView key={current.length} style={{ width: width, height: height }}>
                     <CustomizedView storyGroup={null} />
-                </STStorylyCustomView>
+                </STStorylyGroupView>
             )
         ]))
     }
@@ -250,9 +250,9 @@ const STStorylyCustomViewFactory = forwardRef(({ width, height, CustomizedView }
         let updated = customViewList.map((value, i) => {
             if (i === index) {
                 return (
-                    <STStorylyCustomView key={index} style={{ width: width, height: height }}>
+                    <STStorylyGroupView key={index} style={{ width: width, height: height }}>
                         <CustomizedView storyGroup={storyGroup} />
-                    </STStorylyCustomView>
+                    </STStorylyGroupView>
                 )
             }
             return value
@@ -263,6 +263,6 @@ const STStorylyCustomViewFactory = forwardRef(({ width, height, CustomizedView }
     return (<>{customViewList}</>)
 })
 
-const STStorylyCustomView = requireNativeComponent('STStorylyCustomView', null);
+const STStorylyGroupView = requireNativeComponent('STStorylyGroupView', null);
 
 export default Storyly;

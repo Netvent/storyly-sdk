@@ -1,16 +1,16 @@
 //
-//  RNStoryGroupViewFactory.swift
+//  STStoryGroupViewFactory.swift
 //  storyly-react-native
 //
 //  Created by Haldun Melih Fadillioglu on 27.10.2022.
 //
 import Storyly
 
-internal class RNStoryGroupViewFactory: StoryGroupViewFactory {
+internal class STStoryGroupViewFactory: StoryGroupViewFactory {
     private let width: CGFloat
     private let height: CGFloat
     
-    private var customViewList: [RNStoryGroupView] = []
+    private var customViewList: [STStoryGroupView] = []
     
     internal var onCreateCustomView: RCTBubblingEventBlock? = nil
     internal var onUpdateCustomView: RCTBubblingEventBlock? = nil
@@ -22,7 +22,7 @@ internal class RNStoryGroupViewFactory: StoryGroupViewFactory {
     }
     
     func createView() -> StoryGroupView {
-        let storyGroupView = RNStoryGroupView(frame: .zero)
+        let storyGroupView = STStoryGroupView(frame: .zero)
         storyGroupView.onViewUpdate = self.onUpdateView
         customViewList.append(storyGroupView)
         onCreateCustomView?(nil)
@@ -47,7 +47,7 @@ internal class RNStoryGroupViewFactory: StoryGroupViewFactory {
         subview.bottomAnchor.constraint(equalTo: holderView.bottomAnchor).isActive = true
     }
     
-    private func onUpdateView(_ groupView: RNStoryGroupView, _ storyGroup: StoryGroup?) {
+    private func onUpdateView(_ groupView: STStoryGroupView, _ storyGroup: StoryGroup?) {
         guard let index = self.customViewList.firstIndex(of: groupView) else { return }
         onUpdateCustomView?([
             "index": index,
@@ -58,9 +58,9 @@ internal class RNStoryGroupViewFactory: StoryGroupViewFactory {
 }
 
 
-internal class RNStoryGroupView: StoryGroupView {
+internal class STStoryGroupView: StoryGroupView {
     
-    internal var onViewUpdate: ((RNStoryGroupView, StoryGroup?) -> ())? = nil
+    internal var onViewUpdate: ((STStoryGroupView, StoryGroup?) -> ())? = nil
 
     internal lazy var holderView: UIView = {
         let _holderView = UIView()

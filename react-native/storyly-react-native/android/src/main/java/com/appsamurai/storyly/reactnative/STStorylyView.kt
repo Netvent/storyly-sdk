@@ -1,8 +1,6 @@
 package com.appsamurai.storyly.reactnative
 
 import android.content.Context
-import android.content.res.Resources
-import android.util.DisplayMetrics
 import android.view.Choreographer
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +11,6 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.RCTEventEmitter
-import kotlin.math.roundToInt
 
 class STStorylyView(context: Context) : FrameLayout(context) {
     internal var storylyView: StorylyView = StorylyView((context as? ReactContext)?.currentActivity ?: context)
@@ -114,7 +111,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
     }
 
     internal fun onAttachCustomReactNativeView(child: View?, index: Int) {
-        val storyGroupViewFactory = storylyView.storyGroupViewFactory as? RNStoryGroupViewFactory ?: return
+        val storyGroupViewFactory = storylyView.storyGroupViewFactory as? STStoryGroupViewFactory ?: return
         storyGroupViewFactory.attachCustomReactNativeView(child, index)
     }
 
@@ -142,6 +139,7 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
         storyGroupMap.putString("id", storyGroup.uniqueId)
         storyGroupMap.putString("title", storyGroup.title)
         storyGroupMap.putString("iconUrl", storyGroup.iconUrl)
+        storyGroupMap.putBoolean("pinned", storyGroup.pinned)
         storyGroupMap.putMap("thematicIconUrls",  storyGroup.thematicIconUrls?.let { thematicIconUrls ->
             Arguments.createMap().also {
                 thematicIconUrls.forEach { entry ->  it.putString(entry.key, entry.value) }

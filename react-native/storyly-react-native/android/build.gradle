@@ -81,5 +81,5 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${safeExtGet('kotlin_version', DEFAULT_KOTLIN_VERSION)}"
 
-    api('com.appsamurai.storyly:storyly:1.26.+')
+    api('com.appsamurai.storyly:storyly:1.27.+')
 }

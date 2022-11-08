@@ -142,6 +142,7 @@ declare module "storyly-react-native" {
       title: string;
       name: string;
       index: number;
+      pinned: boolean;
       seen: boolean;
       currentTime: number;
       media: {

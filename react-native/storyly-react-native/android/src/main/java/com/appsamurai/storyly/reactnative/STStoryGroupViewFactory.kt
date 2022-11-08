@@ -12,17 +12,17 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
 
 
-class RNStoryGroupViewFactory(
+class STStoryGroupViewFactory(
     private val context: Context,
     private val width: Int,
     private val height: Int,
 ): StoryGroupViewFactory() {
-    private val customViewList = mutableListOf<RNStoryGroupView>()
+    private val customViewList = mutableListOf<STStoryGroupView>()
 
     internal var onSendEvent: ((eventName: String, eventParameters: WritableMap?) -> Unit)? = null
 
     override fun createView(): StoryGroupView {
-        val storyGroupView = RNStoryGroupView(context, width, height).also {
+        val storyGroupView = STStoryGroupView(context, width, height).also {
             it.onViewUpdate = this::onUpdateView
         }
         customViewList.add(storyGroupView)
@@ -34,7 +34,7 @@ class RNStoryGroupViewFactory(
         customViewList.getOrNull(index)?.holderView?.addView(child)
     }
 
-    private fun onUpdateView(customView: RNStoryGroupView, storyGroup: StoryGroup?) {
+    private fun onUpdateView(customView: STStoryGroupView, storyGroup: StoryGroup?) {
         val index = customViewList.indexOf(customView)
         onSendEvent?.invoke(STStorylyManager.EVENT_ON_UPDATE_CUSTOM_VIEW, Arguments.createMap().apply {
             putInt("index", index)
@@ -44,8 +44,8 @@ class RNStoryGroupViewFactory(
 }
 
 @SuppressLint("ViewConstructor")
-class RNStoryGroupView(context: Context, width: Int, height: Int): StoryGroupView(context) {
-    internal var onViewUpdate: ((RNStoryGroupView, StoryGroup?) -> Unit)? = null
+class STStoryGroupView(context: Context, width: Int, height: Int): StoryGroupView(context) {
+    internal var onViewUpdate: ((STStoryGroupView, StoryGroup?) -> Unit)? = null
 
     internal val holderView = FrameLayout(context)
 

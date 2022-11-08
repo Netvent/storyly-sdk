@@ -47,14 +47,14 @@ class STStorylyView: UIView {
     var storyGroupViewFactorySize: CGSize = CGSize(width: 0, height: 0) {
         didSet {
             if storyGroupViewFactorySize.width <= 0 || storyGroupViewFactorySize.height <= 0 { return }
-            self.storyGroupViewFactory = RNStoryGroupViewFactory(width: storyGroupViewFactorySize.width,
+            self.storyGroupViewFactory = STStoryGroupViewFactory(width: storyGroupViewFactorySize.width,
                                                             height: storyGroupViewFactorySize.height)
             self.storyGroupViewFactory?.onCreateCustomView = self.onCreateCustomView
             self.storyGroupViewFactory?.onUpdateCustomView = self.onUpdateCustomView
             self.storylyView.storyGroupViewFactory = self.storyGroupViewFactory
         }
     }
-    var storyGroupViewFactory: RNStoryGroupViewFactory? = nil
+    var storyGroupViewFactory: STStoryGroupViewFactory? = nil
     
     override init(frame: CGRect) {
         self.storylyView = StorylyView(frame: frame)
@@ -76,7 +76,7 @@ class STStorylyView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
-        guard let subview = subview as? STStorylyCustomView else { return }
+        guard let subview = subview as? STStorylyGroupView else { return }
         storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
     }
 }
@@ -172,6 +172,7 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
         "coverUrl": storyGroup.coverUrl?.absoluteString,
         "index": storyGroup.index,
+        "pinned": storyGroup.pinned,
         "seen": storyGroup.seen,
         "stories": storyGroup.stories.map { createStoryMap(story: $0) },
         "type": storyGroup.type.description,
