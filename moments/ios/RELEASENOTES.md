@@ -1,4 +1,7 @@
 # Release Notes
+### 0.1.5 (08.11.2022)
+* improved link cta interactive component
+
 ### 0.1.3 (10.10.2022)
 * fixed pre-moderation callback flow
 * fixed ui bug on cta link screen
