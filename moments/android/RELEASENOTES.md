@@ -1,4 +1,8 @@
 # Release Notes
+### 0.1.1 (10.11.2022)
+* removed ExoPlayer2 dependency
+* added Storyly-ExoPlayer2 dependency, a custom fork of ExoPlayer2
+
 ### 0.1.0 (01.11.2022)
 * added video media support for create story for both gallery and camera
 * added text interactive component
