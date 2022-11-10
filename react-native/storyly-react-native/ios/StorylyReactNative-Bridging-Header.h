@@ -7,6 +7,7 @@
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTViewManager.h>
+#import <React/RCTUIManager.h>
 
 
 void STLogErr(NSString *msg) { RCTLogError(@"%@", msg); }

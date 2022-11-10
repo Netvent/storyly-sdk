@@ -1,7 +1,7 @@
 #import <React/RCTViewManager.h>
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_MODULE(STStorylyManager, NSObject)
+@interface RCT_EXTERN_REMAP_MODULE(STStoryly, STStorylyManager, NSObject)
 
 RCT_EXTERN_METHOD(refresh:(nonnull NSNumber *)reactTag)
 

@@ -176,7 +176,7 @@ declare module "storyly-react-native" {
   export interface StoryGroupViewFactory {
     width: number;
     height: number;
-    customViewComponent: ({ storyGroup: StoryGroup }) => JSX.Element;
+    customView: ({ storyGroup: StoryGroup }) => JSX.Element;
   }
 
   export class Storyly extends Component<Storyly.Props> {
