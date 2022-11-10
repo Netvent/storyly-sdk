@@ -1,4 +1,7 @@
 # Release Notes
+### 1.27.1 (19.11.2022)
+* fixed [#247](https://github.com/Netvent/storyly-mobile/issues/247)
+
 ### 1.27.0 (08.11.2022)
 * added STStorylyGroupViewFactory and STStorylyGroupView to support customized story list views
 * added link cta interactive component
