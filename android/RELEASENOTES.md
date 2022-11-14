@@ -1,4 +1,9 @@
 # Release Notes
+### 1.27.2 (14.11.2022)
+* added share to Instagram Stories
+* added storyly share sheet with story specific share features
+* improved audio focus with video stories
+
 ### 1.27.0 (01.11.2022)
 * added link cta interactive component
 
