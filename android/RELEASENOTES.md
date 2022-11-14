@@ -3,6 +3,7 @@
 * added share to Instagram Stories
 * added storyly share sheet with story specific share features
 * improved audio focus with video stories
+* added contentDescription to image cta interactive components
 
 ### 1.27.0 (01.11.2022)
 * added link cta interactive component
