@@ -1,4 +1,7 @@
 # Release Notes
+### 0.1.2 (14.11.2022)
+* improved audio focus with video stories
+
 ### 0.1.1 (10.11.2022)
 * removed ExoPlayer2 dependency
 * added Storyly-ExoPlayer2 dependency, a custom fork of ExoPlayer2
