@@ -1,6 +1,6 @@
 # Release Notes
 ### 0.1.6 (14.11.2022)
-* fixed keyboard opening issue on some devices
+* fixed keyboard opening issue on some devices 
 
 ### 0.1.5 (08.11.2022)
 * improved link cta interactive component
