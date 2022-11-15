@@ -1,6 +1,7 @@
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-@interface RCT_EXTERN_MODULE(RNStorylyMoments, NSObject)
+@interface RCT_EXTERN_MODULE(RNStorylyMoments, RCTEventEmitter)
 
 RCT_EXTERN_METHOD(initialize:(NSString)token
                   withUserPayload:(NSString)userPayload)
