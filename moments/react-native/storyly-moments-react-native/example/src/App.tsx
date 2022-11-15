@@ -77,6 +77,10 @@ export default function App() {
               let userStoriesLoadFailed = event as UserStoriesLoadFailedEvent
               console.log(`onUserStoriesLoadFailed - ${userStoriesLoadFailed.errorMessage}`)
             })
+            StorylyMoments.addEventListener("onUserActionClicked", (event: Object) => {
+              let userStoriesLoadFailed = event as UserActionClickedEvent
+              console.log(`onUserStoriesLoadFailed - ${JSON.stringify(userStoriesLoadFailed)}`)
+            })
           }}
         />
       </View>

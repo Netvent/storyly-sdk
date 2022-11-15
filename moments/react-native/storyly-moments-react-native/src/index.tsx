@@ -80,6 +80,7 @@ enum Events {
   onOpenMyStory = "onOpenMyStory",
   onUserStoriesLoaded = "onUserStoriesLoaded" ,
   onUserStoriesLoadFailed = "onUserStoriesLoadFailed",
+  onUserActionClicked = "onUserActionClicked",
 }
 type MomentsEventType = keyof typeof Events
 
@@ -100,6 +101,10 @@ export interface UserStoriesLoadedEvent extends MomentsEvent {
 export interface UserStoriesLoadFailedEvent extends MomentsEvent { 
   errorMessage: string
 }
+export interface UserActionClickedEvent extends MomentsEvent { 
+  stories: MomentsStory
+}
+
 
 export interface OnMomentsEvent {
   (event: MomentsEvent): void

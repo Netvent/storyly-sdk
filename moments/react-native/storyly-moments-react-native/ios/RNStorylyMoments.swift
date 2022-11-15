@@ -10,6 +10,7 @@ class RNStorylyMoments: RCTEventEmitter {
     private let EVENT_STORYLY_MOMENTS_USER_STORIES_LOADED = "onUserStoriesLoaded"
     private let EVENT_STORYLY_MOMENTS_OPEN_STORY_CREATE = "onOpenCreateStory"
     private let EVENT_STORYLY_MOMENTS_USER_STORIES_LOAD_FAILED = "onUserStoriesLoadFailed"
+    private let EVENT_STORYLY_MOMENTS_USER_ACTION_CLICKED = "onUserActionClicked"
     
     @objc(initialize
           :withUserPayload:)
@@ -18,8 +19,8 @@ class RNStorylyMoments: RCTEventEmitter {
         DispatchQueue.main.async {
             let rootViewController = UIApplication.shared.keyWindow?.rootViewController
             self.storylyMomentsManager = StorylyMomentsManager(config: Config(momentsToken: token,
-                                                                              userPayload: userPayload),
-                                                               momentsDelegate: self)
+                                                                              userPayload: userPayload))
+            self.storylyMomentsManager?.momentsDelegate = self
             self.storylyMomentsManager?.rootViewController = rootViewController
         }
     }
@@ -81,7 +82,8 @@ class RNStorylyMoments: RCTEventEmitter {
                 EVENT_STORYLY_MOMENTS_OPEN_STORY_CREATE,
                 EVENT_STORYLY_MOMENTS_OPEN_MY_STORY,
                 EVENT_STORYLY_MOMENTS_USER_STORIES_LOADED,
-                EVENT_STORYLY_MOMENTS_USER_STORIES_LOAD_FAILED]
+                EVENT_STORYLY_MOMENTS_USER_STORIES_LOAD_FAILED,
+                EVENT_STORYLY_MOMENTS_USER_ACTION_CLICKED]
     }
 }
 
@@ -109,6 +111,10 @@ extension RNStorylyMoments: MomentsDelegate {
     func onUserStoriesLoadFailed(errorMessage: String) {
         self.sendEvent(withName: EVENT_STORYLY_MOMENTS_USER_STORIES_LOAD_FAILED, body: ["errorMessage": errorMessage] )
     }
+    
+    func onUserActionClicked(story: MomentsStory) {
+        self.sendEvent(withName: EVENT_STORYLY_MOMENTS_USER_ACTION_CLICKED, body: ["story": createMomentsStory(story: story)] )
+    }
 }
 
 extension RNStorylyMoments {
@@ -128,10 +134,8 @@ extension RNStorylyMoments {
             "id": story.id,
             "title": story.title,
             "seen": story.seen,
-            "media": [
-                "type": story.type == .Image ? "Image" : "Unknown",
-                "action": nil, // TODO: found in android but not ios
-            ]
+            "type": story.type,
+            "url": story.url
         ]
     }
 }

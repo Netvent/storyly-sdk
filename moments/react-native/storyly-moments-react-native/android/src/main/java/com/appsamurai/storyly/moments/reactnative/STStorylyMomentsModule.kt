@@ -9,10 +9,9 @@ import com.appsamurai.storyly.moments.StorylyMomentsManager
 import com.appsamurai.storyly.moments.analytics.StorylyMomentsEvent
 import com.appsamurai.storyly.moments.data.entity.MomentsStory
 import com.appsamurai.storyly.moments.data.entity.MomentsStoryGroup
-import com.facebook.react.bridge.*
-import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.appsamurai.storyly.moments.data.entity.MomentsUserPayload
 import com.facebook.react.bridge.*
+import com.facebook.react.modules.core.DeviceEventManagerModule
 
 class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -24,6 +23,7 @@ class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactConte
     internal const val EVENT_STORYLY_MOMENTS_OPEN_MY_STORY = "onOpenMyStory"
     internal const val EVENT_STORYLY_MOMENTS_USER_STORIES_LOADED = "onUserStoriesLoaded"
     internal const val EVENT_STORYLY_MOMENTS_USER_STORIES_LOAD_FAILED = "onUserStoriesLoadFailed"
+    internal const val EVENT_STORYLY_MOMENTS_USER_ACTION_CLICKED = "onUserActionClicked"
   }
 
   private var storylyMomentsManager: StorylyMomentsManager? = null
@@ -77,6 +77,14 @@ class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactConte
             sendEvent(EVENT_STORYLY_MOMENTS_USER_STORIES_LOAD_FAILED, Arguments.createMap().also { eventMap ->
               eventMap.putString("errorMessage", errorMessage)
             })
+          }
+
+          override fun onUserActionClicked(story: MomentsStory) {
+            sendEvent(
+              EVENT_STORYLY_MOMENTS_USER_ACTION_CLICKED,
+              Arguments.createMap().also { eventMap ->
+                eventMap.putMap("story", createStoryMap(story))
+              })
           }
         }
       }
@@ -158,10 +166,8 @@ class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactConte
       putString("id", story.id)
       putString("title", story.title)
       putBoolean("seen", story.seen)
-      putMap("media", Arguments.createMap().apply {
-        putString("type", story.media.type.name)
-        putString("action", story.media.actionUrl)
-      })
+      putInt("type", story.media.type.ordinal)
+      putString("url", story.media.actionUrl)
     }
   }
 }
