@@ -1,4 +1,13 @@
 # Release Notes
+### 1.27.2 (14.11.2022)
+* added share to Instagram Stories
+* added storyly share sheet with story specific share features
+* improved audio focus with video stories
+* added contentDescription to image cta interactive components
+
+### 1.27.0 (01.11.2022)
+* added link cta interactive component
+
 ### 1.26.8 (21.10.2022)
 * updated seen state of story groups with User Property when a new data set
 * removed pin from personalized story groups

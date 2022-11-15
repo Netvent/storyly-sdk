@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.StorylyInit
@@ -50,6 +51,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
         private const val PROP_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
         private const val PROP_STORY_HEADER_STYLING = "storyHeaderStyling"
+        private const val PROP_STORY_GROUP_VIEW_FACTORY = "storyGroupViewFactory"
         private const val PROP_STORYLY_LAYOUT_DIRECTION = "storylyLayoutDirection"
 
         private const val COMMAND_REFRESH_NAME = "refresh"
@@ -74,12 +76,18 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         internal const val EVENT_STORYLY_STORY_DISMISSED = "onStorylyStoryDismissed"
         internal const val EVENT_STORYLY_USER_INTERACTED = "onStorylyUserInteracted"
 
+        internal const val EVENT_ON_CREATE_CUSTOM_VIEW = "onCreateCustomView"
+        internal const val EVENT_ON_UPDATE_CUSTOM_VIEW = "onUpdateCustomView"
     }
 
     override fun getName(): String = REACT_CLASS
 
     override fun createViewInstance(reactContext: ThemedReactContext): STStorylyView {
         return STStorylyView(reactContext)
+    }
+
+    override fun addView(parent: STStorylyView?, child: View?, index: Int) {
+        parent?.onAttachCustomReactNativeView(child, index)
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
@@ -90,8 +98,11 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             EVENT_STORYLY_EVENT,
             EVENT_STORYLY_ACTION_CLICKED,
             EVENT_STORYLY_STORY_PRESENTED,
+            EVENT_STORYLY_STORY_PRESENT_FAILED,
             EVENT_STORYLY_STORY_DISMISSED,
-            EVENT_STORYLY_USER_INTERACTED
+            EVENT_STORYLY_USER_INTERACTED,
+            EVENT_ON_CREATE_CUSTOM_VIEW,
+            EVENT_ON_UPDATE_CUSTOM_VIEW,
         ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
         }
@@ -276,6 +287,17 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 shareButtonIcon = shareIconDrawable
             )
         )
+    }
+
+    @ReactProp(name = PROP_STORY_GROUP_VIEW_FACTORY)
+    fun setPropStoryGroupViewFactory(view: STStorylyView, storyGroupViewFactoryMap: ReadableMap?) {
+        val map = storyGroupViewFactoryMap ?: return
+        val width = if (map.hasKey("width")) map.getInt("width") else return
+        val height = if (map.hasKey("height")) map.getInt("height") else return
+
+        view.storylyView.storyGroupViewFactory = STStoryGroupViewFactory(view.context, width, height).also {
+            it.onSendEvent = view::sendEvent
+        }
     }
 
     @ReactProp(name = PROP_STORY_ITEM_TEXT_TYPEFACE)

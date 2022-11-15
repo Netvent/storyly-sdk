@@ -1,110 +1,46 @@
-#import "STStorylyManager.h"
+#import <React/RCTViewManager.h>
+#import <React/RCTBridgeModule.h>
 
-@implementation STStorylyManager
+@interface RCT_EXTERN_REMAP_MODULE(STStoryly, STStorylyManager, NSObject)
 
-RCT_EXPORT_MODULE()
+RCT_EXTERN_METHOD(refresh:(nonnull NSNumber *)reactTag)
 
-- (UIView *)view
-{
-    return [STStorylyView new];
-}
+RCT_EXTERN_METHOD(open:(nonnull NSNumber *)reactTag)
 
-RCT_EXPORT_METHOD(refresh:(nonnull NSNumber *)reactTag)
-{
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
-        STStorylyView *stStorylyView = viewRegistry[reactTag];
-        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
-        } else {
-            [stStorylyView refresh];
-        }
-    }];
-}
+RCT_EXTERN_METHOD(close:(nonnull NSNumber *)reactTag)
 
-RCT_EXPORT_METHOD(open:(nonnull NSNumber *)reactTag)
-{
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
-        STStorylyView *stStorylyView = viewRegistry[reactTag];
-        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
-        } else {
-            [stStorylyView open];
-        }
-    }];
-}
-
-RCT_EXPORT_METHOD(close:(nonnull NSNumber *)reactTag)
-{
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
-        STStorylyView *stStorylyView = viewRegistry[reactTag];
-        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
-        } else {
-            [stStorylyView close];
-        }
-    }];
-}
-
-RCT_EXPORT_METHOD(openStory:(nonnull NSNumber *)reactTag
+RCT_EXTERN_METHOD(openStory:(nonnull NSNumber *)reactTag
                   payload:(nonnull NSURL *)payload)
-{
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
-        STStorylyView *stStorylyView = viewRegistry[reactTag];
-        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
-        } else {
-            [stStorylyView openStory:payload];
-        }
-    }];
-}
 
-RCT_EXPORT_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
+RCT_EXTERN_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
                   storyGroupId:(nonnull NSString *)storyGroupId
                   storyId:(nonnull NSString *)storyId)
-{
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
-        STStorylyView *stStorylyView = viewRegistry[reactTag];
-        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
-        } else {
-            [stStorylyView openStoryWithId:storyGroupId storyId:storyId];
-        }
-    }];
-}
 
-RCT_EXPORT_METHOD(setExternalData:(nonnull NSNumber *)reactTag
+RCT_EXTERN_METHOD(setExternalData:(nonnull NSNumber *)reactTag
                   externalData:(nonnull NSArray<NSDictionary *> *)externalData)
-{
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, STStorylyView *> *viewRegistry) {
-        STStorylyView *stStorylyView = viewRegistry[reactTag];
-        if (![stStorylyView isKindOfClass:[STStorylyView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting STStorylyView, got: %@", stStorylyView);
-        } else {
-            [stStorylyView setExternalData:externalData];
-        }
-    }];
-}
 
-RCT_REMAP_VIEW_PROPERTY(storylyInit, _storylyView.storylyInit, STStorylyInit)
-RCT_REMAP_VIEW_PROPERTY(storylyShareUrl, _storylyView.storylyShareUrl, NSString)
 
-RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorSeen, _storylyView.storyGroupIconBorderColorSeen, NSArray<UIColor *>)
-RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorNotSeen, _storylyView.storyGroupIconBorderColorNotSeen, NSArray<UIColor *>)
-RCT_REMAP_VIEW_PROPERTY(storyGroupIconBackgroundColor, _storylyView.storyGroupIconBackgroundColor, UIColor)
-RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorSeen, _storylyView.storyGroupTextColorSeen, UIColor)
-RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorNotSeen, _storylyView.storyGroupTextColorNotSeen, UIColor)
-RCT_REMAP_VIEW_PROPERTY(storyGroupPinIconColor, _storylyView.storyGroupPinIconColor, UIColor)
-RCT_REMAP_VIEW_PROPERTY(storyGroupSize, _storylyView.storyGroupSize, NSString)
-RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, _storylyView.storyItemIconBorderColor, NSArray<UIColor *>)
-RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, _storylyView.storyItemTextColor, UIColor)
-RCT_REMAP_VIEW_PROPERTY(storyItemProgressBarColor, _storylyView.storylyItemProgressBarColor, NSArray<UIColor *>)
-RCT_REMAP_VIEW_PROPERTY(storyItemTextTypeface, _storylyView.storyItemTextFont, STStoryItemTextTypeface)
-RCT_REMAP_VIEW_PROPERTY(storyInteractiveTextTypeface, _storylyView.storyInteractiveFont, STStoryInteractiveTextTypeface)
-RCT_REMAP_VIEW_PROPERTY(storyGroupIconStyling, _storylyView.storyGroupIconStyling, STStoryGroupIconStyling)
-RCT_REMAP_VIEW_PROPERTY(storyGroupListStyling, _storylyView.storyGroupListStyling, STStoryGroupListStyling)
-RCT_REMAP_VIEW_PROPERTY(storyGroupTextStyling, _storylyView.storyGroupTextStyling, STStoryGroupTextStyling)
-RCT_REMAP_VIEW_PROPERTY(storyHeaderStyling, _storylyView.storyHeaderStyling, STStoryHeaderStyling)
-RCT_REMAP_VIEW_PROPERTY(storylyLayoutDirection, _storylyView.storylyLayoutDirection, STStorylyLayoutDirection)
+RCT_REMAP_VIEW_PROPERTY(storylyInit, storylyView.storylyInit, stStorylyInit)
+RCT_REMAP_VIEW_PROPERTY(storylyShareUrl, storylyView.storylyShareUrl, NSString)
+
+RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorSeen, storylyView.storyGroupIconBorderColorSeen, NSArray<UIColor *>)
+RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorNotSeen, storylyView.storyGroupIconBorderColorNotSeen, NSArray<UIColor *>)
+RCT_REMAP_VIEW_PROPERTY(storyGroupIconBackgroundColor, storylyView.storyGroupIconBackgroundColor, UIColor)
+RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorSeen, storylyView.storyGroupTextColorSeen, UIColor)
+RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorNotSeen, storylyView.storyGroupTextColorNotSeen, UIColor)
+RCT_REMAP_VIEW_PROPERTY(storyGroupPinIconColor, storylyView.storyGroupPinIconColor, UIColor)
+RCT_REMAP_VIEW_PROPERTY(storyGroupSize, storylyView.storyGroupSize, NSString)
+RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, storylyView.storyItemIconBorderColor, NSArray<UIColor *>)
+RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, storylyView.storyItemTextColor, UIColor)
+RCT_REMAP_VIEW_PROPERTY(storyItemProgressBarColor, storylyView.storylyItemProgressBarColor, NSArray<UIColor *>)
+RCT_REMAP_VIEW_PROPERTY(storyItemTextTypeface, storylyView.storyItemTextFont, stStoryItemTextTypeface)
+RCT_REMAP_VIEW_PROPERTY(storyInteractiveTextTypeface, storylyView.storyInteractiveFont, stStoryInteractiveTextTypeface)
+RCT_REMAP_VIEW_PROPERTY(storyGroupIconStyling, storylyView.storyGroupIconStyling, stStoryGroupIconStyling)
+RCT_REMAP_VIEW_PROPERTY(storyGroupListStyling, storylyView.storyGroupListStyling, stStoryGroupListStyling)
+RCT_REMAP_VIEW_PROPERTY(storyGroupTextStyling, storylyView.storyGroupTextStyling, stStoryGroupTextStyling)
+RCT_REMAP_VIEW_PROPERTY(storyHeaderStyling, storylyView.storyHeaderStyling, stStoryHeaderStyling)
+RCT_REMAP_VIEW_PROPERTY(storylyLayoutDirection, storylyView.storylyLayoutDirection, stStorylyLayoutDirection)
+RCT_REMAP_VIEW_PROPERTY(storyGroupViewFactory, storyGroupViewFactorySize, stStoryGroupViewFactory)
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)
@@ -114,5 +50,7 @@ RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresented, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresentFailed, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryDismissed, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onCreateCustomView, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onUpdateCustomView, RCTBubblingEventBlock)
 
 @end
