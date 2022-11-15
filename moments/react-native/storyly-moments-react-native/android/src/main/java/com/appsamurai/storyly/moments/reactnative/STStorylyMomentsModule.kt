@@ -51,7 +51,9 @@ class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactConte
               Arguments.createMap().also { eventMap ->
                 eventMap.putString("eventName", event.name)
                 eventMap.putMap("storyGroup", momentsStoryGroup?.let { createMomentsStoryGroup(it) })
-                eventMap.putArray("stories", stories?.let { createMomentsStoryList(stories) })
+                eventMap.putArray("stories", stories?.let { Arguments.createArray().also { array ->
+                  it.forEach { story -> array.pushMap(createStoryMap(story)) }
+                }})
               })
           }
 
@@ -151,13 +153,9 @@ class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactConte
       putString("id", storyGroup.id)
       putString("iconUrl", storyGroup.iconUrl)
       putBoolean("seen", storyGroup.seen)
-      putArray("stories", createMomentsStoryList(storyGroup.stories))
-    }
-  }
-
-  private fun createMomentsStoryList(stories: List<MomentsStory>): ReadableArray? {
-    return Arguments.createArray().also { array ->
-      stories.forEach { story -> array.pushMap(createStoryMap(story)) }
+      putArray("stories",  Arguments.createArray().also { array ->
+        storyGroup.stories.forEach { story -> array.pushMap(createStoryMap(story)) }
+      })
     }
   }
 
