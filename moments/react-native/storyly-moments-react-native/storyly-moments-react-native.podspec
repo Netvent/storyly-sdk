@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  s.dependency "StorylyMoments", "~> 0.0.8"
+  s.dependency "StorylyMoments", "~> 0.1.0"
 end
