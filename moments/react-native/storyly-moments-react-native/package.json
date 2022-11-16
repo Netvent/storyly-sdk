@@ -1,6 +1,6 @@
 {
   "name": "storyly-moments-react-native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The React Native plugin for Moments by Storyly",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
