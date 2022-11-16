@@ -30,6 +30,7 @@ RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorSeen, storylyView.storyGroupTextColor
 RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorNotSeen, storylyView.storyGroupTextColorNotSeen, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyGroupPinIconColor, storylyView.storyGroupPinIconColor, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyGroupSize, storylyView.storyGroupSize, NSString)
+RCT_REMAP_VIEW_PROPERTY(storyGroupAnimation, storylyView.storyGroupAnimation, NSString)
 RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, storylyView.storyItemIconBorderColor, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, storylyView.storyItemTextColor, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyItemProgressBarColor, storylyView.storylyItemProgressBarColor, NSArray<UIColor *>)

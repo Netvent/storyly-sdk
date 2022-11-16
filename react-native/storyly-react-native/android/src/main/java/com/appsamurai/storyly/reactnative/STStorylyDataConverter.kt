@@ -7,7 +7,6 @@ import com.facebook.react.bridge.WritableMap
 
 internal fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
     return Arguments.createMap().also { storyGroupMap ->
-        storyGroupMap.putString("groupTheme", storyGroup.groupTheme?.name)
         storyGroupMap.putString("id", storyGroup.uniqueId)
         storyGroupMap.putString("title", storyGroup.title)
         storyGroupMap.putString("iconUrl", storyGroup.iconUrl)
