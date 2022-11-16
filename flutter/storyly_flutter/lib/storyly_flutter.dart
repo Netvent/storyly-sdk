@@ -788,7 +788,6 @@ class StoryGroup {
     required this.stories,
     required this.pinned,
     required this.type,
-    this.groupTheme,
     this.thematicIconUrls,
     this.coverUrl,
   });
@@ -811,8 +810,6 @@ class StoryGroup {
   /// stories List of stories in the story group
   final List<Story> stories;
 
-  final String? groupTheme;
-
   final Map<String, String>? thematicIconUrls;
 
   final String? coverUrl;
@@ -829,7 +826,6 @@ class StoryGroup {
       iconUrl: json['iconUrl'],
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
-      groupTheme: json['grupTheme'],
       thematicIconUrls: json['thematicIconUrls'] != null
           ? Map<String, String>.from(json['thematicIconUrls'])
           : null,
