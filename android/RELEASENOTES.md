@@ -1,4 +1,9 @@
 # Release Notes
+### 1.27.3 (23.11.2022)
+* fix issue with resource conflicts for Storyly and Moments
+* add localization support to share screen
+* fix video playback issue for Moments stories
+
 ### 1.27.2 (14.11.2022)
 * added share to Instagram Stories
 * added storyly share sheet with story specific share features
