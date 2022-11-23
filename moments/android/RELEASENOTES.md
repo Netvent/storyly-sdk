@@ -1,4 +1,18 @@
 # Release Notes
+### 0.2.0 (23.11.2022)
+* IMPORTANT! deprecate createStory and openMyStories methods
+* IMPORTANT! add openStoryCreator and openUserStories methods
+* IMPORTANT! deprecate onOpenCreateStory and onOpenMyStory callbacks
+* IMPORTANT! add onStoryCreatorOpen/onStoryCreatorClose and onUserStoriesOpen/onUserStoriesClose callbacks
+* fix issue with resource conflicts for Storyly and Moments 
+* add localization(en, es, tr) support
+* fix drag gesture position issue for text interactive component
+* fix duplicate character issue on text interactive component
+* fix text cut issue on text interactive component
+* improve span color selection of text interactive component
+* improve keyboard open/close handling
+* improve ui handling for Android API 24-
+
 ### 0.1.2 (14.11.2022)
 * improved audio focus with video stories
 
