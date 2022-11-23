@@ -1,4 +1,11 @@
 # Release Notes
+### 1.27.6 (14.11.2022)
+* fix pin icon rendering issue for some devices
+* fix story start issue for openStory methods
+* fix story progress animation issue for some devices
+* add localization support to share screen
+* fix video playback issue for Moments stories
+
 ### 1.27.5 (14.11.2022)
 * added share to Instagram Stories
 * added storyly share sheet with story specific share features
