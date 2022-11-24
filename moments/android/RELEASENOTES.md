@@ -5,7 +5,7 @@
 * IMPORTANT! deprecate onOpenCreateStory and onOpenMyStory callbacks
 * IMPORTANT! add onStoryCreatorOpen/onStoryCreatorClose and onUserStoriesOpen/onUserStoriesClose callbacks
 * fix issue with resource conflicts for Storyly and Moments 
-* add localization(en, es, tr) support
+* add localization(en, es, de) support
 * fix drag gesture position issue for text interactive component
 * fix duplicate character issue on text interactive component
 * fix text cut issue on text interactive component
