@@ -1,4 +1,12 @@
 # Release Notes
+### 0.2.0 (24.11.2022)
+* IMPORTANT! deprecate createStory and openMyStories methods
+* IMPORTANT! add openStoryCreator and openUserStories methods
+* IMPORTANT! deprecate onOpenCreateStory and onOpenMyStory callbacks
+* IMPORTANT! add onStoryCreatorOpen/onStoryCreatorClose and onUserStoriesOpen/onUserStoriesClose callbacks
+* add localization(en, es, de) support
+* improve position, cursor indicator handling on text interactive components
+
 ### 0.1.6 (14.11.2022)
 * fixed keyboard opening issue on some devices 
 
