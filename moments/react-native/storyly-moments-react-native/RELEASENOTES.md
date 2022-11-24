@@ -1,4 +1,9 @@
 # Release Notes
+### 0.2.0 (24.11.2022)
+* fix issue with resource conflicts for Storyly and Moments
+* add localization(en, es, de) support
+* improve position, placement, keyboard issues on text interactive component
+
 ### 0.1.1 (15.11.2022)
 * added callbacks, check [MomentsEvent](https://github.com/Netvent/storyly-mobile/blob/master/moments/react-native/storyly-moments-react-native/src/index.tsx#L87)
 
