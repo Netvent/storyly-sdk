@@ -296,26 +296,6 @@ extension Storyly.StorylyView {
   @objc optional func storylyUserInteracted(_ storylyView: Storyly.StorylyView, storyGroup: Storyly.StoryGroup, story: Storyly.Story, storyComponent: Storyly.StoryComponent)
   @objc optional func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, storyGroup: Storyly.StoryGroup?, story: Storyly.Story?, storyComponent: Storyly.StoryComponent?)
 }
-extension UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) weak public var tooltipView: Storyly.ZGTooltipView? {
-    get
-    set(newValue)
-  }
-}
-@objc @_Concurrency.MainActor(unsafe) open class ZGTooltipView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open var backgroundColor: UIKit.UIColor? {
-    @_Concurrency.MainActor(unsafe) @objc get
-    @_Concurrency.MainActor(unsafe) @objc set
-  }
-  @_Concurrency.MainActor(unsafe) convenience public init(text: Swift.String, uiImage: UIKit.UIImage?, originView: UIKit.UIView, hostingView: UIKit.UIView?)
-  @_Concurrency.MainActor(unsafe) required public init(customView: UIKit.UIView, originView: UIKit.UIView, hostingView: UIKit.UIView?)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder _: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) public func displayTooltip(pos: CoreGraphics.CGPoint?, completion: (() -> Swift.Void)? = nil)
-  @_Concurrency.MainActor(unsafe) public func dismiss(completion: (() -> Swift.Void)? = nil)
-  @_Concurrency.MainActor(unsafe) public func updatePosition(pos: CoreGraphics.CGPoint?)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
-  @objc deinit
-}
 @objc(StorylyInit) final public class StorylyInit : ObjectiveC.NSObject {
   @objc final public var segmentation: Storyly.StorylySegmentation {
     @objc get

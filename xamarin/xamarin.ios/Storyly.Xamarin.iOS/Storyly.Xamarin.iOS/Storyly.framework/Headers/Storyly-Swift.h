@@ -1305,13 +1305,6 @@ SWIFT_CLASS_NAMED("StorylyView")
 
 
 
-SWIFT_CLASS("_TtC7Storyly13ZGTooltipView")
-@interface ZGTooltipView : UIView
-@property (nonatomic, strong) UIColor * _Nullable backgroundColor;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)_ OBJC_DESIGNATED_INITIALIZER;
-- (void)layoutSubviews;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -2625,13 +2618,6 @@ SWIFT_CLASS_NAMED("StorylyView")
 
 
 
-SWIFT_CLASS("_TtC7Storyly13ZGTooltipView")
-@interface ZGTooltipView : UIView
-@property (nonatomic, strong) UIColor * _Nullable backgroundColor;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)_ OBJC_DESIGNATED_INITIALIZER;
-- (void)layoutSubviews;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
