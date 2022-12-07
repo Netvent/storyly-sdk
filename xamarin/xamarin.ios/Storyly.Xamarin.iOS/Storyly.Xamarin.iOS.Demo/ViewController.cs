@@ -16,15 +16,16 @@ namespace Storyly.Xamarin.iOS.Demo
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
-            var storylyView = new StorylyView(new CGRect(0, 50, 414, 130))
+            var storylyView = new StorylyView(new CGRect(0, 50, 414, 90))
             {
                 StorylyInit = new StorylyInit("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"),
                 RootViewController = this,
-                Delegate = new StorylyDelegateImpl()
+                Delegate = new StorylyDelegateImpl(),
+                StoryGroupSize = "small"
             };
             View.AddSubview(storylyView);
 
-            var womenStorylyView = new StorylyView(new CGRect(0, 190, 414, 130))
+            var womenStorylyView = new StorylyView(new CGRect(0, 150, 414, 130))
             {
                 StorylyInit = new StorylyInit("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjgyNDgsImFwcF9pZCI6MTM0MzEsImluc19pZCI6MTQ2MTh9.Q6RtSOt-yIcT2op9tS_hborpKLhOpPfV6wn_9tiFNkQ",
                 new StorylySegmentation(new NSSet<NSString>(new NSString("women"))),
@@ -49,7 +50,7 @@ namespace Storyly.Xamarin.iOS.Demo
             });
             View.AddSubview(womenStorylyView);
 
-            var menStorylyView = new StorylyView(new CGRect(0, 330, 414, 130))
+            var menStorylyView = new StorylyView(new CGRect(0, 290, 414, 130))
             {
                 StorylyInit = new StorylyInit("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjgyNDgsImFwcF9pZCI6MTM0MzEsImluc19pZCI6MTQ2MTh9.Q6RtSOt-yIcT2op9tS_hborpKLhOpPfV6wn_9tiFNkQ",
                 new StorylySegmentation(new NSSet<NSString>(new NSString("men"))),

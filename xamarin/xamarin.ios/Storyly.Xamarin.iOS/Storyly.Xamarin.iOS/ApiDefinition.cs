@@ -92,6 +92,7 @@ namespace Storyly
 		[Export("type")]
 		StoryGroupType Type { get; }
 
+		// TODO: check constructor
 		//// -(instancetype _Nonnull)initWithGroupTheme:(NSString * _Nullable)groupTheme id:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nonnull)iconUrl thematicIconUrls:(NSDictionary<NSString *,NSURL *> * _Nullable)thematicIconUrls coverUrl:(NSURL * _Nullable)coverUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type momentsUser:(MomentsUser * _Nullable)momentsUser __attribute__((objc_designated_initializer));
 		//[Export("initWithGroupTheme:id:title:iconUrl:thematicIconUrls:coverUrl:index:seen:stories:pinned:type:momentsUser:")]
 		//[DesignatedInitializer]
@@ -168,6 +169,7 @@ namespace Storyly
 		IntPtr Constructor(StoryType type, [NullAllowed] StoryComponent[] storyComponentList, [NullAllowed] string[] actionUrlList, [NullAllowed] string actionUrl, [NullAllowed] NSUrl previewUrl);
 	}
 
+	// TODO: add childs of StoryComponent
 	// @interface StoryComponent : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
@@ -220,6 +222,80 @@ namespace Storyly
 		void StorylyEvent(StorylyView storylyView, StorylyEvent @event, [NullAllowed] StoryGroup storyGroup, [NullAllowed] Story story, [NullAllowed] StoryComponent storyComponent);
 	}
 
+	// @interface StoryGroupIconStyling : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StoryGroupIconStyling
+	{
+		// @property (nonatomic) CGFloat height;
+		[Export("height")]
+		nfloat Height { get; set; }
+
+		// @property (nonatomic) CGFloat width;
+		[Export("width")]
+		nfloat Width { get; set; }
+
+		// @property (nonatomic) CGFloat cornerRadius;
+		[Export("cornerRadius")]
+		nfloat CornerRadius { get; set; }
+
+		// -(instancetype _Nonnull)initWithHeight:(CGFloat)height width:(CGFloat)width cornerRadius:(CGFloat)cornerRadius __attribute__((objc_designated_initializer));
+		[Export("initWithHeight:width:cornerRadius:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(nfloat height, nfloat width, nfloat cornerRadius);
+	}
+
+	// @interface StoryGroupListStyling : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StoryGroupListStyling
+	{
+		// @property (nonatomic) CGFloat edgePadding;
+		[Export("edgePadding")]
+		nfloat EdgePadding { get; set; }
+
+		// @property (nonatomic) CGFloat paddingBetweenItems;
+		[Export("paddingBetweenItems")]
+		nfloat PaddingBetweenItems { get; set; }
+
+		// -(instancetype _Nonnull)initWithEdgePadding:(CGFloat)edgePadding paddingBetweenItems:(CGFloat)paddingBetweenItems __attribute__((objc_designated_initializer));
+		[Export("initWithEdgePadding:paddingBetweenItems:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(nfloat edgePadding, nfloat paddingBetweenItems);
+	}
+
+	// @interface StoryGroupTextStyling : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StoryGroupTextStyling
+	{
+		// @property (nonatomic) BOOL isVisible;
+		[Export("isVisible")]
+		bool IsVisible { get; set; }
+
+		// @property (nonatomic, strong) UIColor * _Nonnull colorSeen;
+		[Export("colorSeen", ArgumentSemantic.Strong)]
+		UIColor ColorSeen { get; set; }
+
+		// @property (nonatomic, strong) UIColor * _Nonnull colorNotSeen;
+		[Export("colorNotSeen", ArgumentSemantic.Strong)]
+		UIColor ColorNotSeen { get; set; }
+
+		// @property (nonatomic, strong) UIFont * _Nullable font;
+		[NullAllowed, Export("font", ArgumentSemantic.Strong)]
+		UIFont Font { get; set; }
+
+		// @property (nonatomic) NSInteger lines;
+		[Export("lines")]
+		nint Lines { get; set; }
+
+		// -(instancetype _Nonnull)initWithIsVisible:(BOOL)isVisible colorSeen:(UIColor * _Nonnull)colorSeen colorNotSeen:(UIColor * _Nonnull)colorNotSeen font:(UIFont * _Nullable)font lines:(NSInteger)lines __attribute__((objc_designated_initializer));
+		[Export("initWithIsVisible:colorSeen:colorNotSeen:font:lines:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(bool isVisible, UIColor colorSeen, UIColor colorNotSeen, [NullAllowed] UIFont font, nint lines);
+	}
+
+	// TODO: add pause/resume and PresentWithAnimated/DismissWithAnimated
 	// @interface StorylyView : UIView
 	[BaseType(typeof(UIView))]
 	[Protocol]
@@ -233,10 +309,6 @@ namespace Storyly
 		[NullAllowed, Export("rootViewController", ArgumentSemantic.Weak)]
 		UIViewController RootViewController { get; set; }
 
-		// -(BOOL)setExternalData:(NSArray<NSDictionary *> * _Nonnull)externalData __attribute__((warn_unused_result("")));
-		[Export("setExternalData:")]
-		bool SetExternalData(NSDictionary[] externalData);
-
 		[Wrap("WeakDelegate")]
 		[NullAllowed]
 		StorylyDelegate Delegate { get; set; }
@@ -244,6 +316,54 @@ namespace Storyly
 		// @property (nonatomic, weak) id<StorylyDelegate> _Nullable delegate;
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
+
+		// -(void)pause;
+		[Export("pause")]
+		void Pause();
+
+		// -(void)resume;
+		[Export("resume")]
+		void Resume();
+
+		// -(void)presentWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+		[Export("presentWithAnimated:completion:")]
+		void PresentWithAnimated(bool animated, [NullAllowed] Action completion);
+
+		// -(void)dismissWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+		[Export("dismissWithAnimated:completion:")]
+		void DismissWithAnimated(bool animated, [NullAllowed] Action completion);
+
+		// -(BOOL)setExternalData:(NSArray<NSDictionary *> * _Nonnull)externalData __attribute__((warn_unused_result("")));
+		[Export("setExternalData:")]
+		bool SetExternalData(NSDictionary[] externalData);
+
+		// @property (copy, nonatomic) NSString * _Nonnull storyGroupSize;
+		[Export("storyGroupSize")]
+		string StoryGroupSize { get; set; }
+
+		// @property (nonatomic, strong) StoryGroupIconStyling * _Nonnull storyGroupIconStyling;
+		[Export("storyGroupIconStyling", ArgumentSemantic.Strong)]
+		StoryGroupIconStyling StoryGroupIconStyling { get; set; }
+
+		// @property (copy, nonatomic) NSArray<UIColor *> * _Nonnull storyGroupIconBorderColorSeen;
+		[Export("storyGroupIconBorderColorSeen", ArgumentSemantic.Copy)]
+		UIColor[] StoryGroupIconBorderColorSeen { get; set; }
+
+		// @property (copy, nonatomic) NSArray<UIColor *> * _Nonnull storyGroupIconBorderColorNotSeen;
+		[Export("storyGroupIconBorderColorNotSeen", ArgumentSemantic.Copy)]
+		UIColor[] StoryGroupIconBorderColorNotSeen { get; set; }
+
+		// @property (nonatomic, strong) UIColor * _Nonnull storyGroupIconBackgroundColor;
+		[Export("storyGroupIconBackgroundColor", ArgumentSemantic.Strong)]
+		UIColor StoryGroupIconBackgroundColor { get; set; }
+
+		// @property (nonatomic, strong) StoryGroupListStyling * _Nonnull storyGroupListStyling;
+		[Export("storyGroupListStyling", ArgumentSemantic.Strong)]
+		StoryGroupListStyling StoryGroupListStyling { get; set; }
+
+		// @property (nonatomic, strong) StoryGroupTextStyling * _Nonnull storyGroupTextStyling;
+		[Export("storyGroupTextStyling", ArgumentSemantic.Strong)]
+		StoryGroupTextStyling StoryGroupTextStyling { get; set; }
 
 		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
 		[Export("initWithFrame:")]

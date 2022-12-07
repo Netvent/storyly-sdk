@@ -494,7 +494,7 @@ SWIFT_CLASS("_TtC7Storyly26StoryGroupIconColorStyling")
 
 
 /// This class represents styling of story group icons
-SWIFT_CLASS("_TtC7Storyly21StoryGroupIconStyling")
+SWIFT_CLASS_NAMED("StoryGroupIconStyling")
 @interface StoryGroupIconStyling : NSObject
 /// Height of the story group icon
 @property (nonatomic) CGFloat height;
@@ -516,7 +516,7 @@ SWIFT_CLASS("_TtC7Storyly21StoryGroupIconStyling")
 
 
 /// This data class represents styling of story group list
-SWIFT_CLASS("_TtC7Storyly21StoryGroupListStyling")
+SWIFT_CLASS_NAMED("StoryGroupListStyling")
 @interface StoryGroupListStyling : NSObject
 /// Edge padding value of the first and last story groups
 @property (nonatomic) CGFloat edgePadding;
@@ -544,7 +544,7 @@ typedef SWIFT_ENUM(NSInteger, StoryGroupSize, open) {
 
 
 /// This data class represents styling of story group texts
-SWIFT_CLASS("_TtC7Storyly21StoryGroupTextStyling")
+SWIFT_CLASS_NAMED("StoryGroupTextStyling")
 @interface StoryGroupTextStyling : NSObject
 /// Visibility of the story group text
 @property (nonatomic) BOOL isVisible;
@@ -1807,7 +1807,7 @@ SWIFT_CLASS("_TtC7Storyly26StoryGroupIconColorStyling")
 
 
 /// This class represents styling of story group icons
-SWIFT_CLASS("_TtC7Storyly21StoryGroupIconStyling")
+SWIFT_CLASS_NAMED("StoryGroupIconStyling")
 @interface StoryGroupIconStyling : NSObject
 /// Height of the story group icon
 @property (nonatomic) CGFloat height;
@@ -1829,7 +1829,7 @@ SWIFT_CLASS("_TtC7Storyly21StoryGroupIconStyling")
 
 
 /// This data class represents styling of story group list
-SWIFT_CLASS("_TtC7Storyly21StoryGroupListStyling")
+SWIFT_CLASS_NAMED("StoryGroupListStyling")
 @interface StoryGroupListStyling : NSObject
 /// Edge padding value of the first and last story groups
 @property (nonatomic) CGFloat edgePadding;
@@ -1857,7 +1857,7 @@ typedef SWIFT_ENUM(NSInteger, StoryGroupSize, open) {
 
 
 /// This data class represents styling of story group texts
-SWIFT_CLASS("_TtC7Storyly21StoryGroupTextStyling")
+SWIFT_CLASS_NAMED("StoryGroupTextStyling")
 @interface StoryGroupTextStyling : NSObject
 /// Visibility of the story group text
 @property (nonatomic) BOOL isVisible;

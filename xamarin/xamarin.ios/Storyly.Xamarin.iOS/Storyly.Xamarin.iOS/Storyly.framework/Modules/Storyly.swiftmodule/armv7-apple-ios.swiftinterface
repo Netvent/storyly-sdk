@@ -223,14 +223,14 @@ extension Storyly.StorylyView {
   @objc override dynamic public init()
   @objc deinit
 }
-@objc final public class StoryGroupIconStyling : ObjectiveC.NSObject {
+@objc(StoryGroupIconStyling) final public class StoryGroupIconStyling : ObjectiveC.NSObject {
   @objc final public var height: CoreGraphics.CGFloat
   @objc final public var width: CoreGraphics.CGFloat
   @objc final public var cornerRadius: CoreGraphics.CGFloat
   @objc public init(height: CoreGraphics.CGFloat, width: CoreGraphics.CGFloat, cornerRadius: CoreGraphics.CGFloat)
   @objc deinit
 }
-@objc final public class StoryGroupTextStyling : ObjectiveC.NSObject {
+@objc(StoryGroupTextStyling) final public class StoryGroupTextStyling : ObjectiveC.NSObject {
   @objc final public var isVisible: Swift.Bool
   @objc final public var colorSeen: UIKit.UIColor
   @objc final public var colorNotSeen: UIKit.UIColor
@@ -248,7 +248,7 @@ extension Storyly.StorylyView {
   @objc public init(isTextVisible: Swift.Bool, isIconVisible: Swift.Bool, isCloseButtonVisible: Swift.Bool, closeButtonIcon: UIKit.UIImage? = nil, shareButtonIcon: UIKit.UIImage? = nil)
   @objc deinit
 }
-@objc final public class StoryGroupListStyling : ObjectiveC.NSObject {
+@objc(StoryGroupListStyling) final public class StoryGroupListStyling : ObjectiveC.NSObject {
   @objc final public var edgePadding: CoreGraphics.CGFloat
   @objc final public var paddingBetweenItems: CoreGraphics.CGFloat
   @objc public init(edgePadding: CoreGraphics.CGFloat, paddingBetweenItems: CoreGraphics.CGFloat)
