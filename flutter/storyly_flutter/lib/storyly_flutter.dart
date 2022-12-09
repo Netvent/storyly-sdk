@@ -492,7 +492,7 @@ class StorylyParam {
 
     paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
 
-    paramsMap['storyGroupAnimation'] = storyGroupAnimation ?? 'borderRotation';
+    paramsMap['storyGroupAnimation'] = storyGroupAnimation ?? 'border-rotation';
 
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
 

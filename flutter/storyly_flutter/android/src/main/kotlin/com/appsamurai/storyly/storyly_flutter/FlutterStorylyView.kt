@@ -115,7 +115,7 @@ class FlutterStorylyView(
             (args[ARGS_STORY_GROUP_ANIMATION] as? String)?.let {
                 setStoryGroupAnimation(
                     when (it) {
-                        "borderRotation" -> StoryGroupAnimation.BorderRotation
+                        "border-rotation" -> StoryGroupAnimation.BorderRotation
                         "disabled" -> StoryGroupAnimation.Disabled
                         else -> StoryGroupAnimation.BorderRotation
                     }

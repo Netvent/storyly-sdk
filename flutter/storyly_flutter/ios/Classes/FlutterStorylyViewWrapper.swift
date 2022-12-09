@@ -98,7 +98,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         
         storylyView.storyGroupSize = args[self.ARGS_STORY_GROUP_SIZE] as? String ?? "large"
 
-        storylyView.storyGroupAnimation = args[self.ARGS_STORY_GROUP_ANIMATION] as? String ?? "borderRotation"
+        storylyView.storyGroupAnimation = args[self.ARGS_STORY_GROUP_ANIMATION] as? String ?? "border-rotation"
 
         if let storyGroupIconStyling = args[ARGS_STORY_GROUP_ICON_STYLING] as? [String: Any] {
             if let width = storyGroupIconStyling["width"] as? Int,
