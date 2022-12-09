@@ -202,7 +202,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     @ReactProp(name = PROP_STORY_GROUP_ANIMATION)
     fun setPropStoryGroupAnimation(view: STStorylyView, animation: String) {
         when (animation) {
-            "borderRotation" -> view.storylyView.setStoryGroupAnimation(StoryGroupAnimation.BorderRotation)
+            "border-rotation" -> view.storylyView.setStoryGroupAnimation(StoryGroupAnimation.BorderRotation)
             "disabled" -> view.storylyView.setStoryGroupAnimation(StoryGroupAnimation.Disabled)
             else -> view.storylyView.setStoryGroupAnimation(StoryGroupAnimation.BorderRotation)
         }
