@@ -1,3 +1,8 @@
+### 1.28.1 (13.12.2022)
+* IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
+* added past date information of story to header for moments story groups
+* added localization(pt) support
+
 ### 1.26.5 (21.10.2022)
 * improved RootViewController handling on iOS side
 
