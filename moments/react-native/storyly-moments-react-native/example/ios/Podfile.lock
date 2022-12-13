@@ -245,10 +245,10 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - storyly-moments-react-native (0.1.0):
+  - storyly-moments-react-native (0.3.0):
     - React-Core
-    - StorylyMoments (~> 0.1.0)
-  - StorylyMoments (0.1.6)
+    - StorylyMoments (~> 0.3.0)
+  - StorylyMoments (0.3.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -370,8 +370,8 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  storyly-moments-react-native: b88cd6b72ee7702349641e6b88ae8d5eac83b1e3
-  StorylyMoments: ac5ccae9a075229e3badb2d111795d85c025091b
+  storyly-moments-react-native: 35daf5deafff1c7ab73760405f28119bb91cba8e
+  StorylyMoments: 3201223cc4fbf3985b345c8d061487146e3be94d
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 43be89d0698e6ff510b26d5dd9fb64ab49500bbc
