@@ -1,4 +1,9 @@
 # Release Notes
+### 1.28.0 (13.12.2022)
+* IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
+* added past date information of story to header for moments story groups
+* added localization(pt) support
+
 ### 1.27.1 (10.11.2022)
 * fixed [#247](https://github.com/Netvent/storyly-mobile/issues/247)
 
