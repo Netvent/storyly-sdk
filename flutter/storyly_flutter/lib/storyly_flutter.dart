@@ -337,6 +337,9 @@ class StorylyParam {
   /// * You need to set all parameters to this customization to be effective.
   String? storyGroupSize;
 
+  /// This attribute changes the animation of the story group
+  String? storyGroupAnimation;
+
   /// This attribute allows you to changes the width of story group icon.
   int? storyGroupIconWidth;
 
@@ -488,6 +491,8 @@ class StorylyParam {
     };
 
     paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
+
+    paramsMap['storyGroupAnimation'] = storyGroupAnimation ?? 'border-rotation';
 
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
 
@@ -783,7 +788,6 @@ class StoryGroup {
     required this.stories,
     required this.pinned,
     required this.type,
-    this.groupTheme,
     this.thematicIconUrls,
     this.coverUrl,
   });
@@ -806,8 +810,6 @@ class StoryGroup {
   /// stories List of stories in the story group
   final List<Story> stories;
 
-  final String? groupTheme;
-
   final Map<String, String>? thematicIconUrls;
 
   final String? coverUrl;
@@ -824,7 +826,6 @@ class StoryGroup {
       iconUrl: json['iconUrl'],
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
-      groupTheme: json['grupTheme'],
       thematicIconUrls: json['thematicIconUrls'] != null
           ? Map<String, String>.from(json['thematicIconUrls'])
           : null,

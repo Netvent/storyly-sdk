@@ -64,6 +64,7 @@ class FlutterStorylyView(
 
         private const val ARGS_STORYLY_LAYOUT_DIRECTION = "storylyLayoutDirection"
 
+        private const val ARGS_STORY_GROUP_ANIMATION = "storyGroupAnimation"
         private const val ARGS_STORY_GROUP_SIZE = "storyGroupSize"
         private const val ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
         private const val ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
@@ -108,6 +109,15 @@ class FlutterStorylyView(
                         "small" -> StoryGroupSize.Small
                         "custom" -> StoryGroupSize.Custom
                         else -> StoryGroupSize.Large
+                    }
+                )
+            }
+            (args[ARGS_STORY_GROUP_ANIMATION] as? String)?.let {
+                setStoryGroupAnimation(
+                    when (it) {
+                        "border-rotation" -> StoryGroupAnimation.BorderRotation
+                        "disabled" -> StoryGroupAnimation.Disabled
+                        else -> StoryGroupAnimation.BorderRotation
                     }
                 )
             }
@@ -275,7 +285,6 @@ class FlutterStorylyView(
             "seen" to storyGroup.seen,
             "iconUrl" to storyGroup.iconUrl,
             "stories" to storyGroup.stories.map { story -> createStoryMap(story) },
-            "groupTheme" to storyGroup.groupTheme,
             "thematicIconUrls" to storyGroup.thematicIconUrls,
             "coverUrl" to storyGroup.coverUrl,
             "pinned" to storyGroup.pinned,

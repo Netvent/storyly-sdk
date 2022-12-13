@@ -11,7 +11,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
     
     private let ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
-    
+
+    private let ARGS_STORY_GROUP_ANIMATION = "storyGroupAnimation"
     private let ARGS_STORY_GROUP_SIZE = "storyGroupSize"
     private let ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
     private let ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
@@ -96,7 +97,9 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         }
         
         storylyView.storyGroupSize = args[self.ARGS_STORY_GROUP_SIZE] as? String ?? "large"
-        
+
+        storylyView.storyGroupAnimation = args[self.ARGS_STORY_GROUP_ANIMATION] as? String ?? "border-rotation"
+
         if let storyGroupIconStyling = args[ARGS_STORY_GROUP_ICON_STYLING] as? [String: Any] {
             if let width = storyGroupIconStyling["width"] as? Int,
                let height = storyGroupIconStyling["height"] as? Int,
@@ -275,7 +278,6 @@ extension FlutterStorylyViewWrapper {
                 "seen": storyGroup.seen,
                 "iconUrl": storyGroup.iconUrl.absoluteString,
                 "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
-                "groupTheme": storyGroup.groupTheme,
                 "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
                 "coverUrl": storyGroup.coverUrl,
                 "pinned": storyGroup.pinned,
