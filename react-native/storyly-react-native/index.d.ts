@@ -13,6 +13,7 @@ declare module "storyly-react-native" {
       storylyShareUrl?: string;
 
       storyGroupSize?: "small" | "large" | "custom";
+      storyGroupAnimation?: "border-rotation" | "disabled";
       storyGroupIconWidth?: number;
       storyGroupIconHeight?: number;
       storyGroupIconCornerRadius?: number;
@@ -124,7 +125,6 @@ declare module "storyly-react-native" {
     }
 
     export interface StoryGroup {
-      groupTheme?: number;
       id: string;
       title: string;
       iconUrl: string;

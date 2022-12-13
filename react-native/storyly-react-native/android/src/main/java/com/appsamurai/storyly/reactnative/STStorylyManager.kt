@@ -11,6 +11,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.StoryGroupSize
+import com.appsamurai.storyly.StoryGroupAnimation
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylyLayoutDirection
 import com.appsamurai.storyly.StorylySegmentation
@@ -42,6 +43,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val PROP_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
         private const val PROP_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
         private const val PROP_STORY_GROUP_SIZE = "storyGroupSize"
+        private const val PROP_STORY_GROUP_ANIMATION = "storyGroupAnimation"
         private const val PROP_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
         private const val PROP_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
         private const val PROP_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
@@ -194,6 +196,15 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             "small" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Small)
             "custom" -> view.storylyView.setStoryGroupSize(StoryGroupSize.Custom)
             else -> view.storylyView.setStoryGroupSize(StoryGroupSize.Large)
+        }
+    }
+
+    @ReactProp(name = PROP_STORY_GROUP_ANIMATION)
+    fun setPropStoryGroupAnimation(view: STStorylyView, animation: String) {
+        when (animation) {
+            "border-rotation" -> view.storylyView.setStoryGroupAnimation(StoryGroupAnimation.BorderRotation)
+            "disabled" -> view.storylyView.setStoryGroupAnimation(StoryGroupAnimation.Disabled)
+            else -> view.storylyView.setStoryGroupAnimation(StoryGroupAnimation.BorderRotation)
         }
     }
 

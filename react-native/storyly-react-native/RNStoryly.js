@@ -199,6 +199,7 @@ Storyly.propTypes = {
     storyGroupTextColorNotSeen: string,
     storyGroupPinIconColor: string,
     storyGroupSize: string,
+    storyGroupAnimation: string,
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,
     storyItemProgressBarColor: arrayOf(string),
