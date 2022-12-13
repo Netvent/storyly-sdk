@@ -1,4 +1,12 @@
 # Release Notes
+### 1.28.0 (13.12.2022)
+* IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
+* added past date information of story to header for moments story groups
+* improved story bar scrolling performance with pagination
+* added localization(pt) support
+* improved crash report handling
+* fixed visual bug on rotated interactive components
+
 ### 1.27.6 (14.11.2022)
 * fix pin icon rendering issue for some devices
 * fix story start issue for openStory methods
