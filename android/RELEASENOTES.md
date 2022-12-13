@@ -1,8 +1,14 @@
 # Release Notes
+### 1.28.0 (13.12.2022)
+* IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
+* added past date information of story to header for moments story groups
+* improved story bar scrolling performance with pagination
+* added localization(pt) support
+
 ### 1.27.3 (23.11.2022)
-* fix issue with resource conflicts for Storyly and Moments
-* add localization support to share screen
-* fix video playback issue for Moments stories
+* fixed issue with resource conflicts for Storyly and Moments
+* added localization support to share screen
+* fixed video playback issue for Moments stories
 
 ### 1.27.2 (14.11.2022)
 * added share to Instagram Stories
