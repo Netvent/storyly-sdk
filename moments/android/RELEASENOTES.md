@@ -1,4 +1,7 @@
 # Release Notes
+### 0.3.1 (14.12.2022)
+* fixed a crash that forces usage of MaterialTheme
+
 ### 0.3.0 (13.12.2022)
 * added past date information of story to header
 * added mute option to video interactive component
