@@ -1,4 +1,7 @@
 # Release Notes
+### 1.28.1 (14.12.2022)
+* updated seen state of story groups with User Property
+
 ### 1.28.0 (13.12.2022)
 * IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
 * added past date information of story to header for moments story groups
