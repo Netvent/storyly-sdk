@@ -84,5 +84,21 @@ namespace Storyly.Xamarin.iOS.Demo
         {
             Console.WriteLine($"StorylyActionClicked:ActionUrl:{story.Media.ActionUrl}");
         }
+
+        public override void StorylyEvent(StorylyView storylyView, StorylyEvent @event, StoryGroup storyGroup, Story story, StoryComponent storyComponent)
+        {
+            Console.WriteLine($"StorylyEvent:StorylyEvent:");
+            if (storyComponent != null)
+            {
+                if (storyComponent.Type == StoryComponentType.Emoji)
+                {
+                    StoryEmojiComponent emojiComponent = (StoryEmojiComponent)storyComponent;
+                    if (emojiComponent != null)
+                    {
+                        Console.WriteLine($"StorylyEvent:StoryEmojiComponent:{emojiComponent.CustomPayload}");
+                    }
+                }
+            }
+        }
     }
 }

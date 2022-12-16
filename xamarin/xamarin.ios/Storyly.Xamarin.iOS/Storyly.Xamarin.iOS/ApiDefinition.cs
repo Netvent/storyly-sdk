@@ -184,6 +184,134 @@ namespace Storyly
 		StoryComponentType Type { get; }
 	}
 
+	// @interface StoryCommentComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryCommentComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export("text")]
+		string Text { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text __attribute__((objc_designated_initializer));
+		[Export("initWithId:text:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string id, string text);
+	}
+
+	// @interface StoryEmojiComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryEmojiComponent
+	{
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull emojiCodes;
+		[Export("emojiCodes", ArgumentSemantic.Copy)]
+		string[] EmojiCodes { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedEmojiIndex;
+		[Export("selectedEmojiIndex")]
+		nint SelectedEmojiIndex { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCodes:(NSArray<NSString *> * _Nonnull)emojiCodes selectedEmojiIndex:(NSInteger)selectedEmojiIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export("initWithId:emojiCodes:selectedEmojiIndex:customPayload:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string id, string[] emojiCodes, nint selectedEmojiIndex, [NullAllowed] string customPayload);
+	}
+
+	// @interface StoryPollComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryPollComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
+		[Export("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export("initWithId:title:options:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string id, string title, string[] options, nint selectedOptionIndex, [NullAllowed] string customPayload);
+	}
+
+	// @interface StoryPromoCodeComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryPromoCodeComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export("text")]
+		string Text { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text __attribute__((objc_designated_initializer));
+		[Export("initWithId:text:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string id, string text);
+	}
+
+	// @interface StoryQuizComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryQuizComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
+		[Export("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic, strong) NSNumber * _Nullable rightAnswerIndex;
+		[NullAllowed, Export("rightAnswerIndex", ArgumentSemantic.Strong)]
+		NSNumber RightAnswerIndex { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string id, string title, string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
+	}
+
+	// @interface StoryRatingComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryRatingComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull emojiCode;
+		[Export("emojiCode")]
+		string EmojiCode { get; }
+
+		// @property (readonly, nonatomic) NSInteger rating;
+		[Export("rating")]
+		nint Rating { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCode:(NSString * _Nonnull)emojiCode rating:(NSInteger)rating customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export("initWithId:emojiCode:rating:customPayload:")]
+		[DesignatedInitializer]
+		IntPtr Constructor(string id, string emojiCode, nint rating, [NullAllowed] string customPayload);
+	}
+
 	// @protocol StorylyDelegate
 	[BaseType(typeof(NSObject))]
 	[Protocol, Model(AutoGeneratedName = true)]
