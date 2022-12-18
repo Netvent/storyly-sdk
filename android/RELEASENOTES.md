@@ -1,4 +1,7 @@
 # Release Notes
+### 1.28.2 (18.12.2022)
+* improved codebase to prevent ConcurrentModificationException [#204](https://github.com/Netvent/storyly-mobile/issues/204)
+
 ### 1.28.1 (14.12.2022)
 * updated seen state of story groups with User Property
 
