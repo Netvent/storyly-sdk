@@ -1,4 +1,7 @@
 # Release Notes
+### 1.28.1 (19.12.2022)
+* fixed a bug that labels are not working on iOS platform
+
 ### 1.28.0 (13.12.2022)
 * IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
 * added past date information of story to header for moments story groups
