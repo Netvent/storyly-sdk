@@ -10,8 +10,8 @@ extension RCTConvert {
     @objc(stStorylyInit:)
     static func stStorylyInit(json: NSDictionary) -> StorylyInit {
         var segmentation: StorylySegmentation? = nil
-        if let segmentsData = json["storylySegments"] as? Set<String> {
-            segmentation = StorylySegmentation(segments: segmentsData)
+        if let segmentsData = json["storylySegments"] as? [String] {
+            segmentation = StorylySegmentation(segments: Set(segmentsData))
         }
         
         let isTestMode = (json["storylyIsTestMode"] as? Bool) ?? false
