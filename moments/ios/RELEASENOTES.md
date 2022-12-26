@@ -1,5 +1,5 @@
 # Release Notes
-### 0.3.0 (26.12.2022)
+### 0.3.1 (26.12.2022)
 * fixed a crash during story delete
 
 ### 0.3.0 (13.12.2022)
