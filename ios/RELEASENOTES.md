@@ -1,4 +1,7 @@
 # Release Notes
+### 1.28.2 (26.12.2022)
+* improved progress timer deconstructor
+
 ### 1.28.1 (14.12.2022)
 * updated seen state of story groups with User Property
 
