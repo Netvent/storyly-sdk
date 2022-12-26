@@ -1,4 +1,7 @@
 # Release Notes
+### 0.3.0 (26.12.2022)
+* fixed a crash during story delete
+
 ### 0.3.0 (13.12.2022)
 * added past date information of story to header
 * added mute option to video interactive component
