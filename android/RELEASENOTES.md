@@ -1,4 +1,7 @@
 # Release Notes
+### 1.28.3 (29.12.2022)
+* fix ClassCastException when share button clicked
+
 ### 1.28.2 (18.12.2022)
 * improved codebase to prevent ConcurrentModificationException [#204](https://github.com/Netvent/storyly-mobile/issues/204)
 
