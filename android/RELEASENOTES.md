@@ -1,5 +1,5 @@
 # Release Notes
-### 1.28.3 (29.12.2022)
+### 1.28.4 (05.01.2023)
 * fix ClassCastException when share button clicked
 
 ### 1.28.2 (18.12.2022)
