@@ -1,3 +1,8 @@
+### 1.29.0 (09.01.2023)
+* IMPORTANT! changed design of swipe interactive component
+* IMPORTANT! updated Xcode version to 13.2.1 for builds
+* fixed storyGroup:iconUrl format for user generated content
+
 ### 1.28.1 (13.12.2022)
 * IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
 * added past date information of story to header for moments story groups
