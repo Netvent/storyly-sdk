@@ -1,4 +1,8 @@
 # Release Notes
+### 1.29.0 (09.01.2023)
+* IMPORTANT! changed design of swipe interactive component
+* fixed storyGroup:iconUrl format for user generated content
+
 ### 1.28.2 (26.12.2022)
 * improved progress timer deconstructor
 
