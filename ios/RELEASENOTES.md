@@ -1,6 +1,7 @@
 # Release Notes
 ### 1.29.0 (09.01.2023)
 * IMPORTANT! changed design of swipe interactive component
+* IMPORTANT! updated Xcode version to 13.2.1 for builds
 * fixed storyGroup:iconUrl format for user generated content
 
 ### 1.28.2 (26.12.2022)
