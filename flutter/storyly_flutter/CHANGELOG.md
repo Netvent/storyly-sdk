@@ -1,3 +1,6 @@
+### 1.29.1 (10.01.2023)
+* fixed [#256](https://github.com/Netvent/storyly-mobile/issues/256)
+
 ### 1.29.0 (09.01.2023)
 * IMPORTANT! changed design of swipe interactive component
 * IMPORTANT! updated Xcode version to 13.2.1 for builds
