@@ -16,7 +16,7 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
     let storyGroupMap: [String : Any?] = [
         "id": storyGroup.uniqueId,
         "title": storyGroup.title,
-        "iconUrl": storyGroup.iconUrl.absoluteString,
+        "iconUrl": storyGroup.iconUrl?.absoluteString,
         "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
         "coverUrl": storyGroup.coverUrl?.absoluteString,
         "index": storyGroup.index,

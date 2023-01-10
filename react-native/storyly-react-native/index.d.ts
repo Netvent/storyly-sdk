@@ -127,7 +127,7 @@ declare module "storyly-react-native" {
     export interface StoryGroup {
       id: string;
       title: string;
-      iconUrl: string;
+      iconUrl?: string;
       thematicIconUrls?: Record<String, String>
       coverUrl?: string;
       index: number;

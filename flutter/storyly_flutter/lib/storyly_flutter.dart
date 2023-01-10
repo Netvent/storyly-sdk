@@ -805,7 +805,7 @@ class StoryGroup {
   final bool seen;
 
   /// iconUrl URL of the story group icon image
-  final String iconUrl;
+  final String? iconUrl;
 
   /// stories List of stories in the story group
   final List<Story> stories;
