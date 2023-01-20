@@ -118,8 +118,12 @@ class Storyly extends Component {
             storyGroupIconHeight,
             storyGroupIconWidth,
             storyGroupIconCornerRadius,
-            storyGroupListEdgePadding,
-            storyGroupListPaddingBetweenItems,
+            storyGroupListOrientation,
+            storyGroupListSections,
+            storyGroupListHorizontalEdgePadding,
+            storyGroupListVerticalEdgePadding,
+            storyGroupListHorizontalPaddingBetweenItems,
+            storyGroupListVerticalPaddingBetweenItems,
             storyGroupTextIsVisible,
             storyGroupTextTypeface,
             storyGroupTextSize,
@@ -147,7 +151,14 @@ class Storyly extends Component {
                 {...otherProps}
                 storylyInit={{ 'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode }}
                 storyGroupIconStyling={{ 'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius }}
-                storyGroupListStyling={{ 'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems }}
+                storyGroupListStyling={{
+                    'orientation': storyGroupListOrientation,
+                    'sections': storyGroupListSections,
+                    'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
+                    'verticalEdgePadding': storyGroupListVerticalEdgePadding,
+                    'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
+                    'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
+                }}
                 storyGroupTextStyling={{ 'isVisible': storyGroupTextIsVisible, 'typeface': storyGroupTextTypeface, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'colorSeen': storyGroupTextColorSeen, 'colorNotSeen': storyGroupTextColorNotSeen }}
                 storyHeaderStyling={{ 'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon }}
                 onStorylyLoaded={this._onStorylyLoaded}
@@ -208,8 +219,12 @@ Storyly.propTypes = {
     storyGroupIconHeight: number,
     storyGroupIconWidth: number,
     storyGroupIconCornerRadius: number,
-    storyGroupListEdgePadding: number,
-    storyGroupListPaddingBetweenItems: number,
+    storyGroupListOrientation: string,
+    storyGroupListSections: number,
+    storyGroupListHorizontalEdgePadding: number,
+    storyGroupListVerticalEdgePadding: number,
+    storyGroupListHorizontalPaddingBetweenItems: number,
+    storyGroupListVerticalPaddingBetweenItems: number,
     storyHeaderTextIsVisible: bool,
     storyHeaderIconIsVisible: bool,
     storyHeaderCloseButtonIsVisible: bool,

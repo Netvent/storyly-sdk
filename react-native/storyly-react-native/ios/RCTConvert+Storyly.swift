@@ -27,9 +27,20 @@ extension RCTConvert {
 
     @objc(stStoryGroupListStyling:)
     static func stStoryGroupListStyling(json: NSDictionary) -> StoryGroupListStyling {
-        let edgePadding = (json["edgePadding"] as? CGFloat) ?? 4
-        let paddingBetweenItems = (json["paddingBetweenItems"] as? CGFloat) ?? 8
-        return StoryGroupListStyling(edgePadding: edgePadding, paddingBetweenItems: paddingBetweenItems)
+        let orientation = (json["orientation"] as? String) ?? ""
+        let sections = (json["sections"] as? Int) ?? 1
+        let horizontalEdgePadding = (json["horizontalEdgePadding"] as? CGFloat) ?? 4
+        let verticalEdgePadding = (json["verticalEdgePadding"] as? CGFloat) ?? 4
+        let horizontalPaddingBetweenItems = (json["horizontalPaddingBetweenItems"] as? CGFloat) ?? 8
+        let verticalPaddingBetweenItems = (json["verticalPaddingBetweenItems"] as? CGFloat) ?? 8
+        return StoryGroupListStyling(
+            orientation: orientation, 
+            sections: sections, 
+            horizontalEdgePadding: horizontalEdgePadding, 
+            verticalEdgePadding: verticalEdgePadding, 
+            horizontalPaddingBetweenItems: horizontalPaddingBetweenItems, 
+            verticalPaddingBetweenItems: verticalPaddingBetweenItems
+        )
     }
     
     @objc(stStoryGroupIconStyling:)
