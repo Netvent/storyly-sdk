@@ -1,4 +1,14 @@
 # Release Notes
+### 1.30.0 (23.01.2023)
+* added product card interactive component
+* added like/dislike feature for emoji interactive component
+* changed design of the emoji interactive component
+* added vertical/horizontal grid layout support
+* IMPORTANT! added orientation, sections, horizontalEdgePadding, verticalEdgePadding, horizontalPaddingBetweenItems, verticalPaddingBetweenItems to StoryGroupListStyling
+* IMPORTANT! removed edgePadding, paddingBetweenItems from StoryGroupListStyling
+* added accessibility support for quiz and poll interactive components
+* reduced the sdk size by optimizing the asset usage
+
 ### 1.29.0 (09.01.2023)
 * IMPORTANT! changed design of swipe interactive component
 * fixed storyGroup:iconUrl format for user generated content
