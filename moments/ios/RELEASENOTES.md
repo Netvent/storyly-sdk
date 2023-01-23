@@ -1,4 +1,11 @@
 # Release Notes
+### 0.4.0 (23.01.2023)
+* added move/rotation/scale support for media
+* added gradient background for resized media
+* added pre-moderation support before story upload
+* fixed mute state of video in preview screen
+* added storyHeaderClicked callback 
+
 ### 0.3.1 (26.12.2022)
 * fixed a crash during story delete
 
