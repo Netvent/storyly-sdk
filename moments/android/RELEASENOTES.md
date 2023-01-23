@@ -1,4 +1,11 @@
 # Release Notes
+### 0.4.0 (23.01.2023)
+* added move/rotation/scale support for media
+* added gradient background for resized media
+* added pre-moderation support before story upload
+* fixed corrupted video issue during opening media gallery
+* added storyHeaderClicked callback 
+
 ### 0.3.1 (14.12.2022)
 * fixed a crash that forces usage of MaterialTheme
 
