@@ -10,10 +10,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
-import com.appsamurai.storyly.styling.StoryGroupIconStyling
-import com.appsamurai.storyly.styling.StoryGroupListStyling
-import com.appsamurai.storyly.styling.StoryGroupTextStyling
-import com.appsamurai.storyly.styling.StoryHeaderStyling
+import com.appsamurai.storyly.styling.*
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.StandardMessageCodec
@@ -146,9 +143,25 @@ class FlutterStorylyView(
             }
 
             (args[ARGS_STORY_GROUP_LIST_STYLING] as? Map<String, *>)?.let {
-                val edgePadding = it["edgePadding"] as? Int ?: return@let
-                val paddingBetweenItems = it["paddingBetweenItems"] as? Int ?: return@let
-                setStoryGroupListStyling(StoryGroupListStyling(edgePadding.toFloat(), paddingBetweenItems.toFloat()))
+                val orientation = when (it["orientation"] as? String) {
+                    "horizontal" -> StoryGroupListOrientation.Horizontal
+                    "vertical" -> StoryGroupListOrientation.Vertical
+                    else -> StoryGroupListOrientation.Horizontal
+                }
+                val sections = it["sections"] as? Int ?: 1
+                val horizontalEdgePadding = (it["horizontalEdgePadding"] as? Int)?.toFloat() ?: Float.MIN_VALUE
+                val verticalEdgePadding = (it["verticalEdgePadding"] as? Int)?.toFloat() ?: Float.MIN_VALUE
+                val horizontalPaddingBetweenItems = (it["horizontalPaddingBetweenItems"] as? Int)?.toFloat() ?: Float.MIN_VALUE
+                val verticalPaddingBetweenItems = (it["verticalPaddingBetweenItems"] as? Int)?.toFloat() ?: Float.MIN_VALUE
+
+                setStoryGroupListStyling(StoryGroupListStyling(
+                    orientation,
+                    sections,
+                    horizontalEdgePadding,
+                    verticalEdgePadding,
+                    horizontalPaddingBetweenItems,
+                    verticalPaddingBetweenItems
+                ))
             }
 
             (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }

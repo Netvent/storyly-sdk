@@ -110,12 +110,27 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             }
         }
         
-        if let storyGroupListStyling = args[ARGS_STORY_GROUP_LIST_STYLING] as? [String: Any] {
-            if let edgePadding = storyGroupListStyling["edgePadding"] as? Int,
-               let paddingBetweenItems = storyGroupListStyling["paddingBetweenItems"] as? Int {
-                storylyView.storyGroupListStyling = StoryGroupListStyling(edgePadding: CGFloat(edgePadding),
-                                                                          paddingBetweenItems: CGFloat(paddingBetweenItems))
+        if let storyGroupListStyling: [String : Any] = args[ARGS_STORY_GROUP_LIST_STYLING] as? [String: Any] {
+            var orientation: StoryGroupListOrientation
+            switch storyGroupListStyling["orientation"] as? String {
+                case "horizontal": orientation = .Horizontal
+                case "vertical": orientation = .Vertical
+                default: orientation = .Horizontal
             }
+            let sections = storyGroupListStyling["sections"] as? Int ?? 1
+            let horizontalEdgePadding = storyGroupListStyling["horizontalEdgePadding"] as? Int ?? 8
+            let verticalEdgePadding = storyGroupListStyling["verticalEdgePadding"] as? Int ?? 8 
+            let horizontalPaddingBetweenItems = storyGroupListStyling["horizontalPaddingBetweenItems"] as? Int ?? 16
+            let verticalPaddingBetweenItems = storyGroupListStyling["verticalPaddingBetweenItems"] as? Int ?? 16
+
+            storylyView.storyGroupListStyling = StoryGroupListStyling(
+                orientation: orientation,
+                sections: sections,
+                horizontalEdgePadding: CGFloat(horizontalEdgePadding),
+                verticalEdgePadding: CGFloat(verticalEdgePadding),
+                horizontalPaddingBetweenItems: CGFloat(horizontalPaddingBetweenItems),
+                verticalPaddingBetweenItems: CGFloat(verticalPaddingBetweenItems)
+            )
         }
         
         if let storyGroupIconImageThematicLabel = args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String {
