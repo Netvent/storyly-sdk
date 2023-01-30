@@ -109,6 +109,7 @@ class Storyly extends Component {
             customParameter,
             storylyPayload,
             storylyTestMode,
+            storyGroupSize,
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
             storyItemIconBorderColor,
@@ -199,6 +200,7 @@ Storyly.propTypes = {
     storylyTestMode: bool,
     storylyPayload: string,
 
+    storyGroupSize: string,
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),
     storyGroupIconBackgroundColor: string,
@@ -209,7 +211,7 @@ Storyly.propTypes = {
     storyGroupTextColorSeen: string,
     storyGroupTextColorNotSeen: string,
     storyGroupPinIconColor: string,
-    storyGroupSize: string,
+
     storyGroupAnimation: string,
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,
