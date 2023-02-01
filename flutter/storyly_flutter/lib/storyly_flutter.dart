@@ -349,12 +349,12 @@ class StorylyParam {
   /// This attribute allows you to changes the corner radius of story group
   /// icon.
   int? storyGroupIconCornerRadius;
-  
+
   /// This attribute changes orientation value of story group list
   String? storyGroupListOrientation;
 
   /// This attribute changes based on orientation horizontal orientation row count
-  /// or vertical orientation colum count of story group list
+  /// or vertical orientation column count of story group list
   int? storyGroupListSections;
 
   /// This attribute changes edge padding value of the first and last story groups
@@ -483,7 +483,8 @@ class StorylyParam {
       'sections': storyGroupListSections,
       'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
       'verticalEdgePadding': storyGroupListVerticalEdgePadding,
-      'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
+      'horizontalPaddingBetweenItems':
+          storyGroupListHorizontalPaddingBetweenItems,
       'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems
     };
 
