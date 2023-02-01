@@ -357,6 +357,27 @@ class StorylyParam {
   /// This attribute allows you to changes the distance between of story group
   /// icons.
   int? storyGroupListPaddingBetweenItems;
+  
+  /// This attribute changes orientation value of story group list
+  String? storyGroupListOrientation;
+
+  /// This attribute changes based on orientation horizontal orientation row count
+  /// or vertical orientation colum count of story group list
+  int? storyGroupListSections;
+
+  /// This attribute changes edge padding value of the first and last story groups
+  /// for orientation horizontal
+  int? storyGroupListHorizontalEdgePadding;
+
+  /// This attribute changes edge padding value of the first and last story groups
+  /// for orientation vertical
+  int? storyGroupListVerticalEdgePadding;
+
+  /// This attribute changes horizontal padding value between story groups
+  int? storyGroupListHorizontalPaddingBetweenItems;
+
+  /// This attribute changes vertical padding value between story groups
+  int? storyGroupListVerticalPaddingBetweenItems;
 
   /// This attribute allows you to use different story groups images for
   /// different labels.
@@ -466,8 +487,12 @@ class StorylyParam {
     };
 
     paramsMap['storyGroupListStyling'] = {
-      'edgePadding': storyGroupListEdgePadding,
-      'paddingBetweenItems': storyGroupListPaddingBetweenItems
+      'orientation': storyGroupListOrientation,
+      'sections': storyGroupListSections,
+      'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
+      'verticalEdgePadding': storyGroupListVerticalEdgePadding,
+      'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
+      'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems
     };
 
     paramsMap['storyGroupIconImageThematicLabel'] =
