@@ -349,14 +349,6 @@ class StorylyParam {
   /// This attribute allows you to changes the corner radius of story group
   /// icon.
   int? storyGroupIconCornerRadius;
-
-  /// This attribute allows you to changes the edge padding of story group
-  /// list.
-  int? storyGroupListEdgePadding;
-
-  /// This attribute allows you to changes the distance between of story group
-  /// icons.
-  int? storyGroupListPaddingBetweenItems;
   
   /// This attribute changes orientation value of story group list
   String? storyGroupListOrientation;
