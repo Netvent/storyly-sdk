@@ -243,10 +243,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             else -> StoryGroupListOrientation.Horizontal
         }
         val sections = if (storyGroupListStylingMap.hasKey("sections")) storyGroupListStylingMap.getInt("sections") else 1
-        val horizontalEdgePadding = if (storyGroupListStylingMap.hasKey("horizontalEdgePadding")) storyGroupListStylingMap.getInt("horizontalEdgePadding").toFloat() else dpToPixel(8)
-        val verticalEdgePadding = if (storyGroupListStylingMap.hasKey("verticalEdgePadding")) storyGroupListStylingMap.getInt("verticalEdgePadding").toFloat() else dpToPixel(8)
-        val horizontalPaddingBetweenItems = if (storyGroupListStylingMap.hasKey("horizontalPaddingBetweenItems")) storyGroupListStylingMap.getInt("horizontalPaddingBetweenItems").toFloat() else dpToPixel(16)
-        val verticalPaddingBetweenItems = if (storyGroupListStylingMap.hasKey("verticalPaddingBetweenItems")) storyGroupListStylingMap.getInt("verticalPaddingBetweenItems").toFloat() else dpToPixel(16)
+        val horizontalEdgePadding = if (storyGroupListStylingMap.hasKey("horizontalEdgePadding")) storyGroupListStylingMap.getInt("horizontalEdgePadding").toFloat() else dpToPixel(4)
+        val verticalEdgePadding = if (storyGroupListStylingMap.hasKey("verticalEdgePadding")) storyGroupListStylingMap.getInt("verticalEdgePadding").toFloat() else dpToPixel(4)
+        val horizontalPaddingBetweenItems = if (storyGroupListStylingMap.hasKey("horizontalPaddingBetweenItems")) storyGroupListStylingMap.getInt("horizontalPaddingBetweenItems").toFloat() else dpToPixel(8)
+        val verticalPaddingBetweenItems = if (storyGroupListStylingMap.hasKey("verticalPaddingBetweenItems")) storyGroupListStylingMap.getInt("verticalPaddingBetweenItems").toFloat() else dpToPixel(8)
 
         view.storylyView.setStoryGroupListStyling(
             StoryGroupListStyling(
