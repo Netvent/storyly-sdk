@@ -30,8 +30,12 @@ declare module "storyly-react-native" {
       storyGroupTextTypeface?: string;
       storyGroupPinIconColor?: string;
 
-      storyGroupListEdgePadding?: number;
-      storyGroupListPaddingBetweenItems?: number;
+      storyGroupListOrientation?: "horizontal" | "vertical";
+      storyGroupListSections?: number;
+      storyGroupListHorizontalEdgePadding?: number;
+      storyGroupListVerticalEdgePadding?: number;
+      storyGroupListHorizontalPaddingBetweenItems?: number;
+      storyGroupListVerticalPaddingBetweenItems?: number;
 
       storyItemTextColor?: string;
       storyItemIconBorderColor?: string[];
