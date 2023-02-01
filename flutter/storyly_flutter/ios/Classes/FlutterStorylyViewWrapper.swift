@@ -101,13 +101,13 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         storylyView.storyGroupAnimation = args[self.ARGS_STORY_GROUP_ANIMATION] as? String ?? "border-rotation"
 
         if let storyGroupIconStyling = args[ARGS_STORY_GROUP_ICON_STYLING] as? [String: Any] {
-            if let width = storyGroupIconStyling["width"] as? Int,
-               let height = storyGroupIconStyling["height"] as? Int,
-               let cornerRadius = storyGroupIconStyling["cornerRadius"] as? Int {
-                storylyView.storyGroupIconStyling = StoryGroupIconStyling(height: CGFloat(height),
-                                                                          width: CGFloat(width),
-                                                                          cornerRadius: CGFloat(cornerRadius))
-            }
+            let width = (storyGroupIconStyling["width"] as? Int) ?? 80
+            let height = (storyGroupIconStyling["height"] as? Int) ?? 80
+            let cornerRadius = (storyGroupIconStyling["cornerRadius"] as? Int) ?? 40
+                
+            storylyView.storyGroupIconStyling = StoryGroupIconStyling(height: CGFloat(height),
+                                                                      width: CGFloat(width),
+                                                                      cornerRadius: CGFloat(cornerRadius))
         }
         
         if let storyGroupListStyling: [String : Any] = args[ARGS_STORY_GROUP_LIST_STYLING] as? [String: Any] {
@@ -117,11 +117,11 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                 case "vertical": orientation = .Vertical
                 default: orientation = .Horizontal
             }
-            let sections = storyGroupListStyling["sections"] as? Int ?? 1
-            let horizontalEdgePadding = storyGroupListStyling["horizontalEdgePadding"] as? Int ?? 8
-            let verticalEdgePadding = storyGroupListStyling["verticalEdgePadding"] as? Int ?? 8 
-            let horizontalPaddingBetweenItems = storyGroupListStyling["horizontalPaddingBetweenItems"] as? Int ?? 16
-            let verticalPaddingBetweenItems = storyGroupListStyling["verticalPaddingBetweenItems"] as? Int ?? 16
+            let sections = (storyGroupListStyling["sections"] as? Int) ?? 1
+            let horizontalEdgePadding = (storyGroupListStyling["horizontalEdgePadding"] as? Int) ?? 4
+            let verticalEdgePadding = (storyGroupListStyling["verticalEdgePadding"] as? Int) ?? 4
+            let horizontalPaddingBetweenItems = (storyGroupListStyling["horizontalPaddingBetweenItems"] as? Int) ?? 8
+            let verticalPaddingBetweenItems = (storyGroupListStyling["verticalPaddingBetweenItems"] as? Int) ?? 8
 
             storylyView.storyGroupListStyling = StoryGroupListStyling(
                 orientation: orientation,

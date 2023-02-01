@@ -1,10 +1,12 @@
 package com.appsamurai.storyly.storyly_flutter
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -136,9 +138,9 @@ class FlutterStorylyView(
             }
 
             (args[ARGS_STORY_GROUP_ICON_STYLING] as? Map<String, *>)?.let {
-                val width = it["width"] as? Int ?: return@let
-                val height = it["height"] as? Int ?: return@let
-                val cornerRadius = it["cornerRadius"] as? Int ?: return@let
+                val width = it["width"] as? Int ?: dpToPixel(80)
+                val height = it["height"] as? Int ?: dpToPixel(80)
+                val cornerRadius = it["cornerRadius"] as? Int ?: dpToPixel(40)
                 setStoryGroupIconStyling(StoryGroupIconStyling(height.toFloat(), width.toFloat(), cornerRadius.toFloat()))
             }
 
@@ -149,18 +151,18 @@ class FlutterStorylyView(
                     else -> StoryGroupListOrientation.Horizontal
                 }
                 val sections = it["sections"] as? Int ?: 1
-                val horizontalEdgePadding = (it["horizontalEdgePadding"] as? Int)?.toFloat() ?: Float.MIN_VALUE
-                val verticalEdgePadding = (it["verticalEdgePadding"] as? Int)?.toFloat() ?: Float.MIN_VALUE
-                val horizontalPaddingBetweenItems = (it["horizontalPaddingBetweenItems"] as? Int)?.toFloat() ?: Float.MIN_VALUE
-                val verticalPaddingBetweenItems = (it["verticalPaddingBetweenItems"] as? Int)?.toFloat() ?: Float.MIN_VALUE
+                val horizontalEdgePadding = (it["horizontalEdgePadding"] as? Int) ?: dpToPixel(4)
+                val verticalEdgePadding = (it["verticalEdgePadding"] as? Int) ?: dpToPixel(4)
+                val horizontalPaddingBetweenItems = (it["horizontalPaddingBetweenItems"] as? Int) ?: dpToPixel(8)
+                val verticalPaddingBetweenItems = (it["verticalPaddingBetweenItems"] as? Int) ?: dpToPixel(8)
 
                 setStoryGroupListStyling(StoryGroupListStyling(
                     orientation,
                     sections,
-                    horizontalEdgePadding,
-                    verticalEdgePadding,
-                    horizontalPaddingBetweenItems,
-                    verticalPaddingBetweenItems
+                    horizontalEdgePadding.toFloat(),
+                    verticalEdgePadding.toFloat(),
+                    horizontalPaddingBetweenItems.toFloat(),
+                    verticalPaddingBetweenItems.toFloat()
                 ))
             }
 
@@ -387,6 +389,12 @@ class FlutterStorylyView(
             }
         }
     }
+
+
+    private fun dpToPixel(dpValue: Int): Float {
+        return dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    }
+
 
     private fun getDrawable(context: Context, name: String): Drawable? {
         val id = context.resources.getIdentifier(name, "drawable", context.packageName)
