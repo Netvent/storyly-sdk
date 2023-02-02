@@ -6,6 +6,6 @@ framework module Storyly {
 }
 
 module Storyly.Swift {
-    header "Storyly-Swift.h"
-    requires objc
+  header "Storyly-Swift.h"
+  requires objc
 }
