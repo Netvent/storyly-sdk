@@ -1,4 +1,7 @@
 # Release Notes
+### 1.30.2 (10.02.2023)
+* fixed [#263](https://github.com/Netvent/storyly-mobile/issues/263)
+
 ### 1.30.0 (23.01.2023)
 * added product card interactive component
 * added like/dislike feature for emoji interactive component
