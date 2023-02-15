@@ -22,6 +22,7 @@ RCT_EXTERN_METHOD(setExternalData:(nonnull NSNumber *)reactTag
 
 RCT_REMAP_VIEW_PROPERTY(storylyInit, storylyView.storylyInit, stStorylyInit)
 RCT_REMAP_VIEW_PROPERTY(storylyShareUrl, storylyView.storylyShareUrl, NSString)
+RCT_REMAP_VIEW_PROPERTY(storyGroupSize, storyGroupSize, NSString)
 
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorSeen, storylyView.storyGroupIconBorderColorSeen, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorNotSeen, storylyView.storyGroupIconBorderColorNotSeen, NSArray<UIColor *>)
@@ -29,7 +30,6 @@ RCT_REMAP_VIEW_PROPERTY(storyGroupIconBackgroundColor, storylyView.storyGroupIco
 RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorSeen, storylyView.storyGroupTextColorSeen, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorNotSeen, storylyView.storyGroupTextColorNotSeen, UIColor)
 RCT_REMAP_VIEW_PROPERTY(storyGroupPinIconColor, storylyView.storyGroupPinIconColor, UIColor)
-RCT_REMAP_VIEW_PROPERTY(storyGroupSize, storylyView.storyGroupSize, NSString)
 RCT_REMAP_VIEW_PROPERTY(storyGroupAnimation, storylyView.storyGroupAnimation, NSString)
 RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, storylyView.storyItemIconBorderColor, NSArray<UIColor *>)
 RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, storylyView.storyItemTextColor, UIColor)

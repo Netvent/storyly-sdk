@@ -151,6 +151,7 @@ class Storyly extends Component {
             <STStoryly
                 {...otherProps}
                 storylyInit={{ 'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode }}
+                storyGroupSize={storyGroupSize}
                 storyGroupIconStyling={{ 'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius }}
                 storyGroupListStyling={{
                     'orientation': storyGroupListOrientation,
