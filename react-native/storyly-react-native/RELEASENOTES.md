@@ -1,4 +1,7 @@
 # Release Notes
+### 1.30.1 (15.02.2023)
+* fixed storyGroupSize not working bug
+
 ### 1.30.0 (01.02.2023)
 * added product card interactive component
 * added like/dislike feature for emoji interactive component
