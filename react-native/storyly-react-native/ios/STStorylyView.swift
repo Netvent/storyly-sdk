@@ -55,6 +55,15 @@ class STStorylyView: UIView {
         }
     }
     var storyGroupViewFactory: STStoryGroupViewFactory? = nil
+
+    @objc(storyGroupSize)
+    var storyGroupSize: NSString = "" {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.storylyView.storyGroupSize = (self?.storyGroupSize as? String) ?? ""
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         self.storylyView = StorylyView(frame: frame)
