@@ -1,4 +1,13 @@
 # Release Notes
+### 1.31.0 (22.02.2023)
+* added image quiz interactive component
+* added color option to poll interactive component 
+* improved data manager queue flow
+* added like/view analytics buttons for Moments story groups
+* improved story area of Moments story groups
+* added story index to contentDescription of story start
+* IMPORTANT! added Android 13 support by increasing compileSdk and targetSdk to 33
+
 ### 1.30.0 (23.01.2023)
 * added product card interactive component
 * added like/dislike feature for emoji interactive component
