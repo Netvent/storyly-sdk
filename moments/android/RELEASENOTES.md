@@ -1,4 +1,10 @@
 # Release Notes
+### 0.5.0 (22.02.2023)
+* added like/view analytics buttons for User Stories screen
+* added album options for gallery
+* improved performance of gallery loading
+* IMPORTANT! added Android 13 support by increasing compileSdk and targetSdk to 33
+
 ### 0.4.0 (23.01.2023)
 * added move/rotation/scale support for media
 * added gradient background for resized media
