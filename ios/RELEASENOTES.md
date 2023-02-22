@@ -1,4 +1,13 @@
 # Release Notes
+### 1.31.0 (22.02.2023)
+* added image quiz interactive component
+* added color option to poll interactive component
+* improved data manager queue flow
+* added like/view analytics buttons for Moments story groups
+* improved story area of Moments story groups
+* fixed story group icon image's aspect 
+* added story index to accessibilityLabel of story start
+
 ### 1.30.2 (10.02.2023)
 * fixed [#263](https://github.com/Netvent/storyly-mobile/issues/263)
 
