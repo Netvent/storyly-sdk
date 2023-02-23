@@ -1,4 +1,7 @@
 # Release Notes
+### 1.31.1 (23.02.2023)
+* improved data manager queue flow for skeleton view
+
 ### 1.31.0 (22.02.2023)
 * added image quiz interactive component
 * added color option to poll interactive component 
