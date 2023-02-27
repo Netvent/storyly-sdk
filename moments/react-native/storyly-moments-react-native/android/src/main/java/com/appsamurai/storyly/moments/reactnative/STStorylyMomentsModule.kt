@@ -122,8 +122,8 @@ class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactConte
         username = username,
         avatarUrl = avatarUrl,
         followings = convertReadableArray(followings),
-        creatorTags = if (creatorTags != null) convertReadableArray(creatorTags) else null,
-        consumerTags = if (consumerTags != null) convertReadableArray(consumerTags) else null,
+        creatorTags = if (creatorTags != null && creatorTags.size() > 0) convertReadableArray(creatorTags) else null,
+        consumerTags = if (consumerTags != null && consumerTags.size() > 0) convertReadableArray(consumerTags) else null,
         expirationTime = expirationTime
       ).encryptUserPayload(
         secretKey = secretKey,
@@ -135,7 +135,7 @@ class STStorylyMomentsModule(reactContext: ReactApplicationContext) : ReactConte
   private fun convertReadableArray(stringArray: ReadableArray): List<String> {
     val stringList = mutableListOf<String?>()
     for (i in 0 until stringArray.size()) stringList.add(stringArray.getString(i))
-    return stringList.filterNotNull()
+    return stringList.filterNotNull().toList()
   }
 
   private fun getActivityContext(): Context {
