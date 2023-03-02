@@ -126,5 +126,5 @@ dependencies {
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   
-  implementation 'com.appsamurai.storyly:storyly-moments:0.3.+'
+  implementation 'com.appsamurai.storyly:storyly-moments:0.5.+'
 }
