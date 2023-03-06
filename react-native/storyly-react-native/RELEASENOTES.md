@@ -1,4 +1,12 @@
 # Release Notes
+### 1.31.0 (06.03.2023)
+* added image quiz interactive component
+* added color option to poll interactive component
+* added like/view analytics buttons for Moments story groups
+* added local cache invalidation flow 
+* added etag implementaion
+* improved data manager queue flow
+
 ### 1.30.1 (15.02.2023)
 * fixed storyGroupSize not working bug
 
