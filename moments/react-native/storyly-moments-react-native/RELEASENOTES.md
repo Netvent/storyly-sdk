@@ -1,4 +1,13 @@
 # Release Notes
+### 0.5.0 (06.03.2023)
+* added move/rotation/scale support for media
+* added gradient background for resized media
+* added like/view analytics buttons for User Stories screen
+* added past date information of story to header
+* added mute option to video interactive component
+* fixed creatorTags/consumerTags handling bug
+* IMPORTANT! added Android 13 support by increasing compileSdk and targetSdk to 33
+
 ### 0.2.0 (24.11.2022)
 * fix issue with resource conflicts for Storyly and Moments
 * add localization(en, es, de) support
