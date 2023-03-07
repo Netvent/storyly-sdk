@@ -1,4 +1,7 @@
 # Release Notes
+### 1.31.3 (07.03.2023)
+* IMPORTANT! fixed video playback issue introduced in 1.31.2
+
 ### 1.31.2 (06.03.2023)
 * added local cache invalidation flow 
 * added etag implementaion
