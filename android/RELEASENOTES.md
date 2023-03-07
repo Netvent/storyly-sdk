@@ -1,4 +1,9 @@
 # Release Notes
+### 1.31.2 (07.03.2023)
+* added local cache invalidation flow 
+* added etag implementaion
+* fixed padding issue for rtl devices
+
 ### 1.31.1 (23.02.2023)
 * improved data manager queue flow for skeleton view
 
