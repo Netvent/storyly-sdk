@@ -1,4 +1,8 @@
 # Release Notes
+### 1.31.3 (11.03.2023)
+* added events to support smart sorting in story list
+* improved seen state for the story groups contains user property
+
 ### 1.31.2 (07.03.2023)
 * added local cache invalidation flow 
 * added etag implementaion
