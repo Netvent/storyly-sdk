@@ -1,4 +1,8 @@
 # Release Notes
+### 1.31.4 (13.03.2023)
+* added events to support smart sorting in story list
+* improved seen state for the story groups contains user property
+
 ### 1.31.3 (07.03.2023)
 * IMPORTANT! fixed video playback issue introduced in 1.31.2
 
