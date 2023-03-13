@@ -1,4 +1,7 @@
 # Release Notes
+### 0.5.1 (11.03.2023)
+* fixed a bug in search feature of in-app link cta
+
 ### 0.5.0 (22.02.2023)
 * added like/view analytics buttons for User Stories screen
 * added album options for gallery
