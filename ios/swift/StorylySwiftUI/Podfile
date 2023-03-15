@@ -1,0 +1,16 @@
+platform :ios, '16.0'
+
+target 'SwiftUIDemo-Storyly' do
+  use_frameworks!
+  pod 'Storyly'
+
+  target 'SwiftUIDemo-StorylyTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'SwiftUIDemo-StorylyUITests' do
+    # Pods for testing
+  end
+
+end
