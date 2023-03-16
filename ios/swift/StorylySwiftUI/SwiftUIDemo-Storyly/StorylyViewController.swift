@@ -8,7 +8,6 @@
 import Foundation
 import Storyly
 
-
 class StorylyViewController: UIViewController {
     private var storylyView: StorylyView = {
         let storylyView = StorylyView()
