@@ -6202,10 +6202,10 @@ statuses@~1.5.0:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
 
-storyly-react-native@^1.20.0:
-  version "1.20.0"
-  resolved "https://registry.yarnpkg.com/storyly-react-native/-/storyly-react-native-1.20.0.tgz#d69d007517d1c86a5b063627ad10cc554365f8f1"
-  integrity sha512-1rOXsqker8riGafkZB1lYlsv/KvVvGhDFKqkunFfJ4rtW7ttQ8d5+ZdAB3OCsyAloRocJUANBnrAX77B7/ohkw==
+storyly-react-native@^1.20.1:
+  version "1.20.1"
+  resolved "https://registry.yarnpkg.com/storyly-react-native/-/storyly-react-native-1.20.1.tgz#ed6bc9051833f0681dec0ca2a4d705793c960919"
+  integrity sha512-Rh3oMPy8nDfIrqZqkGRNFSfxBJfl5Uj8ZXPGidZIJ35VexAjd5se0ACBeICuM+/vckKaUaHWPWW1ZxMez8Wv2w==
 
 stream-buffers@2.2.x:
   version "2.2.0"
