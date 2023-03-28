@@ -1,4 +1,8 @@
 # Release Notes
+### 0.5.2 (28.03.2023)
+* added dismiss method for user stories
+* fixed text interactive character clipping
+
 ### 0.5.1 (11.03.2023)
 * fixed a bug in search feature of in-app link cta
 
