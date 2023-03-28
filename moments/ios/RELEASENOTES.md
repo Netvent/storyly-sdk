@@ -1,4 +1,7 @@
 # Release Notes
+### 0.5.1 (28.03.2023)
+* added dismiss method for user stories
+
 ### 0.5.0 (22.02.2023)
 * added like/view analytics buttons for User Stories screen
 * fixed accessing albums from iCloud 
