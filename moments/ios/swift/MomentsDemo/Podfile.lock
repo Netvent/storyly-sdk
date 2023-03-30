@@ -1,0 +1,20 @@
+PODS:
+  - Storyly (1.27.0)
+  - StorylyMoments (0.1.0)
+
+DEPENDENCIES:
+  - Storyly (= 1.27.0)
+  - StorylyMoments (= 0.1.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Storyly
+    - StorylyMoments
+
+SPEC CHECKSUMS:
+  Storyly: 1c040ad76945c63783f6c311ca061ad93b1490d8
+  StorylyMoments: 39417b6f34df845348f0a78b57658b7cc76ad336
+
+PODFILE CHECKSUM: 9af2a132f88a39c11632393ba5aabac32a5b2e1a
+
+COCOAPODS: 1.11.2

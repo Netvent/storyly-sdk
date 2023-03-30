@@ -1,3 +1,42 @@
+### 1.29.1 (10.01.2023)
+* fixed [#256](https://github.com/Netvent/storyly-mobile/issues/256)
+
+### 1.29.0 (09.01.2023)
+* IMPORTANT! changed design of swipe interactive component
+* IMPORTANT! updated Xcode version to 13.2.1 for builds
+* fixed storyGroup:iconUrl format for user generated content
+
+### 1.28.1 (13.12.2022)
+* IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
+* added past date information of story to header for moments story groups
+* added localization(pt) support
+
+### 1.26.5 (21.10.2022)
+* improved RootViewController handling on iOS side
+
+### 1.26.4 (14.10.2022)
+* improved native dependency handling to support Monetization by Storyly
+
+### 1.26.3 (11.10.2022)
+* improved Flutter 3+ support with nullability checks
+
+### 1.26.2 (29.09.2022)
+* improved Flutter 3+ support with nullability checks
+
+### 1.26.1 (25.08.2022)
+* added storyHeaderCloseIcon and storyHeaderShareIcon to support customazible icons
+
+### 1.26.0 (24.08.2022)
+* added storyGroupTextTypeface, storyItemTextTypeface and storyInteractiveTextTypeface to support custom fonts
+* added storylyPayload for Storyly Moments usage
+* fixed [#210](https://github.com/Netvent/storyly-mobile/issues/210)
+
+### 1.24.1 (30.07.2022)
+* IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
+* IMPORTANT! removed storyGroupTextColor field 
+* IMPORTANT! added storylyLayoutDirection field
+* fixed [#202](https://github.com/Netvent/storyly-mobile/issues/202)
+
 ### 1.24.0 (07.07.2022)
 * added swipe up designs with a/b test option
 * added outlink parameter to countdown interactive component

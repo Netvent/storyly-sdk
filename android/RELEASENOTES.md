@@ -1,4 +1,102 @@
 # Release Notes
+### 1.30.0 (23.01.2023)
+* added product card interactive component
+* added like/dislike feature for emoji interactive component
+* changed design of the emoji interactive component
+* added vertical/horizontal grid layout support
+* IMPORTANT! added orientation, sections, horizontalEdgePadding, verticalEdgePadding, horizontalPaddingBetweenItems, verticalPaddingBetweenItems to StoryGroupListStyling
+* IMPORTANT! removed edgePadding, paddingBetweenItems from StoryGroupListStyling
+* added accessibility support for quiz and poll interactive components
+* reduced the sdk size by optimizing the asset usage
+
+### 1.29.0 (09.01.2023)
+* IMPORTANT! changed design of swipe interactive component
+* fixed storyGroup:iconUrl format for user generated content
+
+### 1.28.4 (05.01.2023)
+* fix ClassCastException when share button clicked
+
+### 1.28.2 (18.12.2022)
+* improved codebase to prevent ConcurrentModificationException [#204](https://github.com/Netvent/storyly-mobile/issues/204)
+
+### 1.28.1 (14.12.2022)
+* updated seen state of story groups with User Property
+
+### 1.28.0 (13.12.2022)
+* IMPORTANT! added story group animation to borders, use storyGroupAnimation field to disable
+* added past date information of story to header for moments story groups
+* improved story bar scrolling performance with pagination
+* added localization(pt) support
+
+### 1.27.3 (23.11.2022)
+* fixed issue with resource conflicts for Storyly and Moments
+* added localization support to share screen
+* fixed video playback issue for Moments stories
+
+### 1.27.2 (14.11.2022)
+* added share to Instagram Stories
+* added storyly share sheet with story specific share features
+* improved audio focus with video stories
+* added contentDescription to image cta interactive components
+
+### 1.27.0 (01.11.2022)
+* added link cta interactive component
+
+### 1.26.8 (21.10.2022)
+* updated seen state of story groups with User Property when a new data set
+* removed pin from personalized story groups
+* fixed tracking event payload issue related to Reach
+
+### 1.26.7 (20.10.2022)
+* fixed story group disappear issue for several initialization case
+
+### 1.26.6 (06.10.2022)
+* added story group id support to storylyShareUrl
+* fixed cast exception on StoryCommentComponent
+* fixed MomentUser field visibility modifiers
+
+### 1.26.4 (03.10.2022)
+* added MomentUser field to StoryGroup data
+* fixed duplicate moments story group issue
+* fixed a bug on report story feature 
+
+### 1.26.3 (19.09.2022)
+* fixed duplicate moment view issue
+* fixed swipe up size calculation for some devices
+* fixed comment interactive layer rendering
+
+### 1.26.2 (12.09.2022)
+* fixed iVOD story group not showing issue
+* fixed duplicate moments story group issue
+
+### 1.26.1 (06.09.2022)
+* fixed a crash during initialization with userPayload
+* improved accessibility features with talkback feature
+
+### 1.26.0 (23.08.2022)
+* added story bar animations with a/b test option
+* improved story bar scrolling performance with pagination
+* fixed text alignment issue in interactive components if style is given
+
+### 1.25.1 (04.08.2022)
+* changed Storyly-ExoPlayer2 dependency to 1.28.0-1
+
+### 1.25.0 (03.08.2022)
+* IMPORTANT! changed StorylyInit constructors, check [StorylyInit API Reference](https://integration.storyly.io/api/android/storyly/com.appsamurai.storyly/-storyly-init/index.html)
+
+### 1.24.2 (29.07.2022)
+* IMPORTANT! added colorSeen and colorNotSeen fields to StoryGroupTextStyling
+* IMPORTANT! added storyGroupTextColorSeen and storyGroupTextColorNotSeen fields
+* IMPORTANT! removed color field from StoryGroupTextStyling
+* IMPORTANT! removed storyGroupTextColor field
+* IMPORTANT! added storylyLayoutDirection field
+* fixed a crash during reinitialization of StorylyView with MomentsItems
+* fixed [#202](https://github.com/Netvent/storyly-mobile/issues/202)
+
+### 1.24.1 (23.07.2022)
+* removed ExoPlayer2 dependency
+* added Storyly-ExoPlayer2 dependency, a custom fork of ExoPkayer2
+
 ### 1.24.0 (01.07.2022)
 * added swipe up designs with a/b test option
 * added outlink parameter to countdown interactive component

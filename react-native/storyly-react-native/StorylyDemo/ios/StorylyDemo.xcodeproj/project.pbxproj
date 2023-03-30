@@ -13,7 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		700699DD72C7FB5CAF7E38A4 /* Pods_StorylyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F424BA09C4247D3B1C4C0BB /* Pods_StorylyDemo.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		FF631F7735C404FD9F02701D /* Pods_StorylyDemo_StorylyDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FC72CABA2B1911E1E08EAA /* Pods_StorylyDemo_StorylyDemoTests.framework */; };
+		DC4A34D928AE1B6C004041F2 /* Lobster1.4.otf in Resources */ = {isa = PBXBuildFile; fileRef = DC4A34D828AE1B6C004041F2 /* Lobster1.4.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +36,11 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = StorylyDemo/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = StorylyDemo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = StorylyDemo/main.m; sourceTree = "<group>"; };
-		20FC72CABA2B1911E1E08EAA /* Pods_StorylyDemo_StorylyDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo_StorylyDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54909B9405FF092DA777E8FB /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
 		6F424BA09C4247D3B1C4C0BB /* Pods_StorylyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = StorylyDemo/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF290AB54B44FB2D08DE34CD /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		C4B1D92E5038D97D45A29D1A /* Pods-StorylyDemo-StorylyDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-StorylyDemoTests.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests.release.xcconfig"; sourceTree = "<group>"; };
-		EA1EC04531A4441AE7162399 /* Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DC4A34D828AE1B6C004041F2 /* Lobster1.4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster1.4.otf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +49,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF631F7735C404FD9F02701D /* Pods_StorylyDemo_StorylyDemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +83,7 @@
 		13B07FAE1A68108700A75B9A /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DC4A34D728AE1B12004041F2 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -101,7 +99,6 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				6F424BA09C4247D3B1C4C0BB /* Pods_StorylyDemo.framework */,
-				20FC72CABA2B1911E1E08EAA /* Pods_StorylyDemo_StorylyDemoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,15 +134,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DC4A34D728AE1B12004041F2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DC4A34D828AE1B6C004041F2 /* Lobster1.4.otf */,
+			);
+			name = Fonts;
+			path = StorylyDemo/Fonts;
+			sourceTree = "<group>";
+		};
 		FD1620C5116C85F24C883A95 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				BF290AB54B44FB2D08DE34CD /* Pods-StorylyDemo.debug.xcconfig */,
 				54909B9405FF092DA777E8FB /* Pods-StorylyDemo.release.xcconfig */,
-				EA1EC04531A4441AE7162399 /* Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig */,
-				C4B1D92E5038D97D45A29D1A /* Pods-StorylyDemo-StorylyDemoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -156,11 +159,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "StorylyDemoTests" */;
 			buildPhases = (
-				7BF6B7DE341596C1FC725C68 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				568F4DEC5CE8BE0F3A61A4C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -243,6 +244,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				DC4A34D928AE1B6C004041F2 /* Lobster1.4.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,45 +304,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		568F4DEC5CE8BE0F3A61A4C3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StorylyDemo-StorylyDemoTests/Pods-StorylyDemo-StorylyDemoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7BF6B7DE341596C1FC725C68 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StorylyDemo-StorylyDemoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,7 +356,6 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA1EC04531A4441AE7162399 /* Pods-StorylyDemo-StorylyDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -420,7 +382,6 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4B1D92E5038D97D45A29D1A /* Pods-StorylyDemo-StorylyDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;

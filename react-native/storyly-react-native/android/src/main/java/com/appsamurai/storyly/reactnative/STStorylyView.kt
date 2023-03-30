@@ -2,6 +2,7 @@ package com.appsamurai.storyly.reactnative
 
 import android.content.Context
 import android.view.Choreographer
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.appsamurai.storyly.*
@@ -10,7 +11,6 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.RCTEventEmitter
-
 
 class STStorylyView(context: Context) : FrameLayout(context) {
     internal var storylyView: StorylyView = StorylyView((context as? ReactContext)?.currentActivity ?: context)
@@ -110,6 +110,11 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         Choreographer.getInstance().removeFrameCallback(choreographerFrameCallback)
     }
 
+    internal fun onAttachCustomReactNativeView(child: View?, index: Int) {
+        val storyGroupViewFactory = storylyView.storyGroupViewFactory as? STStoryGroupViewFactory ?: return
+        storyGroupViewFactory.attachCustomReactNativeView(child, index)
+    }
+
     private fun manuallyLayout() {
         storylyView.measure(
             MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
@@ -123,92 +128,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         }
     }
 
-    private fun sendEvent(eventName: String, eventParameters: WritableMap?) {
+    internal fun sendEvent(eventName: String, eventParameters: WritableMap?) {
         (context as? ReactContext)?.getJSModule(RCTEventEmitter::class.java)?.receiveEvent(id, eventName, eventParameters)
-    }
-
-    private fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
-        return Arguments.createMap().also { storyGroupMap ->
-            storyGroupMap.putString("id", storyGroup.uniqueId)
-            storyGroupMap.putInt("index", storyGroup.index)
-            storyGroupMap.putString("title", storyGroup.title)
-            storyGroupMap.putBoolean("seen", storyGroup.seen)
-            storyGroupMap.putString("iconUrl", storyGroup.iconUrl)
-            storyGroupMap.putArray("stories", Arguments.createArray().also { storiesArray ->
-                storyGroup.stories.forEach { story ->
-                    storiesArray.pushMap(createStoryMap(story))
-                }
-            })
-        }
-    }
-
-    private fun createStoryMap(story: Story): WritableMap {
-        return Arguments.createMap().also { storyMap ->
-            storyMap.putString("id", story.uniqueId)
-            storyMap.putInt("index", story.index)
-            storyMap.putString("title", story.title)
-            storyMap.putString("name", story.name)
-            storyMap.putBoolean("seen", story.seen)
-            storyMap.putInt("currentTime", story.currentTime.toInt())
-            storyMap.putMap("media", Arguments.createMap().also { storyMediaMap ->
-                storyMediaMap.putInt("type", story.media.type.ordinal)
-                storyMediaMap.putString("actionUrl", story.media.actionUrl)
-            })
-        }
-    }
-
-    private fun createStoryComponentMap(storyComponent: StoryComponent): WritableMap {
-        return Arguments.createMap().also { storyComponentMap ->
-            when (storyComponent.type) {
-                StoryComponentType.Quiz -> {
-                    val quizComponent = storyComponent as StoryQuizComponent
-                    storyComponentMap.putString("type", "quiz")
-                    storyComponentMap.putString("title", quizComponent.title)
-                    storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
-                        quizComponent.options.forEach { option ->
-                            optionsArray.pushString(option)
-                        }
-                    })
-                    quizComponent.rightAnswerIndex?.let {
-                        storyComponentMap.putInt("rightAnswerIndex", it)
-                    } ?: run {
-                        storyComponentMap.putNull("rightAnswerIndex")
-                    }
-                    storyComponentMap.putInt("selectedOptionIndex", quizComponent.selectedOptionIndex)
-                    storyComponentMap.putString("customPayload", quizComponent.customPayload)
-                }
-                StoryComponentType.Poll -> {
-                    val pollComponent = storyComponent as StoryPollComponent
-                    storyComponentMap.putString("type", "poll")
-                    storyComponentMap.putString("title", pollComponent.title)
-                    storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
-                        pollComponent.options.forEach { option ->
-                            optionsArray.pushString(option)
-                        }
-                    })
-                    storyComponentMap.putInt("selectedOptionIndex", pollComponent.selectedOptionIndex)
-                    storyComponentMap.putString("customPayload", pollComponent.customPayload)
-                }
-                StoryComponentType.Emoji -> {
-                    val emojiComponent = storyComponent as StoryEmojiComponent
-                    storyComponentMap.putString("type", "emoji")
-                    storyComponentMap.putArray("emojiCodes", Arguments.createArray().also { emojiCodesArray ->
-                        emojiComponent.emojiCodes.forEach { emojiCode ->
-                            emojiCodesArray.pushString(emojiCode)
-                        }
-                    })
-                    storyComponentMap.putInt("selectedEmojiIndex", emojiComponent.selectedEmojiIndex)
-                    storyComponentMap.putString("customPayload", emojiComponent.customPayload)
-
-                }
-                StoryComponentType.Rating -> {
-                    val ratingComponent = storyComponent as StoryRatingComponent
-                    storyComponentMap.putString("type", "rating")
-                    storyComponentMap.putString("emojiCode", ratingComponent.emojiCode)
-                    storyComponentMap.putInt("rating", ratingComponent.rating)
-                    storyComponentMap.putString("customPayload", ratingComponent.customPayload)
-                }
-            }
-        }
     }
 }

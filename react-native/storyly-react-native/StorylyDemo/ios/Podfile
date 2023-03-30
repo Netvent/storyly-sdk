@@ -14,10 +14,7 @@ target 'StorylyDemo' do
     :hermes_enabled => false
   )
 
-  target 'StorylyDemoTests' do
-    inherit! :complete
-    # Pods for testing
-  end
+  pod 'storyly-react-native', :path => '../..'
 
   # Enables Flipper.
   #

@@ -8,5 +8,5 @@ import com.facebook.react.uimanager.ViewManager
 class STStorylyPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> = listOf()
 
-    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> = listOf(STStorylyManager())
+    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> = listOf(STStorylyManager(), STStorylyGroupViewManager())
 }

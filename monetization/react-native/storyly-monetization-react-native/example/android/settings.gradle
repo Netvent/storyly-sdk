@@ -1,0 +1,11 @@
+rootProject.name = 'StorylyMonetizationReactNativeExample'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+// demo project: path to storyly-monetization-react-native's setting.gradle must be applied
+// apply from: file("../node_modules/storyly-monetization-react-native/android/settings.gradle")
+// for example project
+apply from: file("../../android/settings.gradle")
+
+include ':storyly-monetization-react-native'
+project(':storyly-monetization-react-native').projectDir = new File(rootProject.projectDir, '../../android')

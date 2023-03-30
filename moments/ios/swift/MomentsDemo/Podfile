@@ -1,0 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+platform :ios, '11.0'
+
+target 'MomentsDemo' do
+  pod 'Storyly', "1.27.0"
+  pod 'StorylyMoments', "0.1.0"
+end

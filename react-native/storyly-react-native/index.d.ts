@@ -1,5 +1,5 @@
 declare module "storyly-react-native" {
-  import { Component } from "react";
+  import { Component, JSX } from "react";
   import { ViewProps } from "react-native";
 
   export namespace Storyly {
@@ -8,21 +8,26 @@ declare module "storyly-react-native" {
       customParameter?: string;
       storylyTestMode?: boolean;
       storylySegments?: string[];
-      storylyUserProperty?: Record<string, string>[];
+      storylyUserProperty?: Record<string, string>;
+      storylyPayload?: string;
       storylyShareUrl?: string;
 
       storyGroupSize?: "small" | "large" | "custom";
+      storyGroupAnimation?: "border-rotation" | "disabled";
       storyGroupIconWidth?: number;
       storyGroupIconHeight?: number;
       storyGroupIconCornerRadius?: number;
       storyGroupIconBackgroundColor?: string;
       storyGroupIconBorderColorSeen?: string[];
       storyGroupIconBorderColorNotSeen?: string[];
+      storyGroupViewFactory?: StoryGroupViewFactory,
 
       storyGroupTextSize?: number;
       storyGroupTextLines?: number;
-      storyGroupTextColor?: string;
+      storyGroupTextColorSeen?: string;
+      storyGroupTextColorNotSeen?: string;
       storyGroupTextIsVisible?: boolean;
+      storyGroupTextTypeface?: string;
       storyGroupPinIconColor?: string;
 
       storyGroupListEdgePadding?: number;
@@ -31,10 +36,17 @@ declare module "storyly-react-native" {
       storyItemTextColor?: string;
       storyItemIconBorderColor?: string[];
       storyItemProgressBarColor?: string[];
+      storyItemTextTypeface?: string;
+      storyInteractiveTextTypeface?: string;
 
       storyHeaderIconIsVisible?: boolean;
       storyHeaderTextIsVisible?: boolean;
       storyHeaderCloseButtonIsVisible?: boolean;
+      storyHeaderCloseIcon?: string,
+      storyHeaderShareIcon?: string,
+
+
+      storylyLayoutDirection?: "ltr" | "rtl";
 
       onLoad?: (event: StoryLoadEvent) => void;
       onFail?: (event: String) => void;
@@ -60,27 +72,69 @@ declare module "storyly-react-native" {
 
     export interface StoryEvent {
       event: string;
-      story: Story;
-      storyGroup: StoryGroup;
-      storyComponent: unknown | null;
+      story?: Story;
+      storyGroup?: StoryGroup;
+      storyComponent?: StoryComponent;
+    }
+
+    export interface StoryComponent {
+      id: string;
+      type: ReactionType;
+    }
+
+    export interface StoryQuizComponent extends StoryComponent {
+      title: string;
+      options: string[];
+      rightAnswerIndex?: number;
+      selectedOptionIndex: number;
+      customPayload?: string;
+    }
+
+    export interface StoryPollComponent extends StoryComponent {
+      title: string;
+      emojiCodes: string[];
+      selectedEmojiIndex: number;
+      customPayload?: string;
+    }
+
+    export interface StoryRatingComponent extends StoryComponent {
+      title: string;
+      emojiCodes: string[];
+      selectedEmojiIndex: number;
+      customPayload?: string;
+    }
+
+    export interface StoryPromoCodeComponent extends StoryComponent {
+      text: string;
+    }
+
+    export interface StoryCommentComponent extends StoryComponent {
+      text: string;
     }
 
     export interface StoryInteractiveEvent {
       story: Story;
       storyGroup: StoryGroup;
-      storyComponent: {
-        type: ReactionType;
-        customPayload: string;
-      };
+      storyComponent: StoryComponent;
+    }
+
+    export interface MomentsUser {
+      id?: string;
+      avatarUrl?: string;
+      username?: string;
     }
 
     export interface StoryGroup {
       id: string;
       title: string;
+      iconUrl?: string;
+      thematicIconUrls?: Record<String, String>
+      coverUrl?: string;
       index: number;
       seen: boolean;
-      iconUrl: string;
       stories: Story[];
+      type: string,
+      momentsUser?: MomentsUser
     }
 
     export interface Story {
@@ -88,12 +142,15 @@ declare module "storyly-react-native" {
       title: string;
       name: string;
       index: number;
+      pinned: boolean;
       seen: boolean;
       currentTime: number;
       media: {
-        url: string;
         type: number;
-        actionUrl: string | null;
+        storyComponentList?: StoryComponent[];
+        actionUrl?: string;
+        actionUrlList?: string[];
+        previewUrl?: string;
       };
     }
 
@@ -103,10 +160,24 @@ declare module "storyly-react-native" {
       | "poll"
       | "quiz"
       | "countdown"
-      | "promocode";
+      | "promocode"
+      | "swipeaction"
+      | "buttonaction"
+      | "text"
+      | "image"
+      | "producttag"
+      | "comment"
+      | "video"
+      | "vod";
   }
 
   export type ExternalData = Record<string, string>[];
+
+  export interface StoryGroupViewFactory {
+    width: number;
+    height: number;
+    customView: ({ storyGroup: StoryGroup }) => JSX.Element;
+  }
 
   export class Storyly extends Component<Storyly.Props> {
     open: () => void;
