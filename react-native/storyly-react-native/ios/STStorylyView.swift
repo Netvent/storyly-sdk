@@ -42,6 +42,12 @@ class STStorylyView: UIView {
     
     @objc(onUpdateCustomView)
     var onUpdateCustomView: RCTBubblingEventBlock? = nil
+      
+    @objc(onStorylyProductHydration)
+    var onProductHydration: RCTBubblingEventBlock? = nil
+     
+    @objc(onStorylyProductEvent)
+    var onProductEvent: RCTBubblingEventBlock? = nil
     
     @objc(storyGroupViewFactorySize)
     var storyGroupViewFactorySize: CGSize = CGSize(width: 0, height: 0) {
@@ -73,6 +79,7 @@ class STStorylyView: UIView {
         
         self.storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
         self.storylyView.delegate = self
+        self.storylyView.productDelegate = self
         self.addSubview(storylyView)
         
         self.storylyView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +122,10 @@ extension STStorylyView {
     
     func setExternalData(externalData: [NSDictionary]) -> Bool {
         return storylyView.setExternalData(externalData: externalData)
+    } 
+     
+    func hydrateProducts(products: [STRProductItem]){
+        storylyView.hydrateProducts(products: products)
     }
 }
 
@@ -164,5 +175,24 @@ extension STStorylyView: StorylyDelegate {
             "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
         self.onStorylyUserInteracted?(map)
+    }
+}
+ 
+extension STStorylyView: StorylyProductDelegate {
+    
+    func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [String]) {
+        let map: [String : Any] = [
+            "productIds": productIds
+        ]
+        self.onProductHydration?(map)
+    }
+      
+    func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, product: Storyly.STRProductItem?, extras: [String : String]) {
+        let map: [String : Any] = [
+            "event": StorylyEventHelper.storylyEventName(event: event),
+            "product": createSTRProductItemMap(product: product),
+            "extras": extras
+        ]
+        self.onProductEvent?(map)
     }
 }

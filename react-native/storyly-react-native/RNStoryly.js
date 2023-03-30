@@ -54,6 +54,14 @@ class Storyly extends Component {
             findNodeHandle(this._storylyView),
             UIManager.getViewManagerConfig('STStoryly').Commands.setExternalData,
             [externalData],
+        ); 
+    } 
+
+    hydrateProducts = (products) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.hydrateProducts,
+            [products],
         );
     }
 
@@ -90,6 +98,18 @@ class Storyly extends Component {
     _onStorylyUserInteracted = (eventPayload) => {
         if (this.props.onUserInteracted) {
             this.props.onUserInteracted(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyProductHydration = (eventPayload) => {
+        if (this.props.onProductHydration) {
+            this.props.onProductHydration(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyProductEvent = (eventPayload) => {
+        if (this.props.onProductEvent) {
+            this.props.onProductEvent(eventPayload.nativeEvent);
         }
     }
 
@@ -145,6 +165,8 @@ class Storyly extends Component {
             onStoryOpenFailed,
             onStoryClose,
             onUserInteracted,
+            onProductHydration,
+            onProductEvent,
             ...otherProps
         } = this.props;
         return (
@@ -170,7 +192,9 @@ class Storyly extends Component {
                 onStorylyStoryPresented={onStoryOpen}
                 onStorylyStoryPresentFailed={this._onStorylyStoryPresentFailed}
                 onStorylyStoryDismissed={onStoryClose}
-                onStorylyUserInteracted={this._onStorylyUserInteracted}
+                onStorylyUserInteracted={this._onStorylyUserInteracted} 
+                onStorylyProductHydration={this._onStorylyProductHydration} 
+                onStorylyProductEvent={this._onStorylyProductEvent} 
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
                 storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
@@ -235,7 +259,7 @@ Storyly.propTypes = {
     storyHeaderShareIcon: string,
     storylyLayoutDirection: string,
     storyGroupViewFactory: object,
-
+ 
     onLoad: func,
     onFail: func,
     onPress: func,
@@ -243,7 +267,9 @@ Storyly.propTypes = {
     onStoryOpen: func,
     onStoryOpenFailed: func,
     onStoryClose: func,
-    onUserInteracted: func
+    onUserInteracted: func,
+    onProductHydration: func,
+    onProductEvent: func
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);

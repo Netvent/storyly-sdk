@@ -51,7 +51,7 @@ declare module "storyly-react-native" {
 
 
       storylyLayoutDirection?: "ltr" | "rtl";
-
+ 
       onLoad?: (event: StoryLoadEvent) => void;
       onFail?: (event: String) => void;
       onStoryOpen?: () => void;
@@ -59,6 +59,8 @@ declare module "storyly-react-native" {
       onEvent?: (event: StoryEvent) => void;
       onPress?: (event: StoryPressEvent) => void;
       onUserInteracted?: (event: StoryInteractiveEvent) => void;
+      onProductHydration?: (event: StoryProductHydrationEvent) => void;
+      onProductEvent?: (event: StoryProductEvent) => void;
     }
 
     export interface StoryLoadEvent {
@@ -75,6 +77,23 @@ declare module "storyly-react-native" {
     }
 
     export interface StoryEvent {
+      event: string;
+      story?: Story;
+      storyGroup?: StoryGroup;
+      storyComponent?: StoryComponent;
+    }
+
+    export interface StoryProductEvent {
+      event: string;
+      product: STRProductItem;
+      extras: Map<String,String>;
+    }
+   
+    export interface StoryProductHydrationEvent {
+      productIds: string[];
+    }
+
+    export interface StoryHydrationEvent {
       event: string;
       story?: Story;
       storyGroup?: StoryGroup;
@@ -190,5 +209,23 @@ declare module "storyly-react-native" {
     openStory: (storyUriFromTheDashboard: string) => void;
     setExternalData: (externalData: ExternalData) => void;
     openStoryWithId: (storyGroupId: string, storyId: string) => void;
+    hydrateProducts: (products: STRProductItem[]) => void;
+  } 
+
+  export interface STRProductItem {
+    productId: string;
+    productGroupId: string;
+    title: string;
+    desc: String;
+    price: number;
+    salesPrice?: number;
+    currency: String;
+    imageUrls?: String[];
+    variants: STRProductVariant[];
+  } 
+  
+  export interface STRProductVariant {
+    name: string;
+    value: string;
   }
 }

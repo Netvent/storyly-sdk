@@ -65,6 +65,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_SET_EXTERNAL_DATA_CODE = 5
         private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
         private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 6
+        private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
+        private const val COMMAND_HYDRATE_PRODUCT_CODE = 7
+
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -77,6 +80,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
         internal const val EVENT_ON_CREATE_CUSTOM_VIEW = "onCreateCustomView"
         internal const val EVENT_ON_UPDATE_CUSTOM_VIEW = "onUpdateCustomView"
+
+        internal const val EVENT_STORYLY_ON_HYDRATION = "onStorylyProductHydration"
+        internal const val EVENT_STORYLY_PRODUCT_EVENT = "onStorylyProductEvent"
+
     }
 
     override fun getName(): String = REACT_CLASS
@@ -102,6 +109,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             EVENT_STORYLY_USER_INTERACTED,
             EVENT_ON_CREATE_CUSTOM_VIEW,
             EVENT_ON_UPDATE_CUSTOM_VIEW,
+            EVENT_STORYLY_PRODUCT_EVENT,
+            EVENT_STORYLY_ON_HYDRATION
         ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
         }
@@ -115,7 +124,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
             COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
             COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE,
-            COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE
+            COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE,
+            COMMAND_HYDRATE_PRODUCT_NAME, COMMAND_HYDRATE_PRODUCT_CODE
         )
     }
 
@@ -131,6 +141,12 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_SET_EXTERNAL_DATA_CODE -> {
                 (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
                     root.storylyView.setExternalData(it)
+                }
+            }
+            COMMAND_HYDRATE_PRODUCT_CODE -> {
+                (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
+                    val productItems = it.map { createSTRProductItem(it) }
+                    root.storylyView.hydrateProducts(productItems)
                 }
             }
             COMMAND_OPEN_STORY_WITH_ID_CODE -> {
@@ -270,7 +286,13 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val colorSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorSeen")) storyGroupTextStylingMap.getString("colorSeen") else "#FF000000")
         val colorNotSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorNotSeen")) storyGroupTextStylingMap.getString("colorNotSeen") else "#FF000000")
 
-        val customTypeface = typefaceName?.let { try { Typeface.createFromAsset(view.context.applicationContext.assets, it) } catch(_: Exception) { null } } ?: Typeface.DEFAULT
+        val customTypeface = typefaceName?.let {
+            try {
+                Typeface.createFromAsset(view.context.applicationContext.assets, it)
+            } catch (_: Exception) {
+                null
+            }
+        } ?: Typeface.DEFAULT
 
         view.storylyView.setStoryGroupTextStyling(
             StoryGroupTextStyling(
@@ -322,20 +344,28 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     @ReactProp(name = PROP_STORY_ITEM_TEXT_TYPEFACE)
     fun setPropStoryItemTextTypeface(view: STStorylyView, typeface: String) {
-        val customTypeface = try { Typeface.createFromAsset(view.context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+        val customTypeface = try {
+            Typeface.createFromAsset(view.context.applicationContext.assets, typeface)
+        } catch (_: Exception) {
+            Typeface.DEFAULT
+        }
         view.storylyView.setStoryItemTextTypeface(customTypeface)
     }
 
     @ReactProp(name = PROP_STORY_INTERACTIVE_TEXT_TYPEFACE)
     fun setPropStoryInteractiveTextTypeface(view: STStorylyView, typeface: String) {
-        val customTypeface = try { Typeface.createFromAsset(view.context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+        val customTypeface = try {
+            Typeface.createFromAsset(view.context.applicationContext.assets, typeface)
+        } catch (_: Exception) {
+            Typeface.DEFAULT
+        }
         view.storylyView.setStoryInteractiveTextTypeface(customTypeface)
     }
 
     @ReactProp(name = PROP_STORYLY_LAYOUT_DIRECTION)
     fun setPropStorylyLayoutDirection(view: STStorylyView, layoutDirection: String) {
         when (layoutDirection) {
-            "ltr" ->  view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.LTR)
+            "ltr" -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.LTR)
             "rtl" -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.RTL)
             else -> view.storylyView.setStorylyLayoutDirection(StorylyLayoutDirection.LTR)
         }
