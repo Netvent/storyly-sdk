@@ -9,6 +9,7 @@ import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -129,6 +130,17 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 })
             }
         }
+        
+        (context as? ReactContext)?.addLifecycleEventListener(object : LifecycleEventListener {
+            override fun onHostResume() {
+                val activity = (context as? ReactContext)?.currentActivity ?: return
+                storylyView.activity = activity
+            }
+
+            override fun onHostPause() {}
+
+            override fun onHostDestroy() {}
+        })
     }
 
     override fun onAttachedToWindow() {

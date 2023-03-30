@@ -1,4 +1,8 @@
 # Release Notes
+### 1.32.0 (28.03.2023)
+* added product catalog interactive component
+* improved activity change handling on android side
+
 ### 1.31.0 (06.03.2023)
 * added image quiz interactive component
 * added color option to poll interactive component

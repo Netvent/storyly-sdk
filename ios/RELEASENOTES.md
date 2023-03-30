@@ -1,4 +1,8 @@
 # Release Notes
+### 1.32.0 (28.03.2023)
+* added product catalog interactive component
+* added accessibilityIdentifier field for test setups
+
 ### 1.31.4 (13.03.2023)
 * added events to support smart sorting in story list
 * improved seen state for the story groups contains user property
