@@ -67,5 +67,18 @@ class StorylyCollectionViewCell: UICollectionViewCell {
         self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.storylyView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        self.storylyView.backgroundColor = .random
+        self.storylyView.storyGroupListHorizontalEdgePadding = 16.0
+    }
+}
+
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            alpha: 0.3
+        )
     }
 }

@@ -23,7 +23,8 @@ class CustomThemeViewController: UIViewController {
         storylyViewCustomTheme.storylyInit = StorylyInit(storylyId: STORYLY_INSTANCE_TOKEN)
         storylyViewCustomTheme.rootViewController = self
         
-        storylyViewCustomTheme.storyGroupTextColor = UIColor(red: 240/255, green: 57/255, blue: 50/255, alpha: 1.0)
+        storylyViewCustomTheme.storyGroupTextColorSeen = UIColor(red: 240/255, green: 57/255, blue: 50/255, alpha: 1.0)
+        storylyViewCustomTheme.storyGroupTextColorNotSeen = UIColor(red: 240/255, green: 57/255, blue: 50/255, alpha: 1.0)
 
         storylyViewCustomTheme.storyGroupIconBackgroundColor = UIColor(red: 76/255, green: 175/255, blue: 80/255, alpha: 1.0)
 

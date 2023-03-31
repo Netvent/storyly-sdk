@@ -60,7 +60,7 @@ public class NetflixView: StoryGroupView {
             let (title, borderColor) = customBorderColor(storyGroupTitle: storyGroup.title)
             
             self.groupTitle.text = title
-            self.groupIcon.setImage(iconUrl: storyGroup.iconUrl, contentMode: .scaleAspectFill)
+            self.groupIcon.setImage(iconUrl: storyGroup.iconUrl!, contentMode: .scaleAspectFill)
             self.pinIcon.isHidden = storyGroup.pinned ? false : true
             self.vodIcon.isHidden = storyGroup.type == .IVod ? false : true
 

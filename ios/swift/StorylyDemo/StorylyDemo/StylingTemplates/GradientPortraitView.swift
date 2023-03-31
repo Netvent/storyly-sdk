@@ -48,8 +48,8 @@ public class GradientPortraitView: StoryGroupView {
     public override func populateView(storyGroup: StoryGroup?) {
         if let storyGroup = storyGroup {
             self.groupTitle.text = storyGroup.title
-            self.groupIcon.setImage(iconUrl: storyGroup.iconUrl, contentMode: .scaleAspectFill)
-            self.backgroundStory.setImage(iconUrl: storyGroup.iconUrl, contentMode: .scaleAspectFill) {
+            self.groupIcon.setImage(iconUrl: storyGroup.iconUrl!, contentMode: .scaleAspectFill)
+            self.backgroundStory.setImage(iconUrl: storyGroup.iconUrl!, contentMode: .scaleAspectFill) {
                 self.pinIcon.isHidden = storyGroup.pinned ? false : true
                 self.vodIcon.isHidden = storyGroup.type == .IVod ? false : true
 

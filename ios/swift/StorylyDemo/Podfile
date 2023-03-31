@@ -4,6 +4,6 @@ platform :ios, '9.0'
 
 target 'StorylyDemo' do
   pod 'SDWebImage'
-  pod 'Storyly', '~> 1.22.0'
+  pod 'Storyly', '~> 1.32.0'
   pod 'StorylyMonetization', '~> 1.1.0'
 end
