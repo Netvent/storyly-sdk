@@ -1,4 +1,7 @@
 # Release Notes
+### 1.32.1 (03.04.2023)
+* fixed product and user data conflict
+
 ### 1.32.0 (28.03.2023)
 * added product catalog interactive component
 * added accessibilityIdentifier field for test setups
