@@ -1,4 +1,8 @@
 # Release Notes
+### 1.32.1 (03.04.2023)
+* improved codebase to prevent ConcurrentModificationException [#204](https://github.com/Netvent/storyly-mobile/issues/204)
+* fixed product and user data conflict
+
 ### 1.32.0 (28.03.2023)
 * added product catalog interactive component
 * fixed crash during share
