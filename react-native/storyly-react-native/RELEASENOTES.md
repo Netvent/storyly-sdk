@@ -1,4 +1,8 @@
 # Release Notes
+### 1.32.1 (03.04.2023)
+* removed JSX import 
+* added logs to ios bridge side
+
 ### 1.32.0 (28.03.2023)
 * added product catalog interactive component
 * improved activity change handling on android side

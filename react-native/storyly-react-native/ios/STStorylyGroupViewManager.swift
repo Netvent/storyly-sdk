@@ -9,9 +9,15 @@
 @objc (STStorylyGroupViewManager)
 class STStorylyGroupViewManager: RCTViewManager {
     
-    override func view() -> UIView! { return STStorylyGroupView() }
+    override func view() -> UIView! {
+        print("STR:STStorylyGroupViewManager:view()")
+        return STStorylyGroupView()
+    }
     
-    override class func requiresMainQueueSetup() -> Bool { return true }
+    override class func requiresMainQueueSetup() -> Bool {
+        print("STR:requiresMainQueueSetup:view()")
+        return true
+    }
 }
 
 class STStorylyGroupView: UIView {}

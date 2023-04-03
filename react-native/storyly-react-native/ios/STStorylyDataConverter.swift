@@ -1,5 +1,5 @@
 //
-//  STStorylyViewHelper.swift
+//  STStorylyDataConverter.swift
 //  storyly-react-native
 //
 //  Created by Haldun Melih Fadillioglu on 8.11.2022.
@@ -8,12 +8,14 @@ import Storyly
 
 
 func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any?]? {
+    print("STR:STStorylyDataConverter:createStoryGroupMap(storyGroup:\(storyGroup))")
     guard let storyGroup = storyGroup else { return nil }
     return createStoryGroupMap(storyGroup: storyGroup)
 }
     
 func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
-    let storyGroupMap: [String : Any?] = [
+    print("STR:STStorylyDataConverter:createStoryGroupMap(storyGroup:\(storyGroup))")
+    return [
         "id": storyGroup.uniqueId,
         "title": storyGroup.title,
         "iconUrl": storyGroup.iconUrl?.absoluteString,
@@ -30,16 +32,17 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
             "username": storyGroup.momentsUser?.username,
         ] : nil
     ]
-    return storyGroupMap
 }
 
 func createStoryMap(_ story: Story?) -> [String: Any?]? {
+    print("STR:STStorylyDataConverter:createStoryMap(story:\(story))")
     guard let story = story else { return nil }
     return createStoryMap(story: story)
 }
 
 func createStoryMap(story: Story) -> [String: Any?] {
-    let storyMap: [String : Any?] = [
+    print("STR:STStorylyDataConverter:createStoryMap(story:\(story))")
+    return [
         "id": story.uniqueId,
         "index": story.index,
         "title": story.title,
@@ -54,15 +57,16 @@ func createStoryMap(story: Story) -> [String: Any?] {
             "actionUrlList": story.media.actionUrlList
         ] as [String: Any?]
     ]
-    return storyMap
 }
 
 func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?]? {
+    print("STR:STStorylyDataConverter:createStoryComponentMap(storyComponent:\(storyComponent))")
     guard let storyComponent = storyComponent else { return nil }
     return createStoryComponentMap(storyComponent: storyComponent)
 }
 
 func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
+    print("STR:STStorylyDataConverter:createStoryComponentMap(storyComponent:\(storyComponent))")
     switch storyComponent {
         case let storyComponent as StoryQuizComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
