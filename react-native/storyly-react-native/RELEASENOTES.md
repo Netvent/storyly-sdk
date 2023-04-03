@@ -1,4 +1,8 @@
 # Release Notes
+### 1.33.0 (03.04.2023)
+* updated react dependencies to 18.x.x
+* added prop-types as dependency
+
 ### 1.32.1 (03.04.2023)
 * removed JSX import 
 * added logs to ios bridge side
