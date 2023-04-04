@@ -3,6 +3,9 @@
 * updated react dependencies to 18.x.x
 * added prop-types as dependency
 
+### 1.32.2 (04.04.2023)
+* added logs to ios bridge side
+
 ### 1.32.1 (03.04.2023)
 * removed JSX import 
 * added logs to ios bridge side

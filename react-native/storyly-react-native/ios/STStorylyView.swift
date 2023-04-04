@@ -16,77 +16,77 @@ class STStorylyView: UIView {
     @objc(onStorylyLoaded)
     var onStorylyLoaded: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyLoaded:\(onStorylyLoaded)")
+            print("STR:STStorylyView:onStorylyLoaded:didSet:\(onStorylyLoaded)")
         }
     }
     
     @objc(onStorylyLoadFailed)
     var onStorylyLoadFailed: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyLoadFailed:\(onStorylyLoadFailed)")
+            print("STR:STStorylyView:onStorylyLoadFailed:didSet:\(onStorylyLoadFailed)")
         }
     }
     
     @objc(onStorylyEvent)
     var onStorylyEvent: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyEvent:\(onStorylyEvent)")
+            print("STR:STStorylyView:onStorylyEvent:didSet:\(onStorylyEvent)")
         }
     }
     
     @objc(onStorylyActionClicked)
     var onStorylyActionClicked: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyActionClicked:\(onStorylyActionClicked)")
+            print("STR:STStorylyView:onStorylyActionClicked:didSet:\(onStorylyActionClicked)")
         }
     }
     
     @objc(onStorylyStoryPresented)
     var onStorylyStoryPresented: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyStoryPresented:\(onStorylyStoryPresented)")
+            print("STR:STStorylyView:onStorylyStoryPresented:didSet:\(onStorylyStoryPresented)")
         }
     }
     
     @objc(onStorylyStoryPresentFailed)
     var onStorylyStoryPresentFailed: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyStoryPresentFailed:\(onStorylyStoryPresentFailed)")
+            print("STR:STStorylyView:onStorylyStoryPresentFailed:didSet:\(onStorylyStoryPresentFailed)")
         }
     }
     
     @objc(onStorylyStoryDismissed)
     var onStorylyStoryDismissed: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyStoryDismissed:\(onStorylyStoryDismissed)")
+            print("STR:STStorylyView:onStorylyStoryDismissed:didSet:\(onStorylyStoryDismissed)")
         }
     }
     
     @objc(onStorylyUserInteracted)
     var onStorylyUserInteracted: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onStorylyUserInteracted:\(onStorylyUserInteracted)")
+            print("STR:STStorylyView:onStorylyUserInteracted:didSet:\(onStorylyUserInteracted)")
         }
     }
     
     @objc(onCreateCustomView)
     var onCreateCustomView: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onCreateCustomView:\(onCreateCustomView)")
+            print("STR:STStorylyView:onCreateCustomView:didSet:\(onCreateCustomView)")
         }
     }
     
     @objc(onUpdateCustomView)
     var onUpdateCustomView: RCTBubblingEventBlock? = nil {
         didSet {
-            print("STR:STStorylyView:onUpdateCustomView:\(onUpdateCustomView)")
+            print("STR:STStorylyView:onUpdateCustomView:didSet:\(onUpdateCustomView)")
         }
     }
     
     @objc(storyGroupViewFactorySize)
     var storyGroupViewFactorySize: CGSize = CGSize(width: 0, height: 0) {
         didSet {
-            print("STR:STStorylyView:storyGroupViewFactorySize:\(storyGroupViewFactorySize)")
+            print("STR:STStorylyView:storyGroupViewFactorySize:didSet:\(storyGroupViewFactorySize)")
             if storyGroupViewFactorySize.width <= 0 || storyGroupViewFactorySize.height <= 0 { return }
             self.storyGroupViewFactory = STStoryGroupViewFactory(width: storyGroupViewFactorySize.width,
                                                             height: storyGroupViewFactorySize.height)
@@ -97,14 +97,14 @@ class STStorylyView: UIView {
     }
     var storyGroupViewFactory: STStoryGroupViewFactory? = nil {
         didSet {
-            print("STR:STStorylyView:storyGroupViewFactory:\(storyGroupViewFactory)")
+            print("STR:STStorylyView:storyGroupViewFactory:didSet:\(storyGroupViewFactory)")
         }
     }
 
     @objc(storyGroupSize)
     var storyGroupSize: NSString = "" {
         didSet {
-            print("STR:STStorylyView:storyGroupSize:\(storyGroupSize)")
+            print("STR:STStorylyView:storyGroupSize:didSet:\(storyGroupSize)")
             DispatchQueue.main.async { [weak self] in
                 self?.storylyView.storyGroupSize = (self?.storyGroupSize as? String) ?? ""
             }
