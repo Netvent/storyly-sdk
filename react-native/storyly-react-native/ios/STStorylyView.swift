@@ -125,6 +125,8 @@ class STStorylyView: UIView {
             print("STR:STStorylyView:init:observe:rootViewController:newValue:\(change.newValue):oldValue:\(change.oldValue)")
         }
         
+        print("STR:STStorylyView:init:StorylyBundle:\(Bundle(for: StorylyView.self).infoDictionary)")
+        
         self.storylyView.delegate = self
         self.addSubview(storylyView)
         

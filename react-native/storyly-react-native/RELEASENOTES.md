@@ -3,6 +3,9 @@
 * updated react dependencies to 18.x.x
 * added prop-types as dependency
 
+### 1.32.4 (04.04.2023)
+* added logs to ios bridge side
+
 ### 1.32.3 (04.04.2023)
 * removed StoryGroupListStyling properties (temporary) 
 
