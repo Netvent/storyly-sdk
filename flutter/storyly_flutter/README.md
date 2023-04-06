@@ -1,1 +1,1 @@
-Please check [Storyly Integration Documentation](https://integration.storyly.io/flutter/quick-start.html)
+Please check [Storyly Integration Documentation](https://docs.storyly.io/docs/flutter-initial-sdk-setup)

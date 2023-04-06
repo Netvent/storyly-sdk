@@ -1,1 +1,1 @@
-Please check [Moments by Storyly iOS Documentation](https://integration.storyly.io/moments-ios/quick-start.html)
+Please check [Moments by Storyly iOS Documentation](https://docs.storyly.io/docs/moments-ios-quick-start)

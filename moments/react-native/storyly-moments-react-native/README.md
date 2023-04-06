@@ -1,1 +1,1 @@
-Please check [Moments by Storyly Integration Documentation](https://integration.storyly.io/moments-react-native/quick-start.html)
+Please check [Moments by Storyly Integration Documentation](https://docs.storyly.io/docs/moments-react-native-quick-start)

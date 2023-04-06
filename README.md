@@ -1,6 +1,6 @@
 # Storyly SDK
 
-Please check [Storyly Integration Documentation](https://integration.storyly.io/)
+Please check [Storyly Integration Documentation](https://docs.storyly.io/)
 
 ## Author
 App Samurai Mobile Team, mobile@appsamurai.com
