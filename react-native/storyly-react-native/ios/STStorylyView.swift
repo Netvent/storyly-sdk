@@ -185,7 +185,6 @@ extension STStorylyView {
 
 extension STStorylyView: StorylyDelegate {
     func storylyLoaded(_ storylyView: StorylyView, storyGroupList: [StoryGroup], dataSource: StorylyDataSource) {
-        print("STR:STStorylyView:storylyLoaded():onStorylyLoaded:\(onStorylyLoaded)")
         let map: [String : Any] = [
             "storyGroupList": storyGroupList.map { createStoryGroupMap(storyGroup: $0) },
             "dataSource": dataSource.description
@@ -194,17 +193,14 @@ extension STStorylyView: StorylyDelegate {
     }
     
     func storylyLoadFailed(_ storylyView: StorylyView, errorMessage: String) {
-        print("STR:STStorylyView:storylyLoadFailed():onStorylyLoadFailed:\(onStorylyLoadFailed)")
         self.onStorylyLoadFailed?(["errorMessage": errorMessage])
     }
     
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        print("STR:STStorylyView:storylyActionClicked():onStorylyActionClicked:\(onStorylyActionClicked)")
         self.onStorylyActionClicked?(createStoryMap(story: story) as [AnyHashable: Any])
     }
     
     func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
-        print("STR:STStorylyView:storylyEvent():onStorylyEvent:\(onStorylyEvent)")
         let map: [String : Any] = [
             "event": StorylyEventHelper.storylyEventName(event: event),
             "storyGroup": createStoryGroupMap(storyGroup) as Any,
@@ -215,22 +211,18 @@ extension STStorylyView: StorylyDelegate {
     }
     
     func storylyStoryPresented(_ storylyView: StorylyView) {
-        print("STR:STStorylyView:storylyStoryPresented():onStorylyStoryPresented:\(onStorylyStoryPresented)")
         self.onStorylyStoryPresented?([:])
     }
     
     func storylyStoryPresentFailed(_ storylyView: StorylyView, errorMessage: String) {
-        print("STR:STStorylyView:storylyStoryPresentFailed():onStorylyStoryPresentFailed:\(onStorylyStoryPresentFailed)")
         self.onStorylyStoryPresentFailed?(["errorMessage": errorMessage])
     }
     
     func storylyStoryDismissed(_ storylyView: StorylyView) {
-        print("STR:STStorylyView:storylyStoryDismissed():onStorylyStoryDismissed:\(onStorylyStoryDismissed)")
         self.onStorylyStoryDismissed?([:])
     }
     
     func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
-        print("STR:STStorylyView:storylyUserInteracted():storylyUserInteracted:\(storylyUserInteracted)")
         let map: [String : Any] = [
             "storyGroup": createStoryGroupMap(storyGroup: storyGroup),
             "story": createStoryMap(story: story),

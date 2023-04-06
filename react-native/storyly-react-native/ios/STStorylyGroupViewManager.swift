@@ -15,7 +15,7 @@ class STStorylyGroupViewManager: RCTViewManager {
     }
     
     override class func requiresMainQueueSetup() -> Bool {
-        print("STR:requiresMainQueueSetup:view()")
+        print("STR:STStorylyGroupViewManager:requiresMainQueueSetup:view()")
         return true
     }
 }

@@ -8,13 +8,11 @@ import Storyly
 
 
 func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any?]? {
-    print("STR:STStorylyDataConverter:createStoryGroupMap(storyGroup:\(storyGroup))")
     guard let storyGroup = storyGroup else { return nil }
     return createStoryGroupMap(storyGroup: storyGroup)
 }
     
 func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
-    print("STR:STStorylyDataConverter:createStoryGroupMap(storyGroup:\(storyGroup))")
     return [
         "id": storyGroup.uniqueId,
         "title": storyGroup.title,
@@ -35,13 +33,11 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
 }
 
 func createStoryMap(_ story: Story?) -> [String: Any?]? {
-    print("STR:STStorylyDataConverter:createStoryMap(story:\(story))")
     guard let story = story else { return nil }
     return createStoryMap(story: story)
 }
 
 func createStoryMap(story: Story) -> [String: Any?] {
-    print("STR:STStorylyDataConverter:createStoryMap(story:\(story))")
     return [
         "id": story.uniqueId,
         "index": story.index,
@@ -60,13 +56,11 @@ func createStoryMap(story: Story) -> [String: Any?] {
 }
 
 func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?]? {
-    print("STR:STStorylyDataConverter:createStoryComponentMap(storyComponent:\(storyComponent))")
     guard let storyComponent = storyComponent else { return nil }
     return createStoryComponentMap(storyComponent: storyComponent)
 }
 
 func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
-    print("STR:STStorylyDataConverter:createStoryComponentMap(storyComponent:\(storyComponent))")
     switch storyComponent {
         case let storyComponent as StoryQuizComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
