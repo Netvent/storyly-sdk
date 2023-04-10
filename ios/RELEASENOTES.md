@@ -1,4 +1,7 @@
 # Release Notes
+### 1.32.2 (10.04.2023)
+* improved codebase to fix bugs from crash logs
+
 ### 1.32.1 (03.04.2023)
 * fixed product and user data conflict
 
