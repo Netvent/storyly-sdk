@@ -140,14 +140,14 @@ internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String:
 
 internal func createSTRProductItem(productItem: NSDictionary) -> STRProductItem {
     return STRProductItem(
-        productId: productItem["productId"] as! String,
-        productGroupId: productItem["productGroupId"] as! String,
-        title:productItem["title"] as! String,
-        url: productItem["url"] as! String,
+        productId: productItem["productId"] as? String ?? "",
+        productGroupId: productItem["productGroupId"] as? String ?? "",
+        title:productItem["title"] as? String ?? "",
+        url: productItem["url"] as? String ?? "",
         description: productItem["desc"] as? String,
-        price: Float((productItem["price"] as! Double)),
+        price: Float((productItem["price"] as? Double) ?? 0.0),
         salesPrice: (productItem["salesPrice"] as? NSNumber),
-        currency: productItem["currency"] as! String,
+        currency: productItem["currency"] as? String ?? "",
         imageUrls:productItem["imageUrls"] as? [String],
         variants:  createSTRProductVariant(variants: productItem["variants"] as? [NSDictionary] ?? [])
     )
