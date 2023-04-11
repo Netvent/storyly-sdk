@@ -304,6 +304,38 @@ typedef SWIFT_ENUM_NAMED(NSInteger, PlayMode, "PlayMode", open) {
   PlayModeStory = 2,
 };
 
+@class NSNumber;
+@class STRProductVariant;
+
+SWIFT_CLASS_NAMED("STRProductItem")
+@interface STRProductItem : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull productId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull productGroupId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull title;
+@property (nonatomic, readonly, copy) NSString * _Nonnull url;
+@property (nonatomic, readonly, copy) NSString * _Nullable desc;
+@property (nonatomic, readonly) float price;
+@property (nonatomic, readonly, strong) NSNumber * _Nullable salesPrice;
+@property (nonatomic, readonly, copy) NSString * _Nonnull currency;
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable imageUrls;
+@property (nonatomic, readonly, copy) NSArray<STRProductVariant *> * _Nullable variants;
+- (nonnull instancetype)initWithProductId:(NSString * _Nonnull)productId productGroupId:(NSString * _Nonnull)productGroupId title:(NSString * _Nonnull)title url:(NSString * _Nonnull)url description:(NSString * _Nullable)description price:(float)price salesPrice:(NSNumber * _Nullable)salesPrice currency:(NSString * _Nonnull)currency imageUrls:(NSArray<NSString *> * _Nullable)imageUrls variants:(NSArray<STRProductVariant *> * _Nullable)variants OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("STRProductVariant")
+@interface STRProductVariant : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull value;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly) NSUInteger hash;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 /// This enum class represents the share state of story.
 typedef SWIFT_ENUM_NAMED(NSInteger, ShareType, "ShareType", open) {
 /// Default type of Share State. Share is disabled
@@ -407,14 +439,18 @@ typedef SWIFT_ENUM_NAMED(NSInteger, StoryComponentType, "StoryComponentType", op
   StoryComponentTypeProductTag = 11,
 /// Denotes the type of the component is ProductCard
   StoryComponentTypeProductCard = 12,
+/// Denotes the type of the component is ProductList
+  StoryComponentTypeProductCatalog = 13,
 /// Denotes the type of the component is Comment
-  StoryComponentTypeComment = 13,
+  StoryComponentTypeComment = 14,
 /// Denotes the type of the component is Video
-  StoryComponentTypeVideo = 14,
+  StoryComponentTypeVideo = 15,
 /// Denotes the type of the component is Vod
-  StoryComponentTypeVod = 15,
+  StoryComponentTypeVod = 16,
 /// Denotes the type of the component is Link CTA
-  StoryComponentTypeLinkCTA = 16,
+  StoryComponentTypeLinkCTA = 17,
+/// Denotes the type of the component is Image Quiz
+  StoryComponentTypeImageQuiz = 18,
 };
 
 
@@ -706,6 +742,36 @@ SWIFT_CLASS("_TtC7Storyly18StoryHeaderStyling")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+/// This class represents the Image Quiz component.
+SWIFT_CLASS_NAMED("StoryImageQuizComponent")
+@interface StoryImageQuizComponent : StoryComponent
+/// Title of the image quiz if exists
+@property (nonatomic, readonly, copy) NSString * _Nonnull title;
+/// List of texts of the options if exists, otherwise list of image urls of image quiz
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable options;
+/// Index of the right answer if exists
+@property (nonatomic, readonly, strong) NSNumber * _Nullable rightAnswerIndex;
+/// Option index that the user selected
+@property (nonatomic, readonly) NSInteger selectedOptionIndex;
+/// Custom payload for this image quiz if exists
+@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
+/// StoryImageQuizComponent initialization
+/// \param id Id of the interactive component
+///
+/// \param title Title of the image quiz if exists
+///
+/// \param options List of texts of the options if exists, otherwise list of image urls of image quiz
+///
+/// \param rightAnswerIndex Index of the right answer if exists
+///
+/// \param selectedOptionIndex Option index that the user selected
+///
+/// \param customPayload Custom payload for this image quiz if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nullable)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
+@end
+
 enum StoryType : NSInteger;
 
 /// This data class represents the media of a story.
@@ -777,7 +843,6 @@ SWIFT_CLASS_NAMED("StoryPromoCodeComponent")
 - (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSNumber;
 
 /// This class represents the Quiz component.
 SWIFT_CLASS_NAMED("StoryQuizComponent")
@@ -911,6 +976,10 @@ typedef SWIFT_ENUM_NAMED(NSInteger, StorylyDataSource, "StorylyDataSource", open
   StorylyDataSourceMomentsAPI = 1,
 /// Stories in local device cache
   StorylyDataSourceLocal = 2,
+/// Stories with user specific data
+  StorylyDataSourceUserData = 3,
+/// Stories with product specific data
+  StorylyDataSourceProductData = 4,
 };
 
 @class StorylyView;
@@ -1034,36 +1103,48 @@ typedef SWIFT_ENUM(NSInteger, StorylyEvent, open) {
   StorylyEventStoryPollAnswered = 18,
 /// Sent when a user answers a quiz
   StorylyEventStoryQuizAnswered = 19,
+/// Sent when a user answers a image quiz
+  StorylyEventStoryImageQuizAnswered = 20,
 /// Sent when a user adds reminder to a interactive countdown component
-  StorylyEventStoryCountdownReminderAdded = 20,
+  StorylyEventStoryCountdownReminderAdded = 21,
 /// Sent when a user removes the reminder from a interactive countdown component
-  StorylyEventStoryCountdownReminderRemoved = 21,
+  StorylyEventStoryCountdownReminderRemoved = 22,
 /// Sent when a user rates in interactive rating component
-  StorylyEventStoryRated = 22,
+  StorylyEventStoryRated = 23,
 /// Sent when a user sees an interactive component
-  StorylyEventStoryInteractiveImpression = 23,
+  StorylyEventStoryInteractiveImpression = 24,
 /// Sent when a user clikcs a product tag point
-  StorylyEventStoryProductTagExpanded = 24,
+  StorylyEventStoryProductTagExpanded = 25,
 /// Sent when a user clicks a product expanded area
-  StorylyEventStoryProductTagClicked = 25,
+  StorylyEventStoryProductTagClicked = 26,
 /// Sent when a user clicks a product card area
-  StorylyEventStoryProductCardClicked = 26,
+  StorylyEventStoryProductCardClicked = 27,
 /// Sent when a user copy a promo code
-  StorylyEventStoryPromoCodeCopied = 27,
+  StorylyEventStoryPromoCodeCopied = 28,
 /// Sent when a user sends a comment
-  StorylyEventStoryCommentSent = 28,
+  StorylyEventStoryCommentSent = 29,
 /// Sent when a user opens input area
-  StorylyEventStoryCommentInputOpened = 29,
+  StorylyEventStoryCommentInputOpened = 30,
 /// Sent when a user closes input area
-  StorylyEventStoryCommentInputClosed = 30,
+  StorylyEventStoryCommentInputClosed = 31,
 /// Sent when a user clicks replay button in interactive video on demand story
-  StorylyEventStorylyIVodReplayButtonClicked = 31,
+  StorylyEventStorylyIVodReplayButtonClicked = 32,
 /// Sent when a user seeks the video in interactive video on demand story
-  StorylyEventStorylyIVodSeeked = 32,
+  StorylyEventStorylyIVodSeeked = 33,
 /// Sent when a user likes a Moments story
-  StorylyEventStoryLiked = 33,
+  StorylyEventStoryLiked = 34,
 /// Sent when a user unlikes a Moments story
-  StorylyEventStoryUnliked = 34,
+  StorylyEventStoryUnliked = 35,
+/// Sent when a product added from story
+  StorylyEventStoryAddToCartClicked = 36,
+/// Sent when navigating to the cart
+  StorylyEventStoryGoToCartClicked = 37,
+/// Sent  when product catalog is opened
+  StorylyEventStoryProductCatalogOpened = 38,
+/// Sent  when product catalog is closed
+  StorylyEventStoryProductCatalogClosed = 39,
+/// Sent  when product selected
+  StorylyEventStoryProductSelected = 40,
 };
 
 
@@ -1085,6 +1166,8 @@ SWIFT_CLASS("_TtC7Storyly18StorylyEventHelper")
 /// This class triggers initialization of Storyly
 SWIFT_CLASS_NAMED("StorylyInit")
 @interface StorylyInit : NSObject
+/// storylyPayload information to get moments groups for the user
+@property (nonatomic, copy) NSString * _Nullable storylyPayload;
 /// StorylySegmentation instance to target story groups for the user
 @property (nonatomic, strong) StorylySegmentation * _Nonnull segmentation;
 /// User specific information to fill the story/story group data
@@ -1149,6 +1232,29 @@ SWIFT_PROTOCOL("_TtP7Storyly22StorylyMomentsDelegate_")
 @end
 
 
+/// This delegate  represents the class which notifies application when an product related event
+/// occurs in StorylyView.
+SWIFT_PROTOCOL_NAMED("StorylyProductDelegate")
+@protocol StorylyProductDelegate
+@optional
+/// This function will notify you to get ids of products
+/// \param storylyView StorylyView instance in which the user interacted with a component
+///
+/// \param productIds Found product ids in stories
+///
+- (void)storylyHydration:(StorylyView * _Nonnull)storylyView productIds:(NSArray<NSString *> * _Nonnull)productIds;
+/// This function will notify you about all Storyly events and let you to send these events to
+/// specific data platforms
+/// \param storylyView StorylyView instance in which the event is received
+///
+/// \param event Storyly event type which is received
+///
+/// \param product Product which the event is received
+///
+- (void)storylyEvent:(StorylyView * _Nonnull)storylyView event:(enum StorylyEvent)event product:(STRProductItem * _Nullable)product extras:(NSDictionary<NSString *, NSString *> * _Nonnull)extras;
+@end
+
+
 /// This class is used in Storyly initialization if you are planning to target
 /// labeled story groups which are set in dashboard
 SWIFT_CLASS_NAMED("StorylySegmentation")
@@ -1171,6 +1277,8 @@ SWIFT_CLASS_NAMED("StorylyView")
 @property (nonatomic, weak) UIViewController * _Nullable rootViewController;
 /// Delegate of the StorylyView which will notify you when an event occurs in StorylyView.
 @property (nonatomic, weak) id <StorylyDelegate> _Nullable delegate;
+/// Delegate of the StorylyView which will notify you when an product related event occurs in StorylyView.
+@property (nonatomic, weak) id <StorylyProductDelegate> _Nullable productDelegate;
 /// Delegate of the StorylyMoments which will notify you when an event occurs in StorylyMoments.
 @property (nonatomic, weak) id <StorylyMomentsDelegate> _Nullable momentsDelegate;
 /// This property will allow you to add ad view between stories
@@ -1182,6 +1290,7 @@ SWIFT_CLASS_NAMED("StorylyView")
 /// This property will allow you to customize share url
 @property (nonatomic, copy) NSString * _Nullable storylyShareUrl;
 @property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
+@property (nonatomic, copy) NSString * _Nullable accessibilityIdentifier;
 /// This property allows you to change the border color of the story group
 /// icons which are watched by the user.
 @property (nonatomic, copy) NSArray<UIColor *> * _Nonnull storyGroupIconBorderColorSeen;
@@ -1318,6 +1427,8 @@ SWIFT_CLASS_NAMED("StorylyView")
 /// This property allows you to add custom moments view to the
 /// beginning of the storyly bar such as ‘add your story’ or ‘user’s own stories’
 @property (nonatomic, copy) NSArray<MomentsItem *> * _Nullable momentsItems;
+/// This property allows you to show Moments story like and view analytics
+@property (nonatomic) BOOL showMomentsUserAnalytics;
 /// This property allows you to see the stories created with customs fonts
 /// It is suggested that you use the same custom font list in Storyly Moments
 @property (nonatomic, copy) NSArray<MomentsCustomFont *> * _Nullable customMomentsFonts;
