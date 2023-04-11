@@ -1,1 +1,1 @@
-Please check [Storyly Integration Documentation](https://integration.storyly.io/react-native/quick-start.html)
+Please check [Storyly Integration Documentation](https://docs.storyly.io/docs/react-native-initial-sdk-setup)

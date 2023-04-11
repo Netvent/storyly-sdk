@@ -10,13 +10,18 @@
 class STStorylyManager: RCTViewManager {
     
     override func view() -> UIView! {
-       return STStorylyView()
+        print("STR:STStorylyManager:view()")
+        return STStorylyView()
     }
     
-    override class func requiresMainQueueSetup() -> Bool { true }
+    override class func requiresMainQueueSetup() -> Bool {
+        print("STR:STStorylyManager:requiresMainQueueSetup()")
+        return true
+    }
     
     @objc(refresh:)
     func refresh(reactTag: NSNumber) {
+        print("STR:STStorylyManager:refresh()")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
@@ -30,6 +35,7 @@ class STStorylyManager: RCTViewManager {
     
     @objc(open:)
     func open(reactTag: NSNumber) {
+        print("STR:STStorylyManager:open()")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
@@ -43,6 +49,7 @@ class STStorylyManager: RCTViewManager {
     
     @objc(close:)
     func close(reactTag: NSNumber) {
+        print("STR:STStorylyManager:close()")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
@@ -56,6 +63,7 @@ class STStorylyManager: RCTViewManager {
     
     @objc(openStory:payload:)
     func openStory(reactTag: NSNumber, payload: NSURL) {
+        print("STR:STStorylyManager:openStory(payload:\(payload.absoluteString ?? ""))")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
@@ -68,6 +76,7 @@ class STStorylyManager: RCTViewManager {
     
     @objc(openStoryWithId:storyGroupId:storyId:)
     func openStory(reactTag: NSNumber, storyGroupId: String, storyId: String) {
+        print("STR:STStorylyManager:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
@@ -80,6 +89,7 @@ class STStorylyManager: RCTViewManager {
     
     @objc(setExternalData:externalData:)
     func setExternalData(reactTag: NSNumber, externalData: [NSDictionary]) {
+        print("STR:STStorylyManager:setExternalData(externalData:\(externalData))")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {

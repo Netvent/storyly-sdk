@@ -17,11 +17,13 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
 
     
     init(width: CGFloat, height: CGFloat) {
+        print("STR:STStoryGroupViewFactory:init(width:\(width):height:\(height))")
         self.width = width
         self.height = height
     }
     
     func createView() -> StoryGroupView {
+        print("STR:STStoryGroupViewFactory:createView()")
         let storyGroupView = STStoryGroupView(frame: .zero)
         storyGroupView.onViewUpdate = self.onUpdateView
         customViewList.append(storyGroupView)
@@ -30,10 +32,12 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
     }
     
     func getSize() -> CGSize {
+        print("STR:STStoryGroupViewFactory:getSize()")
         return CGSize(width: width, height: height)
     }
     
     internal func attachCustomReactNativeView(subview: UIView?, index: Int) {
+        print("STR:STStoryGroupViewFactory:attachCustomReactNativeView(subview:\(subview):index:\(index))")
         guard let subview = subview else { return }
         guard index < customViewList.count && index >= 0 else { return }
 
@@ -48,6 +52,7 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
     }
     
     private func onUpdateView(_ groupView: STStoryGroupView, _ storyGroup: StoryGroup?) {
+        print("STR:STStoryGroupViewFactory:onUpdateView(groupView:\(groupView):storyGroup:\(storyGroup))")
         guard let index = self.customViewList.firstIndex(of: groupView) else { return }
         onUpdateCustomView?([
             "index": index,
@@ -69,11 +74,13 @@ internal class STStoryGroupView: StoryGroupView {
     }()
     
     override init(frame: CGRect) {
+        print("STR:STStoryGroupView:init(frame:\(frame))")
         super.init(frame: frame)
         commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
+        print("STR:STStoryGroupView:init(aDecoder:\(aDecoder))")
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -87,6 +94,7 @@ internal class STStoryGroupView: StoryGroupView {
     }
     
     override func populateView(storyGroup: StoryGroup?) {
+        print("STR:STStoryGroupView:populateView(storyGroup:\(storyGroup))")
         onViewUpdate?(self, storyGroup)
     }
 }

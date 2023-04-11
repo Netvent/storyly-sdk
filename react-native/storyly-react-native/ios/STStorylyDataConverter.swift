@@ -1,5 +1,5 @@
 //
-//  STStorylyViewHelper.swift
+//  STStorylyDataConverter.swift
 //  storyly-react-native
 //
 //  Created by Haldun Melih Fadillioglu on 8.11.2022.
@@ -13,7 +13,7 @@ func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any?]? {
 }
     
 func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
-    let storyGroupMap: [String : Any?] = [
+    return [
         "id": storyGroup.uniqueId,
         "title": storyGroup.title,
         "iconUrl": storyGroup.iconUrl?.absoluteString,
@@ -30,7 +30,6 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
             "username": storyGroup.momentsUser?.username,
         ] : nil
     ]
-    return storyGroupMap
 }
 
 func createStoryMap(_ story: Story?) -> [String: Any?]? {
@@ -39,7 +38,7 @@ func createStoryMap(_ story: Story?) -> [String: Any?]? {
 }
 
 func createStoryMap(story: Story) -> [String: Any?] {
-    let storyMap: [String : Any?] = [
+    return [
         "id": story.uniqueId,
         "index": story.index,
         "title": story.title,
@@ -54,7 +53,6 @@ func createStoryMap(story: Story) -> [String: Any?] {
             "actionUrlList": story.media.actionUrlList
         ] as [String: Any?]
     ]
-    return storyMap
 }
 
 func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?]? {

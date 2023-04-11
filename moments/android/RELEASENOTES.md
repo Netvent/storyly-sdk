@@ -1,4 +1,9 @@
 # Release Notes
+### 0.6.0 (03.04.2023)
+* added image and video components to pre-moderation
+* added story snapshots to pre-moderation
+* added async completion for pre-moderation
+
 ### 0.5.2 (28.03.2023)
 * added dismiss method for user stories
 * fixed text interactive character clipping

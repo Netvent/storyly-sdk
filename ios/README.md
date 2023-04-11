@@ -1,1 +1,1 @@
-Please check [Storyly Integration Documentation](https://integration.storyly.io/ios/quick-start.html)
+Please check [Storyly Integration Documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup)

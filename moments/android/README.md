@@ -1,1 +1,1 @@
-Please check [Moments by Storyly Android Documentation](https://integration.storyly.io/moments-android/quick-start.html)
+Please check [Moments by Storyly Android Documentation](https://docs.storyly.io/docs/moments-android-quick-start)

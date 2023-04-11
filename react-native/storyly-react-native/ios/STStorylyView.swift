@@ -14,44 +14,85 @@ class STStorylyView: UIView {
     let storylyView: StorylyView
     
     @objc(onStorylyLoaded)
-    var onStorylyLoaded: RCTBubblingEventBlock? = nil
+    var onStorylyLoaded: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyLoaded:didSet:\(onStorylyLoaded)")
+        }
+    }
     
     @objc(onStorylyLoadFailed)
-    var onStorylyLoadFailed: RCTBubblingEventBlock? = nil
+    var onStorylyLoadFailed: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyLoadFailed:didSet:\(onStorylyLoadFailed)")
+        }
+    }
     
     @objc(onStorylyEvent)
-    var onStorylyEvent: RCTBubblingEventBlock? = nil
+    var onStorylyEvent: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyEvent:didSet:\(onStorylyEvent)")
+        }
+    }
     
     @objc(onStorylyActionClicked)
-    var onStorylyActionClicked: RCTBubblingEventBlock? = nil
+    var onStorylyActionClicked: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyActionClicked:didSet:\(onStorylyActionClicked)")
+        }
+    }
     
     @objc(onStorylyStoryPresented)
-    var onStorylyStoryPresented: RCTBubblingEventBlock? = nil
+    var onStorylyStoryPresented: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyStoryPresented:didSet:\(onStorylyStoryPresented)")
+        }
+    }
     
     @objc(onStorylyStoryPresentFailed)
-    var onStorylyStoryPresentFailed: RCTBubblingEventBlock? = nil
+    var onStorylyStoryPresentFailed: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyStoryPresentFailed:didSet:\(onStorylyStoryPresentFailed)")
+        }
+    }
     
     @objc(onStorylyStoryDismissed)
-    var onStorylyStoryDismissed: RCTBubblingEventBlock? = nil
+    var onStorylyStoryDismissed: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyStoryDismissed:didSet:\(onStorylyStoryDismissed)")
+        }
+    }
     
     @objc(onStorylyUserInteracted)
-    var onStorylyUserInteracted: RCTBubblingEventBlock? = nil
+    var onStorylyUserInteracted: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onStorylyUserInteracted:didSet:\(onStorylyUserInteracted)")
+        }
+    }
     
     @objc(onCreateCustomView)
-    var onCreateCustomView: RCTBubblingEventBlock? = nil
+    var onCreateCustomView: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onCreateCustomView:didSet:\(onCreateCustomView)")
+        }
+    }
     
-    @objc(onUpdateCustomView)
-    var onUpdateCustomView: RCTBubblingEventBlock? = nil
+    var onUpdateCustomView: RCTBubblingEventBlock? = nil {
+        didSet {
+            print("STR:STStorylyView:onUpdateCustomView:didSet:\(onUpdateCustomView)")
+        }
+    }
       
     @objc(onStorylyProductHydration)
     var onProductHydration: RCTBubblingEventBlock? = nil
      
     @objc(onStorylyProductEvent)
     var onProductEvent: RCTBubblingEventBlock? = nil
+
     
     @objc(storyGroupViewFactorySize)
     var storyGroupViewFactorySize: CGSize = CGSize(width: 0, height: 0) {
         didSet {
+            print("STR:STStorylyView:storyGroupViewFactorySize:didSet:\(storyGroupViewFactorySize)")
             if storyGroupViewFactorySize.width <= 0 || storyGroupViewFactorySize.height <= 0 { return }
             self.storyGroupViewFactory = STStoryGroupViewFactory(width: storyGroupViewFactorySize.width,
                                                             height: storyGroupViewFactorySize.height)
@@ -60,11 +101,16 @@ class STStorylyView: UIView {
             self.storylyView.storyGroupViewFactory = self.storyGroupViewFactory
         }
     }
-    var storyGroupViewFactory: STStoryGroupViewFactory? = nil
+    var storyGroupViewFactory: STStoryGroupViewFactory? = nil {
+        didSet {
+            print("STR:STStorylyView:storyGroupViewFactory:didSet:\(storyGroupViewFactory)")
+        }
+    }
 
     @objc(storyGroupSize)
     var storyGroupSize: NSString = "" {
         didSet {
+            print("STR:STStorylyView:storyGroupSize:didSet:\(storyGroupSize)")
             DispatchQueue.main.async { [weak self] in
                 self?.storylyView.storyGroupSize = (self?.storyGroupSize as? String) ?? ""
             }
@@ -72,12 +118,21 @@ class STStorylyView: UIView {
     }
     
     override init(frame: CGRect) {
+        print("STR:STStorylyView:init(frame:\(frame))")
         self.storylyView = StorylyView(frame: frame)
         super.init(frame: frame)
         
         self.backgroundColor = .clear
         
+        print("STR:STStorylyView:init:rootViewController:\(UIApplication.shared.delegate?.window??.rootViewController)")
         self.storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
+        _ = UIApplication.shared.delegate?.window??.rootViewController?.observe(\.self,
+                                                                                 options: [.initial, .old, .new]){ object, change in
+            print("STR:STStorylyView:init:observe:rootViewController:newValue:\(change.newValue):oldValue:\(change.oldValue)")
+        }
+        
+        print("STR:STStorylyView:init:StorylyBundle:\(Bundle(for: StorylyView.self).infoDictionary)")
+        
         self.storylyView.delegate = self
         self.storylyView.productDelegate = self
         self.addSubview(storylyView)
@@ -89,9 +144,13 @@ class STStorylyView: UIView {
         self.storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) {
+        print("STR:STStorylyView:init(coder:\(coder))")
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
+        print("STR:STStorylyView:insertReactSubview(subview:\(subview):at\(atIndex))")
         guard let subview = subview as? STStorylyGroupView else { return }
         storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
     }
@@ -99,28 +158,34 @@ class STStorylyView: UIView {
 
 extension STStorylyView {
     func refresh() {
+        print("STR:STStorylyView:refresh()")
         storylyView.refresh()
     }
     
     func open() {
+        print("STR:STStorylyView:open()")
         storylyView.present(animated: false)
         storylyView.resume()
     }
     
     func close() {
+        print("STR:STStorylyView:close()")
         storylyView.pause()
         storylyView.dismiss(animated: false)
     }
     
     func openStory(payload: URL) -> Bool {
+        print("STR:STStorylyView:openStory(payload:\(payload))")
         return storylyView.openStory(payload: payload)
     }
     
     func openStory(storyGroupId: String, storyId: String) -> Bool {
+        print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         return storylyView.openStory(storyGroupId: storyGroupId, storyId: storyId)
     }
     
     func setExternalData(externalData: [NSDictionary]) -> Bool {
+        print("STR:STStorylyView:openStory(externalData:\(externalData))")
         return storylyView.setExternalData(externalData: externalData)
     } 
      

@@ -1,5 +1,5 @@
 declare module "storyly-react-native" {
-  import { Component, JSX } from "react";
+  import { Component } from "react";
   import { ViewProps } from "react-native";
 
   export namespace Storyly {
@@ -151,7 +151,7 @@ declare module "storyly-react-native" {
       id: string;
       title: string;
       iconUrl?: string;
-      thematicIconUrls?: Record<String, String>
+      thematicIconUrls?: Record<string, string>
       coverUrl?: string;
       index: number;
       seen: boolean;

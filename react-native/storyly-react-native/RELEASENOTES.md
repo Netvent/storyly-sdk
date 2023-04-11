@@ -1,4 +1,25 @@
 # Release Notes
+### 1.33.0 (03.04.2023)
+* updated react dependencies to 18.x.x
+* added prop-types as dependency
+
+### 1.32.5 (06.04.2023)
+* reduced logs in ios bridge side
+* added StoryGroupListStyling properties (reverted temporary removal) 
+
+### 1.32.4 (04.04.2023)
+* added logs to ios bridge side
+
+### 1.32.3 (04.04.2023)
+* removed StoryGroupListStyling properties (temporary) 
+
+### 1.32.2 (04.04.2023)
+* added logs to ios bridge side
+
+### 1.32.1 (03.04.2023)
+* removed JSX import 
+* added logs to ios bridge side
+
 ### 1.32.0 (28.03.2023)
 * added product catalog interactive component
 * improved activity change handling on android side

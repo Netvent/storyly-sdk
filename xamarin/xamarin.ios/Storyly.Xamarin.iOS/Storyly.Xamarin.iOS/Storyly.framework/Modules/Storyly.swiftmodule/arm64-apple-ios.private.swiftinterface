@@ -6,11 +6,9 @@ import AVFoundation
 import AVKit
 import AudioToolbox
 import Dispatch
-import Foundation
 import QuartzCore
 @_exported import Storyly
 import Swift
-import UIKit
 import UserNotifications
 import _Concurrency
 import _StringProcessing
@@ -21,6 +19,30 @@ extension Swift.Array {
         }
         return nil
     }
+}
+@objc(STRProductItem) public class STRProductItem : ObjectiveC.NSObject {
+  @objc final public let productId: Swift.String
+  @objc final public let productGroupId: Swift.String
+  @objc final public let title: Swift.String
+  @objc final public let url: Swift.String
+  @objc final public let desc: Swift.String?
+  @objc final public let price: Swift.Float
+  @objc final public let salesPrice: Foundation.NSNumber?
+  @objc final public let currency: Swift.String
+  @objc final public let imageUrls: [Swift.String]?
+  @objc final public let variants: [Storyly.STRProductVariant]?
+  @objc public init(productId: Swift.String, productGroupId: Swift.String, title: Swift.String, url: Swift.String, description: Swift.String?, price: Swift.Float, salesPrice: Foundation.NSNumber? = nil, currency: Swift.String, imageUrls: [Swift.String]?, variants: [Storyly.STRProductVariant]?)
+  @objc deinit
+}
+@objc(STRProductVariant) public class STRProductVariant : ObjectiveC.NSObject {
+  @objc final public let name: Swift.String
+  @objc final public let value: Swift.String
+  @objc public init(name: Swift.String, value: Swift.String)
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc override dynamic public var hash: Swift.Int {
+    @objc get
+  }
+  @objc deinit
 }
 @objc public class MomentsCustomFont : ObjectiveC.NSObject {
   @objc public init(identifier: Swift.String, font: UIKit.UIFont)
@@ -33,6 +55,7 @@ extension Swift.Array {
   }
   @objc @_Concurrency.MainActor(unsafe) weak final public var rootViewController: UIKit.UIViewController?
   @objc @_Concurrency.MainActor(unsafe) weak final public var delegate: Storyly.StorylyDelegate?
+  @objc @_Concurrency.MainActor(unsafe) weak final public var productDelegate: Storyly.StorylyProductDelegate?
   @objc @_Concurrency.MainActor(unsafe) weak final public var momentsDelegate: Storyly.StorylyMomentsDelegate?
   @objc @_Concurrency.MainActor(unsafe) weak final public var storylyAdViewProvider: Storyly.StorylyAdViewProvider?
   @objc @_Concurrency.MainActor(unsafe) weak final public var storylyLoadingView: Storyly.StorylyLoadingView? {
@@ -48,6 +71,10 @@ extension Swift.Array {
     @objc set
   }
   @_Concurrency.MainActor(unsafe) @objc override final public var accessibilityLabel: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override final public var accessibilityIdentifier: Swift.String? {
     @objc get
     @objc set
   }
@@ -211,6 +238,10 @@ extension Swift.Array {
     @objc get
     @objc set
   }
+  @objc @_Concurrency.MainActor(unsafe) final public var showMomentsUserAnalytics: Swift.Bool {
+    @objc get
+    @objc set
+  }
   @objc @_Concurrency.MainActor(unsafe) final public var customMomentsFonts: [Storyly.MomentsCustomFont]? {
     @objc get
     @objc set
@@ -231,10 +262,16 @@ extension Storyly.StorylyView {
   @objc @_Concurrency.MainActor(unsafe) final public func dismiss(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
   @objc @_Concurrency.MainActor(unsafe) final public func present(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
   @_Concurrency.MainActor(unsafe) final public func setExternalData(externalData: [[Swift.String : Any?]]) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) final public func hydrateProducts(products: [Storyly.STRProductItem])
   @objc @_Concurrency.MainActor(unsafe) final public func showExternalActionView(externalActionView: UIKit.UIView)
   @objc @_Concurrency.MainActor(unsafe) final public func dismissExternalActionView()
   @objc(setExternalData:) @_Concurrency.MainActor(unsafe) final public func setExternalData(externalData: [Foundation.NSDictionary]) -> Swift.Bool
 }
+@objc(StorylyProductDelegate) public protocol StorylyProductDelegate {
+  @objc optional func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [Swift.String])
+  @objc optional func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, product: Storyly.STRProductItem?, extras: [Swift.String : Swift.String])
+}
+public let STR_PRODUCT_EXTRA_QUANTITY: Swift.String
 @objc public protocol StorylyMomentsDelegate {
   @objc optional func storyHeaderClicked(_ storylyView: Storyly.StorylyView, storyGroup: Storyly.StoryGroup?, story: Storyly.Story?)
 }
@@ -323,6 +360,10 @@ extension Storyly.StorylyView {
   @objc optional func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, storyGroup: Storyly.StoryGroup?, story: Storyly.Story?, storyComponent: Storyly.StoryComponent?)
 }
 @objc(StorylyInit) final public class StorylyInit : ObjectiveC.NSObject {
+  @objc final public var storylyPayload: Swift.String? {
+    @objc get
+    @objc set
+  }
   @objc final public var segmentation: Storyly.StorylySegmentation {
     @objc get
     @objc set
@@ -370,6 +411,7 @@ extension Storyly.StorylyView {
   case StoryEmojiClicked
   case StoryPollAnswered
   case StoryQuizAnswered
+  case StoryImageQuizAnswered
   case StoryCountdownReminderAdded
   case StoryCountdownReminderRemoved
   case StoryRated
@@ -385,6 +427,11 @@ extension Storyly.StorylyView {
   case StorylyIVodSeeked
   case StoryLiked
   case StoryUnliked
+  case StoryAddToCartClicked
+  case StoryGoToCartClicked
+  case StoryProductCatalogOpened
+  case StoryProductCatalogClosed
+  case StoryProductSelected
   public var stringValue: Swift.String {
     get
   }
@@ -502,10 +549,12 @@ extension Storyly.StorylyView {
   case Countdown
   case ProductTag
   case ProductCard
+  case ProductCatalog
   case Comment
   case Video
   case Vod
   case LinkCTA
+  case ImageQuiz
   public var stringValue: Swift.String {
     get
   }
@@ -518,6 +567,15 @@ extension Storyly.StorylyView {
 @_inheritsConvenienceInitializers @objc(StoryComponentTypeHelper) public class StoryComponentTypeHelper : ObjectiveC.NSObject {
   @objc public static func storyComponentName(componentType: Storyly.StoryComponentType) -> Swift.String
   @objc override dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(StoryImageQuizComponent) final public class StoryImageQuizComponent : Storyly.StoryComponent {
+  @objc final public let title: Swift.String
+  @objc final public let options: [Swift.String]?
+  @objc final public let rightAnswerIndex: Foundation.NSNumber?
+  @objc final public let selectedOptionIndex: Swift.Int
+  @objc final public let customPayload: Swift.String?
+  @objc public init(id: Swift.String, title: Swift.String, options: [Swift.String]?, rightAnswerIndex: Foundation.NSNumber?, selectedOptionIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryQuizComponent) final public class StoryQuizComponent : Storyly.StoryComponent {
@@ -606,6 +664,8 @@ extension Storyly.StorylyView {
   case API
   case MomentsAPI
   case Local
+  case UserData
+  case ProductData
   public var description: Swift.String {
     get
   }

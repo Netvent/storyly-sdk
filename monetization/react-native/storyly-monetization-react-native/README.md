@@ -1,1 +1,1 @@
-Please check [Monetization by Storyly Integration Documentation](https://integration.storyly.io/monetization-react-native/quick-start.html)
+Please check [Monetization by Storyly Integration Documentation](https://docs.storyly.io/docs/monetization-react-native)
