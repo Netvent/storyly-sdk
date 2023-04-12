@@ -61,6 +61,11 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                     if let externalData = callArguments?["externalData"] as? [[String : Any?]] {
                         _ = self?.storylyView.setExternalData(externalData: externalData)
                     }
+                case "hydrateProducts": 
+                    if let products = callArguments?["products"] as? [[String : Any?]] {
+                        let storylyProducts = products.compactMap { self?.createSTRProductItem(product: $0) }
+                        _ = self?.storylyView.hydrateProducts(products: storylyProducts)
+                    }
                 default: do {}
             }
         }
@@ -82,6 +87,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             self.storylyView.storylyShareUrl = shareUrl
         }
         self.storylyView.delegate = self
+        self.storylyView.productDelegate = self
         self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController?.getPresentedViewController()
         self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
@@ -231,6 +237,28 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         }
     }
 }
+ 
+extension FlutterStorylyViewWrapper: StorylyProductDelegate {
+     
+    func storylyHydration(_ storylyView: StorylyView, productIds: [String]) {
+        self.methodChannel.invokeMethod("storylyOnHydration",
+                                        arguments: ["productIds": productIds])
+    }
+    
+    func storylyEvent(_ storylyView: StorylyView,
+                                     event: StorylyEvent,
+                      product: STRProductItem?, extras: [String:String]) {
+        var storylyProductItem : [String: Any?]? = nil
+        if let product = product {
+            storylyProductItem = self.createSTRProductItemMap(product: product)
+        }
+        self.methodChannel.invokeMethod("storylyProductEvent", arguments: ["event": event.stringValue,
+                                                                          "product": storylyProductItem,
+                                                                          "extras": extras]
+        )
+    }
+}
+
 
 extension FlutterStorylyViewWrapper {
     func storylyLoaded(_ storylyView: Storyly.StorylyView,
@@ -312,6 +340,53 @@ extension FlutterStorylyViewWrapper {
                           "previewUrl": story.media.previewUrl?.absoluteString,
                           "actionUrlList": story.media.actionUrlList ]]
     }
+      
+    internal func createSTRProductItemMap(product: STRProductItem) -> [String: Any?] {
+         return [
+            "productId" : product.productId,
+            "productGroupId" : product.productGroupId,
+            "title" : product.title,
+            "desc" : product.desc,
+            "price" : product.price,
+            "salesPrice" : product.salesPrice,
+            "currency" : product.currency,
+            "imageUrls" : product.imageUrls,
+            "variants" : product.variants?.compactMap {
+                createSTRProductVariantMap(variant: $0)
+            }
+         ]
+     }
+
+     internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
+         return [
+            "name" : variant.name,
+            "value" : variant.value
+         ]
+     }
+        
+    internal func createSTRProductItem(product: [String: Any?]) -> STRProductItem {
+         return STRProductItem(
+            productId: product["productId"] as? String ?? "",
+            productGroupId: product["productGroupId"] as? String ?? "",
+            title: product["title"] as? String ?? "",
+            url: product["url"] as? String ?? "",
+            description: product["desc"] as? String ?? "",
+            price: Float((product["price"] as! Double)),
+            salesPrice: product["salesPrice"] as? NSNumber,
+            currency: product["currency"] as? String ?? "",
+            imageUrls: product["imageUrls"] as? [String],
+            variants: createSTRProductVariant(variants: product["variants"] as? [[String: Any?]])
+         )
+     }
+     
+    internal func createSTRProductVariant(variants: [[String: Any?]]?) -> [STRProductVariant] {
+         return variants?.map {
+             STRProductVariant(
+                name: $0["name"] as? String ?? "",
+                value: $0["value"] as? String ?? ""
+             )
+         } ?? []
+     }
     
     private func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         switch storyComponent {

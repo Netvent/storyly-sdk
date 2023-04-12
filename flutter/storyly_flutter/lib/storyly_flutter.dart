@@ -35,6 +35,18 @@ typedef StorylyViewActionClickedCallback = void Function(
   Story story,
 );
 
+/// [StorylyView]  on product hydration callback
+typedef StorylyViewOnProductHydrationCallback = void Function(
+  List<String> groupIds,
+);
+
+/// [StorylyView]  on product hydration callback
+typedef StoryProductEventCallback = void Function(
+  String event,
+  STRProductItem? product,
+  Map<String, String>? extras,
+);
+
 /// [StorylyView] user interacted callback
 typedef StorylyViewUserInteractedCallback = void Function(
   StoryGroup storyGroup,
@@ -81,6 +93,14 @@ class StorylyView extends StatefulWidget {
   /// or CTA Button action.
   final StorylyViewActionClickedCallback? storylyActionClicked;
 
+  /// This callback function will notify your application in case of Swipe Up
+  /// or CTA Button action.
+  final StorylyViewOnProductHydrationCallback? storylyOnProductHydration;
+
+  /// This callback function will notify your application in case of Swipe Up
+  /// or CTA Button action.
+  final StoryProductEventCallback? storylyProductEvent;
+
   /// This callback function will let you know that stories are started to be
   /// shown to the users.
   final VoidCallback? storylyStoryShown;
@@ -93,19 +113,21 @@ class StorylyView extends StatefulWidget {
   /// specific interactive components.
   final StorylyViewUserInteractedCallback? storylyUserInteracted;
 
-  const StorylyView({
-    Key? key,
-    this.onStorylyViewCreated,
-    this.androidParam,
-    this.iosParam,
-    this.storylyLoaded,
-    this.storylyLoadFailed,
-    this.storylyEvent,
-    this.storylyActionClicked,
-    this.storylyStoryShown,
-    this.storylyStoryDismissed,
-    this.storylyUserInteracted,
-  }) : super(key: key);
+  const StorylyView(
+      {Key? key,
+      this.onStorylyViewCreated,
+      this.androidParam,
+      this.iosParam,
+      this.storylyLoaded,
+      this.storylyLoadFailed,
+      this.storylyEvent,
+      this.storylyActionClicked,
+      this.storylyStoryShown,
+      this.storylyStoryDismissed,
+      this.storylyUserInteracted,
+      this.storylyOnProductHydration,
+      this.storylyProductEvent})
+      : super(key: key);
 
   @override
   State<StorylyView> createState() => _StorylyViewState();
@@ -217,6 +239,25 @@ class _StorylyViewState extends State<StorylyView> {
           getStorylyComponent(jsonData['storyComponent']),
         );
         break;
+      case 'storylyOnHydration':
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        widget.storylyOnProductHydration?.call(
+          List<String>.from(jsonData['productIds']),
+        );
+        break;
+      case 'storylyProductEvent':
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        STRProductItem? item;
+
+        if ((jsonData['product'] as Map<String, dynamic>?) != null) {
+          item = STRProductItem.fromJson(jsonData['product']);
+        } else {
+          item = null;
+        }
+
+        widget.storylyProductEvent
+            ?.call(jsonData['event'], item, Map.from(jsonData['extras']));
+        break;
     }
   }
 }
@@ -276,6 +317,16 @@ class StorylyViewController {
       'setExternalData',
       <String, dynamic>{
         'externalData': externalData,
+      },
+    );
+  }
+
+  /// This function allows you to hydrate products.
+  Future<void> hydrateProducts(List<Map> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateProducts',
+      <String, dynamic>{
+        'products': products,
       },
     );
   }
@@ -896,6 +947,81 @@ class Story {
       seen: json['seen'],
       currentTime: json['currentTime'],
       media: Media.fromJson(json['media']),
+    );
+  }
+}
+
+/// This data class represents a product
+class STRProductItem {
+  STRProductItem(
+      {required this.productId,
+      required this.productGroupId,
+      this.title,
+      this.desc,
+      required this.price,
+      this.salesPrice,
+      required this.currency,
+      this.imageUrls,
+      this.variants});
+
+  /// ID of the product
+  final String productId;
+
+  /// ID of the product group
+  final String productGroupId;
+
+  /// Title of product
+  final String? title;
+
+  /// Description of product
+  final String? desc;
+
+  /// Price of product
+  final double price;
+
+  /// Sales price of product
+  final double? salesPrice;
+
+  /// Currency of product
+  final String currency;
+
+  /// Images of products
+  final List<String>? imageUrls;
+
+  /// Currency of product
+  final List<STRProductVariant>? variants;
+
+  factory STRProductItem.fromJson(Map<String, dynamic> json) {
+    return STRProductItem(
+      productId: json['productId'],
+      productGroupId: json['productGroupId'],
+      title: json['title'],
+      desc: json['desc'],
+      price: json['price'],
+      salesPrice: json['salesPrice'],
+      currency: json['currency'],
+      imageUrls: castOrNull(
+          json['imageUrls']?.map<String>((e) => e as String).toList()),
+      variants: List<STRProductVariant>.from(
+          json['variants'].map((x) => STRProductVariant.fromJson(x))),
+    );
+  }
+}
+
+/// This data class represents a variant inside product
+class STRProductVariant {
+  STRProductVariant({required this.name, required this.value});
+
+  /// ID of the product
+  final String name;
+
+  /// ID of the product group
+  final String value;
+
+  factory STRProductVariant.fromJson(Map<String, dynamic> json) {
+    return STRProductVariant(
+      name: json['name'],
+      value: json['value'],
     );
   }
 }

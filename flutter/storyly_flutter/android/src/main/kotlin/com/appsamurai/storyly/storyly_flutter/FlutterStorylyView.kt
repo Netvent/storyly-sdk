@@ -12,6 +12,8 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
+import com.appsamurai.storyly.data.managers.product.STRProductItem
+import com.appsamurai.storyly.data.managers.product.STRProductVariant
 import com.appsamurai.storyly.styling.*
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
@@ -46,6 +48,10 @@ class FlutterStorylyView(
                 )
                 "openStoryUri" -> storylyView.openStory(Uri.parse(callArguments?.get("uri") as? String))
                 "setExternalData" -> (callArguments?.get("externalData") as List<Map<String, Any?>>)?.let { storylyView.setExternalData(it) }
+                "hydrateProducts" -> (callArguments?.get("products") as List<Map<String, Any?>>)?.let {
+                    val products = it.map { product -> createSTRProductItem(product) }
+                    storylyView.hydrateProducts(products)
+                }
             }
         }
     }
@@ -129,11 +135,19 @@ class FlutterStorylyView(
             (args[ARGS_STORY_ITEM_TEXT_COLOR] as? String)?.let { setStoryItemTextColor(Color.parseColor(it)) }
             (args[ARGS_STORY_ITEM_PROGRESS_BAR_COLOR] as? List<String>)?.let { colors -> setStoryItemProgressBarColor(colors.map { color -> Color.parseColor(color) }.toTypedArray()) }
             (args[ARGS_STORY_ITEM_TEXT_TYPEFACE] as? String)?.let { typeface ->
-                val customTypeface = try { Typeface.createFromAsset(context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+                val customTypeface = try {
+                    Typeface.createFromAsset(context.applicationContext.assets, typeface)
+                } catch (_: Exception) {
+                    Typeface.DEFAULT
+                }
                 setStoryItemTextTypeface(customTypeface)
             }
             (args[ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE] as? String)?.let { typeface ->
-                val customTypeface = try { Typeface.createFromAsset(context.applicationContext.assets, typeface) } catch(_: Exception) { Typeface.DEFAULT }
+                val customTypeface = try {
+                    Typeface.createFromAsset(context.applicationContext.assets, typeface)
+                } catch (_: Exception) {
+                    Typeface.DEFAULT
+                }
                 setStoryInteractiveTextTypeface(customTypeface)
             }
 
@@ -156,14 +170,16 @@ class FlutterStorylyView(
                 val horizontalPaddingBetweenItems = (it["horizontalPaddingBetweenItems"] as? Int) ?: dpToPixel(8)
                 val verticalPaddingBetweenItems = (it["verticalPaddingBetweenItems"] as? Int) ?: dpToPixel(8)
 
-                setStoryGroupListStyling(StoryGroupListStyling(
-                    orientation,
-                    sections,
-                    horizontalEdgePadding.toFloat(),
-                    verticalEdgePadding.toFloat(),
-                    horizontalPaddingBetweenItems.toFloat(),
-                    verticalPaddingBetweenItems.toFloat()
-                ))
+                setStoryGroupListStyling(
+                    StoryGroupListStyling(
+                        orientation,
+                        sections,
+                        horizontalEdgePadding.toFloat(),
+                        verticalEdgePadding.toFloat(),
+                        horizontalPaddingBetweenItems.toFloat(),
+                        verticalPaddingBetweenItems.toFloat()
+                    )
+                )
             }
 
             (args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String)?.let { setStoryGroupIconImageThematicLabel(it) }
@@ -176,7 +192,13 @@ class FlutterStorylyView(
                 val colorSeen = Color.parseColor(it["colorSeen"] as? String ?: "#FF000000")
                 val colorNotSeen = Color.parseColor(it["colorNotSeen"] as? String ?: "#FF000000")
 
-                val customTypeface = typeface?.let { try { Typeface.createFromAsset(context.applicationContext.assets, it) } catch(_: Exception) { null } } ?: Typeface.DEFAULT
+                val customTypeface = typeface?.let {
+                    try {
+                        Typeface.createFromAsset(context.applicationContext.assets, it)
+                    } catch (_: Exception) {
+                        null
+                    }
+                } ?: Typeface.DEFAULT
 
                 setStoryGroupTextStyling(
                     StoryGroupTextStyling(
@@ -213,6 +235,29 @@ class FlutterStorylyView(
                         else -> StorylyLayoutDirection.LTR
                     }
                 )
+            }
+
+            storylyProductListener = object : StorylyProductListener {
+                override fun storylyEvent(storylyView: StorylyView, event: StorylyEvent, product: STRProductItem?, extras: Map<String, String>) {
+                    methodChannel.invokeMethod(
+                        "storylyProductEvent",
+                        mapOf(
+                            "event" to event.name,
+                            "product" to product?.let { createSTRProductItemMap(it) },
+                            "extras" to extras
+                        )
+                    )
+                }
+
+                override fun storylyHydration(storylyView: StorylyView, productIds: List<String>) {
+                    methodChannel.invokeMethod(
+                        "storylyOnHydration",
+                        mapOf(
+                            "productIds" to productIds
+                        )
+                    )
+                }
+
             }
 
             storylyListener = object : StorylyListener {
@@ -294,7 +339,8 @@ class FlutterStorylyView(
     override fun dispose() {}
 
     private fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, *> {
-        return mapOf("id" to storyGroup.uniqueId,
+        return mapOf(
+            "id" to storyGroup.uniqueId,
             "title" to storyGroup.title,
             "index" to storyGroup.index,
             "seen" to storyGroup.seen,
@@ -388,6 +434,53 @@ class FlutterStorylyView(
                 )
             }
         }
+    }
+
+    internal fun createSTRProductItemMap(product: STRProductItem): Map<String, *> {
+        return mapOf(
+            "productId" to product.productId,
+            "productGroupId" to product.productGroupId,
+            "title" to product.title,
+            "desc" to product.desc,
+            "price" to product.price.toDouble(),
+            "salesPrice" to product.salesPrice?.toDouble(),
+            "currency" to product.currency,
+            "imageUrls" to product.imageUrls,
+            "variants" to product.variants.map {
+                createSTRProductVariantMap(it)
+            }
+        )
+    }
+
+    internal fun createSTRProductVariantMap(variant: STRProductVariant): Map<String, *> {
+        return mapOf(
+            "name" to variant.name,
+            "value" to variant.value
+        )
+    }
+
+    internal fun createSTRProductItem(product: Map<String, Any?>): STRProductItem {
+        return STRProductItem(
+            productId = product["productId"] as? String ?: "",
+            productGroupId = product["productGroupId"] as? String ?: "",
+            title = product["title"] as? String ?: "",
+            desc = product["desc"] as? String ?: "",
+            price = (product["price"] as Double).toFloat(),
+            salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
+            currency = product["currency"] as? String ?: "",
+            imageUrls = product["imageUrls"] as? List<String>,
+            url = product["url"] as? String ?: "",
+            variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>)
+        )
+    }
+
+    internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<STRProductVariant> {
+        return variants?.map { variant ->
+            STRProductVariant(
+                name = variant["name"] as? String ?: "",
+                value = variant["value"] as? String ?: ""
+            )
+        } ?: listOf()
     }
 
 
