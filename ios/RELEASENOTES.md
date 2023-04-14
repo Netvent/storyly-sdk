@@ -1,4 +1,7 @@
 # Release Notes
+### 1.32.3 (14.04.2023)
+* improved localizations for es
+
 ### 1.32.2 (10.04.2023)
 * improved codebase to fix bugs from crash logs
 
