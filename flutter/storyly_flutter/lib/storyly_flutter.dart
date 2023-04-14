@@ -93,12 +93,10 @@ class StorylyView extends StatefulWidget {
   /// or CTA Button action.
   final StorylyViewActionClickedCallback? storylyActionClicked;
 
-  /// This callback function will notify your application in case of Swipe Up
-  /// or CTA Button action.
+  /// This callback function will notify your application in case product hydration
   final StorylyViewOnProductHydrationCallback? storylyOnProductHydration;
 
-  /// This callback function will notify your application in case of Swipe Up
-  /// or CTA Button action.
+  /// This callback function will notify your application in case product event occurs
   final StoryProductEventCallback? storylyProductEvent;
 
   /// This callback function will let you know that stories are started to be
@@ -988,7 +986,7 @@ class STRProductItem {
   /// Images of products
   final List<String>? imageUrls;
 
-  /// Currency of product
+  /// Variants of product
   final List<STRProductVariant>? variants;
 
   factory STRProductItem.fromJson(Map<String, dynamic> json) {
@@ -1012,10 +1010,10 @@ class STRProductItem {
 class STRProductVariant {
   STRProductVariant({required this.name, required this.value});
 
-  /// ID of the product
+  /// Name of the product
   final String name;
 
-  /// ID of the product group
+  /// Value of the product group
   final String value;
 
   factory STRProductVariant.fromJson(Map<String, dynamic> json) {
