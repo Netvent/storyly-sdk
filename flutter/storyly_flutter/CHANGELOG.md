@@ -1,3 +1,12 @@
+### 1.32.0 (17.04.2023)
+* added product catalog interactive component
+* added image quiz interactive component
+* added color option to poll interactive component
+* added like/view analytics buttons for Moments story groups
+* added local cache invalidation flow
+* added etag implementaion
+* improved data manager queue flow
+
 ### 1.30.0 (01.02.2023)
 * added product card interactive component
 * added like/dislike feature for emoji interactive component
