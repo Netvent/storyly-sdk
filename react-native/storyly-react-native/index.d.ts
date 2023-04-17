@@ -170,6 +170,7 @@ declare module "storyly-react-native" {
       | "text"
       | "image"
       | "producttag"
+      | "productcard"
       | "comment"
       | "video"
       | "vod";
