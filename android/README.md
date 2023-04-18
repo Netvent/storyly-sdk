@@ -1,1 +1,1 @@
-Please check [Storyly Integration Documentation](https://integration.storyly.io/android/quick-start.html)
+Please check [Storyly Integration Documentation](https://docs.storyly.io/docs/android-initial-sdk-setup)

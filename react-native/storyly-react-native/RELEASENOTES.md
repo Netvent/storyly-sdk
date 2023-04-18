@@ -1,4 +1,51 @@
 # Release Notes
+### 1.33.1 (17.04.2023)
+* added logs to ios bridge side
+
+### 1.33.0 (03.04.2023)
+* updated react dependencies to 18.x.x
+* added prop-types as dependency
+
+### 1.32.5 (06.04.2023)
+* reduced logs in ios bridge side
+* added StoryGroupListStyling properties (reverted temporary removal) 
+
+### 1.32.4 (04.04.2023)
+* added logs to ios bridge side
+
+### 1.32.3 (04.04.2023)
+* removed StoryGroupListStyling properties (temporary) 
+
+### 1.32.2 (04.04.2023)
+* added logs to ios bridge side
+
+### 1.32.1 (03.04.2023)
+* removed JSX import 
+* added logs to ios bridge side
+
+### 1.32.0 (28.03.2023)
+* added product catalog interactive component
+* improved activity change handling on android side
+
+### 1.31.0 (06.03.2023)
+* added image quiz interactive component
+* added color option to poll interactive component
+* added like/view analytics buttons for Moments story groups
+* added local cache invalidation flow 
+* added etag implementaion
+* improved data manager queue flow
+
+### 1.30.1 (15.02.2023)
+* fixed storyGroupSize not working bug
+
+### 1.30.0 (01.02.2023)
+* added product card interactive component
+* added like/dislike feature for emoji interactive component
+* changed design of the emoji interactive component
+* added vertical/horizontal grid layout support
+* IMPORTANT! removed storyGroupListEdgePadding and storyGroupListPaddingBetweenItems
+* IMPORTANT! added storyGroupListOrientation, storyGroupListSections, storyGroupListHorizontalEdgePadding, storyGroupListVerticalEdgePadding, storyGroupListHorizontalPaddingBetweenItems and storyGroupListVerticalPaddingBetweenItems
+
 ### 1.29.1 (10.01.2023)
 * fixed [#256](https://github.com/Netvent/storyly-mobile/issues/256)
 

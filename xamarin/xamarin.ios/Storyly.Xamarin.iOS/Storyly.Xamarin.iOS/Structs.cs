@@ -38,10 +38,11 @@ namespace Storyly
 		Image = 9,
 		Countdown = 10,
 		ProductTag = 11,
-		Comment = 12,
-		Video = 13,
-		Vod = 14,
-		LinkCTA = 15
+		ProductCard = 12,
+		Comment = 13,
+		Video = 14,
+		Vod = 15,
+		LinkCTA = 16
 	}
 
 	[Native]
@@ -81,13 +82,28 @@ namespace Storyly
 		StoryInteractiveImpression = 23,
 		StoryProductTagExpanded = 24,
 		StoryProductTagClicked = 25,
-		StoryPromoCodeCopied = 26,
-		StoryCommentSent = 27,
-		StoryCommentInputOpened = 28,
-		StoryCommentInputClosed = 29,
-		StorylyIVodReplayButtonClicked = 30,
-		StorylyIVodSeeked = 31,
-		StoryLiked = 32,
-		StoryUnliked = 33
+		StoryProductCardClicked = 26,
+		StoryPromoCodeCopied = 27,
+		StoryCommentSent = 28,
+		StoryCommentInputOpened = 29,
+		StoryCommentInputClosed = 30,
+		StorylyIVodReplayButtonClicked = 31,
+		StorylyIVodSeeked = 32,
+		StoryLiked = 33,
+		StoryUnliked = 34
+	}
+
+	[Native]
+	public enum StoryGroupAnimation : long
+	{
+		Disabled = 0,
+		BorderRotation = 1
+	}
+
+	[Native]
+	public enum StoryGroupListOrientation : long
+	{
+		Horizontal = 0,
+		Vertical = 1
 	}
 }

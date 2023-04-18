@@ -1,4 +1,38 @@
 # Release Notes
+### 1.32.2 (14.04.2023)
+* fixed crash during share
+* fixed wrong edge padding issue in grid layout
+
+### 1.32.1 (03.04.2023)
+* improved codebase to prevent ConcurrentModificationException [#204](https://github.com/Netvent/storyly-mobile/issues/204)
+* fixed product and user data conflict
+
+### 1.32.0 (28.03.2023)
+* added product catalog interactive component
+* fixed crash during share
+* added activity field
+
+### 1.31.3 (11.03.2023)
+* added events to support smart sorting in story list
+* improved seen state for the story groups contains user property
+
+### 1.31.2 (07.03.2023)
+* added local cache invalidation flow 
+* added etag implementaion
+* fixed padding issue for rtl devices
+
+### 1.31.1 (23.02.2023)
+* improved data manager queue flow for skeleton view
+
+### 1.31.0 (22.02.2023)
+* added image quiz interactive component
+* added color option to poll interactive component 
+* improved data manager queue flow
+* added like/view analytics buttons for Moments story groups
+* improved story area of Moments story groups
+* added story index to contentDescription of story start
+* IMPORTANT! added Android 13 support by increasing compileSdk and targetSdk to 33
+
 ### 1.30.0 (23.01.2023)
 * added product card interactive component
 * added like/dislike feature for emoji interactive component

@@ -1,4 +1,43 @@
 # Release Notes
+### 1.32.3 (14.04.2023)
+* improved localizations for es
+
+### 1.32.2 (10.04.2023)
+* improved codebase to fix bugs from crash logs
+
+### 1.32.1 (03.04.2023)
+* fixed product and user data conflict
+
+### 1.32.0 (28.03.2023)
+* added product catalog interactive component
+* added accessibilityIdentifier field for test setups
+
+### 1.31.4 (13.03.2023)
+* added events to support smart sorting in story list
+* improved seen state for the story groups contains user property
+
+### 1.31.3 (07.03.2023)
+* IMPORTANT! fixed video playback issue introduced in 1.31.2
+
+### 1.31.2 (06.03.2023)
+* added local cache invalidation flow 
+* added etag implementaion
+
+### 1.31.1 (23.02.2023)
+* improved data manager queue flow for skeleton view
+
+### 1.31.0 (22.02.2023)
+* added image quiz interactive component
+* added color option to poll interactive component
+* improved data manager queue flow
+* added like/view analytics buttons for Moments story groups
+* improved story area of Moments story groups
+* fixed story group icon image's aspect 
+* added story index to accessibilityLabel of story start
+
+### 1.30.2 (10.02.2023)
+* fixed [#263](https://github.com/Netvent/storyly-mobile/issues/263)
+
 ### 1.30.0 (23.01.2023)
 * added product card interactive component
 * added like/dislike feature for emoji interactive component

@@ -48,10 +48,6 @@ namespace Storyly
 	[DisableDefaultCtor]
 	interface StoryGroup
 	{
-		// @property (readonly, copy, nonatomic) NSString * _Nullable groupTheme;
-		[NullAllowed, Export("groupTheme")]
-		string GroupTheme { get; }
-
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull uniqueId;
 		[Export("uniqueId")]
 		string UniqueId { get; }
@@ -378,18 +374,34 @@ namespace Storyly
 	[DisableDefaultCtor]
 	interface StoryGroupListStyling
 	{
-		// @property (nonatomic) CGFloat edgePadding;
-		[Export("edgePadding")]
-		nfloat EdgePadding { get; set; }
+		// @property (nonatomic) enum StoryGroupListOrientation orientation;
+		[Export("orientation", ArgumentSemantic.Assign)]
+		StoryGroupListOrientation Orientation { get; set; }
 
-		// @property (nonatomic) CGFloat paddingBetweenItems;
-		[Export("paddingBetweenItems")]
-		nfloat PaddingBetweenItems { get; set; }
+		// @property (nonatomic) NSInteger sections;
+		[Export("sections")]
+		nint Sections { get; set; }
 
-		// -(instancetype _Nonnull)initWithEdgePadding:(CGFloat)edgePadding paddingBetweenItems:(CGFloat)paddingBetweenItems __attribute__((objc_designated_initializer));
-		[Export("initWithEdgePadding:paddingBetweenItems:")]
+		// @property (nonatomic) CGFloat horizontalEdgePadding;
+		[Export("horizontalEdgePadding")]
+		nfloat HorizontalEdgePadding { get; set; }
+
+		// @property (nonatomic) CGFloat verticalEdgePadding;
+		[Export("verticalEdgePadding")]
+		nfloat VerticalEdgePadding { get; set; }
+
+		// @property (nonatomic) CGFloat horizontalPaddingBetweenItems;
+		[Export("horizontalPaddingBetweenItems")]
+		nfloat HorizontalPaddingBetweenItems { get; set; }
+
+		// @property (nonatomic) CGFloat verticalPaddingBetweenItems;
+		[Export("verticalPaddingBetweenItems")]
+		nfloat VerticalPaddingBetweenItems { get; set; }
+
+		// -(instancetype _Nonnull)initWithOrientation:(enum StoryGroupListOrientation)orientation sections:(NSInteger)sections horizontalEdgePadding:(CGFloat)horizontalEdgePadding verticalEdgePadding:(CGFloat)verticalEdgePadding horizontalPaddingBetweenItems:(CGFloat)horizontalPaddingBetweenItems verticalPaddingBetweenItems:(CGFloat)verticalPaddingBetweenItems __attribute__((objc_designated_initializer));
+		[Export("initWithOrientation:sections:horizontalEdgePadding:verticalEdgePadding:horizontalPaddingBetweenItems:verticalPaddingBetweenItems:")]
 		[DesignatedInitializer]
-		IntPtr Constructor(nfloat edgePadding, nfloat paddingBetweenItems);
+		IntPtr Constructor(StoryGroupListOrientation orientation, nint sections, nfloat horizontalEdgePadding, nfloat verticalEdgePadding, nfloat horizontalPaddingBetweenItems, nfloat verticalPaddingBetweenItems);
 	}
 
 	// @interface StoryGroupTextStyling : NSObject
@@ -464,6 +476,10 @@ namespace Storyly
 		// -(BOOL)setExternalData:(NSArray<NSDictionary *> * _Nonnull)externalData __attribute__((warn_unused_result("")));
 		[Export("setExternalData:")]
 		bool SetExternalData(NSDictionary[] externalData);
+
+		// @property (copy, nonatomic) NSString * _Nonnull storyGroupAnimation;
+		[Export("storyGroupAnimation")]
+		string StoryGroupAnimation { get; set; }
 
 		// @property (copy, nonatomic) NSString * _Nonnull storyGroupSize;
 		[Export("storyGroupSize")]

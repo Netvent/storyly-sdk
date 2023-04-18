@@ -1,5 +1,5 @@
 declare module "storyly-react-native" {
-  import { Component, JSX } from "react";
+  import { Component } from "react";
   import { ViewProps } from "react-native";
 
   export namespace Storyly {
@@ -30,8 +30,12 @@ declare module "storyly-react-native" {
       storyGroupTextTypeface?: string;
       storyGroupPinIconColor?: string;
 
-      storyGroupListEdgePadding?: number;
-      storyGroupListPaddingBetweenItems?: number;
+      storyGroupListOrientation?: "horizontal" | "vertical";
+      storyGroupListSections?: number;
+      storyGroupListHorizontalEdgePadding?: number;
+      storyGroupListVerticalEdgePadding?: number;
+      storyGroupListHorizontalPaddingBetweenItems?: number;
+      storyGroupListVerticalPaddingBetweenItems?: number;
 
       storyItemTextColor?: string;
       storyItemIconBorderColor?: string[];
@@ -128,7 +132,7 @@ declare module "storyly-react-native" {
       id: string;
       title: string;
       iconUrl?: string;
-      thematicIconUrls?: Record<String, String>
+      thematicIconUrls?: Record<string, string>
       coverUrl?: string;
       index: number;
       seen: boolean;
@@ -166,6 +170,7 @@ declare module "storyly-react-native" {
       | "text"
       | "image"
       | "producttag"
+      | "productcard"
       | "comment"
       | "video"
       | "vod";

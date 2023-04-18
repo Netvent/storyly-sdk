@@ -109,6 +109,7 @@ class Storyly extends Component {
             customParameter,
             storylyPayload,
             storylyTestMode,
+            storyGroupSize,
             storyGroupIconBorderColorSeen,
             storyGroupIconBorderColorNotSeen,
             storyItemIconBorderColor,
@@ -118,8 +119,12 @@ class Storyly extends Component {
             storyGroupIconHeight,
             storyGroupIconWidth,
             storyGroupIconCornerRadius,
-            storyGroupListEdgePadding,
-            storyGroupListPaddingBetweenItems,
+            storyGroupListOrientation,
+            storyGroupListSections,
+            storyGroupListHorizontalEdgePadding,
+            storyGroupListVerticalEdgePadding,
+            storyGroupListHorizontalPaddingBetweenItems,
+            storyGroupListVerticalPaddingBetweenItems,
             storyGroupTextIsVisible,
             storyGroupTextTypeface,
             storyGroupTextSize,
@@ -146,8 +151,16 @@ class Storyly extends Component {
             <STStoryly
                 {...otherProps}
                 storylyInit={{ 'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode }}
+                storyGroupSize={storyGroupSize}
                 storyGroupIconStyling={{ 'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius }}
-                storyGroupListStyling={{ 'edgePadding': storyGroupListEdgePadding, 'paddingBetweenItems': storyGroupListPaddingBetweenItems }}
+                storyGroupListStyling={{
+                    'orientation': storyGroupListOrientation,
+                    'sections': storyGroupListSections,
+                    'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
+                    'verticalEdgePadding': storyGroupListVerticalEdgePadding,
+                    'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
+                    'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
+                }}
                 storyGroupTextStyling={{ 'isVisible': storyGroupTextIsVisible, 'typeface': storyGroupTextTypeface, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'colorSeen': storyGroupTextColorSeen, 'colorNotSeen': storyGroupTextColorNotSeen }}
                 storyHeaderStyling={{ 'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon }}
                 onStorylyLoaded={this._onStorylyLoaded}
@@ -188,6 +201,7 @@ Storyly.propTypes = {
     storylyTestMode: bool,
     storylyPayload: string,
 
+    storyGroupSize: string,
     storyGroupIconBorderColorSeen: arrayOf(string),
     storyGroupIconBorderColorNotSeen: arrayOf(string),
     storyGroupIconBackgroundColor: string,
@@ -198,7 +212,7 @@ Storyly.propTypes = {
     storyGroupTextColorSeen: string,
     storyGroupTextColorNotSeen: string,
     storyGroupPinIconColor: string,
-    storyGroupSize: string,
+
     storyGroupAnimation: string,
     storyItemIconBorderColor: arrayOf(string),
     storyItemTextColor: string,
@@ -208,8 +222,12 @@ Storyly.propTypes = {
     storyGroupIconHeight: number,
     storyGroupIconWidth: number,
     storyGroupIconCornerRadius: number,
-    storyGroupListEdgePadding: number,
-    storyGroupListPaddingBetweenItems: number,
+    storyGroupListOrientation: string,
+    storyGroupListSections: number,
+    storyGroupListHorizontalEdgePadding: number,
+    storyGroupListVerticalEdgePadding: number,
+    storyGroupListHorizontalPaddingBetweenItems: number,
+    storyGroupListVerticalPaddingBetweenItems: number,
     storyHeaderTextIsVisible: bool,
     storyHeaderIconIsVisible: bool,
     storyHeaderCloseButtonIsVisible: bool,

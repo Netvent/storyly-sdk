@@ -9,31 +9,52 @@ import Storyly
 extension RCTConvert {
     @objc(stStorylyInit:)
     static func stStorylyInit(json: NSDictionary) -> StorylyInit {
-        var segmentation: StorylySegmentation? = nil
+        print("STR:RCTConvert+Extension:stStorylyInit(json:\(json))")
+        var segmentation: StorylySegmentation = StorylySegmentation(segments: nil)
         if let segmentsData = json["storylySegments"] as? [String] {
             segmentation = StorylySegmentation(segments: Set(segmentsData))
         }
         
-        let isTestMode = (json["storylyIsTestMode"] as? Bool) ?? false
-        
-        let storylyInit = StorylyInit(storylyId: (json["storylyId"] as? String) ?? "",
-                                      segmentation: segmentation ?? StorylySegmentation(segments: nil),
-                                      customParameter: json["customParameter"] as? String,
-                                      isTestMode: isTestMode,
-                                      storylyPayload: json["storylyPayload"] as? String,
-                                      userData: json["userProperty"] as? [String: String] ?? [:])
-        return storylyInit
+        return StorylyInit(
+            storylyId: (json["storylyId"] as? String) ?? "",
+            segmentation: segmentation,
+            customParameter: json["customParameter"] as? String,
+            isTestMode: (json["storylyIsTestMode"] as? Bool) ?? false,
+            storylyPayload: json["storylyPayload"] as? String,
+            userData: json["userProperty"] as? [String: String] ?? [:]
+        )
     }
 
     @objc(stStoryGroupListStyling:)
     static func stStoryGroupListStyling(json: NSDictionary) -> StoryGroupListStyling {
-        let edgePadding = (json["edgePadding"] as? CGFloat) ?? 4
-        let paddingBetweenItems = (json["paddingBetweenItems"] as? CGFloat) ?? 8
-        return StoryGroupListStyling(edgePadding: edgePadding, paddingBetweenItems: paddingBetweenItems)
+        print("STR:RCTConvert+Extension:stStoryGroupListStyling:(json:\(json))")
+        var orientation: StoryGroupListOrientation
+        switch json["orientation"] as? String {
+            case "horizontal": orientation = .Horizontal
+            case "vertical": orientation = .Vertical
+            default: orientation = .Horizontal
+        }
+
+        let sections = (json["sections"] as? Int) ?? 1
+        let horizontalEdgePadding = (json["horizontalEdgePadding"] as? CGFloat) ?? 4
+        let verticalEdgePadding = (json["verticalEdgePadding"] as? CGFloat) ?? 4
+        let horizontalPaddingBetweenItems = (json["horizontalPaddingBetweenItems"] as? CGFloat) ?? 8
+        let verticalPaddingBetweenItems = (json["verticalPaddingBetweenItems"] as? CGFloat) ?? 8
+
+        let storylyGroupListStyling = StoryGroupListStyling(
+            orientation: orientation,
+            sections: sections,
+            horizontalEdgePadding: horizontalEdgePadding,
+            verticalEdgePadding: verticalEdgePadding,
+            horizontalPaddingBetweenItems: horizontalPaddingBetweenItems,
+            verticalPaddingBetweenItems: verticalPaddingBetweenItems
+        )
+        return storylyGroupListStyling
     }
     
     @objc(stStoryGroupIconStyling:)
     static func stStoryGroupIconStyling(json: NSDictionary) -> StoryGroupIconStyling {
+        print("STR:RCTConvert+Extension:stStoryGroupIconStyling(json:\(json))")
         let height = (json["height"] as? CGFloat) ?? 80
         let width = (json["width"] as? CGFloat) ?? 80
         let cornerRadius = (json["cornerRadius"] as? CGFloat) ?? 40
@@ -42,6 +63,7 @@ extension RCTConvert {
     
     @objc(stStoryGroupTextStyling:)
     static func stStoryGroupTextStyling(json: NSDictionary) -> StoryGroupTextStyling {
+        print("STR:RCTConvert+Extension:stStoryGroupTextStyling(json:\(json))")
         let isVisible = (json["isVisible"] as? Bool) ?? true
         let textColorSeen = UIColor(hexString: (json["colorSeen"] as? String)) ?? .black
         let textColorNotSeen = UIColor(hexString: (json["colorNotSeen"] as? String)) ?? .black
@@ -57,6 +79,7 @@ extension RCTConvert {
     
     @objc(stStoryHeaderStyling:)
     static func stStoryHeaderStyling(json: NSDictionary) -> StoryHeaderStyling {
+        print("STR:RCTConvert+Extension:stStoryHeaderStyling(json:\(json))")
         let isTextVisible = (json["isTextVisible"] as? Bool) ?? true
         let isIconVisible = (json["isIconVisible"] as? Bool) ?? true
         let isCloseButtonVisible = (json["isCloseButtonVisible"] as? Bool) ?? true
@@ -72,6 +95,7 @@ extension RCTConvert {
     
     @objc(stStoryGroupViewFactory:)
     static func stStoryGroupViewFactory(json: NSDictionary?) -> CGSize {
+        print("STR:RCTConvert+Extension:stStoryGroupViewFactory(json:\(json))")
         let width = (json?["width"] as? CGFloat) ?? 0
         let height = (json?["height"] as? CGFloat) ?? 0
         return CGSize(width: width, height: height)
@@ -79,6 +103,7 @@ extension RCTConvert {
     
     @objc(stStorylyLayoutDirection:)
     static func stStorylyLayoutDirection(direction: NSString) -> StorylyLayoutDirection {
+        print("STR:RCTConvert+Extension:stStorylyLayoutDirection(json:\(direction))")
         switch direction {
             case "ltr": return .LTR
             case "rtl": return .RTL
@@ -88,11 +113,13 @@ extension RCTConvert {
     
     @objc(stStoryItemTextTypeface:)
     static func stStoryItemTextTypeface(typeface: NSString) -> UIFont {
+        print("STR:RCTConvert+Extension:stStoryItemTextTypeface(json:\(typeface))")
         return getCustomFont(typeface: typeface, fontSize: 14, defaultWeight: .semibold)
     }
     
     @objc(stStoryInteractiveTextTypeface:)
     static func stStoryInteractiveTextTypeface(typeface: NSString) -> UIFont {
+        print("STR:RCTConvert+Extension:stStoryInteractiveTextTypeface(json:\(typeface))")
         return getCustomFont(typeface: typeface, fontSize: 14, defaultWeight: .regular)
     }
     
