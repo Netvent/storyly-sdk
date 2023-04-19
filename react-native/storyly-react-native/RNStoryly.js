@@ -110,12 +110,6 @@ class Storyly extends Component {
             storylyPayload,
             storylyTestMode,
             storyGroupSize,
-            storyGroupIconBorderColorSeen,
-            storyGroupIconBorderColorNotSeen,
-            storyItemIconBorderColor,
-            storyItemProgressBarColor,
-            storyItemTextTypeface,
-            storyInteractiveTextTypeface,
             storyGroupIconHeight,
             storyGroupIconWidth,
             storyGroupIconCornerRadius,
@@ -130,6 +124,16 @@ class Storyly extends Component {
             storyGroupTextSize,
             storyGroupTextLines,
             storyGroupTextColorSeen,
+            storyGroupIconBorderColorSeen,
+            storyGroupIconBorderColorNotSeen,
+            storyGroupIconBackgroundColor,
+            storyGroupPinIconColor,
+            storyGroupAnimation,
+            storylyLayoutDirection,
+            storyItemIconBorderColor,
+            storyItemProgressBarColor,
+            storyItemTextTypeface,
+            storyInteractiveTextTypeface,
             storyGroupTextColorNotSeen,
             storyHeaderTextIsVisible,
             storyHeaderIconIsVisible,
@@ -150,18 +154,46 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
-                storylyInit={{ 'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode }}
-                storyGroupSize={storyGroupSize}
-                storyGroupIconStyling={{ 'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius }}
-                storyGroupListStyling={{
-                    'orientation': storyGroupListOrientation,
-                    'sections': storyGroupListSections,
-                    'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
-                    'verticalEdgePadding': storyGroupListVerticalEdgePadding,
-                    'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
-                    'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
-                }}
-                storyGroupTextStyling={{ 'isVisible': storyGroupTextIsVisible, 'typeface': storyGroupTextTypeface, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'colorSeen': storyGroupTextColorSeen, 'colorNotSeen': storyGroupTextColorNotSeen }}
+                storyly={
+                    {
+                        'storylyInit': {
+                            'storylyId': storylyId,
+                            'storylySegments': storylySegments,
+                            'userProperty': storylyUserProperty,
+                            'customParameter': customParameter,
+                            'storylyPayload': storylyPayload, 
+                            'storylyIsTestMode': storylyTestMode, 
+                        },
+                        'storyGroupSize': storyGroupSize,
+                        'storyGroupIconStyling': {
+                            'height': storyGroupIconHeight, 
+                            'width': storyGroupIconWidth, 
+                            'cornerRadius': storyGroupIconCornerRadius,
+                        },
+                        'storyGroupListStyling': {
+                            'orientation': storyGroupListOrientation,
+                            'sections': storyGroupListSections,
+                            'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
+                            'verticalEdgePadding': storyGroupListVerticalEdgePadding,
+                            'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
+                            'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
+                        },
+                        'storyGroupTextStyling': {
+                            'isVisible': storyGroupTextIsVisible, 
+                            'typeface': storyGroupTextTypeface, 
+                            'textSize': storyGroupTextSize, 
+                            'lines': storyGroupTextLines, 
+                            'colorSeen': storyGroupTextColorSeen, 
+                            'colorNotSeen': storyGroupTextColorNotSeen,
+                        },
+                        'storyGroupIconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
+                        'storyGroupIconBorderColorNotSeen': storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null,
+                        'storyGroupIconBackgroundColor': processColor(storyGroupIconBackgroundColor),
+                        'storyGroupPinIconColor': processColor(storyGroupPinIconColor),
+                        'storyGroupAnimation': storyGroupAnimation,
+                        'storylyLayoutDirection': storylyLayoutDirection,
+                    }
+                }
                 storyHeaderStyling={{ 'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon }}
                 onStorylyLoaded={this._onStorylyLoaded}
                 onStorylyLoadFailed={this._onStorylyLoadFailed}
@@ -173,8 +205,6 @@ class Storyly extends Component {
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
-                storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
-                storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
                 storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
                 storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
                 storyItemTextTypeface={storyItemTextTypeface}

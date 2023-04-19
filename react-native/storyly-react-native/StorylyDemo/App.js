@@ -53,112 +53,44 @@ const convertToNative = (size) => {
      render() {
          return (
              <View>
-                 <Storyly
-                     style={{ width: '100%', height: 120, marginTop: 50 }}
+                <Storyly
+                     style={{ width: '100%', height: 100, marginTop: 50, backgroundColor: "#00ffff" }}
                      storylyId={STORYLY_TOKEN}
-                     storyGroupSize="large"
-                     onLoad={loadEvent => {
-                         console.log(`[Storyly] default - onLoad`);
-                     }}
-                     onFail={errorMessage => {
-                         console.log(`[Storyly] default - onFail ${errorMessage}`);
-                     }}
-                     onPress={pressEvent => {
-                         console.log(`[Storyly] default - onPress`);
-                     }}
-                     onEvent={eventPayload => {
-                         console.log(`[Storyly] default - onEvent`);
-                     }}
-                     onStoryOpen={() => {
-                         console.log("[Storyly] default - onStoryOpen");
-                     }}
-                     onStoryClose={() => {
-                         console.log("[Storyly] default - onStoryClose");
-                     }}
-                     onUserInteracted={interactionEvent => {
-                         console.log(`[Storyly] default - onStoryUserInteracted`);
-                     }}/>
+                     storyGroupSize="small"
+                     storyGroupAnimation="disabled"
+                     storylyLayoutDirection="rtl"/>
+                 <Storyly
+                     style={{ width: '100%', height: 120, marginTop: 10, backgroundColor: "#7fff00" }}
+                     storylyId={STORYLY_TOKEN}
+                     storyGroupSize="large"/>
                  <Storyly
                      ref={ref => { this.customStoryly = ref }}
-                     style={{ width: '100%', height: 180, marginTop: 10 }}
+                     style={{ width: '100%', height: 170, marginTop: 10, backgroundColor: "#e9967a" }}
                      storylyId={STORYLY_TOKEN}
-                     storylyUserProperty={{"name": "TestUser", "surname": "TastLastName"}}
-                     storyGroupTextColorNotSeen={"#FF0000"}
-                     storyGroupIconBorderColorNotSeen={["#FFFF00", "#FF00FF"]}
-                     storyGroupIconBorderColorSeen={["#FFFFFF", "#FF000010"]}
-                     storyGroupIconBackgroundColor={"#000000"}
                      storyGroupSize="custom"
-                     storyGroupIconHeight={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(70) : 70 }
-                     storyGroupIconWidth={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(70) : 70 }
+                     storyGroupIconHeight={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(80) : 80 }
+                     storyGroupIconWidth={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(80) : 80 }
                      storyGroupIconCornerRadius={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20 }
+                     storyGroupListHorizontalEdgePadding={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20 }
+                     storyGroupListHorizontalPaddingBetweenItems={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(10) : 10 }
+                     storyGroupTextTypeface={"Lobster1.4.otf"}
                      storyGroupTextSize={ Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20 }
                      storyGroupTextLines={3}
-                     storyGroupTextTypeface={"Lobster1.4.otf"}
                      storyGroupTextColorSeen={"#00FF00"}
-                     storyGroupPinIconColor={"#000000"}
-                     storyHeaderShareIcon={"share_icon"}
-                     storyHeaderCloseIcon={"close_icon"}
-                     storylyLayoutDirection={"ltr"}
-                     storyItemTextTypeface={"Lobster1.4.otf"}
-                     storyInteractiveTextTypeface={"Lobster1.4.otf"}
-                     onLoad={loadEvent => {
-                        //  console.log(`[Storyly] onLoad ${JSON.stringify(loadEvent.storyGroupList)}`);
-                     }}
-                     onFail={errorMessage => {
-                         console.log(`[Storyly-2] onFail ${errorMessage}`);
-                     }}
-                     onPress={pressEvent => {
-                         console.log(`[Storyly-2] onPress`);
-                     }}
-                     onEvent={eventPayload => {
-                         console.log(`[Storyly-2] onEvent`);
-                     }}
-                     onStoryOpen={() => {
-                         console.log("[Storyly-2] onStoryOpen");
-                     }}
-                     onStoryClose={() => {
-                         console.log("[Storyly-2] onStoryClose");
-                     }}
-                     onUserInteracted={interactionEvent => {
-                         console.log(`[Storyly-2] onStoryUserInteracted`);
-                     }}/>
+                     storyGroupTextColorNotSeen={"#FF0000"}
+                     storyGroupIconBorderColorNotSeen={["#FF0000", "#FF0000"]}
+                     storyGroupIconBorderColorSeen={["#FFFFFF", "#FF000010"]}
+                     storyGroupIconBackgroundColor={"#000000"}
+                     storyGroupPinIconColor={"#000000"}/>
                   <Storyly
                      ref={ref => { this.storyly = ref }}
-                     style={{ width: '100%', height: convertToNative(178), marginTop: 10, marginBottom: 10}}
+                     style={{ width: '100%', height: convertToNative(178), marginTop: 10, backgroundColor: "#ff00ff"}}
                      storylyId={STORYLY_TOKEN}
                      storyGroupViewFactory={{
                         width: convertToNative(100),
                         height: convertToNative(178),
                         customView: CustomPortraitView
-                    }}
-                     onLoad={loadEvent => {
-                         console.log(`[Storyly] onLoad`);
-                     }}
-                     onFail={errorMessage => {
-                         console.log(`[Storyly] onFail ${errorMessage}`);
-                     }}
-                     onPress={pressEvent => {
-                         console.log(`[Storyly] onPress ${JSON.stringify(pressEvent)}`);
-                     }}
-                     onEvent={eventPayload => {
-                         console.log(`[Storyly] onEvent ${JSON.stringify(eventPayload)}`);
-                     }}
-                     onStoryOpen={() => {
-                         console.log("[Storyly] onStoryOpen");
-                     }}
-                     onStoryClose={() => {
-                         console.log("[Storyly] onStoryClose");
-                     }}
-                     onStoryOpenFailed={(message) => {
-                         console.log(`[Storyly] onStoryOpenFailed ${message}`)
-                     }}
-                     onUserInteracted={interactionEvent => {
-                         console.log(`[Storyly] onStoryUserInteracted ${JSON.stringify(interactionEvent)}`);
-                     }}/>
-                 <Button
-                     onPress={() => { this.storyly.refresh(); }}
-                     title="Refresh"
-                 />
+                    }}/>
              </View>
          );
      }

@@ -13,6 +13,24 @@ class STStorylyView: UIView {
     @objc(storylyView)
     let storylyView: StorylyView
     
+    @objc(testStorylyView)
+    var testStorylyView: StorylyView? = nil {
+        didSet {
+            print("STR:STStorylyView:testStorylyView:didSet:\(testStorylyView)")
+            oldValue?.removeFromSuperview()
+            guard let testStorylyView = testStorylyView else { return }
+            testStorylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
+            testStorylyView.delegate = self
+            addSubview(testStorylyView)
+            
+            testStorylyView.translatesAutoresizingMaskIntoConstraints = false
+            testStorylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            testStorylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+            testStorylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            testStorylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        }
+    }
+    
     @objc(onStorylyLoaded)
     var onStorylyLoaded: RCTBubblingEventBlock? = nil {
         didSet {
@@ -119,7 +137,6 @@ class STStorylyView: UIView {
         self.backgroundColor = .clear
         
         print("STR:STStorylyView:init:rootViewController:\(UIApplication.shared.delegate?.window??.rootViewController)")
-        self.storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
         _ = UIApplication.shared.delegate?.window??.rootViewController?.observe(\.self,
                                                                                  options: [.initial, .old, .new]){ object, change in
             print("STR:STStorylyView:init:observe:rootViewController:newValue:\(change.newValue):oldValue:\(change.oldValue)")
@@ -127,14 +144,15 @@ class STStorylyView: UIView {
         
         print("STR:STStorylyView:init:StorylyBundle:\(Bundle(for: StorylyView.self).infoDictionary)")
         
-        self.storylyView.delegate = self
-        self.addSubview(storylyView)
-        
-        self.storylyView.translatesAutoresizingMaskIntoConstraints = false
-        self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        self.storylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+//        self.storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
+//        self.storylyView.delegate = self
+//        self.addSubview(storylyView)
+//
+//        self.storylyView.translatesAutoresizingMaskIntoConstraints = false
+//        self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//        self.storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//        self.storylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//        self.storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {
