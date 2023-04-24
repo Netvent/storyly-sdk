@@ -58,6 +58,10 @@ export default class App extends Component {
                     style={{ width: '100%', height: 100, marginTop: 50, backgroundColor: "#00ffff" }}
                     storylyId={STORYLY_TOKEN}
                     storyGroupSize="small"
+                    storyHeaderShareIcon={"share_icon"}
+                    storyHeaderCloseIcon={"close_icon"}
+                    storyItemTextTypeface={"Lobster1.4.otf"}
+                    storyInteractiveTextTypeface={"Lobster1.4.otf"}
                     onLoad={loadEvent => {
                         console.log(`[Storyly] default - onLoad`);
                     }} />
@@ -81,7 +85,7 @@ export default class App extends Component {
                     storyGroupTextColorSeen={"#00FF00"}
                     storyGroupTextColorNotSeen={"#FF0000"}
                     storyGroupIconBorderColorNotSeen={["#FF0000", "#FF0000"]}
-                    storyGroupIconBorderColorSeen={["#FFFFFF", "#FF000010"]}
+                    storyGroupIconBorderColorSeen={["#FFFFFF", "#FFFFFF"]}
                     storyGroupIconBackgroundColor={"#000000"}
                     storyGroupPinIconColor={"#000000"} />
                 <Storyly
