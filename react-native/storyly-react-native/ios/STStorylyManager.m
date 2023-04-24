@@ -19,30 +19,7 @@ RCT_EXTERN_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
 RCT_EXTERN_METHOD(setExternalData:(nonnull NSNumber *)reactTag
                   externalData:(nonnull NSArray<NSDictionary *> *)externalData)
 
-RCT_REMAP_VIEW_PROPERTY(storyly, storylyView, stStorylyView)
-
-// RCT_REMAP_VIEW_PROPERTY(storylyInit, storylyView.storylyInit, stStorylyInit)
-//RCT_REMAP_VIEW_PROPERTY(storylyShareUrl, storylyView.storylyShareUrl, NSString) TODO:
-//RCT_REMAP_VIEW_PROPERTY(storyGroupSize, storyGroupSize, NSString)
-
-//RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorSeen, storylyView.storyGroupIconBorderColorSeen, NSArray<UIColor *>)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupIconBorderColorNotSeen, storylyView.storyGroupIconBorderColorNotSeen, NSArray<UIColor *>)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupIconBackgroundColor, storylyView.storyGroupIconBackgroundColor, UIColor)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorSeen, storylyView.storyGroupTextColorSeen, UIColor)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupTextColorNotSeen, storylyView.storyGroupTextColorNotSeen, UIColor)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupPinIconColor, storylyView.storyGroupPinIconColor, UIColor)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupAnimation, storylyView.storyGroupAnimation, NSString)
-//RCT_REMAP_VIEW_PROPERTY(storyItemIconBorderColor, storylyView.storyItemIconBorderColor, NSArray<UIColor *>) TODO:
-//RCT_REMAP_VIEW_PROPERTY(storyItemTextColor, storylyView.storyItemTextColor, UIColor) TODO:
-//RCT_REMAP_VIEW_PROPERTY(storyItemProgressBarColor, storylyView.storylyItemProgressBarColor, NSArray<UIColor *>) TODO:
-//RCT_REMAP_VIEW_PROPERTY(storyItemTextTypeface, storylyView.storyItemTextFont, stStoryItemTextTypeface) TODO:
-//RCT_REMAP_VIEW_PROPERTY(storyInteractiveTextTypeface, storylyView.storyInteractiveFont, stStoryInteractiveTextTypeface) TODO:
-//RCT_REMAP_VIEW_PROPERTY(storyGroupIconStyling, storylyView.storyGroupIconStyling, stStoryGroupIconStyling)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupListStyling, storylyView.storyGroupListStyling, stStoryGroupListStyling)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupTextStyling, storylyView.storyGroupTextStyling, stStoryGroupTextStyling)
-//RCT_REMAP_VIEW_PROPERTY(storyHeaderStyling, storylyView.storyHeaderStyling, stStoryHeaderStyling) TODO:
-//RCT_REMAP_VIEW_PROPERTY(storylyLayoutDirection, storylyView.storylyLayoutDirection, stStorylyLayoutDirection)
-//RCT_REMAP_VIEW_PROPERTY(storyGroupViewFactory, storyGroupViewFactorySize, stStoryGroupViewFactory) TODO:
+RCT_REMAP_VIEW_PROPERTY(storyly, storylyBundle, stStorylyBundle)
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)

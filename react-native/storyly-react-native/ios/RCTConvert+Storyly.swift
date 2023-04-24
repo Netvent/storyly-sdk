@@ -6,84 +6,76 @@
 //
 import Storyly
 
+@objc(StorylyBundle)
+class StorylyBundle: NSObject {
+    let storylyView: StorylyView
+    let storyGroupViewFactory: STStoryGroupViewFactory?
+    
+    init(storylyView: StorylyView,
+         storyGroupViewFactory: STStoryGroupViewFactory?) {
+        self.storylyView = storylyView
+        self.storyGroupViewFactory = storyGroupViewFactory
+    }
+}
+
 extension RCTConvert {
-    @objc(stStorylyView:)
-    static func stStorylyView(json: NSDictionary) -> StorylyView? {
-        print("STR:RCTConvert+Extension:stStorylyView(json:\(json))")
+    @objc(stStorylyBundle:)
+    static func stStorylyBundle(json: NSDictionary) -> StorylyBundle? {
+        print("STR:RCTConvert+Extension:stStorylyBundle(json:\(json))")
         guard let storylyInitJson = json["storylyInit"] as? NSDictionary else { return nil }
         guard let storyGroupIconStylingJson = json["storyGroupIconStyling"] as? NSDictionary else { return nil }
+        guard let storyGroupViewFactoryJson = json["storyGroupViewFactory"] as? NSDictionary else { return nil }
         guard let storyGroupListStylingJson = json["storyGroupListStyling"] as? NSDictionary else { return nil }
         guard let storyGroupTextStylingJson = json["storyGroupTextStyling"] as? NSDictionary else { return nil }
+        guard let storyHeaderStylingJson = json["storyHeaderStyling"] as? NSDictionary else { return nil }
+        
+        var storyGroupViewFactory: STStoryGroupViewFactory? = nil
         
         let storylyView = StorylyView()
         storylyView.storylyInit = stStorylyInit(json: storylyInitJson)
-        storylyView.storyGroupSize = json["storyGroupSize"] as? String ?? "large"
-        storylyView.storyGroupIconStyling = stStoryGroupIconStyling(json: storyGroupIconStylingJson)
+        storylyView.storylyShareUrl = json["storylyShareUrl"] as? String
+
+        if let storyGroupViewFactorySize = stStoryGroupViewFactorySize(json: storyGroupViewFactoryJson) {
+            storyGroupViewFactory = STStoryGroupViewFactory(width: storyGroupViewFactorySize.width,
+                                                            height: storyGroupViewFactorySize.height)
+        } else {
+            storylyView.storyGroupSize = json["storyGroupSize"] as? String ?? "large"
+            storylyView.storyGroupIconStyling = stStoryGroupIconStyling(json: storyGroupIconStylingJson)
+            storylyView.storyGroupTextStyling = stStoryGroupTextStyling(json: storyGroupTextStylingJson)
+            if let storyGroupIconBorderColorSeenJson = json["storyGroupIconBorderColorSeen"] as? NSArray {
+                storylyView.storyGroupIconBorderColorSeen = RCTConvert.uiColorArray(storyGroupIconBorderColorSeenJson)
+            }
+            if let storyGroupIconBorderColorNotSeenJson = json["storyGroupIconBorderColorNotSeen"] as? NSArray {
+                storylyView.storyGroupIconBorderColorNotSeen = RCTConvert.uiColorArray(storyGroupIconBorderColorNotSeenJson)
+            }
+            if let storyGroupIconBackgroundColorJson = json["storyGroupIconBackgroundColor"] as? NSNumber {
+                storylyView.storyGroupIconBackgroundColor = RCTConvert.uiColor(storyGroupIconBackgroundColorJson)
+            }
+            if let storyGroupPinIconColorJson = json["storyGroupPinIconColor"] as? NSNumber {
+                storylyView.storyGroupPinIconColor = RCTConvert.uiColor(storyGroupPinIconColorJson)
+            }
+            storylyView.storyGroupAnimation = json["storyGroupAnimation"] as? String ?? "border-rotation"
+        }
         storylyView.storyGroupListStyling = stStoryGroupListStyling(json: storyGroupListStylingJson)
-        storylyView.storyGroupTextStyling = stStoryGroupTextStyling(json: storyGroupTextStylingJson)
-        if let storyGroupIconBorderColorSeenJson = json["storyGroupIconBorderColorSeen"] as? NSArray {
-            storylyView.storyGroupIconBorderColorSeen = RCTConvert.uiColorArray(storyGroupIconBorderColorSeenJson)
+        if stStorylyLayoutDirection(direction: (json["storylyLayoutDirection"] as? String) ?? "ltr") == .RTL {
+            storylyView.storylyLayoutDirection = .RTL
         }
-        if let storyGroupIconBorderColorNotSeenJson = json["storyGroupIconBorderColorNotSeen"] as? NSArray {
-            storylyView.storyGroupIconBorderColorNotSeen = RCTConvert.uiColorArray(storyGroupIconBorderColorNotSeenJson)
-        }
-        if let storyGroupIconBackgroundColorJson = json["storyGroupIconBackgroundColor"] as? NSNumber {
-            storylyView.storyGroupIconBackgroundColor = RCTConvert.uiColor(storyGroupIconBackgroundColorJson)
-        }
-        if let storyGroupPinIconColorJson = json["storyGroupPinIconColor"] as? NSNumber {
-            storylyView.storyGroupPinIconColor = RCTConvert.uiColor(storyGroupPinIconColorJson)
-        }
-        storylyView.storyGroupAnimation = json["storyGroupAnimation"] as? String ?? "border-rotation"
-        storylyView.storylyLayoutDirection = stStorylyLayoutDirection(direction: (json["storylyLayoutDirection"] as? String) ?? "ltr")
-        return storylyView
-    }
-    
-    @objc(stStoryHeaderStyling:)
-    static func stStoryHeaderStyling(json: NSDictionary) -> StoryHeaderStyling {
-        print("STR:RCTConvert+Extension:stStoryHeaderStyling(json:\(json))")
-        let isTextVisible = (json["isTextVisible"] as? Bool) ?? true
-        let isIconVisible = (json["isIconVisible"] as? Bool) ?? true
-        let isCloseButtonVisible = (json["isCloseButtonVisible"] as? Bool) ?? true
         
-        let closeIconImage = UIImage(named: (json["closeIcon"] as? String))
-        let shareIconImage = UIImage(named: (json["shareIcon"] as? String))
-        
-        let storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible, isIconVisible: isIconVisible,
-                                                    isCloseButtonVisible: isCloseButtonVisible,
-                                                    closeButtonIcon: closeIconImage, shareButtonIcon: shareIconImage)
-        return storyHeaderStyling
-    }
-    
-    @objc(stStoryGroupViewFactory:)
-    static func stStoryGroupViewFactory(json: NSDictionary?) -> CGSize {
-        print("STR:RCTConvert+Extension:stStoryGroupViewFactory(json:\(json))")
-        let width = (json?["width"] as? CGFloat) ?? 0
-        let height = (json?["height"] as? CGFloat) ?? 0
-        return CGSize(width: width, height: height)
-    }
-    
-    @objc(stStorylyLayoutDirection:)
-    static func stStorylyLayoutDirection(direction: String) -> StorylyLayoutDirection {
-        print("STR:RCTConvert+Extension:stStorylyLayoutDirection(json:\(direction))")
-        switch direction {
-            case "ltr": return .LTR
-            case "rtl": return .RTL
-            default: return .LTR
+        storylyView.storyHeaderStyling = stStoryHeaderStyling(json: storyHeaderStylingJson)
+        if let storyItemTextColorJson = json["storyItemTextColor"] as? NSNumber {
+            storylyView.storyItemTextColor = RCTConvert.uiColor(storyItemTextColorJson)
         }
+        if let storyItemIconBorderColorJson = json["storyItemIconBorderColor"] as? NSNumber {
+            storylyView.storyItemIconBorderColor = RCTConvert.uiColorArray(storyItemIconBorderColorJson)
+        }
+        if let storyItemProgressBarColorJson = json["storyItemProgressBarColor"] as? NSNumber {
+            storylyView.storylyItemProgressBarColor = RCTConvert.uiColorArray(storyItemProgressBarColorJson)
+        }
+        storylyView.storyItemTextFont = getCustomFont(typeface: json["storyItemTextTypeface"] as? NSString, fontSize: 14, defaultWeight: .semibold)
+        storylyView.storyInteractiveFont = getCustomFont(typeface: json["storyInteractiveTextTypeface"] as? NSString, fontSize: 14, defaultWeight: .regular)
+        
+        return StorylyBundle(storylyView: storylyView, storyGroupViewFactory: storyGroupViewFactory)
     }
-    
-    @objc(stStoryItemTextTypeface:)
-    static func stStoryItemTextTypeface(typeface: NSString) -> UIFont {
-        print("STR:RCTConvert+Extension:stStoryItemTextTypeface(json:\(typeface))")
-        return getCustomFont(typeface: typeface, fontSize: 14, defaultWeight: .semibold)
-    }
-    
-    @objc(stStoryInteractiveTextTypeface:)
-    static func stStoryInteractiveTextTypeface(typeface: NSString) -> UIFont {
-        print("STR:RCTConvert+Extension:stStoryInteractiveTextTypeface(json:\(typeface))")
-        return getCustomFont(typeface: typeface, fontSize: 14, defaultWeight: .regular)
-    }
-    
 }
 
 private func stStorylyInit(json: NSDictionary) -> StorylyInit {
@@ -134,6 +126,13 @@ private func stStoryGroupIconStyling(json: NSDictionary) -> StoryGroupIconStylin
     return StoryGroupIconStyling(height: height, width: width, cornerRadius: cornerRadius)
 }
 
+private func stStoryGroupViewFactorySize(json: NSDictionary) -> CGSize? {
+    let width = (json["width"] as? CGFloat) ?? 0
+    let height = (json["height"] as? CGFloat) ?? 0
+    let factorySize = CGSize(width: width, height: height)
+    return factorySize == .zero ? nil : factorySize
+}
+
 private func stStoryGroupTextStyling(json: NSDictionary) -> StoryGroupTextStyling {
     let isVisible = (json["isVisible"] as? Bool) ?? true
     let textColorSeen = UIColor(hexString: (json["colorSeen"] as? String)) ?? .black
@@ -143,9 +142,34 @@ private func stStoryGroupTextStyling(json: NSDictionary) -> StoryGroupTextStylin
     let font = getCustomFont(typeface: (json["typeface"] as? NSString), fontSize: CGFloat(fontSize))
     let lines = (json["lines"] as? Int) ?? 2
     
-    let storyGroupTextStyling = StoryGroupTextStyling(isVisible: isVisible, colorSeen: textColorSeen,
-                                                      colorNotSeen: textColorNotSeen, font: font, lines: lines)
-    return storyGroupTextStyling
+    return StoryGroupTextStyling(isVisible: isVisible,
+                                 colorSeen: textColorSeen,
+                                 colorNotSeen: textColorNotSeen,
+                                 font: font,
+                                 lines: lines)
+}
+
+private func stStorylyLayoutDirection(direction: String) -> StorylyLayoutDirection {
+    switch direction {
+        case "ltr": return .LTR
+        case "rtl": return .RTL
+        default: return .LTR
+    }
+}
+
+private func stStoryHeaderStyling(json: NSDictionary) -> StoryHeaderStyling {
+    let isTextVisible = (json["isTextVisible"] as? Bool) ?? true
+    let isIconVisible = (json["isIconVisible"] as? Bool) ?? true
+    let isCloseButtonVisible = (json["isCloseButtonVisible"] as? Bool) ?? true
+    
+    let closeIconImage = UIImage(named: (json["closeIcon"] as? String))
+    let shareIconImage = UIImage(named: (json["shareIcon"] as? String))
+    
+    return StoryHeaderStyling(isTextVisible: isTextVisible,
+                              isIconVisible: isIconVisible,
+                              isCloseButtonVisible: isCloseButtonVisible,
+                              closeButtonIcon: closeIconImage,
+                              shareButtonIcon: shareIconImage)
 }
 
 private func getCustomFont(typeface: NSString?, fontSize: CGFloat, defaultWeight: UIFont.Weight = .regular) -> UIFont {

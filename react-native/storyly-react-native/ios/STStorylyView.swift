@@ -10,10 +10,17 @@ import Storyly
 
 @objc(STStorylyView)
 class STStorylyView: UIView {
-    @objc(storylyView)
-    var storylyView: StorylyView? = nil {
+    @objc(storylyBundle)
+    var storylyBundle: StorylyBundle? = nil {
         didSet {
-            print("STR:STStorylyView:testStorylyView:didSet:\(storylyView)")
+            self.storylyView = self.storylyBundle?.storylyView
+            self.storyGroupViewFactory = self.storylyBundle?.storyGroupViewFactory
+        }
+    }
+    
+    private var storylyView: StorylyView? = nil {
+        didSet {
+            print("STR:STStorylyView:storylyView:didSet:\(storylyView)")
             oldValue?.removeFromSuperview()
             guard let storylyView = storylyView else { return }
             storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
@@ -25,6 +32,15 @@ class STStorylyView: UIView {
             storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             storylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        }
+    }
+    
+    private var storyGroupViewFactory: STStoryGroupViewFactory? = nil {
+        didSet {
+            guard let storyGroupViewFactory = storyGroupViewFactory else { return }
+            storyGroupViewFactory.onCreateCustomView = self.onCreateCustomView
+            storyGroupViewFactory.onUpdateCustomView = self.onUpdateCustomView
+            self.storylyView?.storyGroupViewFactory = storyGroupViewFactory
         }
     }
     
@@ -57,24 +73,6 @@ class STStorylyView: UIView {
     
     @objc(onUpdateCustomView)
     var onUpdateCustomView: RCTBubblingEventBlock?
-    
-    @objc(storyGroupViewFactorySize)
-    var storyGroupViewFactorySize: CGSize = CGSize(width: 0, height: 0) {
-        didSet {
-            print("STR:STStorylyView:storyGroupViewFactorySize:didSet:\(storyGroupViewFactorySize)")
-            if storyGroupViewFactorySize.width <= 0 || storyGroupViewFactorySize.height <= 0 { return }
-            self.storyGroupViewFactory = STStoryGroupViewFactory(width: storyGroupViewFactorySize.width,
-                                                            height: storyGroupViewFactorySize.height)
-            self.storyGroupViewFactory?.onCreateCustomView = self.onCreateCustomView
-            self.storyGroupViewFactory?.onUpdateCustomView = self.onUpdateCustomView
-            self.storylyView?.storyGroupViewFactory = self.storyGroupViewFactory
-        }
-    }
-    var storyGroupViewFactory: STStoryGroupViewFactory? = nil {
-        didSet {
-            print("STR:STStorylyView:storyGroupViewFactory:didSet:\(storyGroupViewFactory)")
-        }
-    }
     
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")

@@ -81,9 +81,21 @@ class Storyly extends Component {
         }
     }
 
+    _onStorylyStoryPresented = (eventPayload) => {
+        if (this.props.onStoryOpen) {
+            this.props.onStoryOpen();
+        }
+    }
+
     _onStorylyStoryPresentFailed = (eventPayload) => {
         if (this.props.onStoryOpenFailed) {
             this.props.onStoryOpenFailed(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyStoryDismissed = (eventPayload) => {
+        if (this.props.onStoryClose) {
+            this.props.onStoryClose();
         }
     }
 
@@ -109,6 +121,8 @@ class Storyly extends Component {
             customParameter,
             storylyPayload,
             storylyTestMode,
+            storylyShareUrl,
+            storyGroupViewFactory,
             storyGroupSize,
             storyGroupIconHeight,
             storyGroupIconWidth,
@@ -130,6 +144,7 @@ class Storyly extends Component {
             storyGroupPinIconColor,
             storyGroupAnimation,
             storylyLayoutDirection,
+            storyItemTextColor,
             storyItemIconBorderColor,
             storyItemProgressBarColor,
             storyItemTextTypeface,
@@ -140,20 +155,21 @@ class Storyly extends Component {
             storyHeaderCloseButtonIsVisible,
             storyHeaderCloseIcon,
             storyHeaderShareIcon,
-            storyGroupViewFactory,
-            onLoad,
-            onFail,
-            onEvent,
-            onPress,
-            onStoryOpen,
-            onStoryOpenFailed,
-            onStoryClose,
-            onUserInteracted,
             ...otherProps
         } = this.props;
         return (
             <STStoryly
                 {...otherProps}
+                onStorylyLoaded={this._onStorylyLoaded}
+                onStorylyLoadFailed={this._onStorylyLoadFailed}
+                onStorylyEvent={this._onStorylyEvent}
+                onStorylyActionClicked={this._onStorylyActionClicked}
+                onStorylyStoryPresented={this._onStorylyStoryPresented}
+                onStorylyStoryPresentFailed={this._onStorylyStoryPresentFailed}
+                onStorylyStoryDismissed={this._onStorylyStoryDismissed}
+                onStorylyUserInteracted={this._onStorylyUserInteracted}
+                onCreateCustomView={this._onCreateCustomView}
+                onUpdateCustomView={this._onUpdateCustomView}
                 storyly={
                     {
                         'storylyInit': {
@@ -161,14 +177,19 @@ class Storyly extends Component {
                             'storylySegments': storylySegments,
                             'userProperty': storylyUserProperty,
                             'customParameter': customParameter,
-                            'storylyPayload': storylyPayload, 
                             'storylyIsTestMode': storylyTestMode, 
+                            'storylyPayload': storylyPayload,
                         },
+                        'storylyShareUrl': storylyShareUrl,
                         'storyGroupSize': storyGroupSize,
                         'storyGroupIconStyling': {
                             'height': storyGroupIconHeight, 
                             'width': storyGroupIconWidth, 
                             'cornerRadius': storyGroupIconCornerRadius,
+                        },
+                        'storyGroupViewFactory': {
+                            'width': storyGroupViewFactory ? storyGroupViewFactory.width : 0,
+                            'height': storyGroupViewFactory ? storyGroupViewFactory.height : 0,
                         },
                         'storyGroupListStyling': {
                             'orientation': storyGroupListOrientation,
@@ -192,24 +213,20 @@ class Storyly extends Component {
                         'storyGroupPinIconColor': processColor(storyGroupPinIconColor),
                         'storyGroupAnimation': storyGroupAnimation,
                         'storylyLayoutDirection': storylyLayoutDirection,
+                        'storyHeaderStyling': { 
+                            'isTextVisible': storyHeaderTextIsVisible, 
+                            'isIconVisible': storyHeaderIconIsVisible, 
+                            'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 
+                            'closeIcon': storyHeaderCloseIcon, 
+                            'shareIcon': storyHeaderShareIcon 
+                        },
+                        'storyItemTextColor': processColor(storyItemTextColor),
+                        'storyItemIconBorderColor': storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null,
+                        'storyItemProgressBarColor': storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null,
+                        'storyItemTextTypeface': storyItemTextTypeface,
+                        'storyInteractiveTextTypeface': storyInteractiveTextTypeface,
                     }
                 }
-                storyHeaderStyling={{ 'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon }}
-                onStorylyLoaded={this._onStorylyLoaded}
-                onStorylyLoadFailed={this._onStorylyLoadFailed}
-                onStorylyEvent={this._onStorylyEvent}
-                onStorylyActionClicked={this._onStorylyActionClicked}
-                onStorylyStoryPresented={onStoryOpen}
-                onStorylyStoryPresentFailed={this._onStorylyStoryPresentFailed}
-                onStorylyStoryDismissed={onStoryClose}
-                onStorylyUserInteracted={this._onStorylyUserInteracted}
-                onCreateCustomView={this._onCreateCustomView}
-                onUpdateCustomView={this._onUpdateCustomView}
-                storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
-                storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
-                storyItemTextTypeface={storyItemTextTypeface}
-                storyInteractiveTextTypeface={storyInteractiveTextTypeface}
-                storyGroupViewFactory={storyGroupViewFactory ? { width: storyGroupViewFactory.width, height: storyGroupViewFactory.height } : null}
                 ref={el => (this._storylyView = el)}>
                 {storyGroupViewFactory ?
                     <STStorylyGroupViewFactory
@@ -226,9 +243,9 @@ Storyly.propTypes = {
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
     storylyUserProperty: object,
-    storylyShareUrl: string,
     customParameter: string,
     storylyTestMode: bool,
+    storylyShareUrl: string,
     storylyPayload: string,
 
     storyGroupSize: string,
