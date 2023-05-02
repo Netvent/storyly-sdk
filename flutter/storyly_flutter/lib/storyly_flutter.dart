@@ -40,7 +40,7 @@ typedef StorylyViewOnProductHydrationCallback = void Function(
   List<String> groupIds,
 );
 
-/// [StorylyView]  on product hydration callback
+/// [StorylyView]  on product event callback
 typedef StoryProductEventCallback = void Function(
   String event,
   STRProductItem? product,
