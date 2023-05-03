@@ -49,5 +49,7 @@
 	<array>
 		<string>Lobster1.4.otf</string>
 	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

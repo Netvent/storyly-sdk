@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storyly_demo/constants.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
 class BasePage extends StatefulWidget {
@@ -11,9 +12,6 @@ class BasePage extends StatefulWidget {
 }
 
 class _BasePageState extends State<BasePage> {
-  static const storylyInstanceToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
-
   late StorylyViewController storylyViewController;
 
   void onStorylyViewCreated(StorylyViewController storylyViewController) {
@@ -34,14 +32,8 @@ class _BasePageState extends State<BasePage> {
               height: 120,
               child: StorylyView(
                   onStorylyViewCreated: onStorylyViewCreated,
-                  androidParam: StorylyParam()
-                    ..storylyId = storylyInstanceToken
-                    ..storyGroupListEdgePadding = 20
-                    ..storyGroupListPaddingBetweenItems = 20,
-                  iosParam: StorylyParam()
-                    ..storylyId = storylyInstanceToken
-                    ..storyGroupListEdgePadding = 20
-                    ..storyGroupListPaddingBetweenItems = 20,
+                  androidParam: StorylyParam()..storylyId = Constants.storylyId,
+                  iosParam: StorylyParam()..storylyId = Constants.storylyId,
                   storylyLoaded: (storyGroups, dataSource) {
                     debugPrint(
                         "storylyLoaded -> storyGroups: ${storyGroups.length}");

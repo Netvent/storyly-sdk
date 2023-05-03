@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storyly_demo/constants.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
 class HideStorylyPage extends StatefulWidget {
@@ -9,9 +10,6 @@ class HideStorylyPage extends StatefulWidget {
 }
 
 class _HideStorylyPageState extends State<HideStorylyPage> {
-  static const storylyInstanceToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
-
   bool storylyVisible = true;
   bool storylyLoaded = false;
 
@@ -44,9 +42,8 @@ class _HideStorylyPageState extends State<HideStorylyPage> {
               child: SizedBox(
                 height: 120,
                 child: StorylyView(
-                  androidParam: StorylyParam()
-                    ..storylyId = storylyInstanceToken,
-                  iosParam: StorylyParam()..storylyId = storylyInstanceToken,
+                  androidParam: StorylyParam()..storylyId = Constants.storylyId,
+                  iosParam: StorylyParam()..storylyId = Constants.storylyId,
                   storylyLoaded: onStorylyLoaded,
                   storylyLoadFailed: onStorylyLoadFailed,
                 ),
