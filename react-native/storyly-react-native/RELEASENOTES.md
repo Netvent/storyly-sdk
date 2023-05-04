@@ -1,4 +1,7 @@
 # Release Notes
+### 1.33.2 (04.05.2023)
+* fixed storyItemProgressBarColor and storyItemIconBorderColor for iOS side
+
 ### 1.33.2 (26.04.2023)
 * improved StorylyView initalization flow on native sides
 

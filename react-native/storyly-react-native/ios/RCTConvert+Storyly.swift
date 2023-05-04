@@ -65,10 +65,10 @@ extension RCTConvert {
         if let storyItemTextColorJson = json["storyItemTextColor"] as? NSNumber {
             storylyView.storyItemTextColor = RCTConvert.uiColor(storyItemTextColorJson)
         }
-        if let storyItemIconBorderColorJson = json["storyItemIconBorderColor"] as? NSNumber {
+        if let storyItemIconBorderColorJson = json["storyItemIconBorderColor"] as? NSArray {
             storylyView.storyItemIconBorderColor = RCTConvert.uiColorArray(storyItemIconBorderColorJson)
         }
-        if let storyItemProgressBarColorJson = json["storyItemProgressBarColor"] as? NSNumber {
+        if let storyItemProgressBarColorJson = json["storyItemProgressBarColor"] as? NSArray {
             storylyView.storylyItemProgressBarColor = RCTConvert.uiColorArray(storyItemProgressBarColorJson)
         }
         storylyView.storyItemTextFont = getCustomFont(typeface: json["storyItemTextTypeface"] as? NSString, fontSize: 14, defaultWeight: .semibold)

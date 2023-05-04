@@ -62,6 +62,8 @@ export default class App extends Component {
                     storyHeaderCloseIcon={"close_icon"}
                     storyItemTextTypeface={"Lobster1.4.otf"}
                     storyInteractiveTextTypeface={"Lobster1.4.otf"}
+                    storyItemProgressBarColor={["#00FF00", "#FF0000"]}
+                    storyItemIconBorderColor={["#FF0000", "#FF0000"]}
                     onLoad={loadEvent => {
                         console.log(`[Storyly] default - onLoad`);
                     }} />
