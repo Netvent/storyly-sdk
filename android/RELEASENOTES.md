@@ -1,4 +1,8 @@
 # Release Notes
+### 1.32.2 (14.04.2023)
+* fixed crash during share
+* fixed wrong edge padding issue in grid layout
+
 ### 1.32.1 (03.04.2023)
 * improved codebase to prevent ConcurrentModificationException [#204](https://github.com/Netvent/storyly-mobile/issues/204)
 * fixed product and user data conflict

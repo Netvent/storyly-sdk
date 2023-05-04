@@ -13,21 +13,12 @@ import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import kotlin.properties.Delegates
 
 class STStorylyView(context: Context) : FrameLayout(context) {
-    internal var storylyView: StorylyView = StorylyView((context as? ReactContext)?.currentActivity ?: context)
-
-    private val choreographerFrameCallback: Choreographer.FrameCallback by lazy {
-        Choreographer.FrameCallback {
-            if (isAttachedToWindow && storylyView.isAttachedToWindow) {
-                manuallyLayout()
-                viewTreeObserver.dispatchOnGlobalLayout()
-                Choreographer.getInstance().postFrameCallback(choreographerFrameCallback)
-            }
-        }
-    }
-
-    init {
+    internal var storylyView: StorylyView? by Delegates.observable(null) { _, _, _ ->
+        removeAllViews()
+        val storylyView = storylyView ?: return@observable
         addView(storylyView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         storylyView.storylyListener = object : StorylyListener {
             override fun storylyActionClicked(storylyView: StorylyView, story: Story) {
@@ -131,10 +122,26 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             }
         }
         
+    }
+
+    internal val activity: Context
+        get() = ((context as? ReactContext)?.currentActivity ?: context)
+
+    private val choreographerFrameCallback: Choreographer.FrameCallback by lazy {
+        Choreographer.FrameCallback {
+            if (isAttachedToWindow && storylyView?.isAttachedToWindow == true) {
+                manuallyLayout()
+                viewTreeObserver.dispatchOnGlobalLayout()
+                Choreographer.getInstance().postFrameCallback(choreographerFrameCallback)
+            }
+        }
+    }
+
+    init {
         (context as? ReactContext)?.addLifecycleEventListener(object : LifecycleEventListener {
             override fun onHostResume() {
                 val activity = (context as? ReactContext)?.currentActivity ?: return
-                storylyView.activity = activity
+                storylyView?.activity = activity
             }
 
             override fun onHostPause() {}
@@ -154,18 +161,19 @@ class STStorylyView(context: Context) : FrameLayout(context) {
     }
 
     internal fun onAttachCustomReactNativeView(child: View?, index: Int) {
-        val storyGroupViewFactory = storylyView.storyGroupViewFactory as? STStoryGroupViewFactory ?: return
+        val storyGroupViewFactory = storylyView?.storyGroupViewFactory as? STStoryGroupViewFactory ?: return
         storyGroupViewFactory.attachCustomReactNativeView(child, index)
     }
 
     private fun manuallyLayout() {
+        val storylyView = storylyView ?: return
         storylyView.measure(
             MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
             MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
         )
         storylyView.layout(0, 0, storylyView.measuredWidth, storylyView.measuredHeight)
 
-        val innerStorylyView = storylyView.getChildAt(0) as? ViewGroup ?: return;
+        val innerStorylyView = storylyView.getChildAt(0) as? ViewGroup ?: return
         for (i in 0 until innerStorylyView.childCount) {
             innerStorylyView.getChildAt(i).requestLayout()
         }

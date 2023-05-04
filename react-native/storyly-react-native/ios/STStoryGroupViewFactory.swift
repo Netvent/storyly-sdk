@@ -14,9 +14,10 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
     
     internal var onCreateCustomView: RCTBubblingEventBlock? = nil
     internal var onUpdateCustomView: RCTBubblingEventBlock? = nil
-
     
-    init(width: CGFloat, height: CGFloat) {
+    
+    init(width: CGFloat,
+         height: CGFloat) {
         print("STR:STStoryGroupViewFactory:init(width:\(width):height:\(height))")
         self.width = width
         self.height = height
@@ -40,10 +41,10 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
         print("STR:STStoryGroupViewFactory:attachCustomReactNativeView(subview:\(subview):index:\(index))")
         guard let subview = subview else { return }
         guard index < customViewList.count && index >= 0 else { return }
-
+        
         let holderView = customViewList[index].holderView
         holderView.addSubview(subview)
-
+        
         subview.translatesAutoresizingMaskIntoConstraints = false
         subview.leadingAnchor.constraint(equalTo: holderView.leadingAnchor).isActive = true
         subview.trailingAnchor.constraint(equalTo: holderView.trailingAnchor).isActive = true
@@ -66,7 +67,7 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
 internal class STStoryGroupView: StoryGroupView {
     
     internal var onViewUpdate: ((STStoryGroupView, StoryGroup?) -> ())? = nil
-
+    
     internal lazy var holderView: UIView = {
         let _holderView = UIView()
         _holderView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,13 +79,13 @@ internal class STStoryGroupView: StoryGroupView {
         super.init(frame: frame)
         commonInit()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         print("STR:STStoryGroupView:init(aDecoder:\(aDecoder))")
         super.init(coder: aDecoder)
         commonInit()
     }
-
+    
     func commonInit() {
         self.addSubview(self.holderView)
         self.holderView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true

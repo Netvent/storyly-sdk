@@ -10,71 +10,66 @@ import Storyly
 
 @objc(STStorylyView)
 class STStorylyView: UIView {
-    @objc(storylyView)
-    let storylyView: StorylyView
+    @objc(storylyBundle)
+    var storylyBundle: StorylyBundle? = nil {
+        didSet {
+            self.storylyView = self.storylyBundle?.storylyView
+            self.storyGroupViewFactory = self.storylyBundle?.storyGroupViewFactory
+        }
+    }
+    
+    private var storylyView: StorylyView? = nil {
+        didSet {
+            print("STR:STStorylyView:storylyView:didSet:\(storylyView)")
+            oldValue?.removeFromSuperview()
+            guard let storylyView = storylyView else { return }
+            storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
+            storylyView.delegate = self
+            addSubview(storylyView)
+            
+            storylyView.translatesAutoresizingMaskIntoConstraints = false
+            storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+            storylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        }
+    }
+    
+    private var storyGroupViewFactory: STStoryGroupViewFactory? = nil {
+        didSet {
+            guard let storyGroupViewFactory = storyGroupViewFactory else { return }
+            storyGroupViewFactory.onCreateCustomView = self.onCreateCustomView
+            storyGroupViewFactory.onUpdateCustomView = self.onUpdateCustomView
+            self.storylyView?.storyGroupViewFactory = storyGroupViewFactory
+        }
+    }
     
     @objc(onStorylyLoaded)
-    var onStorylyLoaded: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyLoaded:didSet:\(onStorylyLoaded)")
-        }
-    }
-    
+    var onStorylyLoaded: RCTBubblingEventBlock?
+
     @objc(onStorylyLoadFailed)
-    var onStorylyLoadFailed: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyLoadFailed:didSet:\(onStorylyLoadFailed)")
-        }
-    }
-    
+    var onStorylyLoadFailed: RCTBubblingEventBlock?
+
     @objc(onStorylyEvent)
-    var onStorylyEvent: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyEvent:didSet:\(onStorylyEvent)")
-        }
-    }
-    
+    var onStorylyEvent: RCTBubblingEventBlock?
+
     @objc(onStorylyActionClicked)
-    var onStorylyActionClicked: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyActionClicked:didSet:\(onStorylyActionClicked)")
-        }
-    }
-    
+    var onStorylyActionClicked: RCTBubblingEventBlock?
+
     @objc(onStorylyStoryPresented)
-    var onStorylyStoryPresented: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyStoryPresented:didSet:\(onStorylyStoryPresented)")
-        }
-    }
+    var onStorylyStoryPresented: RCTBubblingEventBlock?
     
     @objc(onStorylyStoryPresentFailed)
-    var onStorylyStoryPresentFailed: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyStoryPresentFailed:didSet:\(onStorylyStoryPresentFailed)")
-        }
-    }
+    var onStorylyStoryPresentFailed: RCTBubblingEventBlock?
     
     @objc(onStorylyStoryDismissed)
-    var onStorylyStoryDismissed: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyStoryDismissed:didSet:\(onStorylyStoryDismissed)")
-        }
-    }
+    var onStorylyStoryDismissed: RCTBubblingEventBlock?
     
     @objc(onStorylyUserInteracted)
-    var onStorylyUserInteracted: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onStorylyUserInteracted:didSet:\(onStorylyUserInteracted)")
-        }
-    }
+    var onStorylyUserInteracted: RCTBubblingEventBlock?
     
     @objc(onCreateCustomView)
-    var onCreateCustomView: RCTBubblingEventBlock? = nil {
-        didSet {
-            print("STR:STStorylyView:onCreateCustomView:didSet:\(onCreateCustomView)")
-        }
-    }
+    var onCreateCustomView: RCTBubblingEventBlock?
     
     var onUpdateCustomView: RCTBubblingEventBlock? = nil {
         didSet {
@@ -116,6 +111,9 @@ class STStorylyView: UIView {
             }
         }
     }
+
+    @objc(onUpdateCustomView)
+    var onUpdateCustomView: RCTBubblingEventBlock?
     
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
@@ -125,7 +123,6 @@ class STStorylyView: UIView {
         self.backgroundColor = .clear
         
         print("STR:STStorylyView:init:rootViewController:\(UIApplication.shared.delegate?.window??.rootViewController)")
-        self.storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
         _ = UIApplication.shared.delegate?.window??.rootViewController?.observe(\.self,
                                                                                  options: [.initial, .old, .new]){ object, change in
             print("STR:STStorylyView:init:observe:rootViewController:newValue:\(change.newValue):oldValue:\(change.oldValue)")
@@ -159,38 +156,39 @@ class STStorylyView: UIView {
 extension STStorylyView {
     func refresh() {
         print("STR:STStorylyView:refresh()")
-        storylyView.refresh()
+        storylyView?.refresh()
     }
     
     func open() {
         print("STR:STStorylyView:open()")
-        storylyView.present(animated: false)
-        storylyView.resume()
+        storylyView?.present(animated: false)
+        storylyView?.resume()
     }
     
     func close() {
         print("STR:STStorylyView:close()")
-        storylyView.pause()
-        storylyView.dismiss(animated: false)
+        storylyView?.pause()
+        storylyView?.dismiss(animated: false)
     }
     
-    func openStory(payload: URL) -> Bool {
+    func openStory(payload: URL) {
         print("STR:STStorylyView:openStory(payload:\(payload))")
-        return storylyView.openStory(payload: payload)
+        storylyView?.openStory(payload: payload)
     }
     
-    func openStory(storyGroupId: String, storyId: String) -> Bool {
+    func openStory(storyGroupId: String, storyId: String) {
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
-        return storylyView.openStory(storyGroupId: storyGroupId, storyId: storyId)
+        storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
     }
     
-    func setExternalData(externalData: [NSDictionary]) -> Bool {
+    func setExternalData(externalData: [NSDictionary]) {
         print("STR:STStorylyView:openStory(externalData:\(externalData))")
         return storylyView.setExternalData(externalData: externalData)
     } 
      
     func hydrateProducts(products: [STRProductItem]){
         storylyView.hydrateProducts(products: products)
+        storylyView?.setExternalData(externalData: externalData)
     }
 }
 

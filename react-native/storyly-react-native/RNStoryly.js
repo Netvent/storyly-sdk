@@ -89,9 +89,21 @@ class Storyly extends Component {
         }
     }
 
+    _onStorylyStoryPresented = (eventPayload) => {
+        if (this.props.onStoryOpen) {
+            this.props.onStoryOpen();
+        }
+    }
+
     _onStorylyStoryPresentFailed = (eventPayload) => {
         if (this.props.onStoryOpenFailed) {
             this.props.onStoryOpenFailed(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyStoryDismissed = (eventPayload) => {
+        if (this.props.onStoryClose) {
+            this.props.onStoryClose();
         }
     }
 
@@ -129,13 +141,9 @@ class Storyly extends Component {
             customParameter,
             storylyPayload,
             storylyTestMode,
+            storylyShareUrl,
+            storyGroupViewFactory,
             storyGroupSize,
-            storyGroupIconBorderColorSeen,
-            storyGroupIconBorderColorNotSeen,
-            storyItemIconBorderColor,
-            storyItemProgressBarColor,
-            storyItemTextTypeface,
-            storyInteractiveTextTypeface,
             storyGroupIconHeight,
             storyGroupIconWidth,
             storyGroupIconCornerRadius,
@@ -150,6 +158,17 @@ class Storyly extends Component {
             storyGroupTextSize,
             storyGroupTextLines,
             storyGroupTextColorSeen,
+            storyGroupIconBorderColorSeen,
+            storyGroupIconBorderColorNotSeen,
+            storyGroupIconBackgroundColor,
+            storyGroupPinIconColor,
+            storyGroupAnimation,
+            storylyLayoutDirection,
+            storyItemTextColor,
+            storyItemIconBorderColor,
+            storyItemProgressBarColor,
+            storyItemTextTypeface,
+            storyInteractiveTextTypeface,
             storyGroupTextColorNotSeen,
             storyHeaderTextIsVisible,
             storyHeaderIconIsVisible,
@@ -172,38 +191,77 @@ class Storyly extends Component {
         return (
             <STStoryly
                 {...otherProps}
-                storylyInit={{ 'storylyId': storylyId, 'storylySegments': storylySegments, 'userProperty': storylyUserProperty, 'customParameter': customParameter, 'storylyPayload': storylyPayload, 'storylyIsTestMode': storylyTestMode }}
-                storyGroupSize={storyGroupSize}
-                storyGroupIconStyling={{ 'height': storyGroupIconHeight, 'width': storyGroupIconWidth, 'cornerRadius': storyGroupIconCornerRadius }}
-                storyGroupListStyling={{
-                    'orientation': storyGroupListOrientation,
-                    'sections': storyGroupListSections,
-                    'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
-                    'verticalEdgePadding': storyGroupListVerticalEdgePadding,
-                    'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
-                    'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
-                }}
-                storyGroupTextStyling={{ 'isVisible': storyGroupTextIsVisible, 'typeface': storyGroupTextTypeface, 'textSize': storyGroupTextSize, 'lines': storyGroupTextLines, 'colorSeen': storyGroupTextColorSeen, 'colorNotSeen': storyGroupTextColorNotSeen }}
-                storyHeaderStyling={{ 'isTextVisible': storyHeaderTextIsVisible, 'isIconVisible': storyHeaderIconIsVisible, 'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 'closeIcon': storyHeaderCloseIcon, 'shareIcon': storyHeaderShareIcon }}
                 onStorylyLoaded={this._onStorylyLoaded}
                 onStorylyLoadFailed={this._onStorylyLoadFailed}
                 onStorylyEvent={this._onStorylyEvent}
                 onStorylyActionClicked={this._onStorylyActionClicked}
-                onStorylyStoryPresented={onStoryOpen}
+                onStorylyStoryPresented={this._onStorylyStoryPresented}
                 onStorylyStoryPresentFailed={this._onStorylyStoryPresentFailed}
                 onStorylyStoryDismissed={onStoryClose}
                 onStorylyUserInteracted={this._onStorylyUserInteracted} 
                 onStorylyProductHydration={this._onStorylyProductHydration} 
                 onStorylyProductEvent={this._onStorylyProductEvent} 
+                onStorylyStoryDismissed={this._onStorylyStoryDismissed}
+                onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
-                storyGroupIconBorderColorSeen={storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null}
-                storyGroupIconBorderColorNotSeen={storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null}
-                storyItemIconBorderColor={storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null}
-                storyItemProgressBarColor={storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null}
-                storyItemTextTypeface={storyItemTextTypeface}
-                storyInteractiveTextTypeface={storyInteractiveTextTypeface}
-                storyGroupViewFactory={storyGroupViewFactory ? { width: storyGroupViewFactory.width, height: storyGroupViewFactory.height } : null}
+                storyly={
+                    {
+                        'storylyInit': {
+                            'storylyId': storylyId,
+                            'storylySegments': storylySegments,
+                            'userProperty': storylyUserProperty,
+                            'customParameter': customParameter,
+                            'storylyIsTestMode': storylyTestMode, 
+                            'storylyPayload': storylyPayload,
+                        },
+                        'storylyShareUrl': storylyShareUrl,
+                        'storyGroupSize': storyGroupSize,
+                        'storyGroupIconStyling': {
+                            'height': storyGroupIconHeight, 
+                            'width': storyGroupIconWidth, 
+                            'cornerRadius': storyGroupIconCornerRadius,
+                        },
+                        'storyGroupViewFactory': {
+                            'width': storyGroupViewFactory ? storyGroupViewFactory.width : 0,
+                            'height': storyGroupViewFactory ? storyGroupViewFactory.height : 0,
+                        },
+                        'storyGroupListStyling': {
+                            'orientation': storyGroupListOrientation,
+                            'sections': storyGroupListSections,
+                            'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
+                            'verticalEdgePadding': storyGroupListVerticalEdgePadding,
+                            'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
+                            'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
+                        },
+                        'storyGroupTextStyling': {
+                            'isVisible': storyGroupTextIsVisible, 
+                            'typeface': storyGroupTextTypeface, 
+                            'textSize': storyGroupTextSize, 
+                            'lines': storyGroupTextLines, 
+                            'colorSeen': storyGroupTextColorSeen, 
+                            'colorNotSeen': storyGroupTextColorNotSeen,
+                        },
+                        'storyGroupIconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
+                        'storyGroupIconBorderColorNotSeen': storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null,
+                        'storyGroupIconBackgroundColor': processColor(storyGroupIconBackgroundColor),
+                        'storyGroupPinIconColor': processColor(storyGroupPinIconColor),
+                        'storyGroupAnimation': storyGroupAnimation,
+                        'storylyLayoutDirection': storylyLayoutDirection,
+                        'storyHeaderStyling': { 
+                            'isTextVisible': storyHeaderTextIsVisible, 
+                            'isIconVisible': storyHeaderIconIsVisible, 
+                            'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 
+                            'closeIcon': storyHeaderCloseIcon, 
+                            'shareIcon': storyHeaderShareIcon 
+                        },
+                        'storyItemTextColor': processColor(storyItemTextColor),
+                        'storyItemIconBorderColor': storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null,
+                        'storyItemProgressBarColor': storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null,
+                        'storyItemTextTypeface': storyItemTextTypeface,
+                        'storyInteractiveTextTypeface': storyInteractiveTextTypeface,
+                    }
+                }
                 ref={el => (this._storylyView = el)}>
                 {storyGroupViewFactory ?
                     <STStorylyGroupViewFactory
@@ -220,9 +278,9 @@ Storyly.propTypes = {
     storylyId: string.isRequired,
     storylySegments: arrayOf(string),
     storylyUserProperty: object,
-    storylyShareUrl: string,
     customParameter: string,
     storylyTestMode: bool,
+    storylyShareUrl: string,
     storylyPayload: string,
 
     storyGroupSize: string,
