@@ -19,6 +19,9 @@ RCT_EXTERN_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
 RCT_EXTERN_METHOD(setExternalData:(nonnull NSNumber *)reactTag
                   externalData:(nonnull NSArray<NSDictionary *> *)externalData)
 
+RCT_EXTERN_METHOD(hydrateProducts:(nonnull NSNumber *)reactTag
+                  products:(nonnull NSArray<NSDictionary *> *)products)
+
 RCT_REMAP_VIEW_PROPERTY(storyly, storylyBundle, stStorylyBundle)
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
@@ -31,5 +34,7 @@ RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryDismissed, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCreateCustomView, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onUpdateCustomView, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyProductHydration, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyProductEvent, RCTBubblingEventBlock)
 
 @end

@@ -1,7 +1,10 @@
 package com.appsamurai.storyly.reactnative
 
 import com.appsamurai.storyly.*
+import com.appsamurai.storyly.data.managers.product.STRProductItem
+import com.appsamurai.storyly.data.managers.product.STRProductVariant
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 
 
@@ -128,4 +131,59 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
             }
         }
     }
+}
+
+internal fun createSTRProductItemMap(product: STRProductItem): WritableMap {
+    return Arguments.createMap().also { productItemMap ->
+        productItemMap.putString("productId", product.productId)
+        productItemMap.putString("productGroupId", product.productGroupId)
+        productItemMap.putString("title", product.title)
+        productItemMap.putString("desc", product.desc)
+        productItemMap.putDouble("price", product.price.toDouble())
+        product.salesPrice?.let {
+            productItemMap.putDouble("salesPrice", it.toDouble())
+        } ?: run {
+            productItemMap.putNull("salesPrice")
+        }
+        productItemMap.putString("currency", product.currency)
+        productItemMap.putArray("imageUrls", Arguments.createArray().also { imageUrls ->
+            product.imageUrls?.forEach { imageUrls.pushString(it) }
+        })
+        productItemMap.putArray("variants", Arguments.createArray().also { variantArray ->
+            product.variants.forEach { variant -> variantArray.pushMap(createSTRProductVariantMap(variant)) }
+        })
+    }
+}
+
+internal fun createSTRProductVariantMap(variant: STRProductVariant): ReadableMap {
+    return Arguments.createMap().also { productItemMap ->
+        productItemMap.putString("name", variant.name)
+        productItemMap.putString("value", variant.value)
+    }
+}
+
+internal fun createSTRProductItem(product: Map<String, Any?>): STRProductItem {
+    val variants: MutableList<STRProductVariant> = mutableListOf()
+
+    return STRProductItem(
+        productId = product["productId"] as? String ?: "",
+        productGroupId = product["productGroupId"] as? String ?: "",
+        title = product["title"] as? String ?: "",
+        desc = product["desc"] as? String ?: "",
+        price = (product["price"] as Double).toFloat(),
+        salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
+        currency = product["currency"] as? String ?: "",
+        imageUrls = product["imageUrls"] as? List<String>,
+        url = product["url"] as? String ?: "",
+        variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>)
+    )
+}
+
+internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<STRProductVariant> {
+    return variants?.map { variant ->
+        STRProductVariant(
+            name = variant["name"] as? String ?: "",
+            value = variant["value"] as? String ?: ""
+        )
+    } ?: listOf()
 }

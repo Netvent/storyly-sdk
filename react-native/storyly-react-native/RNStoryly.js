@@ -57,6 +57,14 @@ class Storyly extends Component {
         );
     }
 
+    hydrateProducts = (products) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.hydrateProducts,
+            [products],
+        );
+    }
+
     _onStorylyLoaded = (eventPayload) => {
         if (this.props.onLoad) {
             this.props.onLoad(eventPayload.nativeEvent);
@@ -102,6 +110,18 @@ class Storyly extends Component {
     _onStorylyUserInteracted = (eventPayload) => {
         if (this.props.onUserInteracted) {
             this.props.onUserInteracted(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyProductHydration = (eventPayload) => {
+        if (this.props.onProductHydration) {
+            this.props.onProductHydration(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyProductEvent = (eventPayload) => {
+        if (this.props.onProductEvent) {
+            this.props.onProductEvent(eventPayload.nativeEvent);
         }
     }
 
@@ -155,6 +175,8 @@ class Storyly extends Component {
             storyHeaderCloseButtonIsVisible,
             storyHeaderCloseIcon,
             storyHeaderShareIcon,
+            onProductHydration,
+            onProductEvent,
             ...otherProps
         } = this.props;
         return (
@@ -168,6 +190,8 @@ class Storyly extends Component {
                 onStorylyStoryPresentFailed={this._onStorylyStoryPresentFailed}
                 onStorylyStoryDismissed={this._onStorylyStoryDismissed}
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
+                onStorylyProductHydration={this._onStorylyProductHydration} 
+                onStorylyProductEvent={this._onStorylyProductEvent} 
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
                 storyly={
@@ -290,7 +314,9 @@ Storyly.propTypes = {
     onStoryOpen: func,
     onStoryOpenFailed: func,
     onStoryClose: func,
-    onUserInteracted: func
+    onUserInteracted: func,
+    onProductHydration: func,
+    onProductEvent: func
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);
