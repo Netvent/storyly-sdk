@@ -1,4 +1,13 @@
 # Release Notes
+### 1.32.3 (05.05.2023)
+* improved appearance of button and swipe up interactives
+* improved corner radius of images
+* improved moments theme styling
+* improved accessibility features
+* improved product catalog interactive animation
+* improved fallback mechanism of product retrieval
+* improved storyly bar loading flow
+
 ### 1.32.2 (14.04.2023)
 * fixed crash during share
 * fixed wrong edge padding issue in grid layout
