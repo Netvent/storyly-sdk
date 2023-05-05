@@ -76,10 +76,10 @@ class STStorylyView: UIView {
     var onUpdateCustomView: RCTBubblingEventBlock?
 
     @objc(onStorylyProductHydration)
-    var onProductHydration: RCTBubblingEventBlock? = nil
+    var onProductHydration: RCTBubblingEventBlock?
 
     @objc(onStorylyProductEvent)
-    var onProductEvent: RCTBubblingEventBlock? = nil
+    var onProductEvent: RCTBubblingEventBlock?
     
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")

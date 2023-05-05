@@ -163,8 +163,6 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): ReadableMap
 }
 
 internal fun createSTRProductItem(product: Map<String, Any?>): STRProductItem {
-    val variants: MutableList<STRProductVariant> = mutableListOf()
-
     return STRProductItem(
         productId = product["productId"] as? String ?: "",
         productGroupId = product["productGroupId"] as? String ?: "",

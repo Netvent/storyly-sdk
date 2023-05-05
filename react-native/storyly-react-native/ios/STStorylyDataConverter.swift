@@ -113,7 +113,7 @@ func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
 func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
     guard let product = product else { return [:] }
 
-    let productMap: [String : Any?] = [
+    return [
         "productId": product.productId,
         "productGroupId": product.productGroupId,
         "title": product.title,
@@ -125,15 +125,13 @@ func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
         "variants": product.variants?.compactMap { createSTRProductVariantMap(variant: $0) },
         "imageUrls": product.imageUrls.map { $0 }
     ]
-    return productMap
 }
 
 internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
-    let productVariantMap: [String : Any?] = [
+    return [
         "name": variant.name,
         "value": variant.value
     ]
-    return productVariantMap
 }
 
 internal func createSTRProductItem(productItem: NSDictionary) -> STRProductItem {
