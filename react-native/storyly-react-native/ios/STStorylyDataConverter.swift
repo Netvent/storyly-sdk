@@ -109,3 +109,48 @@ func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         ]
     }
 }
+
+func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
+    guard let product = product else { return [:] }
+
+    return [
+        "productId": product.productId,
+        "productGroupId": product.productGroupId,
+        "title": product.title,
+        "url": product.url,
+        "desc": product.desc,
+        "price": product.price,
+        "salesPrice": product.salesPrice, 
+        "currency": product.currency,
+        "variants": product.variants?.compactMap { createSTRProductVariantMap(variant: $0) },
+        "imageUrls": product.imageUrls.map { $0 }
+    ]
+}
+
+internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
+    return [
+        "name": variant.name,
+        "value": variant.value
+    ]
+}
+
+internal func createSTRProductItem(productItem: NSDictionary) -> STRProductItem {
+    return STRProductItem(
+        productId: productItem["productId"] as? String ?? "",
+        productGroupId: productItem["productGroupId"] as? String ?? "",
+        title:productItem["title"] as? String ?? "",
+        url: productItem["url"] as? String ?? "",
+        description: productItem["desc"] as? String,
+        price: Float((productItem["price"] as? Double) ?? 0.0),
+        salesPrice: (productItem["salesPrice"] as? NSNumber),
+        currency: productItem["currency"] as? String ?? "",
+        imageUrls:productItem["imageUrls"] as? [String],
+        variants:  createSTRProductVariant(variants: productItem["variants"] as? [NSDictionary] ?? [])
+    )
+}
+
+internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVariant] {
+    variants.compactMap { variant in
+        STRProductVariant(name: variant["name"] as? String ?? "", value: variant["value"] as? String ?? "")
+    }
+}

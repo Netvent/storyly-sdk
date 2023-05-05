@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
+import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
@@ -87,6 +88,36 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                     eventMap.putMap("storyGroup", createStoryGroupMap(storyGroup))
                     eventMap.putMap("story", createStoryMap(story))
                     eventMap.putMap("storyComponent", createStoryComponentMap(storyComponent))
+                })
+            }
+        }
+
+        storylyView.storylyProductListener = object : StorylyProductListener {
+            override fun storylyEvent(storylyView: StorylyView, event: StorylyEvent, product: STRProductItem?, extras: Map<String, String>) {
+                sendEvent(STStorylyManager.EVENT_STORYLY_PRODUCT_EVENT, Arguments.createMap().also { eventMap ->
+                    eventMap.putString("event", event.name)
+                    product?.let {
+                        eventMap.putMap("product", createSTRProductItemMap(product))
+                    }
+                    eventMap.putMap("extras", Arguments.createMap().also { writableMap ->
+                        extras.forEach {
+                            writableMap.putString(it.key, it.value)
+                        }
+                    })
+                })
+            }
+
+            override fun storylyHydration(storylyView: StorylyView, productIds: List<String>) {
+                sendEvent(STStorylyManager.EVENT_STORYLY_ON_HYDRATION, Arguments.createMap().also { eventMap ->
+                    eventMap.putMap("productIds", Arguments.createMap().also { writableMap ->
+                        productIds.forEach {
+                            writableMap.putArray("productIds", Arguments.createArray().also { writableArray ->
+                                productIds.forEach {
+                                    writableArray.pushString(it)
+                                }
+                            })
+                        }
+                    })
                 })
             }
         }

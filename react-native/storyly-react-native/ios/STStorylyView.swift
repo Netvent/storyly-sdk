@@ -25,6 +25,7 @@ class STStorylyView: UIView {
             guard let storylyView = storylyView else { return }
             storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
             storylyView.delegate = self
+            storylyView.productDelegate = self
             addSubview(storylyView)
             
             storylyView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +74,12 @@ class STStorylyView: UIView {
     
     @objc(onUpdateCustomView)
     var onUpdateCustomView: RCTBubblingEventBlock?
+
+    @objc(onStorylyProductHydration)
+    var onProductHydration: RCTBubblingEventBlock?
+
+    @objc(onStorylyProductEvent)
+    var onProductEvent: RCTBubblingEventBlock?
     
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
@@ -134,6 +141,10 @@ extension STStorylyView {
         print("STR:STStorylyView:openStory(externalData:\(externalData))")
         storylyView?.setExternalData(externalData: externalData)
     }
+
+    func hydrateProducts(products: [STRProductItem]){
+        storylyView?.hydrateProducts(products: products)
+    }
 }
 
 extension STStorylyView: StorylyDelegate {
@@ -182,5 +193,24 @@ extension STStorylyView: StorylyDelegate {
             "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
         self.onStorylyUserInteracted?(map)
+    }
+}
+
+extension STStorylyView: StorylyProductDelegate {
+
+    func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [String]) {
+        let map: [String : Any] = [
+            "productIds": productIds
+        ]
+        self.onProductHydration?(map)
+    }
+
+    func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, product: Storyly.STRProductItem?, extras: [String : String]) {
+        let map: [String : Any] = [
+            "event": StorylyEventHelper.storylyEventName(event: event),
+            "product": createSTRProductItemMap(product: product),
+            "extras": extras
+        ]
+        self.onProductEvent?(map)
     }
 }
