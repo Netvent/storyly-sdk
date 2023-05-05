@@ -1,4 +1,13 @@
 # Release Notes
+### 1.0.0 (05.05.2023)
+* improved moments configuration structure
+* added custom font interface components
+* added callbacks for like/view actions for analytics view customization
+* added customization for link-cta interactive text color
+* added customization for icons in moments interface
+* added callback for link-cta url preview for webview customization
+* added preview url to story media
+
 ### 0.6.0 (03.04.2023)
 * added image and video components to pre-moderation
 * added story snapshots to pre-moderation
