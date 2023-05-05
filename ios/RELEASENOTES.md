@@ -1,4 +1,12 @@
 # Release Notes
+### 1.32.4 (05.05.2023)
+* improved appearance of button and swipe up interactives
+* improved moments theme styling
+* improved accessibility features
+* improved product catalog interactive animation
+* improved fallback mechanism of product retrieval
+* fixed volume bar visibility issue
+
 ### 1.32.3 (14.04.2023)
 * improved localizations for es
 
