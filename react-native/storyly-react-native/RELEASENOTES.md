@@ -1,5 +1,9 @@
 # Release Notes
-### 1.33.2 (04.05.2023)
+### 1.33.4 (05.05.2023)
+* added hydrateProducts methods
+* added onProductHydration and onProductEvent callbacks
+
+### 1.33.3 (04.05.2023)
 * fixed storyItemProgressBarColor and storyItemIconBorderColor for iOS side
 
 ### 1.33.2 (26.04.2023)
