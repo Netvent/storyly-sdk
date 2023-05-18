@@ -1,4 +1,9 @@
 # Release Notes
+### 1.32.4 (18.05.2023)
+* optimized memory usage
+* added specific callback for product add to cart
+* added fail and success cases for add to cart action
+
 ### 1.32.3 (05.05.2023)
 * improved appearance of button and swipe up interactives
 * improved corner radius of images
