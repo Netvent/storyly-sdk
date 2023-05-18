@@ -1,6 +1,6 @@
 # Release Notes
 ### 1.32.5 (18.05.2023)
-* optimized memory usage
+* optimized memory usage, fixed [#278](https://github.com/Netvent/storyly-mobile/issues/278)
 * fixed play mode handling of openStory method
 * added specific callback for product add to cart
 * added fail and success cases for add to cart action
