@@ -1,0 +1,36 @@
+*.iml
+.gradle
+.idea
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+local.properties
+
+# Built application files
+*build/
+*/captures/
+
+# IntelliJ
+
+.idea/
+
+# Gradle generated files
+.gradle/
+
+
+.DS_Store?
+*.DS_Store
+
+# Gemfile
+Gemfile.lock
