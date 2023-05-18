@@ -1,6 +1,6 @@
 # Release Notes
 ### 1.32.4 (18.05.2023)
-* optimized memory usage
+* optimized memory usage, fixed [#251](https://github.com/Netvent/storyly-mobile/issues/251), [#164](https://github.com/Netvent/storyly-mobile/issues/164)
 * added specific callback for product add to cart
 * added fail and success cases for add to cart action
 
