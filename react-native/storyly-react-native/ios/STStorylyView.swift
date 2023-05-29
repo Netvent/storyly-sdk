@@ -77,9 +77,6 @@ class STStorylyView: UIView {
 
     @objc(onStorylyProductHydration)
     var onProductHydration: RCTBubblingEventBlock?
-
-    @objc(onStorylyProductEvent)
-    var onProductEvent: RCTBubblingEventBlock?
     
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
@@ -197,20 +194,26 @@ extension STStorylyView: StorylyDelegate {
 }
 
 extension STStorylyView: StorylyProductDelegate {
+    func storylyEvent(
+        _ storylyView: StorylyView,
+        event: StorylyEvent
+    ) {
+    }
+    
+    func storylyAddToCartEvent(
+        storylyView: StorylyView,
+        product: STRProductItem?,
+        extras: [String : String],
+        onSuccess: ((STRCart) -> Void)?,
+        onFail: ((STRCartEventResult) -> Void)?
+    ) {
+    }
+    
 
     func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [String]) {
         let map: [String : Any] = [
             "productIds": productIds
         ]
         self.onProductHydration?(map)
-    }
-
-    func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, product: Storyly.STRProductItem?, extras: [String : String]) {
-        let map: [String : Any] = [
-            "event": StorylyEventHelper.storylyEventName(event: event),
-            "product": createSTRProductItemMap(product: product),
-            "extras": extras
-        ]
-        self.onProductEvent?(map)
     }
 }

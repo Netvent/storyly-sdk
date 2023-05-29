@@ -48,7 +48,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         internal const val EVENT_STORYLY_USER_INTERACTED = "onStorylyUserInteracted"
 
         internal const val EVENT_STORYLY_ON_HYDRATION = "onStorylyProductHydration"
-        internal const val EVENT_STORYLY_PRODUCT_EVENT = "onStorylyProductEvent"
 
         internal const val EVENT_ON_CREATE_CUSTOM_VIEW = "onCreateCustomView"
         internal const val EVENT_ON_UPDATE_CUSTOM_VIEW = "onUpdateCustomView"
@@ -77,7 +76,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             EVENT_STORYLY_USER_INTERACTED,
             EVENT_ON_CREATE_CUSTOM_VIEW,
             EVENT_ON_UPDATE_CUSTOM_VIEW,
-            EVENT_STORYLY_PRODUCT_EVENT,
             EVENT_STORYLY_ON_HYDRATION
         ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))

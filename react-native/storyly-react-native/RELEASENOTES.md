@@ -1,4 +1,7 @@
 # Release Notes
+### 1.33.5 (29.05.2023)
+* removed onProductEvent
+
 ### 1.33.4 (05.05.2023)
 * added hydrateProducts methods
 * added onProductHydration and onProductEvent callbacks

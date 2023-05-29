@@ -60,7 +60,6 @@ declare module "storyly-react-native" {
       onPress?: (event: StoryPressEvent) => void;
       onUserInteracted?: (event: StoryInteractiveEvent) => void;
       onProductHydration?: (event: StoryProductHydrationEvent) => void;
-      onProductEvent?: (event: StoryProductEvent) => void;
     }
 
     export interface StoryLoadEvent {
@@ -81,12 +80,6 @@ declare module "storyly-react-native" {
       story?: Story;
       storyGroup?: StoryGroup;
       storyComponent?: StoryComponent;
-    }
-
-    export interface StoryProductEvent {
-      event: string;
-      product: STRProductItem;
-      extras: Map<String,String>;
     }
 
     export interface StoryProductHydrationEvent {
