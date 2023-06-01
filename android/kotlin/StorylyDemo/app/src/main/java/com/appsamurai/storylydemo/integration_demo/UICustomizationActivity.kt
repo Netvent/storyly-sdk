@@ -10,10 +10,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import com.appsamurai.storyly.*
-import com.appsamurai.storyly.styling.StoryGroupIconStyling
-import com.appsamurai.storyly.styling.StoryGroupListStyling
-import com.appsamurai.storyly.styling.StoryGroupTextStyling
-import com.appsamurai.storyly.styling.StoryHeaderStyling
+import com.appsamurai.storyly.styling.*
 import com.appsamurai.storylydemo.R
 import com.appsamurai.storylydemo.databinding.ActivityUiCustomizationBinding
 import com.skydoves.colorpickerview.ColorPickerDialog
@@ -107,6 +104,8 @@ class UICustomizationActivity : AppCompatActivity() {
 
         storylyView.setStoryGroupListStyling(
             StoryGroupListStyling(
+                StoryGroupListOrientation.Horizontal,
+                2,
                 customization.storyGroupListEdgePadding ?: Float.MIN_VALUE,
                 customization.storyGroupListPaddingBetweenItems ?: Float.MIN_VALUE,
             )
