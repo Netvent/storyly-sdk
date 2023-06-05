@@ -1,4 +1,8 @@
 # Release Notes
+### 1.32.6 (05.06.2023)
+* improved codebase to prevent ArrayIndexOutOfBoundsException [#183](https://github.com/Netvent/storyly-mobile/issues/183)
+* improved story pause/resume state for product catalog flow
+
 ### 1.32.5 (25.05.2023)
 * improved pagination of story groups
 
