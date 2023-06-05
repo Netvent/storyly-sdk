@@ -1,4 +1,7 @@
 # Release Notes
+### 1.32.6 (05.06.2023)
+* optimized memory usage
+ 
 ### 1.32.5 (18.05.2023)
 * optimized memory usage, fixed [#278](https://github.com/Netvent/storyly-mobile/issues/278)
 * fixed play mode handling of openStory method
