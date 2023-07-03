@@ -1,4 +1,8 @@
 # Release Notes
+### 1.33.0 (03.07.2023)
+* added cart synchronization for product catalog interactive component
+* added product detail sheet support for cta interactive components
+
 ### 1.32.6 (05.06.2023)
 * optimized memory usage
  
