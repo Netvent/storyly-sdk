@@ -1,4 +1,9 @@
 # Release Notes
+### 1.33.0 (03.07.2023)
+* added cart synchronization for product catalog interactive component
+* added product detail sheet support for cta interactive components
+* optimized memory usage, fixed [#289](https://github.com/Netvent/storyly-mobile/issues/289)
+
 ### 1.32.6 (05.06.2023)
 * improved codebase to prevent ArrayIndexOutOfBoundsException [#183](https://github.com/Netvent/storyly-mobile/issues/183)
 * improved story pause/resume state for product catalog flow
