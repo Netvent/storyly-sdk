@@ -1,4 +1,7 @@
 # Release Notes
+### 1.33.1 (03.07.2023)
+* fixed black screen issue related to storyly view dismiss
+
 ### 1.33.0 (03.07.2023)
 * added cart synchronization for product catalog interactive component
 * added product detail sheet support for cta interactive components
