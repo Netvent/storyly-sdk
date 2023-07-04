@@ -1,4 +1,11 @@
 # Release Notes
+### 2.0.0 (04.07.2023)
+* added timed interactive feature for stories
+* added conditional stories support
+* added story group badge support
+* IMPORTANT! added new config structure for storylyInit
+* IMPORTANT! moved all ui and storyly customization fields into new config structure
+  
 ### 1.33.0 (03.07.2023)
 * added cart synchronization for product catalog interactive component
 * added product detail sheet support for cta interactive components
