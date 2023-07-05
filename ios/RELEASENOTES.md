@@ -3,7 +3,7 @@
 * added timed interactive feature for stories
 * added conditional stories support
 * added story group badge support
-* IMPORTANT! added new config structure for storylyInit
+* IMPORTANT! added new config structure for storylyInit (Please refer to the [migration doc](https://docs.storyly.io/page/migrating-to-sdk-20))
 * IMPORTANT! moved all ui and storyly customization fields into new config structure
   
 ### 1.33.0 (03.07.2023)
