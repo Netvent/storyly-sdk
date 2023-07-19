@@ -49,14 +49,6 @@ class Storyly extends Component {
         );
     };
 
-    setExternalData = (externalData) => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this._storylyView),
-            UIManager.getViewManagerConfig('STStoryly').Commands.setExternalData,
-            [externalData],
-        );
-    }
-
     hydrateProducts = (products) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
@@ -196,18 +188,28 @@ class Storyly extends Component {
                             'storylyIsTestMode': storylyTestMode, 
                             'storylyPayload': storylyPayload,
                         },
-                        'storylyShareUrl': storylyShareUrl,
-                        'storyGroupSize': storyGroupSize,
-                        'storyGroupIconStyling': {
-                            'height': storyGroupIconHeight, 
-                            'width': storyGroupIconWidth, 
-                            'cornerRadius': storyGroupIconCornerRadius,
+                        'storyGroupStyling': {
+                            'iconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
+                            'iconBorderColorNotSeen': storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null,
+                            'iconBackgroundColor': processColor(storyGroupIconBackgroundColor),
+                            'pinIconColor': processColor(storyGroupPinIconColor),
+                            'iconHeight': storyGroupIconHeight, 
+                            'iconWidth': storyGroupIconWidth, 
+                            'iconCornerRadius': storyGroupIconCornerRadius,
+                            'iconBorderAnimation': storyGroupAnimation,
+                            'titleSeenColor': processColor(storyGroupTextColorSeen), 
+                            'titleNotSeenColor': processColor(storyGroupTextColorNotSeen),
+                            'titleLineCount': storyGroupTextLines,
+                            'titleFont': storyGroupTextTypeface, 
+                            'titleTextSize': storyGroupTextSize,  
+                            'titleVisible': storyGroupTextIsVisible, 
+                            'groupSize': storyGroupSize,
                         },
                         'storyGroupViewFactory': {
                             'width': storyGroupViewFactory ? storyGroupViewFactory.width : 0,
                             'height': storyGroupViewFactory ? storyGroupViewFactory.height : 0,
                         },
-                        'storyGroupListStyling': {
+                        'storyBarStyling': {
                             'orientation': storyGroupListOrientation,
                             'sections': storyGroupListSections,
                             'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
@@ -215,32 +217,20 @@ class Storyly extends Component {
                             'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
                             'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
                         },
-                        'storyGroupTextStyling': {
-                            'isVisible': storyGroupTextIsVisible, 
-                            'typeface': storyGroupTextTypeface, 
-                            'textSize': storyGroupTextSize, 
-                            'lines': storyGroupTextLines, 
-                            'colorSeen': storyGroupTextColorSeen, 
-                            'colorNotSeen': storyGroupTextColorNotSeen,
+                        'storyStyling': { 
+                            'headerIconBorderColor': storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null,
+                            'titleColor': processColor(storyItemTextColor),
+                            'titleFont': storyItemTextTypeface,
+                            'interactiveFont': storyInteractiveTextTypeface,
+                            'progressBarColor': storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null,
+                            'isTitleVisible': storyHeaderTextIsVisible,
+                            'isHeaderIconVisible': storyHeaderIconIsVisible,
+                            'isCloseButtonVisible': storyHeaderCloseButtonIsVisible,
+                            'closeButtonIcon': storyHeaderCloseIcon,
+                            'shareButtonIcon': storyHeaderShareIcon,
                         },
-                        'storyGroupIconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
-                        'storyGroupIconBorderColorNotSeen': storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null,
-                        'storyGroupIconBackgroundColor': processColor(storyGroupIconBackgroundColor),
-                        'storyGroupPinIconColor': processColor(storyGroupPinIconColor),
-                        'storyGroupAnimation': storyGroupAnimation,
+                        'storylyShareUrl': storylyShareUrl,
                         'storylyLayoutDirection': storylyLayoutDirection,
-                        'storyHeaderStyling': { 
-                            'isTextVisible': storyHeaderTextIsVisible, 
-                            'isIconVisible': storyHeaderIconIsVisible, 
-                            'isCloseButtonVisible': storyHeaderCloseButtonIsVisible, 
-                            'closeIcon': storyHeaderCloseIcon, 
-                            'shareIcon': storyHeaderShareIcon 
-                        },
-                        'storyItemTextColor': processColor(storyItemTextColor),
-                        'storyItemIconBorderColor': storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null,
-                        'storyItemProgressBarColor': storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null,
-                        'storyItemTextTypeface': storyItemTextTypeface,
-                        'storyInteractiveTextTypeface': storyInteractiveTextTypeface,
                     }
                 }
                 ref={el => (this._storylyView = el)}>

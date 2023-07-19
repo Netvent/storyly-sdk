@@ -2,7 +2,6 @@ package com.appsamurai.storyly.reactnative
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -11,7 +10,10 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
-import com.appsamurai.storyly.styling.*
+import com.appsamurai.storyly.config.StorylyConfig
+import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
+import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
+import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -31,12 +33,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_CLOSE_CODE = 3
         private const val COMMAND_OPEN_STORY_NAME = "openStory"
         private const val COMMAND_OPEN_STORY_CODE = 4
-        private const val COMMAND_SET_EXTERNAL_DATA_NAME = "setExternalData"
-        private const val COMMAND_SET_EXTERNAL_DATA_CODE = 5
         private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
-        private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 6
+        private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
-        private const val COMMAND_HYDRATE_PRODUCT_CODE = 7
+        private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -55,9 +55,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     override fun getName(): String = REACT_CLASS
 
-    override fun createViewInstance(reactContext: ThemedReactContext): STStorylyView {
-        return STStorylyView(reactContext)
-    }
+    override fun createViewInstance(reactContext: ThemedReactContext): STStorylyView = STStorylyView(reactContext)
 
     override fun addView(parent: STStorylyView?, child: View?, index: Int) {
         parent?.onAttachCustomReactNativeView(child, index)
@@ -89,7 +87,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_OPEN_NAME, COMMAND_OPEN_CODE,
             COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
             COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
-            COMMAND_SET_EXTERNAL_DATA_NAME, COMMAND_SET_EXTERNAL_DATA_CODE,
             COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME, COMMAND_HYDRATE_PRODUCT_CODE
         )
@@ -103,11 +100,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_OPEN_STORY_CODE -> {
                 val payloadStr: String = args?.getString(0) ?: return
                 root.storylyView?.openStory(Uri.parse(payloadStr))
-            }
-            COMMAND_SET_EXTERNAL_DATA_CODE -> {
-                (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
-                    root.storylyView?.setExternalData(it)
-                }
             }
             COMMAND_HYDRATE_PRODUCT_CODE -> {
                 (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
@@ -128,58 +120,123 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     fun setPropStoryly(view: STStorylyView, storylyBundle: ReadableMap) {
         println("STR:STStorylyManager:setPropStoryly:${storylyBundle}")
         val storylyInitJson = storylyBundle.getMap("storylyInit") ?: return
-        val storyGroupListStylingJson = storylyBundle.getMap("storyGroupListStyling") ?: return
-        val storyGroupIconStylingJson = storylyBundle.getMap("storyGroupIconStyling") ?: return
-        val storyGroupTextStylingJson = storylyBundle.getMap("storyGroupTextStyling") ?: return
-        val storyHeaderStylingJson = storylyBundle.getMap("storyHeaderStyling") ?: return
+        val storylyId = storylyInitJson.getString("storylyId") ?: return
+        val storyGroupStylingJson = storylyBundle.getMap("storyGroupStyling") ?: return
+        val storyGroupViewFactoryJson = storylyBundle.getMap("storyGroupViewFactory") ?: return
+        val storyBarStylingJson = storylyBundle.getMap("storyBarStyling") ?: return
+        val storyStylingJson = storylyBundle.getMap("storyStyling") ?: return
 
-        val storylyView = StorylyView(view.activity).apply {
-            storylyInit = getStorylyInit(storylyInitJson)
-            storylyShareUrl = storylyBundle.getString("storylyShareUrl")
-            val stStoryGroupViewFactory = getStoryGroupViewFactory(view.context, storylyBundle.getMap("storyGroupViewFactory"))
-            if (stStoryGroupViewFactory != null) {
-                storyGroupViewFactory = stStoryGroupViewFactory.also { it?.onSendEvent = view::sendEvent }
-            } else {
-                setStoryGroupSize(getStoryGroupSize(storylyBundle.getString("storyGroupSize")))
-                setStoryGroupIconStyling(getStoryGroupIconStyling(storyGroupIconStylingJson))
-                setStoryGroupTextStyling(getStoryGroupTextStyling(view.context, storyGroupTextStylingJson))
-                storylyBundle.getArray("storyGroupIconBorderColorSeen")?.let { setStoryGroupIconBorderColorSeen(convertColorArray(it)) }
-                storylyBundle.getArray("storyGroupIconBorderColorNotSeen")?.let { setStoryGroupIconBorderColorNotSeen(convertColorArray(it)) }
-                if (storylyBundle.hasKey("storyGroupIconBackgroundColor")) setStoryGroupIconBackgroundColor(storylyBundle.getInt("storyGroupIconBackgroundColor"))
-                if (storylyBundle.hasKey("storyGroupPinIconColor")) setStoryGroupPinIconColor(storylyBundle.getInt("storyGroupPinIconColor"))
-                setStoryGroupAnimation(getStoryGroupAnimation(storylyBundle.getString("storyGroupAnimation")))
-            }
+        val storyGroupViewFactory = getStoryGroupViewFactory(view.context, storyGroupViewFactoryJson).also { it?.onSendEvent = view::sendEvent }
+        var storylyConfigBuilder = StorylyConfig.Builder()
+        storylyConfigBuilder = stStorylyInit(json = storylyInitJson, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stStorylyGroupStyling(context = view.context, json = storyGroupStylingJson, groupViewFactory = storyGroupViewFactory, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
+        storylyBundle.getString("storylyShareUrl")?.let { storylyConfigBuilder = storylyConfigBuilder.setShareUrl(it) }
+        storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle.getString("storylyLayoutDirection")))
 
-            setStoryGroupListStyling(getStoryGroupListStyling(storyGroupListStylingJson))
-            setStorylyLayoutDirection(getStorylyLayoutDirection(storylyBundle.getString("storylyLayoutDirection")))
-            setStoryHeaderStyling(getStoryHeaderStyling(view.context, storyHeaderStylingJson))
-            if (storylyBundle.hasKey("storyItemTextColor")) setStoryItemTextColor(storylyBundle.getInt("storyItemTextColor"))
-            storylyBundle.getArray("storyItemIconBorderColor")?.let { setStoryItemIconBorderColor(convertColorArray(it)) }
-            storylyBundle.getArray("storyItemProgressBarColor")?.let { setStoryItemProgressBarColor(convertColorArray(it)) }
-            setStoryItemTextTypeface(getTypeface(view.context, storylyBundle.getString("storyItemTextTypeface")))
-            setStoryInteractiveTextTypeface(getTypeface(view.context, storylyBundle.getString("storyInteractiveTextTypeface")))
+        view.storylyView = StorylyView(view.activity).apply {
+            storylyInit = StorylyInit(
+                storylyId = storylyId,
+                config = storylyConfigBuilder
+                    .build()
+            )
         }
-
-        view.storylyView = storylyView
+        view.storyGroupViewFactory = storyGroupViewFactory
     }
 
-    private fun getStorylyInit(storylyInit: ReadableMap): StorylyInit {
-        val storylyId: String = storylyInit.getString("storylyId") ?: ""
-        val segments = if (storylyInit.hasKey("storylySegments")) (storylyInit.getArray("storylySegments")?.toArrayList() as? ArrayList<String>)?.toSet() else null
-        val customParameter = if (storylyInit.hasKey("customParameter")) storylyInit.getString("customParameter") else null
-        val isTestMode = if (storylyInit.hasKey("storylyIsTestMode")) storylyInit.getBoolean("storylyIsTestMode") else false
-        val storylyPayload = if (storylyInit.hasKey("storylyPayload")) storylyInit.getString("storylyPayload") else null
-        val userProperty = if (storylyInit.hasKey("userProperty")) storylyInit.getMap("userProperty")?.toHashMap() as? Map<String, String> else null
+    private fun stStorylyInit(
+        json: ReadableMap,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        return configBuilder
+            .setLabels(if (json.hasKey("storylySegments")) (json.getArray("storylySegments")?.toArrayList() as? ArrayList<String>)?.toSet() else null)
+            .setCustomParameter(if (json.hasKey("customParameter")) json.getString("customParameter") else null)
+            .setTestMode(if (json.hasKey("storylyIsTestMode")) json.getBoolean("storylyIsTestMode") else false)
+            .setStorylyPayload(if (json.hasKey("storylyPayload")) json.getString("storylyPayload") else null)
+            .setUserData(if (json.hasKey("userProperty")) json.getMap("userProperty")?.toHashMap() as? Map<String, String> ?: emptyMap() else emptyMap())
+    }
 
-        return StorylyInit(
-            storylyId = storylyId,
-            segmentation = StorylySegmentation(segments = segments),
-            customParameter = customParameter,
-            isTestMode = isTestMode,
-            storylyPayload = storylyPayload
-        ).apply {
-            userProperty?.let { this.userData = it }
-        }
+    private fun stStorylyGroupStyling(
+        context: Context,
+        json: ReadableMap,
+        groupViewFactory: STStoryGroupViewFactory?,
+        configBuilder: StorylyConfig.Builder,
+    ): StorylyConfig.Builder {
+        var groupStylingBuilder = StorylyStoryGroupStyling.Builder()
+        json.getArray("iconBorderColorSeen")?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorSeen(convertColorArray(it)) }
+        json.getArray("iconBorderColorNotSeen")?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorNotSeen(convertColorArray(it)) }
+        if (json.hasKey("iconBackgroundColor")) groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(json.getInt("iconBackgroundColor"))
+        if (json.hasKey("pinIconColor")) groupStylingBuilder = groupStylingBuilder.setPinIconColor(json.getInt("pinIconColor"))
+        groupStylingBuilder = if (json.hasKey("iconHeight")) groupStylingBuilder.setIconHeight(json.getInt("iconHeight")) else groupStylingBuilder.setIconHeight(dpToPixel(80))
+        groupStylingBuilder = if (json.hasKey("iconWidth")) groupStylingBuilder.setIconWidth(json.getInt("iconWidth")) else groupStylingBuilder.setIconWidth(dpToPixel(80))
+        groupStylingBuilder = if (json.hasKey("iconCornerRadius")) groupStylingBuilder.setIconCornerRadius(json.getInt("iconCornerRadius")) else groupStylingBuilder.setIconCornerRadius(dpToPixel(40))
+        groupStylingBuilder = groupStylingBuilder.setIconBorderAnimation(getStoryGroupAnimation(json.getString("iconBorderAnimation")))
+        if (json.hasKey("titleSeenColor")) groupStylingBuilder = groupStylingBuilder.setTitleSeenColor(json.getInt("titleSeenColor"))
+        if (json.hasKey("titleNotSeenColor")) groupStylingBuilder = groupStylingBuilder.setTitleNotSeenColor(json.getInt("titleNotSeenColor"))
+        if (json.hasKey("titleLineCount")) groupStylingBuilder = groupStylingBuilder.setTitleLineCount(json.getInt("titleLineCount"))
+        if (json.hasKey("titleFont")) groupStylingBuilder = groupStylingBuilder.setTitleTypeface(getTypeface(context, json.getString("titleFont")))
+        if (json.hasKey("titleTextSize")) groupStylingBuilder = groupStylingBuilder.setTitleTextSize(Pair(TypedValue.COMPLEX_UNIT_PX, json.getInt("titleTextSize")))
+        if (json.hasKey("titleVisible")) groupStylingBuilder = groupStylingBuilder.setTitleVisibility(json.getBoolean("titleVisible"))
+        groupStylingBuilder = groupStylingBuilder.setSize(getStoryGroupSize(json.getString("groupSize")))
+        groupStylingBuilder = groupStylingBuilder.setCustomGroupViewFactory(groupViewFactory)
+
+        return configBuilder
+            .setStoryGroupStyling(
+                styling = groupStylingBuilder
+                    .build()
+            )
+    }
+
+    private fun stStoryBarStyling(
+        json: ReadableMap,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        return configBuilder
+            .setBarStyling(
+                StorylyBarStyling.Builder()
+                    .setOrientation(getStoryGroupListOrientation(if (json.hasKey("orientation")) json.getString("orientation") else null))
+                    .setSection(if (json.hasKey("sections")) json.getInt("sections") else 1)
+                    .setHorizontalEdgePadding(if (json.hasKey("horizontalEdgePadding")) json.getInt("horizontalEdgePadding") else dpToPixel(4))
+                    .setVerticalEdgePadding(if (json.hasKey("verticalEdgePadding")) json.getInt("verticalEdgePadding") else dpToPixel(4))
+                    .setHorizontalPaddingBetweenItems(if (json.hasKey("horizontalPaddingBetweenItems")) json.getInt("horizontalPaddingBetweenItems") else dpToPixel(8))
+                    .setVerticalPaddingBetweenItems(if (json.hasKey("verticalPaddingBetweenItems")) json.getInt("verticalPaddingBetweenItems") else dpToPixel(8))
+                    .build()
+            )
+    }
+
+    private fun stStoryStyling(
+        context: Context,
+        json: ReadableMap,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        var storyStylingBuilder = StorylyStoryStyling.Builder()
+        json.getArray("headerIconBorderColor")?.let { storyStylingBuilder = storyStylingBuilder.setHeaderIconBorderColor(convertColorArray(it)) }
+        if (json.hasKey("titleColor")) storyStylingBuilder = storyStylingBuilder.setTitleColor(json.getInt("titleColor"))
+        if (json.hasKey("titleFont")) storyStylingBuilder = storyStylingBuilder.setTitleTypeface(getTypeface(context, json.getString("titleFont")))
+        if (json.hasKey("interactiveFont")) storyStylingBuilder = storyStylingBuilder.setInteractiveTypeface(getTypeface(context, json.getString("interactiveFont")))
+        json.getArray("progressBarColor")?.let { storyStylingBuilder = storyStylingBuilder.setProgressBarColor(convertColorArray(it)) }
+        if (json.hasKey("isTitleVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isTitleVisible"))
+        if (json.hasKey("isHeaderIconVisible")) storyStylingBuilder = storyStylingBuilder.setHeaderIconVisibility(json.getBoolean("isHeaderIconVisible"))
+        if (json.hasKey("isCloseButtonVisible")) storyStylingBuilder = storyStylingBuilder.setCloseButtonVisibility(json.getBoolean("isCloseButtonVisible"))
+        storyStylingBuilder = storyStylingBuilder.setCloseButtonIcon(getDrawable(context, if (json.hasKey("closeButtonIcon")) json.getString("closeButtonIcon") else null))
+        storyStylingBuilder = storyStylingBuilder.setShareButtonIcon(getDrawable(context, if (json.hasKey("shareButtonIcon")) json.getString("shareButtonIcon") else null))
+
+        return configBuilder
+            .setStoryStyling(
+                storyStylingBuilder
+                    .build()
+            )
+    }
+
+    private fun getStoryGroupViewFactory(
+        context: Context,
+        json: ReadableMap,
+    ): STStoryGroupViewFactory? {
+        val width = if (json.hasKey("width")) json.getInt("width") else return null
+        val height = if (json.hasKey("height")) json.getInt("height") else return null
+        if (width <= 0 || height <= 0) return null
+        return STStoryGroupViewFactory(context, width, height)
     }
 
     private fun getStoryGroupSize(size: String?): StoryGroupSize {
@@ -188,71 +245,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             "custom" -> StoryGroupSize.Custom
             else -> StoryGroupSize.Large
         }
-    }
-
-    private fun getStoryGroupIconStyling(storyGroupIconStylingMap: ReadableMap): StoryGroupIconStyling {
-        val height = if (storyGroupIconStylingMap.hasKey("height")) storyGroupIconStylingMap.getInt("height").toFloat() else dpToPixel(80)
-        val width = if (storyGroupIconStylingMap.hasKey("width")) storyGroupIconStylingMap.getInt("width").toFloat() else dpToPixel(80)
-        val cornerRadius = if (storyGroupIconStylingMap.hasKey("cornerRadius")) storyGroupIconStylingMap.getInt("cornerRadius").toFloat() else dpToPixel(40)
-
-        return StoryGroupIconStyling(
-            height = height,
-            width = width,
-            cornerRadius = cornerRadius
-        )
-    }
-
-    private fun getStoryGroupViewFactory(context: Context, storyGroupViewFactoryMap: ReadableMap?): STStoryGroupViewFactory? {
-        val map = storyGroupViewFactoryMap ?: return null
-        val width = if (map.hasKey("width")) map.getInt("width") else return null
-        val height = if (map.hasKey("height")) map.getInt("height") else return null
-        if (width <= 0 || height <= 0) return null
-
-        return STStoryGroupViewFactory(context, width, height)
-    }
-
-    private fun getStoryGroupListStyling(storyGroupListStylingMap: ReadableMap): StoryGroupListStyling {
-        val orientation = when (if (storyGroupListStylingMap.hasKey("orientation")) storyGroupListStylingMap.getString("orientation") else null) {
-            "horizontal" -> StoryGroupListOrientation.Horizontal
-            "vertical" -> StoryGroupListOrientation.Vertical
-            else -> StoryGroupListOrientation.Horizontal
-        }
-        val sections = if (storyGroupListStylingMap.hasKey("sections")) storyGroupListStylingMap.getInt("sections") else 1
-        val horizontalEdgePadding = if (storyGroupListStylingMap.hasKey("horizontalEdgePadding")) storyGroupListStylingMap.getInt("horizontalEdgePadding").toFloat() else dpToPixel(4)
-        val verticalEdgePadding = if (storyGroupListStylingMap.hasKey("verticalEdgePadding")) storyGroupListStylingMap.getInt("verticalEdgePadding").toFloat() else dpToPixel(4)
-        val horizontalPaddingBetweenItems = if (storyGroupListStylingMap.hasKey("horizontalPaddingBetweenItems")) storyGroupListStylingMap.getInt("horizontalPaddingBetweenItems").toFloat() else dpToPixel(8)
-        val verticalPaddingBetweenItems = if (storyGroupListStylingMap.hasKey("verticalPaddingBetweenItems")) storyGroupListStylingMap.getInt("verticalPaddingBetweenItems").toFloat() else dpToPixel(8)
-
-        return StoryGroupListStyling(
-            orientation = orientation,
-            sections = sections,
-            horizontalEdgePadding = horizontalEdgePadding,
-            verticalEdgePadding = verticalEdgePadding,
-            horizontalPaddingBetweenItems = horizontalPaddingBetweenItems,
-            verticalPaddingBetweenItems = verticalPaddingBetweenItems,
-        )
-    }
-
-    private fun getStoryGroupTextStyling(context: Context, storyGroupTextStylingMap: ReadableMap): StoryGroupTextStyling {
-        val isVisible = if (storyGroupTextStylingMap.hasKey("isVisible")) storyGroupTextStylingMap.getBoolean("isVisible") else true
-        val typefaceName = if (storyGroupTextStylingMap.hasKey("typeface")) storyGroupTextStylingMap.getString("typeface") else null
-        val textSize = if (storyGroupTextStylingMap.hasKey("textSize")) storyGroupTextStylingMap.getInt("textSize") else null
-        val lines = if (storyGroupTextStylingMap.hasKey("lines")) storyGroupTextStylingMap.getInt("lines") else null
-
-        val colorSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorSeen")) storyGroupTextStylingMap.getString("colorSeen") else "#FF000000")
-        val colorNotSeen = Color.parseColor(if (storyGroupTextStylingMap.hasKey("colorNotSeen")) storyGroupTextStylingMap.getString("colorNotSeen") else "#FF000000")
-
-
-        return StoryGroupTextStyling(
-            isVisible = isVisible,
-            typeface = getTypeface(context, typefaceName),
-            textSize = Pair(TypedValue.COMPLEX_UNIT_PX, textSize),
-            minLines = null,
-            maxLines = null,
-            lines = lines,
-            colorSeen = colorSeen,
-            colorNotSeen = colorNotSeen
-        )
     }
 
     private fun getStoryGroupAnimation(animation: String?): StoryGroupAnimation {
@@ -271,24 +263,12 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         }
     }
 
-    private fun getStoryHeaderStyling(context: Context, storyHeaderStylingMap: ReadableMap): StoryHeaderStyling {
-        val isTextVisible = if (storyHeaderStylingMap.hasKey("isTextVisible")) storyHeaderStylingMap.getBoolean("isTextVisible") else true
-        val isIconVisible = if (storyHeaderStylingMap.hasKey("isIconVisible")) storyHeaderStylingMap.getBoolean("isIconVisible") else true
-        val isCloseButtonVisible = if (storyHeaderStylingMap.hasKey("isCloseButtonVisible")) storyHeaderStylingMap.getBoolean("isCloseButtonVisible") else true
-
-        val closeIcon = if (storyHeaderStylingMap.hasKey("closeIcon")) storyHeaderStylingMap.getString("closeIcon") else null
-        val closeIconDrawable = closeIcon?.let { getDrawable(context.applicationContext, it) }
-
-        val shareIcon = if (storyHeaderStylingMap.hasKey("shareIcon")) storyHeaderStylingMap.getString("shareIcon") else null
-        val shareIconDrawable = shareIcon?.let { getDrawable(context.applicationContext, it) }
-
-        return StoryHeaderStyling(
-            isTextVisible = isTextVisible,
-            isIconVisible = isIconVisible,
-            isCloseButtonVisible = isCloseButtonVisible,
-            closeButtonIcon = closeIconDrawable,
-            shareButtonIcon = shareIconDrawable
-        )
+    private fun getStoryGroupListOrientation(orientation: String?): StoryGroupListOrientation {
+        return when (orientation) {
+            "horizontal" -> StoryGroupListOrientation.Horizontal
+            "vertical" -> StoryGroupListOrientation.Vertical
+            else -> StoryGroupListOrientation.Horizontal
+        }
     }
 
     private fun getTypeface(context: Context, fontName: String?): Typeface {
@@ -300,19 +280,21 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         }
     }
 
-    private fun convertColorArray(colors: ReadableArray): Array<Int> {
+    private fun convertColorArray(colors: ReadableArray): List<Int> {
         val colorsNative = arrayListOf<Int>()
-        for (i in 0 until colors.size()) {
-            colorsNative.add(colors.getInt(i))
-        }
-        return colorsNative.toTypedArray()
+        for (i in 0 until colors.size()) colorsNative.add(colors.getInt(i))
+        return colorsNative
     }
 
-    private fun dpToPixel(dpValue: Int): Float {
-        return dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    private fun dpToPixel(dpValue: Int): Int {
+        return (dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
 
-    private fun getDrawable(context: Context, name: String): Drawable? {
+    private fun getDrawable(
+        context: Context,
+        name: String?
+    ): Drawable? {
+        name ?: return null
         val id = context.resources.getIdentifier(name, "drawable", context.packageName)
         return ContextCompat.getDrawable(context, id)
     }

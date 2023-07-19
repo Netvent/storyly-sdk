@@ -188,8 +188,6 @@ declare module "storyly-react-native" {
       | "vod";
   }
 
-  export type ExternalData = Record<string, string>[];
-
   export interface StoryGroupViewFactory {
     width: number;
     height: number;
@@ -201,7 +199,6 @@ declare module "storyly-react-native" {
     close: () => void;
     refresh: () => void;
     openStory: (storyUriFromTheDashboard: string) => void;
-    setExternalData: (externalData: ExternalData) => void;
     openStoryWithId: (storyGroupId: string, storyId: string) => void;
     hydrateProducts: (products: STRProductItem[]) => void;
   }

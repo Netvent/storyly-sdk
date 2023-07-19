@@ -19,9 +19,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true
 
-  s.swift_versions = ["5.0", "5.1", "5.2", "5.3"]
-
   s.dependency "React"
-  s.dependency "Storyly", "~> 1.32.0"
+  s.dependency "Storyly", "~> 2.0.0"
 end
 

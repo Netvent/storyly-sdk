@@ -6,8 +6,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import com.appsamurai.storyly.StoryGroup
-import com.appsamurai.storyly.styling.StoryGroupView
-import com.appsamurai.storyly.styling.StoryGroupViewFactory
+import com.appsamurai.storyly.config.styling.group.StoryGroupView
+import com.appsamurai.storyly.config.styling.group.StoryGroupViewFactory
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
 
@@ -22,9 +22,7 @@ class STStoryGroupViewFactory(
     internal var onSendEvent: ((eventName: String, eventParameters: WritableMap?) -> Unit)? = null
 
     override fun createView(): StoryGroupView {
-        val storyGroupView = STStoryGroupView(context, width, height).also {
-            it.onViewUpdate = this::onUpdateView
-        }
+        val storyGroupView = STStoryGroupView(context, width, height).also { it.onViewUpdate = this::onUpdateView }
         customViewList.add(storyGroupView)
         onSendEvent?.invoke(STStorylyManager.EVENT_ON_CREATE_CUSTOM_VIEW, null)
         return storyGroupView

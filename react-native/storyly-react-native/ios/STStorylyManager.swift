@@ -86,19 +86,6 @@ class STStorylyManager: RCTViewManager {
             }
         }
     }
-    
-    @objc(setExternalData:externalData:)
-    func setExternalData(reactTag: NSNumber, externalData: [NSDictionary]) {
-        print("STR:STStorylyManager:setExternalData(externalData:\(externalData))")
-        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
-            let view = viewRegistry?[reactTag]
-            if let stStorylyView = view as? STStorylyView {
-                _ = stStorylyView.setExternalData(externalData: externalData)
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
-            }
-        }
-    }
 
     @objc(hydrateProducts:products:)
     func hydrateProducts(reactTag: NSNumber, products: [NSDictionary]) {

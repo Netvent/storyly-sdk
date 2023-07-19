@@ -9,12 +9,14 @@ import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
+import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import java.lang.ref.WeakReference
 import kotlin.properties.Delegates
 
 class STStorylyView(context: Context) : FrameLayout(context) {
@@ -95,13 +97,13 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         }
 
         storylyView.storylyProductListener = object : StorylyProductListener {
-            override fun storylyAddToCartEvent(
+            override fun storylyUpdateCartEvent(
                 storylyView: StorylyView,
-                product: STRProductItem?,
-                extras: Map<String, String>,
-                onSuccess: ((STRCart) -> Unit)?,
-                onFail: ((STRCartEventResult) -> Unit)?
-            ) {
+                event: StorylyEvent,
+                cart: STRCart?,
+                change: STRCartItem?,
+                onSuccess: ((STRCart?) -> Unit)?,
+                onFail: ((STRCartEventResult) -> Unit)?) {
             }
 
             override fun storylyEvent(
@@ -128,6 +130,8 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         }
     }
 
+    internal var storyGroupViewFactory: STStoryGroupViewFactory? = null
+
     internal val activity: Context
         get() = ((context as? ReactContext)?.currentActivity ?: context)
 
@@ -145,7 +149,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         (context as? ReactContext)?.addLifecycleEventListener(object : LifecycleEventListener {
             override fun onHostResume() {
                 val activity = (context as? ReactContext)?.currentActivity ?: return
-                storylyView?.activity = activity
+                storylyView?.activity = WeakReference(activity)
             }
 
             override fun onHostPause() {}
@@ -165,7 +169,7 @@ class STStorylyView(context: Context) : FrameLayout(context) {
     }
 
     internal fun onAttachCustomReactNativeView(child: View?, index: Int) {
-        val storyGroupViewFactory = storylyView?.storyGroupViewFactory as? STStoryGroupViewFactory ?: return
+        val storyGroupViewFactory = storyGroupViewFactory ?: return
         storyGroupViewFactory.attachCustomReactNativeView(child, index)
     }
 

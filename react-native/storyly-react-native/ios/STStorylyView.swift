@@ -20,7 +20,6 @@ class STStorylyView: UIView {
     
     private var storylyView: StorylyView? = nil {
         didSet {
-            print("STR:STStorylyView:storylyView:didSet:\(storylyView)")
             oldValue?.removeFromSuperview()
             guard let storylyView = storylyView else { return }
             storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
@@ -41,7 +40,6 @@ class STStorylyView: UIView {
             guard let storyGroupViewFactory = storyGroupViewFactory else { return }
             storyGroupViewFactory.onCreateCustomView = self.onCreateCustomView
             storyGroupViewFactory.onUpdateCustomView = self.onUpdateCustomView
-            self.storylyView?.storyGroupViewFactory = storyGroupViewFactory
         }
     }
     
@@ -94,10 +92,7 @@ class STStorylyView: UIView {
         print("STR:STStorylyView:init:StorylyBundle:\(Bundle(for: StorylyView.self).infoDictionary)")
     }
     
-    required init?(coder: NSCoder) {
-        print("STR:STStorylyView:init(coder:\(coder))")
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
         print("STR:STStorylyView:insertReactSubview(subview:\(subview):at\(atIndex))")
@@ -132,11 +127,6 @@ extension STStorylyView {
     func openStory(storyGroupId: String, storyId: String) {
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
-    }
-    
-    func setExternalData(externalData: [NSDictionary]) {
-        print("STR:STStorylyView:openStory(externalData:\(externalData))")
-        storylyView?.setExternalData(externalData: externalData)
     }
 
     func hydrateProducts(products: [STRProductItem]){
