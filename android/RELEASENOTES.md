@@ -1,10 +1,19 @@
 # Release Notes
+### 2.0.2 (22.07.2023)
+* improved re-initialization flow of StorylyInit
+* fixed edge paddings of storyly bar
+* improved save/restore instance flow 
+* fixed a crash related to AttributeSet interface
+
 ### 2.0.0 (04.07.2023)
 * added timed interactive feature for stories
 * added conditional stories support
 * added story group badge support
 * IMPORTANT! added new config structure for storylyInit (Please refer to the [migration doc](https://docs.storyly.io/page/migrating-to-sdk-20))
 * IMPORTANT! moved all ui and storyly customization fields into new config structure
+
+### 1.33.2 (22.07.2023)
+* fixed edge paddings of storyly bar
 
 ### 1.33.1 (03.07.2023)
 * fixed black screen issue related to storyly view dismiss
