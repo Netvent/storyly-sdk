@@ -81,8 +81,8 @@ private func stStorylyGroupStyling(
     if let titleSeenColorJson = json["titleSeenColor"] as? NSNumber {
         groupStylingBuilder = groupStylingBuilder.setTitleSeenColor(color: RCTConvert.uiColor(titleSeenColorJson))
     }
-    if let titleNotSeenColor = json["titleNotSeenColor"] as? NSNumber {
-        groupStylingBuilder = groupStylingBuilder.setTitleNotSeenColor(color: RCTConvert.uiColor(titleNotSeenColor))
+    if let titleNotSeenColorJson = json["titleNotSeenColor"] as? NSNumber {
+        groupStylingBuilder = groupStylingBuilder.setTitleNotSeenColor(color: RCTConvert.uiColor(titleNotSeenColorJson))
     }
     return configBuilder
         .setStoryGroupStyling(

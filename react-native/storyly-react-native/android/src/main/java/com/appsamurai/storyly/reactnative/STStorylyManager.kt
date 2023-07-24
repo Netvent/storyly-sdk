@@ -271,15 +271,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         }
     }
 
-    private fun getTypeface(context: Context, fontName: String?): Typeface {
-        fontName ?: return Typeface.DEFAULT
-        return try {
-            Typeface.createFromAsset(context.assets, fontName)
-        } catch (_: Exception) {
-            Typeface.DEFAULT
-        }
-    }
-
     private fun convertColorArray(colors: ReadableArray): List<Int> {
         val colorsNative = arrayListOf<Int>()
         for (i in 0 until colors.size()) colorsNative.add(colors.getInt(i))
@@ -288,6 +279,15 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     private fun dpToPixel(dpValue: Int): Int {
         return (dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
+    }
+
+    private fun getTypeface(context: Context, fontName: String?): Typeface {
+        fontName ?: return Typeface.DEFAULT
+        return try {
+            Typeface.createFromAsset(context.assets, fontName)
+        } catch (_: Exception) {
+            Typeface.DEFAULT
+        }
     }
 
     private fun getDrawable(
