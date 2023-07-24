@@ -1,4 +1,7 @@
 # Release Notes
+### 2.0.0 (24.07.2023)
+* migrated native version to 2.0
+
 ### 1.33.5 (29.05.2023)
 * removed onProductEvent
 
