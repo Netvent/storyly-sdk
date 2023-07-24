@@ -1,3 +1,6 @@
+### 2.0.0 (24.07.2023)
+* migrated native version to 2.0
+
 ### 1.32.0 (17.04.2023)
 * added product catalog interactive component
 * added image quiz interactive component
