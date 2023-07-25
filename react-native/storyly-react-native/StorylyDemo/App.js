@@ -9,13 +9,13 @@
  */
 
 import React, { Component } from 'react';
-import { View, Button, Image, Text, PixelRatio } from 'react-native';
+import { View, Button, Image, Text, PixelRatio, TurboModuleRegistry } from 'react-native';
 import { Storyly } from 'storyly-react-native';
 
 const PIN_ICON = require('./assets/pin_icon.png');
 
 
-const STORYLY_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
+const STORYLY_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjU5MzcsImFwcF9pZCI6MTYwNTYsImluc19pZCI6MTc2MDN9.esFRzZLP6JXunXfrZDj2nLOxBCEzphsUPQNgyezw9EA"
 
 const convertToNative = (size) => {
     return Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(size) : size
@@ -60,6 +60,7 @@ export default class App extends Component {
                     storyGroupSize="small"
                     storyHeaderShareIcon={"share_icon"}
                     storyHeaderCloseIcon={"close_icon"}
+                    storyFallbackIsEnabled={true}
                     storyItemTextTypeface={"Lobster1.4.otf"}
                     storyInteractiveTextTypeface={"Lobster1.4.otf"}
                     storyItemProgressBarColor={["#00FF00", "#FF0000"]}
@@ -91,9 +92,1535 @@ export default class App extends Component {
                     storyGroupIconBackgroundColor={"#000000"}
                     storyGroupPinIconColor={"#000000"} />
                 <Storyly
-                    ref={ref => { this.storyly = ref }}
+                    ref={ref => { 
+                        this.storyly = ref 
+                        if (this.storyly != null) {
+                            this.storyly.updateCart([
+                                {
+                                    "items": [
+                                        {
+                                            "item": {
+                                                "productId": "1",
+                                                "productGroupId": "1",
+                                                "title": "High-waist midi skirt",
+                                                "url": "https://www.storyly.io/",
+                                                "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                                "price": 25.99,
+                                                
+                                                "currency": "USD",
+                                                "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-6D7868.jpg"],
+                                                "variants": [
+                                                {"name":"color","value":"#6D7868"},
+                                                {"name":"size","value":"XS"}
+                                                ]
+                                            },
+                                            "totalPrice": 12,
+                                            "oldTotalPrice": 15,
+                                            "quantity": 2
+                                        }
+                                    ],
+                                    "totalPrice": 12,
+                                    "oldTotalPrice": 15,
+                                    "currency": "USD"
+                                }
+                            ])
+                            this.storyly.hydrateProducts([
+                                {
+                                    "productId": "1",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-6D7868.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#6D7868"},
+                                    {"name":"size","value":"XS"}
+                                    ]
+                                },
+                                {
+                                    "productId": "3",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-6D7868.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#6D7868"},
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "4",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-6D7868.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#6D7868"},
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "5",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-6D7868.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-6D7868.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#6D7868"},
+                                    {"name":"size","value":"XL"}
+                                    ]
+                                },
+                                {
+                                    "productId": "6",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-282025.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#282025"},
+                                    {"name":"size","value":"XS"}
+                                    ]
+                                },
+                                {
+                                    "productId": "7",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-282025.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#282025"},
+                                    {"name":"size","value":"S"}
+                                    ]
+                                },
+                                {
+                                    "productId": "8",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-282025.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#282025"},
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "9",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-282025.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#282025"},
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "10",
+                                    "productGroupId": "1",
+                                    "title": "High-waist midi skirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "High-waist midi skirt made of a viscose blend. Featuring a slit at the hem and invisible zip fastening.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-1/1-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/2-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/3-282025.jpg","https://random-feed-generator.vercel.app/images/clothes/group-1/4-282025.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#282025"},
+                                    {"name":"size","value":"XL"}
+                                    ]
+                                },
+                                {
+                                    "productId": "11",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-171614.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#171614"},
+                                    {"name":"size","value":"XS"}
+                                    ]
+                                },
+                                {
+                                    "productId": "12",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-171614.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#171614"},
+                                    {"name":"size","value":"S"}
+                                    ]
+                                },
+                                {
+                                    "productId": "13",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-171614.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#171614"},
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "14",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-171614.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#171614"},
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "15",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-171614.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-171614.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#171614"},
+                                    {"name":"size","value":"XL"}
+                                    ]
+                                },
+                                {
+                                    "productId": "16",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-A5B9DE.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#A5B9DE"},
+                                    {"name":"size","value":"XS"}
+                                    ]
+                                },
+                                {
+                                    "productId": "17",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-A5B9DE.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#A5B9DE"},
+                                    {"name":"size","value":"S"}
+                                    ]
+                                },
+                                {
+                                    "productId": "18",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-A5B9DE.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#A5B9DE"},
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "19",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-A5B9DE.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#A5B9DE"},
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "20",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-A5B9DE.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-A5B9DE.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#A5B9DE"},
+                                    {"name":"size","value":"XL"}
+                                    ]
+                                },
+                                {
+                                    "productId": "21",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-CFBAD9.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#CFBAD9"},
+                                    {"name":"size","value":"XS"}
+                                    ]
+                                },
+                                {
+                                    "productId": "22",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-CFBAD9.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#CFBAD9"},
+                                    {"name":"size","value":"S"}
+                                    ]
+                                },
+                                {
+                                    "productId": "23",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-CFBAD9.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#CFBAD9"},
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "24",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-CFBAD9.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#CFBAD9"},
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "25",
+                                    "productGroupId": "2",
+                                    "title": "Basic long-sleeve crop top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Fitted elastic top with a round neck and long sleeves.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-2/1-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/2-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/3-CFBAD9.jpg","https://random-feed-generator.vercel.app/images/clothes/group-2/4-CFBAD9.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#CFBAD9"},
+                                    {"name":"size","value":"XL"}
+                                    ]
+                                },
+                                {
+                                    "productId": "26",
+                                    "productGroupId": "3",
+                                    "title": "Handbag with handle",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-3/1-1F1D20.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/2-1F1D20.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/3-1F1D20.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/4-1F1D20.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#1F1D20"}
+                                    ]
+                                },
+                                {
+                                    "productId": "27",
+                                    "productGroupId": "3",
+                                    "title": "Handbag with handle",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-3/1-F2EEE3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/2-F2EEE3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/3-F2EEE3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/4-F2EEE3.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#F2EEE3"}
+                                    ]
+                                },
+                                {
+                                    "productId": "28",
+                                    "productGroupId": "3",
+                                    "title": "Handbag with handle",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-3/1-C2D1B7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/2-C2D1B7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/3-C2D1B7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-3/4-C2D1B7.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#C2D1B7"}
+                                    ]
+                                },
+                                {
+                                    "productId": "29",
+                                    "productGroupId": "4",
+                                    "title": "High-heel mini platform boots",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-4/1-252726.jpg","https://random-feed-generator.vercel.app/images/clothes/group-4/2-252726.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#252726"},
+                                    {"name":"size","value":"7,5"}
+                                    ]
+                                },
+                                {
+                                    "productId": "31",
+                                    "productGroupId": "4",
+                                    "title": "High-heel mini platform boots",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-4/1-252726.jpg","https://random-feed-generator.vercel.app/images/clothes/group-4/2-252726.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#252726"},
+                                    {"name":"size","value":"8,5"}
+                                    ]
+                                },
+                                {
+                                    "productId": "33",
+                                    "productGroupId": "4",
+                                    "title": "High-heel mini platform boots",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-4/1-EBE5D5.jpg","https://random-feed-generator.vercel.app/images/clothes/group-4/2-EBE5D5.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#EBE5D5"},
+                                    {"name":"size","value":"8"}
+                                    ]
+                                },
+                                {
+                                    "productId": "34",
+                                    "productGroupId": "4",
+                                    "title": "High-heel mini platform boots",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-4/1-EBE5D5.jpg","https://random-feed-generator.vercel.app/images/clothes/group-4/2-EBE5D5.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#EBE5D5"},
+                                    {"name":"size","value":"8,5"}
+                                    ]
+                                },
+                                {
+                                    "productId": "35",
+                                    "productGroupId": "5",
+                                    "title": "Faux suede shirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Soft shirt constructed with high-quality suede fabric keeps the weather and makes it durable.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-5/1-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/2-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/3-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/4-8092AA.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#8092AA"},
+                                    {"name":"size","value":"S"}
+                                    ]
+                                },
+                                {
+                                    "productId": "36",
+                                    "productGroupId": "5",
+                                    "title": "Faux suede shirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Soft shirt constructed with high-quality suede fabric keeps the weather and makes it durable.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-5/1-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/2-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/3-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/4-8092AA.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#8092AA"},
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "37",
+                                    "productGroupId": "5",
+                                    "title": "Faux suede shirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Soft shirt constructed with high-quality suede fabric keeps the weather and makes it durable.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-5/1-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/2-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/3-8092AA.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/4-8092AA.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#8092AA"},
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "38",
+                                    "productGroupId": "5",
+                                    "title": "Faux suede shirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Soft shirt constructed with high-quality suede fabric keeps the weather and makes it durable.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-5/1-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/2-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/3-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/4-E6DFD7.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E6DFD7"},
+                                    {"name":"size","value":"S"}
+                                    ]
+                                },
+                                {
+                                    "productId": "39",
+                                    "productGroupId": "5",
+                                    "title": "Faux suede shirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Soft shirt constructed with high-quality suede fabric keeps the weather and makes it durable.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-5/1-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/2-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/3-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/4-E6DFD7.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E6DFD7"},
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "40",
+                                    "productGroupId": "5",
+                                    "title": "Faux suede shirt",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Soft shirt constructed with high-quality suede fabric keeps the weather and makes it durable.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-5/1-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/2-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/3-E6DFD7.jpg","https://random-feed-generator.vercel.app/images/clothes/group-5/4-E6DFD7.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E6DFD7"},
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "41",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-415A7E.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#415A7E"},
+                                    {"name":"size","value":"34"}
+                                    ]
+                                },
+                                {
+                                    "productId": "42",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-415A7E.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#415A7E"},
+                                    {"name":"size","value":"36"}
+                                    ]
+                                },
+                                {
+                                    "productId": "43",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-415A7E.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#415A7E"},
+                                    {"name":"size","value":"38"}
+                                    ]
+                                },
+                                {
+                                    "productId": "44",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-415A7E.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#415A7E"},
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "45",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-415A7E.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#415A7E"},
+                                    {"name":"size","value":"42"}
+                                    ]
+                                },
+                                {
+                                    "productId": "46",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-415A7E.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#415A7E"},
+                                    {"name":"size","value":"44"}
+                                    ]
+                                },
+                                {
+                                    "productId": "47",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "priceText": "25,99£",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-415A7E.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-415A7E.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#415A7E"},
+                                    {"name":"size","value":"46"}
+                                    ]
+                                },
+                                {
+                                    "productId": "48",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-E3E7E8.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E3E7E8"},
+                                    {"name":"size","value":"34"}
+                                    ]
+                                },
+                                {
+                                    "productId": "49",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-E3E7E8.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E3E7E8"},
+                                    {"name":"size","value":"36"}
+                                    ]
+                                },
+                                {
+                                    "productId": "50",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-E3E7E8.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E3E7E8"},
+                                    {"name":"size","value":"38"}
+                                    ]
+                                },
+                                {
+                                    "productId": "51",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-E3E7E8.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E3E7E8"},
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "52",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-E3E7E8.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E3E7E8"},
+                                    {"name":"size","value":"42"}
+                                    ]
+                                },
+                                {
+                                    "productId": "53",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-E3E7E8.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E3E7E8"},
+                                    {"name":"size","value":"44"}
+                                    ]
+                                },
+                                {
+                                    "productId": "54",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-E3E7E8.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-E3E7E8.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#E3E7E8"},
+                                    {"name":"size","value":"46"}
+                                    ]
+                                },
+                                {
+                                    "productId": "55",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-7B7E83.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#7B7E83"},
+                                    {"name":"size","value":"34"}
+                                    ]
+                                },
+                                {
+                                    "productId": "56",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-7B7E83.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#7B7E83"},
+                                    {"name":"size","value":"36"}
+                                    ]
+                                },
+                                {
+                                    "productId": "57",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-7B7E83.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#7B7E83"},
+                                    {"name":"size","value":"38"}
+                                    ]
+                                },
+                                {
+                                    "productId": "58",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-7B7E83.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#7B7E83"},
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "59",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-7B7E83.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#7B7E83"},
+                                    {"name":"size","value":"42"}
+                                    ]
+                                },
+                                {
+                                    "productId": "60",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-7B7E83.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#7B7E83"},
+                                    {"name":"size","value":"44"}
+                                    ]
+                                },
+                                {
+                                    "productId": "61",
+                                    "productGroupId": "6",
+                                    "title": "Super skinny jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "The super-stretchy denim with slim tapered ankle.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-6/1-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/2-7B7E83.jpg","https://random-feed-generator.vercel.app/images/clothes/group-6/3-7B7E83.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#7B7E83"},
+                                    {"name":"size","value":"46"}
+                                    ]
+                                },
+                                {
+                                    "productId": "62",
+                                    "productGroupId": "7",
+                                    "title": "Faded-effect denim corset top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Straight-neck top with thin black straps.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-7/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/3.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"Small"}
+                                    ]
+                                },
+                                {
+                                    "productId": "63",
+                                    "productGroupId": "7",
+                                    "title": "Faded-effect denim corset top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Straight-neck top with thin black straps.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-7/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/3.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"Medium"}
+                                    ]
+                                },
+                                {
+                                    "productId": "64",
+                                    "productGroupId": "7",
+                                    "title": "Faded-effect denim corset top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Straight-neck top with thin black straps.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-7/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/3.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"Large"}
+                                    ]
+                                },
+                                {
+                                    "productId": "65",
+                                    "productGroupId": "7",
+                                    "title": "Faded-effect denim corset top",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Straight-neck top with thin black straps.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-7/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-7/3.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"X-Large"}
+                                    ]
+                                },
+                                {
+                                    "productId": "66",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-pink.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFC0CB"},
+                                    {"name":"size","value":"36"}
+                                    ]
+                                },
+                                {
+                                    "productId": "67",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-pink.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFC0CB"},
+                                    {"name":"size","value":"37"}
+                                    ]
+                                },
+                                {
+                                    "productId": "68",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-pink.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFC0CB"},
+                                    {"name":"size","value":"38"}
+                                    ]
+                                },
+                                {
+                                    "productId": "69",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-pink.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFC0CB"},
+                                    {"name":"size","value":"39"}
+                                    ]
+                                },
+                                {
+                                    "productId": "70",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-pink.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-pink.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFC0CB"},
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "71",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-ecru.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#C2B280"},
+                                    {"name":"size","value":"36"}
+                                    ]
+                                },
+                                {
+                                    "productId": "72",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-ecru.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#C2B280"},
+                                    {"name":"size","value":"37"}
+                                    ]
+                                },
+                                {
+                                    "productId": "73",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-ecru.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#C2B280"},
+                                    {"name":"size","value":"38"}
+                                    ]
+                                },
+                                {
+                                    "productId": "74",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-ecru.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#C2B280"},
+                                    {"name":"size","value":"39"}
+                                    ]
+                                },
+                                {
+                                    "productId": "75",
+                                    "productGroupId": "8",
+                                    "title": "Heeled slingback strap shoes",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Heel height: 10cm. AIRFIT®. FLEXIBLE TECHNICAL LATEX FOAM INSOLE, DESIGNED TO OFFER GREATER COMFORT. Slingback stiletto heel shoes. Buckled ankle strap fastening. Pointed toe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-8/1-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/2-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/3-ecru.jpg","https://random-feed-generator.vercel.app/images/clothes/group-8/4-ecru.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#C2B280"},
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "76",
+                                    "productGroupId": "9",
+                                    "title": "Striped sweatshirt with zip",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "An easy-to-wear casual sweatshirt you'll want to wear time and time again you need to look no further.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-9/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/4.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"XS"}
+                                    ]
+                                },
+                                {
+                                    "productId": "77",
+                                    "productGroupId": "9",
+                                    "title": "Striped sweatshirt with zip",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "An easy-to-wear casual sweatshirt you'll want to wear time and time again you need to look no further.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-9/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/4.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"S"}
+                                    ]
+                                },
+                                {
+                                    "productId": "78",
+                                    "productGroupId": "9",
+                                    "title": "Striped sweatshirt with zip",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "An easy-to-wear casual sweatshirt you'll want to wear time and time again you need to look no further.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-9/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/4.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"M"}
+                                    ]
+                                },
+                                {
+                                    "productId": "79",
+                                    "productGroupId": "9",
+                                    "title": "Striped sweatshirt with zip",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "An easy-to-wear casual sweatshirt you'll want to wear time and time again you need to look no further.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-9/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/4.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"L"}
+                                    ]
+                                },
+                                {
+                                    "productId": "80",
+                                    "productGroupId": "9",
+                                    "title": "Striped sweatshirt with zip",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "An easy-to-wear casual sweatshirt you'll want to wear time and time again you need to look no further.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-9/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/3.jpg","https://random-feed-generator.vercel.app/images/clothes/group-9/4.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"XL"}
+                                    ]
+                                },
+                                {
+                                    "productId": "81",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/4-cream.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFFDD0"},
+                                    {"name":"size","value":"34"}
+                                    ]
+                                },
+                                {
+                                    "productId": "82",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/4-cream.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFFDD0"},
+                                    {"name":"size","value":"36"}
+                                    ]
+                                },
+                                {
+                                    "productId": "83",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/4-cream.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFFDD0"},
+                                    {"name":"size","value":"38"}
+                                    ]
+                                },
+                                {
+                                    "productId": "84",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/4-cream.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFFDD0"},
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "85",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-cream.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/4-cream.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#FFFDD0"},
+                                    {"name":"size","value":"42"}
+                                    ]
+                                },
+                                {
+                                    "productId": "86",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-gray.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#808080"},
+                                    {"name":"size","value":"34"}
+                                    ]
+                                },
+                                {
+                                    "productId": "87",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-gray.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#808080"},
+                                    {"name":"size","value":"36"}
+                                    ]
+                                },
+                                {
+                                    "productId": "88",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-gray.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#808080"},
+                                    {"name":"size","value":"38"}
+                                    ]
+                                },
+                                {
+                                    "productId": "89",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-gray.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#808080"},
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "90",
+                                    "productGroupId": "10",
+                                    "title": "Wide-leg cargo jeans",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Made from super soft stretch denim with a high rise waist and utility pocket styling.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-10/1-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/2-gray.jpg","https://random-feed-generator.vercel.app/images/clothes/group-10/3-gray.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#808080"},
+                                    {"name":"size","value":"42"}
+                                    ]
+                                },
+                                {
+                                    "productId": "91",
+                                    "productGroupId": "11",
+                                    "title": "Men's basic sneakers",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "White basic trainers. Tag detail on the laces.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-11/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-11/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-11/3.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"40"}
+                                    ]
+                                },
+                                {
+                                    "productId": "92",
+                                    "productGroupId": "11",
+                                    "title": "Men's basic sneakers",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "White basic trainers. Tag detail on the laces.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-11/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-11/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-11/3.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"41"}
+                                    ]
+                                },
+                                {
+                                    "productId": "93",
+                                    "productGroupId": "11",
+                                    "title": "Men's basic sneakers",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "White basic trainers. Tag detail on the laces.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/clothes/group-11/1.jpg","https://random-feed-generator.vercel.app/images/clothes/group-11/2.jpg","https://random-feed-generator.vercel.app/images/clothes/group-11/3.jpg"],
+                                    "variants": [
+                                    {"name":"size","value":"42"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1001",
+                                    "productGroupId": "1001",
+                                    "title": "MAC Lipstick Matte",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "MAC Lipstick Matte is a creamy, rich lipstick formula with high-color payoff in a matte finish.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-1/1-df3b8b.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-1/2-df3b8b.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-1/3-df3b8b.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#df3b8b"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1002",
+                                    "productGroupId": "1001",
+                                    "title": "MAC Lipstick Matte",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "MAC Lipstick Matte is a creamy, rich lipstick formula with high-color payoff in a matte finish.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-1/1-693a76.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-1/2-693a76.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-1/3-693a76.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#693a76"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1003",
+                                    "productGroupId": "1001",
+                                    "title": "MAC Lipstick Matte",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "MAC Lipstick Matte is a creamy, rich lipstick formula with high-color payoff in a matte finish.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-1/1-e52733.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-1/2-e52733.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-1/3-e52733.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#e52733"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1004",
+                                    "productGroupId": "1002",
+                                    "title": "Lash Sensational Sky High Mascara",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Maybelline's Lash Sensational Sky High mascara delivers full volume and limitless length. The exclusive Flex Tower mascara brush bends to volumize and extend every single lash from root to tip.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-2/1-363634.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-2/2-363634.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-2/3-363634.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#363634"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1005",
+                                    "productGroupId": "1002",
+                                    "title": "Lash Sensational Sky High Mascara",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Maybelline's Lash Sensational Sky High mascara delivers full volume and limitless length. The exclusive Flex Tower mascara brush bends to volumize and extend every single lash from root to tip.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-2/1-31211b.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-2/2-31211b.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-2/3-31211b.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#31211b"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1006",
+                                    "productGroupId": "1003",
+                                    "title": "Glam Eyeshadow Palette",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Natasha Denona's bestselling palette to date, the GLAM PALETTE offers luscious chroma crystal, creamy matte, & mesmerizing metallic finishes in a range of essential shades for day or night.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-3/1.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-3/2.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-3/3.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-3/4.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-3/5.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-3/6.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-3/7.jpg"],
+                                    "variants": [
+                                
+                                    ]
+                                },
+                                {
+                                    "productId": "1007",
+                                    "productGroupId": "1004",
+                                    "title": "So Wispy 5 pair lashes #11, multipack",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "KISS So Wispy multipack #11 are Wispy, voluminous lashes with softly curled ends in a crisscross pattern, with longer lashes at the outer corners. So Wispy styles are easy to apply with KISS lash adhesive or KISS GLUEliner.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-4/1.jpg"],
+                                    "variants": [
+                                
+                                    ]
+                                },
+                                {
+                                    "productId": "1008",
+                                    "productGroupId": "1005",
+                                    "title": "Retro Glam Eyeshadow Palette",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Bringing two of Natasha Denona's most celebrated creations into a new midi-sized eyeshadow palette concept, this dynamic color story combines MINI RETRO EYESHADOW PALETTE with a variety of seductive GLAM EYESHADOW PALETTE finishes in a collection of all NEW shades.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-5/1.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-5/2.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-5/3.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-5/4.jpg"],
+                                    "variants": [
+                                
+                                    ]
+                                },
+                                {
+                                    "productId": "1009",
+                                    "productGroupId": "1006",
+                                    "title": "Always On Longwear Matte Liquid Lipstick",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Smashbox Always On Longwear Matte Liquid Lipstick is infused with Primer Oil Complex, a blend of Jojoba, Apricot & Sunflower Oils to keep lips comfortable. The non-drying, weightless formula is waterproof & stays plush for 8 hours. Precision tip applicator lines & fills lips in one swipe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-6/1-994d41.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-6/2-994d41.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#994d41"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1010",
+                                    "productGroupId": "1006",
+                                    "title": "Always On Longwear Matte Liquid Lipstick",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Smashbox Always On Longwear Matte Liquid Lipstick is infused with Primer Oil Complex, a blend of Jojoba, Apricot & Sunflower Oils to keep lips comfortable. The non-drying, weightless formula is waterproof & stays plush for 8 hours. Precision tip applicator lines & fills lips in one swipe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-6/1-e33c21.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-6/2-e33c21.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#e33c21"}
+                                    ]
+                                },
+                                {
+                                    "productId": "1011",
+                                    "productGroupId": "1006",
+                                    "title": "Always On Longwear Matte Liquid Lipstick",
+                                    "url": "https://www.storyly.io/",
+                                    "desc": "Smashbox Always On Longwear Matte Liquid Lipstick is infused with Primer Oil Complex, a blend of Jojoba, Apricot & Sunflower Oils to keep lips comfortable. The non-drying, weightless formula is waterproof & stays plush for 8 hours. Precision tip applicator lines & fills lips in one swipe.",
+                                    "price": 25.99,
+                                    
+                                    "currency": "USD",
+                                    "imageUrls": ["https://random-feed-generator.vercel.app/images/cosmetics/group-6/1-62133a.jpg","https://random-feed-generator.vercel.app/images/cosmetics/group-6/2-62133a.jpg"],
+                                    "variants": [
+                                    {"name":"color","value":"#62133a"}
+                                    ]
+                                }
+                                ])
+                        }
+                    }}
                     style={{ width: '100%', height: convertToNative(178), marginTop: 10, backgroundColor: "#ff00ff" }}
                     storylyId={STORYLY_TOKEN}
+                    storyCartIsEnabled={true}
+                    storyFallbackIsEnabled={true}
                     storyGroupViewFactory={{
                         width: convertToNative(100),
                         height: convertToNative(178),

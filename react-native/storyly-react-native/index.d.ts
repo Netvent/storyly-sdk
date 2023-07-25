@@ -49,6 +49,8 @@ declare module "storyly-react-native" {
       storyHeaderCloseIcon?: string,
       storyHeaderShareIcon?: string,
 
+      storyFallbackIsEnabled?: boolean;
+      storyCartIsEnabled?: boolean;
 
       storylyLayoutDirection?: "ltr" | "rtl";
 
@@ -201,13 +203,14 @@ declare module "storyly-react-native" {
     openStory: (storyUriFromTheDashboard: string) => void;
     openStoryWithId: (storyGroupId: string, storyId: string) => void;
     hydrateProducts: (products: STRProductItem[]) => void;
+    updateCart: (cart: STRCart) => void;
   }
 
   export interface STRProductItem {
     productId: string;
     productGroupId: string;
     title: string;
-    desc: String;
+    desc: string;
     price: number;
     salesPrice?: number;
     currency: String;
@@ -218,5 +221,19 @@ declare module "storyly-react-native" {
   export interface STRProductVariant {
     name: string;
     value: string;
+  }
+
+  export interface STRCart {
+    items: STRCartItem[];
+    totalPrice?: number;
+    oldTotalPrice?: number;
+    currency: string;
+  } 
+
+  export interface STRCartItem {
+    item: STRProductItem;
+    totalPrice?: number;
+    oldTotalPrice?: number;
+    currency: string;
   }
 }

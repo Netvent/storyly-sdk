@@ -57,6 +57,14 @@ class Storyly extends Component {
         );
     }
 
+    updateCart = (cart) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.updateCart,
+            [cart],
+        );
+    }
+
     _onStorylyLoaded = (eventPayload) => {
         if (this.props.onLoad) {
             this.props.onLoad(eventPayload.nativeEvent);
@@ -161,6 +169,8 @@ class Storyly extends Component {
             storyHeaderCloseButtonIsVisible,
             storyHeaderCloseIcon,
             storyHeaderShareIcon,
+            storyFallbackIsEnabled,
+            storyCartIsEnabled,
             onProductHydration,
             ...otherProps
         } = this.props;
@@ -229,6 +239,10 @@ class Storyly extends Component {
                             'closeButtonIcon': storyHeaderCloseIcon,
                             'shareButtonIcon': storyHeaderShareIcon,
                         },
+                        'storyProductConfig': { 
+                            'isFallbackEnabled': storyFallbackIsEnabled,
+                            'isCartEnabled': storyCartIsEnabled,
+                        },
                         'storylyShareUrl': storylyShareUrl,
                         'storylyLayoutDirection': storylyLayoutDirection,
                     }
@@ -288,6 +302,9 @@ Storyly.propTypes = {
     storyHeaderShareIcon: string,
     storylyLayoutDirection: string,
     storyGroupViewFactory: object,
+
+    storyFallbackIsEnabled: bool,
+    storyCartIsEnabled: bool,
 
     onLoad: func,
     onFail: func,

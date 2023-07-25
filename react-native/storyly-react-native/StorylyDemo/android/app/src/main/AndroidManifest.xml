@@ -8,6 +8,7 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@layout/network_security_config"
         android:supportsRtl="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
