@@ -1,4 +1,8 @@
 # Release Notes
+### 2.0.3 (28.07.2023)
+* added facebook id configuration to enable instagram sharing to stories
+* improved thread management for disk operations 
+  
 ### 2.0.2 (22.07.2023)
 * improved re-initialization flow of StorylyInit
 * fixed edge paddings of storyly bar
