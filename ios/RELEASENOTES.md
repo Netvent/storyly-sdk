@@ -1,4 +1,7 @@
 # Release Notes
+### 2.0.2 (28.07.2023)
+* added facebook id configuration to enable instagram sharing to stories
+  
 ### 2.0.1 (22.07.2023)
 * improved re-initialization flow of StorylyInit
 * improved data update flow of story screen, fixed [#287](https://github.com/Netvent/storyly-mobile/issues/287)
