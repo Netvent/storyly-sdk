@@ -58,13 +58,15 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         guard let storyGroupStylingJson = json["storyGroupStyling"] as? [String: Any] else { return nil }
         guard let storyBarStylingJson = json["storyBarStyling"] as? [String: Any] else { return nil }
         guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
+        guard let shareConfigJson = json["storyShareConfig"] as? NSDictionary else { return nil }
+
         
         var storylyConfigBuilder = StorylyConfig.Builder()
         storylyConfigBuilder = stStorylyInit(json: storylyInitJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStorylyGroupStyling(json: storyGroupStylingJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStoryBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder )
-        if let shareUrl = json["storylyShareUrl"] as? String { storylyConfigBuilder = storylyConfigBuilder.setShareUrl(url: shareUrl) }
+        storylyConfigBuilder = stShareConfig(json: shareConfigJson, configBuilder: &storylyConfigBuilder )
         
         return StorylyInit(
             storylyId: storylyId,
@@ -169,6 +171,23 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                 .setTitleVisibility(isVisible: json["isTitleVisible"] as? Bool ?? true)
                 .setHeaderIconVisibility(isVisible: json["isHeaderIconVisible"] as? Bool ?? true)
                 .setCloseButtonVisibility(isVisible: json["isCloseButtonVisible"] as? Bool ?? true)
+                .build()
+            )
+    }
+
+    private func stShareConfig(
+        json: NSDictionary,
+        configBuilder: inout StorylyConfig.Builder
+    ) -> StorylyConfig.Builder {
+        var shareConfigBuilder = StorylyShareConfig.Builder()
+        if let url = json["storylyShareUrl"] as? String {
+            shareConfigBuilder = shareConfigBuilder.setShareUrl(url: url)
+        }
+        if let facebookAppID = json["storylyFacebookAppID"] as? String {
+            shareConfigBuilder = shareConfigBuilder.setFacebookAppID(id: facebookAppID)
+        }
+        return configBuilder
+            .setShareConfig(config: shareConfigBuilder
                 .build()
             )
     }

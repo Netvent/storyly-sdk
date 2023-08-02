@@ -337,6 +337,9 @@ class StorylyParam {
   /// This attibute allows you to change share URL of stories.
   String? storylyShareUrl;
 
+  /// This attibute allows you to set Facebook app id to be used in Instagram share to storiess.
+  String? storylyFacebookAppID;
+
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
   ///
@@ -550,7 +553,10 @@ class StorylyParam {
       'closeButtonIcon': storyHeaderCloseIcon,
       'shareButtonIcon': storyHeaderShareIcon,
     };
-    paramsMap['storylyShareUrl'] = storylyShareUrl;
+    paramsMap['storyShareConfig'] = {
+      'storylyFacebookAppID': storylyFacebookAppID,
+      'storylyShareUrl': storylyShareUrl,
+    };
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
     return paramsMap;
