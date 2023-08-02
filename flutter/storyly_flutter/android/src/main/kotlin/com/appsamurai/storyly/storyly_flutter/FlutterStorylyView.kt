@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.config.StorylyConfig
+import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
@@ -182,13 +183,14 @@ class FlutterStorylyView(
         val storyGroupStylingJson = json["storyGroupStyling"] as? Map<String, *> ?: return null
         val storyBarStylingJson = json["storyBarStyling"] as? Map<String, *> ?: return null
         val storyStylingJson = json["storyStyling"] as? Map<String, *> ?: return null
+        val storyShareConfigJson = json["storyShareConfig"] as? Map<String, *> ?: return null
 
         var storylyConfigBuilder = StorylyConfig.Builder()
         storylyConfigBuilder = stStorylyInit(json = storylyInitJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stStorylyGroupStyling(context = context, json = storyGroupStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
-        (json["storylyShareUrl"] as? String)?.let { storylyConfigBuilder = storylyConfigBuilder.setShareUrl(it) }
+        storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
 
 
@@ -277,6 +279,20 @@ class FlutterStorylyView(
         return configBuilder
             .setStoryStyling(
                 storyStylingBuilder
+                    .build()
+            )
+    }
+
+    private fun stShareConfig(
+        json: Map<String, *>,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        var shareConfigBuilder = StorylyShareConfig.Builder()
+        (json["storylyShareUrl"] as? String)?.let { shareConfigBuilder = shareConfigBuilder.setShareUrl(it) }
+        (json["storylyFacebookAppID"] as? String)?.let { shareConfigBuilder = shareConfigBuilder.setFacebookAppID(it) }
+        return configBuilder
+            .setShareConfig(
+                shareConfigBuilder
                     .build()
             )
     }
