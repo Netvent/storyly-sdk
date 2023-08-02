@@ -3,14 +3,70 @@
 namespace Storyly
 {
 	[Native]
+	public enum StorylyDataSource : long
+	{
+		Api = 0,
+		MomentsAPI = 1,
+		Local = 2,
+		UserData = 3,
+		ProductData = 4,
+		ConditionData = 5
+	}
+
+	[Native]
+	public enum StorylyEvent : long
+	{
+		GroupOpened = 0,
+		GroupUserOpened = 1,
+		GroupDeepLinkOpened = 2,
+		GroupProgrammaticallyOpened = 3,
+		GroupCompleted = 4,
+		GroupPreviousSwiped = 5,
+		GroupNextSwiped = 6,
+		GroupClosed = 7,
+		Impression = 8,
+		Viewed = 9,
+		Completed = 10,
+		PreviousClicked = 11,
+		NextClicked = 12,
+		Paused = 13,
+		Resumed = 14,
+		Shared = 15,
+		CTAClicked = 16,
+		EmojiClicked = 17,
+		PollAnswered = 18,
+		QuizAnswered = 19,
+		ImageQuizAnswered = 20,
+		CountdownReminderAdded = 21,
+		CountdownReminderRemoved = 22,
+		Rated = 23,
+		InteractiveImpression = 24,
+		ProductTagExpanded = 25,
+		ProductTagClicked = 26,
+		ProductCardClicked = 27,
+		PromoCodeCopied = 28,
+		CommentSent = 29,
+		CommentInputOpened = 30,
+		CommentInputClosed = 31,
+		Liked = 32,
+		Unliked = 33,
+		ProductAdded = 34,
+		ProductUpdated = 35,
+		ProductRemoved = 36,
+		CheckoutButtonClicked = 37,
+		CartButtonClicked = 38,
+		CartViewClicked = 39,
+		ProductCatalogClicked = 40,
+		ProductSelected = 41
+	}
+
+	[Native]
 	public enum StoryGroupType : long
 	{
 		Default = 0,
-		IVod = 1,
-		Ad = 2,
-		MomentsDefault = 3,
-		MomentsBlock = 4,
-		Error = 5
+		Ad = 1,
+		MomentsDefault = 2,
+		MomentsBlock = 3
 	}
 
 	[Native]
@@ -19,7 +75,7 @@ namespace Storyly
 		Unknown = 0,
 		Image = 1,
 		Video = 2,
-		Vod = 3,
+		LongVideo = 3,
 		Ad = 4
 	}
 
@@ -39,58 +95,23 @@ namespace Storyly
 		Countdown = 10,
 		ProductTag = 11,
 		ProductCard = 12,
-		Comment = 13,
-		Video = 14,
-		Vod = 15,
-		LinkCTA = 16
+		ProductCatalog = 13,
+		Comment = 14,
+		Video = 15,
+		LongVideo = 16,
+		LinkCTA = 17,
+		ImageQuiz = 18
 	}
+}
 
+namespace Storyly
+{
 	[Native]
-	public enum StorylyDataSource : long
+	public enum StoryGroupSize : long
 	{
-		Api = 0,
-		MomentsAPI = 1,
-		Local = 2
-	}
-
-	[Native]
-	public enum StorylyEvent : long
-	{
-		StoryGroupOpened = 0,
-		StoryGroupUserOpened = 1,
-		StoryGroupDeepLinkOpened = 2,
-		StoryGroupProgrammaticallyOpened = 3,
-		StoryGroupCompleted = 4,
-		StoryGroupPreviousSwiped = 5,
-		StoryGroupNextSwiped = 6,
-		StoryGroupClosed = 7,
-		StoryImpression = 8,
-		StoryViewed = 9,
-		StoryCompleted = 10,
-		StoryPreviousClicked = 11,
-		StoryNextClicked = 12,
-		StoryPaused = 13,
-		StoryResumed = 14,
-		StoryShared = 15,
-		StoryCTAClicked = 16,
-		StoryEmojiClicked = 17,
-		StoryPollAnswered = 18,
-		StoryQuizAnswered = 19,
-		StoryCountdownReminderAdded = 20,
-		StoryCountdownReminderRemoved = 21,
-		StoryRated = 22,
-		StoryInteractiveImpression = 23,
-		StoryProductTagExpanded = 24,
-		StoryProductTagClicked = 25,
-		StoryProductCardClicked = 26,
-		StoryPromoCodeCopied = 27,
-		StoryCommentSent = 28,
-		StoryCommentInputOpened = 29,
-		StoryCommentInputClosed = 30,
-		StorylyIVodReplayButtonClicked = 31,
-		StorylyIVodSeeked = 32,
-		StoryLiked = 33,
-		StoryUnliked = 34
+		Small = 0,
+		Large = 1,
+		Custom = 2
 	}
 
 	[Native]
@@ -105,5 +126,12 @@ namespace Storyly
 	{
 		Horizontal = 0,
 		Vertical = 1
+	}
+
+	[Native]
+	public enum StorylyLayoutDirection : long
+	{
+		Ltr = 0,
+		Rtl = 1
 	}
 }
