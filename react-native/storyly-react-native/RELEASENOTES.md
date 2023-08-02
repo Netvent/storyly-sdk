@@ -1,4 +1,8 @@
 # Release Notes
+### 2.0.1 (02.08.2023)
+* added storylyFacebookAppID 
+* fixed [#293](https://github.com/Netvent/storyly-mobile/issues/293)
+
 ### 2.0.0 (24.07.2023)
 * migrated native version to 2.0
 
