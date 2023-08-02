@@ -1,3 +1,6 @@
+### 2.0.1 (02.08.2023)
+* added storylyFacebookAppID
+
 ### 2.0.0 (24.07.2023)
 * migrated native version to 2.0
 
