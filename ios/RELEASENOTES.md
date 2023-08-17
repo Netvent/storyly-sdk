@@ -1,4 +1,9 @@
 # Release Notes
+### 2.1.0 (17.08.2023)
+* added result interactive components for poll, quiz, reaction, image quiz, rating, question
+* added animation feature to interactive components entrance 
+* added story group countdown badge
+  
 ### 2.0.2 (28.07.2023)
 * added facebook id configuration to enable instagram sharing to stories
   
