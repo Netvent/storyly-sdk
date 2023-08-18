@@ -1,4 +1,16 @@
 # Release Notes
+### 2.1.0 (17.08.2023)
+* added result interactive components for poll, quiz, reaction, image quiz, rating, question
+* added animation feature to interactive components entrance 
+* added story group countdown badge
+
+### 2.0.1 (02.08.2023)
+* added storylyFacebookAppID 
+* fixed [#293](https://github.com/Netvent/storyly-mobile/issues/293)
+
+### 2.0.0 (24.07.2023)
+* migrated native version to 2.0
+
 ### 1.33.5 (29.05.2023)
 * removed onProductEvent
 

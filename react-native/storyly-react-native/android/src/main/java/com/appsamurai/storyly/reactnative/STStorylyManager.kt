@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.config.StorylyConfig
 import com.appsamurai.storyly.config.StorylyProductConfig
+import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
@@ -139,6 +140,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val storyBarStylingJson = storylyBundle.getMap("storyBarStyling") ?: return
         val storyStylingJson = storylyBundle.getMap("storyStyling") ?: return
         val storyProductConfigJson = storylyBundle.getMap("storyProductConfig") ?: return
+        val storyShareConfig = storylyBundle.getMap("storyShareConfig") ?: return
 
         val storyGroupViewFactory = getStoryGroupViewFactory(view.context, storyGroupViewFactoryJson).also { it?.onSendEvent = view::sendEvent }
         var storylyConfigBuilder = StorylyConfig.Builder()
@@ -147,7 +149,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
-        storylyBundle.getString("storylyShareUrl")?.let { storylyConfigBuilder = storylyConfigBuilder.setShareUrl(it) }
+        storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle.getString("storylyLayoutDirection")))
         view.storylyView = StorylyView(view.activity).apply {
             storylyInit = StorylyInit(
@@ -215,6 +217,20 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                     .setVerticalEdgePadding(if (json.hasKey("verticalEdgePadding")) json.getInt("verticalEdgePadding") else dpToPixel(4))
                     .setHorizontalPaddingBetweenItems(if (json.hasKey("horizontalPaddingBetweenItems")) json.getInt("horizontalPaddingBetweenItems") else dpToPixel(8))
                     .setVerticalPaddingBetweenItems(if (json.hasKey("verticalPaddingBetweenItems")) json.getInt("verticalPaddingBetweenItems") else dpToPixel(8))
+                    .build()
+            )
+    }
+
+    private fun stShareConfig(
+        json: ReadableMap,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        var shareConfigBuilder = StorylyShareConfig.Builder()
+        json.getString("storylyShareUrl")?.let { shareConfigBuilder = shareConfigBuilder.setShareUrl(it) }
+        json.getString("storylyFacebookAppID")?.let { shareConfigBuilder = shareConfigBuilder.setFacebookAppID(it) }
+        return configBuilder
+            .setShareConfig(
+                shareConfigBuilder
                     .build()
             )
     }
@@ -300,15 +316,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         }
     }
 
-    private fun getTypeface(context: Context, fontName: String?): Typeface {
-        fontName ?: return Typeface.DEFAULT
-        return try {
-            Typeface.createFromAsset(context.assets, fontName)
-        } catch (_: Exception) {
-            Typeface.DEFAULT
-        }
-    }
-
     private fun convertColorArray(colors: ReadableArray): List<Int> {
         val colorsNative = arrayListOf<Int>()
         for (i in 0 until colors.size()) colorsNative.add(colors.getInt(i))
@@ -317,6 +324,15 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
     private fun dpToPixel(dpValue: Int): Int {
         return (dpValue * (Resources.getSystem().displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
+    }
+
+    private fun getTypeface(context: Context, fontName: String?): Typeface {
+        fontName ?: return Typeface.DEFAULT
+        return try {
+            Typeface.createFromAsset(context.assets, fontName)
+        } catch (_: Exception) {
+            Typeface.DEFAULT
+        }
     }
 
     private fun getDrawable(

@@ -1,10 +1,14 @@
 ﻿using System;
 using CoreGraphics;
-using Foundation;
 using UIKit;
 
 namespace Storyly.Xamarin.iOS.Demo
 {
+    static class Constants
+    {
+        public const string StorylyToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
+    }
+
     public partial class ViewController : UIViewController
     {
         public ViewController(IntPtr handle) : base(handle)
@@ -18,52 +22,26 @@ namespace Storyly.Xamarin.iOS.Demo
 
             var storylyView = new StorylyView(new CGRect(0, 50, 414, 90))
             {
-                StorylyInit = new StorylyInit("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"),
+                StorylyInit = new StorylyInit(
+                    Constants.StorylyToken,
+                    new StorylyConfigBuilder().Build()),
                 RootViewController = this,
-                Delegate = new StorylyDelegateImpl(),
-                StoryGroupSize = "small"
+                Delegate = new StorylyDelegateImpl()
             };
             View.AddSubview(storylyView);
 
-            var womenStorylyView = new StorylyView(new CGRect(0, 150, 414, 130))
+            var storylyViewCustomization = new StorylyView(new CGRect(0, 180, 414, 130))
             {
-                StorylyInit = new StorylyInit("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjgyNDgsImFwcF9pZCI6MTM0MzEsImluc19pZCI6MTQ2MTh9.Q6RtSOt-yIcT2op9tS_hborpKLhOpPfV6wn_9tiFNkQ",
-                new StorylySegmentation(new NSSet<NSString>(new NSString("women"))),
-                null,
-                false,
-                null,
-                new NSDictionary<NSString, NSString>(
-                    new NSString("username"), new NSString("Nurcin")
-                )),
+                StorylyInit = new StorylyInit(
+                    Constants.StorylyToken,
+                    new StorylyConfigBuilder()
+                        .SetStoryGroupStyling(new StorylyStoryGroupStylingBuilder().SetSize(StoryGroupSize.Small)
+                            .Build())
+                    .Build()),
                 RootViewController = this,
                 Delegate = new StorylyDelegateImpl()
             };
-            womenStorylyView.SetExternalData(new[] {
-                new NSDictionary(
-                    new NSString("{Media_1}"), new NSString("https://xcdn.next.co.uk/common/items/default/default/publications/g65/shotzoom/149/t60-284s.jpg"),
-                    new NSString("{Product Name}"), new NSString("Shower Resistant Faux Fur Hooded Parka"),
-                    new NSString("{Price}"), new NSString("£92"),
-                    new NSString("{Description}"), new NSString("Update your wardrobe for winter with this fashionable and functional coat."),
-                    new NSString("{CTA}"), new NSString("Buy Now"),
-                    new NSString("{CTA_URL}"), new NSString("https://www3.next.co.uk/g65149s2/t60284#t60284")
-                    )
-            });
-            View.AddSubview(womenStorylyView);
-
-            var menStorylyView = new StorylyView(new CGRect(0, 290, 414, 130))
-            {
-                StorylyInit = new StorylyInit("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjgyNDgsImFwcF9pZCI6MTM0MzEsImluc19pZCI6MTQ2MTh9.Q6RtSOt-yIcT2op9tS_hborpKLhOpPfV6wn_9tiFNkQ",
-                new StorylySegmentation(new NSSet<NSString>(new NSString("men"))),
-                null,
-                false,
-                null,
-                new NSDictionary<NSString, NSString>(
-                    new NSString("username"), new NSString("Levent")
-                )),
-                RootViewController = this,
-                Delegate = new StorylyDelegateImpl()
-            };
-            View.AddSubview(menStorylyView);
+            View.AddSubview(storylyViewCustomization);
         }
 
         public override void DidReceiveMemoryWarning()

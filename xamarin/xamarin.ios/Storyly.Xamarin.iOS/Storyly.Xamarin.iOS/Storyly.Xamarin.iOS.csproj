@@ -12,7 +12,7 @@
     <AssemblyName>Storyly.Xamarin.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <SynchReleaseVersion>false</SynchReleaseVersion>
-    <ReleaseVersion>1.32.0</ReleaseVersion>
+    <ReleaseVersion>2.0.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

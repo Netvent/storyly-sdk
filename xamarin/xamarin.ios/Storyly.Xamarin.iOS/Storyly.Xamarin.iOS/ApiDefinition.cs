@@ -6,308 +6,52 @@ using UIKit;
 
 namespace Storyly
 {
-	// @interface StorylyInit : NSObject
-	[BaseType(typeof(NSObject))]
-	[DisableDefaultCtor]
+	// @interface StorylyView : UIView
+	[BaseType(typeof(UIView))]
 	[Protocol]
-	interface StorylyInit
+	interface StorylyView
 	{
-		// @property (nonatomic, strong) StorylySegmentation * _Nonnull segmentation;
-		[Export("segmentation", ArgumentSemantic.Strong)]
-		StorylySegmentation Segmentation { get; set; }
+		// @property (nonatomic, strong) StorylyInit * _Nonnull storylyInit;
+		[Export("storylyInit", ArgumentSemantic.Strong)]
+		StorylyInit StorylyInit { get; set; }
 
-		// @property (copy, nonatomic) NSDictionary<NSString *,NSString *> * _Nonnull userData;
-		[Export("userData", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSString> UserData { get; set; }
+		// @property (nonatomic, weak) UIViewController * _Nullable rootViewController;
+		[NullAllowed, Export("rootViewController", ArgumentSemantic.Weak)]
+		UIViewController RootViewController { get; set; }
 
-		// -(instancetype _Nonnull)initWithStorylyId:(NSString * _Nonnull)storylyId __attribute__((objc_designated_initializer));
-		[Export("initWithStorylyId:")]
+		[Wrap("WeakDelegate")]
+		[NullAllowed]
+		StorylyDelegate Delegate { get; set; }
+
+		// @property (nonatomic, weak) id<StorylyDelegate> _Nullable delegate;
+		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
+		NSObject WeakDelegate { get; set; }
+
+		// -(void)pause;
+		[Export("pause")]
+		void Pause();
+
+		// -(void)resume;
+		[Export("resume")]
+		void Resume();
+
+		// -(void)presentWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+		[Export("presentWithAnimated:completion:")]
+		void PresentWithAnimated(bool animated, [NullAllowed] Action completion);
+
+		// -(void)dismissWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+		[Export("dismissWithAnimated:completion:")]
+		void DismissWithAnimated(bool animated, [NullAllowed] Action completion);
+
+		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+		[Export("initWithFrame:")]
 		[DesignatedInitializer]
-		IntPtr Constructor(string storylyId);
-
-		// -(instancetype _Nonnull)initWithStorylyId:(NSString * _Nonnull)storylyId segmentation:(StorylySegmentation * _Nonnull)segmentation customParameter:(NSString * _Nullable)customParameter isTestMode:(BOOL)isTestMode storylyPayload:(NSString * _Nullable)storylyPayload userData:(NSDictionary<NSString *,NSString *> * _Nonnull)userData __attribute__((objc_designated_initializer));
-		[Export("initWithStorylyId:segmentation:customParameter:isTestMode:storylyPayload:userData:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string storylyId, StorylySegmentation segmentation, [NullAllowed] string customParameter, bool isTestMode, [NullAllowed] string storylyPayload, NSDictionary<NSString, NSString> userData);
+		IntPtr Constructor(CGRect frame);
 	}
+}
 
-	// @interface StorylySegmentation : NSObject
-	[BaseType(typeof(NSObject))]
-	[DisableDefaultCtor]
-	[Protocol]
-	interface StorylySegmentation
-	{
-		// -(instancetype _Nonnull)initWithSegments:(NSSet<NSString *> * _Nullable)segments __attribute__((objc_designated_initializer));
-		[Export("initWithSegments:")]
-		[DesignatedInitializer]
-		IntPtr Constructor([NullAllowed] NSSet<NSString> segments);
-	}
-
-	// @interface StoryGroup : NSObject
-	[BaseType(typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface StoryGroup
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull uniqueId;
-		[Export("uniqueId")]
-		string UniqueId { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
-		[Export("title")]
-		string Title { get; }
-
-		// @property (readonly, copy, nonatomic) NSURL * _Nonnull iconUrl;
-		[Export("iconUrl", ArgumentSemantic.Copy)]
-		NSUrl IconUrl { get; }
-
-		// @property (readonly, copy, nonatomic) NSDictionary<NSString *,NSURL *> * _Nullable thematicIconUrls;
-		[NullAllowed, Export("thematicIconUrls", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSUrl> ThematicIconUrls { get; }
-
-		// @property (readonly, copy, nonatomic) NSURL * _Nullable coverUrl;
-		[NullAllowed, Export("coverUrl", ArgumentSemantic.Copy)]
-		NSUrl CoverUrl { get; }
-
-		// @property (readonly, nonatomic) NSInteger index;
-		[Export("index")]
-		nint Index { get; }
-
-		// @property (readonly, nonatomic) BOOL seen;
-		[Export("seen")]
-		bool Seen { get; }
-
-		// @property (readonly, copy, nonatomic) NSArray<Story *> * _Nonnull stories;
-		[Export("stories", ArgumentSemantic.Copy)]
-		Story[] Stories { get; }
-
-		// @property (readonly, nonatomic) BOOL pinned;
-		[Export("pinned")]
-		bool Pinned { get; }
-
-		// @property (readonly, nonatomic) enum StoryGroupType type;
-		[Export("type")]
-		StoryGroupType Type { get; }
-
-		// TODO: check constructor
-		//// -(instancetype _Nonnull)initWithGroupTheme:(NSString * _Nullable)groupTheme id:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nonnull)iconUrl thematicIconUrls:(NSDictionary<NSString *,NSURL *> * _Nullable)thematicIconUrls coverUrl:(NSURL * _Nullable)coverUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type momentsUser:(MomentsUser * _Nullable)momentsUser __attribute__((objc_designated_initializer));
-		//[Export("initWithGroupTheme:id:title:iconUrl:thematicIconUrls:coverUrl:index:seen:stories:pinned:type:momentsUser:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor([NullAllowed] string groupTheme, string id, string title, NSUrl iconUrl, [NullAllowed] NSDictionary<NSString, NSUrl> thematicIconUrls, [NullAllowed] NSUrl coverUrl, nint index, bool seen, Story[] stories, bool pinned, StoryGroupType type, [NullAllowed] MomentsUser momentsUser);
-	}
-
-	// @interface Story : NSObject
-	[BaseType(typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface Story
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull uniqueId;
-		[Export("uniqueId")]
-		string UniqueId { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
-		[Export("title")]
-		string Title { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable name;
-		[NullAllowed, Export("name")]
-		string Name { get; }
-
-		// @property (readonly, nonatomic) NSInteger index;
-		[Export("index")]
-		nint Index { get; }
-
-		// @property (readonly, nonatomic) BOOL seen;
-		[Export("seen")]
-		bool Seen { get; }
-
-		// @property (readonly, nonatomic) NSInteger currentTime;
-		[Export("currentTime")]
-		nint CurrentTime { get; }
-
-		// @property (readonly, nonatomic, strong) StoryMedia * _Nonnull media;
-		[Export("media", ArgumentSemantic.Strong)]
-		StoryMedia Media { get; }
-
-		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime media:(StoryMedia * _Nonnull)media __attribute__((objc_designated_initializer));
-		[Export("initWithId:index:title:name:seen:currentTime:media:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string id, nint index, string title, [NullAllowed] string name, bool seen, nint currentTime, StoryMedia media);
-	}
-
-	// @interface StoryMedia : NSObject
-	[BaseType(typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface StoryMedia
-	{
-		// @property (readonly, nonatomic) enum StoryType type;
-		[Export("type")]
-		StoryType Type { get; }
-
-		// @property (readonly, copy, nonatomic) NSArray<StoryComponent *> * _Nullable storyComponentList;
-		[NullAllowed, Export("storyComponentList", ArgumentSemantic.Copy)]
-		StoryComponent[] StoryComponentList { get; }
-
-		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable actionUrlList;
-		[NullAllowed, Export("actionUrlList", ArgumentSemantic.Copy)]
-		string[] ActionUrlList { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
-		[NullAllowed, Export("actionUrl")]
-		string ActionUrl { get; }
-
-		// @property (copy, nonatomic) NSURL * _Nullable previewUrl;
-		[NullAllowed, Export("previewUrl", ArgumentSemantic.Copy)]
-		NSUrl PreviewUrl { get; set; }
-
-		// -(instancetype _Nonnull)initWithType:(enum StoryType)type storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList actionUrl:(NSString * _Nullable)actionUrl previewUrl:(NSURL * _Nullable)previewUrl __attribute__((objc_designated_initializer));
-		[Export("initWithType:storyComponentList:actionUrlList:actionUrl:previewUrl:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(StoryType type, [NullAllowed] StoryComponent[] storyComponentList, [NullAllowed] string[] actionUrlList, [NullAllowed] string actionUrl, [NullAllowed] NSUrl previewUrl);
-	}
-
-	// TODO: add childs of StoryComponent
-	// @interface StoryComponent : NSObject
-	[BaseType(typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface StoryComponent
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull id;
-		[Export("id")]
-		string Id { get; }
-
-		// @property (readonly, nonatomic) enum StoryComponentType type;
-		[Export("type")]
-		StoryComponentType Type { get; }
-	}
-
-	// @interface StoryCommentComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
-	interface StoryCommentComponent
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
-		[Export("text")]
-		string Text { get; }
-
-		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text __attribute__((objc_designated_initializer));
-		[Export("initWithId:text:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string id, string text);
-	}
-
-	// @interface StoryEmojiComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
-	interface StoryEmojiComponent
-	{
-		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull emojiCodes;
-		[Export("emojiCodes", ArgumentSemantic.Copy)]
-		string[] EmojiCodes { get; }
-
-		// @property (readonly, nonatomic) NSInteger selectedEmojiIndex;
-		[Export("selectedEmojiIndex")]
-		nint SelectedEmojiIndex { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-		[NullAllowed, Export("customPayload")]
-		string CustomPayload { get; }
-
-		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCodes:(NSArray<NSString *> * _Nonnull)emojiCodes selectedEmojiIndex:(NSInteger)selectedEmojiIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
-		[Export("initWithId:emojiCodes:selectedEmojiIndex:customPayload:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string id, string[] emojiCodes, nint selectedEmojiIndex, [NullAllowed] string customPayload);
-	}
-
-	// @interface StoryPollComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
-	interface StoryPollComponent
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
-		[Export("title")]
-		string Title { get; }
-
-		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
-		[Export("options", ArgumentSemantic.Copy)]
-		string[] Options { get; }
-
-		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
-		[Export("selectedOptionIndex")]
-		nint SelectedOptionIndex { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-		[NullAllowed, Export("customPayload")]
-		string CustomPayload { get; }
-
-		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
-		[Export("initWithId:title:options:selectedOptionIndex:customPayload:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string id, string title, string[] options, nint selectedOptionIndex, [NullAllowed] string customPayload);
-	}
-
-	// @interface StoryPromoCodeComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
-	interface StoryPromoCodeComponent
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
-		[Export("text")]
-		string Text { get; }
-
-		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text __attribute__((objc_designated_initializer));
-		[Export("initWithId:text:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string id, string text);
-	}
-
-	// @interface StoryQuizComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
-	interface StoryQuizComponent
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
-		[Export("title")]
-		string Title { get; }
-
-		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
-		[Export("options", ArgumentSemantic.Copy)]
-		string[] Options { get; }
-
-		// @property (readonly, nonatomic, strong) NSNumber * _Nullable rightAnswerIndex;
-		[NullAllowed, Export("rightAnswerIndex", ArgumentSemantic.Strong)]
-		NSNumber RightAnswerIndex { get; }
-
-		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
-		[Export("selectedOptionIndex")]
-		nint SelectedOptionIndex { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-		[NullAllowed, Export("customPayload")]
-		string CustomPayload { get; }
-
-		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
-		[Export("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string id, string title, string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
-	}
-
-	// @interface StoryRatingComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
-	interface StoryRatingComponent
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull emojiCode;
-		[Export("emojiCode")]
-		string EmojiCode { get; }
-
-		// @property (readonly, nonatomic) NSInteger rating;
-		[Export("rating")]
-		nint Rating { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-		[NullAllowed, Export("customPayload")]
-		string CustomPayload { get; }
-
-		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCode:(NSString * _Nonnull)emojiCode rating:(NSInteger)rating customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
-		[Export("initWithId:emojiCode:rating:customPayload:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(string id, string emojiCode, nint rating, [NullAllowed] string customPayload);
-	}
-
+namespace Storyly
+{
 	// @protocol StorylyDelegate
 	[BaseType(typeof(NSObject))]
 	[Protocol, Model(AutoGeneratedName = true)]
@@ -346,172 +90,549 @@ namespace Storyly
 		void StorylyEvent(StorylyView storylyView, StorylyEvent @event, [NullAllowed] StoryGroup storyGroup, [NullAllowed] Story story, [NullAllowed] StoryComponent storyComponent);
 	}
 
-	// @interface StoryGroupIconStyling : NSObject
+	// @interface StoryGroup : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface StoryGroupIconStyling
+	interface StoryGroup
 	{
-		// @property (nonatomic) CGFloat height;
-		[Export("height")]
-		nfloat Height { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull uniqueId;
+		[Export("uniqueId")]
+		string UniqueId { get; }
 
-		// @property (nonatomic) CGFloat width;
-		[Export("width")]
-		nfloat Width { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export("title")]
+		string Title { get; }
 
-		// @property (nonatomic) CGFloat cornerRadius;
-		[Export("cornerRadius")]
-		nfloat CornerRadius { get; set; }
+		// @property (readonly, copy, nonatomic) NSURL * _Nonnull iconUrl;
+		[Export("iconUrl", ArgumentSemantic.Copy)]
+		NSUrl IconUrl { get; }
 
-		// -(instancetype _Nonnull)initWithHeight:(CGFloat)height width:(CGFloat)width cornerRadius:(CGFloat)cornerRadius __attribute__((objc_designated_initializer));
-		[Export("initWithHeight:width:cornerRadius:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(nfloat height, nfloat width, nfloat cornerRadius);
+		// @property (readonly, copy, nonatomic) NSURL * _Nullable coverUrl;
+		[NullAllowed, Export("coverUrl", ArgumentSemantic.Copy)]
+		NSUrl CoverUrl { get; }
+
+		// @property (readonly, nonatomic) NSInteger index;
+		[Export("index")]
+		nint Index { get; }
+
+		// @property (readonly, nonatomic) BOOL seen;
+		[Export("seen")]
+		bool Seen { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<Story *> * _Nonnull stories;
+		[Export("stories", ArgumentSemantic.Copy)]
+		Story[] Stories { get; }
+
+		// @property (readonly, nonatomic) BOOL pinned;
+		[Export("pinned")]
+		bool Pinned { get; }
+
+		// @property (readonly, nonatomic) enum StoryGroupType type;
+		[Export("type")]
+		StoryGroupType Type { get; }
+
+		// @property (readonly, nonatomic, strong) StoryGroupStyle * _Nullable style;
+		[NullAllowed, Export("style", ArgumentSemantic.Strong)]
+		StoryGroupStyle Style { get; }
 	}
 
-	// @interface StoryGroupListStyling : NSObject
+	// @interface StoryGroupStyle : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface StoryGroupListStyling
+	interface StoryGroupStyle
 	{
-		// @property (nonatomic) enum StoryGroupListOrientation orientation;
-		[Export("orientation", ArgumentSemantic.Assign)]
-		StoryGroupListOrientation Orientation { get; set; }
+		// @property (readonly, copy, nonatomic) NSArray<UIColor *> * _Nullable borderUnseenColors;
+		[NullAllowed, Export("borderUnseenColors", ArgumentSemantic.Copy)]
+		UIColor[] BorderUnseenColors { get; }
 
-		// @property (nonatomic) NSInteger sections;
-		[Export("sections")]
-		nint Sections { get; set; }
+		// @property (readonly, nonatomic, strong) UIColor * _Nullable textUnseenColor;
+		[NullAllowed, Export("textUnseenColor", ArgumentSemantic.Strong)]
+		UIColor TextUnseenColor { get; }
 
-		// @property (nonatomic) CGFloat horizontalEdgePadding;
-		[Export("horizontalEdgePadding")]
-		nfloat HorizontalEdgePadding { get; set; }
-
-		// @property (nonatomic) CGFloat verticalEdgePadding;
-		[Export("verticalEdgePadding")]
-		nfloat VerticalEdgePadding { get; set; }
-
-		// @property (nonatomic) CGFloat horizontalPaddingBetweenItems;
-		[Export("horizontalPaddingBetweenItems")]
-		nfloat HorizontalPaddingBetweenItems { get; set; }
-
-		// @property (nonatomic) CGFloat verticalPaddingBetweenItems;
-		[Export("verticalPaddingBetweenItems")]
-		nfloat VerticalPaddingBetweenItems { get; set; }
-
-		// -(instancetype _Nonnull)initWithOrientation:(enum StoryGroupListOrientation)orientation sections:(NSInteger)sections horizontalEdgePadding:(CGFloat)horizontalEdgePadding verticalEdgePadding:(CGFloat)verticalEdgePadding horizontalPaddingBetweenItems:(CGFloat)horizontalPaddingBetweenItems verticalPaddingBetweenItems:(CGFloat)verticalPaddingBetweenItems __attribute__((objc_designated_initializer));
-		[Export("initWithOrientation:sections:horizontalEdgePadding:verticalEdgePadding:horizontalPaddingBetweenItems:verticalPaddingBetweenItems:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(StoryGroupListOrientation orientation, nint sections, nfloat horizontalEdgePadding, nfloat verticalEdgePadding, nfloat horizontalPaddingBetweenItems, nfloat verticalPaddingBetweenItems);
+		// @property (readonly, nonatomic, strong) StoryGroupBadgeStyle * _Nullable badge;
+		[NullAllowed, Export("badge", ArgumentSemantic.Strong)]
+		StoryGroupBadgeStyle Badge { get; }
 	}
 
-	// @interface StoryGroupTextStyling : NSObject
+	// @interface StoryGroupBadgeStyle : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface StoryGroupTextStyling
+	interface StoryGroupBadgeStyle
 	{
-		// @property (nonatomic) BOOL isVisible;
-		[Export("isVisible")]
-		bool IsVisible { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nullable text;
+		[NullAllowed, Export("text")]
+		string Text { get; }
 
-		// @property (nonatomic, strong) UIColor * _Nonnull colorSeen;
-		[Export("colorSeen", ArgumentSemantic.Strong)]
-		UIColor ColorSeen { get; set; }
+		// @property (readonly, nonatomic, strong) UIColor * _Nullable textColor;
+		[NullAllowed, Export("textColor", ArgumentSemantic.Strong)]
+		UIColor TextColor { get; }
 
-		// @property (nonatomic, strong) UIColor * _Nonnull colorNotSeen;
-		[Export("colorNotSeen", ArgumentSemantic.Strong)]
-		UIColor ColorNotSeen { get; set; }
-
-		// @property (nonatomic, strong) UIFont * _Nullable font;
-		[NullAllowed, Export("font", ArgumentSemantic.Strong)]
-		UIFont Font { get; set; }
-
-		// @property (nonatomic) NSInteger lines;
-		[Export("lines")]
-		nint Lines { get; set; }
-
-		// -(instancetype _Nonnull)initWithIsVisible:(BOOL)isVisible colorSeen:(UIColor * _Nonnull)colorSeen colorNotSeen:(UIColor * _Nonnull)colorNotSeen font:(UIFont * _Nullable)font lines:(NSInteger)lines __attribute__((objc_designated_initializer));
-		[Export("initWithIsVisible:colorSeen:colorNotSeen:font:lines:")]
-		[DesignatedInitializer]
-		IntPtr Constructor(bool isVisible, UIColor colorSeen, UIColor colorNotSeen, [NullAllowed] UIFont font, nint lines);
+		// @property (readonly, nonatomic, strong) UIColor * _Nullable backgroundColor;
+		[NullAllowed, Export("backgroundColor", ArgumentSemantic.Strong)]
+		UIColor BackgroundColor { get; }
 	}
 
-	// TODO: add pause/resume and PresentWithAnimated/DismissWithAnimated
-	// @interface StorylyView : UIView
-	[BaseType(typeof(UIView))]
-	[Protocol]
-	interface StorylyView
+	// @interface Story : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface Story
 	{
-		// @property (nonatomic, strong) StorylyInit * _Nonnull storylyInit;
-		[Export("storylyInit", ArgumentSemantic.Strong)]
-		StorylyInit StorylyInit { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull uniqueId;
+		[Export("uniqueId")]
+		string UniqueId { get; }
 
-		// @property (nonatomic, weak) UIViewController * _Nullable rootViewController;
-		[NullAllowed, Export("rootViewController", ArgumentSemantic.Weak)]
-		UIViewController RootViewController { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export("title")]
+		string Title { get; }
 
-		[Wrap("WeakDelegate")]
-		[NullAllowed]
-		StorylyDelegate Delegate { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nullable name;
+		[NullAllowed, Export("name")]
+		string Name { get; }
 
-		// @property (nonatomic, weak) id<StorylyDelegate> _Nullable delegate;
-		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-		NSObject WeakDelegate { get; set; }
+		// @property (readonly, nonatomic) NSInteger index;
+		[Export("index")]
+		nint Index { get; }
 
-		// -(void)pause;
-		[Export("pause")]
-		void Pause();
+		// @property (readonly, nonatomic) BOOL seen;
+		[Export("seen")]
+		bool Seen { get; }
 
-		// -(void)resume;
-		[Export("resume")]
-		void Resume();
+		// @property (readonly, nonatomic) NSInteger currentTime;
+		[Export("currentTime")]
+		nint CurrentTime { get; }
 
-		// -(void)presentWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
-		[Export("presentWithAnimated:completion:")]
-		void PresentWithAnimated(bool animated, [NullAllowed] Action completion);
+		// @property (readonly, nonatomic, strong) StoryMedia * _Nonnull media;
+		[Export("media", ArgumentSemantic.Strong)]
+		StoryMedia Media { get; }
+	}
 
-		// -(void)dismissWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
-		[Export("dismissWithAnimated:completion:")]
-		void DismissWithAnimated(bool animated, [NullAllowed] Action completion);
+	// @interface StoryMedia : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StoryMedia
+	{
+		// @property (readonly, nonatomic) enum StoryType type;
+		[Export("type")]
+		StoryType Type { get; }
 
-		// -(BOOL)setExternalData:(NSArray<NSDictionary *> * _Nonnull)externalData __attribute__((warn_unused_result("")));
-		[Export("setExternalData:")]
-		bool SetExternalData(NSDictionary[] externalData);
+		// @property (readonly, copy, nonatomic) NSArray<StoryComponent *> * _Nullable storyComponentList;
+		[NullAllowed, Export("storyComponentList", ArgumentSemantic.Copy)]
+		StoryComponent[] StoryComponentList { get; }
 
-		// @property (copy, nonatomic) NSString * _Nonnull storyGroupAnimation;
-		[Export("storyGroupAnimation")]
-		string StoryGroupAnimation { get; set; }
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable actionUrlList;
+		[NullAllowed, Export("actionUrlList", ArgumentSemantic.Copy)]
+		string[] ActionUrlList { get; }
 
-		// @property (copy, nonatomic) NSString * _Nonnull storyGroupSize;
-		[Export("storyGroupSize")]
-		string StoryGroupSize { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export("actionUrl")]
+		string ActionUrl { get; }
 
-		// @property (nonatomic, strong) StoryGroupIconStyling * _Nonnull storyGroupIconStyling;
-		[Export("storyGroupIconStyling", ArgumentSemantic.Strong)]
-		StoryGroupIconStyling StoryGroupIconStyling { get; set; }
+		// @property (copy, nonatomic) NSURL * _Nullable previewUrl;
+		[NullAllowed, Export("previewUrl", ArgumentSemantic.Copy)]
+		NSUrl PreviewUrl { get; set; }
+	}
 
-		// @property (copy, nonatomic) NSArray<UIColor *> * _Nonnull storyGroupIconBorderColorSeen;
-		[Export("storyGroupIconBorderColorSeen", ArgumentSemantic.Copy)]
-		UIColor[] StoryGroupIconBorderColorSeen { get; set; }
+	// @interface StoryComponent : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StoryComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull id;
+		[Export("id")]
+		string Id { get; }
 
-		// @property (copy, nonatomic) NSArray<UIColor *> * _Nonnull storyGroupIconBorderColorNotSeen;
-		[Export("storyGroupIconBorderColorNotSeen", ArgumentSemantic.Copy)]
-		UIColor[] StoryGroupIconBorderColorNotSeen { get; set; }
+		// @property (readonly, nonatomic) enum StoryComponentType type;
+		[Export("type")]
+		StoryComponentType Type { get; }
+	}
 
-		// @property (nonatomic, strong) UIColor * _Nonnull storyGroupIconBackgroundColor;
-		[Export("storyGroupIconBackgroundColor", ArgumentSemantic.Strong)]
-		UIColor StoryGroupIconBackgroundColor { get; set; }
+	// @interface StoryCommentComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryCommentComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export("text")]
+		string Text { get; }
+	}
 
-		// @property (nonatomic, strong) StoryGroupListStyling * _Nonnull storyGroupListStyling;
-		[Export("storyGroupListStyling", ArgumentSemantic.Strong)]
-		StoryGroupListStyling StoryGroupListStyling { get; set; }
+	// @interface StoryEmojiComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryEmojiComponent
+	{
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull emojiCodes;
+		[Export("emojiCodes", ArgumentSemantic.Copy)]
+		string[] EmojiCodes { get; }
 
-		// @property (nonatomic, strong) StoryGroupTextStyling * _Nonnull storyGroupTextStyling;
-		[Export("storyGroupTextStyling", ArgumentSemantic.Strong)]
-		StoryGroupTextStyling StoryGroupTextStyling { get; set; }
+		// @property (readonly, nonatomic) NSInteger selectedEmojiIndex;
+		[Export("selectedEmojiIndex")]
+		nint SelectedEmojiIndex { get; }
 
-		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
-		[Export("initWithFrame:")]
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+	}
+
+	// @interface StoryImageQuizComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryImageQuizComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable options;
+		[NullAllowed, Export("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic, strong) NSNumber * _Nullable rightAnswerIndex;
+		[NullAllowed, Export("rightAnswerIndex", ArgumentSemantic.Strong)]
+		NSNumber RightAnswerIndex { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+	}
+
+	// @interface StoryPollComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryPollComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
+		[Export("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+	}
+
+	// @interface StoryPromoCodeComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryPromoCodeComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export("text")]
+		string Text { get; }
+	}
+
+	// @interface StoryQuizComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryQuizComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
+		[Export("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic, strong) NSNumber * _Nullable rightAnswerIndex;
+		[NullAllowed, Export("rightAnswerIndex", ArgumentSemantic.Strong)]
+		NSNumber RightAnswerIndex { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+	}
+
+	// @interface StoryRatingComponent : StoryComponent
+	[BaseType(typeof(StoryComponent))]
+	interface StoryRatingComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull emojiCode;
+		[Export("emojiCode")]
+		string EmojiCode { get; }
+
+		// @property (readonly, nonatomic) NSInteger rating;
+		[Export("rating")]
+		nint Rating { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export("customPayload")]
+		string CustomPayload { get; }
+	}
+}
+
+
+namespace Storyly
+{
+	// @interface StorylyInit : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyInit
+	{
+		// @property (readonly, nonatomic, strong) StorylyConfig * _Nonnull config;
+		[Export("config", ArgumentSemantic.Strong)]
+		StorylyConfig Config { get; }
+
+		// -(instancetype _Nonnull)initWithStorylyId:(NSString * _Nonnull)storylyId config:(StorylyConfig * _Nonnull)config __attribute__((objc_designated_initializer));
+		[Export("initWithStorylyId:config:")]
 		[DesignatedInitializer]
-		IntPtr Constructor(CGRect frame);
+		IntPtr Constructor(string storylyId, StorylyConfig config);
+	}
+
+	// @interface StorylyConfig : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyConfig
+	{
+	}
+
+	// @interface StorylyConfigBuilder : NSObject
+	[BaseType(typeof(NSObject))]
+	interface StorylyConfigBuilder
+	{
+        // -(StorylyConfigBuilder * _Nonnull)setBarStyling:(StorylyBarStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+        [Export("setBarStyling:")]
+        StorylyConfigBuilder SetBarStyling(StorylyBarStyling styling);
+
+		// -(StorylyConfigBuilder * _Nonnull)setStoryStyling:(StorylyStoryStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+		[Export("setStoryStyling:")]
+		StorylyConfigBuilder SetStoryStyling(StorylyStoryStyling styling);
+
+		// -(StorylyConfigBuilder * _Nonnull)setStoryGroupStyling:(StorylyStoryGroupStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+		[Export("setStoryGroupStyling:")]
+		StorylyConfigBuilder SetStoryGroupStyling(StorylyStoryGroupStyling styling);
+
+		// -(StorylyConfigBuilder * _Nonnull)setLayoutDirection:(enum StorylyLayoutDirection)direction __attribute__((warn_unused_result("")));
+		[Export("setLayoutDirection:")]
+		StorylyConfigBuilder SetLayoutDirection(StorylyLayoutDirection direction);
+
+		// -(StorylyConfigBuilder * _Nonnull)setCustomParameter:(NSString * _Nullable)parameter __attribute__((warn_unused_result("")));
+		[Export("setCustomParameter:")]
+		StorylyConfigBuilder SetCustomParameter([NullAllowed] string parameter);
+
+		// -(StorylyConfigBuilder * _Nonnull)setLabels:(NSSet<NSString *> * _Nullable)labels __attribute__((warn_unused_result("")));
+		[Export("setLabels:")]
+		StorylyConfigBuilder SetLabels([NullAllowed] NSSet<NSString> labels);
+
+		// -(StorylyConfigBuilder * _Nonnull)setUserData:(NSDictionary<NSString *,NSString *> * _Nonnull)data __attribute__((warn_unused_result("")));
+		[Export("setUserData:")]
+		StorylyConfigBuilder SetUserData(NSDictionary<NSString, NSString> data);
+
+		// -(StorylyConfigBuilder * _Nonnull)setTestMode:(BOOL)isTest __attribute__((warn_unused_result("")));
+		[Export("setTestMode:")]
+		StorylyConfigBuilder SetTestMode(bool isTest);
+
+		// -(StorylyConfigBuilder * _Nonnull)setShareConfig:(StorylyShareConfig * _Nonnull)config __attribute__((warn_unused_result("")));
+		[Export("setShareConfig:")]
+		StorylyConfigBuilder SetShareConfig(StorylyShareConfig config);
+
+		// -(StorylyConfig * _Nonnull)build __attribute__((warn_unused_result("")));
+		[Export("build")]
+		StorylyConfig Build();
+	}
+
+	// @interface StorylyBarStyling : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyBarStyling
+	{
+	}
+
+	// @interface StorylyBarStylingBuilder : NSObject
+	[BaseType(typeof(NSObject))]
+	interface StorylyBarStylingBuilder
+	{
+		// -(StorylyBarStylingBuilder * _Nonnull)setOrientation:(enum StoryGroupListOrientation)orientation __attribute__((warn_unused_result("")));
+		[Export("setOrientation:")]
+		StorylyBarStylingBuilder SetOrientation(StoryGroupListOrientation orientation);
+
+		// -(StorylyBarStylingBuilder * _Nonnull)setSection:(NSInteger)count __attribute__((warn_unused_result("")));
+		[Export("setSection:")]
+		StorylyBarStylingBuilder SetSection(nint count);
+
+		// -(StorylyBarStylingBuilder * _Nonnull)setHorizontalEdgePadding:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export("setHorizontalEdgePadding:")]
+		StorylyBarStylingBuilder SetHorizontalEdgePadding(nfloat padding);
+
+		// -(StorylyBarStylingBuilder * _Nonnull)setVerticalEdgePadding:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export("setVerticalEdgePadding:")]
+		StorylyBarStylingBuilder SetVerticalEdgePadding(nfloat padding);
+
+		// -(StorylyBarStylingBuilder * _Nonnull)setHorizontalPaddingBetweenItems:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export("setHorizontalPaddingBetweenItems:")]
+		StorylyBarStylingBuilder SetHorizontalPaddingBetweenItems(nfloat padding);
+
+		// -(StorylyBarStylingBuilder * _Nonnull)setVerticalPaddingBetweenItems:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export("setVerticalPaddingBetweenItems:")]
+		StorylyBarStylingBuilder SetVerticalPaddingBetweenItems(nfloat padding);
+
+		// -(StorylyBarStyling * _Nonnull)build __attribute__((warn_unused_result("")));
+		[Export("build")]
+		StorylyBarStyling Build();
+	}
+
+	// @interface StorylyStoryStyling : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyStoryStyling
+	{
+	}
+
+	// @interface StorylyStoryStylingBuilder : NSObject
+	[BaseType(typeof(NSObject))]
+	interface StorylyStoryStylingBuilder
+	{
+		// -(StorylyStoryStylingBuilder * _Nonnull)setHeaderIconBorderColor:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
+		[Export("setHeaderIconBorderColor:")]
+		StorylyStoryStylingBuilder SetHeaderIconBorderColor(UIColor[] colors);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setTitleColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+		[Export("setTitleColor:")]
+		StorylyStoryStylingBuilder SetTitleColor(UIColor color);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setTitleFont:(UIFont * _Nonnull)font __attribute__((warn_unused_result("")));
+		[Export("setTitleFont:")]
+		StorylyStoryStylingBuilder SetTitleFont(UIFont font);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setInteractiveFont:(UIFont * _Nonnull)font __attribute__((warn_unused_result("")));
+		[Export("setInteractiveFont:")]
+		StorylyStoryStylingBuilder SetInteractiveFont(UIFont font);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setProgressBarColor:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
+		[Export("setProgressBarColor:")]
+		StorylyStoryStylingBuilder SetProgressBarColor(UIColor[] colors);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setTitleVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export("setTitleVisibility:")]
+		StorylyStoryStylingBuilder SetTitleVisibility(bool isVisible);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setHeaderIconVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export("setHeaderIconVisibility:")]
+		StorylyStoryStylingBuilder SetHeaderIconVisibility(bool isVisible);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setCloseButtonVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export("setCloseButtonVisibility:")]
+		StorylyStoryStylingBuilder SetCloseButtonVisibility(bool isVisible);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setCloseButtonIcon:(UIImage * _Nullable)icon __attribute__((warn_unused_result("")));
+		[Export("setCloseButtonIcon:")]
+		StorylyStoryStylingBuilder SetCloseButtonIcon([NullAllowed] UIImage icon);
+
+		// -(StorylyStoryStylingBuilder * _Nonnull)setShareButtonIcon:(UIImage * _Nullable)icon __attribute__((warn_unused_result("")));
+		[Export("setShareButtonIcon:")]
+		StorylyStoryStylingBuilder SetShareButtonIcon([NullAllowed] UIImage icon);
+
+		// -(StorylyStoryStyling * _Nonnull)build __attribute__((warn_unused_result("")));
+		[Export("build")]
+		StorylyStoryStyling Build();
+	}
+
+	// @interface StorylyStoryGroupStyling : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyStoryGroupStyling
+	{
+	}
+
+	// @interface StorylyStoryGroupStylingBuilder : NSObject
+	[BaseType(typeof(NSObject))]
+	interface StorylyStoryGroupStylingBuilder
+	{
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconBorderColorSeen:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
+		[Export("setIconBorderColorSeen:")]
+		StorylyStoryGroupStylingBuilder SetIconBorderColorSeen(UIColor[] colors);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconBorderColorNotSeen:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
+		[Export("setIconBorderColorNotSeen:")]
+		StorylyStoryGroupStylingBuilder SetIconBorderColorNotSeen(UIColor[] colors);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconBackgroundColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+		[Export("setIconBackgroundColor:")]
+		StorylyStoryGroupStylingBuilder SetIconBackgroundColor(UIColor color);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setPinIconColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+		[Export("setPinIconColor:")]
+		StorylyStoryGroupStylingBuilder SetPinIconColor(UIColor color);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconHeight:(CGFloat)height __attribute__((warn_unused_result("")));
+		[Export("setIconHeight:")]
+		StorylyStoryGroupStylingBuilder SetIconHeight(nfloat height);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconWidth:(CGFloat)width __attribute__((warn_unused_result("")));
+		[Export("setIconWidth:")]
+		StorylyStoryGroupStylingBuilder SetIconWidth(nfloat width);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconCornerRadius:(CGFloat)radius __attribute__((warn_unused_result("")));
+		[Export("setIconCornerRadius:")]
+		StorylyStoryGroupStylingBuilder SetIconCornerRadius(nfloat radius);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconThematicImageLabel:(NSString * _Nullable)label __attribute__((warn_unused_result("")));
+		[Export("setIconThematicImageLabel:")]
+		StorylyStoryGroupStylingBuilder SetIconThematicImageLabel([NullAllowed] string label);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setIconBorderAnimation:(enum StoryGroupAnimation)animation __attribute__((warn_unused_result("")));
+		[Export("setIconBorderAnimation:")]
+		StorylyStoryGroupStylingBuilder SetIconBorderAnimation(StoryGroupAnimation animation);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setTitleSeenColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+		[Export("setTitleSeenColor:")]
+		StorylyStoryGroupStylingBuilder SetTitleSeenColor(UIColor color);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setTitleNotSeenColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+		[Export("setTitleNotSeenColor:")]
+		StorylyStoryGroupStylingBuilder SetTitleNotSeenColor(UIColor color);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setTitleLineCount:(NSInteger)count __attribute__((warn_unused_result("")));
+		[Export("setTitleLineCount:")]
+		StorylyStoryGroupStylingBuilder SetTitleLineCount(nint count);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setTitleFont:(UIFont * _Nullable)font __attribute__((warn_unused_result("")));
+		[Export("setTitleFont:")]
+		StorylyStoryGroupStylingBuilder SetTitleFont([NullAllowed] UIFont font);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setTitleVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export("setTitleVisibility:")]
+		StorylyStoryGroupStylingBuilder SetTitleVisibility(bool isVisible);
+
+		// -(StorylyStoryGroupStylingBuilder * _Nonnull)setSize:(enum StoryGroupSize)size __attribute__((warn_unused_result("")));
+		[Export("setSize:")]
+		StorylyStoryGroupStylingBuilder SetSize(StoryGroupSize size);
+
+		// -(StorylyStoryGroupStyling * _Nonnull)build __attribute__((warn_unused_result("")));
+		[Export("build")]
+		StorylyStoryGroupStyling Build();
+	}
+
+	// @interface StorylyShareConfig : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyShareConfig
+	{
+	}
+
+	// @interface StorylyShareConfigBuilder : NSObject
+	[BaseType(typeof(NSObject))]
+	interface StorylyShareConfigBuilder
+	{
+		// -(StorylyShareConfigBuilder * _Nonnull)setShareUrl:(NSString * _Nonnull)url __attribute__((warn_unused_result("")));
+		[Export("setShareUrl:")]
+		StorylyShareConfigBuilder SetShareUrl(string url);
+
+		// -(StorylyShareConfigBuilder * _Nonnull)setFacebookAppID:(NSString * _Nonnull)id __attribute__((warn_unused_result("")));
+		[Export("setFacebookAppID:")]
+		StorylyShareConfigBuilder SetFacebookAppID(string id);
+
+		// -(StorylyShareConfig * _Nonnull)build __attribute__((warn_unused_result("")));
+		[Export("build")]
+		StorylyShareConfig Build();
 	}
 }

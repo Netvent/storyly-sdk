@@ -309,16 +309,6 @@ class StorylyViewController {
     );
   }
 
-  /// This function allows you to specify data of custom template groups.
-  Future<void> setExternalData(List<Map> externalData) {
-    return _methodChannel.invokeMethod(
-      'setExternalData',
-      <String, dynamic>{
-        'externalData': externalData,
-      },
-    );
-  }
-
   /// This function allows you to hydrate products.
   Future<void> hydrateProducts(List<Map> products) {
     return _methodChannel.invokeMethod(
@@ -346,6 +336,9 @@ class StorylyParam {
 
   /// This attibute allows you to change share URL of stories.
   String? storylyShareUrl;
+
+  /// This attibute allows you to set Facebook app id to be used in Instagram share to storiess.
+  String? storylyFacebookAppID;
 
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
@@ -419,10 +412,6 @@ class StorylyParam {
 
   /// This attribute changes vertical padding value between story groups
   int? storyGroupListVerticalPaddingBetweenItems;
-
-  /// This attribute allows you to use different story groups images for
-  /// different labels.
-  String? storyGroupIconImageThematicLabel;
 
   /// This attribute allows you to changes the visibility of story group
   /// text.
@@ -509,86 +498,67 @@ class StorylyParam {
   String? storyInteractiveTextTypeface;
 
   Map<String, dynamic> _toMap() {
-    final paramsMap = <String, dynamic>{
+    final paramsMap = <String, dynamic>{};
+    paramsMap['storylyInit'] = {
       'storylyId': storylyId,
       'storylySegments': storylySegments,
-      'storylyUserProperty': storylyUserProperty,
-      'storylyCustomParameters': storylyCustomParameters,
-      'storylyPayload': storylyPayload,
-      'storylyShareUrl': storylyShareUrl,
+      'userProperty': storylyUserProperty,
+      'customParameter': storylyCustomParameters,
       'storylyIsTestMode': storylyTestMode,
+      'storylyPayload': storylyPayload,
     };
-
-    paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
-
-    paramsMap['storyGroupIconStyling'] = {
-      'width': storyGroupIconWidth,
-      'height': storyGroupIconHeight,
-      'cornerRadius': storyGroupIconCornerRadius,
+    paramsMap['storyGroupStyling'] = {
+      'iconBorderColorSeen': storyGroupIconBorderColorSeen
+          ?.map((color) => color.toHexString())
+          .toList(),
+      'iconBorderColorNotSeen': storyGroupIconBorderColorNotSeen
+          ?.map((color) => color.toHexString())
+          .toList(),
+      'iconBackgroundColor': storyGroupIconBackgroundColor?.toHexString(),
+      'pinIconColor': storyGroupPinIconColor?.toHexString(),
+      'iconHeight': storyGroupIconHeight,
+      'iconWidth': storyGroupIconWidth,
+      'iconCornerRadius': storyGroupIconCornerRadius,
+      'iconBorderAnimation': storyGroupAnimation ?? 'border-rotation',
+      'titleSeenColor': storyGroupTextColorSeen?.toHexString(),
+      'titleNotSeenColor': storyGroupTextColorNotSeen?.toHexString(),
+      'titleLineCount': storyGroupTextLines,
+      'titleFont': storyGroupTextTypeface,
+      'titleTextSize': storyGroupTextSize,
+      'titleVisible': storyGroupTextIsVisible,
+      'groupSize': storyGroupSize ?? 'large',
     };
-
-    paramsMap['storyGroupListStyling'] = {
+    paramsMap['storyBarStyling'] = {
       'orientation': storyGroupListOrientation,
       'sections': storyGroupListSections,
       'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
       'verticalEdgePadding': storyGroupListVerticalEdgePadding,
       'horizontalPaddingBetweenItems':
           storyGroupListHorizontalPaddingBetweenItems,
-      'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems
+      'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
     };
-
-    paramsMap['storyGroupIconImageThematicLabel'] =
-        storyGroupIconImageThematicLabel;
-
-    paramsMap['storyGroupTextStyling'] = {
-      'isVisible': storyGroupTextIsVisible,
-      'textSize': storyGroupTextSize,
-      'lines': storyGroupTextLines,
-      'typeface': storyGroupTextTypeface,
-      'colorSeen': storyGroupTextColorSeen?.toHexString(),
-      'colorNotSeen': storyGroupTextColorNotSeen?.toHexString(),
-    };
-
-    paramsMap['storyHeaderStyling'] = {
-      'isTextVisible': storyHeaderTextIsVisible,
-      'isIconVisible': storyHeaderIconIsVisible,
+    paramsMap['storyStyling'] = {
+      'headerIconBorderColor': storyItemIconBorderColor
+          ?.map((color) => color.toHexString())
+          .toList(),
+      'titleColor': storyItemTextColor?.toHexString(),
+      'titleFont': storyItemTextTypeface,
+      'interactiveFont': storyInteractiveTextTypeface,
+      'progressBarColor': storyItemProgressBarColor
+          ?.map((color) => color.toHexString())
+          .toList(),
+      'isTitleVisible': storyHeaderTextIsVisible,
+      'isHeaderIconVisible': storyHeaderIconIsVisible,
       'isCloseButtonVisible': storyHeaderCloseButtonIsVisible,
-      'closeIcon': storyHeaderCloseIcon,
-      'shareIcon': storyHeaderShareIcon,
+      'closeButtonIcon': storyHeaderCloseIcon,
+      'shareButtonIcon': storyHeaderShareIcon,
     };
-
-    paramsMap['storyGroupSize'] = storyGroupSize ?? 'large';
-
-    paramsMap['storyGroupAnimation'] = storyGroupAnimation ?? 'border-rotation';
-
+    paramsMap['storyShareConfig'] = {
+      'storylyFacebookAppID': storylyFacebookAppID,
+      'storylyShareUrl': storylyShareUrl,
+    };
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
-
-    paramsMap['storyGroupIconBorderColorSeen'] = storyGroupIconBorderColorSeen
-        ?.map((color) => color.toHexString())
-        .toList();
-
-    paramsMap['storyGroupIconBorderColorNotSeen'] =
-        storyGroupIconBorderColorNotSeen
-            ?.map((color) => color.toHexString())
-            .toList();
-
-    paramsMap['storyGroupIconBackgroundColor'] =
-        storyGroupIconBackgroundColor?.toHexString();
-
-    paramsMap['storyGroupPinIconColor'] = storyGroupPinIconColor?.toHexString();
-
-    paramsMap['storyItemIconBorderColor'] =
-        storyItemIconBorderColor?.map((color) => color.toHexString()).toList();
-
-    paramsMap['storyItemTextColor'] = storyItemTextColor?.toHexString();
-
-    paramsMap['storyItemProgressBarColor'] =
-        storyItemProgressBarColor?.map((color) => color.toHexString()).toList();
-
-    paramsMap['storyItemTextTypeface'] = storyItemTextTypeface;
-
-    paramsMap['storyInteractiveTextTypeface'] = storyInteractiveTextTypeface;
-
+    paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
     return paramsMap;
   }
 }

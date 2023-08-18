@@ -2,44 +2,13 @@ import Storyly
 import UIKit
 
 internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
-    private let ARGS_STORYLY_ID = "storylyId"
-    private let ARGS_STORYLY_SEGMENTS = "storylySegments"
-    private let ARGS_STORYLY_USER_PROPERTY = "storylyUserProperty"
-    private let ARGS_STORYLY_PAYLOAD = "storylyPayload"
-    private let ARGS_STORYLY_CUSTOM_PARAMETERS = "storylyCustomParameters"
-    private let ARGS_STORYLY_SHARE_URL = "storylyShareUrl"
-    private let ARGS_STORYLY_IS_TEST_MODE = "storylyIsTestMode"
-    
-    private let ARGS_STORYLY_BACKGROUND_COLOR = "storylyBackgroundColor"
-
-    private let ARGS_STORY_GROUP_ANIMATION = "storyGroupAnimation"
-    private let ARGS_STORY_GROUP_SIZE = "storyGroupSize"
-    private let ARGS_STORY_GROUP_ICON_STYLING = "storyGroupIconStyling"
-    private let ARGS_STORY_GROUP_LIST_STYLING = "storyGroupListStyling"
-    private let ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL = "storyGroupIconImageThematicLabel"
-    private let ARGS_STORY_GROUP_TEXT_STYLING = "storyGroupTextStyling"
-    private let ARGS_STORY_HEADER_STYLING = "storyHeaderStyling"
-    private let ARGS_STORYLY_LAYOUT_DIRECTION = "storylyLayoutDirection"
-    
-    private let ARGS_STORY_GROUP_ICON_BORDER_COLOR_SEEN = "storyGroupIconBorderColorSeen"
-    private let ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN = "storyGroupIconBorderColorNotSeen"
-    private let ARGS_STORY_GROUP_ICON_BACKGROUND_COLOR = "storyGroupIconBackgroundColor"
-    private let ARGS_STORY_GROUP_PIN_ICON_COLOR = "storyGroupPinIconColor"
-    private let ARGS_STORY_ITEM_ICON_BORDER_COLOR = "storyItemIconBorderColor"
-    private let ARGS_STORY_ITEM_TEXT_COLOR = "storyItemTextColor"
-    private let ARGS_STORY_ITEM_TEXT_TYPEFACE = "storyItemTextTypeface"
-    private let ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE = "storyInteractiveTextTypeface"
-    private let ARGS_STORY_ITEM_PROGRESS_BAR_COLOR = "storyItemProgressBarColor"
-    
     internal lazy var storylyView: StorylyView = StorylyView(frame: self.frame)
     
-    private let args: [String: Any]
     private let methodChannel: FlutterMethodChannel
     
     init(frame: CGRect,
          args: [String: Any],
          methodChannel: FlutterMethodChannel) {
-        self.args = args
         self.methodChannel = methodChannel
         super.init(frame: frame)
         
@@ -57,11 +26,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                        let payloadUrl = URL(string: payloadString) {
                         _ = self?.storylyView.openStory(payload: payloadUrl)
                     }
-                case "setExternalData":
-                    if let externalData = callArguments?["externalData"] as? [[String : Any?]] {
-                        _ = self?.storylyView.setExternalData(externalData: externalData)
-                    }
-                case "hydrateProducts": 
+                case "hydrateProducts":
                     if let products = callArguments?["products"] as? [[String : Any?]] {
                         let storylyProducts = products.compactMap { self?.createSTRProductItem(product: $0) }
                         _ = self?.storylyView.hydrateProducts(products: storylyProducts)
@@ -70,191 +35,226 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             }
         }
         
-        guard let storylyId = self.args[ARGS_STORYLY_ID] as? String else { return }
-        var storylySegments: Set<String>?
-        if let argsSegments = self.args[ARGS_STORYLY_SEGMENTS] as? [String] { storylySegments = Set(argsSegments) }
+        guard let storylyInit = getStorylyInit(json: args) else { return }
         self.storylyView = StorylyView(frame: self.frame)
         self.storylyView.translatesAutoresizingMaskIntoConstraints = false
-        self.storylyView.storylyInit = StorylyInit(storylyId: storylyId,
-                                                   segmentation: StorylySegmentation(segments: storylySegments),
-                                                   customParameter: self.args[self.ARGS_STORYLY_CUSTOM_PARAMETERS] as? String,
-                                                   isTestMode: self.args[self.ARGS_STORYLY_IS_TEST_MODE] as? Bool ?? false,
-                                                   storylyPayload: self.args[ARGS_STORYLY_PAYLOAD] as? String)
-        if let userProperty = self.args[ARGS_STORYLY_USER_PROPERTY] as? [String: String] {
-            self.storylyView.storylyInit.userData = userProperty
-        }
-        if let shareUrl = self.args[ARGS_STORYLY_SHARE_URL] as? String {
-            self.storylyView.storylyShareUrl = shareUrl
-        }
+        self.storylyView.storylyInit = storylyInit
         self.storylyView.delegate = self
         self.storylyView.productDelegate = self
         self.storylyView.rootViewController = UIApplication.shared.keyWindow?.rootViewController?.getPresentedViewController()
-        self.updateTheme(storylyView: storylyView, args: self.args)
         self.addSubview(storylyView)
         self.storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        if let storylyBackgroundColor = args["storylyBackgroundColor"] as? String { storylyView.backgroundColor = UIColor(hexString: storylyBackgroundColor) }
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    private func updateTheme(storylyView: StorylyView, args: [String: Any]) {
-        if let storylyBackgroundColor = args[ARGS_STORYLY_BACKGROUND_COLOR] as? String {
-            storylyView.backgroundColor = UIColor(hexString: storylyBackgroundColor)
-        }
+    private func getStorylyInit(
+        json: [String: Any]
+    ) -> StorylyInit? {
+        guard let storylyInitJson = json["storylyInit"] as? [String: Any] else { return nil }
+        guard let storylyId = storylyInitJson["storylyId"] as? String else { return nil }
+        guard let storyGroupStylingJson = json["storyGroupStyling"] as? [String: Any] else { return nil }
+        guard let storyBarStylingJson = json["storyBarStyling"] as? [String: Any] else { return nil }
+        guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
+        guard let shareConfigJson = json["storyShareConfig"] as? NSDictionary else { return nil }
+
         
-        storylyView.storyGroupSize = args[self.ARGS_STORY_GROUP_SIZE] as? String ?? "large"
-
-        storylyView.storyGroupAnimation = args[self.ARGS_STORY_GROUP_ANIMATION] as? String ?? "border-rotation"
-
-        if let storyGroupIconStyling = args[ARGS_STORY_GROUP_ICON_STYLING] as? [String: Any] {
-            let width = (storyGroupIconStyling["width"] as? Int) ?? 80
-            let height = (storyGroupIconStyling["height"] as? Int) ?? 80
-            let cornerRadius = (storyGroupIconStyling["cornerRadius"] as? Int) ?? 40
-                
-            storylyView.storyGroupIconStyling = StoryGroupIconStyling(height: CGFloat(height),
-                                                                      width: CGFloat(width),
-                                                                      cornerRadius: CGFloat(cornerRadius))
-        }
+        var storylyConfigBuilder = StorylyConfig.Builder()
+        storylyConfigBuilder = stStorylyInit(json: storylyInitJson, configBuilder: &storylyConfigBuilder)
+        storylyConfigBuilder = stStorylyGroupStyling(json: storyGroupStylingJson, configBuilder: &storylyConfigBuilder)
+        storylyConfigBuilder = stStoryBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
+        storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder )
+        storylyConfigBuilder = stShareConfig(json: shareConfigJson, configBuilder: &storylyConfigBuilder )
         
-        if let storyGroupListStyling: [String : Any] = args[ARGS_STORY_GROUP_LIST_STYLING] as? [String: Any] {
-            var orientation: StoryGroupListOrientation
-            switch storyGroupListStyling["orientation"] as? String {
-                case "horizontal": orientation = .Horizontal
-                case "vertical": orientation = .Vertical
-                default: orientation = .Horizontal
-            }
-            let sections = (storyGroupListStyling["sections"] as? Int) ?? 1
-            let horizontalEdgePadding = (storyGroupListStyling["horizontalEdgePadding"] as? Int) ?? 4
-            let verticalEdgePadding = (storyGroupListStyling["verticalEdgePadding"] as? Int) ?? 4
-            let horizontalPaddingBetweenItems = (storyGroupListStyling["horizontalPaddingBetweenItems"] as? Int) ?? 8
-            let verticalPaddingBetweenItems = (storyGroupListStyling["verticalPaddingBetweenItems"] as? Int) ?? 8
-
-            storylyView.storyGroupListStyling = StoryGroupListStyling(
-                orientation: orientation,
-                sections: sections,
-                horizontalEdgePadding: CGFloat(horizontalEdgePadding),
-                verticalEdgePadding: CGFloat(verticalEdgePadding),
-                horizontalPaddingBetweenItems: CGFloat(horizontalPaddingBetweenItems),
-                verticalPaddingBetweenItems: CGFloat(verticalPaddingBetweenItems)
+        return StorylyInit(
+            storylyId: storylyId,
+            config: storylyConfigBuilder
+                .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
+                .build()
+        )
+    }
+    
+    private func stStorylyInit(
+        json: [String: Any],
+        configBuilder: inout StorylyConfig.Builder
+    ) -> StorylyConfig.Builder {
+        if let segmentsData = json["storylySegments"] as? [String] { configBuilder = configBuilder.setLabels(labels: Set(segmentsData)) }
+        return configBuilder
+            .setCustomParameter(parameter: json["customParameter"] as? String)
+            .setTestMode(isTest: (json["storylyIsTestMode"] as? Bool) ?? false)
+            .setStorylyPayload(payload: json["storylyPayload"] as? String)
+            .setUserData(data: json["userProperty"] as? [String: String] ?? [:])
+    }
+    
+    private func stStorylyGroupStyling(
+        json: [String: Any],
+        configBuilder: inout StorylyConfig.Builder
+    ) -> StorylyConfig.Builder {
+        var groupStylingBuilder = StorylyStoryGroupStyling.Builder()
+        
+        if let iconBorderColorSeenJson = json["iconBorderColorSeen"] as? [String] {
+            groupStylingBuilder = groupStylingBuilder.setIconBorderColorSeen(colors: iconBorderColorSeenJson.map { UIColor(hexString: $0) })
+        }
+        if let iconBorderColorNotSeenJson = json["iconBorderColorNotSeen"] as? [String] {
+            groupStylingBuilder = groupStylingBuilder.setIconBorderColorNotSeen(colors: iconBorderColorNotSeenJson.map { UIColor(hexString: $0) })
+        }
+        if let iconBackgroundColorJson = json["iconBackgroundColor"] as? String {
+            groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(color: UIColor(hexString: iconBackgroundColorJson))
+        }
+        if let pinIconColorJson = json["pinIconColor"] as? String {
+            groupStylingBuilder = groupStylingBuilder.setPinIconColor(color: UIColor(hexString: pinIconColorJson))
+        }
+        if let titleSeenColorJson = json["titleSeenColor"] as? String {
+            groupStylingBuilder = groupStylingBuilder.setTitleSeenColor(color: UIColor(hexString: titleSeenColorJson))
+        }
+        if let titleNotSeenColorJson = json["titleNotSeenColor"] as? String {
+            groupStylingBuilder = groupStylingBuilder.setTitleNotSeenColor(color: UIColor(hexString: titleNotSeenColorJson))
+        }
+        return configBuilder
+            .setStoryGroupStyling(
+                styling: groupStylingBuilder
+                    .setIconHeight(height: json["iconHeight"] as? CGFloat ?? 80)
+                    .setIconWidth(width: json["iconWidth"] as? CGFloat ?? 80)
+                    .setIconCornerRadius(radius: json["iconCornerRadius"] as? CGFloat ?? 40)
+                    .setSize(size: getStoryGroupSize(groupSize: json["groupSize"] as? String))
+                    .setIconBorderAnimation(animation: getStoryGroupAnimation(groupAnimation: json["iconBorderAnimation"] as? String))
+                    .setTitleLineCount(count: json["titleLineCount"] as? Int ?? 2)
+                    .setTitleFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: CGFloat(json["titleTextSize"] as? Int ?? 12)))
+                    .setTitleVisibility(isVisible: json["titleVisible"] as? Bool ?? true)
+                    .build()
             )
+    }
+    
+    private func stStoryBarStyling(
+        json: [String: Any],
+        configBuilder: inout StorylyConfig.Builder
+    ) -> StorylyConfig.Builder {
+        return configBuilder
+            .setBarStyling(
+                styling: StorylyBarStyling.Builder()
+                    .setOrientation(orientation: getStoryGroupListOrientation(orientation: json["orientation"] as? String))
+                    .setSection(count: json["sections"] as? Int ?? 1)
+                    .setHorizontalEdgePadding(padding: json["horizontalEdgePadding"] as? CGFloat ?? 4)
+                    .setVerticalEdgePadding(padding: json["verticalEdgePadding"] as? CGFloat ?? 4)
+                    .setHorizontalPaddingBetweenItems(padding: json["horizontalPaddingBetweenItems"] as? CGFloat ?? 8)
+                    .setVerticalPaddingBetweenItems(padding: json["verticalPaddingBetweenItems"] as? CGFloat ?? 8)
+                    .build()
+            )
+    }
+    
+    private func stStoryStyling(
+        json: NSDictionary,
+        configBuilder: inout StorylyConfig.Builder
+    ) -> StorylyConfig.Builder {
+        var storyStylingBuilder = StorylyStoryStyling.Builder()
+        if let headerIconBorderColorJson = json["headerIconBorderColor"] as? [String] {
+            storyStylingBuilder = storyStylingBuilder.setHeaderIconBorderColor(colors: headerIconBorderColorJson.map { UIColor(hexString: $0) })
         }
-        
-        if let storyGroupIconImageThematicLabel = args[ARGS_STORY_GROUP_ICON_IMAGE_THEMATIC_LABEL] as? String {
-            storylyView.storyGroupIconImageThematicLabel = storyGroupIconImageThematicLabel
+        if let titleColorJson = json["titleColor"] as? String {
+            storyStylingBuilder = storyStylingBuilder.setTitleColor(color: UIColor(hexString: titleColorJson))
         }
-        
-        if let storyGroupTextStyling = args[ARGS_STORY_GROUP_TEXT_STYLING] as? [String: Any] {
-            let isVisible = storyGroupTextStyling["isVisible"] as? Bool ?? true
-            let fontSize = CGFloat(storyGroupTextStyling["textSize"] as? Int ?? 12)
-            let lines = storyGroupTextStyling["lines"] as? Int ?? 2
-            let typeface = storyGroupTextStyling["typeface"] as? String
-            let colorSeen = UIColor(hexString: storyGroupTextStyling["colorSeen"] as? String ?? "#FF000000")
-            let colorNotSeen = UIColor(hexString: storyGroupTextStyling["colorNotSeen"] as? String ?? "#FF000000")
+        if let progressBarColorJson = json["progressBarColor"] as? [String] {
+            storyStylingBuilder = storyStylingBuilder.setProgressBarColor(colors: progressBarColorJson.map { UIColor(hexString: $0)})
+        }
+        if let closeButtonIconJson = json["closeButtonIcon"] as? String {
+            storyStylingBuilder = storyStylingBuilder.setCloseButtonIcon(icon: UIImage(named: closeButtonIconJson))
+        }
+        if let shareButtonIconJson = json["shareButtonIcon"] as? String {
+            storyStylingBuilder = storyStylingBuilder.setShareButtonIcon(icon: UIImage(named: shareButtonIconJson))
+        }
+        return configBuilder
+            .setStoryStyling(styling: storyStylingBuilder
+                .setTitleFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: 14, defaultWeight: .semibold))
+                .setInteractiveFont(font: getCustomFont(typeface: json["interactiveFont"] as? NSString, fontSize: 14, defaultWeight: .regular))
+                .setTitleVisibility(isVisible: json["isTitleVisible"] as? Bool ?? true)
+                .setHeaderIconVisibility(isVisible: json["isHeaderIconVisible"] as? Bool ?? true)
+                .setCloseButtonVisibility(isVisible: json["isCloseButtonVisible"] as? Bool ?? true)
+                .build()
+            )
+    }
 
-            var font = UIFont.systemFont(ofSize: fontSize)
-            if let fontName = (typeface as? NSString)?.deletingPathExtension {
-                if let updateFont = UIFont(name: fontName, size: fontSize) {
-                    font = updateFont
-                }
-            }
-            
-            storylyView.storyGroupTextStyling = StoryGroupTextStyling(isVisible: isVisible,
-                                                                      colorSeen: colorSeen,
-                                                                      colorNotSeen: colorNotSeen,
-                                                                      font: font,
-                                                                      lines: lines)
+    private func stShareConfig(
+        json: NSDictionary,
+        configBuilder: inout StorylyConfig.Builder
+    ) -> StorylyConfig.Builder {
+        var shareConfigBuilder = StorylyShareConfig.Builder()
+        if let url = json["storylyShareUrl"] as? String {
+            shareConfigBuilder = shareConfigBuilder.setShareUrl(url: url)
         }
-        
-      if let storyHeaderStyling = args[ARGS_STORY_HEADER_STYLING] as? [String: Any] {
-            let isTextVisible = storyHeaderStyling["isTextVisible"] as? Bool ?? true
-            let isIconVisible = storyHeaderStyling["isIconVisible"] as? Bool ?? true
-            let isCloseButtonVisible = storyHeaderStyling["isCloseButtonVisible"] as? Bool ?? true
-                
-            var closeIconImage: UIImage? = nil
-            if let closeIcon = storyHeaderStyling["closeIcon"] as? String {
-                 closeIconImage = UIImage(named: closeIcon)
-            }
-            var shareIconImage: UIImage? = nil
-            if let shareIcon = storyHeaderStyling["shareIcon"] as? String {
-                shareIconImage = UIImage(named: shareIcon)
-            }
-                
-            storylyView.storyHeaderStyling = StoryHeaderStyling(isTextVisible: isTextVisible,
-                                                                isIconVisible: isIconVisible,
-                                                                isCloseButtonVisible: isCloseButtonVisible,
-                                                                closeButtonIcon: closeIconImage,
-                                                                shareButtonIcon: shareIconImage)
+        if let facebookAppID = json["storylyFacebookAppID"] as? String {
+            shareConfigBuilder = shareConfigBuilder.setFacebookAppID(id: facebookAppID)
         }
-
-        if let storylyLayoutDirection = args[self.ARGS_STORYLY_LAYOUT_DIRECTION] as? String {
-            switch storylyLayoutDirection {
-                case "ltr": storylyView.storylyLayoutDirection = .LTR
-                case "rtl": storylyView.storylyLayoutDirection = .RTL
-                default:  storylyView.storylyLayoutDirection = .LTR
-            }
-        }
-        
-        if let storyGroupIconBorderColorSeen = args[ARGS_STORY_GROUP_ICON_BORDER_COLOR_SEEN] as? [String] {
-            storylyView.storyGroupIconBorderColorSeen = storyGroupIconBorderColorSeen.map { UIColor(hexString: $0) }
-        }
-        
-        if let storyGroupIconBorderColorNotSeen = args[ARGS_STORY_GROUP_ICON_BORDER_COLOR_NOT_SEEN] as? [String] {
-            storylyView.storyGroupIconBorderColorNotSeen = storyGroupIconBorderColorNotSeen.map { UIColor(hexString: $0) }
-        }
-        
-        if let storyGroupIconBackgroundColor = args[ARGS_STORY_GROUP_ICON_BACKGROUND_COLOR] as? String {
-            storylyView.storyGroupIconBackgroundColor = UIColor(hexString: storyGroupIconBackgroundColor)
-        }
-        
-        if let storyGroupPinIconColor = args[ARGS_STORY_GROUP_PIN_ICON_COLOR] as? String {
-            storylyView.storyGroupPinIconColor = UIColor(hexString: storyGroupPinIconColor)
-        }
-        
-        if let storyItemIconBorderColor = args[ARGS_STORY_ITEM_ICON_BORDER_COLOR] as? [String] {
-            storylyView.storyItemIconBorderColor = storyItemIconBorderColor.map { UIColor(hexString: $0) }
-        }
-        
-        if let storyItemTextColor = args[ARGS_STORY_ITEM_TEXT_COLOR] as? String {
-            storylyView.storyItemTextColor = UIColor(hexString: storyItemTextColor)
-        }
-        
-        if let storyItemTextTypeface = args[ARGS_STORY_ITEM_TEXT_TYPEFACE] as? String {
-            let fontName = (storyItemTextTypeface as NSString).deletingPathExtension
-            if let updateFont = UIFont(name: fontName, size: 14) {
-                storylyView.storyItemTextFont = updateFont
-            }
-        }
-        
-        if let storyInteractiveTextTypeface = args[ARGS_STORY_INTERACTIVE_TEXT_TYPEFACE] as? String {
-            let fontName = (storyInteractiveTextTypeface as NSString).deletingPathExtension
-            if let updateFont = UIFont(name: fontName, size: 14) {
-                storylyView.storyInteractiveFont = updateFont
-            }
-        }
-        
-        if let storyItemProgressBarColor = args[ARGS_STORY_ITEM_PROGRESS_BAR_COLOR] as? [String] {
-            storylyView.storylyItemProgressBarColor = storyItemProgressBarColor.map { UIColor(hexString: $0) }
+        return configBuilder
+            .setShareConfig(config: shareConfigBuilder
+                .build()
+            )
+    }
+    
+    private func getStoryGroupSize(groupSize: String?) -> StoryGroupSize {
+        switch groupSize {
+            case "small": return .Small
+            case "custom": return .Custom
+            default: return .Large
         }
     }
+    
+    private func getStoryGroupAnimation(groupAnimation: String?) -> StoryGroupAnimation {
+        switch groupAnimation {
+            case "border-rotation": return .BorderRotation
+            case "disabled": return .Disabled
+            default: return .BorderRotation
+        }
+    }
+    
+    private func getStorylyLayoutDirection(direction: String?) -> StorylyLayoutDirection {
+        switch direction {
+            case "ltr": return .LTR
+            case "rtl": return .RTL
+            default: return .LTR
+        }
+    }
+    
+    private func getStoryGroupListOrientation(orientation: String?) -> StoryGroupListOrientation {
+        switch orientation {
+            case "horizontal": return .Horizontal
+            case "vertical": return .Vertical
+            default: return .Horizontal
+        }
+    }
+    
+    private func getCustomFont(
+        typeface: NSString?,
+        fontSize: CGFloat,
+        defaultWeight: UIFont.Weight = .regular
+    ) -> UIFont {
+        if let fontName = typeface?.deletingPathExtension,
+           let font = UIFont(name: fontName, size: fontSize) { return font }
+        return .systemFont(ofSize: fontSize, weight: defaultWeight)
+    }
 }
- 
+
 extension FlutterStorylyViewWrapper: StorylyProductDelegate {
-     
+    
     func storylyHydration(_ storylyView: StorylyView, productIds: [String]) {
         self.methodChannel.invokeMethod("storylyOnHydration",
                                         arguments: ["productIds": productIds])
     }
     
     func storylyEvent(_ storylyView: StorylyView,
-                                     event: StorylyEvent,
+                      event: StorylyEvent,
                       product: STRProductItem?, extras: [String:String]) {
         var storylyProductItem : [String: Any?]? = nil
         if let product = product {
             storylyProductItem = self.createSTRProductItemMap(product: product)
         }
-        self.methodChannel.invokeMethod("storylyProductEvent", arguments: ["event": event.stringValue,
-                                                                          "product": storylyProductItem,
-                                                                          "extras": extras]
+        self.methodChannel.invokeMethod(
+            "storylyProductEvent",
+            arguments: [
+                "event": event.stringValue,
+                "product": storylyProductItem,
+                "extras": extras]
         )
     }
 }
@@ -264,9 +264,11 @@ extension FlutterStorylyViewWrapper {
     func storylyLoaded(_ storylyView: Storyly.StorylyView,
                        storyGroupList: [Storyly.StoryGroup],
                        dataSource: StorylyDataSource) {
-        self.methodChannel.invokeMethod("storylyLoaded",
-                                        arguments: ["storyGroups": storyGroupList.map { storyGroup in self.createStoryGroupMap(storyGroup: storyGroup)},
-                                                    "dataSource": dataSource.description])
+        self.methodChannel.invokeMethod(
+            "storylyLoaded",
+            arguments: [
+                "storyGroups": storyGroupList.map { storyGroup in self.createStoryGroupMap(storyGroup: storyGroup)},
+                "dataSource": dataSource.description])
     }
     
     func storylyLoadFailed(_ storylyView: Storyly.StorylyView, errorMessage: String) {
@@ -282,18 +284,22 @@ extension FlutterStorylyViewWrapper {
         
         var storyComponentMap: [String: Any?]? = nil
         if let storyComponent = storyComponent { storyComponentMap = self.createStoryComponentMap(storyComponent: storyComponent) }
-        self.methodChannel.invokeMethod("storylyEvent",
-                                        arguments: ["event": event.stringValue,
-                                                    "storyGroup": storyGroupMap,
-                                                    "story": storyMap,
-                                                    "storyComponent": storyComponentMap])
+        self.methodChannel.invokeMethod(
+            "storylyEvent",
+            arguments: [
+                "event": event.stringValue,
+                "storyGroup": storyGroupMap,
+                "story": storyMap,
+                "storyComponent": storyComponentMap
+            ])
     }
     
     func storylyActionClicked(_ storylyView: Storyly.StorylyView,
                               rootViewController: UIViewController,
                               story: Storyly.Story) {
-        self.methodChannel.invokeMethod("storylyActionClicked",
-                                        arguments: self.createStoryMap(story: story))
+        self.methodChannel.invokeMethod(
+            "storylyActionClicked",
+            arguments: self.createStoryMap(story: story))
     }
     
     func storylyStoryPresented(_ storylyView: Storyly.StorylyView) {
@@ -308,41 +314,50 @@ extension FlutterStorylyViewWrapper {
                                storyGroup: StoryGroup,
                                story: Story,
                                storyComponent: StoryComponent) {
-        self.methodChannel.invokeMethod("storylyUserInteracted",
-                                        arguments: ["storyGroup": self.createStoryGroupMap(storyGroup: storyGroup),
-                                                    "story": self.createStoryMap(story: story),
-                                                    "storyComponent": self.createStoryComponentMap(storyComponent: storyComponent)])
+        self.methodChannel.invokeMethod(
+            "storylyUserInteracted",
+            arguments: [
+                "storyGroup": self.createStoryGroupMap(storyGroup: storyGroup),
+                "story": self.createStoryMap(story: story),
+                "storyComponent": self.createStoryComponentMap(storyComponent: storyComponent)
+            ])
     }
     
     private func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
-        return ["id": storyGroup.uniqueId,
-                "title": storyGroup.title,
-                "index": storyGroup.index,
-                "seen": storyGroup.seen,
-                "iconUrl": storyGroup.iconUrl?.absoluteString,
-                "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
-                "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
-                "coverUrl": storyGroup.coverUrl,
-                "pinned": storyGroup.pinned,
-                "type": storyGroup.type.rawValue]
+        return [
+            "id": storyGroup.uniqueId,
+            "title": storyGroup.title,
+            "index": storyGroup.index,
+            "seen": storyGroup.seen,
+            "iconUrl": storyGroup.iconUrl?.absoluteString,
+            "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
+            "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
+            "coverUrl": storyGroup.coverUrl,
+            "pinned": storyGroup.pinned,
+            "type": storyGroup.type.rawValue
+        ]
     }
     
     private func createStoryMap(story: Story) -> [String: Any?] {
-        return ["id": story.uniqueId,
-                "title": story.title,
-                "name": story.name,
-                "index": story.index,
-                "seen": story.seen,
-                "currentTime": story.currentTime,
-                "media": ["type": story.media.type.rawValue,
-                          "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
-                          "actionUrl": story.media.actionUrl,
-                          "previewUrl": story.media.previewUrl?.absoluteString,
-                          "actionUrlList": story.media.actionUrlList ]]
+        return [
+            "id": story.uniqueId,
+            "title": story.title,
+            "name": story.name,
+            "index": story.index,
+            "seen": story.seen,
+            "currentTime": story.currentTime,
+            "media": [
+                "type": story.media.type.rawValue,
+                "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
+                "actionUrl": story.media.actionUrl,
+                "previewUrl": story.media.previewUrl?.absoluteString,
+                "actionUrlList": story.media.actionUrlList
+            ]
+        ]
     }
-      
+    
     internal func createSTRProductItemMap(product: STRProductItem) -> [String: Any?] {
-         return [
+        return [
             "productId" : product.productId,
             "productGroupId" : product.productGroupId,
             "title" : product.title,
@@ -351,21 +366,19 @@ extension FlutterStorylyViewWrapper {
             "salesPrice" : product.salesPrice,
             "currency" : product.currency,
             "imageUrls" : product.imageUrls,
-            "variants" : product.variants?.compactMap {
-                createSTRProductVariantMap(variant: $0)
-            }
-         ]
-     }
-
-     internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
-         return [
+            "variants" : product.variants?.compactMap { createSTRProductVariantMap(variant: $0) }
+        ]
+    }
+    
+    internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
+        return [
             "name" : variant.name,
             "value" : variant.value
-         ]
-     }
-        
+        ]
+    }
+    
     internal func createSTRProductItem(product: [String: Any?]) -> STRProductItem {
-         return STRProductItem(
+        return STRProductItem(
             productId: product["productId"] as? String ?? "",
             productGroupId: product["productGroupId"] as? String ?? "",
             title: product["title"] as? String ?? "",
@@ -376,59 +389,67 @@ extension FlutterStorylyViewWrapper {
             currency: product["currency"] as? String ?? "",
             imageUrls: product["imageUrls"] as? [String],
             variants: createSTRProductVariant(variants: product["variants"] as? [[String: Any?]])
-         )
-     }
-     
+        )
+    }
+    
     internal func createSTRProductVariant(variants: [[String: Any?]]?) -> [STRProductVariant] {
-         return variants?.map {
-             STRProductVariant(
+        return variants?.map {
+            STRProductVariant(
                 name: $0["name"] as? String ?? "",
                 value: $0["value"] as? String ?? ""
-             )
-         } ?? []
-     }
+            )
+        } ?? []
+    }
     
     private func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         switch storyComponent {
             case let quizComponent as StoryQuizComponent:
-                return ["type": "quiz",
-                        "id": quizComponent.id,
-                        "title": quizComponent.title,
-                        "options": quizComponent.options,
-                        "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
-                        "selectedOptionIndex": quizComponent.selectedOptionIndex,
-                        "customPayload": quizComponent.customPayload]
+                return [
+                    "type": "quiz",
+                    "id": quizComponent.id,
+                    "title": quizComponent.title,
+                    "options": quizComponent.options,
+                    "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
+                    "selectedOptionIndex": quizComponent.selectedOptionIndex,
+                    "customPayload": quizComponent.customPayload]
             case let pollComponent as StoryPollComponent:
-                return ["type": "poll",
-                        "id": pollComponent.id,
-                        "title": pollComponent.title,
-                        "options": pollComponent.options,
-                        "selectedOptionIndex": pollComponent.selectedOptionIndex,
-                        "customPayload": pollComponent.customPayload]
+                return [
+                    "type": "poll",
+                    "id": pollComponent.id,
+                    "title": pollComponent.title,
+                    "options": pollComponent.options,
+                    "selectedOptionIndex": pollComponent.selectedOptionIndex,
+                    "customPayload": pollComponent.customPayload
+                ]
             case let emojiComponent as StoryEmojiComponent:
-                return ["type": "emoji",
-                        "id": emojiComponent.id,
-                        "emojiCodes": emojiComponent.emojiCodes,
-                        "selectedEmojiIndex": emojiComponent.selectedEmojiIndex,
-                        "customPayload": emojiComponent.customPayload]
+                return [
+                    "type": "emoji",
+                    "id": emojiComponent.id,
+                    "emojiCodes": emojiComponent.emojiCodes,
+                    "selectedEmojiIndex": emojiComponent.selectedEmojiIndex,
+                    "customPayload": emojiComponent.customPayload]
             case let ratingComponent as StoryRatingComponent:
-                return ["type": "rating",
-                        "id": ratingComponent.id,
-                        "emojiCode": ratingComponent.emojiCode,
-                        "rating": ratingComponent.rating,
-                        "customPayload": ratingComponent.customPayload]
+                return [
+                    "type": "rating",
+                    "id": ratingComponent.id,
+                    "emojiCode": ratingComponent.emojiCode,
+                    "rating": ratingComponent.rating,
+                    "customPayload": ratingComponent.customPayload]
             case let promoCodeComponent as StoryPromoCodeComponent:
-                return ["type": "promocode",
-                        "id": promoCodeComponent.id,
-                        "text": promoCodeComponent.text]
+                return [
+                    "type": "promocode",
+                    "id": promoCodeComponent.id,
+                    "text": promoCodeComponent.text]
             case let commentComponent as StoryCommentComponent:
-                return ["type": "comment",
-                        "id": commentComponent.id,
-                        "text": commentComponent.text]
+                return [
+                    "type": "comment",
+                    "id": commentComponent.id,
+                    "text": commentComponent.text]
             default:
-                return ["type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                        "id": storyComponent.id]
-
+                return [
+                    "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+                    "id": storyComponent.id]
+                
         }
     }
 }

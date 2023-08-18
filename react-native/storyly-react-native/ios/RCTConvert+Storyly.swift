@@ -28,6 +28,7 @@ extension RCTConvert {
         guard let storyGroupViewFactoryJson = json["storyGroupViewFactory"] as? NSDictionary else { return nil }
         guard let storyBarStylingJson = json["storyBarStyling"] as? NSDictionary else { return nil }
         guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
+        guard let storyShareConfig = json["storyShareConfig"] as? NSDictionary else { return nil }
         
         var storyGroupViewFactory: STStoryGroupViewFactory? = stStoryGroupViewFactory(json: storyGroupViewFactoryJson)
         var storylyConfigBuilder = StorylyConfig.Builder()
@@ -35,7 +36,7 @@ extension RCTConvert {
         storylyConfigBuilder = stStorylyGroupStyling(json: storyGroupStylingJson, groupViewFactory: storyGroupViewFactory, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStoryBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder )
-        if let shareUrl = json["storylyShareUrl"] as? String { storylyConfigBuilder = storylyConfigBuilder.setShareUrl(url: shareUrl) }
+        storylyConfigBuilder = stShareConfig(json: storyShareConfig, configBuilder: &storylyConfigBuilder )
         
         let storylyView = StorylyView()
         storylyView.storylyInit = StorylyInit(
@@ -81,8 +82,8 @@ private func stStorylyGroupStyling(
     if let titleSeenColorJson = json["titleSeenColor"] as? NSNumber {
         groupStylingBuilder = groupStylingBuilder.setTitleSeenColor(color: RCTConvert.uiColor(titleSeenColorJson))
     }
-    if let titleNotSeenColor = json["titleNotSeenColor"] as? NSNumber {
-        groupStylingBuilder = groupStylingBuilder.setTitleNotSeenColor(color: RCTConvert.uiColor(titleNotSeenColor))
+    if let titleNotSeenColorJson = json["titleNotSeenColor"] as? NSNumber {
+        groupStylingBuilder = groupStylingBuilder.setTitleNotSeenColor(color: RCTConvert.uiColor(titleNotSeenColorJson))
     }
     return configBuilder
         .setStoryGroupStyling(
@@ -151,6 +152,23 @@ private func stStoryStyling(
             .setCloseButtonVisibility(isVisible: json["isCloseButtonVisible"] as? Bool ?? true)
             .setCloseButtonIcon(icon: UIImage(named: json["closeButtonIcon"] as? String))
             .setShareButtonIcon(icon: UIImage(named: json["shareButtonIcon"] as? String))
+            .build()
+        )
+}
+
+private func stShareConfig(
+    json: NSDictionary,
+    configBuilder: inout StorylyConfig.Builder
+) -> StorylyConfig.Builder {
+    var shareConfigBuilder = StorylyShareConfig.Builder()
+    if let facebookAppID = json["storylyFacebookAppID"] as? String {
+        shareConfigBuilder = shareConfigBuilder.setFacebookAppID(id: facebookAppID)
+    }
+    if let url = json["storylyShareUrl"] as? String {
+        shareConfigBuilder = shareConfigBuilder.setShareUrl(url: url)
+    }
+    return configBuilder
+        .setShareConfig(config: shareConfigBuilder
             .build()
         )
 }

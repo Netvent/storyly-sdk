@@ -136,6 +136,7 @@ class Storyly extends Component {
             storylyPayload,
             storylyTestMode,
             storylyShareUrl,
+            storylyFacebookAppID,
             storyGroupViewFactory,
             storyGroupSize,
             storyGroupIconHeight,
@@ -243,7 +244,10 @@ class Storyly extends Component {
                             'isFallbackEnabled': storyFallbackIsEnabled,
                             'isCartEnabled': storyCartIsEnabled,
                         },
-                        'storylyShareUrl': storylyShareUrl,
+                        'storyShareConfig': {
+                            'storylyShareUrl': storylyShareUrl,
+                            'storylyFacebookAppID': storylyFacebookAppID,
+                        },
                         'storylyLayoutDirection': storylyLayoutDirection,
                     }
                 }
