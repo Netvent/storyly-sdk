@@ -11,6 +11,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.config.StorylyConfig
+import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
@@ -38,6 +39,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
+        private const val COMMAND_UPDATE_CART_NAME = "updateCart"
+        private const val COMMAND_UPDATE_CART_CODE = 7
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -89,7 +92,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
             COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
             COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE,
-            COMMAND_HYDRATE_PRODUCT_NAME, COMMAND_HYDRATE_PRODUCT_CODE
+            COMMAND_HYDRATE_PRODUCT_NAME, COMMAND_HYDRATE_PRODUCT_CODE,
+            COMMAND_UPDATE_CART_NAME, COMMAND_UPDATE_CART_CODE
         )
     }
 
@@ -106,6 +110,12 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
                     val productItems = it.map { createSTRProductItem(it) }
                     root.storylyView?.hydrateProducts(productItems)
+                }
+            }
+            COMMAND_UPDATE_CART_CODE -> {
+                (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
+                    val cart = createSTRCart(it[0])
+                    root.storylyView?.updateCart(cart)
                 }
             }
             COMMAND_OPEN_STORY_WITH_ID_CODE -> {
@@ -127,6 +137,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val storyBarStylingJson = storylyBundle.getMap("storyBarStyling") ?: return
         val storyStylingJson = storylyBundle.getMap("storyStyling") ?: return
         val storyShareConfig = storylyBundle.getMap("storyShareConfig") ?: return
+        val storyProductConfig = storylyBundle.getMap("storyProductConfig") ?: return
 
         val storyGroupViewFactory = getStoryGroupViewFactory(view.context, storyGroupViewFactoryJson).also { it?.onSendEvent = view::sendEvent }
         var storylyConfigBuilder = StorylyConfig.Builder()
@@ -135,6 +146,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle.getString("storylyLayoutDirection")))
 
         view.storylyView = StorylyView(view.activity).apply {
@@ -217,6 +229,21 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         return configBuilder
             .setShareConfig(
                 shareConfigBuilder
+                    .build()
+            )
+    }
+
+    private fun stProductConfig(
+        json: ReadableMap,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        var storyProductConfig = StorylyProductConfig.Builder()
+        if (json.hasKey("isFallbackEnabled")) storyProductConfig = storyProductConfig.setFallbackAvailability(json.getBoolean("isFallbackEnabled"))
+        if (json.hasKey("isCartEnabled")) storyProductConfig = storyProductConfig.setCartAvailability(json.getBoolean("isCartEnabled"))
+
+        return configBuilder
+            .setProductConfig(
+                storyProductConfig
                     .build()
             )
     }

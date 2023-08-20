@@ -132,6 +132,10 @@ extension STStorylyView {
     func hydrateProducts(products: [STRProductItem]){
         storylyView?.hydrateProducts(products: products)
     }
+
+    func updateCart(cart: STRCart){
+        storylyView?.updateCart(cart: cart)
+    }
 }
 
 extension STStorylyView: StorylyDelegate {

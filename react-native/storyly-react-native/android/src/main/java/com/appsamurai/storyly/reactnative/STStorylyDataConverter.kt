@@ -1,6 +1,8 @@
 package com.appsamurai.storyly.reactnative
 
 import com.appsamurai.storyly.*
+import com.appsamurai.storyly.data.managers.product.STRCart
+import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.appsamurai.storyly.data.managers.product.STRProductVariant
 import com.facebook.react.bridge.Arguments
@@ -162,13 +164,13 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): ReadableMap
     }
 }
 
-internal fun createSTRProductItem(product: Map<String, Any?>): STRProductItem {
+internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
     return STRProductItem(
-        productId = product["productId"] as? String ?: "",
-        productGroupId = product["productGroupId"] as? String ?: "",
-        title = product["title"] as? String ?: "",
-        desc = product["desc"] as? String ?: "",
-        price = (product["price"] as Double).toFloat(),
+        productId = product?.get("productId") as? String ?: "",
+        productGroupId = product?.get("productGroupId") as? String ?: "",
+        title = product?.get("title") as? String ?: "",
+        desc = product?.get("desc") as? String ?: "",
+        price = (product?.get("price") as Double).toFloat(),
         salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
         currency = product["currency"] as? String ?: "",
         imageUrls = product["imageUrls"] as? List<String>,
@@ -184,4 +186,55 @@ internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<S
             value = variant["value"] as? String ?: ""
         )
     } ?: listOf()
+}
+
+internal fun createSTRCartMap(cart: STRCart): WritableMap {
+    return Arguments.createMap().also { cartMap ->
+        cartMap.putArray("items", Arguments.createArray().also { cartItemArray ->
+            cart.items.forEach { cartItemArray.pushMap(createSTRCartItemMap(it)) }
+        })
+        cart.oldTotalPrice?.let {
+            cartMap.putDouble("oldTotalPrice", it.toDouble())
+        } ?: run {
+            cartMap.putNull("oldTotalPrice")
+        }
+        cartMap.putDouble("totalPrice", cart.totalPrice.toDouble())
+
+        cartMap.putString("currency", cart.currency)
+    }
+}
+
+internal fun createSTRCartItemMap(cartItem: STRCartItem): WritableMap {
+    return Arguments.createMap().also { cartItemMap ->
+        cartItemMap.putMap("item", createSTRProductItemMap(cartItem.item))
+        cartItemMap.putInt("quantity", cartItem.quantity)
+        cartItem.oldTotalPrice?.let {
+            cartItemMap.putDouble("oldTotalPrice", it.toDouble())
+        } ?: run {
+            cartItemMap.putNull("oldTotalPrice")
+        }
+        cartItem.totalPrice?.let {
+            cartItemMap.putDouble("totalPrice", it.toDouble())
+        } ?: run {
+            cartItemMap.putNull("totalPrice")
+        }
+    }
+}
+
+internal fun createSTRCart(cart: Map<String, Any?>): STRCart {
+    return STRCart(
+        items = (cart["items"] as? List<Map<String, Any?>>)?.map { createSTRCartItem(it) } ?: listOf(),
+        oldTotalPrice = (cart["oldTotalPrice"] as? Double)?.toFloat(),
+        totalPrice = (cart["oldTotalPrice"] as Double).toFloat(),
+        currency = cart["currency"] as String
+    )
+}
+
+internal fun createSTRCartItem(cartItem: Map<String, Any?>): STRCartItem {
+    return STRCartItem(
+        item = createSTRProductItem(cartItem["item"] as? Map<String, Any?>),
+        oldTotalPrice = (cartItem["oldTotalPrice"] as? Double)?.toFloat(),
+        totalPrice = (cartItem["oldTotalPrice"] as Double).toFloat(),
+        quantity = (cartItem["quantity"] as Double).toInt()
+    )
 }

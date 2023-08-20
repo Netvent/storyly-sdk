@@ -29,15 +29,17 @@ extension RCTConvert {
         guard let storyBarStylingJson = json["storyBarStyling"] as? NSDictionary else { return nil }
         guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
         guard let storyShareConfig = json["storyShareConfig"] as? NSDictionary else { return nil }
-        
+        guard let storyProductConfig = json["storyProductConfig"] as? NSDictionary else { return nil }
+
         var storyGroupViewFactory: STStoryGroupViewFactory? = stStoryGroupViewFactory(json: storyGroupViewFactoryJson)
         var storylyConfigBuilder = StorylyConfig.Builder()
         storylyConfigBuilder = stStorylyInit(json: storylyInitJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStorylyGroupStyling(json: storyGroupStylingJson, groupViewFactory: storyGroupViewFactory, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStoryBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
-        storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder )
-        storylyConfigBuilder = stShareConfig(json: storyShareConfig, configBuilder: &storylyConfigBuilder )
-        
+        storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder)
+        storylyConfigBuilder = stShareConfig(json: storyShareConfig, configBuilder: &storylyConfigBuilder)
+        storylyConfigBuilder = stProductConfig(json: storyProductConfig, configBuilder: &storylyConfigBuilder)
+
         let storylyView = StorylyView()
         storylyView.storylyInit = StorylyInit(
             storylyId: storylyId,
@@ -169,6 +171,23 @@ private func stShareConfig(
     }
     return configBuilder
         .setShareConfig(config: shareConfigBuilder
+            .build()
+        )
+}
+
+private func stProductConfig(
+    json: NSDictionary,
+    configBuilder: inout StorylyConfig.Builder
+) -> StorylyConfig.Builder {
+    var productConfigBuilder = StorylyProductConfig.Builder()
+    if let isFallbackEnabled = json["isFallbackEnabled"] as? String {
+        productConfigBuilder = productConfigBuilder.setFallbackAvailability(isEnabled: isFallbackEnabled)
+    }
+    if let isCartEnabled = json["isCartEnabled"] as? String {
+        productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
+    }
+    return configBuilder
+        .setProductConfig(config: productConfigBuilder
             .build()
         )
 }
