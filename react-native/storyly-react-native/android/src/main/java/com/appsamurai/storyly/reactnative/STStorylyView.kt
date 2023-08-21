@@ -113,11 +113,15 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 val failId = UUID.randomUUID().toString()
                 val successId = UUID.randomUUID().toString()
 
-                val eventParameters = cart?.let {
-                    createSTRCartMap(cart)
-                } ?: Arguments.createMap()
+                val eventParameters = Arguments.createMap()
+                eventParameters.putMap("cart", cart?.let {
+                    createSTRCartMap(it)
+                } ?: Arguments.createMap())
                 eventParameters.putString("failId", failId)
                 eventParameters.putString("successId", successId)
+                eventParameters.putMap("change", change?.let {
+                    createSTRCartItemMap(it)
+                } ?: Arguments.createMap())
 
                 cartUpdateSuccessFailIdMap[failId] = successId
                 cartUpdateSuccessFailIdMap[successId] = failId
@@ -136,7 +140,9 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             ) {
                 sendEvent(
                     STStorylyManager.EVENT_STORYLY_PRODUCT_EVENT,
-                    null
+                    Arguments.createMap().also { eventMap ->
+                        eventMap.putString("event", event.name)
+                    }
                 )
             }
 

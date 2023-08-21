@@ -141,6 +141,12 @@ class Storyly extends Component {
         }
     }
 
+    _onStorylyProductEvent = (eventPayload) => {
+        if (this.props.onProductEvent) {
+            this.props.onProductEvent(eventPayload.nativeEvent);
+        }
+    }
+
     _onCreateCustomView = (_) => {
         this.customViewFactoryRef?.onCreateCustomView()
     }
@@ -192,8 +198,6 @@ class Storyly extends Component {
             storyHeaderCloseButtonIsVisible,
             storyHeaderCloseIcon,
             storyHeaderShareIcon,
-            onProductHydration,
-            onCartUpdate,
             storyFallbackIsEnabled,
             storyCartIsEnabled,
             ...otherProps
@@ -211,6 +215,7 @@ class Storyly extends Component {
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onStorylyProductHydration={this._onStorylyProductHydration} 
                 onStorylyCartUpdated={this._onStorylyCartUpdated} 
+                onStorylyProductEvent={this._onStorylyProductEvent}
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
                 storyly={
@@ -343,6 +348,7 @@ Storyly.propTypes = {
     onUserInteracted: func,
     onProductHydration: func,
     onCartUpdate: func,
+    onProductEvent: func,
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);
