@@ -10,16 +10,21 @@ import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
-import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import java.lang.ref.WeakReference
+import java.util.UUID
 import kotlin.properties.Delegates
 
 class STStorylyView(context: Context) : FrameLayout(context) {
+
+    private var cartUpdateSuccessFailIdMap: MutableMap<String, String> = mutableMapOf()
+    private var cartUpdateSuccessEvents: MutableMap<String, ((STRCart?) -> Unit)?> = mutableMapOf()
+    private var cartUpdateFailEvents: MutableMap<String, ((STRCartEventResult) -> Unit)?> = mutableMapOf()
+
     internal var storylyView: StorylyView? by Delegates.observable(null) { _, _, _ ->
         removeAllViews()
         val storylyView = storylyView ?: return@observable
@@ -103,13 +108,36 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 cart: STRCart?,
                 change: STRCartItem?,
                 onSuccess: ((STRCart?) -> Unit)?,
-                onFail: ((STRCartEventResult) -> Unit)?) {
+                onFail: ((STRCartEventResult) -> Unit)?
+            ) {
+                val failId = UUID.randomUUID().toString()
+                val successId = UUID.randomUUID().toString()
+
+                val eventParameters = cart?.let {
+                    createSTRCartMap(cart)
+                } ?: Arguments.createMap()
+                eventParameters.putString("failId", failId)
+                eventParameters.putString("successId", successId)
+
+                cartUpdateSuccessFailIdMap[failId] = successId
+                cartUpdateSuccessFailIdMap[successId] = failId
+                cartUpdateSuccessEvents[successId] = onSuccess
+                cartUpdateFailEvents[failId] = onFail
+
+                sendEvent(
+                    STStorylyManager.EVENT_STORYLY_ON_CART_UPDATED,
+                    eventParameters
+                )
             }
 
             override fun storylyEvent(
                 storylyView: StorylyView,
                 event: StorylyEvent
             ) {
+                sendEvent(
+                    STStorylyManager.EVENT_STORYLY_PRODUCT_EVENT,
+                    null
+                )
             }
 
             override fun storylyHydration(
@@ -189,5 +217,23 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     internal fun sendEvent(eventName: String, eventParameters: WritableMap?) {
         (context as? ReactContext)?.getJSModule(RCTEventEmitter::class.java)?.receiveEvent(id, eventName, eventParameters)
+    }
+
+    internal fun approveCart(successId: String, cart: STRCart? = null) {
+        cartUpdateSuccessEvents[successId]?.invoke(cart)
+        cartUpdateSuccessEvents.remove(successId)
+        val failId = cartUpdateSuccessFailIdMap[successId]
+        cartUpdateFailEvents.remove(failId)
+        cartUpdateSuccessFailIdMap.remove(successId)
+        cartUpdateSuccessFailIdMap.remove(failId)
+    }
+
+    internal fun rejectCart(failId: String, failMessage: String) {
+        cartUpdateFailEvents[failId]?.invoke(STRCartEventResult(failMessage))
+        cartUpdateFailEvents.remove(failId)
+        val successId = cartUpdateSuccessFailIdMap[failId]
+        cartUpdateSuccessEvents.remove(successId)
+        cartUpdateSuccessFailIdMap.remove(successId)
+        cartUpdateSuccessFailIdMap.remove(failId)
     }
 }

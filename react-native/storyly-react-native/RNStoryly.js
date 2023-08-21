@@ -65,6 +65,22 @@ class Storyly extends Component {
         );
     }
 
+    approveCart = (successId, cart) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.approveCart,
+            [successId, cart],
+        );
+    }
+
+    rejectCart = (failId, failMessage) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.rejectCart,
+            [failId, failMessage],
+        );
+    }
+
     _onStorylyLoaded = (eventPayload) => {
         if (this.props.onLoad) {
             this.props.onLoad(eventPayload.nativeEvent);
@@ -112,10 +128,16 @@ class Storyly extends Component {
             this.props.onUserInteracted(eventPayload.nativeEvent);
         }
     }
-
+    
     _onStorylyProductHydration = (eventPayload) => {
         if (this.props.onProductHydration) {
             this.props.onProductHydration(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyCartUpdated = (eventPayload) => {
+        if (this.props.onCartUpdate) {
+            this.props.onCartUpdate(eventPayload.nativeEvent);
         }
     }
 
@@ -171,6 +193,7 @@ class Storyly extends Component {
             storyHeaderCloseIcon,
             storyHeaderShareIcon,
             onProductHydration,
+            onCartUpdate,
             storyFallbackIsEnabled,
             storyCartIsEnabled,
             ...otherProps
@@ -187,6 +210,7 @@ class Storyly extends Component {
                 onStorylyStoryDismissed={this._onStorylyStoryDismissed}
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onStorylyProductHydration={this._onStorylyProductHydration} 
+                onStorylyCartUpdated={this._onStorylyCartUpdated} 
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
                 storyly={
@@ -318,6 +342,7 @@ Storyly.propTypes = {
     onStoryClose: func,
     onUserInteracted: func,
     onProductHydration: func,
+    onCartUpdate: func,
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);
