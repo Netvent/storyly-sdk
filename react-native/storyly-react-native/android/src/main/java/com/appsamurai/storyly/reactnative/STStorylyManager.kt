@@ -123,16 +123,16 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 }
             }
             COMMAND_UPDATE_CART_CODE -> {
-                (args?.getArray(0)?.toArrayList() as? List<Map<String, Any?>>)?.let {
-                    val cart = createSTRCart(it[0])
+                (args?.getMap(0)?.toHashMap() as? Map<String, Any?>)?.let {
+                    val cart = createSTRCart(it)
                     root.storylyView?.updateCart(cart)
                 }
             }
             COMMAND_APPROVE_CART_CODE -> {
                 val successId: String = args?.getString(0) ?: return
                 if (args.size() > 1) {
-                    (args.getArray(1)?.toArrayList() as? List<Map<String, Any?>>)?.let {
-                         root.approveCart(successId, createSTRCart(it[0]))
+                    (args.getMap(1)?.toHashMap() as? Map<String, Any?>)?.let {
+                         root.approveCart(successId, createSTRCart(it))
                     } ?: run {
                         root.approveCart(successId)
                     }

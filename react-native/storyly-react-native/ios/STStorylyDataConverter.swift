@@ -134,18 +134,18 @@ internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String:
     ]
 }
 
-internal func createSTRProductItem(productItem: NSDictionary) -> STRProductItem {
+internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem {
     return STRProductItem(
-        productId: productItem["productId"] as? String ?? "",
-        productGroupId: productItem["productGroupId"] as? String ?? "",
-        title:productItem["title"] as? String ?? "",
-        url: productItem["url"] as? String ?? "",
-        description: productItem["desc"] as? String,
-        price: Float((productItem["price"] as? Double) ?? 0.0),
-        salesPrice: (productItem["salesPrice"] as? NSNumber),
-        currency: productItem["currency"] as? String ?? "",
-        imageUrls:productItem["imageUrls"] as? [String],
-        variants:  createSTRProductVariant(variants: productItem["variants"] as? [NSDictionary] ?? [])
+        productId: productItem?["productId"] as? String ?? "",
+        productGroupId: productItem?["productGroupId"] as? String ?? "",
+        title: productItem?["title"] as? String ?? "",
+        url: productItem?["url"] as? String ?? "",
+        description: productItem?["desc"] as? String,
+        price: Float((productItem?["price"] as? Double) ?? 0.0),
+        salesPrice: (productItem?["salesPrice"] as? NSNumber),
+        currency: productItem?["currency"] as? String ?? "",
+        imageUrls:productItem?["imageUrls"] as? [String],
+        variants:  createSTRProductVariant(variants: productItem?["variants"] as? [NSDictionary] ?? [])
     )
 }
 
@@ -154,3 +154,42 @@ internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVa
         STRProductVariant(name: variant["name"] as? String ?? "", value: variant["value"] as? String ?? "")
     }
 }
+
+internal func createSTRCartMap(cart: STRCart?) -> [String: Any?] {
+    guard let cart = cart else { return [:] }
+    return [
+        "items": cart.items.map { createSTRCartItemMap(cartItem: $0) },
+        "oldTotalPrice": cart.oldTotalPrice,
+        "totalPrice": cart.totalPrice,
+        "currency": cart.currency
+    ]
+}
+
+internal func createSTRCartItemMap(cartItem: STRCartItem?) -> [String: Any?] {
+    guard let cartItem = cartItem else { return [:] }
+    return [
+        "item": createSTRProductItemMap(product: cartItem.item),
+        "quantity": cartItem.quantity,
+        "oldTotalPrice": cartItem.oldTotalPrice,
+        "totalPrice": cartItem.totalPrice
+    ]
+}
+
+internal func createSTRCartItem(cartItemMap: NSDictionary) -> STRCartItem {
+    return STRCartItem(
+        item: createSTRProductItem(productItem: cartItemMap["item"] as? NSDictionary),
+        quantity: cartItemMap["item"] as? Int ?? 0,
+        totalPrice: cartItemMap["totalPrice"] as? NSNumber,
+        oldTotalPrice: cartItemMap["oldTotalPrice"] as? NSNumber
+    )
+}
+
+internal func createSTRCart(cartMap: NSDictionary) -> STRCart {
+    return STRCart(
+        items: (cartMap["items"] as? [NSDictionary])?.map { createSTRCartItem(cartItemMap: $0) } ?? [],
+        totalPrice: cartMap["totalPrice"] as? Float ?? 0.0,
+        oldTotalPrice: cartMap["oldTotalPrice"] as? NSNumber,
+        currency: cartMap["currency"] as? String ?? ""
+    )
+}
+

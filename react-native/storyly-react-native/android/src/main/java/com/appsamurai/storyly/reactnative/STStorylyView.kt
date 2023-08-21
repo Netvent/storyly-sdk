@@ -93,10 +93,10 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 story: Story,
                 storyComponent: StoryComponent
             ) {
-                sendEvent(STStorylyManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().also { eventMap ->
-                    eventMap.putMap("storyGroup", createStoryGroupMap(storyGroup))
-                    eventMap.putMap("story", createStoryMap(story))
-                    eventMap.putMap("storyComponent", createStoryComponentMap(storyComponent))
+                sendEvent(STStorylyManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().apply {
+                    putMap("storyGroup", createStoryGroupMap(storyGroup))
+                    putMap("story", createStoryMap(story))
+                    putMap("storyComponent", createStoryComponentMap(storyComponent))
                 })
             }
         }
@@ -113,15 +113,13 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 val failId = UUID.randomUUID().toString()
                 val successId = UUID.randomUUID().toString()
 
-                val eventParameters = Arguments.createMap()
-                eventParameters.putMap("cart", cart?.let {
-                    createSTRCartMap(it)
-                } ?: Arguments.createMap())
-                eventParameters.putString("failId", failId)
-                eventParameters.putString("successId", successId)
-                eventParameters.putMap("change", change?.let {
-                    createSTRCartItemMap(it)
-                } ?: Arguments.createMap())
+                val eventParameters = Arguments.createMap().apply {
+                    putString("event", event.name)
+                    putMap("cart", createSTRCartMap(cart))
+                    putString("failId", failId)
+                    putString("successId", successId)
+                    putMap("change", createSTRCartItemMap(change))
+                }
 
                 cartUpdateSuccessFailIdMap[failId] = successId
                 cartUpdateSuccessFailIdMap[successId] = failId
@@ -140,8 +138,8 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             ) {
                 sendEvent(
                     STStorylyManager.EVENT_STORYLY_PRODUCT_EVENT,
-                    Arguments.createMap().also { eventMap ->
-                        eventMap.putString("event", event.name)
+                    Arguments.createMap().apply {
+                        putString("event", event.name)
                     }
                 )
             }
@@ -152,12 +150,13 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             ) {
                 sendEvent(
                     STStorylyManager.EVENT_STORYLY_ON_HYDRATION,
-                    Arguments.createMap().also { eventMap ->
-                        eventMap.putArray(
+                    Arguments.createMap().apply {
+                        putArray(
                             "productIds",
                             Arguments.createArray().also { writableArray ->
                                 productIds.forEach { writableArray.pushString(it) }
-                            })
+                            }
+                        )
                     }
                 )
             }

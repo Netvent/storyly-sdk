@@ -22,6 +22,14 @@ RCT_EXTERN_METHOD(hydrateProducts:(nonnull NSNumber *)reactTag
 RCT_EXTERN_METHOD(updateCart:(nonnull NSNumber *)reactTag
                   cart:(nonnull NSDictionary * *)cart)
 
+RCT_EXTERN_METHOD(approveCart:(nonnull NSNumber *)reactTag
+                  successId:(nonnull NSString *)successId
+                  cart:(NSDictionary * *)cart)
+
+RCT_EXTERN_METHOD(rejectCart:(nonnull NSNumber *)reactTag
+                  failId:(nonnull NSString *)failId
+                  failMessage:(nonnull NSString *)failMessage)
+
 RCT_REMAP_VIEW_PROPERTY(storyly, storylyBundle, stStorylyBundle)
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
@@ -35,5 +43,7 @@ RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCreateCustomView, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onUpdateCustomView, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyProductHydration, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyProductEvent, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyCartUpdated, RCTBubblingEventBlock)
 
 @end

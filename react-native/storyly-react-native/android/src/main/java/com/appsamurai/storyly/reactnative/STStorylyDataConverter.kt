@@ -135,26 +135,28 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
     }
 }
 
-internal fun createSTRProductItemMap(product: STRProductItem): WritableMap {
-    return Arguments.createMap().also { productItemMap ->
-        productItemMap.putString("productId", product.productId)
-        productItemMap.putString("productGroupId", product.productGroupId)
-        productItemMap.putString("title", product.title)
-        productItemMap.putString("desc", product.desc)
-        productItemMap.putDouble("price", product.price.toDouble())
-        product.salesPrice?.let {
-            productItemMap.putDouble("salesPrice", it.toDouble())
-        } ?: run {
-            productItemMap.putNull("salesPrice")
+internal fun createSTRProductItemMap(product: STRProductItem?): WritableMap {
+    return product?.let {
+        Arguments.createMap().also { productItemMap ->
+            productItemMap.putString("productId", product.productId)
+            productItemMap.putString("productGroupId", product.productGroupId)
+            productItemMap.putString("title", product.title)
+            productItemMap.putString("desc", product.desc)
+            productItemMap.putDouble("price", product.price.toDouble())
+            product.salesPrice?.let {
+                productItemMap.putDouble("salesPrice", it.toDouble())
+            } ?: run {
+                productItemMap.putNull("salesPrice")
+            }
+            productItemMap.putString("currency", product.currency)
+            productItemMap.putArray("imageUrls", Arguments.createArray().also { imageUrls ->
+                product.imageUrls?.forEach { imageUrls.pushString(it) }
+            })
+            productItemMap.putArray("variants", Arguments.createArray().also { variantArray ->
+                product.variants.forEach { variant -> variantArray.pushMap(createSTRProductVariantMap(variant)) }
+            })
         }
-        productItemMap.putString("currency", product.currency)
-        productItemMap.putArray("imageUrls", Arguments.createArray().also { imageUrls ->
-            product.imageUrls?.forEach { imageUrls.pushString(it) }
-        })
-        productItemMap.putArray("variants", Arguments.createArray().also { variantArray ->
-            product.variants.forEach { variant -> variantArray.pushMap(createSTRProductVariantMap(variant)) }
-        })
-    }
+    } ?: Arguments.createMap()
 }
 
 internal fun createSTRProductVariantMap(variant: STRProductVariant): ReadableMap {
@@ -188,37 +190,41 @@ internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<S
     } ?: listOf()
 }
 
-internal fun createSTRCartMap(cart: STRCart): WritableMap {
-    return Arguments.createMap().also { cartMap ->
-        cartMap.putArray("items", Arguments.createArray().also { cartItemArray ->
-            cart.items.forEach { cartItemArray.pushMap(createSTRCartItemMap(it)) }
-        })
-        cart.oldTotalPrice?.let {
-            cartMap.putDouble("oldTotalPrice", it.toDouble())
-        } ?: run {
-            cartMap.putNull("oldTotalPrice")
-        }
-        cartMap.putDouble("totalPrice", cart.totalPrice.toDouble())
+internal fun createSTRCartMap(cart: STRCart?): WritableMap {
+    return cart?.let {
+        Arguments.createMap().also { cartMap ->
+            cartMap.putArray("items", Arguments.createArray().also { cartItemArray ->
+                cart.items.forEach { cartItemArray.pushMap(createSTRCartItemMap(it)) }
+            })
+            cart.oldTotalPrice?.let {
+                cartMap.putDouble("oldTotalPrice", it.toDouble())
+            } ?: run {
+                cartMap.putNull("oldTotalPrice")
+            }
+            cartMap.putDouble("totalPrice", cart.totalPrice.toDouble())
 
-        cartMap.putString("currency", cart.currency)
-    }
+            cartMap.putString("currency", cart.currency)
+        }
+    } ?: Arguments.createMap()
 }
 
-internal fun createSTRCartItemMap(cartItem: STRCartItem): WritableMap {
-    return Arguments.createMap().also { cartItemMap ->
-        cartItemMap.putMap("item", createSTRProductItemMap(cartItem.item))
-        cartItemMap.putInt("quantity", cartItem.quantity)
-        cartItem.oldTotalPrice?.let {
-            cartItemMap.putDouble("oldTotalPrice", it.toDouble())
-        } ?: run {
-            cartItemMap.putNull("oldTotalPrice")
+internal fun createSTRCartItemMap(cartItem: STRCartItem?): WritableMap {
+    return cartItem?.let {
+        Arguments.createMap().also { cartItemMap ->
+            cartItemMap.putMap("item", createSTRProductItemMap(cartItem.item))
+            cartItemMap.putInt("quantity", cartItem.quantity)
+            cartItem.oldTotalPrice?.let {
+                cartItemMap.putDouble("oldTotalPrice", it.toDouble())
+            } ?: run {
+                cartItemMap.putNull("oldTotalPrice")
+            }
+            cartItem.totalPrice?.let {
+                cartItemMap.putDouble("totalPrice", it.toDouble())
+            } ?: run {
+                cartItemMap.putNull("totalPrice")
+            }
         }
-        cartItem.totalPrice?.let {
-            cartItemMap.putDouble("totalPrice", it.toDouble())
-        } ?: run {
-            cartItemMap.putNull("totalPrice")
-        }
-    }
+    } ?: Arguments.createMap()
 }
 
 internal fun createSTRCart(cart: Map<String, Any?>): STRCart {

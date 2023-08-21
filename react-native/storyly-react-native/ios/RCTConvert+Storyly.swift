@@ -180,10 +180,10 @@ private func stProductConfig(
     configBuilder: inout StorylyConfig.Builder
 ) -> StorylyConfig.Builder {
     var productConfigBuilder = StorylyProductConfig.Builder()
-    if let isFallbackEnabled = json["isFallbackEnabled"] as? String {
+    if let isFallbackEnabled = json["isFallbackEnabled"] as? Bool {
         productConfigBuilder = productConfigBuilder.setFallbackAvailability(isEnabled: isFallbackEnabled)
     }
-    if let isCartEnabled = json["isCartEnabled"] as? String {
+    if let isCartEnabled = json["isCartEnabled"] as? Bool {
         productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
     }
     return configBuilder
