@@ -231,7 +231,7 @@ internal fun createSTRCart(cart: Map<String, Any?>): STRCart {
     return STRCart(
         items = (cart["items"] as? List<Map<String, Any?>>)?.map { createSTRCartItem(it) } ?: listOf(),
         oldTotalPrice = (cart["oldTotalPrice"] as? Double)?.toFloat(),
-        totalPrice = (cart["oldTotalPrice"] as Double).toFloat(),
+        totalPrice = (cart["totalPrice"] as Double).toFloat(),
         currency = cart["currency"] as String
     )
 }
@@ -240,7 +240,7 @@ internal fun createSTRCartItem(cartItem: Map<String, Any?>): STRCartItem {
     return STRCartItem(
         item = createSTRProductItem(cartItem["item"] as? Map<String, Any?>),
         oldTotalPrice = (cartItem["oldTotalPrice"] as? Double)?.toFloat(),
-        totalPrice = (cartItem["oldTotalPrice"] as Double).toFloat(),
+        totalPrice = (cartItem["totalPrice"] as Double).toFloat(),
         quantity = (cartItem["quantity"] as Double).toInt()
     )
 }

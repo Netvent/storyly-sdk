@@ -178,7 +178,7 @@ internal func createSTRCartItemMap(cartItem: STRCartItem?) -> [String: Any?] {
 internal func createSTRCartItem(cartItemMap: NSDictionary) -> STRCartItem {
     return STRCartItem(
         item: createSTRProductItem(productItem: cartItemMap["item"] as? NSDictionary),
-        quantity: cartItemMap["item"] as? Int ?? 0,
+        quantity: cartItemMap["quantity"] as? Int ?? 0,
         totalPrice: cartItemMap["totalPrice"] as? NSNumber,
         oldTotalPrice: cartItemMap["oldTotalPrice"] as? NSNumber
     )
