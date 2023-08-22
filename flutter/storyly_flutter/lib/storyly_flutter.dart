@@ -42,9 +42,14 @@ typedef StorylyViewOnProductHydrationCallback = void Function(
 
 /// [StorylyView]  on product event callback
 typedef StoryProductEventCallback = void Function(
+  String event
+);
+
+/// [StorylyView]  on product hydration callback
+typedef StorylyOnProductCartUpdatedCallback = void Function(
   String event,
-  STRProductItem? product,
-  Map<String, String>? extras,
+  STRCart cart,
+  STRCartItem change
 );
 
 /// [StorylyView] user interacted callback
@@ -99,6 +104,9 @@ class StorylyView extends StatefulWidget {
   /// This callback function will notify your application in case product event occurs
   final StoryProductEventCallback? storylyProductEvent;
 
+  /// This callback function will notify you about updates the cart in a StorylyView component
+  final StorylyOnProductCartUpdatedCallback? storylyOnProductCartUpdated;
+
   /// This callback function will let you know that stories are started to be
   /// shown to the users.
   final VoidCallback? storylyStoryShown;
@@ -124,7 +132,8 @@ class StorylyView extends StatefulWidget {
       this.storylyStoryDismissed,
       this.storylyUserInteracted,
       this.storylyOnProductHydration,
-      this.storylyProductEvent})
+      this.storylyProductEvent,
+      this.storylyOnProductCartUpdated})
       : super(key: key);
 
   @override
@@ -245,16 +254,15 @@ class _StorylyViewState extends State<StorylyView> {
         break;
       case 'storylyProductEvent':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        STRProductItem? item;
-
-        if ((jsonData['product'] as Map<String, dynamic>?) != null) {
-          item = STRProductItem.fromJson(jsonData['product']);
-        } else {
-          item = null;
-        }
-
-        widget.storylyProductEvent
-            ?.call(jsonData['event'], item, Map.from(jsonData['extras']));
+        widget.storylyProductEvent?.call(jsonData['event']);
+        break;
+      case 'storylyOnCartUpdated':
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        widget.storylyOnProductCartUpdated?.call(
+          jsonData['event'],
+          STRCart.fromJson(jsonData['cart']),
+          STRCartItem.fromJson(jsonData['change'])
+        );
         break;
     }
   }
@@ -318,6 +326,19 @@ class StorylyViewController {
       },
     );
   }
+
+  /// This function allows you to update your cart.
+  Future<void> updateCart(Map cart) {
+    return _methodChannel.invokeMethod(
+      'updateCart',
+      <String, dynamic>{
+        'items': cart['items'],
+        'totalPrice': cart['totalPrice'],
+        'oldTotalPrice': cart['oldTotalPrice'],
+        'currency': cart['currency'],
+      },
+    );
+  }
 }
 
 /// This class is used to customize the [StorylyView]
@@ -339,6 +360,12 @@ class StorylyParam {
 
   /// This attibute allows you to set Facebook app id to be used in Instagram share to storiess.
   String? storylyFacebookAppID;
+
+  // This attribute allows you to enable hydration from feed data from backend
+  bool? isProductFallbackEnabled;
+
+  // This attribute allows you to set availability of cart
+  bool? isProductCartEnabled;
 
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
@@ -556,6 +583,10 @@ class StorylyParam {
     paramsMap['storyShareConfig'] = {
       'storylyFacebookAppID': storylyFacebookAppID,
       'storylyShareUrl': storylyShareUrl,
+    };
+    paramsMap['storyProductConfig'] = {
+      'isFallbackEnabled': isProductFallbackEnabled,
+      'isCartEnabled': isProductCartEnabled,
     };
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
@@ -990,6 +1021,66 @@ class STRProductVariant {
     return STRProductVariant(
       name: json['name'],
       value: json['value'],
+    );
+  }
+}
+
+/// This data class represents a product cart
+class STRCart {
+  STRCart(
+      {required this.items,
+      this.oldTotalPrice,
+      required this.totalPrice,
+      required this.currency});
+
+  /// List of STRCartItem objects representing the items added to the cart
+  final List<STRCartItem> items;
+
+  /// Represents the old total price of all the items in the cart
+  final double? oldTotalPrice;
+
+  /// Indicates the current total price of all the items in the cart
+  final double totalPrice;
+
+  /// Represents the currency of total prices
+  final String currency;
+
+  factory STRCart.fromJson(Map<String, dynamic> json) {
+    return STRCart(
+      items: List<STRCartItem>.from(json['items'].map((x) => STRCartItem.fromJson(x))),
+      oldTotalPrice: json['productGroupId'],
+      totalPrice: json['title'],
+      currency: json['desc'],
+    );
+  }
+}
+
+/// This data class represents an item in product cart
+class STRCartItem {
+  STRCartItem(
+      {required this.item,
+      required this.quantity,
+      this.oldTotalPrice,
+      this.totalPrice});
+
+  /// Represents the product associated with this cart item
+  final STRProductItem item;
+
+  /// Indicates the quantity of this item added to the cart
+  final int quantity;
+
+  /// Represents the current total price of this item
+  final double? oldTotalPrice;
+
+  /// Represents the old total price of this item
+  final double? totalPrice;
+
+  factory STRCartItem.fromJson(Map<String, dynamic> json) {
+    return STRCartItem(
+      item: STRProductItem.fromJson(json['item']),
+      quantity: json['quantity'],
+      oldTotalPrice: json['oldTotalPrice'],
+      totalPrice: json['totalPrice'],
     );
   }
 }
