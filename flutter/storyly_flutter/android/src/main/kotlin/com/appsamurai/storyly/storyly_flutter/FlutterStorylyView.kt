@@ -39,6 +39,8 @@ class FlutterStorylyView(
     private val args: HashMap<String, Any>
 ) : PlatformView, StorylyListener {
 
+    private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
+
     private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_storyly_view_$viewId").apply {
         setMethodCallHandler { call, _ ->
             val callArguments = call.arguments as? Map<String, *>
@@ -58,11 +60,21 @@ class FlutterStorylyView(
                 "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
                     storylyView.updateCart(createSTRCart(it))
                 }
-                "approve" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
-                    storylyView.updateCart(createSTRCart(it))
+                "approveCartChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onSuccess = cartUpdateSuccessFailCallbackMap[it]?.first
+                    (callArguments["cart"] as? Map<String, Any?>)?.let { cartMap ->
+                        onSuccess?.invoke(createSTRCart(cartMap))
+                    } ?: kotlin.run {
+                        onSuccess?.invoke(null)
+                    }
+                    cartUpdateSuccessFailCallbackMap.remove(it)
                 }
-                "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
-                    storylyView.updateCart(createSTRCart(it))
+                "rejectCartChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onFail = cartUpdateSuccessFailCallbackMap[it]?.second
+                    (callArguments["failMessage"] as? String)?.let { failMessage ->
+                        onFail?.invoke(STRCartEventResult(failMessage))
+                    }
+                    cartUpdateSuccessFailCallbackMap.remove(it)
                 }
             }
         }
@@ -106,12 +118,16 @@ class FlutterStorylyView(
                     onSuccess: ((STRCart?) -> Unit)?,
                     onFail: ((STRCartEventResult) -> Unit)?
                 ) {
+                    val responseId = UUID.randomUUID().toString()
+                    cartUpdateSuccessFailCallbackMap[responseId] = Pair(onSuccess, onFail)
+
                     methodChannel.invokeMethod(
-                        "storylyOnCartUpdated",
+                        "storylyOnProductCartUpdated",
                         mapOf(
                             "event" to event.name,
                             "cart" to createSTRCartMap(cart),
                             "change" to createSTRCartItemMap(change),
+                            "responseId" to responseId
                         )
                     )
                 }
@@ -508,8 +524,8 @@ class FlutterStorylyView(
         } ?: listOf()
     }
 
-    internal fun createSTRCartMap(cart: STRCart?): Map<String, *> {
-        cart ?: return emptyMap<String, Any>()
+    internal fun createSTRCartMap(cart: STRCart?): Map<String, *>? {
+        cart ?: return null
         return mapOf(
             "items" to cart.items.map { createSTRCartItemMap(it) },
             "oldTotalPrice" to cart.oldTotalPrice,

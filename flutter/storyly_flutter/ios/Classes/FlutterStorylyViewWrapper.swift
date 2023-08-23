@@ -39,10 +39,13 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                         self.storylyView.updateCart(cart: self.createSTRCart(cartMap: cart))
                     }
                 case "approveCartChange":
-                    if let cart = callArguments?["cart"] as? [String : Any?],
-                       let responseId = callArguments?["responseId"] as? String,
+                    if let responseId = callArguments?["responseId"] as? String,
                        let onSuccess = cartUpdateSuccessFailCallbackMap[responseId]?.0 as? (STRCart?) -> Void {
-                        onSuccess(self.createSTRCart(cartMap: cart))
+                        if let cart = callArguments?["cart"] as? [String : Any?] {
+                            onSuccess(createSTRCart(cartMap: cart))
+                        } else {
+                            onSuccess(nil)
+                        }
                         cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
                     }
                 case "rejectCartChange":

@@ -49,7 +49,8 @@ typedef StoryProductEventCallback = void Function(
 typedef StorylyOnProductCartUpdatedCallback = void Function(
   String event,
   STRCart? cart,
-  STRCartItem? change
+  STRCartItem? change,
+  String responseId
 );
 
 /// [StorylyView] user interacted callback
@@ -272,7 +273,8 @@ class _StorylyViewState extends State<StorylyView> {
         widget.storylyOnProductCartUpdated?.call(
           jsonData['event'],
           cart,
-          change
+          change,
+          jsonData['responseId']
         );
         break;
     }
@@ -351,7 +353,7 @@ class StorylyViewController {
     );
   }
 
-  Future<void> approveCartChange(responseId: String, cart: Map<String, dynamic>?) {
+  Future<void> approveCartChange(String responseId, Map<String, dynamic>? cart) {
     return _methodChannel.invokeMethod(
       'approveCartChange',
       <String, dynamic>{
@@ -361,7 +363,7 @@ class StorylyViewController {
     );
   }
 
-  Future<void> rejectCartChange(responseId: String, failMessage: String) {
+  Future<void> rejectCartChange(String responseId, String failMessage) {
     return _methodChannel.invokeMethod(
       'rejectCartChange',
       <String, dynamic>{
