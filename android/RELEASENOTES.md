@@ -1,4 +1,9 @@
 # Release Notes
+### 2.2.0 (23.08.2023)
+* IMPORTANT! deprecated dismiss and show methods
+* IMPORTANT! added closeStory, pauseStory and resumeStory methods
+* fixed a bug related to group select
+  
 ### 2.1.0 (17.08.2023)
 * added result interactive components for poll, quiz, reaction, image quiz, rating, question
 * added animation feature to interactive components entrance 

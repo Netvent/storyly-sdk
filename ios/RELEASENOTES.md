@@ -1,4 +1,13 @@
 # Release Notes
+### 2.2.0 (23.08.2023)
+* IMPORTANT! increased minimum os version to 11; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
+* IMPORTANT! removed armv7 and i386 arch support; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
+* IMPORTANT! removed bitcode support; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
+* IMPORTANT! deprecated dismiss, present, pause and resume methods
+* IMPORTANT! added closeStory, pauseStory and resumeStory methods
+* reduced framework size
+* changed sound volume behavior for video stories
+  
 ### 2.1.0 (17.08.2023)
 * added result interactive components for poll, quiz, reaction, image quiz, rating, question
 * added animation feature to interactive components entrance 
