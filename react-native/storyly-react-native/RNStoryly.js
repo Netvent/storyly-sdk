@@ -65,19 +65,19 @@ class Storyly extends Component {
         );
     }
 
-    approveCart = (successId, cart) => {
+    approveCartChange = (responseId, cart) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
-            UIManager.getViewManagerConfig('STStoryly').Commands.approveCart,
-            [successId, cart],
+            UIManager.getViewManagerConfig('STStoryly').Commands.approveCartChange,
+            [responseId, cart],
         );
     }
 
-    rejectCart = (failId, failMessage) => {
+    rejectCartChange = (responseId, failMessage) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
-            UIManager.getViewManagerConfig('STStoryly').Commands.rejectCart,
-            [failId, failMessage],
+            UIManager.getViewManagerConfig('STStoryly').Commands.rejectCartChange,
+            [responseId, failMessage],
         );
     }
 

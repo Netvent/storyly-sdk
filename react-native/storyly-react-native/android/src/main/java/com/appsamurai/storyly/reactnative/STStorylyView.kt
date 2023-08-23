@@ -21,9 +21,7 @@ import kotlin.properties.Delegates
 
 class STStorylyView(context: Context) : FrameLayout(context) {
 
-    private var cartUpdateSuccessFailIdMap: MutableMap<String, String> = mutableMapOf()
-    private var cartUpdateSuccessEvents: MutableMap<String, ((STRCart?) -> Unit)?> = mutableMapOf()
-    private var cartUpdateFailEvents: MutableMap<String, ((STRCartEventResult) -> Unit)?> = mutableMapOf()
+    private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
 
     internal var storylyView: StorylyView? by Delegates.observable(null) { _, _, _ ->
         removeAllViews()
@@ -110,21 +108,15 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 onSuccess: ((STRCart?) -> Unit)?,
                 onFail: ((STRCartEventResult) -> Unit)?
             ) {
-                val failId = UUID.randomUUID().toString()
-                val successId = UUID.randomUUID().toString()
+                val responseId = UUID.randomUUID().toString()
+                cartUpdateSuccessFailCallbackMap[responseId] = Pair(onSuccess, onFail)
 
                 val eventParameters = Arguments.createMap().apply {
                     putString("event", event.name)
                     putMap("cart", createSTRCartMap(cart))
-                    putString("failId", failId)
-                    putString("successId", successId)
                     putMap("change", createSTRCartItemMap(change))
+                    putString("responseId", responseId)
                 }
-
-                cartUpdateSuccessFailIdMap[failId] = successId
-                cartUpdateSuccessFailIdMap[successId] = failId
-                cartUpdateSuccessEvents[successId] = onSuccess
-                cartUpdateFailEvents[failId] = onFail
 
                 sendEvent(
                     STStorylyManager.EVENT_STORYLY_ON_CART_UPDATED,
@@ -224,21 +216,13 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         (context as? ReactContext)?.getJSModule(RCTEventEmitter::class.java)?.receiveEvent(id, eventName, eventParameters)
     }
 
-    internal fun approveCart(successId: String, cart: STRCart? = null) {
-        cartUpdateSuccessEvents[successId]?.invoke(cart)
-        cartUpdateSuccessEvents.remove(successId)
-        val failId = cartUpdateSuccessFailIdMap[successId]
-        cartUpdateFailEvents.remove(failId)
-        cartUpdateSuccessFailIdMap.remove(successId)
-        cartUpdateSuccessFailIdMap.remove(failId)
+    internal fun approveCartChange(responseId: String, cart: STRCart? = null) {
+        cartUpdateSuccessFailCallbackMap[responseId]?.first?.invoke(cart)
+        cartUpdateSuccessFailCallbackMap.remove(responseId)
     }
 
-    internal fun rejectCart(failId: String, failMessage: String) {
-        cartUpdateFailEvents[failId]?.invoke(STRCartEventResult(failMessage))
-        cartUpdateFailEvents.remove(failId)
-        val successId = cartUpdateSuccessFailIdMap[failId]
-        cartUpdateSuccessEvents.remove(successId)
-        cartUpdateSuccessFailIdMap.remove(successId)
-        cartUpdateSuccessFailIdMap.remove(failId)
+    internal fun rejectCartChange(responseId: String, failMessage: String) {
+        cartUpdateSuccessFailCallbackMap[responseId]?.second?.invoke(STRCartEventResult(failMessage))
+        cartUpdateSuccessFailCallbackMap.remove(responseId)
     }
 }

@@ -41,10 +41,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
         private const val COMMAND_UPDATE_CART_NAME = "updateCart"
         private const val COMMAND_UPDATE_CART_CODE = 7
-        private const val COMMAND_APPROVE_CART_NAME = "approveCart"
-        private const val COMMAND_APPROVE_CART_CODE = 8
-        private const val COMMAND_REJECT_CART_NAME = "rejectCart"
-        private const val COMMAND_REJECT_CART_CODE = 9
+        private const val COMMAND_APPROVE_CART_CHANGE_NAME = "approveCart"
+        private const val COMMAND_APPROVE_CART_CHANGE_CODE = 8
+        private const val COMMAND_REJECT_CART_CHANGE_NAME = "rejectCart"
+        private const val COMMAND_REJECT_CART_CHANGE_CODE = 9
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -102,8 +102,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
-            COMMAND_APPROVE_CART_NAME to COMMAND_APPROVE_CART_CODE,
-            COMMAND_REJECT_CART_NAME to COMMAND_REJECT_CART_CODE
+            COMMAND_APPROVE_CART_CHANGE_NAME to COMMAND_APPROVE_CART_CHANGE_CODE,
+            COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE
         )
     }
 
@@ -128,22 +128,22 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                     root.storylyView?.updateCart(cart)
                 }
             }
-            COMMAND_APPROVE_CART_CODE -> {
-                val successId: String = args?.getString(0) ?: return
+            COMMAND_APPROVE_CART_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
                 if (args.size() > 1) {
                     (args.getMap(1)?.toHashMap() as? Map<String, Any?>)?.let {
-                         root.approveCart(successId, createSTRCart(it))
+                         root.approveCartChange(responseId, createSTRCart(it))
                     } ?: run {
-                        root.approveCart(successId)
+                        root.approveCartChange(responseId)
                     }
                 } else {
-                    root.approveCart(successId)
+                    root.approveCartChange(responseId)
                 }
             }
-            COMMAND_REJECT_CART_CODE -> {
-                val failId: String = args?.getString(0) ?: return
+            COMMAND_REJECT_CART_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
                 val failMessage: String = if (args.size() > 1) args.getString(1) else ""
-                root.rejectCart(failId, failMessage)
+                root.rejectCartChange(responseId, failMessage)
             }
             COMMAND_OPEN_STORY_WITH_ID_CODE -> {
                 val storyGroupId: String = args?.getString(0) ?: return

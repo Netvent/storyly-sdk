@@ -11,9 +11,7 @@ import Storyly
 @objc(STStorylyView)
 class STStorylyView: UIView {
     
-    private var cartUpdateSuccessFailIdMap: [String: String] = [:]
-    private var cartUpdateSuccessEvents: [String: ((STRCart) -> Void)?] = [:]
-    private var cartUpdateFailEvents: [String: ((STRCartEventResult) -> Void)?] = [:]
+    private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
     
     @objc(storylyBundle)
     var storylyBundle: StorylyBundle? = nil {
@@ -148,26 +146,20 @@ extension STStorylyView {
         storylyView?.updateCart(cart: cart)
     }
     
-    func approveCart(successId: String, cart: STRCart? = nil) {
-        if let cart = cart, let onSuccess = cartUpdateSuccessEvents[successId] {
-            onSuccess?(cart)
+    func approveCartChange(responseId: String, cart: STRCart? = nil) {
+        guard let onSuccess = cartUpdateSuccessFailCallbackMap[responseId]?.0 else { return }
+        if let cart = cart {
+            onSuccess(cart)
+        } else {
+            onSuccess(nil)
         }
-        cartUpdateSuccessEvents.removeValue(forKey: successId)
-        let failId = cartUpdateSuccessFailIdMap[successId] ?? ""
-        cartUpdateFailEvents.removeValue(forKey: failId)
-        cartUpdateSuccessFailIdMap.removeValue(forKey: successId)
-        cartUpdateSuccessFailIdMap.removeValue(forKey: failId)
+        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
     }
     
-    func rejectCart(failId: String, failMessage: String) {
-        if let onFail = cartUpdateFailEvents[failId] {
-            onFail?(STRCartEventResult(message: failMessage))
-        }
-        cartUpdateFailEvents.removeValue(forKey: failId)
-        let successId = cartUpdateSuccessFailIdMap[failId] ?? ""
-        cartUpdateSuccessEvents.removeValue(forKey: successId)
-        cartUpdateSuccessFailIdMap.removeValue(forKey: successId)
-        cartUpdateSuccessFailIdMap.removeValue(forKey: failId)
+    func rejectCartChange(responseId: String, failMessage: String) {
+        guard let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 else { return }
+        onFail(STRCartEventResult(message: failMessage))
+        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
     }
 }
 
@@ -236,26 +228,17 @@ extension STStorylyView: StorylyProductDelegate {
         event: StorylyEvent,
         cart: STRCart?,
         change: STRCartItem?,
-        onSuccess: ((STRCart) -> Void)?,
+        onSuccess: ((STRCart?) -> Void)?,
         onFail: ((STRCartEventResult) -> Void)?
     ) {
-        let successId = UUID().uuidString
-        let failId = UUID().uuidString
-
+        let responseId = UUID().uuidString
+        cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
         let map: [String : Any] = [
             "event": StorylyEventHelper.storylyEventName(event: event),
             "cart": createSTRCartMap(cart: cart),
             "change": createSTRCartItemMap(cartItem: change),
-            "failId": failId,
-            "successId": successId,
-            
+            "responseId": responseId
         ]
-        
-        cartUpdateSuccessFailIdMap[failId] = successId
-        cartUpdateSuccessFailIdMap[successId] = failId
-        cartUpdateSuccessEvents[successId] = onSuccess
-        cartUpdateFailEvents[failId] = onFail
-        
         self.onStorylyCartUpdated?(map)
     }
 
