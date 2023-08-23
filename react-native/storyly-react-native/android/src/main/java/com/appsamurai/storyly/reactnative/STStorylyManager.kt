@@ -38,6 +38,13 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
+        private const val COMMAND_RESUME_STORY_NAME = "resumeStory"
+        private const val COMMAND_RESUME_STORY_CODE = 7
+        private const val COMMAND_PAUSE_STORY_NAME = "pauseStory"
+        private const val COMMAND_PAUSE_STORY_CODE = 8
+        private const val COMMAND_CLOSE_STORY_NAME = "closeStory"
+        private const val COMMAND_CLOSE_STORY_CODE = 9
+
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -83,14 +90,17 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     }
 
     override fun getCommandsMap(): Map<String, Int> {
-        return MapBuilder.of(
-            COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE,
-            COMMAND_OPEN_NAME, COMMAND_OPEN_CODE,
-            COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE,
-            COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE,
-            COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE,
-            COMMAND_HYDRATE_PRODUCT_NAME, COMMAND_HYDRATE_PRODUCT_CODE
-        )
+       return mapOf(
+           Pair(COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE),
+           Pair(COMMAND_OPEN_NAME, COMMAND_OPEN_CODE),
+           Pair(COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE),
+           Pair(COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE),
+           Pair(COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE),
+           Pair(COMMAND_HYDRATE_PRODUCT_NAME, COMMAND_HYDRATE_PRODUCT_CODE),
+           Pair(COMMAND_RESUME_STORY_NAME, COMMAND_RESUME_STORY_CODE),
+           Pair(COMMAND_PAUSE_STORY_NAME, COMMAND_PAUSE_STORY_CODE),
+           Pair(COMMAND_CLOSE_STORY_NAME, COMMAND_CLOSE_STORY_CODE)
+       )
     }
 
     override fun receiveCommand(root: STStorylyView, commandId: Int, args: ReadableArray?) {
@@ -114,6 +124,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
                 root.storylyView?.openStory(storyGroupId, storyId)
             }
+            COMMAND_RESUME_STORY_CODE -> root.storylyView?.resumeStory()
+            COMMAND_PAUSE_STORY_CODE -> root.storylyView?.pauseStory()
+            COMMAND_CLOSE_STORY_CODE -> root.storylyView?.closeStory()
         }
     }
 

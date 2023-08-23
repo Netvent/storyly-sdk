@@ -32,6 +32,48 @@ class STStorylyManager: RCTViewManager {
             
         }
     }
+
+    @objc(resumeStory:)
+    func resumeStory(reactTag: NSNumber) {
+        print("STR:STStorylyManager:resumeStory()")
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.resumeStory()
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+            
+        }
+    }
+
+    @objc(pauseStory:)
+    func pauseStory(reactTag: NSNumber) {
+        print("STR:STStorylyManager:pauseStory()")
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.pauseStory()
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+            
+        }
+    }
+
+    @objc(closeStory:)
+    func closeStory(reactTag: NSNumber) {
+        print("STR:STStorylyManager:closeStory()")
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.closeStory()
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+            
+        }
+    }
     
     @objc(open:)
     func open(reactTag: NSNumber) {

@@ -132,6 +132,21 @@ extension STStorylyView {
     func hydrateProducts(products: [STRProductItem]){
         storylyView?.hydrateProducts(products: products)
     }
+
+    func resumeStory() {
+        print("STR:STStorylyView:resumeStory()")
+        storylyView?.resumeStory(animated: false)
+    }
+
+    func pauseStory() {
+         print("STR:STStorylyView:pauseStory()")
+         storylyView?.pauseStory(animated: false)
+    }
+
+    func closeStory() {
+         print("STR:STStorylyView:closeStory()")
+         storylyView?.closeStory(animated: false)
+    }
 }
 
 extension STStorylyView: StorylyDelegate {
