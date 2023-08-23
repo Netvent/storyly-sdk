@@ -43,6 +43,9 @@ class FlutterStorylyView(
             val callArguments = call.arguments as? Map<String, *>
             when (call.method) {
                 "refresh" -> storylyView.refresh()
+                "resumeStory" -> storylyView.resumeStory()
+                "pauseStory" -> storylyView.pauseStory()
+                "closeStory" -> storylyView.closeStory()
                 "show" -> storylyView.show()
                 "dismiss" -> storylyView.dismiss()
                 "openStory" -> storylyView.openStory(
