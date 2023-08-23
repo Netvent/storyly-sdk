@@ -45,11 +45,11 @@ typedef StoryProductEventCallback = void Function(
   String event
 );
 
-/// [StorylyView]  on product hydration callback
+/// [StorylyView]  on product cart callback
 typedef StorylyOnProductCartUpdatedCallback = void Function(
   String event,
-  STRCart cart,
-  STRCartItem change
+  STRCart? cart,
+  STRCartItem? change
 );
 
 /// [StorylyView] user interacted callback
@@ -256,12 +256,23 @@ class _StorylyViewState extends State<StorylyView> {
         final jsonData = jsonDecode(jsonEncode(call.arguments));
         widget.storylyProductEvent?.call(jsonData['event']);
         break;
-      case 'storylyOnCartUpdated':
+      case 'storylyOnProductCartUpdated':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
+        debugPrint("storylyOnCartUpdated ${jsonData}");
+        var cart = null;
+        if (jsonData['cart'] != null) {
+          cart = STRCart.fromJson(jsonData['cart']);
+        }
+
+        var change = null;
+        if (jsonData['change'] != null) {
+          change = STRCartItem.fromJson(jsonData['change']);
+        }
+
         widget.storylyOnProductCartUpdated?.call(
           jsonData['event'],
-          STRCart.fromJson(jsonData['cart']),
-          STRCartItem.fromJson(jsonData['change'])
+          cart,
+          change
         );
         break;
     }
@@ -336,6 +347,26 @@ class StorylyViewController {
         'totalPrice': cart['totalPrice'],
         'oldTotalPrice': cart['oldTotalPrice'],
         'currency': cart['currency'],
+      },
+    );
+  }
+
+  Future<void> approveCartChange(responseId: String, cart: Map<String, dynamic>?) {
+    return _methodChannel.invokeMethod(
+      'approveCartChange',
+      <String, dynamic>{
+        'responseId': responseId,
+        'cart': cart
+      },
+    );
+  }
+
+  Future<void> rejectCartChange(responseId: String, failMessage: String) {
+    return _methodChannel.invokeMethod(
+      'rejectCartChange',
+      <String, dynamic>{
+        'responseId': responseId,
+        'failMessage': failMessage
       },
     );
   }
@@ -1048,9 +1079,9 @@ class STRCart {
   factory STRCart.fromJson(Map<String, dynamic> json) {
     return STRCart(
       items: List<STRCartItem>.from(json['items'].map((x) => STRCartItem.fromJson(x))),
-      oldTotalPrice: json['productGroupId'],
-      totalPrice: json['title'],
-      currency: json['desc'],
+      oldTotalPrice: json['oldTotalPrice'],
+      totalPrice: json['totalPrice'],
+      currency: json['currency'],
     );
   }
 }

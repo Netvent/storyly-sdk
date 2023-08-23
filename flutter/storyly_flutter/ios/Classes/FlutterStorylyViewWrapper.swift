@@ -6,6 +6,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     
     private let methodChannel: FlutterMethodChannel
     
+    private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
+    
     init(frame: CGRect,
          args: [String: Any],
          methodChannel: FlutterMethodChannel) {
@@ -13,27 +15,42 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         super.init(frame: frame)
         
         self.methodChannel.setMethodCallHandler { [weak self] call, _ in
+            guard let self = self else { return }
             let callArguments = call.arguments as? [String: Any]
             switch call.method {
-                case "refresh": self?.storylyView.refresh()
-                case "show": self?.storylyView.present(animated: true)
-                case "dismiss": self?.storylyView.dismiss(animated: true)
+                case "refresh": self.storylyView.refresh()
+                case "show": self.storylyView.present(animated: true)
+                case "dismiss": self.storylyView.dismiss(animated: true)
                 case "openStory":
-                    _ = self?.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
+                    _ = self.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
                                                     storyId: callArguments?["storyId"] as? String)
                 case "openStoryUri":
                     if let payloadString = callArguments?["uri"] as? String,
                        let payloadUrl = URL(string: payloadString) {
-                        _ = self?.storylyView.openStory(payload: payloadUrl)
+                        _ = self.storylyView.openStory(payload: payloadUrl)
                     }
                 case "hydrateProducts":
                     if let products = callArguments?["products"] as? [[String : Any?]] {
-                        let storylyProducts = products.compactMap { self?.createSTRProductItem(product: $0) }
-                        _ = self?.storylyView.hydrateProducts(products: storylyProducts)
+                        let storylyProducts = products.compactMap { self.createSTRProductItem(product: $0) }
+                        _ = self.storylyView.hydrateProducts(products: storylyProducts)
                     }
                 case "updateCart":
-                    if let cart = callArguments?["cart"] as? [String : Any?], let self = self {
+                    if let cart = callArguments?["cart"] as? [String : Any?] {
                         self.storylyView.updateCart(cart: self.createSTRCart(cartMap: cart))
+                    }
+                case "approveCartChange":
+                    if let cart = callArguments?["cart"] as? [String : Any?],
+                       let responseId = callArguments?["responseId"] as? String,
+                       let onSuccess = cartUpdateSuccessFailCallbackMap[responseId]?.0 as? (STRCart?) -> Void {
+                        onSuccess(self.createSTRCart(cartMap: cart))
+                        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                    }
+                case "rejectCartChange":
+                    if let responseId = callArguments?["responseId"] as? String,
+                       let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 as? (STRCartEventResult) -> Void,
+                       let failMessage = callArguments?["failMessage"] as? String {
+                        onFail(STRCartEventResult(message: failMessage))
+                        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
                     }
                 default: do {}
             }
@@ -279,14 +296,18 @@ extension FlutterStorylyViewWrapper: StorylyProductDelegate {
         event: StorylyEvent,
         cart: STRCart?,
         change: STRCartItem?,
-        onSuccess: ((STRCart) -> Void)?,
+        onSuccess: ((STRCart?) -> Void)?,
         onFail: ((STRCartEventResult) -> Void)?) {
+            let responseId = UUID().uuidString
+            cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+            
             self.methodChannel.invokeMethod(
-                "storylyOnCartUpdated",
+                "storylyOnProductCartUpdated",
                 arguments: [
                     "event": event.stringValue,
                     "cart": createSTRCartMap(cart: cart),
-                    "change": createSTRCartItemMap(cartItem: change)
+                    "change": createSTRCartItemMap(cartItem: change),
+                    "responseId": responseId
                 ]
             )
         
@@ -436,8 +457,8 @@ extension FlutterStorylyViewWrapper {
         } ?? []
     }
     
-    internal func createSTRCartMap(cart: STRCart?) -> [String: Any?] {
-        guard let cart = cart else { return [:] }
+    internal func createSTRCartMap(cart: STRCart?) -> [String: Any?]? {
+        guard let cart = cart else { return nil }
         return [
             "items": cart.items.map { createSTRCartItemMap(cartItem: $0) },
             "oldTotalPrice": cart.oldTotalPrice,

@@ -58,6 +58,12 @@ class FlutterStorylyView(
                 "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
                     storylyView.updateCart(createSTRCart(it))
                 }
+                "approve" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
+                    storylyView.updateCart(createSTRCart(it))
+                }
+                "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
+                    storylyView.updateCart(createSTRCart(it))
+                }
             }
         }
     }
