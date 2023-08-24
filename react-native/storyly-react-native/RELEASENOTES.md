@@ -1,4 +1,15 @@
 # Release Notes
+### 2.2.0 (24.08.2023)
+* IMPORTANT! increased minimum os version to 11 on ios platform; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
+* IMPORTANT! removed armv7 and i386 arch support on ios platform; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
+* IMPORTANT! removed bitcode support on ios platform; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
+* IMPORTANT! deprecated open and close methods
+* IMPORTANT! added closeStory, pauseStory and resumeStory methods
+* added cart synchronization support and callbacks for product flow
+* reduced framework size on ios platform
+* changed sound volume behavior for video stories on ios platform
+* fixed a bug related to group select on android platform
+
 ### 2.1.0 (17.08.2023)
 * added result interactive components for poll, quiz, reaction, image quiz, rating, question
 * added animation feature to interactive components entrance 
