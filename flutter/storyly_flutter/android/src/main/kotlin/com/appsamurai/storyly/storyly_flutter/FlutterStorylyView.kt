@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.config.StorylyConfig
+import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
@@ -38,6 +39,8 @@ class FlutterStorylyView(
     private val args: HashMap<String, Any>
 ) : PlatformView, StorylyListener {
 
+    private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
+
     private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_storyly_view_$viewId").apply {
         setMethodCallHandler { call, _ ->
             val callArguments = call.arguments as? Map<String, *>
@@ -56,6 +59,25 @@ class FlutterStorylyView(
                 "hydrateProducts" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
                     val products = it.map { product -> createSTRProductItem(product) }
                     storylyView.hydrateProducts(products)
+                }
+                "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
+                    storylyView.updateCart(createSTRCart(it))
+                }
+                "approveCartChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onSuccess = cartUpdateSuccessFailCallbackMap[it]?.first
+                    (callArguments["cart"] as? Map<String, Any?>)?.let { cartMap ->
+                        onSuccess?.invoke(createSTRCart(cartMap))
+                    } ?: kotlin.run {
+                        onSuccess?.invoke(null)
+                    }
+                    cartUpdateSuccessFailCallbackMap.remove(it)
+                }
+                "rejectCartChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onFail = cartUpdateSuccessFailCallbackMap[it]?.second
+                    (callArguments["failMessage"] as? String)?.let { failMessage ->
+                        onFail?.invoke(STRCartEventResult(failMessage))
+                    }
+                    cartUpdateSuccessFailCallbackMap.remove(it)
                 }
             }
         }
@@ -99,6 +121,18 @@ class FlutterStorylyView(
                     onSuccess: ((STRCart?) -> Unit)?,
                     onFail: ((STRCartEventResult) -> Unit)?
                 ) {
+                    val responseId = UUID.randomUUID().toString()
+                    cartUpdateSuccessFailCallbackMap[responseId] = Pair(onSuccess, onFail)
+
+                    methodChannel.invokeMethod(
+                        "storylyOnProductCartUpdated",
+                        mapOf(
+                            "event" to event.name,
+                            "cart" to createSTRCartMap(cart),
+                            "change" to createSTRCartItemMap(change),
+                            "responseId" to responseId
+                        )
+                    )
                 }
             }
 
@@ -187,6 +221,7 @@ class FlutterStorylyView(
         val storyBarStylingJson = json["storyBarStyling"] as? Map<String, *> ?: return null
         val storyStylingJson = json["storyStyling"] as? Map<String, *> ?: return null
         val storyShareConfigJson = json["storyShareConfig"] as? Map<String, *> ?: return null
+        val storyProductConfigJson = json["storyProductConfig"] as? Map<String, *> ?: return null
 
         var storylyConfigBuilder = StorylyConfig.Builder()
         storylyConfigBuilder = stStorylyInit(json = storylyInitJson, configBuilder = storylyConfigBuilder)
@@ -194,8 +229,8 @@ class FlutterStorylyView(
         storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
-
 
         return StorylyInit(
             storylyId = storylyId,
@@ -296,6 +331,20 @@ class FlutterStorylyView(
         return configBuilder
             .setShareConfig(
                 shareConfigBuilder
+                    .build()
+            )
+    }
+
+    private fun stProductConfig(
+        json: Map<String, *>,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        var productConfigBuilder = StorylyProductConfig.Builder()
+        (json["isFallbackEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setFallbackAvailability(it) }
+        (json["isCartEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setCartAvailability(it) }
+        return configBuilder
+            .setProductConfig(
+                productConfigBuilder
                     .build()
             )
     }
@@ -430,7 +479,8 @@ class FlutterStorylyView(
         }
     }
 
-    internal fun createSTRProductItemMap(product: STRProductItem): Map<String, *> {
+    internal fun createSTRProductItemMap(product: STRProductItem?): Map<String, *> {
+        product ?: return emptyMap<String, Any>()
         return mapOf(
             "productId" to product.productId,
             "productGroupId" to product.productGroupId,
@@ -453,18 +503,26 @@ class FlutterStorylyView(
         )
     }
 
-    private fun createSTRProductItem(product: Map<String, Any?>): STRProductItem {
+    private fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         return STRProductItem(
-            productId = product["productId"] as? String ?: "",
-            productGroupId = product["productGroupId"] as? String ?: "",
-            title = product["title"] as? String ?: "",
-            desc = product["desc"] as? String ?: "",
-            price = (product["price"] as Double).toFloat(),
-            salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
-            currency = product["currency"] as? String ?: "",
-            imageUrls = product["imageUrls"] as? List<String>,
-            url = product["url"] as? String ?: "",
-            variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>)
+            productId = product?.get("productId") as? String ?: "",
+            productGroupId = product?.get("productGroupId") as? String ?: "",
+            title = product?.get("title") as? String ?: "",
+            desc = product?.get("desc") as? String ?: "",
+            price = when (product?.get("price")) {
+                is Int -> (product["price"] as? Int)?.toFloat() ?: 0.0f
+                is Double -> (product["price"] as? Double)?.toFloat() ?: 0.0f
+                else -> 0.0f
+            },
+            salesPrice = when (product?.get("salesPrice")) {
+                is Int -> (product["salesPrice"] as? Int)?.toFloat() ?: 0.0f
+                is Double -> (product["salesPrice"] as? Double)?.toFloat() ?: 0.0f
+                else -> 0.0f
+            },
+            currency = product?.get("currency") as? String ?: "",
+            imageUrls = product?.get("imageUrls") as? List<String>,
+            url = product?.get("url") as? String ?: "",
+            variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>)
         )
     }
 
@@ -475,6 +533,60 @@ class FlutterStorylyView(
                 value = variant["value"] as? String ?: ""
             )
         } ?: listOf()
+    }
+
+    internal fun createSTRCartMap(cart: STRCart?): Map<String, *>? {
+        cart ?: return null
+        return mapOf(
+            "items" to cart.items.map { createSTRCartItemMap(it) },
+            "oldTotalPrice" to cart.oldTotalPrice,
+            "totalPrice" to cart.totalPrice,
+            "currency" to cart.currency
+        )
+    }
+
+    internal fun createSTRCartItemMap(cartItem: STRCartItem?): Map<String, *> {
+        cartItem ?: return emptyMap<String, Any>()
+        return mapOf(
+            "item" to createSTRProductItemMap(cartItem.item),
+            "quantity" to cartItem.quantity,
+            "oldTotalPrice" to cartItem.oldTotalPrice,
+            "totalPrice" to cartItem.totalPrice
+        )
+    }
+
+    private fun createSTRCart(cart: Map<String, Any?>): STRCart {
+        return STRCart(
+            items = (cart["items"] as? List<Map<String, Any?>>)?.map { createSTRCartItem(it) } ?: listOf(),
+            oldTotalPrice = when (cart["oldTotalPrice"]) {
+                is Int -> (cart["oldTotalPrice"] as? Int)?.toFloat()
+                is Double -> (cart["oldTotalPrice"] as? Double)?.toFloat()
+                else -> 0.0f
+            },
+            totalPrice = when (cart["totalPrice"]) {
+                is Int -> (cart["totalPrice"] as? Int)?.toFloat() ?: 0.0f
+                is Double -> (cart["totalPrice"] as? Double)?.toFloat() ?: 0.0f
+                else -> 0.0f
+            },
+            currency = cart["currency"] as String
+        )
+    }
+
+    private fun createSTRCartItem(cartItem: Map<String, Any?>): STRCartItem {
+        return STRCartItem(
+            item = createSTRProductItem(cartItem["item"] as? Map<String, Any?>),
+            oldTotalPrice = when (cartItem["oldTotalPrice"]) {
+                is Int -> (cartItem["oldTotalPrice"] as? Int)?.toFloat()
+                is Double -> (cartItem["oldTotalPrice"] as? Double)?.toFloat()
+                else -> 0.0f
+            },
+            totalPrice = when (cartItem["totalPrice"]) {
+                is Int -> (cartItem["totalPrice"] as? Int)?.toFloat()
+                is Double -> (cartItem["totalPrice"] as? Double)?.toFloat()
+                else -> 0.0f
+            },
+            quantity = (cartItem["quantity"] as? Int ?: 0.0).toInt()
+        )
     }
 
     private fun dpToPixel(dpValue: Int): Int {

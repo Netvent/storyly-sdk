@@ -6,6 +6,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     
     private let methodChannel: FlutterMethodChannel
     
+    private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
+    
     init(frame: CGRect,
          args: [String: Any],
          methodChannel: FlutterMethodChannel) {
@@ -13,26 +15,48 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         super.init(frame: frame)
         
         self.methodChannel.setMethodCallHandler { [weak self] call, _ in
+            guard let self = self else { return }
             let callArguments = call.arguments as? [String: Any]
             switch call.method {
-                case "refresh": self?.storylyView.refresh()
-                case "resumeStory": self?.storylyView.resumeStory(animated: true)
-                case "pauseStory": self?.storylyView.pauseStory(animated: true)
-                case "closeStory": self?.storylyView.closeStory(animated: true)
-                case "show": self?.storylyView.present(animated: true)
-                case "dismiss": self?.storylyView.dismiss(animated: true)
+                case "refresh": self.storylyView.refresh()
+                case "resumeStory": self.storylyView.resumeStory(animated: true)
+                case "pauseStory": self.storylyView.pauseStory(animated: true)
+                case "closeStory": self.storylyView.closeStory(animated: true)
+                case "show": self.storylyView.present(animated: true)
+                case "dismiss": self.storylyView.dismiss(animated: true)
                 case "openStory":
-                    _ = self?.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
+                    _ = self.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
                                                     storyId: callArguments?["storyId"] as? String)
                 case "openStoryUri":
                     if let payloadString = callArguments?["uri"] as? String,
                        let payloadUrl = URL(string: payloadString) {
-                        _ = self?.storylyView.openStory(payload: payloadUrl)
+                        _ = self.storylyView.openStory(payload: payloadUrl)
                     }
                 case "hydrateProducts":
                     if let products = callArguments?["products"] as? [[String : Any?]] {
-                        let storylyProducts = products.compactMap { self?.createSTRProductItem(product: $0) }
-                        _ = self?.storylyView.hydrateProducts(products: storylyProducts)
+                        let storylyProducts = products.compactMap { self.createSTRProductItem(product: $0) }
+                        _ = self.storylyView.hydrateProducts(products: storylyProducts)
+                    }
+                case "updateCart":
+                    if let cart = callArguments?["cart"] as? [String : Any?] {
+                        self.storylyView.updateCart(cart: self.createSTRCart(cartMap: cart))
+                    }
+                case "approveCartChange":
+                    if let responseId = callArguments?["responseId"] as? String,
+                       let onSuccess = cartUpdateSuccessFailCallbackMap[responseId]?.0 as? (STRCart?) -> Void {
+                        if let cart = callArguments?["cart"] as? [String : Any?] {
+                            onSuccess(createSTRCart(cartMap: cart))
+                        } else {
+                            onSuccess(nil)
+                        }
+                        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                    }
+                case "rejectCartChange":
+                    if let responseId = callArguments?["responseId"] as? String,
+                       let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 as? (STRCartEventResult) -> Void,
+                       let failMessage = callArguments?["failMessage"] as? String {
+                        onFail(STRCartEventResult(message: failMessage))
+                        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
                     }
                 default: do {}
             }
@@ -62,7 +86,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         guard let storyBarStylingJson = json["storyBarStyling"] as? [String: Any] else { return nil }
         guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
         guard let shareConfigJson = json["storyShareConfig"] as? NSDictionary else { return nil }
-
+        guard let productConfigJson = json["storyProductConfig"] as? NSDictionary else { return nil }
         
         var storylyConfigBuilder = StorylyConfig.Builder()
         storylyConfigBuilder = stStorylyInit(json: storylyInitJson, configBuilder: &storylyConfigBuilder)
@@ -70,7 +94,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         storylyConfigBuilder = stStoryBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder )
         storylyConfigBuilder = stShareConfig(json: shareConfigJson, configBuilder: &storylyConfigBuilder )
-        
+        storylyConfigBuilder = stProductConfig(json: productConfigJson, configBuilder: &storylyConfigBuilder )
+
         return StorylyInit(
             storylyId: storylyId,
             config: storylyConfigBuilder
@@ -195,6 +220,23 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             )
     }
     
+    private func stProductConfig(
+        json: NSDictionary,
+        configBuilder: inout StorylyConfig.Builder
+    ) -> StorylyConfig.Builder {
+        var productConfigBuilder = StorylyProductConfig.Builder()
+        if let isFallbackEnabled = json["isFallbackEnabled"] as? Bool {
+            productConfigBuilder = productConfigBuilder.setFallbackAvailability(isEnabled: isFallbackEnabled)
+        }
+        if let isCartEnabled = json["isCartEnabled"] as? Bool {
+            productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
+        }
+        return configBuilder
+            .setProductConfig(config: productConfigBuilder
+                .build()
+            )
+    }
+    
     private func getStoryGroupSize(groupSize: String?) -> StoryGroupSize {
         switch groupSize {
             case "small": return .Small
@@ -246,19 +288,35 @@ extension FlutterStorylyViewWrapper: StorylyProductDelegate {
     }
     
     func storylyEvent(_ storylyView: StorylyView,
-                      event: StorylyEvent,
-                      product: STRProductItem?, extras: [String:String]) {
-        var storylyProductItem : [String: Any?]? = nil
-        if let product = product {
-            storylyProductItem = self.createSTRProductItemMap(product: product)
-        }
+                      event: StorylyEvent) {
         self.methodChannel.invokeMethod(
             "storylyProductEvent",
             arguments: [
-                "event": event.stringValue,
-                "product": storylyProductItem,
-                "extras": extras]
+                "event": event.stringValue
+            ]
         )
+    }
+    
+    func storylyUpdateCartEvent(
+        storylyView: StorylyView,
+        event: StorylyEvent,
+        cart: STRCart?,
+        change: STRCartItem?,
+        onSuccess: ((STRCart?) -> Void)?,
+        onFail: ((STRCartEventResult) -> Void)?) {
+            let responseId = UUID().uuidString
+            cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+            
+            self.methodChannel.invokeMethod(
+                "storylyOnProductCartUpdated",
+                arguments: [
+                    "event": event.stringValue,
+                    "cart": createSTRCartMap(cart: cart),
+                    "change": createSTRCartItemMap(cartItem: change),
+                    "responseId": responseId
+                ]
+            )
+        
     }
 }
 
@@ -359,7 +417,8 @@ extension FlutterStorylyViewWrapper {
         ]
     }
     
-    internal func createSTRProductItemMap(product: STRProductItem) -> [String: Any?] {
+    internal func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
+        guard let product = product else { return [:] }
         return [
             "productId" : product.productId,
             "productGroupId" : product.productGroupId,
@@ -380,18 +439,18 @@ extension FlutterStorylyViewWrapper {
         ]
     }
     
-    internal func createSTRProductItem(product: [String: Any?]) -> STRProductItem {
+    internal func createSTRProductItem(product: [String: Any?]?) -> STRProductItem {
         return STRProductItem(
-            productId: product["productId"] as? String ?? "",
-            productGroupId: product["productGroupId"] as? String ?? "",
-            title: product["title"] as? String ?? "",
-            url: product["url"] as? String ?? "",
-            description: product["desc"] as? String ?? "",
-            price: Float((product["price"] as! Double)),
-            salesPrice: product["salesPrice"] as? NSNumber,
-            currency: product["currency"] as? String ?? "",
-            imageUrls: product["imageUrls"] as? [String],
-            variants: createSTRProductVariant(variants: product["variants"] as? [[String: Any?]])
+            productId: product?["productId"] as? String ?? "",
+            productGroupId: product?["productGroupId"] as? String ?? "",
+            title: product?["title"] as? String ?? "",
+            url: product?["url"] as? String ?? "",
+            description: product?["desc"] as? String ?? "",
+            price: Float((product?["price"] as! Double)),
+            salesPrice: product?["salesPrice"] as? NSNumber,
+            currency: product?["currency"] as? String ?? "",
+            imageUrls: product?["imageUrls"] as? [String],
+            variants: createSTRProductVariant(variants: product?["variants"] as? [[String: Any?]])
         )
     }
     
@@ -402,6 +461,44 @@ extension FlutterStorylyViewWrapper {
                 value: $0["value"] as? String ?? ""
             )
         } ?? []
+    }
+    
+    internal func createSTRCartMap(cart: STRCart?) -> [String: Any?]? {
+        guard let cart = cart else { return nil }
+        return [
+            "items": cart.items.map { createSTRCartItemMap(cartItem: $0) },
+            "oldTotalPrice": cart.oldTotalPrice,
+            "totalPrice": cart.totalPrice,
+            "currency": cart.currency
+        ]
+    }
+
+    internal func createSTRCartItemMap(cartItem: STRCartItem?) -> [String: Any?] {
+        guard let cartItem = cartItem else { return [:] }
+        return [
+            "item": createSTRProductItemMap(product: cartItem.item),
+            "quantity": cartItem.quantity,
+            "oldTotalPrice": cartItem.oldTotalPrice,
+            "totalPrice": cartItem.totalPrice
+        ]
+    }
+
+    internal func createSTRCartItem(cartItemMap: [String : Any?]) -> STRCartItem {
+        return STRCartItem(
+            item: createSTRProductItem(product: cartItemMap["item"] as? [String: Any?]),
+            quantity: cartItemMap["quantity"] as? Int ?? 0,
+            totalPrice: cartItemMap["totalPrice"] as? NSNumber,
+            oldTotalPrice: cartItemMap["oldTotalPrice"] as? NSNumber
+        )
+    }
+
+    internal func createSTRCart(cartMap: [String : Any?]) -> STRCart {
+        return STRCart(
+            items: (cartMap["items"] as? [[String : Any?]])?.map { createSTRCartItem(cartItemMap: $0) } ?? [],
+            totalPrice: cartMap["totalPrice"] as? Float ?? 0.0,
+            oldTotalPrice: cartMap["oldTotalPrice"] as? NSNumber,
+            currency: cartMap["currency"] as? String ?? ""
+        )
     }
     
     private func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
