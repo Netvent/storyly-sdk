@@ -45,6 +45,13 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_APPROVE_CART_CHANGE_CODE = 8
         private const val COMMAND_REJECT_CART_CHANGE_NAME = "rejectCart"
         private const val COMMAND_REJECT_CART_CHANGE_CODE = 9
+        private const val COMMAND_RESUME_STORY_NAME = "resumeStory"
+        private const val COMMAND_RESUME_STORY_CODE = 10
+        private const val COMMAND_PAUSE_STORY_NAME = "pauseStory"
+        private const val COMMAND_PAUSE_STORY_CODE = 11
+        private const val COMMAND_CLOSE_STORY_NAME = "closeStory"
+        private const val COMMAND_CLOSE_STORY_CODE = 12
+
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -103,7 +110,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
             COMMAND_APPROVE_CART_CHANGE_NAME to COMMAND_APPROVE_CART_CHANGE_CODE,
-            COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE
+            COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE,
+            COMMAND_RESUME_STORY_NAME to COMMAND_RESUME_STORY_CODE,
+            COMMAND_PAUSE_STORY_NAME to COMMAND_PAUSE_STORY_CODE,
+            COMMAND_CLOSE_STORY_NAME to COMMAND_CLOSE_STORY_CODE
         )
     }
 
@@ -151,6 +161,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
                 root.storylyView?.openStory(storyGroupId, storyId)
             }
+            COMMAND_RESUME_STORY_CODE -> root.storylyView?.resumeStory()
+            COMMAND_PAUSE_STORY_CODE -> root.storylyView?.pauseStory()
+            COMMAND_CLOSE_STORY_CODE -> root.storylyView?.closeStory()
         }
     }
 

@@ -16,6 +16,9 @@ class Storyly extends Component {
         );
     };
 
+    /**
+     * @deprecated "This function will be removed in v2.3.0. We've introduced the resumeStory() function to story continuation"
+    */
     open = () => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
@@ -24,7 +27,34 @@ class Storyly extends Component {
         );
     };
 
+    resumeStory = () => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.resumeStory,
+            [],
+        );
+    };
 
+    pauseStory = () => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.pauseStory,
+            [],
+        );
+    };
+
+    closeStory = () => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.closeStory,
+            [],
+        );
+    };
+
+    /**
+     * @deprecated "This function will be removed in v2.3.0. We've introduced two new functions for improved story management: pauseStory() and closeStory(). 
+        To temporarily halt a story and later resume it, use pauseStory(), followed by resumeStory() when ready to continue. For an immediate story closure, use closeStory()"
+    */
     close = () => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),

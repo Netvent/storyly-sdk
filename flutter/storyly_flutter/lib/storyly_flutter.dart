@@ -277,12 +277,27 @@ class StorylyViewController {
     return _methodChannel.invokeMethod('refresh');
   }
 
+  Future<void> resumeStory() {
+    return _methodChannel.invokeMethod('resumeStory');
+  }
+
+  Future<void> pauseStory() {
+    return _methodChannel.invokeMethod('pauseStory');
+  }
+
+  Future<void> closeStory() {
+    return _methodChannel.invokeMethod('closeStory');
+  }
+
   /// This function allows you to open the story view.
+  @Deprecated("This function will be removed in v2.3.0. We've introduced the resumeStory() function to story continuation") 
   Future<void> storyShow() {
     return _methodChannel.invokeMethod('show');
   }
 
   /// This function allows you to dismiss story view.
+  @Deprecated("This function will be removed in v2.3.0. We've introduced two new functions for improved story management: pauseStory() and closeStory()." +
+  "To temporarily halt a story and later resume it, use pauseStory(), followed by resumeStory() when ready to continue. For an immediate story closure, use closeStory()") 
   Future<void> storyDismiss() {
     return _methodChannel.invokeMethod('dismiss');
   }

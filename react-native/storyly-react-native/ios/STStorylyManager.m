@@ -29,6 +29,12 @@ RCT_EXTERN_METHOD(approveCart:(nonnull NSNumber *)reactTag
 RCT_EXTERN_METHOD(rejectCart:(nonnull NSNumber *)reactTag
                   failId:(nonnull NSString *)failId
                   failMessage:(nonnull NSString *)failMessage)
+                  
+RCT_EXTERN_METHOD(resumeStory:(nonnull NSNumber *)reactTag)
+
+RCT_EXTERN_METHOD(pauseStory:(nonnull NSNumber *)reactTag)
+
+RCT_EXTERN_METHOD(closeStory:(nonnull NSNumber *)reactTag)
 
 RCT_REMAP_VIEW_PROPERTY(storyly, storylyBundle, stStorylyBundle)
 
