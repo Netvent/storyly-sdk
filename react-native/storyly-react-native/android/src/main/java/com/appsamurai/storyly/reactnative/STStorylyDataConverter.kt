@@ -190,7 +190,7 @@ internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<S
     } ?: listOf()
 }
 
-internal fun createSTRCartMap(cart: STRCart?): WritableMap {
+internal fun createSTRCartMap(cart: STRCart?): WritableMap? {
     return cart?.let {
         Arguments.createMap().also { cartMap ->
             cartMap.putArray("items", Arguments.createArray().also { cartItemArray ->
@@ -205,7 +205,7 @@ internal fun createSTRCartMap(cart: STRCart?): WritableMap {
 
             cartMap.putString("currency", cart.currency)
         }
-    } ?: Arguments.createMap()
+    }
 }
 
 internal fun createSTRCartItemMap(cartItem: STRCartItem?): WritableMap {

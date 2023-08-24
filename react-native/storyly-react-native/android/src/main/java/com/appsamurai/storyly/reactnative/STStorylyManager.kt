@@ -41,9 +41,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
         private const val COMMAND_UPDATE_CART_NAME = "updateCart"
         private const val COMMAND_UPDATE_CART_CODE = 7
-        private const val COMMAND_APPROVE_CART_CHANGE_NAME = "approveCart"
+        private const val COMMAND_APPROVE_CART_CHANGE_NAME = "approveCartChange"
         private const val COMMAND_APPROVE_CART_CHANGE_CODE = 8
-        private const val COMMAND_REJECT_CART_CHANGE_NAME = "rejectCart"
+        private const val COMMAND_REJECT_CART_CHANGE_NAME = "rejectCartChange"
         private const val COMMAND_REJECT_CART_CHANGE_CODE = 9
         private const val COMMAND_RESUME_STORY_NAME = "resumeStory"
         private const val COMMAND_RESUME_STORY_CODE = 10

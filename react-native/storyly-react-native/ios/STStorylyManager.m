@@ -22,12 +22,12 @@ RCT_EXTERN_METHOD(hydrateProducts:(nonnull NSNumber *)reactTag
 RCT_EXTERN_METHOD(updateCart:(nonnull NSNumber *)reactTag
                   cart:(nonnull NSDictionary * *)cart)
 
-RCT_EXTERN_METHOD(approveCart:(nonnull NSNumber *)reactTag
-                  successId:(nonnull NSString *)successId
+RCT_EXTERN_METHOD(approveCartChange:(nonnull NSNumber *)reactTag
+                  responseId:(nonnull NSString *)responseId
                   cart:(NSDictionary * *)cart)
 
-RCT_EXTERN_METHOD(rejectCart:(nonnull NSNumber *)reactTag
-                  failId:(nonnull NSString *)failId
+RCT_EXTERN_METHOD(rejectCartChange:(nonnull NSNumber *)reactTag
+                  responseId:(nonnull NSString *)responseId
                   failMessage:(nonnull NSString *)failMessage)
                   
 RCT_EXTERN_METHOD(resumeStory:(nonnull NSNumber *)reactTag)

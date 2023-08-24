@@ -155,8 +155,8 @@ internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVa
     }
 }
 
-internal func createSTRCartMap(cart: STRCart?) -> [String: Any?] {
-    guard let cart = cart else { return [:] }
+internal func createSTRCartMap(cart: STRCart?) -> [String: Any?]? {
+    guard let cart = cart else { return nil }
     return [
         "items": cart.items.map { createSTRCartItemMap(cartItem: $0) },
         "oldTotalPrice": cart.oldTotalPrice,

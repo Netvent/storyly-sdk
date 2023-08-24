@@ -154,13 +154,13 @@ class STStorylyManager: RCTViewManager {
         }
     }
     
-    @objc(approveCart:responseId:cartMap:)
-    func approveCartChange(reactTag: NSNumber, responseId: String, cartMap: NSDictionary?) {
+    @objc(approveCartChange:responseId:cart:)
+    func approveCartChange(reactTag: NSNumber, responseId: String, cart: NSDictionary?) {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
-                if let _cartMap = cartMap {
-                    stStorylyView.approveCartChange(responseId: responseId, cart: createSTRCart(cartMap: _cartMap))
+                if let _cart = cart {
+                    stStorylyView.approveCartChange(responseId: responseId, cart: createSTRCart(cartMap: _cart))
                 } else {
                     stStorylyView.approveCartChange(responseId: responseId)
                 }
@@ -170,7 +170,7 @@ class STStorylyManager: RCTViewManager {
         }
     }
     
-    @objc(rejectCart:failId:failMessage:)
+    @objc(rejectCartChange:responseId:failMessage:)
     func rejectCartChange(reactTag: NSNumber, responseId: String, failMessage: String) {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
