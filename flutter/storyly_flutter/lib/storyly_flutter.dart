@@ -41,17 +41,11 @@ typedef StorylyViewOnProductHydrationCallback = void Function(
 );
 
 /// [StorylyView]  on product event callback
-typedef StoryProductEventCallback = void Function(
-  String event
-);
+typedef StoryProductEventCallback = void Function(String event);
 
 /// [StorylyView]  on product cart callback
 typedef StorylyOnProductCartUpdatedCallback = void Function(
-  String event,
-  STRCart? cart,
-  STRCartItem? change,
-  String responseId
-);
+    String event, STRCart? cart, STRCartItem? change, String responseId);
 
 /// [StorylyView] user interacted callback
 typedef StorylyViewUserInteractedCallback = void Function(
@@ -269,12 +263,8 @@ class _StorylyViewState extends State<StorylyView> {
           change = STRCartItem.fromJson(jsonData['change']);
         }
 
-        widget.storylyOnProductCartUpdated?.call(
-          jsonData['event'],
-          cart,
-          change,
-          jsonData['responseId']
-        );
+        widget.storylyOnProductCartUpdated
+            ?.call(jsonData['event'], cart, change, jsonData['responseId']);
         break;
     }
   }
@@ -310,14 +300,16 @@ class StorylyViewController {
   }
 
   /// This function allows you to open the story view.
-  @Deprecated("This function will be removed in v2.3.0. We've introduced the resumeStory() function to story continuation") 
+  @Deprecated(
+      "This function will be removed in v2.3.0. We've introduced the resumeStory() function to story continuation")
   Future<void> storyShow() {
     return _methodChannel.invokeMethod('show');
   }
 
   /// This function allows you to dismiss story view.
-  @Deprecated("This function will be removed in v2.3.0. We've introduced two new functions for improved story management: pauseStory() and closeStory()." +
-  "To temporarily halt a story and later resume it, use pauseStory(), followed by resumeStory() when ready to continue. For an immediate story closure, use closeStory()") 
+  @Deprecated(
+      "This function will be removed in v2.3.0. We've introduced two new functions for improved story management: pauseStory() and closeStory()." +
+          "To temporarily halt a story and later resume it, use pauseStory(), followed by resumeStory() when ready to continue. For an immediate story closure, use closeStory()")
   Future<void> storyDismiss() {
     return _methodChannel.invokeMethod('dismiss');
   }
@@ -367,23 +359,18 @@ class StorylyViewController {
     );
   }
 
-  Future<void> approveCartChange(String responseId, Map<String, dynamic>? cart) {
+  Future<void> approveCartChange(
+      String responseId, Map<String, dynamic>? cart) {
     return _methodChannel.invokeMethod(
       'approveCartChange',
-      <String, dynamic>{
-        'responseId': responseId,
-        'cart': cart
-      },
+      <String, dynamic>{'responseId': responseId, 'cart': cart},
     );
   }
 
   Future<void> rejectCartChange(String responseId, String failMessage) {
     return _methodChannel.invokeMethod(
       'rejectCartChange',
-      <String, dynamic>{
-        'responseId': responseId,
-        'failMessage': failMessage
-      },
+      <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
     );
   }
 }
@@ -1094,7 +1081,8 @@ class STRCart {
 
   factory STRCart.fromJson(Map<String, dynamic> json) {
     return STRCart(
-      items: List<STRCartItem>.from(json['items'].map((x) => STRCartItem.fromJson(x))),
+      items: List<STRCartItem>.from(
+          json['items'].map((x) => STRCartItem.fromJson(x))),
       oldTotalPrice: json['oldTotalPrice'],
       totalPrice: json['totalPrice'],
       currency: json['currency'],
