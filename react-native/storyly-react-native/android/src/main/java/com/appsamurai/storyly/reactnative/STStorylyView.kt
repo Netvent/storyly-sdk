@@ -10,16 +10,19 @@ import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
-import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import java.lang.ref.WeakReference
+import java.util.UUID
 import kotlin.properties.Delegates
 
 class STStorylyView(context: Context) : FrameLayout(context) {
+
+    private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
+
     internal var storylyView: StorylyView? by Delegates.observable(null) { _, _, _ ->
         removeAllViews()
         val storylyView = storylyView ?: return@observable
@@ -88,10 +91,10 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 story: Story,
                 storyComponent: StoryComponent
             ) {
-                sendEvent(STStorylyManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().also { eventMap ->
-                    eventMap.putMap("storyGroup", createStoryGroupMap(storyGroup))
-                    eventMap.putMap("story", createStoryMap(story))
-                    eventMap.putMap("storyComponent", createStoryComponentMap(storyComponent))
+                sendEvent(STStorylyManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().apply {
+                    putMap("storyGroup", createStoryGroupMap(storyGroup))
+                    putMap("story", createStoryMap(story))
+                    putMap("storyComponent", createStoryComponentMap(storyComponent))
                 })
             }
         }
@@ -103,13 +106,34 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                 cart: STRCart?,
                 change: STRCartItem?,
                 onSuccess: ((STRCart?) -> Unit)?,
-                onFail: ((STRCartEventResult) -> Unit)?) {
+                onFail: ((STRCartEventResult) -> Unit)?
+            ) {
+                val responseId = UUID.randomUUID().toString()
+                cartUpdateSuccessFailCallbackMap[responseId] = Pair(onSuccess, onFail)
+
+                val eventParameters = Arguments.createMap().apply {
+                    putString("event", event.name)
+                    putMap("cart", createSTRCartMap(cart))
+                    putMap("change", createSTRCartItemMap(change))
+                    putString("responseId", responseId)
+                }
+
+                sendEvent(
+                    STStorylyManager.EVENT_STORYLY_ON_CART_UPDATED,
+                    eventParameters
+                )
             }
 
             override fun storylyEvent(
                 storylyView: StorylyView,
                 event: StorylyEvent
             ) {
+                sendEvent(
+                    STStorylyManager.EVENT_STORYLY_PRODUCT_EVENT,
+                    Arguments.createMap().apply {
+                        putString("event", event.name)
+                    }
+                )
             }
 
             override fun storylyHydration(
@@ -118,12 +142,13 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             ) {
                 sendEvent(
                     STStorylyManager.EVENT_STORYLY_ON_HYDRATION,
-                    Arguments.createMap().also { eventMap ->
-                        eventMap.putArray(
+                    Arguments.createMap().apply {
+                        putArray(
                             "productIds",
                             Arguments.createArray().also { writableArray ->
                                 productIds.forEach { writableArray.pushString(it) }
-                            })
+                            }
+                        )
                     }
                 )
             }
@@ -189,5 +214,15 @@ class STStorylyView(context: Context) : FrameLayout(context) {
 
     internal fun sendEvent(eventName: String, eventParameters: WritableMap?) {
         (context as? ReactContext)?.getJSModule(RCTEventEmitter::class.java)?.receiveEvent(id, eventName, eventParameters)
+    }
+
+    internal fun approveCartChange(responseId: String, cart: STRCart? = null) {
+        cartUpdateSuccessFailCallbackMap[responseId]?.first?.invoke(cart)
+        cartUpdateSuccessFailCallbackMap.remove(responseId)
+    }
+
+    internal fun rejectCartChange(responseId: String, failMessage: String) {
+        cartUpdateSuccessFailCallbackMap[responseId]?.second?.invoke(STRCartEventResult(failMessage))
+        cartUpdateSuccessFailCallbackMap.remove(responseId)
     }
 }

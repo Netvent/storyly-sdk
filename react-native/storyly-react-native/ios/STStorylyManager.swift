@@ -32,6 +32,48 @@ class STStorylyManager: RCTViewManager {
             
         }
     }
+
+    @objc(resumeStory:)
+    func resumeStory(reactTag: NSNumber) {
+        print("STR:STStorylyManager:resumeStory()")
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.resumeStory()
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+            
+        }
+    }
+
+    @objc(pauseStory:)
+    func pauseStory(reactTag: NSNumber) {
+        print("STR:STStorylyManager:pauseStory()")
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.pauseStory()
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+            
+        }
+    }
+
+    @objc(closeStory:)
+    func closeStory(reactTag: NSNumber) {
+        print("STR:STStorylyManager:closeStory()")
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.closeStory()
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+            
+        }
+    }
     
     @objc(open:)
     func open(reactTag: NSNumber) {
@@ -93,7 +135,47 @@ class STStorylyManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
                 let products = products.map { createSTRProductItem(productItem: $0)}
-                _ = stStorylyView.hydrateProducts(products: products)
+                stStorylyView.hydrateProducts(products: products)
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+        }
+    }
+    
+    @objc(updateCart:cartMap:)
+    func updateCart(reactTag: NSNumber, cartMap: NSDictionary) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.updateCart(cart: createSTRCart(cartMap: cartMap))
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+        }
+    }
+    
+    @objc(approveCartChange:responseId:cart:)
+    func approveCartChange(reactTag: NSNumber, responseId: String, cart: NSDictionary?) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                if let _cart = cart {
+                    stStorylyView.approveCartChange(responseId: responseId, cart: createSTRCart(cartMap: _cart))
+                } else {
+                    stStorylyView.approveCartChange(responseId: responseId)
+                }
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+        }
+    }
+    
+    @objc(rejectCartChange:responseId:failMessage:)
+    func rejectCartChange(reactTag: NSNumber, responseId: String, failMessage: String) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                stStorylyView.rejectCartChange(responseId: responseId, failMessage: failMessage)
             } else {
                 STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
             }

@@ -10,6 +10,9 @@ import Storyly
 
 @objc(STStorylyView)
 class STStorylyView: UIView {
+    
+    private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
+    
     @objc(storylyBundle)
     var storylyBundle: StorylyBundle? = nil {
         didSet {
@@ -76,6 +79,12 @@ class STStorylyView: UIView {
     @objc(onStorylyProductHydration)
     var onProductHydration: RCTBubblingEventBlock?
     
+    @objc(onStorylyProductEvent)
+    var onStorylyProductEvent: RCTBubblingEventBlock?
+    
+    @objc(onStorylyCartUpdated)
+    var onStorylyCartUpdated: RCTBubblingEventBlock?
+    
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
         self.storylyView = StorylyView(frame: frame)
@@ -129,8 +138,43 @@ extension STStorylyView {
         storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
     }
 
-    func hydrateProducts(products: [STRProductItem]){
+    func hydrateProducts(products: [STRProductItem]) {
         storylyView?.hydrateProducts(products: products)
+    }
+
+    func updateCart(cart: STRCart) {
+        storylyView?.updateCart(cart: cart)
+    }
+    
+    func approveCartChange(responseId: String, cart: STRCart? = nil) {
+        guard let onSuccess = cartUpdateSuccessFailCallbackMap[responseId]?.0 else { return }
+        if let cart = cart {
+            onSuccess(cart)
+        } else {
+            onSuccess(nil)
+        }
+        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+    }
+    
+    func rejectCartChange(responseId: String, failMessage: String) {
+        guard let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 else { return }
+        onFail(STRCartEventResult(message: failMessage))
+        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+    }
+    
+    func resumeStory() {
+        print("STR:STStorylyView:resumeStory()")
+        storylyView?.resumeStory(animated: false)
+    }
+
+    func pauseStory() {
+         print("STR:STStorylyView:pauseStory()")
+         storylyView?.pauseStory(animated: false)
+    }
+
+    func closeStory() {
+         print("STR:STStorylyView:closeStory()")
+         storylyView?.closeStory(animated: false)
     }
 }
 
@@ -188,17 +232,30 @@ extension STStorylyView: StorylyProductDelegate {
         _ storylyView: StorylyView,
         event: StorylyEvent
     ) {
+        let map: [String : Any] = [
+            "event": StorylyEventHelper.storylyEventName(event: event)
+        ]
+        self.onStorylyProductEvent?(map)
     }
     
-    func storylyAddToCartEvent(
+    func storylyUpdateCartEvent(
         storylyView: StorylyView,
-        product: STRProductItem?,
-        extras: [String : String],
-        onSuccess: ((STRCart) -> Void)?,
+        event: StorylyEvent,
+        cart: STRCart?,
+        change: STRCartItem?,
+        onSuccess: ((STRCart?) -> Void)?,
         onFail: ((STRCartEventResult) -> Void)?
     ) {
+        let responseId = UUID().uuidString
+        cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+        let map: [String : Any] = [
+            "event": StorylyEventHelper.storylyEventName(event: event),
+            "cart": createSTRCartMap(cart: cart),
+            "change": createSTRCartItemMap(cartItem: change),
+            "responseId": responseId
+        ]
+        self.onStorylyCartUpdated?(map)
     }
-    
 
     func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [String]) {
         let map: [String : Any] = [
