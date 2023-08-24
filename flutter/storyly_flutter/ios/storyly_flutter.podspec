@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'storyly_flutter'
-  s.version          = '2.1.0'
+  s.version          = '2.2.0'
   s.summary          = 'Storyly flutter plugin.'
   s.description      = <<-DESC
   Storyly for flutter
