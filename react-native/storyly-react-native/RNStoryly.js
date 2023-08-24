@@ -106,8 +106,8 @@ class Storyly extends Component {
     }
 
     _onStorylyActionClicked = (eventPayload) => {
-        if (this.props.onStorylyActionClicked) {
-            this.props.onStorylyActionClicked(eventPayload.nativeEvent);
+        if (this.props.onPress) {
+            this.props.onPress(eventPayload.nativeEvent);
         }
     }
 
