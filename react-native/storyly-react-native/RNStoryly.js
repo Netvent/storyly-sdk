@@ -87,6 +87,30 @@ class Storyly extends Component {
         );
     }
 
+    updateCart = (cart) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.updateCart,
+            [cart],
+        );
+    }
+
+    approveCartChange = (responseId, cart) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.approveCartChange,
+            [responseId, cart],
+        );
+    }
+
+    rejectCartChange = (responseId, failMessage) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.rejectCartChange,
+            [responseId, failMessage],
+        );
+    }
+
     _onStorylyLoaded = (eventPayload) => {
         if (this.props.onLoad) {
             this.props.onLoad(eventPayload.nativeEvent);
@@ -134,10 +158,22 @@ class Storyly extends Component {
             this.props.onUserInteracted(eventPayload.nativeEvent);
         }
     }
-
+    
     _onStorylyProductHydration = (eventPayload) => {
         if (this.props.onProductHydration) {
             this.props.onProductHydration(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyCartUpdated = (eventPayload) => {
+        if (this.props.onCartUpdate) {
+            this.props.onCartUpdate(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyProductEvent = (eventPayload) => {
+        if (this.props.onProductEvent) {
+            this.props.onProductEvent(eventPayload.nativeEvent);
         }
     }
 
@@ -192,7 +228,8 @@ class Storyly extends Component {
             storyHeaderCloseButtonIsVisible,
             storyHeaderCloseIcon,
             storyHeaderShareIcon,
-            onProductHydration,
+            storyFallbackIsEnabled,
+            storyCartIsEnabled,
             ...otherProps
         } = this.props;
         return (
@@ -207,6 +244,8 @@ class Storyly extends Component {
                 onStorylyStoryDismissed={this._onStorylyStoryDismissed}
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onStorylyProductHydration={this._onStorylyProductHydration} 
+                onStorylyCartUpdated={this._onStorylyCartUpdated} 
+                onStorylyProductEvent={this._onStorylyProductEvent}
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
                 storyly={
@@ -263,6 +302,10 @@ class Storyly extends Component {
                         'storyShareConfig': {
                             'storylyShareUrl': storylyShareUrl,
                             'storylyFacebookAppID': storylyFacebookAppID,
+                        },
+                        'storyProductConfig': { 
+                            'isFallbackEnabled': storyFallbackIsEnabled,
+                            'isCartEnabled': storyCartIsEnabled,
                         },
                         'storylyLayoutDirection': storylyLayoutDirection,
                     }
@@ -322,6 +365,8 @@ Storyly.propTypes = {
     storyHeaderShareIcon: string,
     storylyLayoutDirection: string,
     storyGroupViewFactory: object,
+    storyFallbackIsEnabled: bool,
+    storyCartIsEnabled: bool,
 
     onLoad: func,
     onFail: func,
@@ -332,6 +377,8 @@ Storyly.propTypes = {
     onStoryClose: func,
     onUserInteracted: func,
     onProductHydration: func,
+    onCartUpdate: func,
+    onProductEvent: func,
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);

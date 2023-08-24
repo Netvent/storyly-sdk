@@ -11,6 +11,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.config.StorylyConfig
+import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
@@ -38,12 +39,18 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
+        private const val COMMAND_UPDATE_CART_NAME = "updateCart"
+        private const val COMMAND_UPDATE_CART_CODE = 7
+        private const val COMMAND_APPROVE_CART_CHANGE_NAME = "approveCartChange"
+        private const val COMMAND_APPROVE_CART_CHANGE_CODE = 8
+        private const val COMMAND_REJECT_CART_CHANGE_NAME = "rejectCartChange"
+        private const val COMMAND_REJECT_CART_CHANGE_CODE = 9
         private const val COMMAND_RESUME_STORY_NAME = "resumeStory"
-        private const val COMMAND_RESUME_STORY_CODE = 7
+        private const val COMMAND_RESUME_STORY_CODE = 10
         private const val COMMAND_PAUSE_STORY_NAME = "pauseStory"
-        private const val COMMAND_PAUSE_STORY_CODE = 8
+        private const val COMMAND_PAUSE_STORY_CODE = 11
         private const val COMMAND_CLOSE_STORY_NAME = "closeStory"
-        private const val COMMAND_CLOSE_STORY_CODE = 9
+        private const val COMMAND_CLOSE_STORY_CODE = 12
 
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
@@ -56,6 +63,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         internal const val EVENT_STORYLY_USER_INTERACTED = "onStorylyUserInteracted"
 
         internal const val EVENT_STORYLY_ON_HYDRATION = "onStorylyProductHydration"
+        internal const val EVENT_STORYLY_ON_CART_UPDATED = "onStorylyCartUpdated"
+        internal const val EVENT_STORYLY_PRODUCT_EVENT = "onStorylyProductEvent"
 
         internal const val EVENT_ON_CREATE_CUSTOM_VIEW = "onCreateCustomView"
         internal const val EVENT_ON_UPDATE_CUSTOM_VIEW = "onUpdateCustomView"
@@ -82,7 +91,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             EVENT_STORYLY_USER_INTERACTED,
             EVENT_ON_CREATE_CUSTOM_VIEW,
             EVENT_ON_UPDATE_CUSTOM_VIEW,
-            EVENT_STORYLY_ON_HYDRATION
+            EVENT_STORYLY_ON_HYDRATION,
+            EVENT_STORYLY_ON_CART_UPDATED,
+            EVENT_STORYLY_PRODUCT_EVENT
         ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
         }
@@ -90,17 +101,20 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     }
 
     override fun getCommandsMap(): Map<String, Int> {
-       return mapOf(
-           Pair(COMMAND_REFRESH_NAME, COMMAND_REFRESH_CODE),
-           Pair(COMMAND_OPEN_NAME, COMMAND_OPEN_CODE),
-           Pair(COMMAND_CLOSE_NAME, COMMAND_CLOSE_CODE),
-           Pair(COMMAND_OPEN_STORY_NAME, COMMAND_OPEN_STORY_CODE),
-           Pair(COMMAND_OPEN_STORY_WITH_ID_NAME, COMMAND_OPEN_STORY_WITH_ID_CODE),
-           Pair(COMMAND_HYDRATE_PRODUCT_NAME, COMMAND_HYDRATE_PRODUCT_CODE),
-           Pair(COMMAND_RESUME_STORY_NAME, COMMAND_RESUME_STORY_CODE),
-           Pair(COMMAND_PAUSE_STORY_NAME, COMMAND_PAUSE_STORY_CODE),
-           Pair(COMMAND_CLOSE_STORY_NAME, COMMAND_CLOSE_STORY_CODE)
-       )
+        return mapOf(
+            COMMAND_REFRESH_NAME to COMMAND_REFRESH_CODE,
+            COMMAND_OPEN_NAME to COMMAND_OPEN_CODE,
+            COMMAND_CLOSE_NAME to COMMAND_CLOSE_CODE,
+            COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
+            COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
+            COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
+            COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
+            COMMAND_APPROVE_CART_CHANGE_NAME to COMMAND_APPROVE_CART_CHANGE_CODE,
+            COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE,
+            COMMAND_RESUME_STORY_NAME to COMMAND_RESUME_STORY_CODE,
+            COMMAND_PAUSE_STORY_NAME to COMMAND_PAUSE_STORY_CODE,
+            COMMAND_CLOSE_STORY_NAME to COMMAND_CLOSE_STORY_CODE
+        )
     }
 
     override fun receiveCommand(root: STStorylyView, commandId: Int, args: ReadableArray?) {
@@ -113,10 +127,33 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 root.storylyView?.openStory(Uri.parse(payloadStr))
             }
             COMMAND_HYDRATE_PRODUCT_CODE -> {
-                (args?.getArray(0)?.toArrayList() as List<Map<String, Any?>>).let {
+                (args?.getArray(0)?.toArrayList() as? List<Map<String, Any?>>)?.let {
                     val productItems = it.map { createSTRProductItem(it) }
                     root.storylyView?.hydrateProducts(productItems)
                 }
+            }
+            COMMAND_UPDATE_CART_CODE -> {
+                (args?.getMap(0)?.toHashMap() as? Map<String, Any?>)?.let {
+                    val cart = createSTRCart(it)
+                    root.storylyView?.updateCart(cart)
+                }
+            }
+            COMMAND_APPROVE_CART_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
+                if (args.size() > 1) {
+                    (args.getMap(1)?.toHashMap() as? Map<String, Any?>)?.let {
+                         root.approveCartChange(responseId, createSTRCart(it))
+                    } ?: run {
+                        root.approveCartChange(responseId)
+                    }
+                } else {
+                    root.approveCartChange(responseId)
+                }
+            }
+            COMMAND_REJECT_CART_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
+                val failMessage: String = if (args.size() > 1) args.getString(1) else ""
+                root.rejectCartChange(responseId, failMessage)
             }
             COMMAND_OPEN_STORY_WITH_ID_CODE -> {
                 val storyGroupId: String = args?.getString(0) ?: return
@@ -140,6 +177,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val storyBarStylingJson = storylyBundle.getMap("storyBarStyling") ?: return
         val storyStylingJson = storylyBundle.getMap("storyStyling") ?: return
         val storyShareConfig = storylyBundle.getMap("storyShareConfig") ?: return
+        val storyProductConfig = storylyBundle.getMap("storyProductConfig") ?: return
 
         val storyGroupViewFactory = getStoryGroupViewFactory(view.context, storyGroupViewFactoryJson).also { it?.onSendEvent = view::sendEvent }
         var storylyConfigBuilder = StorylyConfig.Builder()
@@ -148,6 +186,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle.getString("storylyLayoutDirection")))
 
         view.storylyView = StorylyView(view.activity).apply {
@@ -230,6 +269,21 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         return configBuilder
             .setShareConfig(
                 shareConfigBuilder
+                    .build()
+            )
+    }
+
+    private fun stProductConfig(
+        json: ReadableMap,
+        configBuilder: StorylyConfig.Builder
+    ): StorylyConfig.Builder {
+        var storyProductConfig = StorylyProductConfig.Builder()
+        if (json.hasKey("isFallbackEnabled")) storyProductConfig = storyProductConfig.setFallbackAvailability(json.getBoolean("isFallbackEnabled"))
+        if (json.hasKey("isCartEnabled")) storyProductConfig = storyProductConfig.setCartAvailability(json.getBoolean("isCartEnabled"))
+
+        return configBuilder
+            .setProductConfig(
+                storyProductConfig
                     .build()
             )
     }
