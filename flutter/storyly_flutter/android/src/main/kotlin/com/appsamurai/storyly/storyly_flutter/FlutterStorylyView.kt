@@ -509,12 +509,20 @@ class FlutterStorylyView(
             productGroupId = product?.get("productGroupId") as? String ?: "",
             title = product?.get("title") as? String ?: "",
             desc = product?.get("desc") as? String ?: "",
-            price = (product?.get("price") as Double).toFloat(),
-            salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
-            currency = product["currency"] as? String ?: "",
-            imageUrls = product["imageUrls"] as? List<String>,
-            url = product["url"] as? String ?: "",
-            variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>)
+            price = when (product?.get("price")) {
+                is Int -> (product["price"] as? Int)?.toFloat() ?: 0.0f
+                is Double -> (product["price"] as? Double)?.toFloat() ?: 0.0f
+                else -> 0.0f
+            },
+            salesPrice = when (product?.get("salesPrice")) {
+                is Int -> (product["salesPrice"] as? Int)?.toFloat() ?: 0.0f
+                is Double -> (product["salesPrice"] as? Double)?.toFloat() ?: 0.0f
+                else -> 0.0f
+            },
+            currency = product?.get("currency") as? String ?: "",
+            imageUrls = product?.get("imageUrls") as? List<String>,
+            url = product?.get("url") as? String ?: "",
+            variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>)
         )
     }
 
@@ -547,21 +555,37 @@ class FlutterStorylyView(
         )
     }
 
-    internal fun createSTRCart(cart: Map<String, Any?>): STRCart {
+    private fun createSTRCart(cart: Map<String, Any?>): STRCart {
         return STRCart(
             items = (cart["items"] as? List<Map<String, Any?>>)?.map { createSTRCartItem(it) } ?: listOf(),
-            oldTotalPrice = (cart["oldTotalPrice"] as? Double)?.toFloat(),
-            totalPrice = (cart["oldTotalPrice"] as Double).toFloat(),
+            oldTotalPrice = when (cart["oldTotalPrice"]) {
+                is Int -> (cart["oldTotalPrice"] as? Int)?.toFloat()
+                is Double -> (cart["oldTotalPrice"] as? Double)?.toFloat()
+                else -> 0.0f
+            },
+            totalPrice = when (cart["totalPrice"]) {
+                is Int -> (cart["totalPrice"] as? Int)?.toFloat() ?: 0.0f
+                is Double -> (cart["totalPrice"] as? Double)?.toFloat() ?: 0.0f
+                else -> 0.0f
+            },
             currency = cart["currency"] as String
         )
     }
 
-    internal fun createSTRCartItem(cartItem: Map<String, Any?>): STRCartItem {
+    private fun createSTRCartItem(cartItem: Map<String, Any?>): STRCartItem {
         return STRCartItem(
             item = createSTRProductItem(cartItem["item"] as? Map<String, Any?>),
-            oldTotalPrice = (cartItem["oldTotalPrice"] as? Double)?.toFloat(),
-            totalPrice = (cartItem["oldTotalPrice"] as Double).toFloat(),
-            quantity = (cartItem["quantity"] as Double).toInt()
+            oldTotalPrice = when (cartItem["oldTotalPrice"]) {
+                is Int -> (cartItem["oldTotalPrice"] as? Int)?.toFloat()
+                is Double -> (cartItem["oldTotalPrice"] as? Double)?.toFloat()
+                else -> 0.0f
+            },
+            totalPrice = when (cartItem["totalPrice"]) {
+                is Int -> (cartItem["totalPrice"] as? Int)?.toFloat()
+                is Double -> (cartItem["totalPrice"] as? Double)?.toFloat()
+                else -> 0.0f
+            },
+            quantity = (cartItem["quantity"] as? Int ?: 0.0).toInt()
         )
     }
 

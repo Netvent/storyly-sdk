@@ -18,12 +18,12 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             guard let self = self else { return }
             let callArguments = call.arguments as? [String: Any]
             switch call.method {
-                case "refresh": self?.storylyView.refresh()
-                case "resumeStory": self?.storylyView.resumeStory(animated: true)
-                case "pauseStory": self?.storylyView.pauseStory(animated: true)
-                case "closeStory": self?.storylyView.closeStory(animated: true)
-                case "show": self?.storylyView.present(animated: true)
-                case "dismiss": self?.storylyView.dismiss(animated: true)
+                case "refresh": self.storylyView.refresh()
+                case "resumeStory": self.storylyView.resumeStory(animated: true)
+                case "pauseStory": self.storylyView.pauseStory(animated: true)
+                case "closeStory": self.storylyView.closeStory(animated: true)
+                case "show": self.storylyView.present(animated: true)
+                case "dismiss": self.storylyView.dismiss(animated: true)
                 case "openStory":
                     _ = self.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
                                                     storyId: callArguments?["storyId"] as? String)

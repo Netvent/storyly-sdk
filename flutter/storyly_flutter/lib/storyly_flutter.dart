@@ -259,7 +259,6 @@ class _StorylyViewState extends State<StorylyView> {
         break;
       case 'storylyOnProductCartUpdated':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        debugPrint("storylyOnCartUpdated ${jsonData}");
         var cart = null;
         if (jsonData['cart'] != null) {
           cart = STRCart.fromJson(jsonData['cart']);
