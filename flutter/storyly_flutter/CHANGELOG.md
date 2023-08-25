@@ -1,3 +1,6 @@
+### 2.2.1 (25.08.2023)
+* fixed compiler error from native side
+
 ### 2.2.0 (24.08.2023)
 * IMPORTANT! increased minimum os version to 11 on ios platform; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
 * IMPORTANT! removed armv7 and i386 arch support on ios platform; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)

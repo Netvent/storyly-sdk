@@ -43,20 +43,20 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                     }
                 case "approveCartChange":
                     if let responseId = callArguments?["responseId"] as? String,
-                       let onSuccess = cartUpdateSuccessFailCallbackMap[responseId]?.0 as? (STRCart?) -> Void {
+                       let onSuccess = self.cartUpdateSuccessFailCallbackMap[responseId]?.0 as? (STRCart?) -> Void {
                         if let cart = callArguments?["cart"] as? [String : Any?] {
-                            onSuccess(createSTRCart(cartMap: cart))
+                            onSuccess(self.createSTRCart(cartMap: cart))
                         } else {
                             onSuccess(nil)
                         }
-                        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                        self.cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
                     }
                 case "rejectCartChange":
                     if let responseId = callArguments?["responseId"] as? String,
-                       let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 as? (STRCartEventResult) -> Void,
+                       let onFail = self.cartUpdateSuccessFailCallbackMap[responseId]?.1 as? (STRCartEventResult) -> Void,
                        let failMessage = callArguments?["failMessage"] as? String {
                         onFail(STRCartEventResult(message: failMessage))
-                        cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                        self.cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
                     }
                 default: do {}
             }
@@ -305,7 +305,7 @@ extension FlutterStorylyViewWrapper: StorylyProductDelegate {
         onSuccess: ((STRCart?) -> Void)?,
         onFail: ((STRCartEventResult) -> Void)?) {
             let responseId = UUID().uuidString
-            cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+            self.cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
             
             self.methodChannel.invokeMethod(
                 "storylyOnProductCartUpdated",
