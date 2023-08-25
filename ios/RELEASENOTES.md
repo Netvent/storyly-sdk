@@ -1,4 +1,7 @@
 # Release Notes
+### 2.2.1 (25.08.2023)
+* fixed a bug in story dismiss flow
+
 ### 2.2.0 (23.08.2023)
 * IMPORTANT! increased minimum os version to 11; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
 * IMPORTANT! removed armv7 and i386 arch support; please refer to [Xcode 14 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes)
