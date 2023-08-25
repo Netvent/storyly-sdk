@@ -63,7 +63,8 @@ declare module "storyly-react-native" {
       onPress?: (event: StoryPressEvent) => void;
       onUserInteracted?: (event: StoryInteractiveEvent) => void;
       onProductHydration?: (event: StoryProductHydrationEvent) => void;
-      updateCart: (cart: STRCart) => void;
+      onCartUpdate?: (event: StoryProductCartUpdateEvent) => void;
+      onProductEvent?: (event: ProductEvent) => void;
     }
 
     export interface StoryLoadEvent {
@@ -88,6 +89,17 @@ declare module "storyly-react-native" {
 
     export interface StoryProductHydrationEvent {
       productIds: string[];
+    }
+
+    export interface StoryProductCartUpdateEvent {
+      event: string;
+      cart: STRCart;
+      change: STRCartItem;
+      responseId: string;
+    }
+
+    export interface ProductEvent {
+      event: string;
     }
 
     export interface StoryHydrationEvent {
@@ -202,9 +214,15 @@ declare module "storyly-react-native" {
     open: () => void;
     close: () => void;
     refresh: () => void;
+    pauseStory: () => void;
+    resumeStory: () => void;
+    closeStory: () => void;
     openStory: (storyUriFromTheDashboard: string) => void;
     openStoryWithId: (storyGroupId: string, storyId: string) => void;
     hydrateProducts: (products: STRProductItem[]) => void;
+    updateCart: (cart: STRCart) => void;
+    approveCartChange: (responseId: string, cart: STRCart) => void;
+    rejectCartChange: (responseId: string, failMessage: string) => void;
   }
 
   export interface STRProductItem {
@@ -226,7 +244,7 @@ declare module "storyly-react-native" {
 
   export interface STRCart {
     items: STRCartItem[];
-    totalPrice?: number;
+    totalPrice: number;
     oldTotalPrice?: number;
     currency: string;
   } 
@@ -235,6 +253,6 @@ declare module "storyly-react-native" {
     item: STRProductItem;
     totalPrice?: number;
     oldTotalPrice?: number;
-    currency: string;
+    quantity: number;
   }
 }
