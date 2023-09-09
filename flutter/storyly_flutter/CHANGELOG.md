@@ -1,3 +1,9 @@
+### 2.3.0 (09.09.2023)
+* added support for google fonts from Storyly studio for text interactive component
+* added support for instance theme settings from Storyly dashboard
+* added Live story group type to support streaming urls
+* converted emoji interactive component results from click counts to percentages
+
 ### 2.2.1 (25.08.2023)
 * fixed compiler error from native side
 
