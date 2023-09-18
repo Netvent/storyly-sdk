@@ -1,4 +1,7 @@
 # Release Notes
+### 1.0.1 (18.09.2023)
+* fixed media import 
+  
 ### 1.0.0 (05.05.2023)
 * improved moments configuration structure
 * added custom font interface components
