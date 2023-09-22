@@ -116,18 +116,6 @@ extension STStorylyView {
         storylyView?.refresh()
     }
     
-    func open() {
-        print("STR:STStorylyView:open()")
-        storylyView?.present(animated: false)
-        storylyView?.resume()
-    }
-    
-    func close() {
-        print("STR:STStorylyView:close()")
-        storylyView?.pause()
-        storylyView?.dismiss(animated: false)
-    }
-    
     func openStory(payload: URL) {
         print("STR:STStorylyView:openStory(payload:\(payload))")
         storylyView?.openStory(payload: payload)

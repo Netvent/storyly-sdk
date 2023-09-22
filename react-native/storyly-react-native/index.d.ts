@@ -211,8 +211,6 @@ declare module "storyly-react-native" {
   }
 
   export class Storyly extends Component<Storyly.Props> {
-    open: () => void;
-    close: () => void;
     refresh: () => void;
     pauseStory: () => void;
     resumeStory: () => void;

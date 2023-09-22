@@ -5,10 +5,6 @@
 
 RCT_EXTERN_METHOD(refresh:(nonnull NSNumber *)reactTag)
 
-RCT_EXTERN_METHOD(open:(nonnull NSNumber *)reactTag)
-
-RCT_EXTERN_METHOD(close:(nonnull NSNumber *)reactTag)
-
 RCT_EXTERN_METHOD(openStory:(nonnull NSNumber *)reactTag
                   payload:(nonnull NSURL *)payload)
 
