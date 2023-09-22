@@ -49,8 +49,6 @@ class FlutterStorylyView(
                 "resumeStory" -> storylyView.resumeStory()
                 "pauseStory" -> storylyView.pauseStory()
                 "closeStory" -> storylyView.closeStory()
-                "show" -> storylyView.show()
-                "dismiss" -> storylyView.dismiss()
                 "openStory" -> storylyView.openStory(
                     callArguments?.get("storyGroupId") as? String ?: "",
                     callArguments?.getOrElse("storyId") { null } as? String

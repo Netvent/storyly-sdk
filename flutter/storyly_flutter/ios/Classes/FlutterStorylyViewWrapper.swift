@@ -22,8 +22,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                 case "resumeStory": self.storylyView.resumeStory(animated: true)
                 case "pauseStory": self.storylyView.pauseStory(animated: true)
                 case "closeStory": self.storylyView.closeStory(animated: true)
-                case "show": self.storylyView.present(animated: true)
-                case "dismiss": self.storylyView.dismiss(animated: true)
                 case "openStory":
                     _ = self.storylyView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
                                                     storyId: callArguments?["storyId"] as? String)
