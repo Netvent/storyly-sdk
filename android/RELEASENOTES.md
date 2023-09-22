@@ -1,4 +1,7 @@
 # Release Notes
+### 2.3.2 (22.09.2023)
+* optimized memory usage
+  
 ### 2.3.1 (12.09.2023)
 * improved code obfuscation for dexguard
   
