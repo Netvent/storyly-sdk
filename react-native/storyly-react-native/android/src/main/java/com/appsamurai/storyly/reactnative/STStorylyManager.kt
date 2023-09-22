@@ -29,10 +29,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
-        private const val COMMAND_OPEN_NAME = "open"
-        private const val COMMAND_OPEN_CODE = 2
-        private const val COMMAND_CLOSE_NAME = "close"
-        private const val COMMAND_CLOSE_CODE = 3
         private const val COMMAND_OPEN_STORY_NAME = "openStory"
         private const val COMMAND_OPEN_STORY_CODE = 4
         private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
@@ -103,8 +99,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
             COMMAND_REFRESH_NAME to COMMAND_REFRESH_CODE,
-            COMMAND_OPEN_NAME to COMMAND_OPEN_CODE,
-            COMMAND_CLOSE_NAME to COMMAND_CLOSE_CODE,
             COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
             COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
@@ -120,8 +114,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
     override fun receiveCommand(root: STStorylyView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             COMMAND_REFRESH_CODE -> root.storylyView?.refresh()
-            COMMAND_OPEN_CODE -> root.storylyView?.show()
-            COMMAND_CLOSE_CODE -> root.storylyView?.dismiss()
             COMMAND_OPEN_STORY_CODE -> {
                 val payloadStr: String = args?.getString(0) ?: return
                 root.storylyView?.openStory(Uri.parse(payloadStr))
