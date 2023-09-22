@@ -1,4 +1,8 @@
 # Release Notes
+### 2.3.1 (22.09.2023)
+* optimized memory usage
+* improved layout on orientation change, fixed [#291](https://github.com/Netvent/storyly-mobile/issues/291)
+  
 ### 2.3.0 (09.09.2023)
 * added support for google fonts from Storyly studio for text interactive component
 * added support for instance theme settings from Storyly dashboard
