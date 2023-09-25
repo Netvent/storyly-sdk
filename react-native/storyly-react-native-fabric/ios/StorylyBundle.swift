@@ -1,54 +1,61 @@
 //
-//  RCTConvert+Storyly.swift
+//  StorylyBundle.swift
 //  storyly-react-native
 //
-//  Created by Haldun Melih Fadillioglu on 25.10.2022.
+//  Created by Haldun Melih Fadillioglu on 22.09.2023.
 //
 import Storyly
 
-@objc(StorylyBundle)
-class StorylyBundle: NSObject {
+
+internal class StorylyBundle {
     let storylyView: StorylyView
-    let storyGroupViewFactory: STStoryGroupViewFactory?
+//    let storyGroupViewFactory: STStoryGroupViewFactory?
     
-    init(storylyView: StorylyView,
-         storyGroupViewFactory: STStoryGroupViewFactory?) {
+    init(storylyView: StorylyView
+//         storyGroupViewFactory: STStoryGroupViewFactory?
+    ) {
         self.storylyView = storylyView
-        self.storyGroupViewFactory = storyGroupViewFactory
+//        self.storyGroupViewFactory = storyGroupViewFactory
+    }
+    
+    public static func build(rawJson: String) -> StorylyBundle? {
+        guard let bundleData = rawJson.data(using: .utf8),
+              let json = try? JSONSerialization.jsonObject(with: bundleData, options: []) as? NSDictionary else { return nil }
+        
+        return stStorylyBundle(json: json)
     }
 }
 
-extension RCTConvert {
-    @objc(stStorylyBundle:)
-    static func stStorylyBundle(json: NSDictionary) -> StorylyBundle? {
-        print("STR:RCTConvert+Extension:stStorylyBundle(json:\(json))")
-        guard let storylyInitJson = json["storylyInit"] as? NSDictionary else { return nil }
-        guard let storylyId = storylyInitJson["storylyId"] as? String else { return nil }
-        guard let storyGroupStylingJson = json["storyGroupStyling"] as? NSDictionary else { return nil }
-        guard let storyGroupViewFactoryJson = json["storyGroupViewFactory"] as? NSDictionary else { return nil }
-        guard let storyBarStylingJson = json["storyBarStyling"] as? NSDictionary else { return nil }
-        guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
-        guard let storyShareConfig = json["storyShareConfig"] as? NSDictionary else { return nil }
-        guard let storyProductConfig = json["storyProductConfig"] as? NSDictionary else { return nil }
+private func stStorylyBundle(json: NSDictionary) -> StorylyBundle? {
+    print("STR:RCTConvert+Extension:stStorylyBundle(json:\(json))")
+    guard let storylyInitJson = json["storylyInit"] as? NSDictionary else { return nil }
+    guard let storylyId = storylyInitJson["storylyId"] as? String else { return nil }
+    guard let storyGroupStylingJson = json["storyGroupStyling"] as? NSDictionary else { return nil }
+    guard let storyGroupViewFactoryJson = json["storyGroupViewFactory"] as? NSDictionary else { return nil }
+    guard let storyBarStylingJson = json["storyBarStyling"] as? NSDictionary else { return nil }
+    guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
+    guard let storyShareConfig = json["storyShareConfig"] as? NSDictionary else { return nil }
+    guard let storyProductConfig = json["storyProductConfig"] as? NSDictionary else { return nil }
 
-        var storyGroupViewFactory: STStoryGroupViewFactory? = stStoryGroupViewFactory(json: storyGroupViewFactoryJson)
-        var storylyConfigBuilder = StorylyConfig.Builder()
-        storylyConfigBuilder = stStorylyInit(json: storylyInitJson, configBuilder: &storylyConfigBuilder)
-        storylyConfigBuilder = stStorylyGroupStyling(json: storyGroupStylingJson, groupViewFactory: storyGroupViewFactory, configBuilder: &storylyConfigBuilder)
-        storylyConfigBuilder = stStoryBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
-        storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder)
-        storylyConfigBuilder = stShareConfig(json: storyShareConfig, configBuilder: &storylyConfigBuilder)
-        storylyConfigBuilder = stProductConfig(json: storyProductConfig, configBuilder: &storylyConfigBuilder)
+//        var storyGroupViewFactory: STStoryGroupViewFactory? = stStoryGroupViewFactory(json: storyGroupViewFactoryJson)
+    var storylyConfigBuilder = StorylyConfig.Builder()
+    storylyConfigBuilder = stStorylyInit(json: storylyInitJson, configBuilder: &storylyConfigBuilder)
+//    storylyConfigBuilder = stStorylyGroupStyling(json: storyGroupStylingJson, groupViewFactory: storyGroupViewFactory, configBuilder: &storylyConfigBuilder)
+    storylyConfigBuilder = stStoryBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
+    storylyConfigBuilder = stStoryStyling(json: storyStylingJson, configBuilder: &storylyConfigBuilder)
+    storylyConfigBuilder = stShareConfig(json: storyShareConfig, configBuilder: &storylyConfigBuilder)
+    storylyConfigBuilder = stProductConfig(json: storyProductConfig, configBuilder: &storylyConfigBuilder)
 
-        let storylyView = StorylyView()
-        storylyView.storylyInit = StorylyInit(
-            storylyId: storylyId,
-            config: storylyConfigBuilder
-                .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
-                .build()
-        )
-        return StorylyBundle(storylyView: storylyView, storyGroupViewFactory: storyGroupViewFactory)
-    }
+    let storylyView = StorylyView()
+    storylyView.storylyInit = StorylyInit(
+        storylyId: storylyId,
+        config: storylyConfigBuilder
+            .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
+            .build()
+    )
+    return StorylyBundle(storylyView: storylyView
+//                             storyGroupViewFactory: storyGroupViewFactory
+    )
 }
 
 private func stStorylyInit(
@@ -65,7 +72,7 @@ private func stStorylyInit(
 
 private func stStorylyGroupStyling(
     json: NSDictionary,
-    groupViewFactory: STStoryGroupViewFactory?,
+//    groupViewFactory: STStoryGroupViewFactory?,
     configBuilder: inout StorylyConfig.Builder
 ) -> StorylyConfig.Builder {
     var groupStylingBuilder = StorylyStoryGroupStyling.Builder()
@@ -98,7 +105,7 @@ private func stStorylyGroupStyling(
                 .setTitleLineCount(count: json["titleLineCount"] as? Int ?? 2)
                 .setTitleFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: CGFloat(json["titleTextSize"] as? Int ?? 12)))
                 .setTitleVisibility(isVisible: json["titleVisible"] as? Bool ?? true)
-                .setCustomGroupViewFactory(factory: groupViewFactory)
+//                .setCustomGroupViewFactory(factory: groupViewFactory)
                 .build()
         )
 }
@@ -120,16 +127,16 @@ private func stStoryBarStyling(
         )
 }
 
-private func stStoryGroupViewFactory(json: NSDictionary) -> STStoryGroupViewFactory? {
-    let width = (json["width"] as? CGFloat) ?? 0
-    let height = (json["height"] as? CGFloat) ?? 0
-    let factorySize = CGSize(width: width, height: height)
-    if factorySize == .zero { return nil }
-    return STStoryGroupViewFactory(
-        width: width,
-        height: height
-    )
-}
+//private func stStoryGroupViewFactory(json: NSDictionary) -> STStoryGroupViewFactory? {
+//    let width = (json["width"] as? CGFloat) ?? 0
+//    let height = (json["height"] as? CGFloat) ?? 0
+//    let factorySize = CGSize(width: width, height: height)
+//    if factorySize == .zero { return nil }
+//    return STStoryGroupViewFactory(
+//        width: width,
+//        height: height
+//    )
+//}
 
 private func stStoryStyling(
     json: NSDictionary,

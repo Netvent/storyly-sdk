@@ -3,15 +3,9 @@
 #import <React/RCTViewComponentView.h>
 #import <UIKit/UIKit.h>
 
-#ifndef StorylyReactNativeViewNativeComponent_h
-#define StorylyReactNativeViewNativeComponent_h
-
-NS_ASSUME_NONNULL_BEGIN
-
 @interface StorylyReactNativeView : RCTViewComponentView
+
+
 @end
 
-NS_ASSUME_NONNULL_END
-
-#endif /* StorylyReactNativeViewNativeComponent_h */
 #endif /* RCT_NEW_ARCH_ENABLED */

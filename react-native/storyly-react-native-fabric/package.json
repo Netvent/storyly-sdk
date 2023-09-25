@@ -161,7 +161,7 @@
     ]
   },
   "codegenConfig": {
-    "name": "RNStorylyReactNativeViewSpec",
+    "name": "StorylyReactNativeSpec",
     "type": "components",
     "jsSrcsDir": "src"
   }
