@@ -1,2 +1,4 @@
-export { default as Storyly } from './Storyly';
+import Storyly from './Storyly';
+
+export default Storyly;
 export * from './Storyly';

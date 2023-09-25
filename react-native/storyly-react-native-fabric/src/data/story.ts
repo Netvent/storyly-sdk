@@ -95,8 +95,8 @@ export interface STRProductItem {
     desc: string;
     price: number;
     salesPrice?: number;
-    currency: String;
-    imageUrls?: String[];
+    currency: string;
+    imageUrls?: string[];
     variants: STRProductVariant[];
 }
 

@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { processColor, type NativeSyntheticEvent } from "react-native";
-import { StorylyNativeView, StorylyNativeCommands } from "./StorylyReactNativeViewNativeComponent";
+import { processColor } from "react-native";
+import StorylyNativeView, { StorylyNativeCommands, applyBaseEvent } from "./StorylyReactNativeNativeComponent";
 import type { StoryGroup, STRCart, STRProductItem } from "./data/story";
-import type { ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent } from "./data/event";
+import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent } from "./data/event";
+import type { ViewProps } from "react-native";
 
 type StorylyNativeComponentRef = InstanceType<typeof StorylyNativeView>;
 
@@ -10,10 +11,10 @@ type StorylyNativeComponentRef = InstanceType<typeof StorylyNativeView>;
 export interface StoryGroupViewFactory {
     width: number;
     height: number;
-    customView: (storyGroup: StoryGroup) => JSX.Element;
+    customView: React.FC<{storyGroup: StoryGroup}>;
 }
 
-export type StorylyProps = {
+export interface StorylyProps extends ViewProps {
     storylyId: string;
     customParameter?: string;
     storylyTestMode?: boolean;
@@ -78,19 +79,72 @@ export type StorylyProps = {
     onProductEvent?: (event: ProductEvent) => void;
 }
 
+const mapStorylyConfig = (props: StorylyProps) => {
+    return {
+        'storylyInit': {
+            'storylyId': props.storylyId,
+            'storylySegments': props.storylySegments,
+            'userProperty': props.storylyUserProperty,
+            'customParameter': props.customParameter,
+            'storylyIsTestMode': props.storylyTestMode,
+            'storylyPayload': props.storylyPayload,
+        },
+        'storyGroupStyling': {
+            'iconBorderColorSeen': props.storyGroupIconBorderColorSeen ? props.storyGroupIconBorderColorSeen.map(processColor) : undefined,
+            'iconBorderColorNotSeen': props.storyGroupIconBorderColorNotSeen ? props.storyGroupIconBorderColorNotSeen.map(processColor) : undefined,
+            'iconBackgroundColor': processColor(props.storyGroupIconBackgroundColor) ?? undefined,
+            'pinIconColor': processColor(props.storyGroupPinIconColor) ?? undefined,
+            'iconHeight': props.storyGroupIconHeight,
+            'iconWidth': props.storyGroupIconWidth,
+            'iconCornerRadius': props.storyGroupIconCornerRadius,
+            'iconBorderAnimation': props.storyGroupAnimation,
+            'titleSeenColor': processColor(props.storyGroupTextColorSeen) ?? undefined,
+            'titleNotSeenColor': processColor(props.storyGroupTextColorNotSeen) ?? undefined,
+            'titleLineCount': props.storyGroupTextLines,
+            'titleFont': props.storyGroupTextTypeface,
+            'titleTextSize': props.storyGroupTextSize,
+            'titleVisible': props.storyGroupTextIsVisible,
+            'groupSize': props.storyGroupSize,
+        },
+        'storyGroupViewFactory': {
+            'width': props.storyGroupViewFactory ? props.storyGroupViewFactory.width : 0,
+            'height': props.storyGroupViewFactory ? props.storyGroupViewFactory.height : 0,
+        },
+        'storyBarStyling': {
+            'orientation': props.storyGroupListOrientation,
+            'sections': props.storyGroupListSections,
+            'horizontalEdgePadding': props.storyGroupListHorizontalEdgePadding,
+            'verticalEdgePadding': props.storyGroupListVerticalEdgePadding,
+            'horizontalPaddingBetweenItems': props.storyGroupListHorizontalPaddingBetweenItems,
+            'verticalPaddingBetweenItems': props.storyGroupListVerticalPaddingBetweenItems,
+        },
+        'storyStyling': {
+            'headerIconBorderColor': props.storyItemIconBorderColor ? props.storyItemIconBorderColor.map(processColor) : undefined,
+            'titleColor': processColor(props.storyItemTextColor) ?? undefined,
+            'titleFont': props.storyItemTextTypeface,
+            'interactiveFont': props.storyInteractiveTextTypeface,
+            'progressBarColor': props.storyItemProgressBarColor ? props.storyItemProgressBarColor.map(processColor) : undefined,
+            'isTitleVisible': props.storyHeaderTextIsVisible,
+            'isHeaderIconVisible': props.storyHeaderIconIsVisible,
+            'isCloseButtonVisible': props.storyHeaderCloseButtonIsVisible,
+            'closeButtonIcon': props.storyHeaderCloseIcon,
+            'shareButtonIcon': props.storyHeaderShareIcon,
+        },
+        'storyShareConfig': {
+            'storylyShareUrl': props.storylyShareUrl,
+            'storylyFacebookAppID': props.storylyFacebookAppID,
+        },
+        'storyProductConfig': {
+            'isFallbackEnabled': props.storyFallbackIsEnabled,
+            'isCartEnabled': props.storyCartIsEnabled,
+        },
+        'storylyLayoutDirection': props.storylyLayoutDirection,
+    }
+}
+
 const Storyly: React.FC<StorylyProps> = (props: StorylyProps) => {
 
     const ref = useRef<StorylyNativeComponentRef>(null);
-
-
-    /**
-     * @deprecated "This function will be removed in v2.3.0. We've introduced the resumeStory() function to story continuation"
-     */
-    const open = () => {
-        if (ref.current) {
-            StorylyNativeCommands.open(ref.current)
-        }
-    }
 
     const resumeStory = () => {
         if (ref.current) {
@@ -110,116 +164,106 @@ const Storyly: React.FC<StorylyProps> = (props: StorylyProps) => {
         }
     }
 
-    /**
-     * @deprecated "This function will be removed in v2.3.0. We've introduced two new functions for improved story management: pauseStory() and closeStory().
-     * To temporarily halt a story and later resume it, use pauseStory(), followed by resumeStory() when ready to continue. For an immediate story closure, use closeStory()"
-     */
-    const close = () => {
-        if (ref.current) {
-            StorylyNativeCommands.close(ref.current)
-        }
-    }
-
     const openStory = (url: string) => {
         if (ref.current) {
-            StorylyNativeCommands.openStory(ref.current, url)
+            StorylyNativeCommands.openStory(ref.current, JSON.stringify({url}))
         }
     }
 
-    const openStoryWithId = (groupId: string, storyId: String) => {
+    const openStoryWithId = (groupId: string, storyId: string) => {
         if (ref.current) {
-            StorylyNativeCommands.openStoryWithId(ref.current, groupId, storyId)
+            StorylyNativeCommands.openStoryWithId(ref.current, JSON.stringify({groupId, storyId}))
         }
     }
 
     const hydrateProducts = (products: [STRProductItem]) => {
         if (ref.current) {
-            StorylyNativeCommands.hydrateProducts(ref.current, products)
+            StorylyNativeCommands.hydrateProducts(ref.current, JSON.stringify({products}))
         }
     }
 
     const updateCart = (cart: STRCart) => {
         if (ref.current) {
-            StorylyNativeCommands.updateCart(ref.current, cart)
+            StorylyNativeCommands.updateCart(ref.current, JSON.stringify({cart}))
         }
     }
 
     const approveCartChange = (responseId: string, cart: STRCart) => {
         if (ref.current) {
-            StorylyNativeCommands.approveCartChange(ref.current, responseId, cart)
+            StorylyNativeCommands.approveCartChange(ref.current, JSON.stringify({responseId, cart}))
         }
     }
 
     const rejectCartChange = (responseId: string, faileMsg: string) => {
         if (ref.current) {
-            StorylyNativeCommands.rejectCartChange(ref.current, responseId, faileMsg)
+            StorylyNativeCommands.rejectCartChange(ref.current, JSON.stringify({responseId, faileMsg}))
         }
     }
 
 
-    const _onStorylyLoaded = (event: NativeSyntheticEvent<StoryLoadEvent>) => {
+    const _onStorylyLoaded = (event: BaseEvent) => {
         if (props.onLoad) {
-            props.onLoad(event.nativeEvent);
+            props.onLoad(event as StoryLoadEvent);
         }
     }
 
-    const _onStorylyLoadFailed = (event: NativeSyntheticEvent<StoryFailEvent>) => {
+    const _onStorylyLoadFailed = (event: BaseEvent) => {
         if (props.onFail) {
-            props.onFail(event.nativeEvent);
+            props.onFail(event as StoryFailEvent);
         }
     }
 
-    const _onStorylyEvent = (event: NativeSyntheticEvent<StoryEvent>) => {
+    const _onStorylyEvent = (event: BaseEvent) => {
         if (props.onEvent) {
-            props.onEvent(event.nativeEvent);
+            props.onEvent(event as StoryEvent);
         }
     }
 
-    const _onStorylyActionClicked = (event: NativeSyntheticEvent<StoryPressEvent>) => {
+    const _onStorylyActionClicked = (event: BaseEvent) => {
         if (props.onPress) {
-            props.onPress(event.nativeEvent);
+            props.onPress(event as StoryPressEvent)
         }
     }
 
-    const _onStorylyStoryPresented = () => {
+    const _onStorylyStoryPresented = (_: BaseEvent) => {
         if (props.onStoryOpen) {
             props.onStoryOpen();
         }
     }
 
-    const _onStorylyStoryPresentFailed = (event: NativeSyntheticEvent<StoryPresentFail>) => {
+    const _onStorylyStoryPresentFailed = (event: BaseEvent) => {
         if (props.onStoryOpenFail) {
-            props.onStoryOpenFail(event.nativeEvent);
+            props.onStoryOpenFail(event as StoryPresentFail);
         }
     }
 
-    const _onStorylyStoryDismissed = () => {
+    const _onStorylyStoryDismissed = (_: BaseEvent) => {
         if (props.onStoryClose) {
             props.onStoryClose();
         }
     }
 
-    const _onStorylyUserInteracted = (event: NativeSyntheticEvent<StoryInteractiveEvent>) => {
+    const _onStorylyUserInteracted = (event: BaseEvent) => {
         if (props.onUserInteracted) {
-            props.onUserInteracted(event.nativeEvent);
+            props.onUserInteracted(event as StoryInteractiveEvent);
         }
     }
 
-    const _onStorylyProductHydration = (event: NativeSyntheticEvent<StoryProductHydrationEvent>) => {
+    const _onStorylyProductHydration = (event: BaseEvent) => {
         if (props.onProductHydration) {
-            props.onProductHydration(event.nativeEvent);
+            props.onProductHydration(event as StoryProductHydrationEvent);
         }
     }
 
-    const _onStorylyCartUpdated = (event: NativeSyntheticEvent<StoryProductCartUpdateEvent>) => {
+    const _onStorylyCartUpdated = (event: BaseEvent) => {
         if (props.onCartUpdate) {
-            props.onCartUpdate(event.nativeEvent);
+            props.onCartUpdate(event as StoryProductCartUpdateEvent);
         }
     }
 
-    const _onStorylyProductEvent = (event: NativeSyntheticEvent<ProductEvent>) => {
+    const _onStorylyProductEvent = (event: BaseEvent) => {
         if (props.onProductEvent) {
-            props.onProductEvent(event.nativeEvent);
+            props.onProductEvent(event as ProductEvent);
         }
     }
 
@@ -236,81 +280,20 @@ const Storyly: React.FC<StorylyProps> = (props: StorylyProps) => {
         <StorylyNativeView
             {...props}
             ref={ref}
-            onStorylyLoaded={_onStorylyLoaded}
-            onStorylyLoadFailed={_onStorylyLoadFailed}
-            onStorylyEvent={_onStorylyEvent}
-            onStorylyActionClicked={_onStorylyActionClicked}
-            onStorylyStoryPresented={_onStorylyStoryPresented}
-            onStorylyStoryPresentFailed={_onStorylyStoryPresentFailed}
-            onStorylyStoryClose={_onStorylyStoryDismissed}
-            onStorylyUserInteracted={_onStorylyUserInteracted}
-            onStorylyProductHydration={_onStorylyProductHydration}
-            onStorylyCartUpdated={_onStorylyCartUpdated}
-            onStorylyProductEvent={_onStorylyProductEvent}
+            onStorylyLoaded={applyBaseEvent(_onStorylyLoaded)}
+            onStorylyLoadFailed={applyBaseEvent(_onStorylyLoadFailed)}
+            onStorylyEvent={applyBaseEvent(_onStorylyEvent)}
+            onStorylyActionClicked={applyBaseEvent(_onStorylyActionClicked)}
+            onStorylyStoryPresented={applyBaseEvent(_onStorylyStoryPresented)}
+            onStorylyStoryPresentFailed={applyBaseEvent(_onStorylyStoryPresentFailed)}
+            onStorylyStoryClose={applyBaseEvent(_onStorylyStoryDismissed)}
+            onStorylyUserInteracted={applyBaseEvent(_onStorylyUserInteracted)}
+            onStorylyProductHydration={applyBaseEvent(_onStorylyProductHydration)}
+            onStorylyCartUpdated={applyBaseEvent(_onStorylyCartUpdated)}
+            onStorylyProductEvent={applyBaseEvent(_onStorylyProductEvent)}
             // onCreateCustomView={this._onCreateCustomView}
             // onUpdateCustomView={this._onUpdateCustomView}
-            storylyConfig={
-                {
-                    'storylyInit': {
-                        'storylyId': props.storylyId,
-                        'storylySegments': props.storylySegments,
-                        'userProperty': props.storylyUserProperty,
-                        'customParameter': props.customParameter,
-                        'storylyIsTestMode': props.storylyTestMode,
-                        'storylyPayload': props.storylyPayload,
-                    },
-                    'storyGroupStyling': {
-                        'iconBorderColorSeen': props.storyGroupIconBorderColorSeen ? props.storyGroupIconBorderColorSeen.map(processColor) : undefined,
-                        'iconBorderColorNotSeen': props.storyGroupIconBorderColorNotSeen ? props.storyGroupIconBorderColorNotSeen.map(processColor) : undefined,
-                        'iconBackgroundColor': processColor(props.storyGroupIconBackgroundColor) ?? undefined,
-                        'pinIconColor': processColor(props.storyGroupPinIconColor) ?? undefined,
-                        'iconHeight': props.storyGroupIconHeight,
-                        'iconWidth': props.storyGroupIconWidth,
-                        'iconCornerRadius': props.storyGroupIconCornerRadius,
-                        'iconBorderAnimation': props.storyGroupAnimation,
-                        'titleSeenColor': processColor(props.storyGroupTextColorSeen) ?? undefined,
-                        'titleNotSeenColor': processColor(props.storyGroupTextColorNotSeen) ?? undefined,
-                        'titleLineCount': props.storyGroupTextLines,
-                        'titleFont': props.storyGroupTextTypeface,
-                        'titleTextSize': props.storyGroupTextSize,
-                        'titleVisible': props.storyGroupTextIsVisible,
-                        'groupSize': props.storyGroupSize,
-                    },
-                    'storyGroupViewFactory': {
-                        'width': props.storyGroupViewFactory ? props.storyGroupViewFactory.width : 0,
-                        'height': props.storyGroupViewFactory ? props.storyGroupViewFactory.height : 0,
-                    },
-                    'storyBarStyling': {
-                        'orientation': props.storyGroupListOrientation,
-                        'sections': props.storyGroupListSections,
-                        'horizontalEdgePadding': props.storyGroupListHorizontalEdgePadding,
-                        'verticalEdgePadding': props.storyGroupListVerticalEdgePadding,
-                        'horizontalPaddingBetweenItems': props.storyGroupListHorizontalPaddingBetweenItems,
-                        'verticalPaddingBetweenItems': props.storyGroupListVerticalPaddingBetweenItems,
-                    },
-                    'storyStyling': {
-                        'headerIconBorderColor': props.storyItemIconBorderColor ? props.storyItemIconBorderColor.map(processColor) : undefined,
-                        'titleColor': processColor(props.storyItemTextColor) ?? undefined,
-                        'titleFont': props.storyItemTextTypeface,
-                        'interactiveFont': props.storyInteractiveTextTypeface,
-                        'progressBarColor': props.storyItemProgressBarColor ? props.storyItemProgressBarColor.map(processColor) : undefined,
-                        'isTitleVisible': props.storyHeaderTextIsVisible,
-                        'isHeaderIconVisible': props.storyHeaderIconIsVisible,
-                        'isCloseButtonVisible': props.storyHeaderCloseButtonIsVisible,
-                        'closeButtonIcon': props.storyHeaderCloseIcon,
-                        'shareButtonIcon': props.storyHeaderShareIcon,
-                    },
-                    'storyShareConfig': {
-                        'storylyShareUrl': props.storylyShareUrl,
-                        'storylyFacebookAppID': props.storylyFacebookAppID,
-                    },
-                    'storyProductConfig': {
-                        'isFallbackEnabled': props.storyFallbackIsEnabled,
-                        'isCartEnabled': props.storyCartIsEnabled,
-                    },
-                    'storylyLayoutDirection': props.storylyLayoutDirection,
-                }
-            } >
+            storylyConfig={JSON.stringify(mapStorylyConfig(props))} >
             {/* {storyGroupViewFactory ?
                 <STStorylyGroupViewFactory
                     ref={(ref) => { this.customViewFactoryRef = ref }}
