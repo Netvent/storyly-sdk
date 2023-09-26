@@ -161,8 +161,8 @@
     ]
   },
   "codegenConfig": {
-    "name": "StorylyReactNativeSpec",
+    "name": "storylyfabric",
     "type": "components",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "./src/fabric"
   }
 }

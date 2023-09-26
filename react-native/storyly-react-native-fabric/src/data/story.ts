@@ -1,5 +1,11 @@
 
 
+export interface StoryGroupViewFactory {
+    width: number;
+    height: number;
+    customView: React.FC<{storyGroup?: StoryGroup}>;
+}
+
 export interface StoryComponent {
     id: string;
     type: ReactionType;
@@ -51,6 +57,7 @@ export interface StoryGroup {
     seen: boolean;
     stories: Story[];
     type: string,
+    pinned: boolean
     momentsUser?: MomentsUser
 }
 

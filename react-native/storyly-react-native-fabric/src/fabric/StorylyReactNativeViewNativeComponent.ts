@@ -1,14 +1,12 @@
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
-import type { HostComponent, NativeSyntheticEvent, ViewProps } from 'react-native';
-import type { BaseEvent } from './data/event';
+import type { HostComponent, ViewProps } from 'react-native';
 import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 import type { BubblingEventHandler } from 'react-native/Libraries/Types/CodegenTypes';
+import type { BaseEvent } from '../data/event';
 
-interface RawEvent {
-  raw: string;
-}
-
-type Event = Readonly<RawEvent>;
+type Event = Readonly<{
+  raw?: string;
+}>;
 
 interface StorylyNativeProps extends ViewProps {
   storylyConfig: string;
@@ -24,16 +22,21 @@ interface StorylyNativeProps extends ViewProps {
   onStorylyProductHydration: BubblingEventHandler<Event>;
   onStorylyCartUpdated: BubblingEventHandler<Event>;
   onStorylyProductEvent: BubblingEventHandler<Event>;
+
+  onCreateCustomView: BubblingEventHandler<Event>;
+  onUpdateCustomView: BubblingEventHandler<Event>;
 }
 
-export const applyBaseEvent = (func: (event: BaseEvent)=>void) => {
-  return (event: NativeSyntheticEvent<{ raw: string }>) => {
-    let baseEvent = JSON.parse(event.nativeEvent.raw) as BaseEvent
-    func(baseEvent)
-  }
+export const applyBaseEvent = (callback: (event: BaseEvent)=>void) => {
+  let responseCallback: BubblingEventHandler<Event> = (event) => {
+      if (event.nativeEvent.raw) {
+        callback(JSON.parse(event.nativeEvent.raw) as BaseEvent);
+      } else {
+        callback({} as BaseEvent);
+      }
+  };
+  return responseCallback;
 }
-
-export default codegenNativeComponent<StorylyNativeProps>("StorylyReactNativeView") as HostComponent<StorylyNativeProps>;
 
 type StorylyComponentType = HostComponent<StorylyNativeProps>;
 
@@ -62,3 +65,5 @@ export const StorylyNativeCommands = codegenNativeCommands<NativeCommands>({
     "rejectCartChange",
   ],
 });
+
+export default codegenNativeComponent<StorylyNativeProps>("StorylyReactNativeView") as HostComponent<StorylyNativeProps>;

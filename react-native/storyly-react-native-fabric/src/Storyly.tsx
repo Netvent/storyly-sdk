@@ -1,20 +1,14 @@
-import React, { useRef } from "react";
-import { processColor } from "react-native";
-import StorylyNativeView, { StorylyNativeCommands, applyBaseEvent } from "./StorylyReactNativeNativeComponent";
-import type { StoryGroup, STRCart, STRProductItem } from "./data/story";
-import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent } from "./data/event";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import StorylyNativeView, { StorylyNativeCommands, applyBaseEvent } from "./fabric/StorylyReactNativeViewNativeComponent";
+import type { STRCart, STRProductItem, StoryGroupViewFactory } from "./data/story";
+import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent, UpdateCustomViewEvent } from "./data/event";
 import type { ViewProps } from "react-native";
+import { STStorylyGroupViewFactory, type StorylyGroupViewFactoryHandle } from "./StorylyGroupViewFactory";
+import { mapStorylyConfig } from "./data/config";
 
 type StorylyNativeComponentRef = InstanceType<typeof StorylyNativeView>;
 
-
-export interface StoryGroupViewFactory {
-    width: number;
-    height: number;
-    customView: React.FC<{storyGroup: StoryGroup}>;
-}
-
-export interface StorylyProps extends ViewProps {
+interface StorylyProps extends ViewProps {
     storylyId: string;
     customParameter?: string;
     storylyTestMode?: boolean;
@@ -79,124 +73,86 @@ export interface StorylyProps extends ViewProps {
     onProductEvent?: (event: ProductEvent) => void;
 }
 
-const mapStorylyConfig = (props: StorylyProps) => {
-    return {
-        'storylyInit': {
-            'storylyId': props.storylyId,
-            'storylySegments': props.storylySegments,
-            'userProperty': props.storylyUserProperty,
-            'customParameter': props.customParameter,
-            'storylyIsTestMode': props.storylyTestMode,
-            'storylyPayload': props.storylyPayload,
-        },
-        'storyGroupStyling': {
-            'iconBorderColorSeen': props.storyGroupIconBorderColorSeen ? props.storyGroupIconBorderColorSeen.map(processColor) : undefined,
-            'iconBorderColorNotSeen': props.storyGroupIconBorderColorNotSeen ? props.storyGroupIconBorderColorNotSeen.map(processColor) : undefined,
-            'iconBackgroundColor': processColor(props.storyGroupIconBackgroundColor) ?? undefined,
-            'pinIconColor': processColor(props.storyGroupPinIconColor) ?? undefined,
-            'iconHeight': props.storyGroupIconHeight,
-            'iconWidth': props.storyGroupIconWidth,
-            'iconCornerRadius': props.storyGroupIconCornerRadius,
-            'iconBorderAnimation': props.storyGroupAnimation,
-            'titleSeenColor': processColor(props.storyGroupTextColorSeen) ?? undefined,
-            'titleNotSeenColor': processColor(props.storyGroupTextColorNotSeen) ?? undefined,
-            'titleLineCount': props.storyGroupTextLines,
-            'titleFont': props.storyGroupTextTypeface,
-            'titleTextSize': props.storyGroupTextSize,
-            'titleVisible': props.storyGroupTextIsVisible,
-            'groupSize': props.storyGroupSize,
-        },
-        'storyGroupViewFactory': {
-            'width': props.storyGroupViewFactory ? props.storyGroupViewFactory.width : 0,
-            'height': props.storyGroupViewFactory ? props.storyGroupViewFactory.height : 0,
-        },
-        'storyBarStyling': {
-            'orientation': props.storyGroupListOrientation,
-            'sections': props.storyGroupListSections,
-            'horizontalEdgePadding': props.storyGroupListHorizontalEdgePadding,
-            'verticalEdgePadding': props.storyGroupListVerticalEdgePadding,
-            'horizontalPaddingBetweenItems': props.storyGroupListHorizontalPaddingBetweenItems,
-            'verticalPaddingBetweenItems': props.storyGroupListVerticalPaddingBetweenItems,
-        },
-        'storyStyling': {
-            'headerIconBorderColor': props.storyItemIconBorderColor ? props.storyItemIconBorderColor.map(processColor) : undefined,
-            'titleColor': processColor(props.storyItemTextColor) ?? undefined,
-            'titleFont': props.storyItemTextTypeface,
-            'interactiveFont': props.storyInteractiveTextTypeface,
-            'progressBarColor': props.storyItemProgressBarColor ? props.storyItemProgressBarColor.map(processColor) : undefined,
-            'isTitleVisible': props.storyHeaderTextIsVisible,
-            'isHeaderIconVisible': props.storyHeaderIconIsVisible,
-            'isCloseButtonVisible': props.storyHeaderCloseButtonIsVisible,
-            'closeButtonIcon': props.storyHeaderCloseIcon,
-            'shareButtonIcon': props.storyHeaderShareIcon,
-        },
-        'storyShareConfig': {
-            'storylyShareUrl': props.storylyShareUrl,
-            'storylyFacebookAppID': props.storylyFacebookAppID,
-        },
-        'storyProductConfig': {
-            'isFallbackEnabled': props.storyFallbackIsEnabled,
-            'isCartEnabled': props.storyCartIsEnabled,
-        },
-        'storylyLayoutDirection': props.storylyLayoutDirection,
-    }
+interface StorylyMethods {
+    resumeStory: () => void;
+    pauseStory: () => void;
+    closeStory: () => void;
+    openStory: (url: string) => void;
+    openStoryWithId: (groupId: string, storyId: string) => void;
+    hydrateProducts: (products: [STRProductItem]) => void;
+    updateCart: (cart: STRCart) => void;
+    approveCartChange: (responseId: string, cart: STRCart) => void;
+    rejectCartChange: (responseId: string, faileMsg: string) => void;
 }
 
-const Storyly: React.FC<StorylyProps> = (props: StorylyProps) => {
+const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
 
-    const ref = useRef<StorylyNativeComponentRef>(null);
+    const storylyRef = useRef<StorylyNativeComponentRef>(null);
+    const customGroupRef = useRef<StorylyGroupViewFactoryHandle>(null);
+
+    useImperativeHandle(ref, () => ({
+        resumeStory,
+        pauseStory,
+        closeStory,
+        openStory,
+        openStoryWithId,
+        hydrateProducts,
+        updateCart,
+        approveCartChange,
+        rejectCartChange,
+    }));
 
     const resumeStory = () => {
-        if (ref.current) {
-            StorylyNativeCommands.resumeStory(ref.current)
+        if (storylyRef.current) {
+            StorylyNativeCommands.resumeStory(storylyRef.current)
         }
     }
 
     const pauseStory = () => {
-        if (ref.current) {
-            StorylyNativeCommands.pauseStory(ref.current)
+        if (storylyRef.current) {
+            StorylyNativeCommands.pauseStory(storylyRef.current)
         }
     }
 
     const closeStory = () => {
-        if (ref.current) {
-            StorylyNativeCommands.closeStory(ref.current)
+        if (storylyRef.current) {
+            StorylyNativeCommands.closeStory(storylyRef.current)
         }
     }
 
     const openStory = (url: string) => {
-        if (ref.current) {
-            StorylyNativeCommands.openStory(ref.current, JSON.stringify({url}))
+        if (storylyRef.current) {
+            StorylyNativeCommands.openStory(storylyRef.current, JSON.stringify({url}))
         }
     }
 
     const openStoryWithId = (groupId: string, storyId: string) => {
-        if (ref.current) {
-            StorylyNativeCommands.openStoryWithId(ref.current, JSON.stringify({groupId, storyId}))
+        if (storylyRef.current) {
+            StorylyNativeCommands.openStoryWithId(storylyRef.current, JSON.stringify({groupId, storyId}))
         }
     }
 
     const hydrateProducts = (products: [STRProductItem]) => {
-        if (ref.current) {
-            StorylyNativeCommands.hydrateProducts(ref.current, JSON.stringify({products}))
+        if (storylyRef.current) {
+            StorylyNativeCommands.hydrateProducts(storylyRef.current, JSON.stringify({products}))
         }
     }
 
     const updateCart = (cart: STRCart) => {
-        if (ref.current) {
-            StorylyNativeCommands.updateCart(ref.current, JSON.stringify({cart}))
+        if (storylyRef.current) {
+            StorylyNativeCommands.updateCart(storylyRef.current, JSON.stringify({cart}))
         }
     }
 
     const approveCartChange = (responseId: string, cart: STRCart) => {
-        if (ref.current) {
-            StorylyNativeCommands.approveCartChange(ref.current, JSON.stringify({responseId, cart}))
+        if (storylyRef.current) {
+            StorylyNativeCommands.approveCartChange(storylyRef.current, JSON.stringify({responseId, cart}))
         }
     }
 
     const rejectCartChange = (responseId: string, faileMsg: string) => {
-        if (ref.current) {
-            StorylyNativeCommands.rejectCartChange(ref.current, JSON.stringify({responseId, faileMsg}))
+        if (storylyRef.current) {
+            StorylyNativeCommands.rejectCartChange(storylyRef.current, JSON.stringify({responseId, faileMsg}))
         }
     }
 
@@ -267,19 +223,20 @@ const Storyly: React.FC<StorylyProps> = (props: StorylyProps) => {
         }
     }
 
+    const _onCreateCustomView = (_: BaseEvent) => {
+        console.log("create base view");
+        customGroupRef.current?.onCreateCustomView()
+    }
 
-    // private _onCreateCustomView = (_) => {
-    //     customViewFactoryRef?.onCreateCustomView()
-    // }
-
-    // private _onUpdateCustomView = (eventPayload) => {
-    //     this.customViewFactoryRef?.onUpdateCustomView(eventPayload.nativeEvent)
-    // }
+    const _onUpdateCustomView = (event: BaseEvent) => {
+        console.log("update base view");
+        customGroupRef.current?.onUpdateCustomView(event as UpdateCustomViewEvent)
+    }
 
     return (
         <StorylyNativeView
             {...props}
-            ref={ref}
+            ref={storylyRef}
             onStorylyLoaded={applyBaseEvent(_onStorylyLoaded)}
             onStorylyLoadFailed={applyBaseEvent(_onStorylyLoadFailed)}
             onStorylyEvent={applyBaseEvent(_onStorylyEvent)}
@@ -291,17 +248,18 @@ const Storyly: React.FC<StorylyProps> = (props: StorylyProps) => {
             onStorylyProductHydration={applyBaseEvent(_onStorylyProductHydration)}
             onStorylyCartUpdated={applyBaseEvent(_onStorylyCartUpdated)}
             onStorylyProductEvent={applyBaseEvent(_onStorylyProductEvent)}
-            // onCreateCustomView={this._onCreateCustomView}
-            // onUpdateCustomView={this._onUpdateCustomView}
-            storylyConfig={JSON.stringify(mapStorylyConfig(props))} >
-            {/* {storyGroupViewFactory ?
+            onCreateCustomView={applyBaseEvent(_onCreateCustomView)}
+            onUpdateCustomView={applyBaseEvent(_onUpdateCustomView)}
+            storylyConfig={mapStorylyConfig(props)} >
+            {props.storyGroupViewFactory ?
                 <STStorylyGroupViewFactory
-                    ref={(ref) => { this.customViewFactoryRef = ref }}
-                    width={storyGroupViewFactory.width}
-                    height={storyGroupViewFactory.height}
-                    CustomizedView={storyGroupViewFactory.customView} /> : <></>} */}
+                    ref={customGroupRef}
+                    width={props.storyGroupViewFactory.width}
+                    height={props.storyGroupViewFactory.height}
+                    customView={props.storyGroupViewFactory.customView} /> : <></>}
         </StorylyNativeView>
     )
-}
+})
+
 
 export default Storyly;
