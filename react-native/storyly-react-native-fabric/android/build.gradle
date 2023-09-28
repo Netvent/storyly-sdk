@@ -155,6 +155,8 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  api('com.appsamurai.storyly:storyly:2.3.+')
 }
 
 if (isNewArchitectureEnabled()) {

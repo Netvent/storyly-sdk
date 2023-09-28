@@ -8,9 +8,7 @@ import java.util.ArrayList
 
 class StorylyReactNativeViewPackage : ReactPackage {
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-    val viewManagers: MutableList<ViewManager<*, *>> = ArrayList()
-    viewManagers.add(StorylyReactNativeViewManager())
-    return viewManagers
+    return listOf(StorylyReactNativeViewManager(), StorylyGroupViewManager())
   }
 
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {

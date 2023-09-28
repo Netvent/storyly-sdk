@@ -150,9 +150,9 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         }
     }
 
-    const rejectCartChange = (responseId: string, faileMsg: string) => {
+    const rejectCartChange = (responseId: string, failMessage: string) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.rejectCartChange(storylyRef.current, JSON.stringify({responseId, faileMsg}))
+            StorylyNativeCommands.rejectCartChange(storylyRef.current, JSON.stringify({responseId, failMessage}))
         }
     }
 
@@ -229,7 +229,7 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
     }
 
     const _onUpdateCustomView = (event: BaseEvent) => {
-        console.log("update base view");
+        console.log(`update base view ${JSON.stringify(event)}`);
         customGroupRef.current?.onUpdateCustomView(event as UpdateCustomViewEvent)
     }
 
