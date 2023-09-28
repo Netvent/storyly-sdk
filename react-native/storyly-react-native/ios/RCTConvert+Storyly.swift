@@ -186,6 +186,11 @@ private func stProductConfig(
     if let isCartEnabled = json["isCartEnabled"] as? Bool {
         productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
     }
+
+    if let country = json["country"] as? String, let language = json["language"] as? String {
+        productConfigBuilder = productConfigBuilder.setProductFeedLocal(country: country, language: language)
+    }
+
     return configBuilder
         .setProductConfig(config: productConfigBuilder
             .build()
