@@ -1,5 +1,6 @@
 package com.storylyreactnative
 
+import android.app.Activity
 import android.net.Uri
 import android.view.View
 import com.facebook.react.common.MapBuilder
@@ -14,8 +15,8 @@ import com.facebook.soloader.SoLoader
 import com.storylyreactnative.data.STEvent
 import com.storylyreactnative.data.createSTRCart
 import com.storylyreactnative.data.createSTRProductItem
+import com.storylyreactnative.data.createStorylyBundle
 import com.storylyreactnative.data.jsonStringToMap
-import com.storylyreactnative.data.updateStorylyView
 
 @ReactModule(name = StorylyReactNativeViewManager.NAME)
 class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
@@ -39,9 +40,16 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
 
     @ReactProp(name = "storylyConfig")
     override fun setStorylyConfig(view: STStorylyView?, value: String?) {
-        view ?: return
+        val activity = view?.activity as? Activity ?: return
+
         val rawConfig = value?.let { jsonStringToMap(it) } ?: return
-        updateStorylyView(view, rawConfig)
+        val bundle = createStorylyBundle(activity, rawConfig)
+        view.apply {
+            storylyView = bundle?.storylyView
+            storyGroupViewFactory = bundle?.storyGroupViewFactory?.apply {
+                dispatchEvent = view::dispatchEvent
+            }
+        }
     }
 
     override fun resumeStory(view: STStorylyView?) {

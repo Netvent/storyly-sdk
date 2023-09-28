@@ -148,11 +148,7 @@ class STStorylyView(
         }
     }
 
-    internal var storyGroupViewFactory: STStoryGroupViewFactory? by Delegates.observable(null) { _, _, _ ->
-        storyGroupViewFactory?.apply {
-            dispatchEvent = this@STStorylyView::dispatchEvent
-        }
-    }
+    internal var storyGroupViewFactory: STStoryGroupViewFactory? = null
 
     internal val activity: Context
         get() = ((context as? ReactContext)?.currentActivity ?: context)
@@ -209,7 +205,7 @@ class STStorylyView(
         }
     }
 
-    private fun dispatchEvent(eventType: STEvent.Type, data: Map<String, Any?>? = null) {
+    internal fun dispatchEvent(eventType: STEvent.Type, data: Map<String, Any?>? = null) {
         val surfaceId = UIManagerHelper.getSurfaceId(reactContext)
         val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(reactContext, id)
         eventDispatcher?.dispatchEvent(STEvent(surfaceId, id, eventType, data))

@@ -1,5 +1,6 @@
 package com.storylyreactnative.data
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -20,37 +21,43 @@ import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
 import com.storylyreactnative.STStoryGroupViewFactory
-import com.storylyreactnative.STStorylyView
 
-fun updateStorylyView(view: STStorylyView, storylyBundle: Map<String, Any?>) {
+data class STStorylyBundle (
+    val storylyView: StorylyView,
+    val storyGroupViewFactory: STStoryGroupViewFactory?
+)
+
+fun createStorylyBundle(context: Activity, storylyBundle: Map<String, Any?>): STStorylyBundle? {
     println("STR:STStorylyManager:setPropStoryly:${storylyBundle}")
-    val storylyInitJson = storylyBundle["storylyInit"] as? Map<String, Any?> ?: return
-    val storylyId = storylyInitJson["storylyId"] as? String ?: return
-    val storyGroupStylingJson = storylyBundle["storyGroupStyling"] as? Map<String, Any?> ?: return
-    val storyGroupViewFactoryJson = storylyBundle["storyGroupViewFactory"] as? Map<String, Any?> ?: return
-    val storyBarStylingJson = storylyBundle["storyBarStyling"] as? Map<String, Any?> ?: return
-    val storyStylingJson = storylyBundle["storyStyling"] as? Map<String, Any?> ?: return
-    val storyShareConfig = storylyBundle["storyShareConfig"] as? Map<String, Any?> ?: return
-    val storyProductConfig = storylyBundle["storyProductConfig"] as? Map<String, Any?> ?: return
+    val storylyInitJson = storylyBundle["storylyInit"] as? Map<String, Any?> ?: return null
+    val storylyId = storylyInitJson["storylyId"] as? String ?: return null
+    val storyGroupStylingJson = storylyBundle["storyGroupStyling"] as? Map<String, Any?> ?: return null
+    val storyGroupViewFactoryJson = storylyBundle["storyGroupViewFactory"] as? Map<String, Any?> ?: return null
+    val storyBarStylingJson = storylyBundle["storyBarStyling"] as? Map<String, Any?> ?: return null
+    val storyStylingJson = storylyBundle["storyStyling"] as? Map<String, Any?> ?: return null
+    val storyShareConfig = storylyBundle["storyShareConfig"] as? Map<String, Any?> ?: return null
+    val storyProductConfig = storylyBundle["storyProductConfig"] as? Map<String, Any?> ?: return null
 
-    val storyGroupViewFactory = getStoryGroupViewFactory(view.context, storyGroupViewFactoryJson)
+    val storyGroupViewFactory = getStoryGroupViewFactory(context, storyGroupViewFactoryJson)
     var storylyConfigBuilder = StorylyConfig.Builder()
     storylyConfigBuilder = stStorylyInit(json = storylyInitJson, configBuilder = storylyConfigBuilder)
-    storylyConfigBuilder = stStorylyGroupStyling(context = view.context, json = storyGroupStylingJson, groupViewFactory = storyGroupViewFactory, configBuilder = storylyConfigBuilder)
+    storylyConfigBuilder = stStorylyGroupStyling(context = context, json = storyGroupStylingJson, groupViewFactory = storyGroupViewFactory, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
-    storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
+    storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle["storylyLayoutDirection"] as? String))
 
-    view.storylyView = StorylyView(view.activity).apply {
-        storylyInit = StorylyInit(
-            storylyId = storylyId,
-            config = storylyConfigBuilder
-                .build()
-        )
-    }
-    view.storyGroupViewFactory = storyGroupViewFactory
+    return  STStorylyBundle(
+        StorylyView(context).apply {
+            storylyInit = StorylyInit(
+                storylyId = storylyId,
+                config = storylyConfigBuilder
+                    .build()
+            )
+        },
+        storyGroupViewFactory,
+    )
 }
 
 private fun stStorylyInit(

@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { useRef } from 'react';
 
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, PixelRatio, Platform, StyleSheet, Text, View } from 'react-native';
 import type { StoryGroup } from 'src/data/story';
-import Storyly, { type StorylyProps } from 'storyly-react-native';
+import Storyly from 'storyly-react-native';
+
+const convertToNative = (size: number) => {
+  return Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(size) : size
+}
 
 const CustomPortraitView: React.FC<{storyGroup?: StoryGroup}> = ({ storyGroup }) => {
   return (
@@ -32,7 +36,7 @@ const CustomPortraitView: React.FC<{storyGroup?: StoryGroup}> = ({ storyGroup })
 
 
 export default function App() {
-  const ref = useRef<StorylyProps>(null)
+  const ref = useRef<typeof Storyly>(null)
 
   return (
     <View style={styles.container}>
@@ -43,15 +47,18 @@ export default function App() {
           }
         }}
         storylyId='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE0Mjd9.cGTn_uElzFerKU-ul3EnrTn7pMZlhA3HvG4EEoygDcQ'
+        // onLoad={(event) => {
+        //   console.log(JSON.stringify(event))
+        // }}
         storyGroupSize='custom'
         storyGroupViewFactory={{
           customView: CustomPortraitView,
-          width: 100,
-          height: 178,
+          width: convertToNative(100),
+          height: convertToNative(178),
         }}
         style={{
           width: "100%",
-          height: 178,
+          height: convertToNative(178),
         }}
         />
     </View>

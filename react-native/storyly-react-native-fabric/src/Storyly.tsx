@@ -8,7 +8,7 @@ import { mapStorylyConfig } from "./data/config";
 
 type StorylyNativeComponentRef = InstanceType<typeof StorylyNativeView>;
 
-interface StorylyProps extends ViewProps {
+export interface StorylyProps extends ViewProps {
     storylyId: string;
     customParameter?: string;
     storylyTestMode?: boolean;
@@ -73,7 +73,7 @@ interface StorylyProps extends ViewProps {
     onProductEvent?: (event: ProductEvent) => void;
 }
 
-interface StorylyMethods {
+export interface StorylyMethods {
     resumeStory: () => void;
     pauseStory: () => void;
     closeStory: () => void;
