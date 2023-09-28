@@ -272,6 +272,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         var storyProductConfig = StorylyProductConfig.Builder()
         if (json.hasKey("isFallbackEnabled")) storyProductConfig = storyProductConfig.setFallbackAvailability(json.getBoolean("isFallbackEnabled"))
         if (json.hasKey("isCartEnabled")) storyProductConfig = storyProductConfig.setCartAvailability(json.getBoolean("isCartEnabled"))
+        if (json.hasKey("country") && json.hasKey("language")) storyProductConfig = storyProductConfig.setProductFeedLocale(json.getString("country"), json.getString("language"))
 
         return configBuilder
             .setProductConfig(
