@@ -386,6 +386,12 @@ class StorylyParam {
   // This attribute allows you to set availability of cart
   bool? isProductCartEnabled;
 
+  // This attribute allows you to set country for product feed
+  String? storyProductCountry;
+
+  // This attribute allows you to set language for product feed
+  String? storyProductLanguage;
+
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
   ///
@@ -606,6 +612,8 @@ class StorylyParam {
     paramsMap['storyProductConfig'] = {
       'isFallbackEnabled': isProductFallbackEnabled,
       'isCartEnabled': isProductCartEnabled,
+      'productCountry': storyProductCountry,
+      'productLanguage': storyProductLanguage,
     };
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
