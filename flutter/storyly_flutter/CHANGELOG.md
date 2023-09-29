@@ -1,3 +1,7 @@
+### 2.4.0 (29.09.2023)
+* added gif support for story group covers
+* added multi region and language support for product feeds
+
 ### 2.3.1 (22.09.2023)
 * optimized memory usage
 * improved layout on orientation change
