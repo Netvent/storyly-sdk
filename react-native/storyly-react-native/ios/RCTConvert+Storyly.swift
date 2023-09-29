@@ -192,7 +192,7 @@ private func stProductConfig(
     }
 
     if let language = json["productLanguage"] as? String {
-        productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: country)
+        productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: language)
     }
 
     return configBuilder
