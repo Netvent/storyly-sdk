@@ -1,0 +1,37 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# npm
+npm-debug.log
+
+# IntelliJ
+*.iml
+/.idea
+
+# dependencies
+node_modules
+.cache
+# testing
+coverage
+
+# production
+build
+dist
+
+.env
+/src/.DS_Store
+/.DS_Store
+/public/img/.DS_Store
+.DS_Store
+
+.sublime-project
+package-lock.json
+
+__pycache__/
+
+localhost.pem
+localhost-key.pem
+
+dev.storyly.pem
+dev.storyly-key.pem
+
+index.html
