@@ -229,6 +229,15 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         if let isCartEnabled = json["isCartEnabled"] as? Bool {
             productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
         }
+        
+        if let productCountry = json["productCountry"] as? String {
+            productConfigBuilder = productConfigBuilder.setProductFeedCountry(country: productCountry)
+        }
+        
+        if let productLanguage = json["productLanguage"] as? String {
+            productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: productLanguage)
+        }
+        
         return configBuilder
             .setProductConfig(config: productConfigBuilder
                 .build()
