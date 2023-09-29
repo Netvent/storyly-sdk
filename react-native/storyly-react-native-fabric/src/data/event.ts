@@ -56,5 +56,5 @@ export interface StoryInteractiveEvent extends BaseEvent {
 
 export interface UpdateCustomViewEvent extends BaseEvent {
   index: number;
-  storyGroup: StoryGroup;
+  storyGroup?: StoryGroup;
 }

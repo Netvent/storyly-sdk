@@ -3,6 +3,7 @@ package com.storylyreactnative
 import android.app.Activity
 import android.net.Uri
 import android.view.View
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ThemedReactContext
@@ -36,6 +37,10 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
 
     override fun addView(parent: STStorylyView?, child: View?, index: Int) {
         parent?.onAttachCustomReactNativeView(child, index)
+    }
+
+    override fun receiveCommand(root: STStorylyView, commandId: String?, args: ReadableArray?) {
+        delegate.receiveCommand(root, commandId, args)
     }
 
     @ReactProp(name = "storylyConfig")
@@ -107,13 +112,16 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
         view?.rejectCartChange(responseId, failMessage)
     }
 
-    override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
+    override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
+        val events = super.getExportedCustomDirectEventTypeConstants()
         val builder = MapBuilder.builder<String, Any>()
+        events?.forEach { builder.put(it.key, it.value) }
         STEvent.Type.values().forEach {
             builder.put(it.rawName, MapBuilder.of("registrationName", it.rawName))
         }
         return builder.build()
     }
+
     companion object {
         const val NAME = "StorylyReactNativeView"
 
