@@ -3,7 +3,7 @@ package com.storylyreactnative.data
 import org.json.JSONArray
 import org.json.JSONObject
 
-fun jsonStringToMap(jsonString: String): Map<String, Any?>? {
+internal fun jsonStringToMap(jsonString: String): Map<String, Any?>? {
     val map = try {
         JSONObject(jsonString).toMap()
     } catch (exc: Exception) {
@@ -13,7 +13,7 @@ fun jsonStringToMap(jsonString: String): Map<String, Any?>? {
     return map
 }
 
-fun JSONObject.toMap(): Map<String, Any?> = keys().asSequence().associateWith {
+internal fun JSONObject.toMap(): Map<String, Any?> = keys().asSequence().associateWith {
     when (val value = this[it])
     {
         is JSONArray ->

@@ -22,12 +22,12 @@ import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
 import com.storylyreactnative.STStoryGroupViewFactory
 
-data class STStorylyBundle (
+internal data class STStorylyBundle (
     val storylyView: StorylyView,
     val storyGroupViewFactory: STStoryGroupViewFactory?
 )
 
-fun createStorylyBundle(context: Activity, storylyBundle: Map<String, Any?>): STStorylyBundle? {
+internal fun createStorylyBundle(context: Activity, storylyBundle: Map<String, Any?>): STStorylyBundle? {
     println("STR:STStorylyManager:setPropStoryly:${storylyBundle}")
     val storylyInitJson = storylyBundle["storylyInit"] as? Map<String, Any?> ?: return null
     val storylyId = storylyInitJson["storylyId"] as? String ?: return null

@@ -13,28 +13,29 @@ import com.facebook.soloader.SoLoader
 
 @ReactModule(name = StorylyGroupViewManager.NAME)
 class StorylyGroupViewManager : ViewGroupManager<STStorylyGroupView>(),
-  StorylyGroupViewManagerInterface<STStorylyGroupView> {
-  private val _delegate: ViewManagerDelegate<STStorylyGroupView> by lazy {
-    StorylyGroupViewManagerDelegate(this)
-  }
+    StorylyGroupViewManagerInterface<STStorylyGroupView> {
 
-  override fun getDelegate(): ViewManagerDelegate<STStorylyGroupView> = _delegate
-
-  override fun getName(): String = NAME
-
-  public override fun createViewInstance(context: ThemedReactContext): STStorylyGroupView {
-    return STStorylyGroupView(context)
-  }
-
-  companion object {
-    const val NAME = "StorylyGroupView"
-
-    init {
-      if (BuildConfig.CODEGEN_MODULE_REGISTRATION != null) {
-        SoLoader.loadLibrary(BuildConfig.CODEGEN_MODULE_REGISTRATION)
-      }
+    private val _delegate: ViewManagerDelegate<STStorylyGroupView> by lazy {
+        StorylyGroupViewManagerDelegate(this)
     }
-  }
+
+    override fun getDelegate(): ViewManagerDelegate<STStorylyGroupView> = _delegate
+
+    override fun getName(): String = NAME
+
+    public override fun createViewInstance(context: ThemedReactContext): STStorylyGroupView {
+        return STStorylyGroupView(context)
+    }
+
+    companion object {
+        const val NAME = "StorylyGroupView"
+
+        init {
+            if (BuildConfig.CODEGEN_MODULE_REGISTRATION != null) {
+                SoLoader.loadLibrary(BuildConfig.CODEGEN_MODULE_REGISTRATION)
+            }
+        }
+    }
 }
 
 
