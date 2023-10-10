@@ -299,21 +299,6 @@ class StorylyViewController {
     return _methodChannel.invokeMethod('closeStory');
   }
 
-  /// This function allows you to open the story view.
-  @Deprecated(
-      "This function will be removed in v2.3.0. We've introduced the resumeStory() function to story continuation")
-  Future<void> storyShow() {
-    return _methodChannel.invokeMethod('show');
-  }
-
-  /// This function allows you to dismiss story view.
-  @Deprecated(
-      "This function will be removed in v2.3.0. We've introduced two new functions for improved story management: pauseStory() and closeStory()." +
-          "To temporarily halt a story and later resume it, use pauseStory(), followed by resumeStory() when ready to continue. For an immediate story closure, use closeStory()")
-  Future<void> storyDismiss() {
-    return _methodChannel.invokeMethod('dismiss');
-  }
-
   /// This function allows you to open a specific story using
   /// `storyGroupId` and `storyId`.
   Future<void> openStory(String storyGroupId, String storyId) {
@@ -400,6 +385,12 @@ class StorylyParam {
 
   // This attribute allows you to set availability of cart
   bool? isProductCartEnabled;
+
+  // This attribute allows you to set country for product feed
+  String? storyProductCountry;
+
+  // This attribute allows you to set language for product feed
+  String? storyProductLanguage;
 
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
@@ -621,6 +612,8 @@ class StorylyParam {
     paramsMap['storyProductConfig'] = {
       'isFallbackEnabled': isProductFallbackEnabled,
       'isCartEnabled': isProductCartEnabled,
+      'productCountry': storyProductCountry,
+      'productLanguage': storyProductLanguage,
     };
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();

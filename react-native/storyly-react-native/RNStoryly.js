@@ -16,17 +16,6 @@ class Storyly extends Component {
         );
     };
 
-    /**
-     * @deprecated "This function will be removed in v2.3.0. We've introduced the resumeStory() function to story continuation"
-    */
-    open = () => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this._storylyView),
-            UIManager.getViewManagerConfig('STStoryly').Commands.open,
-            [],
-        );
-    };
-
     resumeStory = () => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
@@ -47,18 +36,6 @@ class Storyly extends Component {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
             UIManager.getViewManagerConfig('STStoryly').Commands.closeStory,
-            [],
-        );
-    };
-
-    /**
-     * @deprecated "This function will be removed in v2.3.0. We've introduced two new functions for improved story management: pauseStory() and closeStory(). 
-        To temporarily halt a story and later resume it, use pauseStory(), followed by resumeStory() when ready to continue. For an immediate story closure, use closeStory()"
-    */
-    close = () => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this._storylyView),
-            UIManager.getViewManagerConfig('STStoryly').Commands.close,
             [],
         );
     };
@@ -230,6 +207,8 @@ class Storyly extends Component {
             storyHeaderShareIcon,
             storyFallbackIsEnabled,
             storyCartIsEnabled,
+            storyProductCountry,
+            storyProductLanguage,
             ...otherProps
         } = this.props;
         return (
@@ -306,6 +285,8 @@ class Storyly extends Component {
                         'storyProductConfig': { 
                             'isFallbackEnabled': storyFallbackIsEnabled,
                             'isCartEnabled': storyCartIsEnabled,
+                            'productCountry': storyProductCountry,
+                            'productLanguage': storyProductLanguage
                         },
                         'storylyLayoutDirection': storylyLayoutDirection,
                     }
@@ -367,6 +348,8 @@ Storyly.propTypes = {
     storyGroupViewFactory: object,
     storyFallbackIsEnabled: bool,
     storyCartIsEnabled: bool,
+    storyProductCountry: string,
+    storyProductLanguage: string,
 
     onLoad: func,
     onFail: func,

@@ -75,34 +75,6 @@ class STStorylyManager: RCTViewManager {
         }
     }
     
-    @objc(open:)
-    func open(reactTag: NSNumber) {
-        print("STR:STStorylyManager:open()")
-        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
-            let view = viewRegistry?[reactTag]
-            if let stStorylyView = view as? STStorylyView {
-                stStorylyView.open()
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
-            }
-            
-        }
-    }
-    
-    @objc(close:)
-    func close(reactTag: NSNumber) {
-        print("STR:STStorylyManager:close()")
-        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
-            let view = viewRegistry?[reactTag]
-            if let stStorylyView = view as? STStorylyView {
-                stStorylyView.close()
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
-            }
-            
-        }
-    }
-    
     @objc(openStory:payload:)
     func openStory(reactTag: NSNumber, payload: NSURL) {
         print("STR:STStorylyManager:openStory(payload:\(payload.absoluteString ?? ""))")

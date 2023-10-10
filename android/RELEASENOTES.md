@@ -1,4 +1,14 @@
 # Release Notes
+### 2.4.0 (29.09.2023)
+* added gif support for story group covers
+* added multi region and language support for product feeds
+  
+### 2.3.2 (22.09.2023)
+* optimized memory usage
+  
+### 2.3.1 (12.09.2023)
+* improved code obfuscation for dexguard
+  
 ### 2.3.0 (09.09.2023)
 * added support for google fonts from Storyly studio for text interactive component
 * added support for instance theme settings from Storyly dashboard
@@ -32,6 +42,9 @@
 * IMPORTANT! added new config structure for storylyInit (Please refer to the [migration doc](https://docs.storyly.io/page/migrating-to-sdk-20))
 * IMPORTANT! moved all ui and storyly customization fields into new config structure
 
+### 1.34.0 (12.09.2023)
+* improved code obfuscation for dexguard
+  
 ### 1.33.2 (22.07.2023)
 * fixed edge paddings of storyly bar
 

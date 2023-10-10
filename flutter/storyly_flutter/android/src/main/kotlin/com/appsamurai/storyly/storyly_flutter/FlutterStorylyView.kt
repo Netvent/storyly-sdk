@@ -49,8 +49,6 @@ class FlutterStorylyView(
                 "resumeStory" -> storylyView.resumeStory()
                 "pauseStory" -> storylyView.pauseStory()
                 "closeStory" -> storylyView.closeStory()
-                "show" -> storylyView.show()
-                "dismiss" -> storylyView.dismiss()
                 "openStory" -> storylyView.openStory(
                     callArguments?.get("storyGroupId") as? String ?: "",
                     callArguments?.getOrElse("storyId") { null } as? String
@@ -342,6 +340,9 @@ class FlutterStorylyView(
         var productConfigBuilder = StorylyProductConfig.Builder()
         (json["isFallbackEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setFallbackAvailability(it) }
         (json["isCartEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setCartAvailability(it) }
+        (json["productCountry"] as? String)?.let { productConfigBuilder = productConfigBuilder.setProductFeedCountry(it) }
+        (json["productLanguage"] as? String)?.let { productConfigBuilder = productConfigBuilder.setProductFeedLanguage(it) }
+
         return configBuilder
             .setProductConfig(
                 productConfigBuilder
