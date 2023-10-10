@@ -6,113 +6,80 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
+  PixelRatio,
+  Platform,
   StyleSheet,
-  Text,
-  useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Storyly from 'storyly-react-native';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const STORYLY_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40'
+
+const convertToNative = (size: number) => {
+  return Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(size) : size
+}
+
+export default function App() {
+  // const ref = useRef<typeof Storyly>(null)
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.container}>
+      <Storyly
+        ref={(storylyRef) => {
+          if (storylyRef) {
+            
+          }
+        }}
+        storylyId={STORYLY_TOKEN}
+        onLoad={(event) => {
+          let log = event.storyGroupList.map(group => (
+            `${event.dataSource} - GroupId:${group.id} - StoryIds[${group.stories.map(story => ( story.id )).join(", ")}]`
+          )).join(", ")
+          console.log(log)
+          // console.log(JSON.stringify(event))
+        }}
+        storyGroupSize='large'
+        style={{
+          width: "100%",
+          height: 178,
+        }} />
+
+      <Storyly
+        storylyId={STORYLY_TOKEN}
+        storyGroupSize='small'
+        style={{
+          width: "100%",
+          height: 178,
+        }} />
+
+      <Storyly
+        style={{ width: '100%', height: 170, marginTop: 10, backgroundColor: "#e9967a" }}
+        storylyId={STORYLY_TOKEN}
+        storyGroupSize="custom"
+        storyGroupIconHeight={convertToNative(80)}
+        storyGroupIconWidth={convertToNative(80)}
+        storyGroupIconCornerRadius={convertToNative(20)}
+        storyGroupListHorizontalEdgePadding={convertToNative(20)}
+        storyGroupListHorizontalPaddingBetweenItems={convertToNative(10)}
+        storyGroupTextSize={convertToNative(20)}
+        storyGroupTextLines={3}
+        storyGroupTextColorSeen={"#00FF00"}
+        storyGroupTextColorNotSeen={"#FF0000"}
+        storyGroupIconBorderColorNotSeen={["#FF0000", "#FF0000"]}
+        storyGroupIconBorderColorSeen={["#FFFFFF", "#FFFFFF"]}
+        storyGroupIconBackgroundColor={"#000000"}
+        storyGroupPinIconColor={"#000000"} />
     </View>
   );
 }
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-
-export default App;
