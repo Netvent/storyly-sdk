@@ -1,6 +1,6 @@
 {
   "name": "storyly-react-native",
-  "version": "0.1.0",
+  "version": "2.4.0",
   "description": "A react-native component for Storyly",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -36,7 +36,7 @@
     "codegen:android": "cd example/android && ./gradlew generateCodegenArtifactsFromSchema && cd ../..",
     "build:android": "cd example/android && ./gradlew assembleDebug --no-daemon --console=plain -PreactNativeArchitectures=arm64-v8a",
     "build:ios": "cd example/ios && xcodebuild -workspace StorylyReactNativeExample.xcworkspace -scheme StorylyReactNativeExample -configuration Debug -sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO",
-    "bootstrap": "yarn example && yarn install && yarn example pods && yarn codegen:android",
+    "bootstrap": "yarn example && yarn install && yarn example pods update && yarn codegen:android",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build"
   },
   "keywords": [

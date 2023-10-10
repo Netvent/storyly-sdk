@@ -999,7 +999,7 @@ PODS:
     - React-logger (= 0.72.4)
     - React-perflogger (= 0.72.4)
   - SocketRocket (0.6.1)
-  - Storyly (2.3.1)
+  - Storyly (2.4.0)
   - storyly-react-native (0.1.0):
     - hermes-engine
     - RCT-Folly (= 2021.07.22.00)
@@ -1015,7 +1015,7 @@ PODS:
     - React-utils
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Storyly (~> 2.3.0)
+    - Storyly (= 2.4.0)
     - Yoga
   - Yoga (1.14.0)
 
@@ -1208,8 +1208,8 @@ SPEC CHECKSUMS:
   React-utils: c8f8c6801fc9c2fea2e3a16b1cda9cf21f7db1fe
   ReactCommon: ee5293e780b82740803096b3ca3220963a9c3967
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  Storyly: 3b854fddbd26306aa52df59f3a2cdf1162d5de54
-  storyly-react-native: 23aa2325b68fc8b705adb220277c27e1c4624b1a
+  Storyly: c19f50039bca21c69bdece7b17f03a35c8dc9650
+  storyly-react-native: af6a9c5f1b5a13d9ba34951fa29d3034da28121f
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
 
 PODFILE CHECKSUM: 6e970b0a2b8de97ca976b4422919c2051b53ebef
