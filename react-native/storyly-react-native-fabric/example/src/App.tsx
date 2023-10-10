@@ -17,13 +17,6 @@ export default function App() {
       <Storyly
         ref={(storylyRef) => {
           if (storylyRef) {
-            setTimeout(() => {
-              // storylyRef.refresh()
-              storylyRef.openStory("asdfasdf");
-              console.log("aa")
-            }, 3000)
-           
-            // storylyRef.openStoryWithId("26763", "191223");
             
           }
         }}
