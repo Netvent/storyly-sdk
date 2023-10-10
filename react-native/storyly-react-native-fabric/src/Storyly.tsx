@@ -80,7 +80,7 @@ export interface StorylyMethods {
     hydrateProducts: (products: [STRProductItem]) => void;
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
-    rejectCartChange: (responseId: string, faileMsg: string) => void;
+    rejectCartChange: (responseId: string, failMsg: string) => void;
 }
 
 const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
