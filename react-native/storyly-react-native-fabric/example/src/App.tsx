@@ -1,23 +1,28 @@
 import * as React from 'react';
-import { useRef } from 'react';
 
 import { PixelRatio, Platform, StyleSheet, View } from 'react-native';
 import Storyly from 'storyly-react-native';
 
-const STORYLY_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE0Mjd9.cGTn_uElzFerKU-ul3EnrTn7pMZlhA3HvG4EEoygDcQ'
+const STORYLY_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40'
 
 const convertToNative = (size: number) => {
   return Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(size) : size
 }
 
 export default function App() {
-  const ref = useRef<typeof Storyly>(null)
+  // const ref = useRef<typeof Storyly>(null)
 
   return (
     <View style={styles.container}>
       <Storyly
         ref={(storylyRef) => {
           if (storylyRef) {
+            setTimeout(() => {
+              // storylyRef.refresh()
+              storylyRef.openStory("asdfasdf");
+              console.log("aa")
+            }, 3000)
+           
             // storylyRef.openStoryWithId("26763", "191223");
             
           }
