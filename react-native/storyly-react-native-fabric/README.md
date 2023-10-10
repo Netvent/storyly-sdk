@@ -1,0 +1,1 @@
+Please check [Storyly Integration Documentation](https://docs.storyly.io/docs/react-native-initial-sdk-setup)
