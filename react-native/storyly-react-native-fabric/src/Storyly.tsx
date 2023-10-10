@@ -1,9 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import StorylyNativeView, { StorylyNativeCommands, applyBaseEvent } from "./fabric/StorylyReactNativeViewNativeComponent";
-import type { STRCart, STRProductItem, StoryGroupViewFactory } from "./data/story";
-import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent, UpdateCustomViewEvent } from "./data/event";
+import type { STRCart, STRProductItem } from "./data/story";
+import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent } from "./data/event";
 import type { ViewProps } from "react-native";
-import { STStorylyGroupViewFactory, type StorylyGroupViewFactoryHandle } from "./StorylyGroupViewFactory";
 import { mapStorylyConfig } from "./data/config";
 
 type StorylyNativeComponentRef = InstanceType<typeof StorylyNativeView>;
@@ -26,7 +25,6 @@ export interface StorylyProps extends ViewProps {
     storyGroupIconBackgroundColor?: string;
     storyGroupIconBorderColorSeen?: string[];
     storyGroupIconBorderColorNotSeen?: string[];
-    storyGroupViewFactory?: StoryGroupViewFactory,
 
     storyGroupTextSize?: number;
     storyGroupTextLines?: number;
@@ -88,7 +86,6 @@ export interface StorylyMethods {
 const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
 
     const storylyRef = useRef<StorylyNativeComponentRef>(null);
-    const customGroupRef = useRef<StorylyGroupViewFactoryHandle>(null);
 
     useImperativeHandle(ref, () => ({
         resumeStory,
@@ -223,16 +220,6 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         }
     }
 
-    const _onCreateCustomView = (_: BaseEvent) => {
-        console.log("create base view");
-        customGroupRef.current?.onCreateCustomView()
-    }
-
-    const _onUpdateCustomView = (event: BaseEvent) => {
-        console.log(`update base view ${JSON.stringify(event)}`);
-        customGroupRef.current?.onUpdateCustomView(event as UpdateCustomViewEvent)
-    }
-
     return (
         <StorylyNativeView
             {...props}
@@ -248,16 +235,7 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
             onStorylyProductHydration={applyBaseEvent(_onStorylyProductHydration)}
             onStorylyCartUpdated={applyBaseEvent(_onStorylyCartUpdated)}
             onStorylyProductEvent={applyBaseEvent(_onStorylyProductEvent)}
-            onCreateCustomView={applyBaseEvent(_onCreateCustomView)}
-            onUpdateCustomView={applyBaseEvent(_onUpdateCustomView)}
-            storylyConfig={mapStorylyConfig(props)} >
-            {props.storyGroupViewFactory ?
-                <STStorylyGroupViewFactory
-                    ref={customGroupRef}
-                    width={props.storyGroupViewFactory.width}
-                    height={props.storyGroupViewFactory.height}
-                    customView={props.storyGroupViewFactory.customView} /> : <></>}
-        </StorylyNativeView>
+            storylyConfig={mapStorylyConfig(props)} />
     )
 })
 

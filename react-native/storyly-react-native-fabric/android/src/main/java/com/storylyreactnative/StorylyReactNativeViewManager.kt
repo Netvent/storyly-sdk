@@ -35,10 +35,6 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
         return STStorylyView(context)
     }
 
-    override fun addView(parent: STStorylyView?, child: View?, index: Int) {
-        parent?.onAttachCustomReactNativeView(child, index)
-    }
-
     override fun receiveCommand(root: STStorylyView, commandId: String?, args: ReadableArray?) {
         delegate.receiveCommand(root, commandId, args)
     }
@@ -51,9 +47,6 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
         val bundle = createStorylyBundle(activity, rawConfig)
         view.apply {
             storylyView = bundle?.storylyView
-            storyGroupViewFactory = bundle?.storyGroupViewFactory?.apply {
-                dispatchEvent = view::dispatchEvent
-            }
         }
     }
 

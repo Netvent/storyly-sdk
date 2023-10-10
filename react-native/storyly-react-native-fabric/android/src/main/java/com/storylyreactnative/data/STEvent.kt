@@ -17,7 +17,7 @@ internal class STEvent(
     override fun getCoalescingKey(): Short = 0
 
     override fun getEventData(): WritableMap? = Arguments.createMap().apply {
-        raw?. let {
+        raw?.let {
             try {
                 val json = JSONObject(it).toString()
                 putString("raw", json)
@@ -39,7 +39,5 @@ internal class STEvent(
         ON_STORYLY_ON_HYDRATION("onStorylyProductHydration"),
         ON_STORYLY_ON_CART_UPDATED("onStorylyCartUpdated"),
         ON_STORYLY_PRODUCT_EVENT("onStorylyProductEvent"),
-        ON_CREATE_CUSTOM_VIEW("onCreateCustomView"),
-        ON_UPDATE_CUSTOM_VIEW("onUpdateCustomView"),
     }
 }

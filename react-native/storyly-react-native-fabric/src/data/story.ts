@@ -1,11 +1,5 @@
 
 
-export interface StoryGroupViewFactory {
-    width: number;
-    height: number;
-    customView: React.FC<{storyGroup?: StoryGroup}>;
-}
-
 export interface StoryComponent {
     id: string;
     type: ReactionType;

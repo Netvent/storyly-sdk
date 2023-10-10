@@ -27,10 +27,6 @@ export interface StorylyConfig {
         titleVisible?: boolean,
         groupSize?: string,
     }
-    storyGroupViewFactory: {
-        width: number,
-        height: number,
-    }
     storyBarStyling: {
         orientation?: string,
         sections?: number,
@@ -88,10 +84,6 @@ export const mapStorylyConfig = (props: StorylyProps) => {
             'titleTextSize': props.storyGroupTextSize,
             'titleVisible': props.storyGroupTextIsVisible,
             'groupSize': props.storyGroupSize,
-        },
-        'storyGroupViewFactory': {
-            'width': props.storyGroupViewFactory ? props.storyGroupViewFactory.width : 0,
-            'height': props.storyGroupViewFactory ? props.storyGroupViewFactory.height : 0,
         },
         'storyBarStyling': {
             'orientation': props.storyGroupListOrientation,

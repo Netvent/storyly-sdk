@@ -14,8 +14,6 @@
 
 #import <storyly_react_native/storyly_react_native-Swift.h>
 
-#import "StorylyGroupView.h"
-
 #import "RCTFabricComponentsPlugins.h"
 
 using namespace facebook::react;
@@ -80,14 +78,6 @@ using namespace facebook::react;
           [weakSelf storylyEventEmitter]
             ->onStorylyProductEvent(StorylyReactNativeViewEventEmitter::OnStorylyProductEvent{std::string([raw UTF8String])});
       };
-      _stStorylyView.onCreateCustomView = ^() {
-          [weakSelf storylyEventEmitter]
-            ->onCreateCustomView(StorylyReactNativeViewEventEmitter::OnCreateCustomView{});
-      };
-      _stStorylyView.onUpdateCustomView = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onUpdateCustomView(StorylyReactNativeViewEventEmitter::OnUpdateCustomView{std::string([raw UTF8String])});
-      };
       
       self.contentView = _stStorylyView;
       
@@ -95,12 +85,6 @@ using namespace facebook::react;
   }
 
   return self;
-}
-
-- (void)insertSubview:(UIView *)view atIndex:(NSInteger)index {
-    if ([view isKindOfClass:[StorylyGroupView class]]) {
-        [_stStorylyView insertReactSubview:(StorylyGroupView *) view atIndex:index];
-    }
 }
 
 - (std::shared_ptr<const StorylyReactNativeViewEventEmitter>)storylyEventEmitter

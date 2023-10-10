@@ -20,11 +20,9 @@ import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
-import com.storylyreactnative.STStoryGroupViewFactory
 
 internal data class STStorylyBundle (
     val storylyView: StorylyView,
-    val storyGroupViewFactory: STStoryGroupViewFactory?
 )
 
 internal fun createStorylyBundle(context: Activity, storylyBundle: Map<String, Any?>): STStorylyBundle? {
@@ -32,16 +30,14 @@ internal fun createStorylyBundle(context: Activity, storylyBundle: Map<String, A
     val storylyInitJson = storylyBundle["storylyInit"] as? Map<String, Any?> ?: return null
     val storylyId = storylyInitJson["storylyId"] as? String ?: return null
     val storyGroupStylingJson = storylyBundle["storyGroupStyling"] as? Map<String, Any?> ?: return null
-    val storyGroupViewFactoryJson = storylyBundle["storyGroupViewFactory"] as? Map<String, Any?> ?: return null
     val storyBarStylingJson = storylyBundle["storyBarStyling"] as? Map<String, Any?> ?: return null
     val storyStylingJson = storylyBundle["storyStyling"] as? Map<String, Any?> ?: return null
     val storyShareConfig = storylyBundle["storyShareConfig"] as? Map<String, Any?> ?: return null
     val storyProductConfig = storylyBundle["storyProductConfig"] as? Map<String, Any?> ?: return null
 
-    val storyGroupViewFactory = getStoryGroupViewFactory(context, storyGroupViewFactoryJson)
     var storylyConfigBuilder = StorylyConfig.Builder()
     storylyConfigBuilder = stStorylyInit(json = storylyInitJson, configBuilder = storylyConfigBuilder)
-    storylyConfigBuilder = stStorylyGroupStyling(context = context, json = storyGroupStylingJson, groupViewFactory = storyGroupViewFactory, configBuilder = storylyConfigBuilder)
+    storylyConfigBuilder = stStorylyGroupStyling(context = context, json = storyGroupStylingJson, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
@@ -56,7 +52,6 @@ internal fun createStorylyBundle(context: Activity, storylyBundle: Map<String, A
                     .build()
             )
         },
-        storyGroupViewFactory,
     )
 }
 
@@ -75,7 +70,6 @@ private fun stStorylyInit(
 private fun stStorylyGroupStyling(
     context: Context,
     json: Map<String, Any?>,
-    groupViewFactory: STStoryGroupViewFactory?,
     configBuilder: StorylyConfig.Builder,
 ): StorylyConfig.Builder {
     var groupStylingBuilder = StorylyStoryGroupStyling.Builder()
@@ -102,7 +96,6 @@ private fun stStorylyGroupStyling(
     (json["titleTextSize"] as? Int)?.let { groupStylingBuilder = groupStylingBuilder.setTitleTextSize(Pair(TypedValue.COMPLEX_UNIT_PX, it)) }
     (json["titleVisible"] as? Boolean)?.let { groupStylingBuilder = groupStylingBuilder.setTitleVisibility(it) }
     groupStylingBuilder = groupStylingBuilder.setSize(getStoryGroupSize(json["groupSize"] as? String))
-    groupStylingBuilder = groupStylingBuilder.setCustomGroupViewFactory(groupViewFactory)
 
     return configBuilder
         .setStoryGroupStyling(
@@ -183,16 +176,6 @@ private fun stStoryStyling(
             storyStylingBuilder
                 .build()
         )
-}
-
-private fun getStoryGroupViewFactory(
-    context: Context,
-    json: Map<String, Any?>,
-): STStoryGroupViewFactory? {
-    val width = json["width"] as? Int ?: return null
-    val height = json["height"] as? Int ?: return null
-    if (width <= 0 || height <= 0) return null
-    return STStoryGroupViewFactory(context, width, height)
 }
 
 private fun getStoryGroupSize(size: String?): StoryGroupSize {

@@ -148,8 +148,6 @@ class STStorylyView(
         }
     }
 
-    internal var storyGroupViewFactory: STStoryGroupViewFactory? = null
-
     internal val activity: Context
         get() = ((context as? ReactContext)?.currentActivity ?: context)
 
@@ -184,11 +182,6 @@ class STStorylyView(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         Choreographer.getInstance().removeFrameCallback(choreographerFrameCallback)
-    }
-
-    internal fun onAttachCustomReactNativeView(child: View?, index: Int) {
-        val storyGroupViewFactory = storyGroupViewFactory ?: return
-        storyGroupViewFactory.attachCustomReactNativeView(child, index)
     }
 
     private fun manuallyLayout() {

@@ -1,39 +1,14 @@
 import * as React from 'react';
 import { useRef } from 'react';
 
-import { Image, PixelRatio, Platform, StyleSheet, Text, View } from 'react-native';
-import type { StoryGroup } from 'src/data/story';
+import { PixelRatio, Platform, StyleSheet, View } from 'react-native';
 import Storyly from 'storyly-react-native';
+
+const STORYLY_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE0Mjd9.cGTn_uElzFerKU-ul3EnrTn7pMZlhA3HvG4EEoygDcQ'
 
 const convertToNative = (size: number) => {
   return Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(size) : size
 }
-
-const CustomPortraitView: React.FC<{storyGroup?: StoryGroup}> = ({ storyGroup }) => {
-  return (
-      <>
-          {(storyGroup ? (
-              <View style={{ width: "100%", height: "100%", backgroundColor: "yellow"}}>
-                   <Image
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: 8
-                    }}
-                    source={{ uri: storyGroup.iconUrl }} />
-                  <View style={{ width: 100, height: 178, borderRadius: 8, position: 'absolute', backgroundColor: storyGroup.seen ? "#16ad055f" : "#1905ad5f" }}>
-                      <View style={{ flexDirection: 'column', width: 90, marginTop: 20, marginLeft: 5, height: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
-                          <Text style={{ flexWrap: 'wrap', width: "90%", textAlign: 'center', fontWeight: 'bold', fontSize: 15, color: "white" }}>{storyGroup.title}</Text>
-                      </View>
-                  </View> 
-              </View>
-          ) : (
-              <View style={{ width: "100%", height: "100%", borderRadius: 8, backgroundColor: "grey" }}></View>
-          ))}
-      </>
-  )
-}
-
 
 export default function App() {
   const ref = useRef<typeof Storyly>(null)
@@ -43,24 +18,49 @@ export default function App() {
       <Storyly
         ref={(storylyRef) => {
           if (storylyRef) {
-            storylyRef.openStoryWithId("26763", "191223");
+            // storylyRef.openStoryWithId("26763", "191223");
+            
           }
         }}
-        storylyId='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE0Mjd9.cGTn_uElzFerKU-ul3EnrTn7pMZlhA3HvG4EEoygDcQ'
-        // onLoad={(event) => {
-        //   console.log(JSON.stringify(event))
-        // }}
-        storyGroupSize='custom'
-        storyGroupViewFactory={{
-          customView: CustomPortraitView,
-          width: convertToNative(100),
-          height: convertToNative(178),
+        storylyId={STORYLY_TOKEN}
+        onLoad={(event) => {
+          let log = event.storyGroupList.map(group => (
+            `${event.dataSource} - GroupId:${group.id} - StoryIds[${group.stories.map(story => ( story.id )).join(", ")}]`
+          )).join(", ")
+          console.log(log)
+          // console.log(JSON.stringify(event))
         }}
+        storyGroupSize='large'
         style={{
           width: "100%",
-          height: convertToNative(178),
-        }}
-        />
+          height: 178,
+        }} />
+
+      <Storyly
+        storylyId={STORYLY_TOKEN}
+        storyGroupSize='small'
+        style={{
+          width: "100%",
+          height: 178,
+        }} />
+
+      <Storyly
+        style={{ width: '100%', height: 170, marginTop: 10, backgroundColor: "#e9967a" }}
+        storylyId={STORYLY_TOKEN}
+        storyGroupSize="custom"
+        storyGroupIconHeight={convertToNative(80)}
+        storyGroupIconWidth={convertToNative(80)}
+        storyGroupIconCornerRadius={convertToNative(20)}
+        storyGroupListHorizontalEdgePadding={convertToNative(20)}
+        storyGroupListHorizontalPaddingBetweenItems={convertToNative(10)}
+        storyGroupTextSize={convertToNative(20)}
+        storyGroupTextLines={3}
+        storyGroupTextColorSeen={"#00FF00"}
+        storyGroupTextColorNotSeen={"#FF0000"}
+        storyGroupIconBorderColorNotSeen={["#FF0000", "#FF0000"]}
+        storyGroupIconBorderColorSeen={["#FFFFFF", "#FFFFFF"]}
+        storyGroupIconBackgroundColor={"#000000"}
+        storyGroupPinIconColor={"#000000"} />
     </View>
   );
 }
