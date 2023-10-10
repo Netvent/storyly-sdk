@@ -105,8 +105,11 @@ using namespace facebook::react;
 }
 
 - (void)handleCommand:(nonnull const NSString *)commandName args:(nonnull const NSArray *)args {
-    NSString* raw = args[0];
-    if ([commandName isEqual:@"resumeStory"]) {
+    NSString* raw;
+    if ([args count] > 0) { raw = args[0]; }
+    if ([commandName isEqual:@"refresh"]) {
+        [self refresh];
+    } else if ([commandName isEqual:@"resumeStory"]) {
         [self resumeStory];
     } else if ([commandName isEqual:@"pauseStory"]) {
         [self pauseStory];
@@ -129,6 +132,11 @@ using namespace facebook::react;
     }
     
     [super handleCommand:commandName args:args];
+}
+
+
+- (void)refresh {
+    [_stStorylyView refresh];
 }
 
 - (void)resumeStory {

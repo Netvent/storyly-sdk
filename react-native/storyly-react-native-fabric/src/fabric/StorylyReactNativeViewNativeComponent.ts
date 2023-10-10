@@ -38,6 +38,7 @@ export const applyBaseEvent = (callback: (event: BaseEvent)=>void) => {
 type StorylyComponentType = HostComponent<StorylyNativeProps>;
 
 interface NativeCommands {
+  refresh: (viewRef: React.ElementRef<StorylyComponentType>) => void;
   resumeStory: (viewRef: React.ElementRef<StorylyComponentType>) => void;
   pauseStory: (viewRef: React.ElementRef<StorylyComponentType>) => void;
   closeStory: (viewRef: React.ElementRef<StorylyComponentType>) => void;
@@ -51,6 +52,7 @@ interface NativeCommands {
 
 export const StorylyNativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: [
+    "refresh",
     "resumeStory",
     "pauseStory",
     "closeStory",

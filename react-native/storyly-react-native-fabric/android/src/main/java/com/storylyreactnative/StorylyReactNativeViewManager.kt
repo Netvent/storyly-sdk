@@ -50,6 +50,10 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
         }
     }
 
+    override fun refresh(view: STStorylyView?) {
+        view?.storylyView?.refresh()
+    }
+
     override fun resumeStory(view: STStorylyView?) {
         view?.storylyView?.resumeStory()
     }

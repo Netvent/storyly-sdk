@@ -54,6 +54,8 @@ export interface StorylyConfig {
     storyProductConfig: {
         isFallbackEnabled?: boolean,
         isCartEnabled?: boolean,
+        productCountry?: string;
+        productLanguage?: string;  
     }
     storylyLayoutDirection?: string
 }
@@ -112,6 +114,8 @@ export const mapStorylyConfig = (props: StorylyProps) => {
         'storyProductConfig': {
             'isFallbackEnabled': props.storyFallbackIsEnabled,
             'isCartEnabled': props.storyCartIsEnabled,
+            'productCountry': props.storyProductCountry,
+            'productLanguage': props.storyProductLanguage
         },
         'storylyLayoutDirection': props.storylyLayoutDirection,
     })

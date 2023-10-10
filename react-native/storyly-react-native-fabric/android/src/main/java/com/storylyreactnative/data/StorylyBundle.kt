@@ -142,6 +142,8 @@ private fun stProductConfig(
     var storyProductConfig = StorylyProductConfig.Builder()
     (json["isFallbackEnabled"] as? Boolean)?.let { storyProductConfig = storyProductConfig.setFallbackAvailability(it) }
     (json["isCartEnabled"] as? Boolean)?.let { storyProductConfig = storyProductConfig.setCartAvailability(it) }
+    (json["productCountry"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedCountry(it) }
+    (json["productLanguage"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedLanguage(it) }
 
     return configBuilder
         .setProductConfig(

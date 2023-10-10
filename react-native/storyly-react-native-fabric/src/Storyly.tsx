@@ -55,13 +55,15 @@ export interface StorylyProps extends ViewProps {
 
     storyFallbackIsEnabled?: boolean;
     storyCartIsEnabled?: boolean;
+    storyProductCountry?: string;
+    storyProductLanguage?: string;
 
     storylyLayoutDirection?: "ltr" | "rtl";
 
     onLoad?: (event: StoryLoadEvent) => void;
     onFail?: (event: StoryFailEvent) => void;
     onStoryOpen?: () => void;
-    onStoryOpenFail?: (event: StoryPresentFail) => void;
+    onStoryOpenFailed?: (event: StoryPresentFail) => void;
     onStoryClose?: () => void;
     onEvent?: (event: StoryEvent) => void;
     onPress?: (event: StoryPressEvent) => void;
@@ -72,6 +74,7 @@ export interface StorylyProps extends ViewProps {
 }
 
 export interface StorylyMethods {
+    refresh: () => void;
     resumeStory: () => void;
     pauseStory: () => void;
     closeStory: () => void;
@@ -88,6 +91,7 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
     const storylyRef = useRef<StorylyNativeComponentRef>(null);
 
     useImperativeHandle(ref, () => ({
+        refresh,
         resumeStory,
         pauseStory,
         closeStory,
@@ -98,6 +102,13 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         approveCartChange,
         rejectCartChange,
     }));
+
+    const refresh = () => {
+        if (storylyRef.current) {
+            StorylyNativeCommands.refresh(storylyRef.current)
+        }
+    }
+
 
     const resumeStory = () => {
         if (storylyRef.current) {
@@ -185,8 +196,8 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
     }
 
     const _onStorylyStoryPresentFailed = (event: BaseEvent) => {
-        if (props.onStoryOpenFail) {
-            props.onStoryOpenFail(event as StoryPresentFail);
+        if (props.onStoryOpenFailed) {
+            props.onStoryOpenFailed(event as StoryPresentFail);
         }
     }
 
