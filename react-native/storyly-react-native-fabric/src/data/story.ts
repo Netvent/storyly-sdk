@@ -99,6 +99,7 @@ export interface STRProductItem {
     currency: string;
     imageUrls?: string[];
     variants: STRProductVariant[];
+    ctaText?: string;
 }
 
 export interface STRProductVariant {
