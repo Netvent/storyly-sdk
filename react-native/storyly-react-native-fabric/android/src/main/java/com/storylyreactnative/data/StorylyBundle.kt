@@ -20,6 +20,7 @@ import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
+import com.appsamurai.storyly.data.managers.product.STRProductItem
 
 internal data class STStorylyBundle (
     val storylyView: StorylyView,
@@ -144,6 +145,14 @@ private fun stProductConfig(
     (json["isCartEnabled"] as? Boolean)?.let { storyProductConfig = storyProductConfig.setCartAvailability(it) }
     (json["productCountry"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedCountry(it) }
     (json["productLanguage"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedLanguage(it) }
+    (json["productFeed"] as? Map<String, List<Map<String, Any?>>?>)?.let  { productFeed ->
+        val feed = productFeed.mapValues { entry ->
+            entry.value?.let { productList ->
+                productList.map { createSTRProductItem(it) }
+            } ?: emptyList()
+        }
+        storyProductConfig = storyProductConfig.setProductFeed(feed)
+    }
 
     return configBuilder
         .setProductConfig(

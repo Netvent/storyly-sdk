@@ -178,6 +178,13 @@ private func stProductConfig(
     if let language = json["productLanguage"] as? String {
         productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: language)
     }
+    if let feedMap = json["productFeed"] as? [String: [NSDictionary]]  {
+        var feed: [String: [STRProductItem]] = [:]
+        feedMap.forEach { key, value in
+            feed[key] = value.map({ createSTRProductItem(productItem: $0) })
+        }
+        productConfigBuilder = productConfigBuilder.setProductFeed(feed: feed)
+    }
 
     return configBuilder
         .setProductConfig(config: productConfigBuilder

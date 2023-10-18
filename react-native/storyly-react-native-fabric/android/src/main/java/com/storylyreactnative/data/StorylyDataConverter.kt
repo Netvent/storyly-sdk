@@ -151,7 +151,8 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         currency = product["currency"] as? String ?: "",
         imageUrls = product["imageUrls"] as? List<String>,
         url = product["url"] as? String ?: "",
-        variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>)
+        variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>),
+        ctaText = product["ctaText"] as? String,
     )
 }
 
