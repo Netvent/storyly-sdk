@@ -392,6 +392,9 @@ class StorylyParam {
   // This attribute allows you to set language for product feed
   String? storyProductLanguage;
 
+  // This attribute allows you to set product feed
+  Map<String, List<STRProductItem>>? storyProductFeed;
+
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
   ///
@@ -614,7 +617,9 @@ class StorylyParam {
       'isCartEnabled': isProductCartEnabled,
       'productCountry': storyProductCountry,
       'productLanguage': storyProductLanguage,
+      'productFeed': storyProductFeed?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())),
     };
+    print(storyProductFeed?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())));
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
     return paramsMap;
@@ -988,7 +993,9 @@ class STRProductItem {
       this.salesPrice,
       required this.currency,
       this.imageUrls,
-      this.variants});
+      this.url,
+      this.variants,
+      this.ctaText});
 
   /// ID of the product
   final String productId;
@@ -1014,8 +1021,30 @@ class STRProductItem {
   /// Images of products
   final List<String>? imageUrls;
 
+  /// Url of product
+  final String? url;
+
   /// Variants of product
   final List<STRProductVariant>? variants;
+
+  /// CTA text of product
+  final String? ctaText;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "productId": productId,
+      "productGroupId": productGroupId,
+      "title": title,
+      "desc": desc,
+      "price": price,
+      "salesPrice": salesPrice,
+      "currency": currency,
+      "imageUrls": imageUrls,
+      "url": url,
+      "variants": variants?.map((e) => e.toJson()).toList(),
+      "ctaText": ctaText,
+    };
+  }
 
   factory STRProductItem.fromJson(Map<String, dynamic> json) {
     return STRProductItem(
@@ -1028,8 +1057,10 @@ class STRProductItem {
       currency: json['currency'],
       imageUrls: castOrNull(
           json['imageUrls']?.map<String>((e) => e as String).toList()),
+      url: json['url'],
       variants: List<STRProductVariant>.from(
           json['variants'].map((x) => STRProductVariant.fromJson(x))),
+      ctaText: json['ctaText']
     );
   }
 }
@@ -1043,6 +1074,13 @@ class STRProductVariant {
 
   /// Value of the product group
   final String value;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "value": value,
+    };
+  }
 
   factory STRProductVariant.fromJson(Map<String, dynamic> json) {
     return STRProductVariant(
@@ -1154,3 +1192,4 @@ extension StorylyHexColor on Color {
     return '#${value.toRadixString(16).padLeft(8, '0')}';
   }
 }
+
