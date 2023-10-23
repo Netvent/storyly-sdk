@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 @import Storyly;
-@import StorylyMonetization;
 
 NS_ASSUME_NONNULL_BEGIN
 
