@@ -21,7 +21,7 @@ declare module "storyly-react-native" {
       storyGroupIconBackgroundColor?: string;
       storyGroupIconBorderColorSeen?: string[];
       storyGroupIconBorderColorNotSeen?: string[];
-      storyGroupViewFactory?: StoryGroupViewFactory,
+      storyGroupViewFactory?: StoryGroupViewFactory;
 
       storyGroupTextSize?: number;
       storyGroupTextLines?: number;
@@ -162,13 +162,13 @@ declare module "storyly-react-native" {
       id: string;
       title: string;
       iconUrl?: string;
-      thematicIconUrls?: Record<string, string>
+      thematicIconUrls?: Record<string, string>;
       coverUrl?: string;
       index: number;
       seen: boolean;
       stories: Story[];
-      type: string,
-      momentsUser?: MomentsUser
+      type: string;
+      momentsUser?: MomentsUser;
     }
 
     export interface Story {
@@ -219,6 +219,7 @@ declare module "storyly-react-native" {
     closeStory: () => void;
     openStory: (storyUriFromTheDashboard: string) => void;
     openStoryWithId: (storyGroupId: string, storyId: string) => void;
+    openStoryGroupWithId: (storyGroupId: string) => void;
     hydrateProducts: (products: STRProductItem[]) => void;
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
@@ -235,7 +236,7 @@ declare module "storyly-react-native" {
     currency: String;
     imageUrls?: String[];
     variants: STRProductVariant[];
-  } 
+  }
 
   export interface STRProductVariant {
     name: string;
@@ -247,7 +248,7 @@ declare module "storyly-react-native" {
     totalPrice: number;
     oldTotalPrice?: number;
     currency: string;
-  } 
+  }
 
   export interface STRCartItem {
     item: STRProductItem;
