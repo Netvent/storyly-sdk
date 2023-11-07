@@ -44,6 +44,7 @@ interface NativeCommands {
   closeStory: (viewRef: React.ElementRef<StorylyComponentType>) => void;
   openStory: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
   openStoryWithId: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
+  openStoryGroupWithId: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
   hydrateProducts: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
   updateCart: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
   approveCartChange: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
@@ -58,6 +59,7 @@ export const StorylyNativeCommands = codegenNativeCommands<NativeCommands>({
     "closeStory",
     "openStory",
     "openStoryWithId",
+    "openStoryGroupWithId",
     "hydrateProducts",
     "updateCart",
     "approveCartChange",
