@@ -119,7 +119,9 @@ using namespace facebook::react;
         [self openStory: raw];
     } else if ([commandName isEqual:@"openStoryWithId"]) {
         [self openStoryWithId: raw];
-    } else if ([commandName isEqual:@"hydrateProducts"]) {
+    } else if ([commandName isEqual:@"openStoryGroupWithId"]) {
+        [self openStoryGroupWithId: raw];
+    }  else if ([commandName isEqual:@"hydrateProducts"]) {
         [self hydrateProducts: raw];
     } else if ([commandName isEqual:@"updateCart"]) {
         [self updateCart: raw];
@@ -157,6 +159,10 @@ using namespace facebook::react;
 
 - (void)openStoryWithId:(nonnull NSString *)raw {
     [_stStorylyView openStoryId: raw];
+}
+
+- (void)openStoryGroupWithId:(nonnull NSString *)raw {
+    [_stStorylyView openStoryGroupId: raw];
 }
 
 - (void)hydrateProducts:(nonnull NSString *)raw {

@@ -138,6 +138,14 @@ extension STStorylyView {
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         _ = storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
     }
+
+    @objc(openStoryGroupId:)
+    public func openStoryGroupId(raw: String) {
+        guard let map = decodePayload(raw: raw),
+              let storyGroupId = map["groupId"] as? String else { return }
+        print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId))")
+        _ = storylyView?.openStory(storyGroupId: storyGroupId)
+    }
     
     @objc(hydrateProducts:)
     public func hydrateProducts(raw: String) {
