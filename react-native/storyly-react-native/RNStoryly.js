@@ -56,6 +56,14 @@ class Storyly extends Component {
         );
     };
 
+    openStoryGroupWithId = (storyGroupId) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.openStoryGroupWithId,
+            [storyGroupId],
+        );
+    };
+
     hydrateProducts = (products) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
