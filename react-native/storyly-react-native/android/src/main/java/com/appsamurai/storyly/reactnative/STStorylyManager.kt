@@ -47,6 +47,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_PAUSE_STORY_CODE = 11
         private const val COMMAND_CLOSE_STORY_NAME = "closeStory"
         private const val COMMAND_CLOSE_STORY_CODE = 12
+        private const val COMMAND_OPEN_STORY_GROUP_WITH_ID_NAME = "openStoryGroupWithId"
+        private const val COMMAND_OPEN_STORY_GROUP_WITH_ID_CODE = 13
 
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
@@ -101,6 +103,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_REFRESH_NAME to COMMAND_REFRESH_CODE,
             COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
             COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
+            COMMAND_OPEN_STORY_GROUP_WITH_ID_NAME to COMMAND_OPEN_STORY_GROUP_WITH_ID_CODE
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
             COMMAND_APPROVE_CART_CHANGE_NAME to COMMAND_APPROVE_CART_CHANGE_CODE,
@@ -152,6 +155,11 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 val storyId: String? = if (args.size() > 1) args.getString(1) else null
 
                 root.storylyView?.openStory(storyGroupId, storyId)
+            }
+            COMMAND_OPEN_STORY_GROUP_WITH_ID_CODE -> {
+                val storyGroupId: String = args?.getString(0) ?: return
+
+                root.storylyView?.openStory(storyGroupId)
             }
             COMMAND_RESUME_STORY_CODE -> root.storylyView?.resumeStory()
             COMMAND_PAUSE_STORY_CODE -> root.storylyView?.pauseStory()
