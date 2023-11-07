@@ -79,6 +79,12 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
         view?.storylyView?.openStory(groupId, storyId)
     }
 
+    override fun openStoryGroupWithId(view: STStorylyView?, raw: String?) {
+        val map = raw?.let { jsonStringToMap(it) } ?: return
+        val groupId = map["groupId"] as? String ?: return
+        view?.storylyView?.openStory(groupId)
+    }
+
     override fun hydrateProducts(view: STStorylyView?, raw: String?) {
         val map = raw?.let { jsonStringToMap(it) } ?: return
         val productItems = (map["products"] as? List<Map<String, Any?>>)?.map { createSTRProductItem(it) } ?: return
