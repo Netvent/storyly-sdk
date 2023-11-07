@@ -126,6 +126,11 @@ extension STStorylyView {
         storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
     }
 
+    func openStory(storyGroupId: String) {
+        print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId))")
+        storylyView?.openStory(storyGroupId: storyGroupId)
+    }
+
     func hydrateProducts(products: [STRProductItem]) {
         storylyView?.hydrateProducts(products: products)
     }

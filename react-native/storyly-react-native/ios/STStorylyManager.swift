@@ -101,6 +101,19 @@ class STStorylyManager: RCTViewManager {
         }
     }
 
+    @objc(openStoryGroupWithId:storyGroupId:)
+    func openStory(reactTag: NSNumber, storyGroupId: String) {
+        print("STR:STStorylyManager:openStory(storyGroupId:\(storyGroupId))")
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                _ = stStorylyView.openStory(storyGroupId: storyGroupId)
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+        }
+    }
+
     @objc(hydrateProducts:products:)
     func hydrateProducts(reactTag: NSNumber, products: [NSDictionary]) {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
