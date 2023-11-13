@@ -1,4 +1,7 @@
 # Release Notes
+### 2.5.1 (13.11.2023)
+* improved story bar scrolling after data update, fixed [#320](https://github.com/Netvent/storyly-mobile/issues/320)
+  
 ### 2.5.0 (06.11.2023)
 * added improvements for text interactive components
 * optimized story dismiss flow
