@@ -133,8 +133,8 @@ extension STStorylyView {
     @objc(openStoryId:)
     public func openStoryId(raw: String) {
         guard let map = decodePayload(raw: raw),
-              let storyGroupId = map["groupId"] as? String,
-              let storyId = map["storyId"] as? String else { return }
+              let storyGroupId = map["groupId"] as? String else { return }
+        let storyId = map["storyId"] as? String
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         _ = storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
     }
