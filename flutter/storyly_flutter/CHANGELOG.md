@@ -1,3 +1,8 @@
+### 2.5.1 (16.11.2023)
+* improved story bar scrolling after data update
+* changed storyId parameter to nullable for openStory function 
+* fixed a bug related to group select on android platform
+
 ### 2.5.0 (09.11.2023)
 * added improvements for text interactive components
 * optimized story dismiss flow
