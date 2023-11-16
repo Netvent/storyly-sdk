@@ -1,4 +1,7 @@
 # Release Notes
+### 2.5.1 (13.11.2023)
+* improved story bar scrolling after data update
+  
 ### 2.5.0 (06.11.2023)
 * added improvements for text interactive components
 * optimized story dismiss flow

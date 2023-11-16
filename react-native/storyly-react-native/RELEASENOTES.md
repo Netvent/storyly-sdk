@@ -1,4 +1,11 @@
 # Release Notes
+### 2.4.1 (09.11.2023)
+* added improvements for text interactive components
+* optimized story dismiss flow
+* optimized memory usage on android platform
+* fixed a visual bug in quiz interactive component on android platform
+* fixed a visual bug in countdown interactive component on ios platform
+
 ### 2.4.0 (29.09.2023)
 * added gif support for story group covers
 * added multi region and language support for product feeds
