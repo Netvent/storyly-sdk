@@ -218,7 +218,7 @@ declare module "storyly-react-native" {
     resumeStory: () => void;
     closeStory: () => void;
     openStory: (storyUriFromTheDashboard: string) => void;
-    openStoryWithId: (storyGroupId: string, storyId: string) => void;
+    openStoryWithId: (storyGroupId: string, storyId?: string) => void;
     hydrateProducts: (products: STRProductItem[]) => void;
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;

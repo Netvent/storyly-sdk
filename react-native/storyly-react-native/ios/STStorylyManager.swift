@@ -89,7 +89,7 @@ class STStorylyManager: RCTViewManager {
     }
     
     @objc(openStoryWithId:storyGroupId:storyId:)
-    func openStory(reactTag: NSNumber, storyGroupId: String, storyId: String) {
+    func openStory(reactTag: NSNumber, storyGroupId: String, storyId: String?) {
         print("STR:STStorylyManager:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
