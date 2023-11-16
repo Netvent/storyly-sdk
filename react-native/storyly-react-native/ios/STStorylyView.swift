@@ -121,7 +121,7 @@ extension STStorylyView {
         storylyView?.openStory(payload: payload)
     }
     
-    func openStory(storyGroupId: String, storyId: String) {
+    func openStory(storyGroupId: String, storyId: String?) {
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
     }

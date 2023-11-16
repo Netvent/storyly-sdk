@@ -75,7 +75,7 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
     override fun openStoryWithId(view: STStorylyView?, raw: String?) {
         val map = raw?.let { jsonStringToMap(it) } ?: return
         val groupId = map["groupId"] as? String ?: return
-        val storyId = map["storyId"] as? String ?: return
+        val storyId = map["storyId"] as? String
         view?.storylyView?.openStory(groupId, storyId)
     }
 
