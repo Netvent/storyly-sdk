@@ -1,4 +1,9 @@
 # Release Notes
+### 2.4.2 (16.11.2023)
+* improved story bar scrolling after data update
+* changed storyId parameter to nullable for openStoryWithId function 
+* fixed a bug related to group select on android platform
+
 ### 2.4.1 (09.11.2023)
 * added improvements for text interactive components
 * optimized story dismiss flow
