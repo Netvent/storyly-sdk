@@ -301,7 +301,7 @@ class StorylyViewController {
 
   /// This function allows you to open a specific story using
   /// `storyGroupId` and `storyId`.
-  Future<void> openStory(String storyGroupId, String storyId) {
+  Future<void> openStory(String storyGroupId, String? storyId) {
     return _methodChannel.invokeMethod(
       'openStory',
       <String, dynamic>{
