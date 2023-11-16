@@ -1,4 +1,7 @@
 # Release Notes
+### 2.5.2 (16.11.2023)
+* fixed a bug related to group select, fixed [#321](https://github.com/Netvent/storyly-mobile/issues/321)
+  
 ### 2.5.1 (13.11.2023)
 * improved story bar scrolling after data update, fixed [#320](https://github.com/Netvent/storyly-mobile/issues/320)
   
