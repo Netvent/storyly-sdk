@@ -1,15 +1,19 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
-// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Storyly
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Storyly
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
 import AVKit
 import AudioToolbox
 import Dispatch
+import Foundation
+import MediaPlayer
 import QuartzCore
 @_exported import Storyly
 import Swift
 import UserNotifications
 import _Concurrency
+import _StringProcessing
 extension Swift.Array {
   @inlinable internal func after(where predicate: (Element) -> Swift.Bool) -> Element? {
         if let index = self.firstIndex(where: predicate), index + 1 <= self.count {
@@ -69,17 +73,17 @@ extension Swift.Array {
     @objc set
   }
   @objc @_Concurrency.MainActor(unsafe) weak final public var rootViewController: UIKit.UIViewController?
-  @objc @_Concurrency.MainActor(unsafe) weak final public var delegate: Storyly.StorylyDelegate?
-  @objc @_Concurrency.MainActor(unsafe) weak final public var productDelegate: Storyly.StorylyProductDelegate?
-  @objc @_Concurrency.MainActor(unsafe) weak final public var momentsDelegate: Storyly.StorylyMomentsDelegate?
-  @objc @_Concurrency.MainActor(unsafe) weak final public var storylyAdViewProvider: Storyly.StorylyAdViewProvider?
-  @objc override final public var accessibilityLabel: Swift.String? {
+  @objc @_Concurrency.MainActor(unsafe) weak final public var delegate: (any Storyly.StorylyDelegate)?
+  @objc @_Concurrency.MainActor(unsafe) weak final public var productDelegate: (any Storyly.StorylyProductDelegate)?
+  @objc @_Concurrency.MainActor(unsafe) weak final public var momentsDelegate: (any Storyly.StorylyMomentsDelegate)?
+  @objc @_Concurrency.MainActor(unsafe) weak final public var storylyAdViewProvider: (any Storyly.StorylyAdViewProvider)?
+  @_Concurrency.MainActor(unsafe) @objc override final public var accessibilityLabel: Swift.String? {
     @objc get
     @objc set
   }
   @_Concurrency.MainActor(unsafe) @objc override final public var accessibilityIdentifier: Swift.String? {
-    @_Concurrency.MainActor(unsafe) @objc get
-    @_Concurrency.MainActor(unsafe) @objc set
+    @objc get
+    @objc set
   }
   @objc @IBInspectable @_Concurrency.MainActor(unsafe) final public var languageCode: Swift.String {
     @objc get
@@ -89,7 +93,7 @@ extension Swift.Array {
     @objc get
     @objc set
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
@@ -97,10 +101,9 @@ extension Storyly.StorylyView {
   @objc @_Concurrency.MainActor(unsafe) final public func refresh()
   @_Concurrency.MainActor(unsafe) final public func openStory(storyGroupId: Swift.String, storyId: Swift.String? = nil, play: Storyly.PlayMode = .Default) -> Swift.Bool
   @objc @_Concurrency.MainActor(unsafe) final public func openStory(payload: Foundation.URL) -> Swift.Bool
-  @objc @_Concurrency.MainActor(unsafe) final public func pause()
-  @objc @_Concurrency.MainActor(unsafe) final public func resume()
-  @objc @_Concurrency.MainActor(unsafe) final public func dismiss(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
-  @objc @_Concurrency.MainActor(unsafe) final public func present(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) final public func resumeStory(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) final public func pauseStory(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) final public func closeStory(animated: Swift.Bool, completion: (() -> Swift.Void)? = nil)
   @_Concurrency.MainActor(unsafe) final public func hydrateProducts(products: [Storyly.STRProductItem])
   @_Concurrency.MainActor(unsafe) final public func updateCart(cart: Storyly.STRCart)
   @objc @_Concurrency.MainActor(unsafe) final public func showExternalActionView(externalActionView: UIKit.UIView)
@@ -121,7 +124,7 @@ extension Storyly.StorylyView {
 @objc(StorylyProductDelegate) public protocol StorylyProductDelegate {
   @objc optional func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [Swift.String])
   @objc optional func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent)
-  @objc optional func storylyUpdateCartEvent(storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, cart: Storyly.STRCart?, change: Storyly.STRCartItem?, onSuccess: ((Storyly.STRCart) -> Swift.Void)?, onFail: ((Storyly.STRCartEventResult) -> Swift.Void)?)
+  @objc optional func storylyUpdateCartEvent(storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, cart: Storyly.STRCart?, change: Storyly.STRCartItem?, onSuccess: ((Storyly.STRCart?) -> Swift.Void)?, onFail: ((Storyly.STRCartEventResult) -> Swift.Void)?)
 }
 @_hasMissingDesignatedInitializers @objc(StorylyMomentsLinkCTAStyling) final public class StorylyMomentsLinkCTAStyling : ObjectiveC.NSObject {
   @_inheritsConvenienceInitializers @objc(StorylyMomentsLinkCTAStylingBuilder) final public class Builder : ObjectiveC.NSObject {
@@ -190,9 +193,9 @@ extension Storyly.StorylyView {
     @objc(setIconBorderColorNotSeen:) public func setIconBorderColorNotSeen(colors: [UIKit.UIColor]) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc(setIconBackgroundColor:) public func setIconBackgroundColor(color: UIKit.UIColor) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc(setPinIconColor:) public func setPinIconColor(color: UIKit.UIColor) -> Storyly.StorylyStoryGroupStyling.Builder
-    @objc(setIconHeight:) public func setIconHeight(height: CoreGraphics.CGFloat) -> Storyly.StorylyStoryGroupStyling.Builder
-    @objc(setIconWidth:) public func setIconWidth(width: CoreGraphics.CGFloat) -> Storyly.StorylyStoryGroupStyling.Builder
-    @objc(setIconCornerRadius:) public func setIconCornerRadius(radius: CoreGraphics.CGFloat) -> Storyly.StorylyStoryGroupStyling.Builder
+    @objc(setIconHeight:) public func setIconHeight(height: CoreFoundation.CGFloat) -> Storyly.StorylyStoryGroupStyling.Builder
+    @objc(setIconWidth:) public func setIconWidth(width: CoreFoundation.CGFloat) -> Storyly.StorylyStoryGroupStyling.Builder
+    @objc(setIconCornerRadius:) public func setIconCornerRadius(radius: CoreFoundation.CGFloat) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc(setIconThematicImageLabel:) public func setIconThematicImageLabel(label: Swift.String?) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc(setIconBorderAnimation:) public func setIconBorderAnimation(animation: Storyly.StoryGroupAnimation) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc(setTitleSeenColor:) public func setTitleSeenColor(color: UIKit.UIColor) -> Storyly.StorylyStoryGroupStyling.Builder
@@ -201,7 +204,7 @@ extension Storyly.StorylyView {
     @objc(setTitleFont:) public func setTitleFont(font: UIKit.UIFont?) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc(setTitleVisibility:) public func setTitleVisibility(isVisible: Swift.Bool) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc(setSize:) public func setSize(size: Storyly.StoryGroupSize) -> Storyly.StorylyStoryGroupStyling.Builder
-    @objc(setCustomGroupViewFactory:) public func setCustomGroupViewFactory(factory: Storyly.StoryGroupViewFactory?) -> Storyly.StorylyStoryGroupStyling.Builder
+    @objc(setCustomGroupViewFactory:) public func setCustomGroupViewFactory(factory: (any Storyly.StoryGroupViewFactory)?) -> Storyly.StorylyStoryGroupStyling.Builder
     @objc public func build() -> Storyly.StorylyStoryGroupStyling
     @objc override dynamic public init()
     @objc deinit
@@ -214,10 +217,10 @@ extension Storyly.StorylyView {
   @objc func hide()
 }
 @objc public protocol StorylyAdViewProvider {
-  @objc(onRequest::) func onRequest(adViewListener: Storyly.StorylyAdViewListener, frame: CoreGraphics.CGRect)
+  @objc(onRequest::) func onRequest(adViewListener: any Storyly.StorylyAdViewListener, frame: CoreFoundation.CGRect)
 }
 @objc public protocol StorylyAdViewListener {
-  @objc(onLoad:) func onLoad(adView: Storyly.StorylyAdView)
+  @objc(onLoad:) func onLoad(adView: any Storyly.StorylyAdView)
 }
 @objc public protocol StorylyAdView {
   @objc var onActionClicked: (() -> Swift.Void)? { get set }
@@ -260,6 +263,8 @@ extension Storyly.StorylyView {
     @objc(setPriceFormatter:) public func setPriceFormatter(formatter: Storyly.StoryPriceFormatter) -> Storyly.StorylyProductConfig.Builder
     @objc(setFallbackAvailability:) public func setFallbackAvailability(isEnabled: Swift.Bool) -> Storyly.StorylyProductConfig.Builder
     @objc(setCartEnabled:) public func setCartEnabled(isEnabled: Swift.Bool) -> Storyly.StorylyProductConfig.Builder
+    @objc(setProductFeedCountry:) public func setProductFeedCountry(country: Swift.String?) -> Storyly.StorylyProductConfig.Builder
+    @objc(setProductFeedLanguage:) public func setProductFeedLanguage(language: Swift.String?) -> Storyly.StorylyProductConfig.Builder
     @objc public func build() -> Storyly.StorylyProductConfig
     @objc override dynamic public init()
     @objc deinit
@@ -270,10 +275,10 @@ extension Storyly.StorylyView {
   @_inheritsConvenienceInitializers @objc(StorylyBarStylingBuilder) public class Builder : ObjectiveC.NSObject {
     @objc(setOrientation:) public func setOrientation(orientation: Storyly.StoryGroupListOrientation) -> Storyly.StorylyBarStyling.Builder
     @objc(setSection:) public func setSection(count: Swift.Int) -> Storyly.StorylyBarStyling.Builder
-    @objc(setHorizontalEdgePadding:) public func setHorizontalEdgePadding(padding: CoreGraphics.CGFloat) -> Storyly.StorylyBarStyling.Builder
-    @objc(setVerticalEdgePadding:) public func setVerticalEdgePadding(padding: CoreGraphics.CGFloat) -> Storyly.StorylyBarStyling.Builder
-    @objc(setHorizontalPaddingBetweenItems:) public func setHorizontalPaddingBetweenItems(padding: CoreGraphics.CGFloat) -> Storyly.StorylyBarStyling.Builder
-    @objc(setVerticalPaddingBetweenItems:) public func setVerticalPaddingBetweenItems(padding: CoreGraphics.CGFloat) -> Storyly.StorylyBarStyling.Builder
+    @objc(setHorizontalEdgePadding:) public func setHorizontalEdgePadding(padding: CoreFoundation.CGFloat) -> Storyly.StorylyBarStyling.Builder
+    @objc(setVerticalEdgePadding:) public func setVerticalEdgePadding(padding: CoreFoundation.CGFloat) -> Storyly.StorylyBarStyling.Builder
+    @objc(setHorizontalPaddingBetweenItems:) public func setHorizontalPaddingBetweenItems(padding: CoreFoundation.CGFloat) -> Storyly.StorylyBarStyling.Builder
+    @objc(setVerticalPaddingBetweenItems:) public func setVerticalPaddingBetweenItems(padding: CoreFoundation.CGFloat) -> Storyly.StorylyBarStyling.Builder
     @objc public func build() -> Storyly.StorylyBarStyling
     @objc override dynamic public init()
     @objc deinit
@@ -300,11 +305,11 @@ extension Storyly.StorylyView {
 }
 @objc public protocol StoryGroupViewFactory {
   @objc func createView() -> Storyly.StoryGroupView
-  @objc func getSize() -> CoreGraphics.CGSize
+  @objc func getSize() -> CoreFoundation.CGSize
 }
 @_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class StoryGroupView : UIKit.UIView {
   @objc(populateView:) @_Concurrency.MainActor(unsafe) open func populateView(storyGroup: Storyly.StoryGroup?)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
@@ -317,7 +322,7 @@ extension Storyly.StorylyView {
     @objc(setHeaderIconBorderColor:) public func setHeaderIconBorderColor(colors: [UIKit.UIColor]) -> Storyly.StorylyStoryStyling.Builder
     @objc(setTitleColor:) public func setTitleColor(color: UIKit.UIColor) -> Storyly.StorylyStoryStyling.Builder
     @objc(setTitleFont:) public func setTitleFont(font: UIKit.UIFont) -> Storyly.StorylyStoryStyling.Builder
-    @objc(setInteractiveFont:) public func setInteractiveFont(font: UIKit.UIFont) -> Storyly.StorylyStoryStyling.Builder
+    @objc(setInteractiveFont:) public func setInteractiveFont(font: UIKit.UIFont?) -> Storyly.StorylyStoryStyling.Builder
     @objc(setProgressBarColor:) public func setProgressBarColor(colors: [UIKit.UIColor]) -> Storyly.StorylyStoryStyling.Builder
     @objc(setTitleVisibility:) public func setTitleVisibility(isVisible: Swift.Bool) -> Storyly.StorylyStoryStyling.Builder
     @objc(setHeaderIconVisibility:) public func setHeaderIconVisibility(isVisible: Swift.Bool) -> Storyly.StorylyStoryStyling.Builder
@@ -363,15 +368,18 @@ extension Storyly.StorylyView {
   case StoryCommentSent
   case StoryCommentInputOpened
   case StoryCommentInputClosed
+  case StorySeeked
   case StoryLiked
   case StoryUnliked
+  case StoryProductCartAdded
+  case StoryProductCartAddFailed
+  case StoryProductSheetOpened
   case StoryProductAdded
   case StoryProductUpdated
   case StoryProductRemoved
   case StoryCheckoutButtonClicked
   case StoryCartButtonClicked
   case StoryCartViewClicked
-  case StoryProductCatalogClicked
   case StoryProductSelected
   public var stringValue: Swift.String {
     get
@@ -392,6 +400,7 @@ extension Storyly.StorylyView {
   case Image
   case Video
   case LongVideo
+  case Live
   case Ad
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
@@ -463,7 +472,8 @@ extension Storyly.StorylyView {
   @objc final public let text: Swift.String?
   @objc final public let textColor: UIKit.UIColor?
   @objc final public let backgroundColor: UIKit.UIColor?
-  @objc public init(text: Swift.String?, textColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?)
+  @objc final public let endTime: Foundation.NSNumber?
+  @objc public init(text: Swift.String?, textColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?, endTime: Foundation.NSNumber?)
   @objc deinit
 }
 @objc(Story) final public class Story : ObjectiveC.NSObject {
@@ -590,7 +600,8 @@ extension Storyly.StorylyView {
   case Ad
   case MomentsDefault
   case MomentsBlock
-  public init(from decoder: Swift.Decoder) throws
+  case Live
+  public init(from decoder: any Swift.Decoder) throws
   public var description: Swift.String {
     get
   }
@@ -604,7 +615,7 @@ extension Storyly.StorylyView {
   case Disabled
   case Link
   case Screenshot
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
   public var description: Swift.String {
     get
   }
@@ -634,7 +645,7 @@ extension Storyly.StorylyView {
   @objc final public let userId: Swift.String?
   @objc final public let avatarURL: Swift.String?
   @objc final public let username: Swift.String?
-  required public init(from decoder: Swift.Decoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
   @objc deinit
 }
 extension Storyly.StorylyLayoutDirection : Swift.Equatable {}

@@ -27,21 +27,17 @@ namespace Storyly
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
 
-		// -(void)pause;
-		[Export("pause")]
-		void Pause();
+		// -(void)resumeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+		[Export("resumeStoryWithAnimated:completion:")]
+		void ResumeStoryWithAnimated(bool animated, [NullAllowed] Action completion);
 
-		// -(void)resume;
-		[Export("resume")]
-		void Resume();
+		// -(void)pauseStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+		[Export("pauseStoryWithAnimated:completion:")]
+		void PauseStoryWithAnimated(bool animated, [NullAllowed] Action completion);
 
-		// -(void)presentWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
-		[Export("presentWithAnimated:completion:")]
-		void PresentWithAnimated(bool animated, [NullAllowed] Action completion);
-
-		// -(void)dismissWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
-		[Export("dismissWithAnimated:completion:")]
-		void DismissWithAnimated(bool animated, [NullAllowed] Action completion);
+		// -(void)closeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+		[Export("closeStoryWithAnimated:completion:")]
+		void CloseStoryWithAnimated(bool animated, [NullAllowed] Action completion);
 
 		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
 		[Export("initWithFrame:")]
