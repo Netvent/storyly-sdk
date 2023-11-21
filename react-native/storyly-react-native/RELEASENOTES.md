@@ -1,4 +1,6 @@
 # Release Notes
+* These are Fabric supported versions of storyly-react-native, for the older architecture please use these [legacy versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-legacy/RELEASENOTES.md)
+
 ### 2.5.2 (16.11.2023)
 * improved story bar scrolling after data update
 * changed storyId parameter to nullable for openStoryWithId function 
