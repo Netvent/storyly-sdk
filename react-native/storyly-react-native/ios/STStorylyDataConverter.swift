@@ -6,6 +6,19 @@
 //
 import Storyly
 
+func decodePayload(raw: String) -> [String: Any?]? {
+    guard let data = raw.data(using: .utf8),
+          let map = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any?] else {
+        return nil
+    }
+    return map
+}
+
+func encodeEvent(json: [String: Any]) -> String? {
+    guard let rawMap = try? JSONSerialization.data(withJSONObject: json, options: []),
+          let rawMapString = String(data: rawMap, encoding: .utf8) else { return nil }
+    return rawMapString
+}
 
 func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any?]? {
     guard let storyGroup = storyGroup else { return nil }
@@ -120,7 +133,7 @@ func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
         "url": product.url,
         "desc": product.desc,
         "price": product.price,
-        "salesPrice": product.salesPrice, 
+        "salesPrice": product.salesPrice,
         "currency": product.currency,
         "variants": product.variants?.compactMap { createSTRProductVariantMap(variant: $0) },
         "imageUrls": product.imageUrls.map { $0 }
@@ -184,7 +197,8 @@ internal func createSTRCartItem(cartItemMap: NSDictionary) -> STRCartItem {
     )
 }
 
-internal func createSTRCart(cartMap: NSDictionary) -> STRCart {
+internal func createSTRCart(cartMap: NSDictionary?) -> STRCart? {
+    guard let cartMap = cartMap else { return nil }
     return STRCart(
         items: (cartMap["items"] as? [NSDictionary])?.map { createSTRCartItem(cartItemMap: $0) } ?? [],
         totalPrice: cartMap["totalPrice"] as? Float ?? 0.0,
@@ -192,4 +206,3 @@ internal func createSTRCart(cartMap: NSDictionary) -> STRCart {
         currency: cartMap["currency"] as? String ?? ""
     )
 }
-

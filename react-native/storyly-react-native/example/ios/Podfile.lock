@@ -1000,7 +1000,7 @@ PODS:
     - React-perflogger (= 0.72.4)
   - SocketRocket (0.6.1)
   - Storyly (2.5.1)
-  - storyly-react-native (2.5.1):
+  - storyly-react-native (2.5.2):
     - hermes-engine
     - RCT-Folly (= 2021.07.22.00)
     - RCTRequired
@@ -1180,20 +1180,20 @@ SPEC CHECKSUMS:
   React-Core: 34da8c952844e21f5a69bf46438fb6bf063900d0
   React-CoreModules: 621243df8863055ff30f3bb2ff71573ffa7b16c8
   React-cxxreact: 4ad1cc861e32fb533dad6ff7a4ea25680fa1c994
-  React-debug: ba8050aa13bc2915902d118d2c6095bbd8ddbf7c
-  React-Fabric: bcc1b6e0ac73d4a6d08ac4c087dc55e9d86041a2
-  React-graphics: 5b946fd2d826f2dc330b95dbd9206a1b1497ec43
+  React-debug: f342996c000c90c496e1aab404d0dc62f92a7c47
+  React-Fabric: 8d52f49f472be74c038aaaafb3762b0ab63faf00
+  React-graphics: d52d4ad17bc1eb5f6297e7b90b9c9a8f0899fcac
   React-hermes: 37377d0a56aa0cf55c65248271866ce3268cde3f
-  React-ImageManager: 8f2ee8905a466ef5a15740c6a1b45253ee6de0a2
+  React-ImageManager: c03de7750a767f588cc760cd845c7ee7c3e4bdd8
   React-jsi: 6de8b0ccc6b765b58e4eee9ee38049dbeaf5c221
   React-jsiexecutor: c7f826e40fa9cab5d37cab6130b1af237332b594
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
-  React-NativeModulesApple: 69026bbb71c8d82e34b06a2c6d99fcfa0492876c
+  React-NativeModulesApple: eb57cf70ace7e6747467fe0a0b419549090aa56e
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00
   React-RCTAnimation: e44fe5053708c5be762943087c78dc5a6a3c645c
-  React-RCTAppDelegate: 948e63141ee7dbd6e024e294e3c7e92fd36e3480
+  React-RCTAppDelegate: c8dddaba8ba5875574331a6fd4748f9b2f4e125c
   React-RCTBlob: 5577c3542fafbd9241f505bda541f6762996b0eb
   React-RCTFabric: 17af2ec2bc375e565448d913f65abd4c9946ae63
   React-RCTImage: f48859ae6a1e5c2c8659f860efdfcb8b0cb60cde
@@ -1204,12 +1204,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: 35eec7201c8ffdaccdd908a5ec874b7055f975f3
   React-rncore: 32177e06dd7ecc14572e46ec9fca7a600b36c3a7
   React-runtimeexecutor: d465ba0c47ef3ed8281143f59605cacc2244d5c7
-  React-runtimescheduler: 4057cae11b515f58f06369838b67a3f564de3f61
-  React-utils: 4f8d3a6d9a968521066344d4eb9dc9a1d9faed1c
-  ReactCommon: e5c2c84e39b858a458c0c2b3030c2f95542ce565
+  React-runtimescheduler: 2ec6cdcd11b8502f9e6af0623663c57d54d54ad8
+  React-utils: 5d110e89d7920b4de824005c8af658e1f2e541de
+  ReactCommon: 861dba75241ced6913f4dd179f7a36f1c2800486
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Storyly: 64819c4e4e932ae8f2f5ed8d53efbe25b2970899
-  storyly-react-native: c7432f69748bed4fce43d417aa53c8fd54817f18
+  storyly-react-native: 374bb30c77dc5ea27105dd73600f032b7e41efda
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
 
 PODFILE CHECKSUM: 6e970b0a2b8de97ca976b4422919c2051b53ebef

@@ -5,19 +5,28 @@
 //  Created by Haldun Melih Fadillioglu on 26.10.2022.
 //
 
+import UIKit
 import Storyly
 
 
 @objc(STStorylyView)
-class STStorylyView: UIView {
+public class STStorylyView: UIView {
     
-    private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
+    internal var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
     
-    @objc(storylyBundle)
-    var storylyBundle: StorylyBundle? = nil {
+    private lazy var stStorylyDelegate = STStorylyDelegate(view: self)
+    private lazy var stStorylyProductDelegate = STStorylyProductDelegate(view: self)
+    
+    
+    @objc(storyBundleRaw)
+    public var storyBundleRaw: String? = nil {
         didSet {
-            self.storylyView = self.storylyBundle?.storylyView
-            self.storyGroupViewFactory = self.storylyBundle?.storyGroupViewFactory
+            guard let storyBundleRaw = storyBundleRaw,
+                  let storylyBundle = StorylyBundle.build(rawJson: storyBundleRaw) else {
+                storylyView = nil
+                return
+            }
+            storylyView = storylyBundle.storylyView
         }
     }
     
@@ -26,117 +35,134 @@ class STStorylyView: UIView {
             oldValue?.removeFromSuperview()
             guard let storylyView = storylyView else { return }
             storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
-            storylyView.delegate = self
-            storylyView.productDelegate = self
+            storylyView.delegate = stStorylyDelegate
+            storylyView.productDelegate = stStorylyProductDelegate
             addSubview(storylyView)
-            
             storylyView.translatesAutoresizingMaskIntoConstraints = false
             storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             storylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        }
-    }
-    
-    private var storyGroupViewFactory: STStoryGroupViewFactory? = nil {
-        didSet {
-            guard let storyGroupViewFactory = storyGroupViewFactory else { return }
-            storyGroupViewFactory.onCreateCustomView = self.onCreateCustomView
-            storyGroupViewFactory.onUpdateCustomView = self.onUpdateCustomView
         }
     }
     
     @objc(onStorylyLoaded)
-    var onStorylyLoaded: RCTBubblingEventBlock?
-
+    public var onStorylyLoaded: ((String) -> Void)?
+    
     @objc(onStorylyLoadFailed)
-    var onStorylyLoadFailed: RCTBubblingEventBlock?
-
-    @objc(onStorylyEvent)
-    var onStorylyEvent: RCTBubblingEventBlock?
-
-    @objc(onStorylyActionClicked)
-    var onStorylyActionClicked: RCTBubblingEventBlock?
-
-    @objc(onStorylyStoryPresented)
-    var onStorylyStoryPresented: RCTBubblingEventBlock?
-    
-    @objc(onStorylyStoryPresentFailed)
-    var onStorylyStoryPresentFailed: RCTBubblingEventBlock?
-    
-    @objc(onStorylyStoryDismissed)
-    var onStorylyStoryDismissed: RCTBubblingEventBlock?
-    
-    @objc(onStorylyUserInteracted)
-    var onStorylyUserInteracted: RCTBubblingEventBlock?
-    
-    @objc(onCreateCustomView)
-    var onCreateCustomView: RCTBubblingEventBlock?
-    
-    @objc(onUpdateCustomView)
-    var onUpdateCustomView: RCTBubblingEventBlock?
-
-    @objc(onStorylyProductHydration)
-    var onProductHydration: RCTBubblingEventBlock?
+    public var onStorylyLoadFailed: ((String) -> Void)?
     
     @objc(onStorylyProductEvent)
-    var onStorylyProductEvent: RCTBubblingEventBlock?
+    public var onStorylyProductEvent: ((String) -> Void)?
+    
+    @objc(onStorylyActionClicked)
+    public var onStorylyActionClicked: ((String) -> Void)?
+    
+    @objc(onStorylyStoryPresented)
+    public var onStorylyStoryPresented: (() -> Void)?
+    
+    @objc(onStorylyStoryPresentFailed)
+    public var onStorylyStoryPresentFailed: ((String) -> Void)?
+    
+    @objc(onStorylyStoryDismissed)
+    public var onStorylyStoryDismissed: (() -> Void)?
+    
+    @objc(onStorylyUserInteracted)
+    public var onStorylyUserInteracted: ((String) -> Void)?
+    
+    @objc(onProductHydration)
+    public var onProductHydration: ((String) -> Void)?
+    
+    @objc(onStorylyProductHydration)
+    public var onStorylyProductHydration: ((String) -> Void)?
     
     @objc(onStorylyCartUpdated)
-    var onStorylyCartUpdated: RCTBubblingEventBlock?
+    public var onStorylyCartUpdated: ((String) -> Void)?
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
-        self.storylyView = StorylyView(frame: frame)
         super.init(frame: frame)
+        backgroundColor = .clear
         
-        self.backgroundColor = .clear
-        
+        storylyView = StorylyView(frame: frame)
         print("STR:STStorylyView:init:rootViewController:\(UIApplication.shared.delegate?.window??.rootViewController)")
         _ = UIApplication.shared.delegate?.window??.rootViewController?.observe(\.self,
                                                                                  options: [.initial, .old, .new]){ object, change in
             print("STR:STStorylyView:init:observe:rootViewController:newValue:\(change.newValue):oldValue:\(change.oldValue)")
         }
-        
         print("STR:STStorylyView:init:StorylyBundle:\(Bundle(for: StorylyView.self).infoDictionary)")
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
-        print("STR:STStorylyView:insertReactSubview(subview:\(subview):at\(atIndex))")
-        guard let subview = subview as? STStorylyGroupView else { return }
-        storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
-    }
+
 }
 
 extension STStorylyView {
-    func refresh() {
+    @objc(refresh)
+    public func refresh() {
         print("STR:STStorylyView:refresh()")
         storylyView?.refresh()
     }
     
-    func openStory(payload: URL) {
-        print("STR:STStorylyView:openStory(payload:\(payload))")
-        storylyView?.openStory(payload: payload)
+    @objc(resumeStory)
+    public func resumeStory() {
+        print("STR:STStorylyView:resumeStory()")
+        storylyView?.resumeStory(animated: false)
     }
     
-    func openStory(storyGroupId: String, storyId: String?) {
-        print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
-        storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
+    @objc(pauseStory)
+    public func pauseStory() {
+        print("STR:STStorylyView:pauseStory()")
+        storylyView?.pauseStory(animated: false)
     }
-
-    func hydrateProducts(products: [STRProductItem]) {
+    
+    @objc(closeStory)
+    public func closeStory() {
+        print("STR:STStorylyView:closeStory()")
+        storylyView?.closeStory(animated: false)
+    }
+    
+    @objc(openStory:)
+    public func openStory(raw: String) {
+        guard let map = decodePayload(raw: raw),
+              let urlStr = map["url"] as? String,
+              let payload = URL(string: urlStr) else { return }
+        print("STR:STStorylyView:openStory(payload:\(payload))")
+        _ = storylyView?.openStory(payload: payload)
+    }
+    
+    @objc(openStoryId:)
+    public func openStoryId(raw: String) {
+        guard let map = decodePayload(raw: raw),
+              let storyGroupId = map["groupId"] as? String else { return }
+        let storyId = map["storyId"] as? String
+        print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
+        _ = storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
+    }
+    
+    @objc(hydrateProducts:)
+    public func hydrateProducts(raw: String) {
+        guard let map = decodePayload(raw: raw),
+              let productMap = map["products"] as? [NSDictionary?] else { return }
+        let products = productMap.map({ createSTRProductItem(productItem: $0) })
         storylyView?.hydrateProducts(products: products)
     }
-
-    func updateCart(cart: STRCart) {
+    
+    @objc(updateCart:)
+    public func updateCart(raw: String) {
+        guard let map = decodePayload(raw: raw),
+              let cartMap = map["cart"] as? NSDictionary,
+              let cart = createSTRCart(cartMap: cartMap) else { return }
+        
         storylyView?.updateCart(cart: cart)
     }
     
-    func approveCartChange(responseId: String, cart: STRCart? = nil) {
+    @objc(approveCartChange:)
+    public func approveCartChange(raw: String) {
+        guard let map = decodePayload(raw: raw),
+              let responseId = map["responseId"] as? String else { return }
+        
         guard let onSuccess = cartUpdateSuccessFailCallbackMap[responseId]?.0 else { return }
-        if let cart = cart {
+        if let cart = createSTRCart(cartMap: map["cart"] as? NSDictionary) {
             onSuccess(cart)
         } else {
             onSuccess(nil)
@@ -144,43 +170,44 @@ extension STStorylyView {
         cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
     }
     
-    func rejectCartChange(responseId: String, failMessage: String) {
+    @objc(rejectCartChange:)
+    public func rejectCartChange(raw: String) {
+        guard let map = decodePayload(raw: raw),
+              let responseId = map["responseId"] as? String,
+              let failMessage = map["failMessage"] as? String else { return }
+        
         guard let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 else { return }
         onFail(STRCartEventResult(message: failMessage))
         cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
     }
-    
-    func resumeStory() {
-        print("STR:STStorylyView:resumeStory()")
-        storylyView?.resumeStory(animated: false)
-    }
-
-    func pauseStory() {
-         print("STR:STStorylyView:pauseStory()")
-         storylyView?.pauseStory(animated: false)
-    }
-
-    func closeStory() {
-         print("STR:STStorylyView:closeStory()")
-         storylyView?.closeStory(animated: false)
-    }
 }
 
-extension STStorylyView: StorylyDelegate {
+class STStorylyDelegate: StorylyDelegate {
+    
+    private weak var view: STStorylyView?
+    
+    init(view: STStorylyView) {
+        self.view = view
+    }
+    
     func storylyLoaded(_ storylyView: StorylyView, storyGroupList: [StoryGroup], dataSource: StorylyDataSource) {
         let map: [String : Any] = [
             "storyGroupList": storyGroupList.map { createStoryGroupMap(storyGroup: $0) },
             "dataSource": dataSource.description
         ]
-        self.onStorylyLoaded?(map)
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onStorylyLoaded?(eventJson)
     }
     
     func storylyLoadFailed(_ storylyView: StorylyView, errorMessage: String) {
-        self.onStorylyLoadFailed?(["errorMessage": errorMessage])
+        guard let rawMap = try? JSONSerialization.data(withJSONObject: ["errorMessage": errorMessage], options: []),
+              let rawMapString = String(data: rawMap, encoding: .utf8) else { return }
+        view?.onStorylyLoadFailed?(rawMapString)
     }
     
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        self.onStorylyActionClicked?(createStoryMap(story: story) as [AnyHashable: Any])
+        guard let eventJson = encodeEvent(json: createStoryMap(story: story) as [String: Any]) else { return }
+        view?.onStorylyActionClicked?(eventJson)
     }
     
     func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
@@ -190,19 +217,21 @@ extension STStorylyView: StorylyDelegate {
             "story": createStoryMap(story) as Any,
             "storyComponent": createStoryComponentMap(storyComponent) as Any
         ]
-        self.onStorylyEvent?(map)
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onStorylyProductEvent?(eventJson)
     }
     
     func storylyStoryPresented(_ storylyView: StorylyView) {
-        self.onStorylyStoryPresented?([:])
+        view?.onStorylyStoryPresented?()
     }
     
     func storylyStoryPresentFailed(_ storylyView: StorylyView, errorMessage: String) {
-        self.onStorylyStoryPresentFailed?(["errorMessage": errorMessage])
+        guard let eventJson = encodeEvent(json: ["errorMessage": errorMessage]) else { return }
+        view?.onStorylyStoryPresentFailed?(eventJson)
     }
     
     func storylyStoryDismissed(_ storylyView: StorylyView) {
-        self.onStorylyStoryDismissed?([:])
+        view?.onStorylyStoryDismissed?()
     }
     
     func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
@@ -211,11 +240,21 @@ extension STStorylyView: StorylyDelegate {
             "story": createStoryMap(story: story),
             "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
-        self.onStorylyUserInteracted?(map)
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onStorylyUserInteracted?(eventJson)
     }
 }
 
-extension STStorylyView: StorylyProductDelegate {
+
+class STStorylyProductDelegate: StorylyProductDelegate {
+    
+    private weak var view: STStorylyView?
+    
+    init(view: STStorylyView) {
+        self.view = view
+    }
+    
+    
     func storylyEvent(
         _ storylyView: StorylyView,
         event: StorylyEvent
@@ -223,8 +262,10 @@ extension STStorylyView: StorylyProductDelegate {
         let map: [String : Any] = [
             "event": StorylyEventHelper.storylyEventName(event: event)
         ]
-        self.onStorylyProductEvent?(map)
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onStorylyProductHydration?(eventJson)
     }
+    
     
     func storylyUpdateCartEvent(
         storylyView: StorylyView,
@@ -235,20 +276,23 @@ extension STStorylyView: StorylyProductDelegate {
         onFail: ((STRCartEventResult) -> Void)?
     ) {
         let responseId = UUID().uuidString
-        cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+        view?.cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
         let map: [String : Any] = [
             "event": StorylyEventHelper.storylyEventName(event: event),
-            "cart": createSTRCartMap(cart: cart),
+            "cart": createSTRCartMap(cart: cart) as Any,
             "change": createSTRCartItemMap(cartItem: change),
             "responseId": responseId
         ]
-        self.onStorylyCartUpdated?(map)
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onStorylyCartUpdated?(eventJson)
     }
-
+    
+    
     func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [String]) {
         let map: [String : Any] = [
             "productIds": productIds
         ]
-        self.onProductHydration?(map)
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onProductHydration?(eventJson)
     }
 }

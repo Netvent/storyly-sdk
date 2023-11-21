@@ -1,84 +1,168 @@
-// android/build.gradle
+buildscript {
+  // Buildscript is evaluated before everything else so we can't use getExtOrDefault
+  def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["StorylyReactNative_kotlinVersion"]
 
-// based on:
-//
-// * https://github.com/facebook/react-native/blob/0.60-stable/template/android/build.gradle
-//   original location:
-//   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/build.gradle
-//
-// * https://github.com/facebook/react-native/blob/0.60-stable/template/android/app/build.gradle
-//   original location:
-//   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/app/build.gradle
+  repositories {
+    google()
+    mavenCentral()
+  }
 
-def DEFAULT_COMPILE_SDK_VERSION = 30
-def DEFAULT_BUILD_TOOLS_VERSION = '30.0.3'
-def DEFAULT_MIN_SDK_VERSION = 17
-def DEFAULT_TARGET_SDK_VERSION = 30
-def DEFAULT_KOTLIN_VERSION = '1.5.31'
-
-def safeExtGet(prop, fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+  dependencies {
+    classpath "com.android.tools.build:gradle:7.2.1"
+    // noinspection DifferentKotlinGradleVersion
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'maven-publish'
+def isNewArchitectureEnabled() {
+  return rootProject.hasProperty("newArchEnabled") && rootProject.getProperty("newArchEnabled") == "true"
+}
 
-buildscript {
-    // The Android Gradle plugin is only required when opening the android folder stand-alone.
-    // This avoids unnecessary downloads and potential conflicts when the library is included as a
-    // module dependency in an application project.
-    // ref: https://docs.gradle.org/current/userguide/tutorial_using_tasks.html#sec:build_script_external_dependencies
-    if (project == rootProject) {
-        repositories {
-            google()
-            mavenCentral()
-        }
-        dependencies {
-            classpath('com.android.tools.build:gradle:7.0.4')
-            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlin_version', DEFAULT_KOTLIN_VERSION)}"
-        }
-    }
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+import groovy.json.JsonSlurper
+
+// https://github.com/callstack/react-native-builder-bob/discussions/359
+def registrationCompat = {
+  def reactNativeManifest = file("$projectDir/../node_modules/react-native/package.json").exists()
+    ? file("$projectDir/../node_modules/react-native/package.json") // developer mode, to run example app
+    : file("$projectDir/../../react-native/package.json")
+  def reactNativeVersion = new JsonSlurper().parseText(reactNativeManifest.text).version as String
+  // Fabric was introduced at react-native@0.68, full CMake support were introduced at react-native@0.70
+  // Use Android.mk for compatibility with react-native@0.68/0.69
+  reactNativeVersion.matches('(0.68.*|0.69.*)')
+}()
+
+def codegenViewLibraryName = "StorylyReactNativeView"
+def codegenViewModuleName = {
+  // Autolink for Fabric uses codegenConfig.name in package.json since react-native@0.70
+  // Use codegenViewLibraryName for compatibility with react-native@0.68/0.69
+  def libraryManifestJson = new JsonSlurper().parseText(file("$projectDir/../package.json").text)
+  registrationCompat ? codegenViewLibraryName : libraryManifestJson.codegenConfig.name
+}()
+
+def appProject = rootProject.allprojects.find { it.plugins.hasPlugin('com.android.application') }
+
+if (isNewArchitectureEnabled()) {
+  apply plugin: "com.facebook.react"
+}
+
+def getExtOrDefault(name) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties["StorylyReactNative_" + name]
+}
+
+def getExtOrIntegerDefault(name) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["StorylyReactNative_" + name]).toInteger()
+}
+
+def supportsNamespace() {
+  def parsed = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')
+  def major = parsed[0].toInteger()
+  def minor = parsed[1].toInteger()
+
+  // Namespace support was added in 7.3.0
+  if (major == 7 && minor >= 3) {
+    return true
+  }
+
+  return major >= 8
 }
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
-    buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
+  if (supportsNamespace()) {
+    namespace "com.storylyreactnative"
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    sourceSets {
+      main {
+        manifest.srcFile "src/main/AndroidManifestNew.xml"
+      }
     }
-    
-    defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
-        targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
-        versionCode 1
-        versionName "1.0"
+  }
+
+  ndkVersion getExtOrDefault("ndkVersion")
+  compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+
+  defaultConfig {
+    minSdkVersion getExtOrIntegerDefault("minSdkVersion")
+    targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+    buildConfigField "String", "CODEGEN_MODULE_REGISTRATION", (isNewArchitectureEnabled() && registrationCompat ? "\"${codegenViewModuleName}_registration\"" : "null")
+    if (isNewArchitectureEnabled() && registrationCompat) {
+      def reactAndroidProject = project(':ReactAndroid')
+      externalNativeBuild {
+        ndkBuild {
+          arguments "APP_PLATFORM=android-21",
+                    "APP_STL=c++_shared",
+                    "NDK_TOOLCHAIN_VERSION=clang",
+                    "GENERATED_SRC_DIR=$buildDir/generated/source", // for react_codegen_* in this library's codegen/jni
+                    "PROJECT_BUILD_DIR=${appProject.buildDir}", // for REACT_NDK_EXPORT_DIR in ReactAndroid's Android-prebuilt.mk
+                    "REACT_ANDROID_DIR=${reactAndroidProject.projectDir}",
+                    "REACT_ANDROID_BUILD_DIR=${reactAndroidProject.buildDir}",
+                    "CODEGEN_MODULE_NAME=$codegenViewModuleName"
+          cFlags "-Wall", "-Werror", "-fexceptions", "-frtti", "-DWITH_INSPECTOR=1"
+          cppFlags "-std=c++17"
+          targets "${codegenViewModuleName}_registration"
+        }
+      }
     }
-    lintOptions {
-        abortOnError false
+  }
+  if (isNewArchitectureEnabled() && registrationCompat) {
+    // We configure the NDK build only if you decide to opt-in for the New Architecture.
+    externalNativeBuild {
+      ndkBuild {
+        path "Android.mk"
+      }
     }
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  lintOptions {
+    disable "GradleCompatible"
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  sourceSets {
+    main {
+      if (isNewArchitectureEnabled()) {
+          java.srcDirs += [
+            // This is needed to build Kotlin project with NewArch enabled
+            "${project.buildDir}/generated/source/codegen/java"
+          ]
+      }
+    }
+  }
 }
 
 repositories {
-    // ref: https://www.baeldung.com/maven-local-repository
-    maven {
-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-        url "$rootDir/../node_modules/react-native/android"
-    }
-    maven {
-        // Android JSC is installed from npm
-        url "$rootDir/../node_modules/jsc-android/dist"
-    }
-    google()
-    mavenCentral()
+  mavenCentral()
+  google()
 }
 
-dependencies {
-    //noinspection GradleDynamicVersion
-    implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${safeExtGet('kotlin_version', DEFAULT_KOTLIN_VERSION)}"
+def kotlin_version = getExtOrDefault("kotlinVersion")
 
-    api('com.appsamurai.storyly:storyly:2.5.2')
+dependencies {
+  // For < 0.71, this will be from the local maven repo
+  // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
+  //noinspection GradleDynamicVersion
+  implementation "com.facebook.react:react-native:+"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  api('com.appsamurai.storyly:storyly:2.5.2')
+}
+
+if (isNewArchitectureEnabled()) {
+  react {
+    jsRootDir = file("../src/")
+    libraryName = codegenViewLibraryName
+    codegenJavaPackageName = "com.storylyreactnative"
+  }
 }
