@@ -1,4 +1,7 @@
 # Release Notes
+### 2.6.0 (24.11.2023)
+* added product feed feature for client side automated shoppable stories
+  
 ### 2.5.1 (13.11.2023)
 * improved story bar scrolling after data update
   
