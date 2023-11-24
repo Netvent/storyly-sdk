@@ -1,4 +1,7 @@
 # Release Notes
+### 2.6.0 (24.11.2023)
+* added product feed feature for client side automated shoppable stories
+  
 ### 2.5.2 (16.11.2023)
 * fixed a bug related to group select, fixed [#321](https://github.com/Netvent/storyly-mobile/issues/321)
   
