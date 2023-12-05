@@ -53,11 +53,10 @@ export interface StorylyConfig {
     }
     storyProductConfig: {
         isFallbackEnabled?: boolean,
-        isCartEnabled?: boolean,
-        productCountry?: string;
-        productLanguage?: string;  
+        isCartEnabled?: boolean
     }
     storylyLayoutDirection?: string
+    storylyLocale?: string
 }
 
 export const mapStorylyConfig = (props: StorylyProps) => {
@@ -113,10 +112,10 @@ export const mapStorylyConfig = (props: StorylyProps) => {
         },
         'storyProductConfig': {
             'isFallbackEnabled': props.storyFallbackIsEnabled,
-            'isCartEnabled': props.storyCartIsEnabled,
-            'productCountry': props.storyProductCountry,
-            'productLanguage': props.storyProductLanguage
+            'isCartEnabled': props.storyCartIsEnabled
         },
         'storylyLayoutDirection': props.storylyLayoutDirection,
+        'storylyLocale': props.storylyLocale,
+
     })
 }

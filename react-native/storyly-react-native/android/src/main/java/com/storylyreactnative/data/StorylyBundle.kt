@@ -43,6 +43,7 @@ internal fun createStorylyBundle(context: Activity, storylyBundle: Map<String, A
     storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle["storylyLayoutDirection"] as? String))
+    storylyConfigBuilder = storylyConfigBuilder.setLocale(storylyBundle["storylyLocale"] as? String)
 
     return  STStorylyBundle(
         StorylyView(context).apply {
@@ -142,8 +143,6 @@ private fun stProductConfig(
     var storyProductConfig = StorylyProductConfig.Builder()
     (json["isFallbackEnabled"] as? Boolean)?.let { storyProductConfig = storyProductConfig.setFallbackAvailability(it) }
     (json["isCartEnabled"] as? Boolean)?.let { storyProductConfig = storyProductConfig.setCartAvailability(it) }
-    (json["productCountry"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedCountry(it) }
-    (json["productLanguage"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedLanguage(it) }
 
     return configBuilder
         .setProductConfig(

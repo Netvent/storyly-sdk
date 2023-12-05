@@ -55,10 +55,9 @@ export interface StorylyProps extends ViewProps {
 
     storyFallbackIsEnabled?: boolean;
     storyCartIsEnabled?: boolean;
-    storyProductCountry?: string;
-    storyProductLanguage?: string;
 
     storylyLayoutDirection?: "ltr" | "rtl";
+    storylyLocale?: string;
 
     onLoad?: (event: StoryLoadEvent) => void;
     onFail?: (event: StoryFailEvent) => void;
