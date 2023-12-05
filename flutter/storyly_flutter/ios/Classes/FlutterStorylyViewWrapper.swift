@@ -97,6 +97,7 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         return StorylyInit(
             storylyId: storylyId,
             config: storylyConfigBuilder
+                .setLocale(locale: json["storylyLocale"] as? String)
                 .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
                 .build()
         )
@@ -228,14 +229,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         }
         if let isCartEnabled = json["isCartEnabled"] as? Bool {
             productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
-        }
-        
-        if let productCountry = json["productCountry"] as? String {
-            productConfigBuilder = productConfigBuilder.setProductFeedCountry(country: productCountry)
-        }
-        
-        if let productLanguage = json["productLanguage"] as? String {
-            productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: productLanguage)
         }
         
         return configBuilder
