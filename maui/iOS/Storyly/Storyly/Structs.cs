@@ -56,8 +56,9 @@ namespace Storyly
 		CheckoutButtonClicked = 37,
 		CartButtonClicked = 38,
 		CartViewClicked = 39,
-		ProductCatalogClicked = 40,
-		ProductSelected = 41
+		ProductSheetOpened = 40,
+		ProductSelected = 41,
+		Seeked = 42
 	}
 
 	[Native]
@@ -66,7 +67,8 @@ namespace Storyly
 		Default = 0,
 		Ad = 1,
 		MomentsDefault = 2,
-		MomentsBlock = 3
+		MomentsBlock = 3,
+		Live = 4
 	}
 
 	[Native]
@@ -76,7 +78,8 @@ namespace Storyly
 		Image = 1,
 		Video = 2,
 		LongVideo = 3,
-		Ad = 4
+		Live = 4,
+		Ad = 5
 	}
 
 	[Native]

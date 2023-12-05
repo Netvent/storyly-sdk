@@ -1,0 +1,43 @@
+{
+  "name": "storyly-react-native",
+  "title": "Storyly React Native",
+  "version": "2.4.2",
+  "description": "A react-native component for Storyly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "StorylyDemo": "yarn --cwd StorylyDemo",
+    "pods": "cd StorylyDemo && pod-install --quiet",
+    "bootstrap": "yarn StorylyDemo && yarn && yarn pods"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Netvent/storyly-mobile.git",
+    "baseUrl": "https://github.com/Netvent/storyly-mobile"
+  },
+  "keywords": [
+    "react-native",
+    "storyly",
+    "story",
+    "appsamurai"
+  ],
+  "author": {
+    "name": "App Samurai Mobile Team",
+    "email": "mobile@appsamurai.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-native": ">=0.64.2 <1.0.x"
+  },
+  "devDependencies": {
+    "pod-install": "^0.1.0",
+    "react": "18.0.0",
+    "react-native": "0.69.8"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1"
+  }
+}

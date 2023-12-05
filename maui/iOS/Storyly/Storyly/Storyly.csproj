@@ -9,6 +9,8 @@
     <RootNamespace>Storyly</RootNamespace>
     <AssemblyName>Storyly.MAUI</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ReleaseVersion>2.5.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
