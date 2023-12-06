@@ -386,12 +386,6 @@ class StorylyParam {
   // This attribute allows you to set availability of cart
   bool? isProductCartEnabled;
 
-  // This attribute allows you to set country for product feed
-  String? storyProductCountry;
-
-  // This attribute allows you to set language for product feed
-  String? storyProductLanguage;
-
   // This attribute allows you to set product feed
   Map<String, List<STRProductItem>>? storyProductFeed;
 
@@ -514,6 +508,10 @@ class StorylyParam {
   /// the story view.
   String? storylyLayoutDirection;
 
+  /// This function allows you to set localization for
+  /// the storyly view. Sample convention is en-GB
+  String? storylyLocale;
+
   /// This attribute allows you to the border color of the story group
   /// icons which are watched by the user.
   List<Color>? storyGroupIconBorderColorSeen;
@@ -561,6 +559,8 @@ class StorylyParam {
       'customParameter': storylyCustomParameters,
       'storylyIsTestMode': storylyTestMode,
       'storylyPayload': storylyPayload,
+      'storylyLayoutDirection': storylyLayoutDirection,
+      'storylyLocale': storylyLocale,
     };
     paramsMap['storyGroupStyling'] = {
       'iconBorderColorSeen': storyGroupIconBorderColorSeen
@@ -615,11 +615,9 @@ class StorylyParam {
     paramsMap['storyProductConfig'] = {
       'isFallbackEnabled': isProductFallbackEnabled,
       'isCartEnabled': isProductCartEnabled,
-      'productCountry': storyProductCountry,
-      'productLanguage': storyProductLanguage,
-      'productFeed': storyProductFeed?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())),
+      'productFeed': storyProductFeed?.map(
+          (key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())),
     };
-    paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
     return paramsMap;
   }
@@ -1047,20 +1045,19 @@ class STRProductItem {
 
   factory STRProductItem.fromJson(Map<String, dynamic> json) {
     return STRProductItem(
-      productId: json['productId'],
-      productGroupId: json['productGroupId'],
-      title: json['title'],
-      desc: json['desc'],
-      price: json['price'],
-      salesPrice: json['salesPrice'],
-      currency: json['currency'],
-      imageUrls: castOrNull(
-          json['imageUrls']?.map<String>((e) => e as String).toList()),
-      url: json['url'],
-      variants: List<STRProductVariant>.from(
-          json['variants'].map((x) => STRProductVariant.fromJson(x))),
-      ctaText: json['ctaText']
-    );
+        productId: json['productId'],
+        productGroupId: json['productGroupId'],
+        title: json['title'],
+        desc: json['desc'],
+        price: json['price'],
+        salesPrice: json['salesPrice'],
+        currency: json['currency'],
+        imageUrls: castOrNull(
+            json['imageUrls']?.map<String>((e) => e as String).toList()),
+        url: json['url'],
+        variants: List<STRProductVariant>.from(
+            json['variants'].map((x) => STRProductVariant.fromJson(x))),
+        ctaText: json['ctaText']);
   }
 }
 
@@ -1191,4 +1188,3 @@ extension StorylyHexColor on Color {
     return '#${value.toRadixString(16).padLeft(8, '0')}';
   }
 }
-

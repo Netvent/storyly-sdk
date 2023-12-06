@@ -230,7 +230,7 @@ class FlutterStorylyView(
         storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
-        storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
+      
 
         return StorylyInit(
             storylyId = storylyId,
@@ -249,6 +249,8 @@ class FlutterStorylyView(
             .setTestMode(json["storylyIsTestMode"] as? Boolean ?: false)
             .setStorylyPayload(json["storylyPayload"] as? String)
             .setUserData(json["userProperty"] as? Map<String, String> ?: emptyMap())
+            .setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
+            .setLocale(json["storylyLocale"] as? String)
     }
 
     private fun stStorylyGroupStyling(
@@ -257,8 +259,8 @@ class FlutterStorylyView(
         configBuilder: StorylyConfig.Builder,
     ): StorylyConfig.Builder {
         var groupStylingBuilder = StorylyStoryGroupStyling.Builder()
-        (json["iconBorderColorSeen"] as? List<String>?)?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorSeen( it.map { hexColor ->Color.parseColor(hexColor) }) }
-        (json["iconBorderColorNotSeen"] as? List<String>?)?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorNotSeen( it.map { hexColor ->Color.parseColor(hexColor) }) }
+        (json["iconBorderColorSeen"] as? List<String>?)?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorSeen(it.map { hexColor -> Color.parseColor(hexColor) }) }
+        (json["iconBorderColorNotSeen"] as? List<String>?)?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorNotSeen(it.map { hexColor -> Color.parseColor(hexColor) }) }
         (json["iconBackgroundColor"] as? String)?.let { groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(Color.parseColor(it)) }
         (json["pinIconColor"] as? String)?.let { groupStylingBuilder = groupStylingBuilder.setPinIconColor(Color.parseColor(it)) }
         (json["iconHeight"] as? Int)?.let { groupStylingBuilder = groupStylingBuilder.setIconHeight(it) } // dpToPixel(80)
@@ -303,11 +305,11 @@ class FlutterStorylyView(
         configBuilder: StorylyConfig.Builder
     ): StorylyConfig.Builder {
         var storyStylingBuilder = StorylyStoryStyling.Builder()
-        (json["headerIconBorderColor"] as? List<String>?)?.let { storyStylingBuilder = storyStylingBuilder.setHeaderIconBorderColor( it.map { hexColor ->Color.parseColor(hexColor) }) }
+        (json["headerIconBorderColor"] as? List<String>?)?.let { storyStylingBuilder = storyStylingBuilder.setHeaderIconBorderColor(it.map { hexColor -> Color.parseColor(hexColor) }) }
         (json["titleColor"] as? String)?.let { storyStylingBuilder = storyStylingBuilder.setTitleColor(Color.parseColor(it)) }
         storyStylingBuilder.setTitleTypeface(getTypeface(context, json["titleFont"] as? String))
         storyStylingBuilder.setInteractiveTypeface(getTypeface(context, json["interactiveFont"] as? String))
-        (json["progressBarColor"] as? List<String>?)?.let { storyStylingBuilder = storyStylingBuilder.setProgressBarColor( it.map { hexColor ->Color.parseColor(hexColor) }) }
+        (json["progressBarColor"] as? List<String>?)?.let { storyStylingBuilder = storyStylingBuilder.setProgressBarColor(it.map { hexColor -> Color.parseColor(hexColor) }) }
         storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json["isTitleVisible"] as? Boolean ?: true)
         storyStylingBuilder = storyStylingBuilder.setHeaderIconVisibility(json["isHeaderIconVisible"] as? Boolean ?: true)
         storyStylingBuilder = storyStylingBuilder.setCloseButtonVisibility(json["isCloseButtonVisible"] as? Boolean ?: true)
@@ -342,8 +344,6 @@ class FlutterStorylyView(
         var productConfigBuilder = StorylyProductConfig.Builder()
         (json["isFallbackEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setFallbackAvailability(it) }
         (json["isCartEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setCartAvailability(it) }
-        (json["productCountry"] as? String)?.let { productConfigBuilder = productConfigBuilder.setProductFeedCountry(it) }
-        (json["productLanguage"] as? String)?.let { productConfigBuilder = productConfigBuilder.setProductFeedLanguage(it) }
         (json["productFeed"] as? HashMap<String, ArrayList<HashMap<String, Any?>>?>)?.let  { productFeed ->
             val feed = productFeed.mapValues { entry ->
                 entry.value?.let { productList ->
