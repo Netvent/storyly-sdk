@@ -97,8 +97,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         return StorylyInit(
             storylyId: storylyId,
             config: storylyConfigBuilder
-                .setLocale(locale: json["storylyLocale"] as? String)
-                .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
                 .build()
         )
     }
@@ -113,6 +111,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             .setTestMode(isTest: (json["storylyIsTestMode"] as? Bool) ?? false)
             .setStorylyPayload(payload: json["storylyPayload"] as? String)
             .setUserData(data: json["userProperty"] as? [String: String] ?? [:])
+            .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
+            .setLocale(locale: json["storylyLocale"] as? String)
     }
     
     private func stStorylyGroupStyling(

@@ -559,6 +559,8 @@ class StorylyParam {
       'customParameter': storylyCustomParameters,
       'storylyIsTestMode': storylyTestMode,
       'storylyPayload': storylyPayload,
+      'storylyLayoutDirection': storylyLayoutDirection,
+      'storylyLocale': storylyLocale,
     };
     paramsMap['storyGroupStyling'] = {
       'iconBorderColorSeen': storyGroupIconBorderColorSeen
@@ -613,10 +615,9 @@ class StorylyParam {
     paramsMap['storyProductConfig'] = {
       'isFallbackEnabled': isProductFallbackEnabled,
       'isCartEnabled': isProductCartEnabled,
-      'productFeed': storyProductFeed?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())),
+      'productFeed': storyProductFeed?.map(
+          (key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())),
     };
-    paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
-    paramsMap['storylyLocale'] = storylyLocale;
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
     return paramsMap;
   }
@@ -1044,20 +1045,19 @@ class STRProductItem {
 
   factory STRProductItem.fromJson(Map<String, dynamic> json) {
     return STRProductItem(
-      productId: json['productId'],
-      productGroupId: json['productGroupId'],
-      title: json['title'],
-      desc: json['desc'],
-      price: json['price'],
-      salesPrice: json['salesPrice'],
-      currency: json['currency'],
-      imageUrls: castOrNull(
-          json['imageUrls']?.map<String>((e) => e as String).toList()),
-      url: json['url'],
-      variants: List<STRProductVariant>.from(
-          json['variants'].map((x) => STRProductVariant.fromJson(x))),
-      ctaText: json['ctaText']
-    );
+        productId: json['productId'],
+        productGroupId: json['productGroupId'],
+        title: json['title'],
+        desc: json['desc'],
+        price: json['price'],
+        salesPrice: json['salesPrice'],
+        currency: json['currency'],
+        imageUrls: castOrNull(
+            json['imageUrls']?.map<String>((e) => e as String).toList()),
+        url: json['url'],
+        variants: List<STRProductVariant>.from(
+            json['variants'].map((x) => STRProductVariant.fromJson(x))),
+        ctaText: json['ctaText']);
   }
 }
 
@@ -1188,4 +1188,3 @@ extension StorylyHexColor on Color {
     return '#${value.toRadixString(16).padLeft(8, '0')}';
   }
 }
-

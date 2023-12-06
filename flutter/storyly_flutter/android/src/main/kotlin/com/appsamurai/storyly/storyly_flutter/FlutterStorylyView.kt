@@ -230,8 +230,7 @@ class FlutterStorylyView(
         storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
-        storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
-        storylyConfigBuilder = storylyConfigBuilder.setLocale(json["storylyLocale"] as? String)
+      
 
         return StorylyInit(
             storylyId = storylyId,
@@ -250,6 +249,8 @@ class FlutterStorylyView(
             .setTestMode(json["storylyIsTestMode"] as? Boolean ?: false)
             .setStorylyPayload(json["storylyPayload"] as? String)
             .setUserData(json["userProperty"] as? Map<String, String> ?: emptyMap())
+            .setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
+            .setLocale(json["storylyLocale"] as? String)
     }
 
     private fun stStorylyGroupStyling(
