@@ -1,3 +1,10 @@
+### 2.6.0 (06.12.2023)
+* IMPORTANT! added storylyLocale parameter; please refer to [Localization documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup#localization)
+* IMPORTANT! removed productCountry and productLanguage parameters; please use storylyLocale parameter
+* added animation for not-fitting images in automated shoppable image layers
+* added storyProductFeed parameter for client side automated shoppable stories
+* improved story screen reset flow on android platform
+
 ### 2.5.1 (16.11.2023)
 * improved story bar scrolling after data update
 * changed storyId parameter to nullable for openStory function 
