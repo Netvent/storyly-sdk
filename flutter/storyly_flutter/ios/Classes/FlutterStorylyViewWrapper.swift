@@ -229,13 +229,18 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         if let isCartEnabled = json["isCartEnabled"] as? Bool {
             productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
         }
-        
         if let productCountry = json["productCountry"] as? String {
             productConfigBuilder = productConfigBuilder.setProductFeedCountry(country: productCountry)
         }
-        
         if let productLanguage = json["productLanguage"] as? String {
             productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: productLanguage)
+        }
+        if let feedMap = json["productFeed"] as? [String: [[String: Any?]]]  {
+            var feed: [String: [STRProductItem]] = [:]
+            feedMap.forEach { key, value in
+                feed[key] = value.map({ createSTRProductItem(product: $0) })
+            }
+            productConfigBuilder = productConfigBuilder.setProductFeed(feed: feed)
         }
         
         return configBuilder
@@ -457,7 +462,8 @@ extension FlutterStorylyViewWrapper {
             salesPrice: product?["salesPrice"] as? NSNumber,
             currency: product?["currency"] as? String ?? "",
             imageUrls: product?["imageUrls"] as? [String],
-            variants: createSTRProductVariant(variants: product?["variants"] as? [[String: Any?]])
+            variants: createSTRProductVariant(variants: product?["variants"] as? [[String: Any?]]),
+            ctaText: product?["ctaText"] as? String
         )
     }
     

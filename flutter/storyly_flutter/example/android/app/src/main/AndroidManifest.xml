@@ -4,6 +4,7 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:label="storyly_flutter_example">
         <activity
             android:name=".MainActivity"
