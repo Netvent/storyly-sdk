@@ -144,9 +144,8 @@ internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem
         price: Float((productItem?["price"] as? Double) ?? 0.0),
         salesPrice: (productItem?["salesPrice"] as? NSNumber),
         currency: productItem?["currency"] as? String ?? "",
-        imageUrls: productItem?["imageUrls"] as? [String],
-        variants: createSTRProductVariant(variants: productItem?["variants"] as? [NSDictionary] ?? []),
-        ctaText: productItem?["ctaText"] as? String
+        imageUrls:productItem?["imageUrls"] as? [String],
+        variants:  createSTRProductVariant(variants: productItem?["variants"] as? [NSDictionary] ?? [])
     )
 }
 
