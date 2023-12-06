@@ -1,6 +1,9 @@
 # Release Notes
 * These are Fabric supported versions of storyly-react-native, for the older architecture please use these [legacy versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-legacy/RELEASENOTES.md)
 
+### 2.7.0 (06.12.2023)
+* improved codebase
+
 ### 2.6.0 (06.12.2023)
 * IMPORTANT! added storylyLocale property for localization; please refer to [Localization documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup#localization)
 * IMPORTANT! removed storyProductCountry and storyProductLanguage properties; please use storylyLocale property
