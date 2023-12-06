@@ -1,8 +1,8 @@
 # Release Notes
 ### 2.7.0 (05.12.2023)
-* IMPORTANT! added setLocale function to StorylyConfig
-* IMPORTANT! removed languageCode (please use setLocale function)
-* IMPORTANT! removed product country and language from StorylyProductConfig (please use setLocale function)
+* IMPORTANT! added setLocale function to StorylyConfig; please refer to [Localization documentation](https://docs.storyly.io/docs/android-initial-sdk-setup#localization)
+* IMPORTANT! removed languageCode; please use setLocale function
+* IMPORTANT! removed product country and language from StorylyProductConfig; please use setLocale function
 * added animation for not-fitting images in automated shoppable image layers
 * improved story screen reset flow
 
