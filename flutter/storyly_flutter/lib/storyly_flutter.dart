@@ -322,11 +322,11 @@ class StorylyViewController {
   }
 
   /// This function allows you to hydrate products.
-  Future<void> hydrateProducts(List<Map> products) {
+  Future<void> hydrateProducts(List<STRProductItem> products) {
     return _methodChannel.invokeMethod(
       'hydrateProducts',
       <String, dynamic>{
-        'products': products,
+        'products': products.map((e) => e.toJson()).toList(),
       },
     );
   }
@@ -619,7 +619,6 @@ class StorylyParam {
       'productLanguage': storyProductLanguage,
       'productFeed': storyProductFeed?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())),
     };
-    print(storyProductFeed?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()).toList())));
     paramsMap['storylyLayoutDirection'] = storylyLayoutDirection ?? 'ltr';
     paramsMap['storylyBackgroundColor'] = storylyBackgroundColor?.toHexString();
     return paramsMap;
