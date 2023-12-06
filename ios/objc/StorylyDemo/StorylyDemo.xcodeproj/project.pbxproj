@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		413318A926B804A00086C34D /* Tokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 413318A826B804A00086C34D /* Tokens.m */; };
-		41AC1F6726B0A8B5007CA47A /* AdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AC1F6626B0A8B5007CA47A /* AdsViewController.m */; };
-		41AC1F6926B0A8E7007CA47A /* Ads.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41AC1F6826B0A8E7007CA47A /* Ads.storyboard */; };
-		41BC5D5325D1BF35002876EF /* CustomSize.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BC5D5025D1BF34002876EF /* CustomSize.storyboard */; };
-		41BC5D5425D1BF35002876EF /* CustomSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC5D5225D1BF35002876EF /* CustomSizeViewController.m */; };
-		41BC5D5825D1BF4F002876EF /* EventHandling.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BC5D5725D1BF4F002876EF /* EventHandling.storyboard */; };
-		41BC5D5C25D1BF69002876EF /* EventHandlingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC5D5B25D1BF69002876EF /* EventHandlingViewController.m */; };
 		568301BB7602ED9444C8418B /* Pods_StorylyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1F4386905C77B5B2A41980 /* Pods_StorylyDemo.framework */; };
 		A1752CBC23FD0E43000CCB33 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1752CBB23FD0E43000CCB33 /* AppDelegate.m */; };
 		A1752CC223FD0E43000CCB33 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1752CC123FD0E43000CCB33 /* BasicViewController.m */; };
@@ -21,13 +15,6 @@
 		A1752CC723FD0E45000CCB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1752CC623FD0E45000CCB33 /* Assets.xcassets */; };
 		A1752CCA23FD0E45000CCB33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1752CC823FD0E45000CCB33 /* LaunchScreen.storyboard */; };
 		A1752CCD23FD0E45000CCB33 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1752CCC23FD0E45000CCB33 /* main.m */; };
-		DCC275EB27B105EF004CE064 /* IntegrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC275EA27B105EF004CE064 /* IntegrationViewController.m */; };
-		DCC275ED27B1066D004CE064 /* Demo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCC275EC27B1066D004CE064 /* Demo.storyboard */; };
-		DCC275F027B106B9004CE064 /* UICustomizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC275EF27B106B9004CE064 /* UICustomizationViewController.m */; };
-		DCC2C1002643D4A300854DF7 /* ShowStorylyController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C0FF2643D4A300854DF7 /* ShowStorylyController.m */; };
-		DCC2C1052643D4C100854DF7 /* HideStorylyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C1042643D4C100854DF7 /* HideStorylyViewController.m */; };
-		DCC2C1172644006700854DF7 /* ShowStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C1162644006700854DF7 /* ShowStoryly.storyboard */; };
-		DCC2C11A264401B500854DF7 /* HideStoryly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C119264401B500854DF7 /* HideStoryly.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,15 +22,6 @@
 		2B1F4386905C77B5B2A41980 /* Pods_StorylyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		413318A726B804A00086C34D /* Tokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tokens.h; sourceTree = "<group>"; };
 		413318A826B804A00086C34D /* Tokens.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tokens.m; sourceTree = "<group>"; };
-		41AC1F6526B0A8B5007CA47A /* AdsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsViewController.h; sourceTree = "<group>"; };
-		41AC1F6626B0A8B5007CA47A /* AdsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsViewController.m; sourceTree = "<group>"; };
-		41AC1F6826B0A8E7007CA47A /* Ads.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ads.storyboard; sourceTree = "<group>"; };
-		41BC5D5025D1BF34002876EF /* CustomSize.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomSize.storyboard; sourceTree = "<group>"; };
-		41BC5D5125D1BF35002876EF /* CustomSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSizeViewController.h; sourceTree = "<group>"; };
-		41BC5D5225D1BF35002876EF /* CustomSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSizeViewController.m; sourceTree = "<group>"; };
-		41BC5D5725D1BF4F002876EF /* EventHandling.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventHandling.storyboard; sourceTree = "<group>"; };
-		41BC5D5A25D1BF69002876EF /* EventHandlingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventHandlingViewController.h; sourceTree = "<group>"; };
-		41BC5D5B25D1BF69002876EF /* EventHandlingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventHandlingViewController.m; sourceTree = "<group>"; };
 		53D94C51C9D15D913A3D14D0 /* Pods-StorylyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.debug.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A1752CB723FD0E43000CCB33 /* StorylyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorylyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1752CBA23FD0E43000CCB33 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -55,17 +33,6 @@
 		A1752CC923FD0E45000CCB33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1752CCB23FD0E45000CCB33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1752CCC23FD0E45000CCB33 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DCC275E927B105EF004CE064 /* IntegrationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegrationViewController.h; sourceTree = "<group>"; };
-		DCC275EA27B105EF004CE064 /* IntegrationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegrationViewController.m; sourceTree = "<group>"; };
-		DCC275EC27B1066D004CE064 /* Demo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Demo.storyboard; sourceTree = "<group>"; };
-		DCC275EE27B106B9004CE064 /* UICustomizationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICustomizationViewController.h; sourceTree = "<group>"; };
-		DCC275EF27B106B9004CE064 /* UICustomizationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICustomizationViewController.m; sourceTree = "<group>"; };
-		DCC2C0FE2643D4A300854DF7 /* ShowStorylyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowStorylyController.h; sourceTree = "<group>"; };
-		DCC2C0FF2643D4A300854DF7 /* ShowStorylyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowStorylyController.m; sourceTree = "<group>"; };
-		DCC2C1032643D4C100854DF7 /* HideStorylyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HideStorylyViewController.h; sourceTree = "<group>"; };
-		DCC2C1042643D4C100854DF7 /* HideStorylyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HideStorylyViewController.m; sourceTree = "<group>"; };
-		DCC2C1162644006700854DF7 /* ShowStoryly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowStoryly.storyboard; sourceTree = "<group>"; };
-		DCC2C119264401B500854DF7 /* HideStoryly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HideStoryly.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,16 +55,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		41AC1F6426B0A897007CA47A /* Ads */ = {
-			isa = PBXGroup;
-			children = (
-				41AC1F6626B0A8B5007CA47A /* AdsViewController.m */,
-				41AC1F6526B0A8B5007CA47A /* AdsViewController.h */,
-				41AC1F6826B0A8E7007CA47A /* Ads.storyboard */,
-			);
-			path = Ads;
-			sourceTree = "<group>";
-		};
 		41BC5D5625D1BF3A002876EF /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,16 +63,6 @@
 				A1752CC323FD0E43000CCB33 /* Basic.storyboard */,
 			);
 			path = Basic;
-			sourceTree = "<group>";
-		};
-		41BC5D5E25D1BF6E002876EF /* EventHandling */ = {
-			isa = PBXGroup;
-			children = (
-				41BC5D5B25D1BF69002876EF /* EventHandlingViewController.m */,
-				41BC5D5A25D1BF69002876EF /* EventHandlingViewController.h */,
-				41BC5D5725D1BF4F002876EF /* EventHandling.storyboard */,
-			);
-			path = EventHandling;
 			sourceTree = "<group>";
 		};
 		A1752CAE23FD0E43000CCB33 = {
@@ -139,12 +86,7 @@
 		A1752CB923FD0E43000CCB33 /* StorylyDemo */ = {
 			isa = PBXGroup;
 			children = (
-				DCC275E327B105A3004CE064 /* IntegrationDemo */,
 				41BC5D5625D1BF3A002876EF /* Basic */,
-				41AC1F6426B0A897007CA47A /* Ads */,
-				41BC5D5E25D1BF6E002876EF /* EventHandling */,
-				DCC2C0FA2643D45400854DF7 /* CustomSize */,
-				DCC2C0FB2643D46B00854DF7 /* UseCases */,
 				A1752CBA23FD0E43000CCB33 /* AppDelegate.h */,
 				A1752CBB23FD0E43000CCB33 /* AppDelegate.m */,
 				A1752CC623FD0E45000CCB33 /* Assets.xcassets */,
@@ -164,57 +106,6 @@
 				1D0A85522E993DBED89E899C /* Pods-StorylyDemo.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		DCC275E327B105A3004CE064 /* IntegrationDemo */ = {
-			isa = PBXGroup;
-			children = (
-				DCC275E927B105EF004CE064 /* IntegrationViewController.h */,
-				DCC275EA27B105EF004CE064 /* IntegrationViewController.m */,
-				DCC275EC27B1066D004CE064 /* Demo.storyboard */,
-				DCC275EE27B106B9004CE064 /* UICustomizationViewController.h */,
-				DCC275EF27B106B9004CE064 /* UICustomizationViewController.m */,
-			);
-			path = IntegrationDemo;
-			sourceTree = "<group>";
-		};
-		DCC2C0FA2643D45400854DF7 /* CustomSize */ = {
-			isa = PBXGroup;
-			children = (
-				41BC5D5025D1BF34002876EF /* CustomSize.storyboard */,
-				41BC5D5125D1BF35002876EF /* CustomSizeViewController.h */,
-				41BC5D5225D1BF35002876EF /* CustomSizeViewController.m */,
-			);
-			path = CustomSize;
-			sourceTree = "<group>";
-		};
-		DCC2C0FB2643D46B00854DF7 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				DCC2C0FD2643D48A00854DF7 /* ShowStoryly */,
-				DCC2C0FC2643D47E00854DF7 /* HideStoryly */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
-		DCC2C0FC2643D47E00854DF7 /* HideStoryly */ = {
-			isa = PBXGroup;
-			children = (
-				DCC2C1032643D4C100854DF7 /* HideStorylyViewController.h */,
-				DCC2C1042643D4C100854DF7 /* HideStorylyViewController.m */,
-				DCC2C119264401B500854DF7 /* HideStoryly.storyboard */,
-			);
-			path = HideStoryly;
-			sourceTree = "<group>";
-		};
-		DCC2C0FD2643D48A00854DF7 /* ShowStoryly */ = {
-			isa = PBXGroup;
-			children = (
-				DCC2C0FE2643D4A300854DF7 /* ShowStorylyController.h */,
-				DCC2C0FF2643D4A300854DF7 /* ShowStorylyController.m */,
-				DCC2C1162644006700854DF7 /* ShowStoryly.storyboard */,
-			);
-			path = ShowStoryly;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,12 +170,6 @@
 			files = (
 				A1752CCA23FD0E45000CCB33 /* LaunchScreen.storyboard in Resources */,
 				A1752CC723FD0E45000CCB33 /* Assets.xcassets in Resources */,
-				DCC275ED27B1066D004CE064 /* Demo.storyboard in Resources */,
-				DCC2C1172644006700854DF7 /* ShowStoryly.storyboard in Resources */,
-				41BC5D5325D1BF35002876EF /* CustomSize.storyboard in Resources */,
-				41BC5D5825D1BF4F002876EF /* EventHandling.storyboard in Resources */,
-				41AC1F6926B0A8E7007CA47A /* Ads.storyboard in Resources */,
-				DCC2C11A264401B500854DF7 /* HideStoryly.storyboard in Resources */,
 				A1752CC523FD0E43000CCB33 /* Basic.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,16 +224,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1752CC223FD0E43000CCB33 /* BasicViewController.m in Sources */,
-				DCC275F027B106B9004CE064 /* UICustomizationViewController.m in Sources */,
 				A1752CBC23FD0E43000CCB33 /* AppDelegate.m in Sources */,
-				41BC5D5425D1BF35002876EF /* CustomSizeViewController.m in Sources */,
-				DCC275EB27B105EF004CE064 /* IntegrationViewController.m in Sources */,
-				41BC5D5C25D1BF69002876EF /* EventHandlingViewController.m in Sources */,
-				DCC2C1052643D4C100854DF7 /* HideStorylyViewController.m in Sources */,
-				41AC1F6726B0A8B5007CA47A /* AdsViewController.m in Sources */,
 				413318A926B804A00086C34D /* Tokens.m in Sources */,
 				A1752CCD23FD0E45000CCB33 /* main.m in Sources */,
-				DCC2C1002643D4A300854DF7 /* ShowStorylyController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,7 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9HWCG6YGG;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -516,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N9HWCG6YGG;
 				INFOPLIST_FILE = StorylyDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

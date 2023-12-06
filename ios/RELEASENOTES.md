@@ -1,4 +1,21 @@
 # Release Notes
+### 2.7.0 (05.12.2023)
+* IMPORTANT! added setLocale function to StorylyConfig; please refer to [Localization documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup#localization)
+* IMPORTANT! removed languageCode; please use setLocale function
+* IMPORTANT! removed product country and language from StorylyProductConfig; please use setLocale function
+* added animation for not-fitting images in automated shoppable image layers
+  
+### 2.6.0 (24.11.2023)
+* added product feed feature for client side automated shoppable stories
+  
+### 2.5.1 (13.11.2023)
+* improved story bar scrolling after data update
+  
+### 2.5.0 (06.11.2023)
+* added improvements for text interactive components
+* optimized story dismiss flow
+* fixed a visual bug in countdown interactive component
+  
 ### 2.4.0 (29.09.2023)
 * added gif support for story group covers
 * added multi region and language support for product feeds
