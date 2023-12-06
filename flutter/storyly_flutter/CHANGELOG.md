@@ -1,3 +1,6 @@
+### 2.7.0 (06.12.2023)
+* improved codebase
+
 ### 2.6.0 (06.12.2023)
 * IMPORTANT! added storylyLocale parameter; please refer to [Localization documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup#localization)
 * IMPORTANT! removed productCountry and productLanguage parameters; please use storylyLocale parameter
