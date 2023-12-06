@@ -44,7 +44,6 @@ private func stStorylyBundle(json: NSDictionary) -> StorylyBundle? {
     storylyView.storylyInit = StorylyInit(
         storylyId: storylyId,
         config: storylyConfigBuilder
-            .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
             .build()
     )
     return StorylyBundle(storylyView: storylyView)
@@ -60,6 +59,8 @@ private func stStorylyInit(
         .setTestMode(isTest: (json["storylyIsTestMode"] as? Bool) ?? false)
         .setStorylyPayload(payload: json["storylyPayload"] as? String)
         .setUserData(data: json["userProperty"] as? [String: String] ?? [:])
+        .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
+        .setLocale(locale: json["storylyLocale"] as? String)
 }
 
 private func stStorylyGroupStyling(
@@ -171,12 +172,6 @@ private func stProductConfig(
     }
     if let isCartEnabled = json["isCartEnabled"] as? Bool {
         productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
-    }
-    if let country = json["productCountry"] as? String {
-        productConfigBuilder = productConfigBuilder.setProductFeedCountry(country: country)
-    }
-    if let language = json["productLanguage"] as? String {
-        productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: language)
     }
 
     return configBuilder
