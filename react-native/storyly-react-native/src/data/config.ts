@@ -1,5 +1,6 @@
-import { processColor, type ProcessedColorValue } from "react-native"
-import type { StorylyProps } from "storyly-react-native"
+import { processColor, type ProcessedColorValue } from "react-native";
+import type { StorylyProps } from "../Storyly";
+import type { STRProductItem } from "./story";
 
 export interface StorylyConfig {
     storylyInit: {
@@ -55,7 +56,8 @@ export interface StorylyConfig {
     }
     storyProductConfig: {
         isFallbackEnabled?: boolean,
-        isCartEnabled?: boolean
+        isCartEnabled?: boolean,
+        productFeed?: Record<string, STRProductItem[]>;
     }
 }
 
@@ -114,7 +116,8 @@ export const mapStorylyConfig = (props: StorylyProps) => {
         },
         'storyProductConfig': {
             'isFallbackEnabled': props.storyFallbackIsEnabled,
-            'isCartEnabled': props.storyCartIsEnabled
+            'isCartEnabled': props.storyCartIsEnabled,
+            'productFeed': props.storyProductFeed
         }
     })
 }

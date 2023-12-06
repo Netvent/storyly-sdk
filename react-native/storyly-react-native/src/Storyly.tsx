@@ -55,6 +55,7 @@ export interface StorylyProps extends ViewProps {
 
     storyFallbackIsEnabled?: boolean;
     storyCartIsEnabled?: boolean;
+    storyProductFeed?: Record<string, STRProductItem[]>;
 
     storylyLayoutDirection?: "ltr" | "rtl";
     storylyLocale?: string;

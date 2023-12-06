@@ -98,7 +98,9 @@ export interface STRProductItem {
     salesPrice?: number;
     currency: string;
     imageUrls?: string[];
+    url?: string;
     variants: STRProductVariant[];
+    ctaText?: string;
 }
 
 export interface STRProductVariant {
