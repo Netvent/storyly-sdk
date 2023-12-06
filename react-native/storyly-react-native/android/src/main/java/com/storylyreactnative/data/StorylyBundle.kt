@@ -43,8 +43,6 @@ internal fun createStorylyBundle(context: Activity, storylyBundle: Map<String, A
     storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
-    storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle["storylyLayoutDirection"] as? String))
-
     return  STStorylyBundle(
         StorylyView(context).apply {
             storylyInit = StorylyInit(
@@ -66,6 +64,8 @@ private fun stStorylyInit(
         .setTestMode(json["storylyIsTestMode"] as? Boolean ?: false)
         .setStorylyPayload(json["storylyPayload"] as? String)
         .setUserData(json["userProperty"] as? Map<String, String> ?: emptyMap())
+        .setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
+        .setLocale(json["storylyLocale"] as? String)
 }
 
 private fun stStorylyGroupStyling(
@@ -143,8 +143,6 @@ private fun stProductConfig(
     var storyProductConfig = StorylyProductConfig.Builder()
     (json["isFallbackEnabled"] as? Boolean)?.let { storyProductConfig = storyProductConfig.setFallbackAvailability(it) }
     (json["isCartEnabled"] as? Boolean)?.let { storyProductConfig = storyProductConfig.setCartAvailability(it) }
-    (json["productCountry"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedCountry(it) }
-    (json["productLanguage"] as? String)?.let  { storyProductConfig = storyProductConfig.setProductFeedLanguage(it) }
     (json["productFeed"] as? Map<String, List<Map<String, Any?>>?>)?.let  { productFeed ->
         val feed = productFeed.mapValues { entry ->
             entry.value?.let { productList ->
