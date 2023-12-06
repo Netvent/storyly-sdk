@@ -179,8 +179,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
-        storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle.getString("storylyLayoutDirection")))
-        storylyConfigBuilder = storylyConfigBuilder.setLocale(storylyBundle.getString("storylyLocale"))
 
         view.storylyView = StorylyView(view.activity).apply {
             storylyInit = StorylyInit(
@@ -202,6 +200,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             .setTestMode(if (json.hasKey("storylyIsTestMode")) json.getBoolean("storylyIsTestMode") else false)
             .setStorylyPayload(if (json.hasKey("storylyPayload")) json.getString("storylyPayload") else null)
             .setUserData(if (json.hasKey("userProperty")) json.getMap("userProperty")?.toHashMap() as? Map<String, String> ?: emptyMap() else emptyMap())
+            .setLayoutDirection(getStorylyLayoutDirection(json.getString("storylyLayoutDirection")))
+            .setLocale(if (json.hasKey("storylyLocale")) json.getString("storylyLocale") else null)
     }
 
     private fun stStorylyGroupStyling(

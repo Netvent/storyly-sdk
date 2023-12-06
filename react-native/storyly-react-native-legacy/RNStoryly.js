@@ -235,6 +235,8 @@ class Storyly extends Component {
                             'customParameter': customParameter,
                             'storylyIsTestMode': storylyTestMode, 
                             'storylyPayload': storylyPayload,
+                            'storylyLayoutDirection': storylyLayoutDirection,
+                            'storylyLocale': storylyLocale,
                         },
                         'storyGroupStyling': {
                             'iconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
@@ -285,8 +287,6 @@ class Storyly extends Component {
                             'isFallbackEnabled': storyFallbackIsEnabled,
                             'isCartEnabled': storyCartIsEnabled,
                         },
-                        'storylyLayoutDirection': storylyLayoutDirection,
-                        'storylyLocale': storylyLocale,
                     }
                 }
                 ref={el => (this._storylyView = el)}>
