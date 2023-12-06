@@ -52,12 +52,13 @@ declare module "storyly-react-native" {
 
       storyFallbackIsEnabled?: boolean;
       storyCartIsEnabled?: boolean;
+      storyProductFeed?: Record<string, STRProductItem[]>;
 
       storylyLayoutDirection?: "ltr" | "rtl";
       storylyLocale?: string;
 
       onLoad?: (event: StoryLoadEvent) => void;
-      onFail?: (event: String) => void;
+      onFail?: (event: string) => void;
       onStoryOpen?: () => void;
       onStoryClose?: () => void;
       onEvent?: (event: StoryEvent) => void;
@@ -231,9 +232,11 @@ declare module "storyly-react-native" {
     desc: string;
     price: number;
     salesPrice?: number;
-    currency: String;
-    imageUrls?: String[];
+    currency: string;
+    imageUrls?: string[];
+    url?: string;
     variants: STRProductVariant[];
+    ctaText?: string;
   } 
 
   export interface STRProductVariant {

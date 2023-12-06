@@ -208,6 +208,7 @@ class Storyly extends Component {
             storyHeaderShareIcon,
             storyFallbackIsEnabled,
             storyCartIsEnabled,
+            storyProductFeed,
             ...otherProps
         } = this.props;
         return (
@@ -286,6 +287,7 @@ class Storyly extends Component {
                         'storyProductConfig': { 
                             'isFallbackEnabled': storyFallbackIsEnabled,
                             'isCartEnabled': storyCartIsEnabled,
+                            'productFeed': storyProductFeed,
                         },
                     }
                 }
@@ -346,6 +348,7 @@ Storyly.propTypes = {
     storyGroupViewFactory: object,
     storyFallbackIsEnabled: bool,
     storyCartIsEnabled: bool,
+    storyProductFeed: object,
 
     onLoad: func,
     onFail: func,

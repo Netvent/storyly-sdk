@@ -273,7 +273,14 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         var storyProductConfig = StorylyProductConfig.Builder()
         if (json.hasKey("isFallbackEnabled")) storyProductConfig = storyProductConfig.setFallbackAvailability(json.getBoolean("isFallbackEnabled"))
         if (json.hasKey("isCartEnabled")) storyProductConfig = storyProductConfig.setCartAvailability(json.getBoolean("isCartEnabled"))
-
+        (json.getMap("productFeed")?.toHashMap() as? Map<String, List<Map<String, Any?>>?>)?.let  { productFeed ->
+            val feed = productFeed.mapValues { entry ->
+                entry.value?.let { productList ->
+                    productList.map { createSTRProductItem(it) }
+                } ?: emptyList()
+            }
+            storyProductConfig = storyProductConfig.setProductFeed(feed)
+        }
         return configBuilder
             .setProductConfig(
                 storyProductConfig

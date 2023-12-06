@@ -187,6 +187,14 @@ private func stProductConfig(
     if let isCartEnabled = json["isCartEnabled"] as? Bool {
         productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
     }
+    
+    if let feedMap = json["productFeed"] as? [String: [NSDictionary]]  {
+        var feed: [String: [STRProductItem]] = [:]
+        feedMap.forEach { key, value in
+            feed[key] = value.map({ createSTRProductItem(productItem: $0) })
+        }
+        productConfigBuilder = productConfigBuilder.setProductFeed(feed: feed)
+    }
 
     return configBuilder
         .setProductConfig(config: productConfigBuilder

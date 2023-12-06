@@ -172,12 +172,13 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         productGroupId = product?.get("productGroupId") as? String ?: "",
         title = product?.get("title") as? String ?: "",
         desc = product?.get("desc") as? String ?: "",
-        price = (product?.get("price") as Double).toFloat(),
-        salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
-        currency = product["currency"] as? String ?: "",
-        imageUrls = product["imageUrls"] as? List<String>,
-        url = product["url"] as? String ?: "",
-        variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>)
+        price = (product?.get("price") as? Double)?.toFloat() ?: 0f,
+        salesPrice = (product?.get("salesPrice") as? Double)?.toFloat(),
+        currency = product?.get("currency") as? String ?: "",
+        imageUrls = product?.get("imageUrls") as? List<String>,
+        url = product?.get("url") as? String ?: "",
+        variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>),
+        ctaText = product?.get("ctaText") as? String,
     )
 }
 
