@@ -9,6 +9,8 @@ export interface StorylyConfig {
         customParameter?: string,
         storylyIsTestMode?: boolean,
         storylyPayload?: string,
+        storylyLayoutDirection?: string,
+        storylyLocale?: string,
     }
     storyGroupStyling: {
         iconBorderColorSeen?: Optional<ProcessedColorValue>[],
@@ -55,8 +57,6 @@ export interface StorylyConfig {
         isFallbackEnabled?: boolean,
         isCartEnabled?: boolean
     }
-    storylyLayoutDirection?: string
-    storylyLocale?: string
 }
 
 export const mapStorylyConfig = (props: StorylyProps) => {
@@ -68,6 +68,8 @@ export const mapStorylyConfig = (props: StorylyProps) => {
             'customParameter': props.customParameter,
             'storylyIsTestMode': props.storylyTestMode,
             'storylyPayload': props.storylyPayload,
+            'storylyLayoutDirection': props.storylyLayoutDirection,
+            'storylyLocale': props.storylyLocale,
         },
         'storyGroupStyling': {
             'iconBorderColorSeen': props.storyGroupIconBorderColorSeen ? props.storyGroupIconBorderColorSeen.map(processColor) : undefined,
@@ -113,9 +115,6 @@ export const mapStorylyConfig = (props: StorylyProps) => {
         'storyProductConfig': {
             'isFallbackEnabled': props.storyFallbackIsEnabled,
             'isCartEnabled': props.storyCartIsEnabled
-        },
-        'storylyLayoutDirection': props.storylyLayoutDirection,
-        'storylyLocale': props.storylyLocale,
-
+        }
     })
 }

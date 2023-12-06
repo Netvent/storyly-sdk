@@ -42,9 +42,6 @@ internal fun createStorylyBundle(context: Activity, storylyBundle: Map<String, A
     storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
     storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
-    storylyConfigBuilder = storylyConfigBuilder.setLayoutDirection(getStorylyLayoutDirection(storylyBundle["storylyLayoutDirection"] as? String))
-    storylyConfigBuilder = storylyConfigBuilder.setLocale(storylyBundle["storylyLocale"] as? String)
-
     return  STStorylyBundle(
         StorylyView(context).apply {
             storylyInit = StorylyInit(
@@ -66,6 +63,8 @@ private fun stStorylyInit(
         .setTestMode(json["storylyIsTestMode"] as? Boolean ?: false)
         .setStorylyPayload(json["storylyPayload"] as? String)
         .setUserData(json["userProperty"] as? Map<String, String> ?: emptyMap())
+        .setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
+        .setLocale(json["storylyLocale"] as? String)
 }
 
 private fun stStorylyGroupStyling(
