@@ -25,6 +25,8 @@ import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class FlutterStorylyViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     internal lateinit var context: Context
@@ -341,6 +343,14 @@ class FlutterStorylyView(
         var productConfigBuilder = StorylyProductConfig.Builder()
         (json["isFallbackEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setFallbackAvailability(it) }
         (json["isCartEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setCartAvailability(it) }
+        (json["productFeed"] as? HashMap<String, ArrayList<HashMap<String, Any?>>?>)?.let  { productFeed ->
+            val feed = productFeed.mapValues { entry ->
+                entry.value?.let { productList ->
+                    productList.map { createSTRProductItem(it) }
+                } ?: emptyList()
+            }
+            productConfigBuilder = productConfigBuilder.setProductFeed(feed)
+        }
 
         return configBuilder
             .setProductConfig(
@@ -503,26 +513,19 @@ class FlutterStorylyView(
         )
     }
 
-    private fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
+    internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         return STRProductItem(
             productId = product?.get("productId") as? String ?: "",
             productGroupId = product?.get("productGroupId") as? String ?: "",
             title = product?.get("title") as? String ?: "",
             desc = product?.get("desc") as? String ?: "",
-            price = when (product?.get("price")) {
-                is Int -> (product["price"] as? Int)?.toFloat() ?: 0.0f
-                is Double -> (product["price"] as? Double)?.toFloat() ?: 0.0f
-                else -> 0.0f
-            },
-            salesPrice = when (product?.get("salesPrice")) {
-                is Int -> (product["salesPrice"] as? Int)?.toFloat() ?: 0.0f
-                is Double -> (product["salesPrice"] as? Double)?.toFloat() ?: 0.0f
-                else -> 0.0f
-            },
+            price = (product?.get("price") as? Double)?.toFloat() ?: 0f,
+            salesPrice = (product?.get("salesPrice") as? Double)?.toFloat(),
             currency = product?.get("currency") as? String ?: "",
             imageUrls = product?.get("imageUrls") as? List<String>,
             url = product?.get("url") as? String ?: "",
-            variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>)
+            variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>),
+            ctaText = product?.get("ctaText") as? String,
         )
     }
 

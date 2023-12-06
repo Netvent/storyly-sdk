@@ -194,6 +194,7 @@ class Storyly extends Component {
             storyGroupPinIconColor,
             storyGroupAnimation,
             storylyLayoutDirection,
+            storylyLocale,
             storyItemTextColor,
             storyItemIconBorderColor,
             storyItemProgressBarColor,
@@ -207,8 +208,6 @@ class Storyly extends Component {
             storyHeaderShareIcon,
             storyFallbackIsEnabled,
             storyCartIsEnabled,
-            storyProductCountry,
-            storyProductLanguage,
             ...otherProps
         } = this.props;
         return (
@@ -236,6 +235,8 @@ class Storyly extends Component {
                             'customParameter': customParameter,
                             'storylyIsTestMode': storylyTestMode, 
                             'storylyPayload': storylyPayload,
+                            'storylyLayoutDirection': storylyLayoutDirection,
+                            'storylyLocale': storylyLocale,
                         },
                         'storyGroupStyling': {
                             'iconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
@@ -285,10 +286,7 @@ class Storyly extends Component {
                         'storyProductConfig': { 
                             'isFallbackEnabled': storyFallbackIsEnabled,
                             'isCartEnabled': storyCartIsEnabled,
-                            'productCountry': storyProductCountry,
-                            'productLanguage': storyProductLanguage
                         },
-                        'storylyLayoutDirection': storylyLayoutDirection,
                     }
                 }
                 ref={el => (this._storylyView = el)}>
@@ -348,8 +346,6 @@ Storyly.propTypes = {
     storyGroupViewFactory: object,
     storyFallbackIsEnabled: bool,
     storyCartIsEnabled: bool,
-    storyProductCountry: string,
-    storyProductLanguage: string,
 
     onLoad: func,
     onFail: func,

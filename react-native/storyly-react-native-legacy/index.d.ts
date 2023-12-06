@@ -52,10 +52,9 @@ declare module "storyly-react-native" {
 
       storyFallbackIsEnabled?: boolean;
       storyCartIsEnabled?: boolean;
-      storyProductCountry?: string;
-      storyProductLanguage?: string;
 
       storylyLayoutDirection?: "ltr" | "rtl";
+      storylyLocale?: string;
 
       onLoad?: (event: StoryLoadEvent) => void;
       onFail?: (event: String) => void;
