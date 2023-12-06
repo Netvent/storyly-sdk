@@ -389,9 +389,6 @@ class StorylyParam {
   // This attribute allows you to set product feed
   Map<String, List<STRProductItem>>? storyProductFeed;
 
-  // This attribute allows you to set product feed
-  Map<String, List<STRProductItem>>? storyProductFeed;
-
   /// Storyly SDK allows you to send a string parameter in the initialization
   /// process. This field is used for this analytical pruposes.
   ///
@@ -1191,4 +1188,3 @@ extension StorylyHexColor on Color {
     return '#${value.toRadixString(16).padLeft(8, '0')}';
   }
 }
-
