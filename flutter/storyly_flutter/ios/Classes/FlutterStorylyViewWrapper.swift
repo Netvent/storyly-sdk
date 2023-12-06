@@ -97,7 +97,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         return StorylyInit(
             storylyId: storylyId,
             config: storylyConfigBuilder
-                .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
                 .build()
         )
     }
@@ -112,6 +111,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
             .setTestMode(isTest: (json["storylyIsTestMode"] as? Bool) ?? false)
             .setStorylyPayload(payload: json["storylyPayload"] as? String)
             .setUserData(data: json["userProperty"] as? [String: String] ?? [:])
+            .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
+            .setLocale(locale: json["storylyLocale"] as? String)
     }
     
     private func stStorylyGroupStyling(
@@ -228,12 +229,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         }
         if let isCartEnabled = json["isCartEnabled"] as? Bool {
             productConfigBuilder = productConfigBuilder.setCartEnabled(isEnabled: isCartEnabled)
-        }
-        if let productCountry = json["productCountry"] as? String {
-            productConfigBuilder = productConfigBuilder.setProductFeedCountry(country: productCountry)
-        }
-        if let productLanguage = json["productLanguage"] as? String {
-            productConfigBuilder = productConfigBuilder.setProductFeedLanguage(language: productLanguage)
         }
         if let feedMap = json["productFeed"] as? [String: [[String: Any?]]]  {
             var feed: [String: [STRProductItem]] = [:]
