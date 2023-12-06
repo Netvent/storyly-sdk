@@ -274,7 +274,14 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         if (json.hasKey("isCartEnabled")) storyProductConfig = storyProductConfig.setCartAvailability(json.getBoolean("isCartEnabled"))
         if (json.hasKey("productCountry")) storyProductConfig = storyProductConfig.setProductFeedCountry(json.getString("productCountry"))
         if (json.hasKey("productLanguage")) storyProductConfig = storyProductConfig.setProductFeedLanguage(json.getString("productLanguage"))
-
+        (json.getMap("productFeed")?.toHashMap() as? Map<String, List<Map<String, Any?>>?>)?.let  { productFeed ->
+            val feed = productFeed.mapValues { entry ->
+                entry.value?.let { productList ->
+                    productList.map { createSTRProductItem(it) }
+                } ?: emptyList()
+            }
+            storyProductConfig = storyProductConfig.setProductFeed(feed)
+        }
         return configBuilder
             .setProductConfig(
                 storyProductConfig

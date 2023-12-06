@@ -209,6 +209,7 @@ class Storyly extends Component {
             storyCartIsEnabled,
             storyProductCountry,
             storyProductLanguage,
+            storyProductFeed,
             ...otherProps
         } = this.props;
         return (
@@ -286,7 +287,8 @@ class Storyly extends Component {
                             'isFallbackEnabled': storyFallbackIsEnabled,
                             'isCartEnabled': storyCartIsEnabled,
                             'productCountry': storyProductCountry,
-                            'productLanguage': storyProductLanguage
+                            'productLanguage': storyProductLanguage,
+                            'productFeed': storyProductFeed,
                         },
                         'storylyLayoutDirection': storylyLayoutDirection,
                     }
@@ -350,6 +352,7 @@ Storyly.propTypes = {
     storyCartIsEnabled: bool,
     storyProductCountry: string,
     storyProductLanguage: string,
+    storyProductFeed: object,
 
     onLoad: func,
     onFail: func,
