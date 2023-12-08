@@ -268,8 +268,38 @@ namespace Storyly
 		string CustomPayload { get; }
 	}
 
-	// @interface StoryImageQuizComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
+    // @interface StoryGroupView : UIView
+	[BaseType (typeof(UIView), Name = "_TtC7Storyly14StoryGroupView")]
+    interface StoryGroupView
+    {
+        // -(void)populateView:(StoryGroup * _Nullable)storyGroup;
+        [Export("populateView:")]
+        void PopulateView([NullAllowed] StoryGroup storyGroup);
+
+        // -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+        [Export("initWithFrame:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(CGRect frame);
+    }
+
+    // @protocol StoryGroupViewFactory
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+    interface StoryGroupViewFactory
+    {
+        // @required -(StoryGroupView * _Nonnull)createView __attribute__((warn_unused_result("")));
+        [Abstract]
+        [Export("createView")]
+        StoryGroupView CreateView { get; }
+
+        // @required -(CGSize)getSize __attribute__((warn_unused_result("")));
+        [Abstract]
+        [Export("getSize")]
+        CGSize GetSize { get; }
+    }
+
+    // @interface StoryImageQuizComponent : StoryComponent
+    [BaseType(typeof(StoryComponent))]
 	interface StoryImageQuizComponent
 	{
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
@@ -603,8 +633,12 @@ namespace Storyly
 		[Export("setSize:")]
 		StorylyStoryGroupStylingBuilder SetSize(StoryGroupSize size);
 
-		// -(StorylyStoryGroupStyling * _Nonnull)build __attribute__((warn_unused_result("")));
-		[Export("build")]
+        // -(StorylyStoryGroupStylingBuilder * _Nonnull)setCustomGroupViewFactory:(id<StoryGroupViewFactory> _Nullable)factory __attribute__((warn_unused_result(“”)));
+        [Export("setCustomGroupViewFactory:")]
+        StorylyStoryGroupStylingBuilder SetCustomGroupViewFactory([NullAllowed] StoryGroupViewFactory factory);
+
+        // -(StorylyStoryGroupStyling * _Nonnull)build __attribute__((warn_unused_result("")));
+        [Export("build")]
 		StorylyStoryGroupStyling Build();
 	}
 
