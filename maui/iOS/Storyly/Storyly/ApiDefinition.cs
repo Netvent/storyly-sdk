@@ -47,8 +47,16 @@ namespace Storyly
 		[Export("closeStoryWithAnimated:completion:")]
 		void CloseStoryWithAnimated(bool animated, [NullAllowed] Action completion);
 
-		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
-		[Export("initWithFrame:")]
+        // -(void)hydrateProductsWithProducts:(NSArray<STRProductItem *> * _Nonnull)products;
+        [Export("hydrateProductsWithProducts:")]
+        void HydrateProduct(STRProductItem[] products);
+
+        // -(void)updateCartWithCart:(STRCart * _Nonnull)cart;
+        [Export("updateCartWithCart:")]
+        void UpdateCart(STRCart cart);
+
+        // -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+        [Export("initWithFrame:")]
 		[DesignatedInitializer]
 		IntPtr Constructor(CGRect frame);
 	}
@@ -505,10 +513,14 @@ namespace Storyly
         [NullAllowed, Export("variants", ArgumentSemantic.Copy)]
         STRProductVariant[] Variants { get; }
 
-        // -(instancetype _Nonnull)initWithProductId:(NSString * _Nonnull)productId productGroupId:(NSString * _Nonnull)productGroupId title:(NSString * _Nonnull)title url:(NSString * _Nonnull)url description:(NSString * _Nullable)description price:(float)price salesPrice:(NSNumber * _Nullable)salesPrice currency:(NSString * _Nonnull)currency imageUrls:(NSArray<NSString *> * _Nullable)imageUrls variants:(NSArray<STRProductVariant *> * _Nullable)variants __attribute__((objc_designated_initializer));
-        [Export("initWithProductId:productGroupId:title:url:description:price:salesPrice:currency:imageUrls:variants:")]
+        // @property (readonly, copy, nonatomic) NSString * _Nullable ctaText;
+        [NullAllowed, Export("ctaText")]
+        string CtaText { get; }
+
+        // -(instancetype _Nonnull)initWithProductId:(NSString * _Nonnull)productId productGroupId:(NSString * _Nonnull)productGroupId title:(NSString * _Nonnull)title url:(NSString * _Nonnull)url description:(NSString * _Nullable)description price:(float)price salesPrice:(NSNumber * _Nullable)salesPrice currency:(NSString * _Nonnull)currency imageUrls:(NSArray<NSString *> * _Nullable)imageUrls variants:(NSArray<STRProductVariant *> * _Nullable)variants ctaText:(NSString * _Nullable)ctaText __attribute__((objc_designated_initializer));
+        [Export("initWithProductId:productGroupId:title:url:description:price:salesPrice:currency:imageUrls:variants:ctaText:")]
         [DesignatedInitializer]
-        NativeHandle Constructor(string productId, string productGroupId, string title, string url, [NullAllowed] string description, float price, [NullAllowed] NSNumber salesPrice, string currency, [NullAllowed] string[] imageUrls, [NullAllowed] STRProductVariant[] variants);
+        NativeHandle Constructor(string productId, string productGroupId, string title, string url, [NullAllowed] string description, float price, [NullAllowed] NSNumber salesPrice, string currency, [NullAllowed] string[] imageUrls, [NullAllowed] STRProductVariant[] variants, [NullAllowed] string ctaText);
     }
 
     // @interface STRProductVariant : NSObject
