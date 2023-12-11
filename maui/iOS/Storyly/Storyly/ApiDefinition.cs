@@ -268,8 +268,7 @@ namespace Storyly
 		string CustomPayload { get; }
 	}
 
-    // @interface StoryGroupView : UIView
-	[BaseType (typeof(UIView), Name = "_TtC7Storyly14StoryGroupView")]
+    [BaseType(typeof(UIView))]
     interface StoryGroupView
     {
         // -(void)populateView:(StoryGroup * _Nullable)storyGroup;
