@@ -539,7 +539,7 @@ namespace Storyly
     }
 
     // @interface StoryPriceFormatter : NSObject
-    [BaseType(typeof(NSObject), Name = "_TtC7Storyly19StoryPriceFormatter")]
+    [BaseType(typeof(NSObject))]
     interface StoryPriceFormatter
     {
     }
