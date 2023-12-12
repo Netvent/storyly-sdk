@@ -885,9 +885,12 @@ SWIFT_CLASS_NAMED("StoryPollComponent")
 
 
 /// This class defines the structure of StorylyPriceConverter
-SWIFT_CLASS_NAMED("StoryPriceFormatter")
-@interface StoryPriceFormatter : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_PROTOCOL_NAMED("StoryPriceFormatter")
+@protocol StoryPriceFormatter
+/// This function format price and currency symbol
+/// @param price Represents the numerical value of the price
+/// @param currency Represents the currency symbol
+- (NSString * _Nullable)format:(NSNumber * _Nullable)price :(NSString * _Nonnull)currency SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1532,7 +1535,7 @@ SWIFT_CLASS_NAMED("StorylyProductConfig")
 /// Builder class of StorylyProductConfig
 SWIFT_CLASS_NAMED("Builder")
 @interface StorylyProductConfigBuilder : NSObject
-- (StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(StoryPriceFormatter * _Nonnull)formatter SWIFT_WARN_UNUSED_RESULT;
+- (StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(id <StoryPriceFormatter> _Nonnull)formatter SWIFT_WARN_UNUSED_RESULT;
 /// This function allows you to set enability of hydration from feed data from backend
 /// \param isEnabled Bool instance to set 
 ///

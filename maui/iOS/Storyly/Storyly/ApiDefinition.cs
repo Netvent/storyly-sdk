@@ -471,7 +471,7 @@ namespace Storyly
     // @interface STRProductItem : NSObject
     [BaseType(typeof(NSObject))]
     [DisableDefaultCtor]
-    interface STRProductItem
+    interface STRProductItem: INativeObject
     {
         // @property (readonly, copy, nonatomic) NSString * _Nonnull productId;
         [Export("productId")]
@@ -550,10 +550,14 @@ namespace Storyly
         nuint Hash { get; }
     }
 
-    // @interface StoryPriceFormatter : NSObject
+    // @protocol StoryPriceFormatter
     [BaseType(typeof(NSObject))]
+    [Protocol, Model]
     interface StoryPriceFormatter
     {
+        // -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
+        [Export("format::")]
+        string Format([NullAllowed] NSNumber price, string currency);
     }
 
 }
@@ -839,7 +843,7 @@ namespace Storyly
     [BaseType(typeof(NSObject))]
     interface StorylyProductConfigBuilder
     {
-        // -(StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(StoryPriceFormatter * _Nonnull)formatter __attribute__((warn_unused_result("")));
+        // -(StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(id<StoryPriceFormatter> _Nonnull)formatter __attribute__((warn_unused_result("")));
         [Export("setPriceFormatter:")]
         StorylyProductConfigBuilder SetPriceFormatter(StoryPriceFormatter formatter);
 
@@ -850,6 +854,10 @@ namespace Storyly
         // -(StorylyProductConfigBuilder * _Nonnull)setCartEnabled:(BOOL)isEnabled __attribute__((warn_unused_result("")));
         [Export("setCartEnabled:")]
         StorylyProductConfigBuilder SetCartEnabled(bool isEnabled);
+
+        // -(StorylyProductConfigBuilder * _Nonnull)setProductFeed:(NSDictionary<NSString *,NSArray<STRProductItem *> *> * _Nullable)feed __attribute__((warn_unused_result("")));
+        [Export("setProductFeed:")]
+        StorylyProductConfigBuilder SetProductFeed([NullAllowed] NSDictionary<NSString, NSMutableArray<STRProductItem>> feed);
 
         // -(StorylyProductConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
