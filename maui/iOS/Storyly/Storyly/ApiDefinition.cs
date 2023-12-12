@@ -423,7 +423,7 @@ namespace Storyly
         // -(instancetype _Nonnull)initWithItems:(NSArray<STRCartItem *> * _Nonnull)items totalPrice:(float)totalPrice oldTotalPrice:(NSNumber * _Nullable)oldTotalPrice currency:(NSString * _Nonnull)currency __attribute__((objc_designated_initializer));
         [Export("initWithItems:totalPrice:oldTotalPrice:currency:")]
         [DesignatedInitializer]
-        NativeHandle Constructor(STRCartItem[] items, float totalPrice, [NullAllowed] NSNumber oldTotalPrice, string currency);
+        IntPtr Constructor(STRCartItem[] items, float totalPrice, [NullAllowed] NSNumber oldTotalPrice, string currency);
     }
 
     // @interface STRCartEventResult : NSObject
@@ -438,7 +438,7 @@ namespace Storyly
         // -(instancetype _Nonnull)initWithMessage:(NSString * _Nonnull)message __attribute__((objc_designated_initializer));
         [Export("initWithMessage:")]
         [DesignatedInitializer]
-        NativeHandle Constructor(string message);
+        IntPtr Constructor(string message);
     }
 
     // @interface STRCartItem : NSObject
@@ -465,7 +465,7 @@ namespace Storyly
         // -(instancetype _Nonnull)initWithItem:(STRProductItem * _Nonnull)item quantity:(NSInteger)quantity totalPrice:(NSNumber * _Nullable)totalPrice oldTotalPrice:(NSNumber * _Nullable)oldTotalPrice __attribute__((objc_designated_initializer));
         [Export("initWithItem:quantity:totalPrice:oldTotalPrice:")]
         [DesignatedInitializer]
-        NativeHandle Constructor(STRProductItem item, nint quantity, [NullAllowed] NSNumber totalPrice, [NullAllowed] NSNumber oldTotalPrice);
+        IntPtr Constructor(STRProductItem item, nint quantity, [NullAllowed] NSNumber totalPrice, [NullAllowed] NSNumber oldTotalPrice);
     }
 
     // @interface STRProductItem : NSObject
