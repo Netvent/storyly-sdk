@@ -278,7 +278,7 @@ namespace Storyly
         // -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
         [Export("initWithFrame:")]
         [DesignatedInitializer]
-        NativeHandle Constructor(CGRect frame);
+        IntPtr Constructor(CGRect frame);
     }
 
     // @protocol StoryGroupViewFactory
@@ -320,7 +320,7 @@ namespace Storyly
         // -(instancetype _Nonnull)initWithFrame:(CGRect)frame xamarinStoryGroup:(id<XamarinStoryGroup> _Nullable)xamarinStoryGroup __attribute__((objc_designated_initializer));
         [Export("initWithFrame:xamarinStoryGroup:")]
         [DesignatedInitializer]
-        NativeHandle Constructor(CGRect frame, [NullAllowed] XamarinStoryGroup xamarinStoryGroup);
+        IntPtr Constructor(CGRect frame, [NullAllowed] XamarinStoryGroup xamarinStoryGroup);
 
         // -(void)populateView:(StoryGroup * _Nullable)storyGroup;
         [Export("populateView:")]
