@@ -539,7 +539,7 @@ namespace Storyly
         // -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value __attribute__((objc_designated_initializer));
         [Export("initWithName:value:")]
         [DesignatedInitializer]
-        NativeHandle Constructor(string name, string value);
+        IntPtr Constructor(string name, string value);
 
         // -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
         [Export("isEqual:")]
