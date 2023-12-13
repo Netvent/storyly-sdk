@@ -297,6 +297,36 @@ namespace Storyly
         CGSize GetSize { get; }
     }
 
+    // @protocol XamarinStoryGroup
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+    interface XamarinStoryGroup
+    {
+        // @required -(UIView * _Nonnull)createView __attribute__((warn_unused_result("")));
+        [Abstract]
+        [Export("createView")]
+        UIView CreateView { get; }
+
+        // @required -(void)populateView:(StoryGroup * _Nullable)storyGroup;
+        [Abstract]
+        [Export("populateView:")]
+        void PopulateView([NullAllowed] StoryGroup storyGroup);
+    }
+
+    // @interface XamarinStoryGroupView : StoryGroupView
+    [BaseType(typeof(StoryGroupView))]
+    interface XamarinStoryGroupView
+    {
+        // -(instancetype _Nonnull)initWithFrame:(CGRect)frame xamarinStoryGroup:(id<XamarinStoryGroup> _Nullable)xamarinStoryGroup __attribute__((objc_designated_initializer));
+        [Export("initWithFrame:xamarinStoryGroup:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(CGRect frame, [NullAllowed] XamarinStoryGroup xamarinStoryGroup);
+
+        // -(void)populateView:(StoryGroup * _Nullable)storyGroup;
+        [Export("populateView:")]
+        void PopulateView([NullAllowed] StoryGroup storyGroup);
+    }
+
     // @interface StoryImageQuizComponent : StoryComponent
     [BaseType(typeof(StoryComponent))]
 	interface StoryImageQuizComponent

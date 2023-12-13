@@ -8592,12 +8592,12 @@
                     "kind": "TypeNominal",
                     "name": "StoryPriceFormatter",
                     "printedName": "Storyly.StoryPriceFormatter",
-                    "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter"
+                    "usr": "c:@M@Storyly@objc(pl)StoryPriceFormatter"
                   }
                 ],
                 "declKind": "Func",
-                "usr": "s:7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0C_tF",
-                "mangledName": "$s7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0C_tF",
+                "usr": "s:7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0_p_tF",
+                "mangledName": "$s7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0_p_tF",
                 "moduleName": "Storyly",
                 "objc_name": "setPriceFormatter:",
                 "declAttributes": [
@@ -10229,77 +10229,186 @@
         ]
       },
       {
-        "kind": "Import",
-        "name": "AVFoundation",
-        "printedName": "AVFoundation",
-        "declKind": "Import",
-        "moduleName": "Storyly",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "AVKit",
-        "printedName": "AVKit",
-        "declKind": "Import",
-        "moduleName": "Storyly"
-      },
-      {
-        "kind": "Import",
-        "name": "AVKit",
-        "printedName": "AVKit",
-        "declKind": "Import",
-        "moduleName": "Storyly",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
         "kind": "TypeDecl",
-        "name": "StoryPriceFormatter",
-        "printedName": "StoryPriceFormatter",
+        "name": "XamarinStoryGroupView",
+        "printedName": "XamarinStoryGroupView",
         "children": [
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init()",
+            "printedName": "init(frame:xamarinStoryGroup:)",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "StoryPriceFormatter",
-                "printedName": "Storyly.StoryPriceFormatter",
-                "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter"
+                "name": "XamarinStoryGroupView",
+                "printedName": "Storyly.XamarinStoryGroupView",
+                "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Storyly.XamarinStoryGroup?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "XamarinStoryGroup",
+                    "printedName": "Storyly.XamarinStoryGroup",
+                    "usr": "c:@M@Storyly@objc(pl)XamarinStoryGroup"
+                  }
+                ],
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
-            "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter(im)init",
-            "mangledName": "$s7Storyly19StoryPriceFormatterCACycfc",
+            "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView(im)initWithFrame:xamarinStoryGroup:",
+            "mangledName": "$s7Storyly21XamarinStoryGroupViewC5frame07xamarincD0ACSo6CGRectV_AA0bcD0_pSgtcfc",
+            "moduleName": "Storyly",
+            "objc_name": "initWithFrame:xamarinStoryGroup:",
+            "declAttributes": [
+              "Custom",
+              "Required",
+              "AccessControl",
+              "ObjC"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(coder:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Storyly.XamarinStoryGroupView?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "XamarinStoryGroupView",
+                    "printedName": "Storyly.XamarinStoryGroupView",
+                    "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView(im)initWithCoder:",
+            "mangledName": "$s7Storyly21XamarinStoryGroupViewC5coderACSgSo7NSCoderC_tcfc",
             "moduleName": "Storyly",
             "overriding": true,
-            "implicit": true,
-            "objc_name": "init",
+            "objc_name": "initWithCoder:",
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Custom",
+              "Required",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "populateView",
+            "printedName": "populateView(storyGroup:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Storyly.StoryGroup?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StoryGroup",
+                    "printedName": "Storyly.StoryGroup",
+                    "usr": "c:@M@Storyly@objc(cs)StoryGroup"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView(im)populateView:",
+            "mangledName": "$s7Storyly21XamarinStoryGroupViewC08populateE005storyD0yAA0cD0CSg_tF",
+            "moduleName": "Storyly",
+            "overriding": true,
+            "isOpen": true,
+            "objc_name": "populateView:",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "Override",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(frame:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "XamarinStoryGroupView",
+                "printedName": "Storyly.XamarinStoryGroupView",
+                "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView(im)initWithFrame:",
+            "mangledName": "$s7Storyly21XamarinStoryGroupViewC5frameACSo6CGRectV_tcfc",
+            "moduleName": "Storyly",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "initWithFrame:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
               "Override"
             ],
             "init_kind": "Designated"
           }
         ],
         "declKind": "Class",
-        "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter",
-        "mangledName": "$s7Storyly19StoryPriceFormatterC",
+        "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView",
+        "mangledName": "$s7Storyly21XamarinStoryGroupViewC",
         "moduleName": "Storyly",
-        "objc_name": "StoryPriceFormatter",
+        "isOpen": true,
+        "objc_name": "XamarinStoryGroupView",
         "declAttributes": [
+          "Custom",
           "AccessControl",
-          "ObjC",
-          "RawDocComment"
+          "ObjC"
         ],
-        "superclassUsr": "c:objc(cs)NSObject",
-        "inheritsConvenienceInitializers": true,
+        "superclassUsr": "c:@M@Storyly@objc(cs)StoryGroupView",
         "superclassNames": [
+          "Storyly.StoryGroupView",
+          "UIKit.UIView",
+          "UIKit.UIResponder",
           "ObjectiveC.NSObject"
         ],
         "conformances": [
@@ -10351,7 +10460,214 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "__DefaultCustomPlaygroundQuickLookable",
+            "printedName": "__DefaultCustomPlaygroundQuickLookable",
+            "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
+            "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
           }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "XamarinStoryGroup",
+        "printedName": "XamarinStoryGroup",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "createView",
+            "printedName": "createView()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIView",
+                "printedName": "UIKit.UIView",
+                "usr": "c:objc(cs)UIView"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@Storyly@objc(pl)XamarinStoryGroup(im)createView",
+            "mangledName": "$s7Storyly17XamarinStoryGroupP10createViewSo6UIViewCyF",
+            "moduleName": "Storyly",
+            "genericSig": "<τ_0_0 where τ_0_0 : Storyly.XamarinStoryGroup>",
+            "sugared_genericSig": "<Self where Self : Storyly.XamarinStoryGroup>",
+            "protocolReq": true,
+            "objc_name": "createView",
+            "declAttributes": [
+              "ObjC",
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "populateView",
+            "printedName": "populateView(storyGroup:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Storyly.StoryGroup?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StoryGroup",
+                    "printedName": "Storyly.StoryGroup",
+                    "usr": "c:@M@Storyly@objc(cs)StoryGroup"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@Storyly@objc(pl)XamarinStoryGroup(im)populateView:",
+            "mangledName": "$s7Storyly17XamarinStoryGroupP12populateView05storyD0yAA0cD0CSg_tF",
+            "moduleName": "Storyly",
+            "genericSig": "<τ_0_0 where τ_0_0 : Storyly.XamarinStoryGroup>",
+            "sugared_genericSig": "<Self where Self : Storyly.XamarinStoryGroup>",
+            "protocolReq": true,
+            "objc_name": "populateView:",
+            "declAttributes": [
+              "ObjC",
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "c:@M@Storyly@objc(pl)XamarinStoryGroup",
+        "mangledName": "$s7Storyly17XamarinStoryGroupP",
+        "moduleName": "Storyly",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "objc_name": "XamarinStoryGroup",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AVFoundation",
+        "printedName": "AVFoundation",
+        "declKind": "Import",
+        "moduleName": "Storyly",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AVKit",
+        "printedName": "AVKit",
+        "declKind": "Import",
+        "moduleName": "Storyly"
+      },
+      {
+        "kind": "Import",
+        "name": "AVKit",
+        "printedName": "AVKit",
+        "declKind": "Import",
+        "moduleName": "Storyly",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "StoryPriceFormatter",
+        "printedName": "StoryPriceFormatter",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "format",
+            "printedName": "format(price:currency:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.NSNumber?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "NSNumber",
+                    "printedName": "Foundation.NSNumber",
+                    "usr": "c:objc(cs)NSNumber"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@Storyly@objc(pl)StoryPriceFormatter(im)format::",
+            "mangledName": "$s7Storyly19StoryPriceFormatterP6format5price8currencySSSgSo8NSNumberCSg_SStF",
+            "moduleName": "Storyly",
+            "genericSig": "<τ_0_0 where τ_0_0 : Storyly.StoryPriceFormatter>",
+            "sugared_genericSig": "<Self where Self : Storyly.StoryPriceFormatter>",
+            "protocolReq": true,
+            "objc_name": "format::",
+            "declAttributes": [
+              "ObjC",
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "c:@M@Storyly@objc(pl)StoryPriceFormatter",
+        "mangledName": "$s7Storyly19StoryPriceFormatterP",
+        "moduleName": "Storyly",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "objc_name": "StoryPriceFormatter",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
         ]
       },
       {
@@ -36018,7 +36334,7 @@
     {
       "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/Formatter\/DefaultPriceFormatter.swift",
       "kind": "IntegerLiteral",
-      "offset": 345,
+      "offset": 336,
       "length": 1,
       "value": "0"
     },
@@ -62322,6 +62638,13 @@
       "value": "0"
     },
     {
+      "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Config\/Styling\/Group\/StoryGroupView.swift",
+      "kind": "StringLiteral",
+      "offset": 923,
+      "length": 21,
+      "value": "\"Storyly.XamarinStoryGroupView\""
+    },
+    {
       "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/DeepDiff\/UICollectionView+Extensions.swift",
       "kind": "IntegerLiteral",
       "offset": 582,
@@ -64210,13 +64533,6 @@
       "offset": 173,
       "length": 26,
       "value": "\"Storyly.StorylyShareViewController\""
-    },
-    {
-      "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/Formatter\/StoryPriceFormatter.swift",
-      "kind": "StringLiteral",
-      "offset": 602,
-      "length": 2,
-      "value": "\"\""
     },
     {
       "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/StorylyLayerItem.swift",
