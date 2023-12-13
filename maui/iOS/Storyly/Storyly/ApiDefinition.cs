@@ -843,10 +843,6 @@ namespace Storyly
     [BaseType(typeof(NSObject))]
     interface StorylyProductConfigBuilder
     {
-        // -(StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(id<StoryPriceFormatter> _Nonnull)formatter __attribute__((warn_unused_result("")));
-        [Export("setPriceFormatter:")]
-        StorylyProductConfigBuilder SetPriceFormatter(StoryPriceFormatter formatter);
-
         // -(StorylyProductConfigBuilder * _Nonnull)setFallbackAvailability:(BOOL)isEnabled __attribute__((warn_unused_result("")));
         [Export("setFallbackAvailability:")]
         StorylyProductConfigBuilder SetFallbackAvailability(bool isEnabled);
