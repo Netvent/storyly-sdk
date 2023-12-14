@@ -304,11 +304,11 @@ extension Storyly.StorylyView {
   @objc public init(storylyId: Swift.String, config: Storyly.StorylyConfig = StorylyConfig.Builder().build())
   @objc deinit
 }
-@objc(StoryGroupViewFactory) public protocol StoryGroupViewFactory {
-  @objc(createView) func createView() -> Storyly.StoryGroupView
+@objc public protocol StoryGroupViewFactory {
+  @objc func createView() -> Storyly.StoryGroupView
   @objc func getSize() -> CoreFoundation.CGSize
 }
-@_inheritsConvenienceInitializers @objc(StoryGroupView) @_Concurrency.MainActor(unsafe) open class StoryGroupView : UIKit.UIView {
+@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class StoryGroupView : UIKit.UIView {
   @objc(populateView:) @_Concurrency.MainActor(unsafe) open func populateView(storyGroup: Storyly.StoryGroup?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)

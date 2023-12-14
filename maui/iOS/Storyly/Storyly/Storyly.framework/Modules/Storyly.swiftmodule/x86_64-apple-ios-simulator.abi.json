@@ -9969,7 +9969,6 @@
             "genericSig": "<τ_0_0 where τ_0_0 : Storyly.StoryGroupViewFactory>",
             "sugared_genericSig": "<Self where Self : Storyly.StoryGroupViewFactory>",
             "protocolReq": true,
-            "objc_name": "createView",
             "declAttributes": [
               "ObjC",
               "RawDocComment"
@@ -10010,7 +10009,6 @@
         "moduleName": "Storyly",
         "genericSig": "<τ_0_0 : AnyObject>",
         "sugared_genericSig": "<Self : AnyObject>",
-        "objc_name": "StoryGroupViewFactory",
         "declAttributes": [
           "AccessControl",
           "ObjC",
@@ -10141,7 +10139,6 @@
         "mangledName": "$s7Storyly14StoryGroupViewC",
         "moduleName": "Storyly",
         "isOpen": true,
-        "objc_name": "StoryGroupView",
         "declAttributes": [
           "Custom",
           "AccessControl",
@@ -62640,7 +62637,7 @@
     {
       "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Config\/Styling\/Group\/StoryGroupView.swift",
       "kind": "StringLiteral",
-      "offset": 923,
+      "offset": 868,
       "length": 21,
       "value": "\"Storyly.XamarinStoryGroupView\""
     },

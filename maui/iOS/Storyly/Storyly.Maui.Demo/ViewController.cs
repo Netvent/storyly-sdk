@@ -39,6 +39,7 @@ namespace Storyly.Maui.Demo
                     Constants.StorylyToken,
                     new StorylyConfigBuilder()
                         .SetStoryGroupStyling(new StorylyStoryGroupStylingBuilder().SetSize(StoryGroupSize.Small)
+                        .SetCustomGroupViewFactory(new CustomStoryGroupViewFactory())
                             .Build())
                     .Build()),
                 RootViewController = this,
@@ -73,6 +74,64 @@ namespace Storyly.Maui.Demo
                         Console.WriteLine($"StorylyEvent:StoryEmojiComponent:{emojiComponent.CustomPayload}");
                     }
                 }
+            }
+        }
+    }
+
+    public class CustomStoryGroupViewFactory : StoryGroupViewFactory
+    {
+        public override StoryGroupView CreateView
+        {
+            get
+            {
+                return new XamarinStoryGroupView(CGRect.Empty, new CustomerStoryGroup());
+            }
+        }
+        public override CGSize GetSize
+        {
+            get
+            {
+                return new CGSize(200, 100); // Replace with your actual view size
+            }
+        }
+    }
+    public class CustomerStoryGroup : XamarinStoryGroup
+    {
+        private UILabel titleLabel = new UILabel()
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            TextAlignment = UITextAlignment.Center
+        };
+
+        private UIView container = new UIView()
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+        };
+
+        public override UIView CreateView
+        {
+            get
+            {
+                container.Layer.CornerRadius = 16;
+                container.AddSubview(titleLabel);
+
+                titleLabel.TopAnchor.ConstraintEqualTo(titleLabel.Superview.TopAnchor).Active = true;
+                titleLabel.BottomAnchor.ConstraintEqualTo(titleLabel.Superview.BottomAnchor).Active = true;
+                titleLabel.LeadingAnchor.ConstraintEqualTo(titleLabel.Superview.LeadingAnchor).Active = true;
+
+                return container;
+            }
+        }
+        public override void PopulateView(StoryGroup? storyGroup)
+        {
+            titleLabel.Text = storyGroup?.Title;
+            if (storyGroup?.Seen == true)
+            {
+                container.BackgroundColor = UIColor.Red.ColorWithAlpha(0.5f);
+            }
+            else
+            {
+                container.BackgroundColor = UIColor.Red.ColorWithAlpha(1f);
             }
         }
     }

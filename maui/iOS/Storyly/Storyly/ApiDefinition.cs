@@ -269,6 +269,7 @@ namespace Storyly
 	}
 
     [BaseType(typeof(UIView))]
+	[Protocol]
     interface StoryGroupView
     {
         // -(void)populateView:(StoryGroup * _Nullable)storyGroup;

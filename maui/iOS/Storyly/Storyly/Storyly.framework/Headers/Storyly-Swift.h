@@ -778,7 +778,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, StoryGroupType, "StoryGroupType", open) {
 @class NSCoder;
 
 /// This class defines the parent class of the custom styling StoryGroupView classes
-SWIFT_CLASS_NAMED("StoryGroupView")
+SWIFT_CLASS("_TtC7Storyly14StoryGroupView")
 @interface StoryGroupView : UIView
 /// This function fills the StoryGroupView components
 - (void)populateView:(StoryGroup * _Nullable)storyGroup;
@@ -788,7 +788,7 @@ SWIFT_CLASS_NAMED("StoryGroupView")
 
 
 /// This protocol defines the structure of StoryGroupViewFactory
-SWIFT_PROTOCOL_NAMED("StoryGroupViewFactory")
+SWIFT_PROTOCOL("_TtP7Storyly21StoryGroupViewFactory_")
 @protocol StoryGroupViewFactory
 /// This function is called when a new view is requested
 - (StoryGroupView * _Nonnull)createView SWIFT_WARN_UNUSED_RESULT;
