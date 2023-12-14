@@ -885,12 +885,9 @@ SWIFT_CLASS_NAMED("StoryPollComponent")
 
 
 /// This class defines the structure of StorylyPriceConverter
-SWIFT_PROTOCOL_NAMED("StoryPriceFormatter")
-@protocol StoryPriceFormatter
-/// This function format price and currency symbol
-/// @param price Represents the numerical value of the price
-/// @param currency Represents the currency symbol
-- (NSString * _Nullable)format:(NSNumber * _Nullable)price :(NSString * _Nonnull)currency SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS("_TtC7Storyly19StoryPriceFormatter")
+@interface StoryPriceFormatter : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1535,7 +1532,7 @@ SWIFT_CLASS_NAMED("StorylyProductConfig")
 /// Builder class of StorylyProductConfig
 SWIFT_CLASS_NAMED("Builder")
 @interface StorylyProductConfigBuilder : NSObject
-- (StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(id <StoryPriceFormatter> _Nonnull)formatter SWIFT_WARN_UNUSED_RESULT;
+- (StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(StoryPriceFormatter * _Nonnull)formatter SWIFT_WARN_UNUSED_RESULT;
 /// This function allows you to set enability of hydration from feed data from backend
 /// \param isEnabled Bool instance to set 
 ///
@@ -1869,7 +1866,7 @@ SWIFT_PROTOCOL_NAMED("XamarinStoryGroup")
 
 SWIFT_CLASS_NAMED("XamarinStoryGroupView")
 @interface XamarinStoryGroupView : StoryGroupView
-- (nonnull instancetype)initWithFrame:(CGRect)frame xamarinStoryGroup:(id <XamarinStoryGroup> _Nullable)xamarinStoryGroup OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithXamarinStoryGroup:(id <XamarinStoryGroup> _Nullable)xamarinStoryGroup OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)populateView:(StoryGroup * _Nullable)storyGroup;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;

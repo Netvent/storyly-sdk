@@ -84,7 +84,7 @@ namespace Storyly.Maui.Demo
         {
             get
             {
-                return new XamarinStoryGroupView(CGRect.Empty, new CustomerStoryGroup());
+                return new XamarinStoryGroupView(new CustomerStoryGroup());
             }
         }
         public override CGSize GetSize

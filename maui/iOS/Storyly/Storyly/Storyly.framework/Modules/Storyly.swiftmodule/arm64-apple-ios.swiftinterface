@@ -262,7 +262,7 @@ extension Storyly.StorylyView {
 }
 @_hasMissingDesignatedInitializers @objc(StorylyProductConfig) public class StorylyProductConfig : ObjectiveC.NSObject {
   @_inheritsConvenienceInitializers @objc(StorylyProductConfigBuilder) public class Builder : ObjectiveC.NSObject {
-    @objc(setPriceFormatter:) public func setPriceFormatter(formatter: any Storyly.StoryPriceFormatter) -> Storyly.StorylyProductConfig.Builder
+    @objc(setPriceFormatter:) public func setPriceFormatter(formatter: Storyly.StoryPriceFormatter) -> Storyly.StorylyProductConfig.Builder
     @objc(setFallbackAvailability:) public func setFallbackAvailability(isEnabled: Swift.Bool) -> Storyly.StorylyProductConfig.Builder
     @objc(setCartEnabled:) public func setCartEnabled(isEnabled: Swift.Bool) -> Storyly.StorylyProductConfig.Builder
     @objc(setProductFeed:) public func setProductFeed(feed: [Swift.String : [Storyly.STRProductItem]]?) -> Storyly.StorylyProductConfig.Builder
@@ -315,7 +315,7 @@ extension Storyly.StorylyView {
   @objc deinit
 }
 @objc(XamarinStoryGroupView) @_Concurrency.MainActor(unsafe) open class XamarinStoryGroupView : Storyly.StoryGroupView {
-  @objc @_Concurrency.MainActor(unsafe) required public init(frame: CoreFoundation.CGRect, xamarinStoryGroup: (any Storyly.XamarinStoryGroup)?)
+  @objc @_Concurrency.MainActor(unsafe) required public init(xamarinStoryGroup: (any Storyly.XamarinStoryGroup)?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc(populateView:) @_Concurrency.MainActor(unsafe) override open func populateView(storyGroup: Storyly.StoryGroup?)
   @objc deinit
@@ -324,8 +324,9 @@ extension Storyly.StorylyView {
   @objc(createView) func createView() -> UIKit.UIView
   @objc(populateView:) func populateView(storyGroup: Storyly.StoryGroup?)
 }
-@objc(StoryPriceFormatter) public protocol StoryPriceFormatter {
-  @objc(format::) func format(price: Foundation.NSNumber?, currency: Swift.String) -> Swift.String?
+@_inheritsConvenienceInitializers @objc public class StoryPriceFormatter : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StorylyStoryStyling) public class StorylyStoryStyling : ObjectiveC.NSObject {
   @_inheritsConvenienceInitializers @objc(StorylyStoryStylingBuilder) public class Builder : ObjectiveC.NSObject {

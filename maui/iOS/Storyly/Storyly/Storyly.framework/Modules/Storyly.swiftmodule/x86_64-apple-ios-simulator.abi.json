@@ -8592,12 +8592,12 @@
                     "kind": "TypeNominal",
                     "name": "StoryPriceFormatter",
                     "printedName": "Storyly.StoryPriceFormatter",
-                    "usr": "c:@M@Storyly@objc(pl)StoryPriceFormatter"
+                    "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter"
                   }
                 ],
                 "declKind": "Func",
-                "usr": "s:7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0_p_tF",
-                "mangledName": "$s7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0_p_tF",
+                "usr": "s:7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0C_tF",
+                "mangledName": "$s7Storyly0A13ProductConfigC7BuilderC17setPriceFormatter9formatterAeA05StoryfG0C_tF",
                 "moduleName": "Storyly",
                 "objc_name": "setPriceFormatter:",
                 "declAttributes": [
@@ -10233,19 +10233,13 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(frame:xamarinStoryGroup:)",
+            "printedName": "init(xamarinStoryGroup:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "XamarinStoryGroupView",
                 "printedName": "Storyly.XamarinStoryGroupView",
                 "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "CGRect",
-                "printedName": "CoreFoundation.CGRect",
-                "usr": "c:@S@CGRect"
               },
               {
                 "kind": "TypeNominal",
@@ -10263,10 +10257,10 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView(im)initWithFrame:xamarinStoryGroup:",
-            "mangledName": "$s7Storyly21XamarinStoryGroupViewC5frame07xamarincD0ACSo6CGRectV_AA0bcD0_pSgtcfc",
+            "usr": "c:@M@Storyly@objc(cs)XamarinStoryGroupView(im)initWithXamarinStoryGroup:",
+            "mangledName": "$s7Storyly21XamarinStoryGroupViewC07xamarincD0AcA0bcD0_pSg_tcfc",
             "moduleName": "Storyly",
-            "objc_name": "initWithFrame:xamarinStoryGroup:",
+            "objc_name": "initWithXamarinStoryGroup:",
             "declAttributes": [
               "Custom",
               "Required",
@@ -10599,72 +10593,96 @@
         "printedName": "StoryPriceFormatter",
         "children": [
           {
-            "kind": "Function",
-            "name": "format",
-            "printedName": "format(price:currency:)",
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.String?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Foundation.NSNumber?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "NSNumber",
-                    "printedName": "Foundation.NSNumber",
-                    "usr": "c:objc(cs)NSNumber"
-                  }
-                ],
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "StoryPriceFormatter",
+                "printedName": "Storyly.StoryPriceFormatter",
+                "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter"
               }
             ],
-            "declKind": "Func",
-            "usr": "c:@M@Storyly@objc(pl)StoryPriceFormatter(im)format::",
-            "mangledName": "$s7Storyly19StoryPriceFormatterP6format5price8currencySSSgSo8NSNumberCSg_SStF",
+            "declKind": "Constructor",
+            "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter(im)init",
+            "mangledName": "$s7Storyly19StoryPriceFormatterCACycfc",
             "moduleName": "Storyly",
-            "genericSig": "<τ_0_0 where τ_0_0 : Storyly.StoryPriceFormatter>",
-            "sugared_genericSig": "<Self where Self : Storyly.StoryPriceFormatter>",
-            "protocolReq": true,
-            "objc_name": "format::",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
             "declAttributes": [
+              "Dynamic",
               "ObjC",
-              "RawDocComment"
+              "Override"
             ],
-            "reqNewWitnessTableEntry": true,
-            "funcSelfKind": "NonMutating"
+            "init_kind": "Designated"
           }
         ],
-        "declKind": "Protocol",
-        "usr": "c:@M@Storyly@objc(pl)StoryPriceFormatter",
-        "mangledName": "$s7Storyly19StoryPriceFormatterP",
+        "declKind": "Class",
+        "usr": "c:@M@Storyly@objc(cs)StoryPriceFormatter",
+        "mangledName": "$s7Storyly19StoryPriceFormatterC",
         "moduleName": "Storyly",
-        "genericSig": "<τ_0_0 : AnyObject>",
-        "sugared_genericSig": "<Self : AnyObject>",
-        "objc_name": "StoryPriceFormatter",
         "declAttributes": [
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
         ]
       },
       {
@@ -36331,7 +36349,7 @@
     {
       "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/Formatter\/DefaultPriceFormatter.swift",
       "kind": "IntegerLiteral",
-      "offset": 336,
+      "offset": 345,
       "length": 1,
       "value": "0"
     },
@@ -64530,6 +64548,13 @@
       "offset": 173,
       "length": 26,
       "value": "\"Storyly.StorylyShareViewController\""
+    },
+    {
+      "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/Formatter\/StoryPriceFormatter.swift",
+      "kind": "StringLiteral",
+      "offset": 567,
+      "length": 2,
+      "value": "\"\""
     },
     {
       "filePath": "\/Users\/macbook\/XcodeProjects\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/StorylyLayerItem.swift",

@@ -318,10 +318,10 @@ namespace Storyly
     [BaseType(typeof(StoryGroupView))]
     interface XamarinStoryGroupView
     {
-        // -(instancetype _Nonnull)initWithFrame:(CGRect)frame xamarinStoryGroup:(id<XamarinStoryGroup> _Nullable)xamarinStoryGroup __attribute__((objc_designated_initializer));
-        [Export("initWithFrame:xamarinStoryGroup:")]
+        // -(instancetype _Nonnull)initWithXamarinStoryGroup:(id<XamarinStoryGroup> _Nullable)xamarinStoryGroup __attribute__((objc_designated_initializer));
+        [Export("initWithXamarinStoryGroup:")]
         [DesignatedInitializer]
-        IntPtr Constructor(CGRect frame, [NullAllowed] XamarinStoryGroup xamarinStoryGroup);
+        IntPtr Constructor([NullAllowed] XamarinStoryGroup xamarinStoryGroup);
 
         // -(void)populateView:(StoryGroup * _Nullable)storyGroup;
         [Export("populateView:")]
