@@ -107,9 +107,9 @@ namespace Storyly
     [Protocol, Model]
     interface StorylyProductDelegate
     {
-        // @optional -(void)storylyHydration:(StorylyView * _Nonnull)storylyView productIds:(NSArray<NSString *> * _Nonnull)productIds;
-        [Export("storylyHydration:productIds:")]
-        void StorylyHydration(StorylyView storylyView, string[] productIds);
+        // @optional -(void)storylyHydration:(StorylyView * _Nonnull)storylyView products:(NSArray<STRProductInformation *> * _Nonnull)products;
+        [Export("storylyHydration:products:")]
+        void StorylyHydration(StorylyView storylyView, STRProductInformation[] products);
 
         // @optional -(void)storylyEvent:(StorylyView * _Nonnull)storylyView event:(enum StorylyEvent)event;
         [Export("storylyEvent:event:")]
@@ -466,6 +466,25 @@ namespace Storyly
         [Export("initWithItem:quantity:totalPrice:oldTotalPrice:")]
         [DesignatedInitializer]
         IntPtr Constructor(STRProductItem item, nint quantity, [NullAllowed] NSNumber totalPrice, [NullAllowed] NSNumber oldTotalPrice);
+    }
+
+    // @interface STRProductInformation : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRProductInformation
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nullable productId;
+        [NullAllowed, Export("productId")]
+        string ProductId { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable productGroupId;
+        [NullAllowed, Export("productGroupId")]
+        string ProductGroupId { get; }
+
+        // -(instancetype _Nonnull)initWithProductId:(NSString * _Nullable)productId productGroupId:(NSString * _Nullable)productGroupId __attribute__((objc_designated_initializer));
+        [Export("initWithProductId:productGroupId:")]
+        [DesignatedInitializer]
+        IntPtr Constructor([NullAllowed] string productId, [NullAllowed] string productGroupId);
     }
 
     // @interface STRProductItem : NSObject
