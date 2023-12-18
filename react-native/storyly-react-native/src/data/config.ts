@@ -9,7 +9,6 @@ export interface StorylyConfig {
         userProperty?: Record<string, string>,
         customParameter?: string,
         storylyIsTestMode?: boolean,
-        storylyPayload?: string,
         storylyLayoutDirection?: string,
         storylyLocale?: string,
     }
@@ -69,7 +68,6 @@ export const mapStorylyConfig = (props: StorylyProps) => {
             'userProperty': props.storylyUserProperty,
             'customParameter': props.customParameter,
             'storylyIsTestMode': props.storylyTestMode,
-            'storylyPayload': props.storylyPayload,
             'storylyLayoutDirection': props.storylyLayoutDirection,
             'storylyLocale': props.storylyLocale,
         },

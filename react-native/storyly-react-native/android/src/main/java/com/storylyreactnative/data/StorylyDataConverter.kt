@@ -5,7 +5,7 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.appsamurai.storyly.data.managers.product.STRProductVariant
-
+import com.appsamurai.storyly.data.managers.product.STRProductInformation
 
 internal fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, Any?> {
     return mapOf(
@@ -137,6 +137,13 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): Map<String,
     return mapOf(
         "name" to variant.name,
         "value" to variant.value,
+    )
+}
+
+internal fun createSTRProductInformationMap(productInfo: STRProductInformation): Map<String, Any?> {
+    return mapOf(
+        "productId" to productInfo.productId,
+        "productGroupId" to productInfo.productGroupId,
     )
 }
 

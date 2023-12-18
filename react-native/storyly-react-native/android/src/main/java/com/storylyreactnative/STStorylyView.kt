@@ -11,6 +11,7 @@ import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
+import com.appsamurai.storyly.data.managers.product.STRProductInformation
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
@@ -18,6 +19,7 @@ import com.facebook.react.uimanager.UIManagerHelper
 import com.storylyreactnative.data.STEvent
 import com.storylyreactnative.data.createSTRCartItemMap
 import com.storylyreactnative.data.createSTRCartMap
+import com.storylyreactnative.data.createSTRProductInformationMap
 import com.storylyreactnative.data.createStoryComponentMap
 import com.storylyreactnative.data.createStoryGroupMap
 import com.storylyreactnative.data.createStoryMap
@@ -139,10 +141,10 @@ class STStorylyView(
 
             override fun storylyHydration(
                 storylyView: StorylyView,
-                productIds: List<String>
+                products: List<STRProductInformation>
             ) {
                 dispatchEvent(STEvent.Type.ON_STORYLY_ON_HYDRATION, mapOf(
-                        "productIds" to productIds
+                    "products" to products.map { info -> createSTRProductInformationMap(info) },
                 ))
             }
         }

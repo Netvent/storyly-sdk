@@ -1,4 +1,11 @@
 # Release Notes
+### 2.8.0 (15.12.2023)
+* IMPORTANT! changed type of products parameter in StorylyProductDelegate storylyHydration callback
+* added nudge stories
+* improved data update flow of story bar
+* fixed a bug related to conditional stories flow
+* optimized memory management of SDWebImage
+  
 ### 2.7.0 (05.12.2023)
 * IMPORTANT! added setLocale function to StorylyConfig; please refer to [Localization documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup#localization)
 * IMPORTANT! removed languageCode; please use setLocale function

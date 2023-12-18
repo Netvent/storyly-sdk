@@ -1,6 +1,13 @@
 # Release Notes
 * These are Fabric supported versions of storyly-react-native, for the older architecture please use these [legacy versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-legacy/RELEASENOTES.md)
 
+### 2.8.0 (18.12.2023)
+* IMPORTANT! changed type of products parameter onProductHydration callback
+* added nudge stories
+* improved data update flow of story bar 
+* fixed a bug related to conditional stories flow
+* optimized memory management of SDWebImage on ios platform
+
 ### 2.7.0 (06.12.2023)
 * improved codebase
 

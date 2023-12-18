@@ -9,7 +9,6 @@ declare module "storyly-react-native" {
       storylyTestMode?: boolean;
       storylySegments?: string[];
       storylyUserProperty?: Record<string, string>;
-      storylyPayload?: string;
       storylyShareUrl?: string;
       storylyFacebookAppID?: string;
 
@@ -90,7 +89,7 @@ declare module "storyly-react-native" {
     }
 
     export interface StoryProductHydrationEvent {
-      productIds: string[];
+      products: STRProductInformation[];
     }
 
     export interface StoryProductCartUpdateEvent {
@@ -256,5 +255,10 @@ declare module "storyly-react-native" {
     totalPrice?: number;
     oldTotalPrice?: number;
     quantity: number;
+  }
+
+  export interface STRProductInformation {
+    productId?: string;
+    productGroupId?: string;
   }
 }

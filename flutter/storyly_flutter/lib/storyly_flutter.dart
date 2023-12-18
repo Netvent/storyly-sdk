@@ -37,7 +37,7 @@ typedef StorylyViewActionClickedCallback = void Function(
 
 /// [StorylyView]  on product hydration callback
 typedef StorylyViewOnProductHydrationCallback = void Function(
-  List<String> groupIds,
+  List<ProductInformation> products,
 );
 
 /// [StorylyView]  on product event callback
@@ -244,7 +244,7 @@ class _StorylyViewState extends State<StorylyView> {
       case 'storylyOnHydration':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
         widget.storylyOnProductHydration?.call(
-          List<String>.from(jsonData['productIds']),
+          productInformationFromJson(jsonData['products']),
         );
         break;
       case 'storylyProductEvent':
@@ -874,6 +874,11 @@ List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
   return List<StoryGroup>.from(json.map((x) => StoryGroup.fromJson(x)));
 }
 
+List<ProductInformation> productInformationFromJson(List<dynamic> json) {
+  return List<ProductInformation>.from(
+      json.map((x) => ProductInformation.fromJson(x)));
+}
+
 /// This data class represents a story group in the StorylyView.
 class StoryGroup {
   StoryGroup({
@@ -1180,6 +1185,23 @@ class Media {
       actionUrl: json['actionUrl'],
       previewUrl: json['previewUrl'],
     );
+  }
+}
+
+/// This data class represents the story product information.
+class ProductInformation {
+  ProductInformation({
+    this.productId,
+    this.productGroupId,
+  });
+
+  final String? productId;
+
+  final String? productGroupId;
+
+  factory ProductInformation.fromJson(Map<String, dynamic> json) {
+    return ProductInformation(
+        productId: json['productId'], productGroupId: json['productGroupId']);
   }
 }
 

@@ -245,9 +245,9 @@ extension STStorylyView: StorylyProductDelegate {
         self.onStorylyCartUpdated?(map)
     }
 
-    func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [String]) {
+    func storylyHydration(_ storylyView: Storyly.StorylyView, products: [STRProductInformation]) {
         let map: [String : Any] = [
-            "productIds": productIds
+            "products": products.map { createSTRProductInformationMap(productInfo: $0) },
         ]
         self.onProductHydration?(map)
     }

@@ -288,9 +288,9 @@ class STStorylyProductDelegate: StorylyProductDelegate {
     }
     
     
-    func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [String]) {
+    func storylyHydration(_ storylyView: Storyly.StorylyView, products: [STRProductInformation]) {
         let map: [String : Any] = [
-            "productIds": productIds
+            "products": products.map { createSTRProductInformationMap(productInfo: $0) },
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onProductHydration?(eventJson)

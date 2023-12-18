@@ -13,7 +13,6 @@ export interface StorylyProps extends ViewProps {
     storylyTestMode?: boolean;
     storylySegments?: string[];
     storylyUserProperty?: Record<string, string>;
-    storylyPayload?: string;
     storylyShareUrl?: string;
     storylyFacebookAppID?: string;
 

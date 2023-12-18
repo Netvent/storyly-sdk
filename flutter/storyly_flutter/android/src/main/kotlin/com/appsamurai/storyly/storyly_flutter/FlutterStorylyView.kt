@@ -103,12 +103,12 @@ class FlutterStorylyView(
 
                 override fun storylyHydration(
                     storylyView: StorylyView,
-                    productIds: List<String>
+                    products: List<STRProductInformation>
                 ) {
                     methodChannel.invokeMethod(
                         "storylyOnHydration",
                         mapOf(
-                            "productIds" to productIds
+                            "products" to products.map { createSTRProductInformationMap(it) }
                         )
                     )
                 }
@@ -247,7 +247,6 @@ class FlutterStorylyView(
             .setLabels((json["storylySegments"] as? List<String>)?.toSet())
             .setCustomParameter(json["customParameter"] as? String)
             .setTestMode(json["storylyIsTestMode"] as? Boolean ?: false)
-            .setStorylyPayload(json["storylyPayload"] as? String)
             .setUserData(json["userProperty"] as? Map<String, String> ?: emptyMap())
             .setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
             .setLocale(json["storylyLocale"] as? String)
@@ -556,6 +555,13 @@ class FlutterStorylyView(
             "quantity" to cartItem.quantity,
             "oldTotalPrice" to cartItem.oldTotalPrice,
             "totalPrice" to cartItem.totalPrice
+        )
+    }
+
+    private fun createSTRProductInformationMap(productInfo: STRProductInformation): Map<String, *> {
+        return mapOf(
+            "productId" to productInfo.productId,
+            "productGroupId" to productInfo.productGroupId
         )
     }
 

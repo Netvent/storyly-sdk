@@ -62,7 +62,6 @@ private fun stStorylyInit(
         .setLabels(((json["storylySegments"] as? List<String>)?.toSet()))
         .setCustomParameter(json["customParameter"] as? String)
         .setTestMode(json["storylyIsTestMode"] as? Boolean ?: false)
-        .setStorylyPayload(json["storylyPayload"] as? String)
         .setUserData(json["userProperty"] as? Map<String, String> ?: emptyMap())
         .setLayoutDirection(getStorylyLayoutDirection(json["storylyLayoutDirection"] as? String))
         .setLocale(json["storylyLocale"] as? String)
