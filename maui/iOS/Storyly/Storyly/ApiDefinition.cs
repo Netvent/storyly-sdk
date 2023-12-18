@@ -268,8 +268,68 @@ namespace Storyly
 		string CustomPayload { get; }
 	}
 
-	// @interface StoryImageQuizComponent : StoryComponent
-	[BaseType(typeof(StoryComponent))]
+    [BaseType(typeof(UIView))]
+	[Protocol]
+    interface StoryGroupView
+    {
+        // -(void)populateView:(StoryGroup * _Nullable)storyGroup;
+        [Export("populateView:")]
+        void PopulateView([NullAllowed] StoryGroup storyGroup);
+
+        // -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+        [Export("initWithFrame:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(CGRect frame);
+    }
+
+    // @protocol StoryGroupViewFactory
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+    interface StoryGroupViewFactory
+    {
+        // @required -(StoryGroupView * _Nonnull)createView __attribute__((warn_unused_result("")));
+        [Abstract]
+        [Export("createView")]
+        StoryGroupView CreateView { get; }
+
+        // @required -(CGSize)getSize __attribute__((warn_unused_result("")));
+        [Abstract]
+        [Export("getSize")]
+        CGSize GetSize { get; }
+    }
+
+    // @protocol XamarinStoryGroup
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+    interface XamarinStoryGroup
+    {
+        // @required -(UIView * _Nonnull)createView __attribute__((warn_unused_result("")));
+        [Abstract]
+        [Export("createView")]
+        UIView CreateView { get; }
+
+        // @required -(void)populateView:(StoryGroup * _Nullable)storyGroup;
+        [Abstract]
+        [Export("populateView:")]
+        void PopulateView([NullAllowed] StoryGroup storyGroup);
+    }
+
+    // @interface XamarinStoryGroupView : StoryGroupView
+    [BaseType(typeof(StoryGroupView))]
+    interface XamarinStoryGroupView
+    {
+        // -(instancetype _Nonnull)initWithXamarinStoryGroup:(id<XamarinStoryGroup> _Nullable)xamarinStoryGroup __attribute__((objc_designated_initializer));
+        [Export("initWithXamarinStoryGroup:")]
+        [DesignatedInitializer]
+        IntPtr Constructor([NullAllowed] XamarinStoryGroup xamarinStoryGroup);
+
+        // -(void)populateView:(StoryGroup * _Nullable)storyGroup;
+        [Export("populateView:")]
+        void PopulateView([NullAllowed] StoryGroup storyGroup);
+    }
+
+    // @interface StoryImageQuizComponent : StoryComponent
+    [BaseType(typeof(StoryComponent))]
 	interface StoryImageQuizComponent
 	{
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
@@ -603,8 +663,12 @@ namespace Storyly
 		[Export("setSize:")]
 		StorylyStoryGroupStylingBuilder SetSize(StoryGroupSize size);
 
-		// -(StorylyStoryGroupStyling * _Nonnull)build __attribute__((warn_unused_result("")));
-		[Export("build")]
+        // -(StorylyStoryGroupStylingBuilder * _Nonnull)setCustomGroupViewFactory:(id<StoryGroupViewFactory> _Nullable)factory __attribute__((warn_unused_result(“”)));
+        [Export("setCustomGroupViewFactory:")]
+        StorylyStoryGroupStylingBuilder SetCustomGroupViewFactory([NullAllowed] StoryGroupViewFactory factory);
+
+        // -(StorylyStoryGroupStyling * _Nonnull)build __attribute__((warn_unused_result("")));
+        [Export("build")]
 		StorylyStoryGroupStyling Build();
 	}
 
