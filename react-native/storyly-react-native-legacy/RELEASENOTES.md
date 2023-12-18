@@ -1,6 +1,13 @@
 # Release Notes
 * If you are using new Fabric architecture please use these [Fabric supported versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) of storyly-react-native.
 
+### 2.4.4 (18.12.2023)
+* IMPORTANT! changed type of products parameter onProductHydration callback
+* added nudge stories
+* improved data update flow of story bar 
+* fixed a bug related to conditional stories flow
+* optimized memory management of SDWebImage on ios platform
+
 ### 2.4.3 (06.12.2023)
 * IMPORTANT! added storylyLocale property for localization; please refer to [Localization documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup#localization)
 * IMPORTANT! removed storyProductCountry and storyProductLanguage properties; please use storylyLocale property
