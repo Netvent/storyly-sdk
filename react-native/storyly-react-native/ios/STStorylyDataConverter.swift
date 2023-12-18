@@ -147,6 +147,13 @@ internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String:
     ]
 }
 
+internal func createSTRProductInformationMap(productInfo: STRProductInformation) -> [String: Any?] {
+    return [
+        "productId": productInfo.productId,
+        "productGroupId": productInfo.productGroupId
+    ]
+}
+
 internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem {
     return STRProductItem(
         productId: productItem?["productId"] as? String ?? "",
