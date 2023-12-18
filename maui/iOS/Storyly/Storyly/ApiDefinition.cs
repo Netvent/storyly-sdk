@@ -27,8 +27,16 @@ namespace Storyly
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
 
-		// -(void)resumeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
-		[Export("resumeStoryWithAnimated:completion:")]
+        [Wrap("WeakProductDelegate")]
+        [NullAllowed]
+        StorylyProductDelegate ProductDelegate { get; set; }
+
+        // @property (nonatomic, weak) id<StorylyProductDelegate> _Nullable productDelegate;
+        [NullAllowed, Export("productDelegate", ArgumentSemantic.Weak)]
+        NSObject WeakProductDelegate { get; set; }
+
+        // -(void)resumeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
+        [Export("resumeStoryWithAnimated:completion:")]
 		void ResumeStoryWithAnimated(bool animated, [NullAllowed] Action completion);
 
 		// -(void)pauseStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
@@ -39,8 +47,16 @@ namespace Storyly
 		[Export("closeStoryWithAnimated:completion:")]
 		void CloseStoryWithAnimated(bool animated, [NullAllowed] Action completion);
 
-		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
-		[Export("initWithFrame:")]
+        // -(void)hydrateProductsWithProducts:(NSArray<STRProductItem *> * _Nonnull)products;
+        [Export("hydrateProductsWithProducts:")]
+        void HydrateProduct(STRProductItem[] products);
+
+        // -(void)updateCartWithCart:(STRCart * _Nonnull)cart;
+        [Export("updateCartWithCart:")]
+        void UpdateCart(STRCart cart);
+
+        // -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+        [Export("initWithFrame:")]
 		[DesignatedInitializer]
 		IntPtr Constructor(CGRect frame);
 	}
@@ -86,8 +102,26 @@ namespace Storyly
 		void StorylyEvent(StorylyView storylyView, StorylyEvent @event, [NullAllowed] StoryGroup storyGroup, [NullAllowed] Story story, [NullAllowed] StoryComponent storyComponent);
 	}
 
-	// @interface StoryGroup : NSObject
-	[BaseType(typeof(NSObject))]
+    // @protocol StorylyProductDelegate
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+    interface StorylyProductDelegate
+    {
+        // @optional -(void)storylyHydration:(StorylyView * _Nonnull)storylyView products:(NSArray<STRProductInformation *> * _Nonnull)products;
+        [Export("storylyHydration:products:")]
+        void StorylyHydration(StorylyView storylyView, STRProductInformation[] products);
+
+        // @optional -(void)storylyEvent:(StorylyView * _Nonnull)storylyView event:(enum StorylyEvent)event;
+        [Export("storylyEvent:event:")]
+        void StorylyEvent(StorylyView storylyView, StorylyEvent @event);
+
+        // @optional -(void)storylyUpdateCartEventWithStorylyView:(StorylyView * _Nonnull)storylyView event:(enum StorylyEvent)event cart:(STRCart * _Nullable)cart change:(STRCartItem * _Nullable)change onSuccess:(void (^ _Nullable)(STRCart * _Nullable))onSuccess onFail:(void (^ _Nullable)(STRCartEventResult * _Nonnull))onFail;
+        [Export("storylyUpdateCartEventWithStorylyView:event:cart:change:onSuccess:onFail:")]
+        void StorylyUpdateCartEvent(StorylyView storylyView, StorylyEvent @event, [NullAllowed] STRCart cart, [NullAllowed] STRCartItem change, [NullAllowed] Action<STRCart> onSuccess, [NullAllowed] Action<STRCartEventResult> onFail);
+    }
+
+    // @interface StoryGroup : NSObject
+    [BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
 	interface StoryGroup
 	{
@@ -424,6 +458,187 @@ namespace Storyly
 		[NullAllowed, Export("customPayload")]
 		string CustomPayload { get; }
 	}
+
+    // @interface STRCart : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRCart
+    {
+        // @property (readonly, copy, nonatomic) NSArray<STRCartItem *> * _Nonnull items;
+        [Export("items", ArgumentSemantic.Copy)]
+        STRCartItem[] Items { get; }
+
+        // @property (readonly, nonatomic) float totalPrice;
+        [Export("totalPrice")]
+        float TotalPrice { get; }
+
+        // @property (readonly, nonatomic, strong) NSNumber * _Nullable oldTotalPrice;
+        [NullAllowed, Export("oldTotalPrice", ArgumentSemantic.Strong)]
+        NSNumber OldTotalPrice { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull currency;
+        [Export("currency")]
+        string Currency { get; }
+
+        // -(instancetype _Nonnull)initWithItems:(NSArray<STRCartItem *> * _Nonnull)items totalPrice:(float)totalPrice oldTotalPrice:(NSNumber * _Nullable)oldTotalPrice currency:(NSString * _Nonnull)currency __attribute__((objc_designated_initializer));
+        [Export("initWithItems:totalPrice:oldTotalPrice:currency:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(STRCartItem[] items, float totalPrice, [NullAllowed] NSNumber oldTotalPrice, string currency);
+    }
+
+    // @interface STRCartEventResult : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRCartEventResult
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull message;
+        [Export("message")]
+        string Message { get; }
+
+        // -(instancetype _Nonnull)initWithMessage:(NSString * _Nonnull)message __attribute__((objc_designated_initializer));
+        [Export("initWithMessage:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(string message);
+    }
+
+    // @interface STRCartItem : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRCartItem
+    {
+        // @property (readonly, nonatomic, strong) STRProductItem * _Nonnull item;
+        [Export("item", ArgumentSemantic.Strong)]
+        STRProductItem Item { get; }
+
+        // @property (readonly, nonatomic) NSInteger quantity;
+        [Export("quantity")]
+        nint Quantity { get; }
+
+        // @property (readonly, nonatomic, strong) NSNumber * _Nullable totalPrice;
+        [NullAllowed, Export("totalPrice", ArgumentSemantic.Strong)]
+        NSNumber TotalPrice { get; }
+
+        // @property (readonly, nonatomic, strong) NSNumber * _Nullable oldTotalPrice;
+        [NullAllowed, Export("oldTotalPrice", ArgumentSemantic.Strong)]
+        NSNumber OldTotalPrice { get; }
+
+        // -(instancetype _Nonnull)initWithItem:(STRProductItem * _Nonnull)item quantity:(NSInteger)quantity totalPrice:(NSNumber * _Nullable)totalPrice oldTotalPrice:(NSNumber * _Nullable)oldTotalPrice __attribute__((objc_designated_initializer));
+        [Export("initWithItem:quantity:totalPrice:oldTotalPrice:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(STRProductItem item, nint quantity, [NullAllowed] NSNumber totalPrice, [NullAllowed] NSNumber oldTotalPrice);
+    }
+
+    // @interface STRProductInformation : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRProductInformation
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nullable productId;
+        [NullAllowed, Export("productId")]
+        string ProductId { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable productGroupId;
+        [NullAllowed, Export("productGroupId")]
+        string ProductGroupId { get; }
+
+        // -(instancetype _Nonnull)initWithProductId:(NSString * _Nullable)productId productGroupId:(NSString * _Nullable)productGroupId __attribute__((objc_designated_initializer));
+        [Export("initWithProductId:productGroupId:")]
+        [DesignatedInitializer]
+        IntPtr Constructor([NullAllowed] string productId, [NullAllowed] string productGroupId);
+    }
+
+    // @interface STRProductItem : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRProductItem: INativeObject
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull productId;
+        [Export("productId")]
+        string ProductId { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull productGroupId;
+        [Export("productGroupId")]
+        string ProductGroupId { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+        [Export("title")]
+        string Title { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull url;
+        [Export("url")]
+        string Url { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable desc;
+        [NullAllowed, Export("desc")]
+        string Desc { get; }
+
+        // @property (readonly, nonatomic) float price;
+        [Export("price")]
+        float Price { get; }
+
+        // @property (readonly, nonatomic, strong) NSNumber * _Nullable salesPrice;
+        [NullAllowed, Export("salesPrice", ArgumentSemantic.Strong)]
+        NSNumber SalesPrice { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull currency;
+        [Export("currency")]
+        string Currency { get; }
+
+        // @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable imageUrls;
+        [NullAllowed, Export("imageUrls", ArgumentSemantic.Copy)]
+        string[] ImageUrls { get; }
+
+        // @property (readonly, copy, nonatomic) NSArray<STRProductVariant *> * _Nullable variants;
+        [NullAllowed, Export("variants", ArgumentSemantic.Copy)]
+        STRProductVariant[] Variants { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable ctaText;
+        [NullAllowed, Export("ctaText")]
+        string CtaText { get; }
+
+        // -(instancetype _Nonnull)initWithProductId:(NSString * _Nonnull)productId productGroupId:(NSString * _Nonnull)productGroupId title:(NSString * _Nonnull)title url:(NSString * _Nonnull)url description:(NSString * _Nullable)description price:(float)price salesPrice:(NSNumber * _Nullable)salesPrice currency:(NSString * _Nonnull)currency imageUrls:(NSArray<NSString *> * _Nullable)imageUrls variants:(NSArray<STRProductVariant *> * _Nullable)variants ctaText:(NSString * _Nullable)ctaText __attribute__((objc_designated_initializer));
+        [Export("initWithProductId:productGroupId:title:url:description:price:salesPrice:currency:imageUrls:variants:ctaText:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(string productId, string productGroupId, string title, string url, [NullAllowed] string description, float price, [NullAllowed] NSNumber salesPrice, string currency, [NullAllowed] string[] imageUrls, [NullAllowed] STRProductVariant[] variants, [NullAllowed] string ctaText);
+    }
+
+    // @interface STRProductVariant : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRProductVariant
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull name;
+        [Export("name")]
+        string Name { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull value;
+        [Export("value")]
+        string Value { get; }
+
+        // -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value __attribute__((objc_designated_initializer));
+        [Export("initWithName:value:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(string name, string value);
+
+        // -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
+        [Export("isEqual:")]
+        bool IsEqual([NullAllowed] NSObject @object);
+
+        // @property (readonly, nonatomic) NSUInteger hash;
+        [Export("hash")]
+        nuint Hash { get; }
+    }
+
+    // @protocol StoryPriceFormatter
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+    interface StoryPriceFormatter
+    {
+        // -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
+        [Export("format::")]
+        string Format([NullAllowed] NSNumber price, string currency);
+    }
+
 }
 
 
@@ -487,8 +702,12 @@ namespace Storyly
 		[Export("setTestMode:")]
 		StorylyConfigBuilder SetTestMode(bool isTest);
 
-		// -(StorylyConfigBuilder * _Nonnull)setShareConfig:(StorylyShareConfig * _Nonnull)config __attribute__((warn_unused_result("")));
-		[Export("setShareConfig:")]
+        // -(StorylyConfigBuilder * _Nonnull)setProductConfig:(StorylyProductConfig * _Nonnull)config __attribute__((warn_unused_result("")));
+        [Export("setProductConfig:")]
+        StorylyConfigBuilder SetProductConfig(StorylyProductConfig config);
+
+        // -(StorylyConfigBuilder * _Nonnull)setShareConfig:(StorylyShareConfig * _Nonnull)config __attribute__((warn_unused_result("")));
+        [Export("setShareConfig:")]
 		StorylyConfigBuilder SetShareConfig(StorylyShareConfig config);
 
 		// -(StorylyConfig * _Nonnull)build __attribute__((warn_unused_result("")));
@@ -695,4 +914,32 @@ namespace Storyly
 		[Export("build")]
 		StorylyShareConfig Build();
 	}
+
+    // @interface StorylyProductConfig : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface StorylyProductConfig
+    {
+    }
+
+    // @interface StorylyProductConfigBuilder : NSObject
+    [BaseType(typeof(NSObject))]
+    interface StorylyProductConfigBuilder
+    {
+        // -(StorylyProductConfigBuilder * _Nonnull)setFallbackAvailability:(BOOL)isEnabled __attribute__((warn_unused_result("")));
+        [Export("setFallbackAvailability:")]
+        StorylyProductConfigBuilder SetFallbackAvailability(bool isEnabled);
+
+        // -(StorylyProductConfigBuilder * _Nonnull)setCartEnabled:(BOOL)isEnabled __attribute__((warn_unused_result("")));
+        [Export("setCartEnabled:")]
+        StorylyProductConfigBuilder SetCartEnabled(bool isEnabled);
+
+        // -(StorylyProductConfigBuilder * _Nonnull)setProductFeed:(NSDictionary<NSString *,NSArray<STRProductItem *> *> * _Nullable)feed __attribute__((warn_unused_result("")));
+        [Export("setProductFeed:")]
+        StorylyProductConfigBuilder SetProductFeed([NullAllowed] NSDictionary<NSString, NSMutableArray<STRProductItem>> feed);
+
+        // -(StorylyProductConfig * _Nonnull)build __attribute__((warn_unused_result("")));
+        [Export("build")]
+        StorylyProductConfig Build { get; }
+    }
 }
