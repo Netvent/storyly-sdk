@@ -416,6 +416,21 @@ SWIFT_CLASS_NAMED("STRCartItem")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+/// Data class that represents the storyly product information
+/// \param productId The unique identifier for the product. 
+///
+/// \param productGroupId The unique identifier for the product group. 
+///
+SWIFT_CLASS_NAMED("STRProductInformation")
+@interface STRProductInformation : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable productId;
+@property (nonatomic, readonly, copy) NSString * _Nullable productGroupId;
+- (nonnull instancetype)initWithProductId:(NSString * _Nullable)productId productGroupId:(NSString * _Nullable)productGroupId OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class STRProductVariant;
 
 /// Represents the storyly product
@@ -662,6 +677,8 @@ SWIFT_CLASS_NAMED("StoryGroup")
 @property (nonatomic, readonly, strong) StoryGroupStyle * _Nullable style;
 /// Name of this group
 @property (nonatomic, readonly, copy) NSString * _Nullable name;
+/// Denotes whether story group is nudge or not
+@property (nonatomic, readonly) BOOL nudge;
 /// StoryGroup initialization
 /// \param id ID of the story group
 ///
@@ -689,7 +706,9 @@ SWIFT_CLASS_NAMED("StoryGroup")
 ///
 /// \param name Name of this group
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl thematicIconUrls:(NSDictionary<NSString *, NSURL *> * _Nullable)thematicIconUrls coverUrl:(NSURL * _Nullable)coverUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type momentsUser:(MomentsUser * _Nullable)momentsUser style:(StoryGroupStyle * _Nullable)style name:(NSString * _Nullable)name OBJC_DESIGNATED_INITIALIZER;
+/// \param nudge Denotes whether story group is nudge or not
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl thematicIconUrls:(NSDictionary<NSString *, NSURL *> * _Nullable)thematicIconUrls coverUrl:(NSURL * _Nullable)coverUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type momentsUser:(MomentsUser * _Nullable)momentsUser style:(StoryGroupStyle * _Nullable)style name:(NSString * _Nullable)name nudge:(BOOL)nudge OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -778,7 +797,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, StoryGroupType, "StoryGroupType", open) {
 @class NSCoder;
 
 /// This class defines the parent class of the custom styling StoryGroupView classes
-SWIFT_CLASS("_TtC7Storyly14StoryGroupView")
+SWIFT_CLASS_NAMED("StoryGroupView")
 @interface StoryGroupView : UIView
 /// This function fills the StoryGroupView components
 - (void)populateView:(StoryGroup * _Nullable)storyGroup;
@@ -788,7 +807,7 @@ SWIFT_CLASS("_TtC7Storyly14StoryGroupView")
 
 
 /// This protocol defines the structure of StoryGroupViewFactory
-SWIFT_PROTOCOL("_TtP7Storyly21StoryGroupViewFactory_")
+SWIFT_PROTOCOL_NAMED("StoryGroupViewFactory")
 @protocol StoryGroupViewFactory
 /// This function is called when a new view is requested
 - (StoryGroupView * _Nonnull)createView SWIFT_WARN_UNUSED_RESULT;
@@ -885,9 +904,12 @@ SWIFT_CLASS_NAMED("StoryPollComponent")
 
 
 /// This class defines the structure of StorylyPriceConverter
-SWIFT_CLASS("_TtC7Storyly19StoryPriceFormatter")
-@interface StoryPriceFormatter : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_PROTOCOL_NAMED("StoryPriceFormatter")
+@protocol StoryPriceFormatter
+/// This function format price and currency symbol
+/// @param price Represents the numerical value of the price
+/// @param currency Represents the currency symbol
+- (NSString * _Nullable)format:(NSNumber * _Nullable)price :(NSString * _Nonnull)currency SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1127,10 +1149,6 @@ SWIFT_CLASS_NAMED("Builder")
 /// \param data [String String] instance to set
 ///
 - (StorylyConfigBuilder * _Nonnull)setUserData:(NSDictionary<NSString *, NSString *> * _Nonnull)data SWIFT_WARN_UNUSED_RESULT;
-/// This function allows you to set storylyPayload information to get moments groups for the user
-/// \param payload String? instance to set 
-///
-- (StorylyConfigBuilder * _Nonnull)setStorylyPayload:(NSString * _Nullable)payload SWIFT_WARN_UNUSED_RESULT;
 /// This function allows you to set IsTestMode which defines whether it is a test device or not. If true, test groups are sent from the server.
 /// \param isTest Bool instance to set 
 ///
@@ -1532,7 +1550,7 @@ SWIFT_CLASS_NAMED("StorylyProductConfig")
 /// Builder class of StorylyProductConfig
 SWIFT_CLASS_NAMED("Builder")
 @interface StorylyProductConfigBuilder : NSObject
-- (StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(StoryPriceFormatter * _Nonnull)formatter SWIFT_WARN_UNUSED_RESULT;
+- (StorylyProductConfigBuilder * _Nonnull)setPriceFormatter:(id <StoryPriceFormatter> _Nonnull)formatter SWIFT_WARN_UNUSED_RESULT;
 /// This function allows you to set enability of hydration from feed data from backend
 /// \param isEnabled Bool instance to set 
 ///
@@ -1562,9 +1580,9 @@ SWIFT_PROTOCOL_NAMED("StorylyProductDelegate")
 /// This function will notify you to get ids of products
 /// \param storylyView StorylyView instance in which the user interacted with a component
 ///
-/// \param productIds Found product ids in stories
+/// \param products Found list of product information in stories
 ///
-- (void)storylyHydration:(StorylyView * _Nonnull)storylyView productIds:(NSArray<NSString *> * _Nonnull)productIds;
+- (void)storylyHydration:(StorylyView * _Nonnull)storylyView products:(NSArray<STRProductInformation *> * _Nonnull)products;
 /// This function will notify you about all Storyly events and let you to send these events to
 /// specific data platforms
 /// \param storylyView StorylyView instance in which the event is received

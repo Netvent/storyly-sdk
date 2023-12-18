@@ -110,6 +110,12 @@ extension Storyly.StorylyView {
   @objc @_Concurrency.MainActor(unsafe) final public func showExternalActionView(externalActionView: UIKit.UIView)
   @objc @_Concurrency.MainActor(unsafe) final public func dismissExternalActionView()
 }
+@objc(STRProductInformation) public class STRProductInformation : ObjectiveC.NSObject {
+  @objc final public let productId: Swift.String?
+  @objc final public let productGroupId: Swift.String?
+  @objc public init(productId: Swift.String?, productGroupId: Swift.String?)
+  @objc deinit
+}
 @_hasMissingDesignatedInitializers @objc(StorylyMomentsStyling) public class StorylyMomentsStyling : ObjectiveC.NSObject {
   @_inheritsConvenienceInitializers @objc(StorylyMomentsStylingBuilder) public class Builder : ObjectiveC.NSObject {
     @objc(setIconStyling:) public func setIconStyling(iconStyling: Storyly.StorylyMomentsIconStyling) -> Storyly.StorylyMomentsStyling.Builder
@@ -123,7 +129,7 @@ extension Storyly.StorylyView {
   @objc deinit
 }
 @objc(StorylyProductDelegate) public protocol StorylyProductDelegate {
-  @objc optional func storylyHydration(_ storylyView: Storyly.StorylyView, productIds: [Swift.String])
+  @objc optional func storylyHydration(_ storylyView: Storyly.StorylyView, products: [Storyly.STRProductInformation])
   @objc optional func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent)
   @objc optional func storylyUpdateCartEvent(storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, cart: Storyly.STRCart?, change: Storyly.STRCartItem?, onSuccess: ((Storyly.STRCart?) -> Swift.Void)?, onFail: ((Storyly.STRCartEventResult) -> Swift.Void)?)
 }
@@ -145,10 +151,6 @@ extension Storyly.StorylyView {
     get
     set
   }
-  public var storylyPayload: Swift.String? {
-    get
-    set
-  }
   @_inheritsConvenienceInitializers @objc(StorylyConfigBuilder) public class Builder : ObjectiveC.NSObject {
     @objc(setBarStyling:) public func setBarStyling(styling: Storyly.StorylyBarStyling) -> Storyly.StorylyConfig.Builder
     @objc(setStoryStyling:) public func setStoryStyling(styling: Storyly.StorylyStoryStyling) -> Storyly.StorylyConfig.Builder
@@ -158,7 +160,6 @@ extension Storyly.StorylyView {
     @objc(setCustomParameter:) public func setCustomParameter(parameter: Swift.String?) -> Storyly.StorylyConfig.Builder
     @objc(setLabels:) public func setLabels(labels: Swift.Set<Swift.String>?) -> Storyly.StorylyConfig.Builder
     @objc(setUserData:) public func setUserData(data: [Swift.String : Swift.String]) -> Storyly.StorylyConfig.Builder
-    @objc(setStorylyPayload:) public func setStorylyPayload(payload: Swift.String?) -> Storyly.StorylyConfig.Builder
     @objc(setTestMode:) public func setTestMode(isTest: Swift.Bool) -> Storyly.StorylyConfig.Builder
     @objc(setProductConfig:) public func setProductConfig(config: Storyly.StorylyProductConfig) -> Storyly.StorylyConfig.Builder
     @objc(setShareConfig:) public func setShareConfig(config: Storyly.StorylyShareConfig) -> Storyly.StorylyConfig.Builder
@@ -262,7 +263,7 @@ extension Storyly.StorylyView {
 }
 @_hasMissingDesignatedInitializers @objc(StorylyProductConfig) public class StorylyProductConfig : ObjectiveC.NSObject {
   @_inheritsConvenienceInitializers @objc(StorylyProductConfigBuilder) public class Builder : ObjectiveC.NSObject {
-    @objc(setPriceFormatter:) public func setPriceFormatter(formatter: Storyly.StoryPriceFormatter) -> Storyly.StorylyProductConfig.Builder
+    @objc(setPriceFormatter:) public func setPriceFormatter(formatter: any Storyly.StoryPriceFormatter) -> Storyly.StorylyProductConfig.Builder
     @objc(setFallbackAvailability:) public func setFallbackAvailability(isEnabled: Swift.Bool) -> Storyly.StorylyProductConfig.Builder
     @objc(setCartEnabled:) public func setCartEnabled(isEnabled: Swift.Bool) -> Storyly.StorylyProductConfig.Builder
     @objc(setProductFeed:) public func setProductFeed(feed: [Swift.String : [Storyly.STRProductItem]]?) -> Storyly.StorylyProductConfig.Builder
@@ -304,11 +305,11 @@ extension Storyly.StorylyView {
   @objc public init(storylyId: Swift.String, config: Storyly.StorylyConfig = StorylyConfig.Builder().build())
   @objc deinit
 }
-@objc public protocol StoryGroupViewFactory {
-  @objc func createView() -> Storyly.StoryGroupView
+@objc(StoryGroupViewFactory) public protocol StoryGroupViewFactory {
+  @objc(createView) func createView() -> Storyly.StoryGroupView
   @objc func getSize() -> CoreFoundation.CGSize
 }
-@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class StoryGroupView : UIKit.UIView {
+@_inheritsConvenienceInitializers @objc(StoryGroupView) @_Concurrency.MainActor(unsafe) open class StoryGroupView : UIKit.UIView {
   @objc(populateView:) @_Concurrency.MainActor(unsafe) open func populateView(storyGroup: Storyly.StoryGroup?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -324,9 +325,8 @@ extension Storyly.StorylyView {
   @objc(createView) func createView() -> UIKit.UIView
   @objc(populateView:) func populateView(storyGroup: Storyly.StoryGroup?)
 }
-@_inheritsConvenienceInitializers @objc public class StoryPriceFormatter : ObjectiveC.NSObject {
-  @objc override dynamic public init()
-  @objc deinit
+@objc(StoryPriceFormatter) public protocol StoryPriceFormatter {
+  @objc(format::) func format(price: Foundation.NSNumber?, currency: Swift.String) -> Swift.String?
 }
 @_hasMissingDesignatedInitializers @objc(StorylyStoryStyling) public class StorylyStoryStyling : ObjectiveC.NSObject {
   @_inheritsConvenienceInitializers @objc(StorylyStoryStylingBuilder) public class Builder : ObjectiveC.NSObject {
@@ -470,7 +470,8 @@ extension Storyly.StorylyView {
   @objc final public let momentsUser: Storyly.MomentsUser?
   @objc final public let style: Storyly.StoryGroupStyle?
   @objc final public let name: Swift.String?
-  @objc public init(id: Swift.String, title: Swift.String, iconUrl: Foundation.URL?, thematicIconUrls: [Swift.String : Foundation.URL]?, coverUrl: Foundation.URL?, index: Swift.Int, seen: Swift.Bool, stories: [Storyly.Story], pinned: Swift.Bool, type: Storyly.StoryGroupType, momentsUser: Storyly.MomentsUser?, style: Storyly.StoryGroupStyle?, name: Swift.String?)
+  @objc final public let nudge: Swift.Bool
+  @objc public init(id: Swift.String, title: Swift.String, iconUrl: Foundation.URL?, thematicIconUrls: [Swift.String : Foundation.URL]?, coverUrl: Foundation.URL?, index: Swift.Int, seen: Swift.Bool, stories: [Storyly.Story], pinned: Swift.Bool, type: Storyly.StoryGroupType, momentsUser: Storyly.MomentsUser?, style: Storyly.StoryGroupStyle?, name: Swift.String?, nudge: Swift.Bool)
   @objc deinit
 }
 @objc(StoryGroupStyle) final public class StoryGroupStyle : ObjectiveC.NSObject {
