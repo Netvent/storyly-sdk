@@ -198,7 +198,6 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             .setLabels(if (json.hasKey("storylySegments")) (json.getArray("storylySegments")?.toArrayList() as? ArrayList<String>)?.toSet() else null)
             .setCustomParameter(if (json.hasKey("customParameter")) json.getString("customParameter") else null)
             .setTestMode(if (json.hasKey("storylyIsTestMode")) json.getBoolean("storylyIsTestMode") else false)
-            .setStorylyPayload(if (json.hasKey("storylyPayload")) json.getString("storylyPayload") else null)
             .setUserData(if (json.hasKey("userProperty")) json.getMap("userProperty")?.toHashMap() as? Map<String, String> ?: emptyMap() else emptyMap())
             .setLayoutDirection(getStorylyLayoutDirection(json.getString("storylyLayoutDirection")))
             .setLocale(if (json.hasKey("storylyLocale")) json.getString("storylyLocale") else null)

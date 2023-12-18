@@ -168,7 +168,6 @@ class Storyly extends Component {
             storylySegments,
             storylyUserProperty,
             customParameter,
-            storylyPayload,
             storylyTestMode,
             storylyShareUrl,
             storylyFacebookAppID,
@@ -235,7 +234,6 @@ class Storyly extends Component {
                             'userProperty': storylyUserProperty,
                             'customParameter': customParameter,
                             'storylyIsTestMode': storylyTestMode, 
-                            'storylyPayload': storylyPayload,
                             'storylyLayoutDirection': storylyLayoutDirection,
                             'storylyLocale': storylyLocale,
                         },
@@ -310,7 +308,6 @@ Storyly.propTypes = {
     customParameter: string,
     storylyTestMode: bool,
     storylyShareUrl: string,
-    storylyPayload: string,
 
     storyGroupSize: string,
     storyGroupIconBorderColorSeen: arrayOf(string),

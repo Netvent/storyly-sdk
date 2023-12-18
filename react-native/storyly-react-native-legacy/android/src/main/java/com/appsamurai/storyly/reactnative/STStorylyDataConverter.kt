@@ -5,6 +5,7 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.appsamurai.storyly.data.managers.product.STRProductVariant
+import com.appsamurai.storyly.data.managers.product.STRProductInformation
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
@@ -226,6 +227,13 @@ internal fun createSTRCartItemMap(cartItem: STRCartItem?): WritableMap {
             }
         }
     } ?: Arguments.createMap()
+}
+
+internal fun createSTRProductInformationMap(productInfo: STRProductInformation): WritableMap {
+    return Arguments.createMap().also { productInformationMap ->
+        productInformationMap.putString("productId", productInfo.productId)
+        productInformationMap.putString("productGroupId", productInfo.productGroupId)
+    }
 }
 
 internal fun createSTRCart(cart: Map<String, Any?>): STRCart {
