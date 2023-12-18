@@ -1,3 +1,10 @@
+### 2.8.0 (18.12.2023)
+* IMPORTANT! changed type of products parameter storylyOnProductHydration callback
+* added nudge stories
+* improved data update flow of story bar 
+* fixed a bug related to conditional stories flow
+* optimized memory management of SDWebImage on ios platform
+
 ### 2.7.0 (06.12.2023)
 * improved codebase
 
