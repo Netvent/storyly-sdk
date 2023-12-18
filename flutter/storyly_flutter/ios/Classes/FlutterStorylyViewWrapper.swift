@@ -109,7 +109,6 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
         return configBuilder
             .setCustomParameter(parameter: json["customParameter"] as? String)
             .setTestMode(isTest: (json["storylyIsTestMode"] as? Bool) ?? false)
-            .setStorylyPayload(payload: json["storylyPayload"] as? String)
             .setUserData(data: json["userProperty"] as? [String: String] ?? [:])
             .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
             .setLocale(locale: json["storylyLocale"] as? String)
@@ -289,9 +288,11 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
 
 extension FlutterStorylyViewWrapper: StorylyProductDelegate {
     
-    func storylyHydration(_ storylyView: StorylyView, productIds: [String]) {
+    func storylyHydration(_ storylyView: StorylyView, products: [Storyly.STRProductInformation]) {
         self.methodChannel.invokeMethod("storylyOnHydration",
-                                        arguments: ["productIds": productIds])
+                                        arguments: [
+                                            "products": products.map { productInfo in self.createSTRProductInformationMap(productInfo: productInfo)},
+                                        ])
     }
     
     func storylyEvent(_ storylyView: StorylyView,
@@ -443,6 +444,13 @@ extension FlutterStorylyViewWrapper {
         return [
             "name" : variant.name,
             "value" : variant.value
+        ]
+    }
+    
+    private func createSTRProductInformationMap(productInfo: STRProductInformation) -> [String: Any?] {
+        return [
+            "productId": productInfo.productId,
+            "productGroupId": productInfo.productGroupId
         ]
     }
     
