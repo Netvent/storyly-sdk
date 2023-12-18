@@ -58,7 +58,6 @@ private func stStorylyInit(
     return configBuilder
         .setCustomParameter(parameter: json["customParameter"] as? String)
         .setTestMode(isTest: (json["storylyIsTestMode"] as? Bool) ?? false)
-        .setStorylyPayload(payload: json["storylyPayload"] as? String)
         .setUserData(data: json["userProperty"] as? [String: String] ?? [:])
         .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
         .setLocale(locale: json["storylyLocale"] as? String)

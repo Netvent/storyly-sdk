@@ -176,6 +176,14 @@ internal func createSTRCartItemMap(cartItem: STRCartItem?) -> [String: Any?] {
     ]
 }
 
+internal func createSTRProductInformationMap(productInfo: STRProductInformation?) -> [String: Any?] {
+    guard let productInfo = productInfo else { return [:] }
+    return [
+        "productId": productInfo.productId,
+        "productGroupId": productInfo.productGroupId
+    ]
+}
+
 internal func createSTRCartItem(cartItemMap: NSDictionary) -> STRCartItem {
     return STRCartItem(
         item: createSTRProductItem(productItem: cartItemMap["item"] as? NSDictionary),
