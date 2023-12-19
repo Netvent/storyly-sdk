@@ -36,6 +36,7 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
                 it.putString("username", momentsUser.username)
             }
         })
+        storyGroupMap.putBoolean("nudge", storyGroup.nudge)
     }
 }
 
