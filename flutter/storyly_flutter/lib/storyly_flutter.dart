@@ -890,6 +890,7 @@ class StoryGroup {
     required this.stories,
     required this.pinned,
     required this.type,
+    required this.nudge,
     this.thematicIconUrls,
     this.coverUrl,
   });
@@ -918,6 +919,8 @@ class StoryGroup {
 
   final bool pinned;
 
+  final bool nudge;
+
   final int type;
 
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
@@ -934,6 +937,7 @@ class StoryGroup {
       coverUrl: json['coverUrl'],
       pinned: json['pinned'],
       type: json['type'],
+      nudge: json['nudge'],
     );
   }
 }
