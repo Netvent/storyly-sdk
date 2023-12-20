@@ -240,7 +240,7 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
             onStorylyActionClicked={applyBaseEvent(_onStorylyActionClicked)}
             onStorylyStoryPresented={applyBaseEvent(_onStorylyStoryPresented)}
             onStorylyStoryPresentFailed={applyBaseEvent(_onStorylyStoryPresentFailed)}
-            onStorylyStoryClose={applyBaseEvent(_onStorylyStoryDismissed)}
+            onStorylyStoryDismissed={applyBaseEvent(_onStorylyStoryDismissed)}
             onStorylyUserInteracted={applyBaseEvent(_onStorylyUserInteracted)}
             onStorylyProductHydration={applyBaseEvent(_onStorylyProductHydration)}
             onStorylyCartUpdated={applyBaseEvent(_onStorylyCartUpdated)}

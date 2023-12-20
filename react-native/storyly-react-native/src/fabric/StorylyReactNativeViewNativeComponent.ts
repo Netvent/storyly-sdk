@@ -16,7 +16,7 @@ interface StorylyNativeProps extends ViewProps {
   onStorylyEvent: BubblingEventHandler<Event>;
   onStorylyStoryPresented: BubblingEventHandler<Event>;
   onStorylyStoryPresentFailed: BubblingEventHandler<Event>;
-  onStorylyStoryClose: BubblingEventHandler<Event>;
+  onStorylyStoryDismissed: BubblingEventHandler<Event>;
   onStorylyActionClicked: BubblingEventHandler<Event>;
   onStorylyUserInteracted: BubblingEventHandler<Event>;
   onStorylyProductHydration: BubblingEventHandler<Event>;

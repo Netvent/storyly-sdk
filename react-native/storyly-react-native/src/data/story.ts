@@ -45,14 +45,15 @@ export interface StoryGroup {
     id: string;
     title: string;
     iconUrl?: string;
-    thematicIconUrls?: Record<string, string>
+    thematicIconUrls?: Record<string, string>;
     coverUrl?: string;
     index: number;
     seen: boolean;
     stories: Story[];
-    type: string,
-    pinned: boolean
-    momentsUser?: MomentsUser
+    type: string;
+    pinned: boolean;
+    momentsUser?: MomentsUser;
+    nudge: boolean;
 }
 
 export interface Story {
@@ -120,4 +121,9 @@ export interface STRCartItem {
     totalPrice?: number;
     oldTotalPrice?: number;
     quantity: number;
+}
+
+export interface STRProductInformation {
+    productId?: string;
+    productGroupId?: string;
 }

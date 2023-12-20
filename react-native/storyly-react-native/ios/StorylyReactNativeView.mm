@@ -46,7 +46,7 @@ using namespace facebook::react;
           [weakSelf storylyEventEmitter]
             ->onStorylyLoadFailed(StorylyReactNativeViewEventEmitter::OnStorylyLoadFailed{std::string([raw UTF8String])});
       };
-      _stStorylyView.onStorylyProductEvent = ^(NSString* raw) {
+      _stStorylyView.onStorylyEvent = ^(NSString* raw) {
           [weakSelf storylyEventEmitter]
             ->onStorylyEvent(StorylyReactNativeViewEventEmitter::OnStorylyEvent{std::string([raw UTF8String])});
       };
@@ -57,6 +57,10 @@ using namespace facebook::react;
       _stStorylyView.onStorylyStoryPresentFailed = ^(NSString* raw) {
           [weakSelf storylyEventEmitter]
             ->onStorylyStoryPresentFailed(StorylyReactNativeViewEventEmitter::OnStorylyStoryPresentFailed{std::string([raw UTF8String])});
+      };
+      _stStorylyView.onStorylyStoryDismissed = ^() {
+          [weakSelf storylyEventEmitter]
+            ->onStorylyStoryDismissed(StorylyReactNativeViewEventEmitter::OnStorylyStoryDismissed{});
       };
       _stStorylyView.onStorylyActionClicked = ^(NSString* raw) {
           [weakSelf storylyEventEmitter]

@@ -50,6 +50,9 @@ public class STStorylyView: UIView {
     
     @objc(onStorylyLoadFailed)
     public var onStorylyLoadFailed: ((String) -> Void)?
+
+    @objc(onStorylyEvent)
+    public var onStorylyEvent: ((String) -> Void)?
     
     @objc(onStorylyProductEvent)
     public var onStorylyProductEvent: ((String) -> Void)?
@@ -68,9 +71,6 @@ public class STStorylyView: UIView {
     
     @objc(onStorylyUserInteracted)
     public var onStorylyUserInteracted: ((String) -> Void)?
-    
-    @objc(onProductHydration)
-    public var onProductHydration: ((String) -> Void)?
     
     @objc(onStorylyProductHydration)
     public var onStorylyProductHydration: ((String) -> Void)?
@@ -218,7 +218,7 @@ class STStorylyDelegate: StorylyDelegate {
             "storyComponent": createStoryComponentMap(storyComponent) as Any
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
-        view?.onStorylyProductEvent?(eventJson)
+        view?.onStorylyEvent?(eventJson)
     }
     
     func storylyStoryPresented(_ storylyView: StorylyView) {
@@ -263,7 +263,7 @@ class STStorylyProductDelegate: StorylyProductDelegate {
             "event": StorylyEventHelper.storylyEventName(event: event)
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
-        view?.onStorylyProductHydration?(eventJson)
+        view?.onStorylyProductEvent?(eventJson)
     }
     
     
@@ -293,6 +293,6 @@ class STStorylyProductDelegate: StorylyProductDelegate {
             "products": products.map { createSTRProductInformationMap(productInfo: $0) },
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
-        view?.onProductHydration?(eventJson)
+        view?.onStorylyProductHydration?(eventJson)
     }
 }

@@ -1,4 +1,4 @@
-import type { StoryGroup, Story, StoryComponent, STRCart, STRCartItem } from "./story";
+import type { StoryGroup, Story, StoryComponent, STRCart, STRCartItem, STRProductInformation } from "./story";
 
 export interface BaseEvent {}
 
@@ -27,7 +27,7 @@ export interface StoryEvent extends BaseEvent {
 }
 
 export interface StoryProductHydrationEvent extends BaseEvent {
-  productIds: string[];
+  products: STRProductInformation[];
 }
 
 export interface StoryProductCartUpdateEvent extends BaseEvent {
