@@ -167,7 +167,8 @@ declare module "storyly-react-native" {
       seen: boolean;
       stories: Story[];
       type: string,
-      momentsUser?: MomentsUser
+      momentsUser?: MomentsUser,
+      nudge: boolean,
     }
 
     export interface Story {
