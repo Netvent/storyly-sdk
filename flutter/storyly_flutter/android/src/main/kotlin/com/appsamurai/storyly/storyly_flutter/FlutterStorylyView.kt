@@ -403,6 +403,7 @@ class FlutterStorylyView(
             "coverUrl" to storyGroup.coverUrl,
             "pinned" to storyGroup.pinned,
             "type" to storyGroup.type.ordinal,
+            "nudge" to storyGroup.nudge
         )
     }
 

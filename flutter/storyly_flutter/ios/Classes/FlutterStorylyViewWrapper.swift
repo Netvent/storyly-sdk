@@ -403,7 +403,8 @@ extension FlutterStorylyViewWrapper {
             "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
             "coverUrl": storyGroup.coverUrl,
             "pinned": storyGroup.pinned,
-            "type": storyGroup.type.rawValue
+            "type": storyGroup.type.rawValue,
+            "nudge": storyGroup.nudge
         ]
     }
     
