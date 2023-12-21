@@ -161,8 +161,12 @@ namespace Storyly
 		[Export("type")]
 		StoryGroupType Type { get; }
 
-		// @property (readonly, nonatomic, strong) StoryGroupStyle * _Nullable style;
-		[NullAllowed, Export("style", ArgumentSemantic.Strong)]
+        // @property (readonly, nonatomic) BOOL nudge;
+        [Export("nudge")]
+        bool Nudge { get; }
+
+        // @property (readonly, nonatomic, strong) StoryGroupStyle * _Nullable style;
+        [NullAllowed, Export("style", ArgumentSemantic.Strong)]
 		StoryGroupStyle Style { get; }
 	}
 
