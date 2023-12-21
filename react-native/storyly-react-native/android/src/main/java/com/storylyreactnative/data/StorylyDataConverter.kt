@@ -25,7 +25,8 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, Any?> {
                 "avatarUrl" to momentsUser.userId,
                 "username" to momentsUser.username,
             )
-        }
+        },
+        "nudge" to storyGroup.nudge
     )
 }
 

@@ -41,7 +41,8 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
             "id": storyGroup.momentsUser?.userId,
             "avatarUrl": storyGroup.momentsUser?.avatarURL,
             "username": storyGroup.momentsUser?.username,
-        ] : nil
+        ] : nil,
+        "nudge": storyGroup.nudge
     ]
 }
 
