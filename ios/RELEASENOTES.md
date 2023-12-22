@@ -1,4 +1,7 @@
 # Release Notes
+### 2.9.0 (22.12.2023)
+* improved data cache flow
+  
 ### 2.8.0 (15.12.2023)
 * IMPORTANT! changed type of products parameter in StorylyProductDelegate storylyHydration callback
 * added nudge stories
