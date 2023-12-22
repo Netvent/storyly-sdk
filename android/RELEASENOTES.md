@@ -1,4 +1,9 @@
 # Release Notes
+### 2.9.0 (22.12.2023)
+* improved data cache flow
+* changed storyly-exoplayer2 dependency to 2.18.1-1
+* fixed a bug related to story group size
+  
 ### 2.8.0 (15.12.2023)
 * IMPORTANT! changed type of products parameter in StorylyProductListener storylyHydration callback
 * added nudge stories
