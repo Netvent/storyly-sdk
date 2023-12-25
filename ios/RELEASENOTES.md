@@ -1,4 +1,7 @@
 # Release Notes
+### 2.10.0 (25.12.2023)
+* added background image position/resize handling
+  
 ### 2.9.0 (22.12.2023)
 * improved data cache flow
   
