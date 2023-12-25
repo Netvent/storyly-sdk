@@ -1,4 +1,8 @@
 # Release Notes
+### 2.10.0 (25.12.2023)
+* added background image position/resize handling
+* fixed a ui bug related to outlineProvider
+  
 ### 2.9.0 (22.12.2023)
 * improved data cache flow
 * changed storyly-exoplayer2 dependency to 2.18.1-1
