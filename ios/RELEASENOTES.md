@@ -1,4 +1,7 @@
 # Release Notes
+### 2.10.1 (27.12.2023)
+* fixed a bug related to conditional stories flow
+  
 ### 2.10.0 (25.12.2023)
 * added background image position/resize handling
   
