@@ -1,4 +1,8 @@
 # Release Notes
+### 2.10.1 (27.12.2023)
+* fixed a bug related to conditional stories flow
+* fixed IllegalStateException during activity recreation
+  
 ### 2.10.0 (25.12.2023)
 * added background image position/resize handling
 * fixed a ui bug related to outlineProvider
