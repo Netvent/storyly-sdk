@@ -1,6 +1,15 @@
 # Release Notes
 * If you are using new Fabric architecture please use these [Fabric supported versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) of storyly-react-native.
 
+### 2.4.5 (27.12.2023)
+* improved data cache flow
+* fixed a bug related to conditional stories flow
+* added background image position/resize handling
+* fixed IllegalStateException during activity recreation on android platform
+* fixed a ui bug related to outlineProvider on android platform
+* changed storyly-exoplayer2 dependency to 2.18.1-1 on android platform
+* fixed a bug related to story group size on android platform
+
 ### 2.4.4 (18.12.2023)
 * IMPORTANT! changed type of products parameter onProductHydration callback
 * added nudge stories
