@@ -156,7 +156,7 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  api('com.appsamurai.storyly:storyly:2.8.0')
+  api('com.appsamurai.storyly:storyly:2.10.1')
 }
 
 if (isNewArchitectureEnabled()) {
