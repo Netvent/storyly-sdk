@@ -1,3 +1,12 @@
+### 2.10.0 (27.12.2023)
+* improved data cache flow
+* fixed a bug related to conditional stories flow
+* added background image position/resize handling
+* fixed IllegalStateException during activity recreation on android platform
+* fixed a ui bug related to outlineProvider on android platform
+* changed storyly-exoplayer2 dependency to 2.18.1-1 on android platform
+* fixed a bug related to story group size on android platform
+
 ### 2.8.0 (18.12.2023)
 * IMPORTANT! changed type of products parameter storylyOnProductHydration callback
 * added nudge stories
