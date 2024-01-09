@@ -32150,14 +32150,14 @@
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Processing\/QueueManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 640,
+      "offset": 646,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Processing\/QueueManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1325,
+      "offset": 1331,
       "length": 1,
       "value": "0"
     },
@@ -53219,8 +53219,15 @@
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
+      "kind": "Array",
+      "offset": 616,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2088,
+      "offset": 2322,
       "length": 1,
       "value": "1"
     },
@@ -53234,133 +53241,133 @@
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2189,
+      "offset": 2423,
       "length": 2,
       "value": "25"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2194,
+      "offset": 2428,
       "length": 5,
       "value": "1024"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2202,
+      "offset": 2436,
       "length": 5,
       "value": "1024"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2263,
+      "offset": 2497,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2317,
+      "offset": 2551,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2321,
+      "offset": 2555,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2326,
+      "offset": 2560,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2331,
+      "offset": 2565,
       "length": 2,
       "value": "60"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2336,
+      "offset": 2570,
       "length": 2,
       "value": "60"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "Array",
-      "offset": 2537,
+      "offset": 2771,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2585,
+      "offset": 2819,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "BooleanLiteral",
-      "offset": 2705,
+      "offset": 2939,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "Array",
-      "offset": 2795,
+      "offset": 3029,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "Array",
-      "offset": 3038,
+      "offset": 3272,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "BooleanLiteral",
-      "offset": 3295,
+      "offset": 3529,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "Array",
-      "offset": 3923,
+      "offset": 4157,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "Array",
-      "offset": 4140,
+      "offset": 4374,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 4695,
+      "offset": 4929,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Cache\/ImageCacheManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 5665,
+      "offset": 5899,
       "length": 2,
       "value": "-1"
     },
@@ -74528,112 +74535,105 @@
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 433,
+      "offset": 359,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 369,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 378,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "FloatLiteral",
+      "offset": 388,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 571,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 560,
+      "offset": 698,
       "length": 1,
       "value": "9"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 605,
+      "offset": 743,
       "length": 10,
       "value": "0xff000000"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 620,
+      "offset": 758,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 626,
+      "offset": 764,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 669,
+      "offset": 807,
       "length": 10,
       "value": "0x00ff0000"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 684,
+      "offset": 822,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 690,
+      "offset": 828,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 735,
+      "offset": 873,
       "length": 10,
       "value": "0x0000ff00"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 750,
+      "offset": 888,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 755,
-      "length": 3,
-      "value": "255"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 798,
-      "length": 10,
-      "value": "0x000000ff"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 812,
-      "length": 3,
-      "value": "255"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 872,
-      "length": 8,
-      "value": "0xff0000"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 885,
-      "length": 2,
-      "value": "16"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 891,
+      "offset": 893,
       "length": 3,
       "value": "255"
     },
@@ -74641,132 +74641,167 @@
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
       "offset": 936,
+      "length": 10,
+      "value": "0x000000ff"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 950,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1010,
       "length": 8,
-      "value": "0x00ff00"
+      "value": "0xff0000"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 949,
-      "length": 1,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 954,
-      "length": 3,
-      "value": "255"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 997,
-      "length": 8,
-      "value": "0x0000ff"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1009,
-      "length": 3,
-      "value": "255"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1033,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1182,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1202,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1221,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1241,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1348,
-      "length": 3,
-      "value": "255"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1356,
-      "length": 2,
-      "value": "24"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1385,
-      "length": 3,
-      "value": "255"
-    },
-    {
-      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1393,
+      "offset": 1023,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 1424,
+      "offset": 1029,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 1432,
+      "offset": 1074,
+      "length": 8,
+      "value": "0x00ff00"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1087,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 1461,
+      "offset": 1092,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "IntegerLiteral",
-      "offset": 1469,
+      "offset": 1135,
+      "length": 8,
+      "value": "0x0000ff"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1147,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1171,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1320,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1340,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1359,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1379,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1486,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1494,
+      "length": 2,
+      "value": "24"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1523,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1531,
+      "length": 2,
+      "value": "16"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1562,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1570,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1599,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1607,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/yigitc\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/View\/UIColor+HexString.swift",
       "kind": "StringLiteral",
-      "offset": 1501,
+      "offset": 1639,
       "length": 7,
       "value": "\"#%08x\""
     },

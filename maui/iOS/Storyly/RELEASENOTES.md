@@ -1,5 +1,8 @@
 # Release Notes
 
+### 2.11.0 (09.01.2024)
+* IMPORTANT! increased minimum os version to 12; please refer to [Xcode 15 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-15-release-notes)
+
 ### 2.10.0 (27.12.2023)
 * improved data cache flow
 * fixed a bug related to conditional stories flow
