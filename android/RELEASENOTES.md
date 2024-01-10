@@ -1,4 +1,9 @@
 # Release Notes
+### 2.12.0 (10.01.2024)
+* added video position/resize handling
+* added static inputs for product catalog interactive component
+* improved data processing flow
+  
 ### 2.10.1 (27.12.2023)
 * fixed a bug related to conditional stories flow
 * fixed IllegalStateException during activity recreation
