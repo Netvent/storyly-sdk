@@ -1,6 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use these [Fabric supported versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) of storyly-react-native.
 
+### 2.4.7 (11.01.2024)
+* fixed a bug related to simulator architecture on ios platform
+
 ### 2.4.6 (09.01.2024)
 * IMPORTANT! increased minimum os version to 12 on ios platform; please refer to [Xcode 15 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-15-release-notes)
 

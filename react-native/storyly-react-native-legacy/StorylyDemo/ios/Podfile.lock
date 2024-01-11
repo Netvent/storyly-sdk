@@ -274,10 +274,10 @@ PODS:
     - React-jsi (= 0.67.5)
     - React-logger (= 0.67.5)
     - React-perflogger (= 0.67.5)
-  - Storyly (2.11.0)
-  - storyly-react-native (2.4.5):
+  - Storyly (2.11.1)
+  - storyly-react-native (2.4.6):
     - React
-    - Storyly (= 2.11.0)
+    - Storyly (= 2.11.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -415,8 +415,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: c3b8a3245267a3849b0c7cb91a37606bf5f3aa65
   React-runtimeexecutor: 434efc9e5b6d0f14f49867f130b39376c971c1aa
   ReactCommon: a30c2448e5a88bae6fcb0e3da124c14ae493dac1
-  Storyly: bfe07866adf4ce9eafe3833b46f14c2a96e069db
-  storyly-react-native: 2d99331d10a2396a87dfb997e2f86ec5120f3cbd
+  Storyly: dee273e646b878b9b473e4e027f0796b2a38d231
+  storyly-react-native: e13cb3686a9899c7148ba4cd6d65b84d5f0e1570
   Yoga: 099a946cbf84c9b32ffdc4278d72db26710ecf92
 
 PODFILE CHECKSUM: 27cc68e726ff5696e6749a4aa1bc049ebeb24ebd
