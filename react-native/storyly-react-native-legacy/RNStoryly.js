@@ -210,6 +210,7 @@ class Storyly extends Component {
             storyProductFeed,
             ...otherProps
         } = this.props;
+        const factoryId = uuidv4();
         return (
             <STStoryly
                 {...otherProps}
@@ -293,6 +294,7 @@ class Storyly extends Component {
                 {storyGroupViewFactory ?
                     <STStorylyGroupViewFactory
                         ref={(ref) => { this.customViewFactoryRef = ref }}
+                        key={factoryId}
                         width={storyGroupViewFactory.width}
                         height={storyGroupViewFactory.height}
                         CustomizedView={storyGroupViewFactory.customView} /> : <></>}
@@ -395,6 +397,14 @@ const STStorylyGroupViewFactory = forwardRef(({ width, height, CustomizedView },
 
     return (<>{customViewList}</>)
 })
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+}
+  
 
 const STStorylyGroupView = requireNativeComponent('STStorylyGroupView', null);
 

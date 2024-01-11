@@ -108,6 +108,8 @@ class STStorylyView: UIView {
         guard let subview = subview as? STStorylyGroupView else { return }
         storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
     }
+
+    override func removeReactSubview(_ subview: UIView!) {}
 }
 
 extension STStorylyView {
