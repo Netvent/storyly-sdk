@@ -1,9 +1,9 @@
 PODS:
   - Flutter (1.0.0)
-  - Storyly (2.11.0)
-  - storyly_flutter (2.10.0):
+  - Storyly (2.12.1)
+  - storyly_flutter (2.11.0):
     - Flutter
-    - Storyly (= 2.11.0)
+    - Storyly (= 2.12.1)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -21,8 +21,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  Storyly: bfe07866adf4ce9eafe3833b46f14c2a96e069db
-  storyly_flutter: 2e885303af40a84d07c176bee52313a5c3dc58d5
+  Storyly: 64e62d2635b733a05b39a1ad9b903f4f3dbc58d0
+  storyly_flutter: 8f2de2fa14b3a5749463eb605175de1d61519975
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 
