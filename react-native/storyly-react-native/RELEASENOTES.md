@@ -1,6 +1,12 @@
 # Release Notes
 * These are Fabric supported versions of storyly-react-native, for the older architecture please use these [legacy versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-legacy/RELEASENOTES.md)
 
+### 2.12.0 (12.01.2024)
+* added video position/resize handling
+* added static inputs for product catalog interactive component
+* improved data processing flow
+* fixed a simulator architecture bug for cocoapods on ios platform
+
 ### 2.11.0 (09.01.2024)
 * IMPORTANT! increased minimum os version to 12 on ios platform; please refer to [Xcode 15 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-15-release-notes)
 
