@@ -1326,40 +1326,42 @@ typedef SWIFT_ENUM(NSInteger, StorylyEvent, open) {
   StorylyEventStoryProductTagClicked = 26,
 /// Sent when a user clicks a product card area
   StorylyEventStoryProductCardClicked = 27,
+/// Sent when a user clicks a product catalog area
+  StorylyEventStoryProductCatalogClicked = 28,
 /// Sent when a user copy a promo code
-  StorylyEventStoryPromoCodeCopied = 28,
+  StorylyEventStoryPromoCodeCopied = 29,
 /// Sent when a user sends a comment
-  StorylyEventStoryCommentSent = 29,
+  StorylyEventStoryCommentSent = 30,
 /// Sent when a user opens input area
-  StorylyEventStoryCommentInputOpened = 30,
+  StorylyEventStoryCommentInputOpened = 31,
 /// Sent when a user closes input area
-  StorylyEventStoryCommentInputClosed = 31,
+  StorylyEventStoryCommentInputClosed = 32,
 /// Sent when a user seeks the video in long story
-  StorylyEventStorySeeked = 32,
+  StorylyEventStorySeeked = 33,
 /// Sent when a user likes a Moments story
-  StorylyEventStoryLiked = 33,
+  StorylyEventStoryLiked = 34,
 /// Sent when a user unlikes a Moments story
-  StorylyEventStoryUnliked = 34,
+  StorylyEventStoryUnliked = 35,
 /// Sent when a product successfully added
-  StorylyEventStoryProductCartAdded = 35,
+  StorylyEventStoryProductCartAdded = 36,
 /// Sent when a product added failed
-  StorylyEventStoryProductCartAddFailed = 36,
+  StorylyEventStoryProductCartAddFailed = 37,
 /// Sent when product sheet is opened
-  StorylyEventStoryProductSheetOpened = 37,
+  StorylyEventStoryProductSheetOpened = 38,
 /// Sent when a product added
-  StorylyEventStoryProductAdded = 38,
+  StorylyEventStoryProductAdded = 39,
 /// Sent when a product updated
-  StorylyEventStoryProductUpdated = 39,
+  StorylyEventStoryProductUpdated = 40,
 /// Sent when product removed
-  StorylyEventStoryProductRemoved = 40,
+  StorylyEventStoryProductRemoved = 41,
 /// Sent when checkout button clicked
-  StorylyEventStoryCheckoutButtonClicked = 41,
+  StorylyEventStoryCheckoutButtonClicked = 42,
 /// Sent when cart button clicked from success sheet
-  StorylyEventStoryCartButtonClicked = 42,
+  StorylyEventStoryCartButtonClicked = 43,
 /// Sent when cart view clicked
-  StorylyEventStoryCartViewClicked = 43,
+  StorylyEventStoryCartViewClicked = 44,
 /// Sent  when product selected
-  StorylyEventStoryProductSelected = 44,
+  StorylyEventStoryProductSelected = 45,
 };
 
 

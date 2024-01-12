@@ -375,6 +375,7 @@ extension Storyly.StorylyView {
   case StoryProductTagExpanded
   case StoryProductTagClicked
   case StoryProductCardClicked
+  case StoryProductCatalogClicked
   case StoryPromoCodeCopied
   case StoryCommentSent
   case StoryCommentInputOpened

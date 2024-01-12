@@ -1,4 +1,9 @@
 # Release Notes
+### 2.12.0 (12.01.2024)
+* added video position/resize handling
+* added static inputs for product catalog interactive component
+* improved data processing flow
+* fixed a simulator architecture bug for cocoapods
 
 ### 2.11.0 (09.01.2024)
 * IMPORTANT! increased minimum os version to 12; please refer to [Xcode 15 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-15-release-notes)
