@@ -74,6 +74,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         parent?.onAttachCustomReactNativeView(child, index)
     }
 
+    override fun removeViewAt(parent: STStorylyView?, index: Int) {}
+
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         val builder = MapBuilder.builder<String, Any>()
         arrayOf(
