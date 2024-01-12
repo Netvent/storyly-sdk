@@ -1,4 +1,7 @@
 # Release Notes
+### 2.12.1 (12.01.2024)
+* fixed a simulator architecture bug for cocoapods
+  
 ### 2.12.0 (10.01.2024)
 * added video position/resize handling
 * added static inputs for product catalog interactive component
