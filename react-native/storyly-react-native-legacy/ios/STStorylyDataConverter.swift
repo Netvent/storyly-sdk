@@ -46,13 +46,17 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "name": story.name,
         "seen": story.seen,
         "currentTime": story.currentTime,
-        "media": [
-            "type": story.media.type.rawValue,
-            "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
-            "actionUrl": story.media.actionUrl,
-            "previewUrl": story.media.previewUrl?.absoluteString,
-            "actionUrlList": story.media.actionUrlList
-        ] as [String: Any?]
+        "media": createMediaMap(story: story)
+    ]
+}
+
+func createMediaMap(story: Story) -> [String: Any?] {
+    return [
+        "type": story.media.type.rawValue,
+        "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
+        "actionUrl": story.media.actionUrl,
+        "previewUrl": story.media.previewUrl?.absoluteString,
+        "actionUrlList": story.media.actionUrlList
     ]
 }
 

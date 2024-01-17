@@ -30,7 +30,9 @@ class STStorylyView(context: Context) : FrameLayout(context) {
         addView(storylyView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         storylyView.storylyListener = object : StorylyListener {
             override fun storylyActionClicked(storylyView: StorylyView, story: Story) {
-                sendEvent(STStorylyManager.EVENT_STORYLY_ACTION_CLICKED, createStoryMap(story))
+                sendEvent(STStorylyManager.EVENT_STORYLY_ACTION_CLICKED, Arguments.createMap().also { eventMap ->
+                    eventMap.putMap("story", createStoryMap(story))
+                })
             }
 
             override fun storylyLoaded(

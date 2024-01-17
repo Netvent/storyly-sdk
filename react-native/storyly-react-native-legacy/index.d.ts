@@ -164,6 +164,7 @@ declare module "storyly-react-native" {
       thematicIconUrls?: Record<string, string>
       coverUrl?: string;
       index: number;
+      pinned: boolean;
       seen: boolean;
       stories: Story[];
       type: string,
@@ -173,19 +174,20 @@ declare module "storyly-react-native" {
 
     export interface Story {
       id: string;
+      index: number;
       title: string;
       name: string;
-      index: number;
-      pinned: boolean;
       seen: boolean;
       currentTime: number;
-      media: {
-        type: number;
-        storyComponentList?: StoryComponent[];
-        actionUrl?: string;
-        actionUrlList?: string[];
-        previewUrl?: string;
-      };
+      media: Media;
+    }
+
+    export interface Media {
+      type: number;
+      storyComponentList?: StoryComponent[];
+      actionUrl?: string;
+      previewUrl?: string;
+      actionUrlList?: string[];
     }
 
     export type ReactionType =

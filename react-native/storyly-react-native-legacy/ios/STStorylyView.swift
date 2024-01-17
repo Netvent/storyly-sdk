@@ -182,7 +182,7 @@ extension STStorylyView: StorylyDelegate {
     }
     
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        self.onStorylyActionClicked?(createStoryMap(story: story) as [AnyHashable: Any])
+        self.onStorylyActionClicked?(["story": createStoryMap(story: story)])
     }
     
     func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {

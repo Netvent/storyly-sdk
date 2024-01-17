@@ -48,17 +48,21 @@ internal fun createStoryMap(story: Story): WritableMap {
         storyMap.putString("name", story.name)
         storyMap.putBoolean("seen", story.seen)
         storyMap.putInt("currentTime", story.currentTime.toInt())
-        storyMap.putMap("media", Arguments.createMap().also { storyMediaMap ->
-            storyMediaMap.putInt("type", story.media.type.ordinal)
-            storyMediaMap.putArray("storyComponentList", Arguments.createArray().also { componentArray ->
-                story.media.storyComponentList?.forEach { componentArray.pushMap(createStoryComponentMap(it)) }
-            })
-            storyMediaMap.putString("actionUrl", story.media.actionUrl)
-            storyMediaMap.putArray("actionUrlList", Arguments.createArray().also { urlArray ->
-                story.media.actionUrlList?.forEach { urlArray.pushString(it)  }
-            })
-            storyMediaMap.putString("previewUrl", story.media.previewUrl)
+        storyMap.putMap("media", createMediaMap(story))
+    }
+}
+
+internal fun createMediaMap(story: Story): WritableMap {
+    return Arguments.createMap().also { storyMediaMap ->
+        storyMediaMap.putInt("type", story.media.type.ordinal)
+        storyMediaMap.putArray("storyComponentList", Arguments.createArray().also { componentArray ->
+            story.media.storyComponentList?.forEach { componentArray.pushMap(createStoryComponentMap(it)) }
         })
+        storyMediaMap.putString("actionUrl", story.media.actionUrl)
+        storyMediaMap.putArray("actionUrlList", Arguments.createArray().also { urlArray ->
+            story.media.actionUrlList?.forEach { urlArray.pushString(it)  }
+        })
+        storyMediaMap.putString("previewUrl", story.media.previewUrl)
     }
 }
 
@@ -161,7 +165,7 @@ internal fun createSTRProductItemMap(product: STRProductItem?): WritableMap {
     } ?: Arguments.createMap()
 }
 
-internal fun createSTRProductVariantMap(variant: STRProductVariant): ReadableMap {
+internal fun createSTRProductVariantMap(variant: STRProductVariant): WritableMap {
     return Arguments.createMap().also { productItemMap ->
         productItemMap.putString("name", variant.name)
         productItemMap.putString("value", variant.value)
