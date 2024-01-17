@@ -1,6 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use these [Fabric supported versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) of storyly-react-native.
 
+### 2.4.9 (17.01.2024)
+* fixed data structure of onPress event
+
 ### 2.4.8 (12.01.2024)
 * fixed a bug related to custom group styling
 
