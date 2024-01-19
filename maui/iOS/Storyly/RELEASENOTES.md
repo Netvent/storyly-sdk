@@ -1,4 +1,7 @@
 # Release Notes
+### 2.12.1 (19.01.2024)
+* fixed an orientation bug for devices having iOS version <16
+
 ### 2.12.0 (12.01.2024)
 * added video position/resize handling
 * added static inputs for product catalog interactive component
