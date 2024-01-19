@@ -1,4 +1,7 @@
 # Release Notes
+### 2.12.2 (19.01.2024)
+* fixed an orientation bug for devices having iOS version <16
+  
 ### 2.12.1 (12.01.2024)
 * fixed a simulator architecture bug for cocoapods
   
