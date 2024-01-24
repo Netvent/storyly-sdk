@@ -1,4 +1,7 @@
 # Release Notes
+### 2.13.0 (24.01.2024)
+* improved functionality and design of story group countdown badge
+  
 ### 2.12.2 (19.01.2024)
 * fixed an orientation bug for devices having iOS version <16
   
