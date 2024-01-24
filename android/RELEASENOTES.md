@@ -1,4 +1,7 @@
 # Release Notes
+### 2.13.0 (24.01.2024)
+* improved functionality and design of story group countdown badge
+  
 ### 2.12.0 (10.01.2024)
 * added video position/resize handling
 * added static inputs for product catalog interactive component
