@@ -1,4 +1,7 @@
 # Release Notes
+### 2.13.1 (26.01.2024)
+* fixed a bug related to scroll position in storyly bar
+  
 ### 2.13.0 (24.01.2024)
 * improved functionality and design of story group countdown badge
   
