@@ -8,14 +8,95 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
-import { View, Button, Image, Text, PixelRatio } from 'react-native';
+import React, { Component, useState, useRef, useEffect } from 'react';
+import { View, Image, Text, PixelRatio, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import { Storyly } from 'storyly-react-native';
+
 
 const PIN_ICON = require('./assets/pin_icon.png');
 
 
-const STORYLY_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
+const STORYLY_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjU1NiwiYXBwX2lkIjoxMzg5LCJpbnNfaWQiOjE4NjY1fQ._PwkZ48JdHkSU01KUR2n66zJcL29JhykNTMRUorfvE4"
+
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isHidden: true,
+        };
+    }
+
+    render() {
+        return (
+            <View>
+                <ScrollView>
+                    <ShowHideAnimation style={{ width: "100%", height: 100 }} isHidden={this.state.isHidden} >
+                        <Storyly
+                            style={{ width: '100%', height: 100, backgroundColor: "#00ffff" }}
+                            storylyId={STORYLY_TOKEN}
+                            storyGroupSize="small"
+                            onLoad={loadEvent => {
+                                console.log(`[Storyly] default - onLoad`);
+                                this.setState({isHidden: false})
+                            }} />
+                    </ShowHideAnimation>
+                    <TouchableOpacity onPress={() => { this.setState({isHidden: !this.state.isHidden}) }}>
+                        <View style={{ padding: 10, backgroundColor: 'blue' }}>
+                            <Text style={{ color: 'white', textAlign: "center" }}>{this.state.isHidden ? 'Show' : 'Hide'}</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <Storyly
+                        style={{ width: '100%', height: 100, marginTop: 10, backgroundColor: "#00ffff" }}
+                        storylyId={STORYLY_TOKEN}
+                        storyGroupSize="small"
+                        storyHeaderShareIcon={"share_icon"}
+                        storyHeaderCloseIcon={"close_icon"}
+                        storyItemTextTypeface={"Lobster1.4.otf"}
+                        storyInteractiveTextTypeface={"Lobster1.4.otf"}
+                        storyItemProgressBarColor={["#00FF00", "#FF0000"]}
+                        storyItemIconBorderColor={["#FF0000", "#FF0000"]}
+                        onLoad={loadEvent => {
+                            console.log(`[Storyly] default - onLoad`);
+                        }} />
+                    <Storyly
+                        style={{ width: '100%', height: 120, marginTop: 10, backgroundColor: "#7fff00" }}
+                        storylyId={STORYLY_TOKEN}
+                        storyGroupSize="large" />
+                    <Storyly
+                        ref={ref => { this.customStoryly = ref }}
+                        style={{ width: '100%', height: 170, marginTop: 10, backgroundColor: "#e9967a" }}
+                        storylyId={STORYLY_TOKEN}
+                        storyGroupSize="custom"
+                        storyGroupIconHeight={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(80) : 80}
+                        storyGroupIconWidth={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(80) : 80}
+                        storyGroupIconCornerRadius={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20}
+                        storyGroupListHorizontalEdgePadding={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20}
+                        storyGroupListHorizontalPaddingBetweenItems={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(10) : 10}
+                        storyGroupTextTypeface={"Lobster1.4.otf"}
+                        storyGroupTextSize={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20}
+                        storyGroupTextLines={3}
+                        storyGroupTextColorSeen={"#00FF00"}
+                        storyGroupTextColorNotSeen={"#FF0000"}
+                        storyGroupIconBorderColorNotSeen={["#FF0000", "#FF0000"]}
+                        storyGroupIconBorderColorSeen={["#FFFFFF", "#FFFFFF"]}
+                        storyGroupIconBackgroundColor={"#000000"}
+                        storyGroupPinIconColor={"#000000"} />
+                    <Storyly
+                        ref={ref => { this.storyly = ref }}
+                        style={{ width: '100%', height: 178, marginTop: 10, backgroundColor: "#ff00ff" }}
+                        storylyId={STORYLY_TOKEN}
+                        storyGroupViewFactory={{
+                            width: convertToNative(100),
+                            height: convertToNative(178),
+                            customView: CustomPortraitView
+                        }} />
+                </ScrollView>
+            </View>
+        );
+    }
+}
 
 const convertToNative = (size) => {
     return Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(size) : size
@@ -49,57 +130,20 @@ const CustomPortraitView = ({ storyGroup }) => {
 }
 
 
+const ShowHideAnimation = (props) => {
+    const heightAnim = useRef(new Animated.Value(0)).current;
 
-export default class App extends Component {
-    render() {
-        return (
-            <View>
-                <Storyly
-                    style={{ width: '100%', height: 100, marginTop: 50, backgroundColor: "#00ffff" }}
-                    storylyId={STORYLY_TOKEN}
-                    storyGroupSize="small"
-                    storyHeaderShareIcon={"share_icon"}
-                    storyHeaderCloseIcon={"close_icon"}
-                    storyItemTextTypeface={"Lobster1.4.otf"}
-                    storyInteractiveTextTypeface={"Lobster1.4.otf"}
-                    storyItemProgressBarColor={["#00FF00", "#FF0000"]}
-                    storyItemIconBorderColor={["#FF0000", "#FF0000"]}
-                    onLoad={loadEvent => {
-                        console.log(`[Storyly] default - onLoad`);
-                    }} />
-                <Storyly
-                    style={{ width: '100%', height: 120, marginTop: 10, backgroundColor: "#7fff00" }}
-                    storylyId={STORYLY_TOKEN}
-                    storyGroupSize="large" />
-                <Storyly
-                    ref={ref => { this.customStoryly = ref }}
-                    style={{ width: '100%', height: 170, marginTop: 10, backgroundColor: "#e9967a" }}
-                    storylyId={STORYLY_TOKEN}
-                    storyGroupSize="custom"
-                    storyGroupIconHeight={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(80) : 80}
-                    storyGroupIconWidth={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(80) : 80}
-                    storyGroupIconCornerRadius={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20}
-                    storyGroupListHorizontalEdgePadding={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20}
-                    storyGroupListHorizontalPaddingBetweenItems={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(10) : 10}
-                    storyGroupTextTypeface={"Lobster1.4.otf"}
-                    storyGroupTextSize={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(20) : 20}
-                    storyGroupTextLines={3}
-                    storyGroupTextColorSeen={"#00FF00"}
-                    storyGroupTextColorNotSeen={"#FF0000"}
-                    storyGroupIconBorderColorNotSeen={["#FF0000", "#FF0000"]}
-                    storyGroupIconBorderColorSeen={["#FFFFFF", "#FFFFFF"]}
-                    storyGroupIconBackgroundColor={"#000000"}
-                    storyGroupPinIconColor={"#000000"} />
-                <Storyly
-                    ref={ref => { this.storyly = ref }}
-                    style={{ width: '100%', height: convertToNative(178), marginTop: 10, backgroundColor: "#ff00ff" }}
-                    storylyId={STORYLY_TOKEN}
-                    storyGroupViewFactory={{
-                        width: convertToNative(100),
-                        height: convertToNative(178),
-                        customView: CustomPortraitView
-                    }} />
-            </View>
-        );
-    }
-}
+    useEffect(() => {
+        Animated.timing(heightAnim, {
+            toValue: props.isHidden ? 0 : props.style.height,
+            duration: 500,
+            useNativeDriver: false,
+        }).start();
+    }, [props.isHidden])
+
+    return (
+        <Animated.View style={{ height: heightAnim, overflow: 'hidden' }}>
+            {props.children}
+        </Animated.View>
+    );
+};
