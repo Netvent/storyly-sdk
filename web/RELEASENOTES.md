@@ -1,6 +1,6 @@
 # Release Notes
 
-### 2.13.1 - 18.01.2024
+### 2.13.1 - 07.02.2024
 
 - Feature: Countdown badge
 - Bug: Fixed share widget bug
