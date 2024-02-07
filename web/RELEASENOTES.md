@@ -1,6 +1,6 @@
 # Release Notes
 
-### 2.13.1 - 07.02.2024 [cdn](https://web-story.storyly.io/sdk/2.13.1/storyly-web.js)
+### 2.13.1 - 07.02.2024 [for cdn](https://web-story.storyly.io/sdk/2.13.1/storyly-web.js)
 
 - Feature: Countdown badge
 - Bug: Fixed share widget bug
