@@ -1,5 +1,14 @@
 # Release Notes
-* If you are using new Fabric architecture please use these [Fabric supported versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) of storyly-react-native.
+* If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+
+### 2.14.0 (19.02.2024)
+* added animations for text interactive component
+* improved functionality and design of story group countdown badge
+* improved data processing flow
+* added video position/resize handling
+* added static inputs for product catalog interactive component
+* fixed a bug related to scroll position in storyly bar on android platform
+* fixed an orientation bug for devices having iOS version <16 on ios platform
 
 ### 2.4.9 (17.01.2024)
 * fixed data structure of onPress event
