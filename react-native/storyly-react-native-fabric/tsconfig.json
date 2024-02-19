@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "storyly-react-native": ["./src/index"]
+      "storyly-react-native-fabric": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

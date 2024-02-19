@@ -1,7 +1,7 @@
 {
-  "name": "storyly-react-native",
-  "version": "2.12.0",
-  "description": "A react-native component for Storyly",
+  "name": "storyly-react-native-fabric",
+  "version": "2.14.0",
+  "description": "A fabric version of react-native component for Storyly",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

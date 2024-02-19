@@ -1,5 +1,11 @@
 # Release Notes
-* These are Fabric supported versions of storyly-react-native, for the older architecture please use these [legacy versions](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-legacy/RELEASENOTES.md)
+* These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+
+### 2.14.0 (19.02.2024)
+* added animations for text interactive component
+* improved functionality and design of story group countdown badge
+* fixed a bug related to scroll position in storyly bar on android platform
+* fixed an orientation bug for devices having iOS version <16 on ios platform
 
 ### 2.12.0 (12.01.2024)
 * added video position/resize handling

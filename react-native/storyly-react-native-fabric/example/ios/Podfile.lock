@@ -999,8 +999,8 @@ PODS:
     - React-logger (= 0.72.4)
     - React-perflogger (= 0.72.4)
   - SocketRocket (0.6.1)
-  - Storyly (2.12.1)
-  - storyly-react-native (2.11.0):
+  - Storyly (2.14.0)
+  - storyly-react-native-fabric (2.12.0):
     - hermes-engine
     - RCT-Folly (= 2021.07.22.00)
     - RCTRequired
@@ -1015,7 +1015,7 @@ PODS:
     - React-utils
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Storyly (= 2.12.1)
+    - Storyly (= 2.14.0)
     - Yoga
   - Yoga (1.14.0)
 
@@ -1064,7 +1064,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - storyly-react-native (from `../..`)
+  - storyly-react-native-fabric (from `../..`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1158,7 +1158,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  storyly-react-native:
+  storyly-react-native-fabric:
     :path: "../.."
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
@@ -1180,20 +1180,20 @@ SPEC CHECKSUMS:
   React-Core: 34da8c952844e21f5a69bf46438fb6bf063900d0
   React-CoreModules: 621243df8863055ff30f3bb2ff71573ffa7b16c8
   React-cxxreact: 4ad1cc861e32fb533dad6ff7a4ea25680fa1c994
-  React-debug: f342996c000c90c496e1aab404d0dc62f92a7c47
-  React-Fabric: 8d52f49f472be74c038aaaafb3762b0ab63faf00
-  React-graphics: d52d4ad17bc1eb5f6297e7b90b9c9a8f0899fcac
+  React-debug: 268cc270f337d3584d3161a351e854c472d5b9c4
+  React-Fabric: ba0c7c62fd311f203d01666f1def125a6123d92a
+  React-graphics: 2673dda19ede6b41c232f6c912ce74791cce3144
   React-hermes: 37377d0a56aa0cf55c65248271866ce3268cde3f
-  React-ImageManager: c03de7750a767f588cc760cd845c7ee7c3e4bdd8
+  React-ImageManager: 543605b38d0df2b8252e74963c31b04c02dc4330
   React-jsi: 6de8b0ccc6b765b58e4eee9ee38049dbeaf5c221
   React-jsiexecutor: c7f826e40fa9cab5d37cab6130b1af237332b594
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
-  React-NativeModulesApple: eb57cf70ace7e6747467fe0a0b419549090aa56e
+  React-NativeModulesApple: 0969e98ae6ef1112e93543d2d40e5288a30c76ed
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00
   React-RCTAnimation: e44fe5053708c5be762943087c78dc5a6a3c645c
-  React-RCTAppDelegate: c8dddaba8ba5875574331a6fd4748f9b2f4e125c
+  React-RCTAppDelegate: bca50b746d0b49e623298993bbd4aea2129e4903
   React-RCTBlob: 5577c3542fafbd9241f505bda541f6762996b0eb
   React-RCTFabric: 17af2ec2bc375e565448d913f65abd4c9946ae63
   React-RCTImage: f48859ae6a1e5c2c8659f860efdfcb8b0cb60cde
@@ -1204,14 +1204,14 @@ SPEC CHECKSUMS:
   React-RCTVibration: 35eec7201c8ffdaccdd908a5ec874b7055f975f3
   React-rncore: 32177e06dd7ecc14572e46ec9fca7a600b36c3a7
   React-runtimeexecutor: d465ba0c47ef3ed8281143f59605cacc2244d5c7
-  React-runtimescheduler: 2ec6cdcd11b8502f9e6af0623663c57d54d54ad8
-  React-utils: 5d110e89d7920b4de824005c8af658e1f2e541de
-  ReactCommon: 861dba75241ced6913f4dd179f7a36f1c2800486
+  React-runtimescheduler: b5af8bff730f8283d48b54d9f095b95a62aa8a33
+  React-utils: 856628161c92f6f38a686cfea1f7e856395d81b2
+  ReactCommon: 090dab716c8b16c8faf71b81c4f7bd89105aa317
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  Storyly: 64e62d2635b733a05b39a1ad9b903f4f3dbc58d0
-  storyly-react-native: d7e8702c496f01c91ec26544e7db327949ed2af8
+  Storyly: 71b4a381fb842cd46bc778faf75ceb2e6dd59a1b
+  storyly-react-native-fabric: 85caa1476af6655ef0f0f5e56e16a4b391a240fa
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
 
 PODFILE CHECKSUM: 6e970b0a2b8de97ca976b4422919c2051b53ebef
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2
