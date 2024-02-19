@@ -5,7 +5,13 @@ import android.view.Choreographer
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.appsamurai.storyly.*
+import com.appsamurai.storyly.Story
+import com.appsamurai.storyly.StoryComponent
+import com.appsamurai.storyly.StoryGroup
+import com.appsamurai.storyly.StorylyDataSource
+import com.appsamurai.storyly.StorylyListener
+import com.appsamurai.storyly.StorylyProductListener
+import com.appsamurai.storyly.StorylyView
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
@@ -204,11 +210,6 @@ class STStorylyView(context: Context) : FrameLayout(context) {
             MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
         )
         storylyView.layout(0, 0, storylyView.measuredWidth, storylyView.measuredHeight)
-
-        val innerStorylyView = storylyView.getChildAt(0) as? ViewGroup ?: return
-        for (i in 0 until innerStorylyView.childCount) {
-            innerStorylyView.getChildAt(i).requestLayout()
-        }
     }
 
     internal fun sendEvent(eventName: String, eventParameters: WritableMap?) {
