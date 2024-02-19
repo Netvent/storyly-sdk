@@ -1,4 +1,7 @@
 # Release Notes
+### 2.14.0 (19.02.2024)
+* added animations for text interactive component
+  
 ### 2.13.1 (26.01.2024)
 * fixed a bug related to scroll position in storyly bar
   
