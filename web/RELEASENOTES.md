@@ -1,5 +1,11 @@
 # Release Notes
 
+### 2.14.0 - 20.02.2024 [for cdn](https://web-story.storyly.io/sdk/2.14.0/storyly-web.js)
+
+- Feature: Added animations for text interactive component
+- Bug: Fixed question sticker multiple clicking
+- Bug: Fixed product description heading font sizes
+
 ### 2.13.1 - 07.02.2024 [for cdn](https://web-story.storyly.io/sdk/2.13.1/storyly-web.js)
 
 - Feature: Countdown badge
