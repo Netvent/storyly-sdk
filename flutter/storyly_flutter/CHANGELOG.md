@@ -1,3 +1,9 @@
+### 2.14.0 (20.02.2024)
+* added animations for text interactive component
+* improved functionality and design of story group countdown badge
+* fixed a bug related to scroll position in storyly bar on android platform
+* fixed an orientation bug for devices having iOS version <16 on ios platform
+
 ### 2.12.0 (12.01.2024)
 * added video position/resize handling
 * added static inputs for product catalog interactive component
