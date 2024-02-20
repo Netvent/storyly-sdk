@@ -487,7 +487,8 @@ extension Storyly.StorylyView {
   @objc final public let textColor: UIKit.UIColor?
   @objc final public let backgroundColor: UIKit.UIColor?
   @objc final public let endTime: Foundation.NSNumber?
-  @objc public init(text: Swift.String?, textColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?, endTime: Foundation.NSNumber?)
+  @objc final public let template: Swift.String?
+  @objc public init(text: Swift.String?, textColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?, endTime: Foundation.NSNumber?, template: Swift.String?)
   @objc deinit
 }
 @objc(Story) final public class Story : ObjectiveC.NSObject {
