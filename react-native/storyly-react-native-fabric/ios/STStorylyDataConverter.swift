@@ -6,6 +6,19 @@
 //
 import Storyly
 
+func decodePayload(raw: String) -> [String: Any?]? {
+    guard let data = raw.data(using: .utf8),
+          let map = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any?] else {
+        return nil
+    }
+    return map
+}
+
+func encodeEvent(json: [String: Any]) -> String? {
+    guard let rawMap = try? JSONSerialization.data(withJSONObject: json, options: []),
+          let rawMapString = String(data: rawMap, encoding: .utf8) else { return nil }
+    return rawMapString
+}
 
 func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any?]? {
     guard let storyGroup = storyGroup else { return nil }
@@ -29,7 +42,7 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
             "avatarUrl": storyGroup.momentsUser?.avatarURL,
             "username": storyGroup.momentsUser?.username,
         ] : nil,
-        "nudge": storyGroup.nudge,
+        "nudge": storyGroup.nudge
     ]
 }
 
@@ -46,17 +59,13 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "name": story.name,
         "seen": story.seen,
         "currentTime": story.currentTime,
-        "media": createMediaMap(story: story)
-    ]
-}
-
-func createMediaMap(story: Story) -> [String: Any?] {
-    return [
-        "type": story.media.type.rawValue,
-        "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
-        "actionUrl": story.media.actionUrl,
-        "previewUrl": story.media.previewUrl?.absoluteString,
-        "actionUrlList": story.media.actionUrlList
+        "media": [
+            "type": story.media.type.rawValue,
+            "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
+            "actionUrl": story.media.actionUrl,
+            "previewUrl": story.media.previewUrl?.absoluteString,
+            "actionUrlList": story.media.actionUrlList
+        ] as [String: Any?]
     ]
 }
 
@@ -125,7 +134,7 @@ func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
         "url": product.url,
         "desc": product.desc,
         "price": product.price,
-        "salesPrice": product.salesPrice, 
+        "salesPrice": product.salesPrice,
         "currency": product.currency,
         "variants": product.variants?.compactMap { createSTRProductVariantMap(variant: $0) },
         "imageUrls": product.imageUrls.map { $0 }
@@ -136,6 +145,13 @@ internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String:
     return [
         "name": variant.name,
         "value": variant.value
+    ]
+}
+
+internal func createSTRProductInformationMap(productInfo: STRProductInformation) -> [String: Any?] {
+    return [
+        "productId": productInfo.productId,
+        "productGroupId": productInfo.productGroupId
     ]
 }
 
@@ -181,14 +197,6 @@ internal func createSTRCartItemMap(cartItem: STRCartItem?) -> [String: Any?] {
     ]
 }
 
-internal func createSTRProductInformationMap(productInfo: STRProductInformation?) -> [String: Any?] {
-    guard let productInfo = productInfo else { return [:] }
-    return [
-        "productId": productInfo.productId,
-        "productGroupId": productInfo.productGroupId
-    ]
-}
-
 internal func createSTRCartItem(cartItemMap: NSDictionary) -> STRCartItem {
     return STRCartItem(
         item: createSTRProductItem(productItem: cartItemMap["item"] as? NSDictionary),
@@ -198,7 +206,8 @@ internal func createSTRCartItem(cartItemMap: NSDictionary) -> STRCartItem {
     )
 }
 
-internal func createSTRCart(cartMap: NSDictionary) -> STRCart {
+internal func createSTRCart(cartMap: NSDictionary?) -> STRCart? {
+    guard let cartMap = cartMap else { return nil }
     return STRCart(
         items: (cartMap["items"] as? [NSDictionary])?.map { createSTRCartItem(cartItemMap: $0) } ?? [],
         totalPrice: cartMap["totalPrice"] as? Float ?? 0.0,
@@ -206,4 +215,3 @@ internal func createSTRCart(cartMap: NSDictionary) -> STRCart {
         currency: cartMap["currency"] as? String ?? ""
     )
 }
-
