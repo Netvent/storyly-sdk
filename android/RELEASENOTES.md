@@ -1,4 +1,9 @@
 # Release Notes
+### 2.15.0 (27.02.2024)
+* improved media url handling
+* improved functionality of product catalog interactive component
+* fixed a bug related to product cart state
+  
 ### 2.14.0 (19.02.2024)
 * added animations for text interactive component
   
