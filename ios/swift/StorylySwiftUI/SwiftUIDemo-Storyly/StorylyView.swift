@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Storyly
 
-struct StorylySwiftUIview: UIViewControllerRepresentable {
+struct StorylySwiftUIView: UIViewControllerRepresentable {
     typealias UIViewControllerType = StorylyViewController
     var storylyToken: String
     
