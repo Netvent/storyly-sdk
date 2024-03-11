@@ -1,4 +1,9 @@
 # Release Notes
+### 2.16.0 (11.03.2024)
+* improved price formatting for product related interactive components
+* fixed a bug related to interactive component representation
+* improved action flow for product related interactive components
+  
 ### 2.15.0 (27.02.2024)
 * improved media url handling
 * improved functionality of product catalog interactive component
