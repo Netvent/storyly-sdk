@@ -180,6 +180,7 @@ declare module "storyly-react-native" {
       seen: boolean;
       currentTime: number;
       media: Media;
+      products?: STRProductItem[];
     }
 
     export interface Media {
