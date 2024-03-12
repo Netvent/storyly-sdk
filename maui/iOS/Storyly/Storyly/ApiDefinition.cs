@@ -238,7 +238,11 @@ namespace Storyly
 		// @property (readonly, nonatomic, strong) StoryMedia * _Nonnull media;
 		[Export("media", ArgumentSemantic.Strong)]
 		StoryMedia Media { get; }
-	}
+
+        // @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+        [NullAllowed, Export("products", ArgumentSemantic.Copy)]
+        STRProductItem[] Products { get; }
+    }
 
 	// @interface StoryMedia : NSObject
 	[BaseType(typeof(NSObject))]
