@@ -123,9 +123,9 @@ extension STStorylyView {
         storylyView?.openStory(payload: payload)
     }
     
-    func openStory(storyGroupId: String, storyId: String?) {
+    func openStory(storyGroupId: String, storyId: String?, playMode: String?) {
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
-        storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
+        storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId, play: getPlayMode(playMode: playMode))
     }
 
     func hydrateProducts(products: [STRProductItem]) {
@@ -165,6 +165,14 @@ extension STStorylyView {
     func closeStory() {
          print("STR:STStorylyView:closeStory()")
          storylyView?.closeStory(animated: false)
+    }
+    
+    private func getPlayMode(playMode: String?) -> PlayMode {
+        switch playMode {
+            case "story-group": return .StoryGroup
+            case "story": return .Story
+            default: return .Default
+        }
     }
 }
 

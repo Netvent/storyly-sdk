@@ -10,7 +10,9 @@ RCT_EXTERN_METHOD(openStory:(nonnull NSNumber *)reactTag
 
 RCT_EXTERN_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
                   storyGroupId:(nonnull NSString *)storyGroupId
-                  storyId:(NSString *)storyId)
+                  storyId:(NSString *)storyId
+                  playMode:(NSString *)playMode
+                  )
 
 RCT_EXTERN_METHOD(hydrateProducts:(nonnull NSNumber *)reactTag
                   products:(nonnull NSArray<NSDictionary *> *)products)

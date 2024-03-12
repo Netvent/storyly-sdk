@@ -88,13 +88,13 @@ class STStorylyManager: RCTViewManager {
         }
     }
     
-    @objc(openStoryWithId:storyGroupId:storyId:)
-    func openStory(reactTag: NSNumber, storyGroupId: String, storyId: String?) {
+    @objc(openStoryWithId:storyGroupId:storyId:playMode:)
+    func openStory(reactTag: NSNumber, storyGroupId: String, storyId: String?, playMode: String?) {
         print("STR:STStorylyManager:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STStorylyView {
-                _ = stStorylyView.openStory(storyGroupId: storyGroupId , storyId: storyId)
+                _ = stStorylyView.openStory(storyGroupId: storyGroupId , storyId: storyId, playMode: playMode)
             } else {
                 STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
             }
