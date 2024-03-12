@@ -38,6 +38,7 @@ internal fun createStoryMap(story: Story): Map<String, Any?> {
         "name" to story.name,
         "seen" to story.seen,
         "currentTime" to story.currentTime.toInt(),
+        "products" to story.products?.map { product -> createSTRProductItemMap(product) },
         "media" to mapOf(
             "type" to story.media.type.ordinal,
             "storyComponentList" to story.media.storyComponentList?.map { createStoryComponentMap(it) },
