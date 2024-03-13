@@ -137,7 +137,7 @@ extension STStorylyView {
         let storyId = map["storyId"] as? String
         let playMode = map["playMode"] as? String
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
-        _ = storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId, getPlayMode(playMode: playMode))
+        _ = storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId, play: getPlayMode(playMode: playMode))
     }
     
     @objc(hydrateProducts:)
