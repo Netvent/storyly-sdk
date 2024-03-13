@@ -78,7 +78,7 @@ export interface StorylyMethods {
     pauseStory: () => void;
     closeStory: () => void;
     openStory: (url: string) => void;
-    openStoryWithId: (groupId: string, storyId?: string) => void;
+    openStoryWithId: (groupId: string, storyId?: string, playMode?: string) => void;
     hydrateProducts: (products: [STRProductItem]) => void;
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
@@ -133,9 +133,9 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         }
     }
 
-    const openStoryWithId = (groupId: string, storyId?: string) => {
+    const openStoryWithId = (groupId: string, storyId?: string, playMode?: string) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.openStoryWithId(storylyRef.current, JSON.stringify({groupId, storyId}))
+            StorylyNativeCommands.openStoryWithId(storylyRef.current, JSON.stringify({groupId, storyId, playMode}))
         }
     }
 

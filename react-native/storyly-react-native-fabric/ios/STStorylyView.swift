@@ -133,10 +133,11 @@ extension STStorylyView {
     @objc(openStoryId:)
     public func openStoryId(raw: String) {
         guard let map = decodePayload(raw: raw),
-              let storyGroupId = map["groupId"] as? String else { return }
+        let storyGroupId = map["groupId"] as? String else { return }
         let storyId = map["storyId"] as? String
+        let playMode = map["playMode"] as? String
         print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
-        _ = storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId)
+        _ = storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId, getPlayMode(playMode: playMode))
     }
     
     @objc(hydrateProducts:)
@@ -179,6 +180,14 @@ extension STStorylyView {
         guard let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 else { return }
         onFail(STRCartEventResult(message: failMessage))
         cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+    }
+
+    private func getPlayMode(playMode: String?) -> PlayMode {
+        switch playMode {
+            case "story-group": return .StoryGroup
+            case "story": return .Story
+            default: return .Default
+        }
     }
 }
 
