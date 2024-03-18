@@ -71,6 +71,7 @@ export interface Story {
         actionUrlList?: string[];
         previewUrl?: string;
     };
+    products?: STRProductItem[];
 }
 
 export type ReactionType =
