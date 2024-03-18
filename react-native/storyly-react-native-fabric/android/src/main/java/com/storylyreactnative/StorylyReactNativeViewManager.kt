@@ -3,6 +3,7 @@ package com.storylyreactnative
 import android.app.Activity
 import android.net.Uri
 import android.view.View
+import com.appsamurai.storyly.PlayMode
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.module.annotations.ReactModule
@@ -76,7 +77,8 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
         val map = raw?.let { jsonStringToMap(it) } ?: return
         val groupId = map["groupId"] as? String ?: return
         val storyId = map["storyId"] as? String
-        view?.storylyView?.openStory(groupId, storyId)
+        val playMode = map["playMode"] as? String
+        view?.storylyView?.openStory(groupId, storyId, getPlayMode(playMode))
     }
 
     override fun hydrateProducts(view: STStorylyView?, raw: String?) {
@@ -117,6 +119,14 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
             builder.put(it.rawName, MapBuilder.of("registrationName", it.rawName))
         }
         return builder.build()
+    }
+
+    private fun getPlayMode(playMode: String?): PlayMode {
+        return when (playMode) {
+            "story-group" -> PlayMode.StoryGroup
+            "story" -> PlayMode.Story
+            else -> PlayMode.Default
+        }
     }
 
     companion object {
