@@ -46,7 +46,8 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "name": story.name,
         "seen": story.seen,
         "currentTime": story.currentTime,
-        "media": createMediaMap(story: story)
+        "media": createMediaMap(story: story),
+        "products": story.products?.map { product in createSTRProductItemMap(product: product) }
     ]
 }
 
