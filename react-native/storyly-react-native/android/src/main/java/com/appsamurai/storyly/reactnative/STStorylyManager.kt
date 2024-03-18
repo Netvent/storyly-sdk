@@ -120,23 +120,26 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 val payloadStr: String = args?.getString(0) ?: return
                 root.storylyView?.openStory(Uri.parse(payloadStr))
             }
+
             COMMAND_HYDRATE_PRODUCT_CODE -> {
                 (args?.getArray(0)?.toArrayList() as? List<Map<String, Any?>>)?.let {
                     val productItems = it.map { createSTRProductItem(it) }
                     root.storylyView?.hydrateProducts(productItems)
                 }
             }
+
             COMMAND_UPDATE_CART_CODE -> {
                 (args?.getMap(0)?.toHashMap() as? Map<String, Any?>)?.let {
                     val cart = createSTRCart(it)
                     root.storylyView?.updateCart(cart)
                 }
             }
+
             COMMAND_APPROVE_CART_CHANGE_CODE -> {
                 val responseId: String = args?.getString(0) ?: return
                 if (args.size() > 1) {
                     (args.getMap(1)?.toHashMap() as? Map<String, Any?>)?.let {
-                         root.approveCartChange(responseId, createSTRCart(it))
+                        root.approveCartChange(responseId, createSTRCart(it))
                     } ?: run {
                         root.approveCartChange(responseId)
                     }
@@ -144,20 +147,31 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                     root.approveCartChange(responseId)
                 }
             }
+
             COMMAND_REJECT_CART_CHANGE_CODE -> {
                 val responseId: String = args?.getString(0) ?: return
                 val failMessage: String = if (args.size() > 1) args.getString(1) else ""
                 root.rejectCartChange(responseId, failMessage)
             }
+
             COMMAND_OPEN_STORY_WITH_ID_CODE -> {
                 val storyGroupId: String = args?.getString(0) ?: return
                 val storyId: String? = if (args.size() > 1) args.getString(1) else null
-
-                root.storylyView?.openStory(storyGroupId, storyId)
+                val playMode: String? = if (args.size() > 2) args.getString(2) else null
+                root.storylyView?.openStory(storyGroupId, storyId, getPlayMode(playMode))
             }
+
             COMMAND_RESUME_STORY_CODE -> root.storylyView?.resumeStory()
             COMMAND_PAUSE_STORY_CODE -> root.storylyView?.pauseStory()
             COMMAND_CLOSE_STORY_CODE -> root.storylyView?.closeStory()
+        }
+    }
+
+    private fun getPlayMode(playMode: String?): PlayMode {
+        return when (playMode) {
+            "story-group" -> PlayMode.StoryGroup
+            "story" -> PlayMode.Story
+            else -> PlayMode.Default
         }
     }
 
@@ -274,7 +288,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         var storyProductConfig = StorylyProductConfig.Builder()
         if (json.hasKey("isFallbackEnabled")) storyProductConfig = storyProductConfig.setFallbackAvailability(json.getBoolean("isFallbackEnabled"))
         if (json.hasKey("isCartEnabled")) storyProductConfig = storyProductConfig.setCartAvailability(json.getBoolean("isCartEnabled"))
-        (json.getMap("productFeed")?.toHashMap() as? Map<String, List<Map<String, Any?>>?>)?.let  { productFeed ->
+        (json.getMap("productFeed")?.toHashMap() as? Map<String, List<Map<String, Any?>>?>)?.let { productFeed ->
             val feed = productFeed.mapValues { entry ->
                 entry.value?.let { productList ->
                     productList.map { createSTRProductItem(it) }

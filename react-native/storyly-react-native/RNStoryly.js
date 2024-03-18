@@ -48,11 +48,11 @@ class Storyly extends Component {
         );
     };
 
-    openStoryWithId = (storyGroupId, storyId) => {
+    openStoryWithId = (storyGroupId, storyId, playMode) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),
             UIManager.getViewManagerConfig('STStoryly').Commands.openStoryWithId,
-            [storyGroupId, storyId],
+            [storyGroupId, storyId, playMode],
         );
     };
 
