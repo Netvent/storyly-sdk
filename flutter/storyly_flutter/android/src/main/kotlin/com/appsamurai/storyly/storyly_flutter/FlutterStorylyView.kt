@@ -55,14 +55,17 @@ class FlutterStorylyView(
                     callArguments?.get("storyGroupId") as? String ?: "",
                     callArguments?.getOrElse("storyId") { null } as? String
                 )
+
                 "openStoryUri" -> storylyView.openStory(Uri.parse(callArguments?.get("uri") as? String))
                 "hydrateProducts" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
                     val products = it.map { product -> createSTRProductItem(product) }
                     storylyView.hydrateProducts(products)
                 }
+
                 "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
                     storylyView.updateCart(createSTRCart(it))
                 }
+
                 "approveCartChange" -> (callArguments?.get("responseId") as? String)?.let {
                     val onSuccess = cartUpdateSuccessFailCallbackMap[it]?.first
                     (callArguments["cart"] as? Map<String, Any?>)?.let { cartMap ->
@@ -72,6 +75,7 @@ class FlutterStorylyView(
                     }
                     cartUpdateSuccessFailCallbackMap.remove(it)
                 }
+
                 "rejectCartChange" -> (callArguments?.get("responseId") as? String)?.let {
                     val onFail = cartUpdateSuccessFailCallbackMap[it]?.second
                     (callArguments["failMessage"] as? String)?.let { failMessage ->
@@ -230,7 +234,7 @@ class FlutterStorylyView(
         storylyConfigBuilder = stStoryStyling(context = context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
-      
+
 
         return StorylyInit(
             storylyId = storylyId,
@@ -343,7 +347,7 @@ class FlutterStorylyView(
         var productConfigBuilder = StorylyProductConfig.Builder()
         (json["isFallbackEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setFallbackAvailability(it) }
         (json["isCartEnabled"] as? Boolean)?.let { productConfigBuilder = productConfigBuilder.setCartAvailability(it) }
-        (json["productFeed"] as? HashMap<String, ArrayList<HashMap<String, Any?>>?>)?.let  { productFeed ->
+        (json["productFeed"] as? HashMap<String, ArrayList<HashMap<String, Any?>>?>)?.let { productFeed ->
             val feed = productFeed.mapValues { entry ->
                 entry.value?.let { productList ->
                     productList.map { createSTRProductItem(it) }
@@ -414,6 +418,7 @@ class FlutterStorylyView(
             "index" to story.index,
             "seen" to story.seen,
             "currentTime" to story.currentTime,
+            "products" to (story.products ?: listOf()).map { product -> createSTRProductItemMap(product) },
             "media" to story.media.let {
                 mapOf(
                     "type" to it.type.ordinal,
@@ -439,6 +444,7 @@ class FlutterStorylyView(
                     "customPayload" to storyComponent.customPayload
                 )
             }
+
             is StoryPollComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
@@ -449,6 +455,7 @@ class FlutterStorylyView(
                     "customPayload" to storyComponent.customPayload
                 )
             }
+
             is StoryEmojiComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
@@ -458,6 +465,7 @@ class FlutterStorylyView(
                     "customPayload" to storyComponent.customPayload
                 )
             }
+
             is StoryRatingComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
@@ -467,6 +475,7 @@ class FlutterStorylyView(
                     "customPayload" to storyComponent.customPayload
                 )
             }
+
             is StoryPromoCodeComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
@@ -474,6 +483,7 @@ class FlutterStorylyView(
                     "text" to storyComponent.text
                 )
             }
+
             is StoryCommentComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
@@ -481,6 +491,7 @@ class FlutterStorylyView(
                     "text" to storyComponent.text
                 )
             }
+
             else -> {
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
