@@ -1,3 +1,9 @@
+### 2.16.1 (19.03.2024)
+* improved price formatting for product related interactive components
+* fixed a bug related to interactive component representation
+* improved action flow for product related interactive components
+* improved analytic events
+
 ### 2.15.0 (27.02.2024)
 * improved media url handling
 * improved functionality of product catalog interactive component
