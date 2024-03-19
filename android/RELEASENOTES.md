@@ -1,4 +1,8 @@
 # Release Notes
+### 2.16.1 (19.03.2024)
+* improved analytic events
+* fixed a bug related to z-index of interactive components
+  
 ### 2.16.0 (11.03.2024)
 * improved price formatting for product related interactive components
 * fixed a bug related to interactive component representation
