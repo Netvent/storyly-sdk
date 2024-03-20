@@ -416,6 +416,7 @@ extension FlutterStorylyViewWrapper {
             "index": story.index,
             "seen": story.seen,
             "currentTime": story.currentTime,
+            "products": (story.products ?? []).map { createSTRProductItemMap(product: $0) },
             "media": [
                 "type": story.media.type.rawValue,
                 "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },

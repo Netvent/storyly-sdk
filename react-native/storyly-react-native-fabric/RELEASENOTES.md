@@ -1,6 +1,11 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
 
+### 2.15.0 (27.02.2024)
+* improved media url handling
+* improved functionality of product catalog interactive component
+* fixed a bug related to product cart state
+
 ### 2.14.0 (19.02.2024)
 * added animations for text interactive component
 * improved functionality and design of story group countdown badge

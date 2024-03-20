@@ -49,6 +49,11 @@ internal fun createStoryMap(story: Story): WritableMap {
         storyMap.putBoolean("seen", story.seen)
         storyMap.putInt("currentTime", story.currentTime.toInt())
         storyMap.putMap("media", createMediaMap(story))
+        storyMap.putArray("products", story.products?.let {
+            Arguments.createArray().also { storiesArray ->
+                it.forEach { item -> storiesArray.pushMap(createSTRProductItemMap(item)) }
+            }
+        })
     }
 }
 

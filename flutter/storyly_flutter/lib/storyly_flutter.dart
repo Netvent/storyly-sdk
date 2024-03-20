@@ -951,6 +951,7 @@ class Story {
     required this.seen,
     required this.currentTime,
     required this.media,
+    this.products,
     this.name,
   });
 
@@ -975,6 +976,9 @@ class Story {
   /// Media content of the story
   final Media media;
 
+  /// Related product content of interactive incase of click action
+  final List<STRProductItem>? products;
+
   factory Story.fromJson(Map<String, dynamic> json) {
     return Story(
       id: json['id'],
@@ -984,6 +988,8 @@ class Story {
       seen: json['seen'],
       currentTime: json['currentTime'],
       media: Media.fromJson(json['media']),
+      products: List<STRProductItem>.from(
+          json['products'].map((x) => STRProductItem.fromJson(x))),
     );
   }
 }

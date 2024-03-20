@@ -1,4 +1,21 @@
 # Release Notes
+### 2.16.1 (19.03.2024)
+* improved price formatting for product related interactive components
+* fixed a bug related to interactive component representation
+* improved action flow for product related interactive components
+* improved analytic events
+
+### 2.15.0 (27.02.2024)
+* improved media url handling
+* improved functionality of product catalog interactive component
+* fixed a bug related to product cart state
+
+### 2.14.0 (20.02.2024)
+* added animations for text interactive component
+* improved functionality and design of story group countdown badge
+* fixed a bug related to scroll position in storyly bar on android platform
+* fixed an orientation bug for devices having iOS version <16 on ios platform
+
 ### 2.12.1 (19.01.2024)
 * fixed an orientation bug for devices having iOS version <16
 

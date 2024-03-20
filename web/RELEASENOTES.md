@@ -1,5 +1,12 @@
 # Release Notes
 
+### 2.16.0 - 11.03.2024 [for cdn](https://web-story.storyly.io/sdk/2.16.0/storyly-web.js)
+
+- Feature: Video tag supported in custom styling
+- Feature: actionClicked event supported for referenced product
+- Improvement: Svg optimization for performance
+- Bug: Fixed minor bugs
+
 ### 2.15.0 - 01.03.2024 [for cdn](https://web-story.storyly.io/sdk/2.15.0/storyly-web.js)
 
 - Feature: Show available products on product catalog

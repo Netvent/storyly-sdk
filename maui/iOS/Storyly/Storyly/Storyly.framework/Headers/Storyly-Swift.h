@@ -520,6 +520,8 @@ SWIFT_CLASS_NAMED("Story")
 @property (nonatomic, readonly) NSInteger currentTime;
 /// Media content of the story
 @property (nonatomic, readonly, strong) StoryMedia * _Nonnull media;
+/// Related product content of interactive incase of click action
+@property (nonatomic, readonly, copy) NSArray<STRProductItem *> * _Nullable products;
 /// Story initialization
 /// \param id ID of the story
 ///
@@ -533,7 +535,7 @@ SWIFT_CLASS_NAMED("Story")
 ///
 /// \param media Media content of the story
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime media:(StoryMedia * _Nonnull)media OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime media:(StoryMedia * _Nonnull)media products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -734,10 +736,12 @@ SWIFT_CLASS_NAMED("StoryGroupBadgeStyle")
 @property (nonatomic, readonly, strong) UIColor * _Nullable backgroundColor;
 /// End time of the badge in timestamp format
 @property (nonatomic, readonly, strong) NSNumber * _Nullable endTime;
+/// Text template for the badge timestamp format
+@property (nonatomic, readonly, copy, getter=template) NSString * _Nullable template_;
 /// StoryGroupStyle initialization
 /// \param badge Badge value of the story group
 ///
-- (nonnull instancetype)initWithText:(NSString * _Nullable)text textColor:(UIColor * _Nullable)textColor backgroundColor:(UIColor * _Nullable)backgroundColor endTime:(NSNumber * _Nullable)endTime OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithText:(NSString * _Nullable)text textColor:(UIColor * _Nullable)textColor backgroundColor:(UIColor * _Nullable)backgroundColor endTime:(NSNumber * _Nullable)endTime template:(NSString * _Nullable)template_ OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1162,6 +1166,7 @@ SWIFT_CLASS_NAMED("Builder")
 ///
 - (StorylyConfigBuilder * _Nonnull)setShareConfig:(StorylyShareConfig * _Nonnull)config SWIFT_WARN_UNUSED_RESULT;
 /// This function allows you to set localization to Storyly, sample convention is en-GB.
+/// Current supported languages for sdk texts are: de, en, es, fr, he, pt, ru, tr
 /// \param locale Locale for localization 
 ///
 - (StorylyConfigBuilder * _Nonnull)setLocale:(NSString * _Nullable)locale SWIFT_WARN_UNUSED_RESULT;
