@@ -1,4 +1,11 @@
 # Release Notes
+### 2.17.0 (05.04.2024)
+* fixed RTL support issues for product related interactive components
+* fixed bugs related to conditional stories
+* added additional bottom sheet customizations for product related interactive components
+* improved bottom sheet functionality for product related interactive components
+* added privacy manifest files for the upcoming SDK requirements
+  
 ### 2.16.1 (19.03.2024)
 * improved analytic events
   
