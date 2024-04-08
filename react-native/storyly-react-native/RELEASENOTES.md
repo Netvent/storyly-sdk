@@ -1,6 +1,16 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
 
+### 2.17.0 (08.04.2024)
+* fixed RTL support issues for product related interactive components
+* fixed bugs related to conditional stories
+* added additional bottom sheet customizations for product related interactive components
+* improved bottom sheet functionality for product related interactive components
+* improved StorylyDataSource by simplifying the sources for storylyLoaded callback
+* improved network requests on android platform
+* fixed a bug related to product sheet colors on android platform
+* added privacy manifest files for the upcoming SDK requirements on ios platform
+
 ### 2.16.1 (19.03.2024)
 * improved price formatting for product related interactive components
 * fixed a bug related to interactive component representation
