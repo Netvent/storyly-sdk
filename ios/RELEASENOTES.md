@@ -5,6 +5,7 @@
 * added additional bottom sheet customizations for product related interactive components
 * improved bottom sheet functionality for product related interactive components
 * added privacy manifest files for the upcoming SDK requirements
+* improved StorylyDataSource by simplifying the sources for storylyLoaded callback
   
 ### 2.16.1 (19.03.2024)
 * improved analytic events
