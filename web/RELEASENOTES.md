@@ -1,5 +1,14 @@
 # Release Notes
 
+### 2.17.0 - 08.04.2024 [for cdn](https://web-story.storyly.io/sdk/2.17.0/storyly-web.js)
+
+- Feature: Product bottom sheet and modal customization have been implemented.
+- Feature: The functionality of the “Go to Cart” button has been fixed in case the integration is not connected.
+- Feature: Image overlaps in bottom sheets have been addressed specifically for Safari browsers.
+- Feature: Sorting functionality has been added to variants, allowing them to be sorted by key.
+- Feature: Adding parameters to the URL for each story to return to the same story.
+- Bug: Fix zoomed screen while story was openning in some iphone models
+
 ### 2.16.0 - 11.03.2024 [for cdn](https://web-story.storyly.io/sdk/2.16.0/storyly-web.js)
 
 - Feature: Video tag supported in custom styling
