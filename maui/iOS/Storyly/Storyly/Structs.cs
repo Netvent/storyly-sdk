@@ -6,11 +6,7 @@ namespace Storyly
 	public enum StorylyDataSource : long
 	{
 		Api = 0,
-		MomentsAPI = 1,
-		Local = 2,
-		UserData = 3,
-		ProductData = 4,
-		ConditionData = 5
+		Local = 1
 	}
 
 	[Native]
@@ -44,21 +40,24 @@ namespace Storyly
 		ProductTagExpanded = 25,
 		ProductTagClicked = 26,
 		ProductCardClicked = 27,
-		PromoCodeCopied = 28,
-		CommentSent = 29,
-		CommentInputOpened = 30,
-		CommentInputClosed = 31,
-		Liked = 32,
-		Unliked = 33,
-		ProductAdded = 34,
-		ProductUpdated = 35,
-		ProductRemoved = 36,
-		CheckoutButtonClicked = 37,
-		CartButtonClicked = 38,
-		CartViewClicked = 39,
-		ProductSheetOpened = 40,
-		ProductSelected = 41,
-		Seeked = 42
+		ProductCatalogClicked = 28,
+		PromoCodeCopied = 29,
+		CommentSent = 30,
+		CommentInputOpened = 31,
+		CommentInputClosed = 32,
+		Seeked = 33,
+		Liked = 34,
+		Unliked = 35,
+		ProductCartAdded = 36,
+		ProductCartAddFailed = 37,
+		ProductSheetOpened = 38,
+		ProductAdded = 39,
+		ProductUpdated = 40,
+		ProductRemoved = 41,
+		CheckoutButtonClicked = 42,
+		CartButtonClicked = 43,
+		CartViewClicked = 44,
+		ProductSelected = 45
 	}
 
 	[Native]
@@ -68,7 +67,8 @@ namespace Storyly
 		Ad = 1,
 		MomentsDefault = 2,
 		MomentsBlock = 3,
-		Live = 4
+		Live = 4,
+		AutomatedShoppable = 5
 	}
 
 	[Native]
