@@ -1,4 +1,10 @@
 # Release Notes
+### 2.17.2 (24.04.2024)
+* fixed thumbnail image load issue of video stories
+* fixed a bug related to cta behavior of product related interactive components
+* fixed icon corner radius flick on fragment transitions
+* fixed a bug related to icon corner radius on android 8 and below devices
+  
 ### 2.17.1 (06.04.2024)
 * fixed a bug related to product sheet colors
 
