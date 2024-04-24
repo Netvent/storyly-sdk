@@ -1,4 +1,8 @@
 # Release Notes
+### 2.17.1 (24.04.2024)
+* fixed thumbnail image load issue of video stories
+* fixed story dismiss issue after a non-modal view controller presented over stories
+
 ### 2.17.0 (08.04.2024)
 * fixed RTL support issues for product related interactive components
 * fixed bugs related to conditional stories
