@@ -3,14 +3,14 @@
 ### 2.17.2 (25.04.2024)
 * fixed a bug related to analytics requests on ios platform
 
-### 2.17.1 (24.04.2024)
+### (DEPRECATED) 2.17.1 (24.04.2024)
 * fixed thumbnail image load issue of video stories
 * fixed story dismiss issue after a non-modal view controller presented over stories on ios platform
 * fixed a bug related to cta behavior of product related interactive components on android platform
 * fixed icon corner radius flick on fragment transitions on android platform
 * fixed a bug related to icon corner radius on android 8 and below devices on android platform
 
-### 2.17.0 (08.04.2024)
+### (DEPRECATED) 2.17.0 (08.04.2024)
 * fixed RTL support issues for product related interactive components
 * fixed bugs related to conditional stories
 * added additional bottom sheet customizations for product related interactive components
