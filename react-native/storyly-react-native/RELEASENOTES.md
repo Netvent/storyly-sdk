@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 2.17.2 (25.04.2024)
+* fixed a bug related to analytics requests on ios platform
+
 ### 2.17.1 (24.04.2024)
 * fixed thumbnail image load issue of video stories
 * fixed story dismiss issue after a non-modal view controller presented over stories on ios platform
