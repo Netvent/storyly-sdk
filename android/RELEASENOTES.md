@@ -8,7 +8,7 @@
 ### 2.17.1 (06.04.2024)
 * fixed a bug related to product sheet colors
 
-### 2.17.0 (05.04.2024)
+### (DEPRECATED) 2.17.0 (05.04.2024)
 * fixed RTL support issues for product related interactive components
 * fixed bugs related to conditional stories
 * added additional bottom sheet customizations for product related interactive components
