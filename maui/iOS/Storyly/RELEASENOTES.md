@@ -1,4 +1,7 @@
 # Release Notes
+### 2.17.2 (25.04.2024)
+* fixed a bug related to analytics requests
+
 ### 2.17.1 (24.04.2024)
 * fixed thumbnail image load issue of video stories
 * fixed story dismiss issue after a non-modal view controller presented over stories
