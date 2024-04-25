@@ -35,6 +35,10 @@ namespace Storyly
         [NullAllowed, Export("productDelegate", ArgumentSemantic.Weak)]
         NSObject WeakProductDelegate { get; set; }
 
+        // -(BOOL)openStoryWithPayload:(NSURL * _Nonnull)payload __attribute__((warn_unused_result("")));
+        [Export("openStoryWithPayload:")]
+        bool OpenStoryWithPayload(NSUrl payload);
+
         // -(void)resumeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
         [Export("resumeStoryWithAnimated:completion:")]
 		void ResumeStoryWithAnimated(bool animated, [NullAllowed] Action completion);
@@ -718,8 +722,12 @@ namespace Storyly
         [Export("setShareConfig:")]
 		StorylyConfigBuilder SetShareConfig(StorylyShareConfig config);
 
-		// -(StorylyConfig * _Nonnull)build __attribute__((warn_unused_result("")));
-		[Export("build")]
+        // -(StorylyConfigBuilder * _Nonnull)setLocale:(NSString * _Nullable)locale __attribute__((warn_unused_result("")));
+        [Export("setLocale:")]
+        StorylyConfigBuilder SetLocale([NullAllowed] string locale);
+
+        // -(StorylyConfig * _Nonnull)build __attribute__((warn_unused_result("")));
+        [Export("build")]
 		StorylyConfig Build();
 	}
 
