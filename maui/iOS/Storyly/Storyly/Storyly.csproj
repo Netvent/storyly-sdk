@@ -9,8 +9,12 @@
     <RootNamespace>Storyly</RootNamespace>
     <AssemblyName>Storyly.MAUI</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ReleaseVersion>2.17.2</ReleaseVersion>
+    <ReleaseVersion>2.17.3</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />

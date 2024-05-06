@@ -1,4 +1,7 @@
 # Release Notes
+### 2.17.3 (06.05.2024)
+* improved usage of actionUrl and products in storylyActionClicked callback
+
 ### 2.17.2 (25.04.2024)
 * fixed a bug related to analytics requests
 
