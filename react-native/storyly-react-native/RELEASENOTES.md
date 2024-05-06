@@ -1,5 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 2.17.3 (06.05.2024)
+* improved usage of actionUrl and products in storylyActionClicked callback
+* fixed an issue related to visibility of the product catalog interactive component on android platform
+
 ### 2.17.2 (25.04.2024)
 * fixed a bug related to analytics requests on ios platform
 
