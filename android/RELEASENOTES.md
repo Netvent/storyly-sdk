@@ -1,4 +1,8 @@
 # Release Notes
+### 2.17.3 (06.05.2024)
+* improved usage of actionUrl and products in storylyActionClicked callback
+* fixed an issue related to visibility of the product catalog interactive component
+
 ### 2.17.2 (24.04.2024)
 * fixed thumbnail image load issue of video stories
 * fixed a bug related to cta behavior of product related interactive components
