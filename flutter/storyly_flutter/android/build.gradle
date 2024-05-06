@@ -46,5 +46,5 @@ android {
 }
 
 dependencies {
-    api 'com.appsamurai.storyly:storyly:2.17.2'
+    api 'com.appsamurai.storyly:storyly:2.17.3'
 }
