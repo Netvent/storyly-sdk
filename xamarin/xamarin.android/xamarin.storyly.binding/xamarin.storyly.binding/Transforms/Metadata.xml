@@ -1,0 +1,149 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+
+  <attr path="/api/package[@name='com.appsamurai.storyly.databinding']/class[@name='a']" name="visibility">kotlin-internal</attr>
+
+  <attr path="/api/package[@name='com.appsamurai.storyly']/interface[@name='StorylyProductListener']/method[@name='storylyEvent']" name="managedName">StorylyProductEvent</attr>
+
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCart']/parameter[@name='p0']" 
+        name="name">api</attr>
+
+  <!-- STRCart  -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCart']/constructor[@name='STRCart' and count(parameter)=4]/parameter[@name='p0']" name="name">items</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCart']/constructor[@name='STRCart' and count(parameter)=4]/parameter[@name='p1']" name="name">totalPrice</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCart']/constructor[@name='STRCart' and count(parameter)=4]/parameter[@name='p2']" name="name">oldTotalPrice</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCart']/constructor[@name='STRCart' and count(parameter)=4]/parameter[@name='p3']" name="name">currency</attr>
+
+  <!-- STRCartItem  -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCartItem']/constructor[@name='STRCartItem' and count(parameter)=4]/parameter[@name='p0']" name="name">item</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCartItem']/constructor[@name='STRCartItem' and count(parameter)=4]/parameter[@name='p1']" name="name">quantity</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCartItem']/constructor[@name='STRCartItem' and count(parameter)=4]/parameter[@name='p2']" name="name">totalPrice</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRCartItem']/constructor[@name='STRCartItem' and count(parameter)=4]/parameter[@name='p3']" name="name">oldTotalPrice</attr>
+
+    <!-- STRProductItem -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p0']" name="name">productId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p1']" name="name">productGroupId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p2']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p3']" name="name">url</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p4']" name="name">desc</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p5']" name="name">price</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p6']" name="name">salesPrice</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p7']" name="name">currency</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p8']" name="name">imageUrls</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p9']" name="name">variants</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p10']" name="name">ctaText</attr>
+
+  <!-- STRProductVariant -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=2]/parameter[@name='p0']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=2]/parameter[@name='p1']" name="name">value</attr>
+
+  <!-- StoryGroup -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p0']" name="name">uniqueId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p2']" name="name">iconUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p3']" name="name">thematicIconUrls</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p4']" name="name">coverUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p5']" name="name">index</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p6']" name="name">seen</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p7']" name="name">stories</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p8']" name="name">pinned</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p9']" name="name">type</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p10']" name="name">momentsUser</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p11']" name="name">style</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p12']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p13']" name="name">nudge</attr>
+
+  <!-- StoryGroupStyle -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupStyle']/constructor[@name='StoryGroupStyle' and count(parameter)=3]/parameter[@name='p0']" name="name">borderUnseenColors</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupStyle']/constructor[@name='StoryGroupStyle' and count(parameter)=3]/parameter[@name='p1']" name="name">textUnseenColor</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupStyle']/constructor[@name='StoryGroupStyle' and count(parameter)=3]/parameter[@name='p2']" name="name">badge</attr>
+
+  <!-- StoryGroupBadgeStyle -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupBadgeStyle']/constructor[@name='StoryGroupBadgeStyle' and count(parameter)=5]/parameter[@name='p0']" name="name">text</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupBadgeStyle']/constructor[@name='StoryGroupBadgeStyle' and count(parameter)=5]/parameter[@name='p1']" name="name">textColor</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupBadgeStyle']/constructor[@name='StoryGroupBadgeStyle' and count(parameter)=5]/parameter[@name='p2']" name="name">backgroundColor</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupBadgeStyle']/constructor[@name='StoryGroupBadgeStyle' and count(parameter)=5]/parameter[@name='p3']" name="name">endTime</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupBadgeStyle']/constructor[@name='StoryGroupBadgeStyle' and count(parameter)=5]/parameter[@name='p4']" name="name">template</attr>
+
+  <!-- Story -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p0']" name="name">uniqueId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p2']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p3']" name="name">index</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p4']" name="name">seen</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p5']" name="name">currentTime</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p6']" name="name">media</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p7']" name="name">products</attr>
+
+  <!-- StoryMedia -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p0']" name="name">type</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p1']" name="name">storyComponentList</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p2']" name="name">actionUrlList</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p3']" name="name">actionUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p4']" name="name">previewUrl</attr>
+
+  <!-- StoryComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryComponent']/constructor[@name='StoryComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryComponent']/constructor[@name='StoryComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">StoryComponentType</attr>
+
+  <!-- StoryQuizComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p2']" name="name">options</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p3']" name="name">rightAnswerIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p4']" name="name">selectedOptionIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p5']" name="name">customPayload</attr>
+
+  <!-- StoryImageQuizComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p2']" name="name">options</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p3']" name="name">rightAnswerIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p4']" name="name">selectedOptionIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p5']" name="name">customPayload</attr>
+
+  <!-- StoryPollComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p2']" name="name">options</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p3']" name="name">selectedOptionIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p4']" name="name">customPayload</attr>
+
+  <!-- StoryEmojiComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p1']" name="name">emojiCodes</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p2']" name="name">selectedEmojiIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p3']" name="name">customPayload</attr>
+
+  <!-- StoryRatingComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryRatingComponent']/constructor[@name='StoryRatingComponent' and count(parameter)=4]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryRatingComponent']/constructor[@name='StoryRatingComponent' and count(parameter)=4]/parameter[@name='p1']" name="name">emojiCode</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryRatingComponent']/constructor[@name='StoryRatingComponent' and count(parameter)=4]/parameter[@name='p2']" name="name">rating</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryRatingComponent']/constructor[@name='StoryRatingComponent' and count(parameter)=4]/parameter[@name='p3']" name="name">customPayload</attr>
+
+  <!-- StoryPromoCodeComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPromoCodeComponent']/constructor[@name='StoryPromoCodeComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPromoCodeComponent']/constructor[@name='StoryPromoCodeComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">text</attr>
+
+  <!-- StoryCommentComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryCommentComponent']/constructor[@name='StoryCommentComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryCommentComponent']/constructor[@name='StoryCommentComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">text</attr>
+
+
+  <!-- STRCartEventResult -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='STRCartEventResult']/constructor[@name='STRCartEventResult' and count(parameter)=1]/parameter[@name='p0']" name="name">text</attr>
+
+
+  <!-- STRProductInformation -->
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='STRProductInformation']/constructor[@name='STRProductInformation' and count(parameter)=1]/parameter[@name='p0']" name="name">productId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='STRProductInformation']/constructor[@name='STRProductInformation' and count(parameter)=2]/parameter[@name='p1']" name="name">productGroupId</attr>
+
+
+</metadata>
+
