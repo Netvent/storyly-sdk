@@ -1,4 +1,7 @@
 # Release Notes
+### 2.18.1 (13.05.2024)
+* fixed an issue related to product payload of story impression events 
+
 ### 2.18.0 (10.05.2024)
 * improved placement of product tag interactive component based on content
 * improved payload of product events
