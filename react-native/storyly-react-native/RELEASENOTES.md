@@ -1,5 +1,12 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 2.18.0 (13.05.2024)
+* improved placement of product tag interactive component based on content
+* improved payload of product events
+* fixed storylyStoryDismissed delegate trigger time on ios platform
+* fixed an issue related to product payload of story impression events on android platform
+* improved monetization templates on android platform
+
 ### 2.17.3 (06.05.2024)
 * improved usage of actionUrl and products in storylyActionClicked callback
 * fixed an issue related to visibility of the product catalog interactive component on android platform
