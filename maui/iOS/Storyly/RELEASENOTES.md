@@ -1,4 +1,9 @@
 # Release Notes
+### 2.18.0 (13.05.2024)
+* improved placement of product tag interactive component based on content
+* improved payload of product events
+* fixed storylyStoryDismissed delegate trigger time
+
 ### 2.17.3 (06.05.2024)
 * improved usage of actionUrl and products in storylyActionClicked callback
 
