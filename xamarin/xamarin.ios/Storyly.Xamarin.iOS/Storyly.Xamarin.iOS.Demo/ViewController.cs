@@ -6,7 +6,7 @@ namespace Storyly.Xamarin.iOS.Demo
 {
     static class Constants
     {
-        public const string StorylyToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
+        public const string StorylyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjU4OTMsImFwcF9pZCI6MTc1MTMsImluc19pZCI6MTk1MzV9.RzvLM7KNF01AgOYzOfgJoafr6cSB9kc1DmJ6U14A3XQ";
     }
 
     public partial class ViewController : UIViewController
@@ -24,7 +24,8 @@ namespace Storyly.Xamarin.iOS.Demo
             {
                 StorylyInit = new StorylyInit(
                     Constants.StorylyToken,
-                    new StorylyConfigBuilder().Build()),
+                    new StorylyConfigBuilder()
+                    .Build()),
                 RootViewController = this,
                 Delegate = new StorylyDelegateImpl()
             };
