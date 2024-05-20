@@ -1,4 +1,8 @@
 # Release Notes
+### 2.18.2 (20.05.2024)
+* added key field for product variants to indicate variant type
+* fixed a visual bug for poll and quiz interactive components
+  
 ### 2.18.1 (13.05.2024)
 * fixed an issue related to product payload of story impression events 
 
