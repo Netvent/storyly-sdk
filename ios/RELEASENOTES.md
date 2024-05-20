@@ -1,4 +1,7 @@
 # Release Notes
+### 2.18.1 (20.05.2024)
+* added key field for product variants to indicate variant type
+  
 ### 2.18.0 (10.05.2024)
 * improved placement of product tag interactive component based on media
 * improved payload of product events
