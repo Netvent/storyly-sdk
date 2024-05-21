@@ -402,6 +402,7 @@ extension FlutterStorylyViewWrapper {
             "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
             "pinned": storyGroup.pinned,
             "type": storyGroup.type.rawValue,
+            "name": storyGroup.name,
             "nudge": storyGroup.nudge
         ]
     }
@@ -414,10 +415,10 @@ extension FlutterStorylyViewWrapper {
             "index": story.index,
             "seen": story.seen,
             "currentTime": story.currentTime,
-            "products": (story.products ?? []).map { createSTRProductItemMap(product: $0) },
             "previewUrl": story.previewUrl?.absoluteString,
+            "actionUrl": story.actionUrl,
             "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
-            "actionUrl": story.actionUrl
+            "products": (story.products ?? []).map { createSTRProductItemMap(product: $0) }
         ]
     }
     

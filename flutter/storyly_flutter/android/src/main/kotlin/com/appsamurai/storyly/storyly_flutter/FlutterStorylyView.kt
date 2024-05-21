@@ -403,31 +403,25 @@ class FlutterStorylyView(
             "seen" to storyGroup.seen,
             "iconUrl" to storyGroup.iconUrl,
             "stories" to storyGroup.stories.map { story -> createStoryMap(story) },
-            "thematicIconUrls" to storyGroup.thematicIconUrls,
-            "coverUrl" to storyGroup.coverUrl,
             "pinned" to storyGroup.pinned,
             "type" to storyGroup.type.ordinal,
+            "name" to storyGroup.name,
             "nudge" to storyGroup.nudge
         )
     }
 
     private fun createStoryMap(story: Story): Map<String, *> {
-        return mapOf("id" to story.uniqueId,
+        return mapOf(
+            "id" to story.uniqueId,
             "title" to story.title,
             "name" to story.name,
             "index" to story.index,
             "seen" to story.seen,
             "currentTime" to story.currentTime,
-            "products" to (story.products ?: listOf()).map { product -> createSTRProductItemMap(product) },
-            "media" to story.media.let {
-                mapOf(
-                    "type" to it.type.ordinal,
-                    "actionUrlList" to it.actionUrlList,
-                    "actionUrl" to it.actionUrl,
-                    "previewUrl" to it.previewUrl,
-                    "storyComponentList" to it.storyComponentList?.map { component -> createStoryComponentMap(component) }
-                )
-            }
+            "previewUrl" to story.previewUrl,
+            "actionUrl" to story.actionUrl,
+            "storyComponentList" to story.storyComponentList?.map { component -> createStoryComponentMap(component) },
+            "products" to (story.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
         )
     }
 
@@ -526,7 +520,7 @@ class FlutterStorylyView(
         )
     }
 
-    internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
+    private fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         return STRProductItem(
             productId = product?.get("productId") as? String ?: "",
             productGroupId = product?.get("productGroupId") as? String ?: "",

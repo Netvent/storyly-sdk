@@ -891,8 +891,7 @@ class StoryGroup {
     required this.pinned,
     required this.type,
     required this.nudge,
-    this.thematicIconUrls,
-    this.coverUrl,
+    this.name,
   });
 
   /// id ID of the story group
@@ -913,13 +912,11 @@ class StoryGroup {
   /// stories List of stories in the story group
   final List<Story> stories;
 
-  final Map<String, String>? thematicIconUrls;
-
-  final String? coverUrl;
-
   final bool pinned;
 
   final bool nudge;
+
+  final String? name;
 
   final int type;
 
@@ -931,12 +928,9 @@ class StoryGroup {
       iconUrl: json['iconUrl'],
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
-      thematicIconUrls: json['thematicIconUrls'] != null
-          ? Map<String, String>.from(json['thematicIconUrls'])
-          : null,
-      coverUrl: json['coverUrl'],
       pinned: json['pinned'],
       type: json['type'],
+      name: json['name'],
       nudge: json['nudge'],
     );
   }
@@ -950,9 +944,11 @@ class Story {
     required this.index,
     required this.seen,
     required this.currentTime,
-    required this.media,
+    this.previewUrl,
+    this.actionUrl,
     this.products,
     this.name,
+    this.actionUrlList
   });
 
   /// ID of the story
@@ -973,11 +969,15 @@ class Story {
   /// Time of the story that user watched
   final int currentTime;
 
-  /// Media content of the story
-  final Media media;
+  /// URL which the user has just interacted with
+  final String? actionUrl;
 
   /// Related product content of interactive incase of click action
   final List<STRProductItem>? products;
+
+  final List<String>? actionUrlList;
+
+  final String? previewUrl;
 
   factory Story.fromJson(Map<String, dynamic> json) {
     return Story(
@@ -987,7 +987,10 @@ class Story {
       index: json['index'],
       seen: json['seen'],
       currentTime: json['currentTime'],
-      media: Media.fromJson(json['media']),
+      previewUrl: json['previewUrl'],
+      actionUrl: json['actionUrl'],
+      actionUrlList: castOrNull(
+          json['actionUrlList']?.map<String>((e) => e as String).toList()),
       products: List<STRProductItem>.from(
           json['products'].map((x) => STRProductItem.fromJson(x))),
     );
