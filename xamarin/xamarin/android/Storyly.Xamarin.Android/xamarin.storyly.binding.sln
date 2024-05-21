@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.11
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xamarin.storyly.binding", "xamarin.storyly.binding\xamarin.storyly.binding.csproj", "{2B1129E0-A65F-40EF-BFD5-15094F232AC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xamarin.storyly.exoplayer.binding", "xamarin.storyly.exoplayer.binding\xamarin.storyly.exoplayer.binding.csproj", "{D4D8B81B-D82A-481E-946B-D6D9CB4CB533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xamarin.storyly.demo", "xamarin.storyly.demo\xamarin.storyly.demo.csproj", "{2D3303A4-A6E7-405E-BD55-4800A59DA411}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B1129E0-A65F-40EF-BFD5-15094F232AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1129E0-A65F-40EF-BFD5-15094F232AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1129E0-A65F-40EF-BFD5-15094F232AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1129E0-A65F-40EF-BFD5-15094F232AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4D8B81B-D82A-481E-946B-D6D9CB4CB533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D8B81B-D82A-481E-946B-D6D9CB4CB533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D8B81B-D82A-481E-946B-D6D9CB4CB533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D8B81B-D82A-481E-946B-D6D9CB4CB533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D3303A4-A6E7-405E-BD55-4800A59DA411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3303A4-A6E7-405E-BD55-4800A59DA411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3303A4-A6E7-405E-BD55-4800A59DA411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D3303A4-A6E7-405E-BD55-4800A59DA411}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {178B655E-F466-444C-B2A2-946F95BDFF53}
+	EndGlobalSection
+EndGlobal
