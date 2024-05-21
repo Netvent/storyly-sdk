@@ -400,8 +400,6 @@ extension FlutterStorylyViewWrapper {
             "seen": storyGroup.seen,
             "iconUrl": storyGroup.iconUrl?.absoluteString,
             "stories": storyGroup.stories.map { story in self.createStoryMap(story: story)},
-            "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
-            "coverUrl": storyGroup.coverUrl,
             "pinned": storyGroup.pinned,
             "type": storyGroup.type.rawValue,
             "nudge": storyGroup.nudge
@@ -417,13 +415,9 @@ extension FlutterStorylyViewWrapper {
             "seen": story.seen,
             "currentTime": story.currentTime,
             "products": (story.products ?? []).map { createSTRProductItemMap(product: $0) },
-            "media": [
-                "type": story.media.type.rawValue,
-                "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
-                "actionUrl": story.media.actionUrl,
-                "previewUrl": story.media.previewUrl?.absoluteString,
-                "actionUrlList": story.media.actionUrlList
-            ]
+            "previewUrl": story.previewUrl?.absoluteString,
+            "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
+            "actionUrl": story.actionUrl
         ]
     }
     
@@ -445,7 +439,8 @@ extension FlutterStorylyViewWrapper {
     internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
         return [
             "name" : variant.name,
-            "value" : variant.value
+            "value" : variant.value,
+            "key": variant.key
         ]
     }
     
@@ -476,7 +471,8 @@ extension FlutterStorylyViewWrapper {
         return variants?.map {
             STRProductVariant(
                 name: $0["name"] as? String ?? "",
-                value: $0["value"] as? String ?? ""
+                value: $0["value"] as? String ?? "",
+                key: $0["key"] as? String ?? ""
             )
         } ?? []
     }

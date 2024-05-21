@@ -521,7 +521,8 @@ class FlutterStorylyView(
     private fun createSTRProductVariantMap(variant: STRProductVariant): Map<String, *> {
         return mapOf(
             "name" to variant.name,
-            "value" to variant.value
+            "value" to variant.value,
+            "key" to variant.key
         )
     }
 
@@ -545,7 +546,8 @@ class FlutterStorylyView(
         return variants?.map { variant ->
             STRProductVariant(
                 name = variant["name"] as? String ?: "",
-                value = variant["value"] as? String ?: ""
+                value = variant["value"] as? String ?: "",
+                key = variant["key"] as? String ?: ""
             )
         } ?: listOf()
     }
