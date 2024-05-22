@@ -136,7 +136,8 @@ func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
 internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
     return [
         "name": variant.name,
-        "value": variant.value
+        "value": variant.value,
+        "key": variant.key
     ]
 }
 
@@ -158,7 +159,11 @@ internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem
 
 internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVariant] {
     variants.compactMap { variant in
-        STRProductVariant(name: variant["name"] as? String ?? "", value: variant["value"] as? String ?? "")
+        STRProductVariant(
+            name: variant["name"] as? String ?? "", 
+            value: variant["value"] as? String ?? "",
+            key: variant["key"] as? String ?? ""
+            )
     }
 }
 

@@ -174,6 +174,7 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): WritableMap
     return Arguments.createMap().also { productItemMap ->
         productItemMap.putString("name", variant.name)
         productItemMap.putString("value", variant.value)
+        productItemMap.putString("key", variant.key)
     }
 }
 
@@ -197,7 +198,8 @@ internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<S
     return variants?.map { variant ->
         STRProductVariant(
             name = variant["name"] as? String ?: "",
-            value = variant["value"] as? String ?: ""
+            value = variant["value"] as? String ?: "",
+            key = variant["key"] as? String ?: ""
         )
     } ?: listOf()
 }
