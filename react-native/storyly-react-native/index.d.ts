@@ -161,14 +161,13 @@ declare module "storyly-react-native" {
       id: string;
       title: string;
       iconUrl?: string;
-      thematicIconUrls?: Record<string, string>
-      coverUrl?: string;
       index: number;
       pinned: boolean;
       seen: boolean;
       stories: Story[];
       type: string,
       momentsUser?: MomentsUser,
+      name: string,
       nudge: boolean,
     }
 
@@ -179,7 +178,9 @@ declare module "storyly-react-native" {
       name: string;
       seen: boolean;
       currentTime: number;
-      media: Media;
+      actionUrl: string;
+      previewUrl: string;
+      storyComponentList?: StoryComponent[];
       products?: STRProductItem[];
     }
 

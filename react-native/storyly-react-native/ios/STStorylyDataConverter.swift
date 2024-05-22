@@ -17,18 +17,12 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         "id": storyGroup.uniqueId,
         "title": storyGroup.title,
         "iconUrl": storyGroup.iconUrl?.absoluteString,
-        "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
-        "coverUrl": storyGroup.coverUrl?.absoluteString,
         "index": storyGroup.index,
         "pinned": storyGroup.pinned,
         "seen": storyGroup.seen,
         "stories": storyGroup.stories.map { createStoryMap(story: $0) },
         "type": storyGroup.type.description,
-        "momentsUser": (storyGroup.momentsUser != nil) ? [
-            "id": storyGroup.momentsUser?.userId,
-            "avatarUrl": storyGroup.momentsUser?.avatarURL,
-            "username": storyGroup.momentsUser?.username,
-        ] : nil,
+        "name": storyGroup.name,
         "nudge": storyGroup.nudge,
     ]
 }
@@ -46,18 +40,10 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "name": story.name,
         "seen": story.seen,
         "currentTime": story.currentTime,
-        "media": createMediaMap(story: story),
+        "previewUrl": story.previewUrl?.absoluteString,
+        "actionUrl": story.actionUrl,
+        "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent: $0)},
         "products": story.products?.map { product in createSTRProductItemMap(product: product) }
-    ]
-}
-
-func createMediaMap(story: Story) -> [String: Any?] {
-    return [
-        "type": story.media.type.rawValue,
-        "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
-        "actionUrl": story.media.actionUrl,
-        "previewUrl": story.media.previewUrl?.absoluteString,
-        "actionUrlList": story.media.actionUrlList
     ]
 }
 
@@ -136,7 +122,8 @@ func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
 internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
     return [
         "name": variant.name,
-        "value": variant.value
+        "value": variant.value,
+        "key": variant.key
     ]
 }
 
@@ -158,7 +145,11 @@ internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem
 
 internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVariant] {
     variants.compactMap { variant in
-        STRProductVariant(name: variant["name"] as? String ?? "", value: variant["value"] as? String ?? "")
+        STRProductVariant(
+            name: variant["name"] as? String ?? "",
+            value: variant["value"] as? String ?? "",
+            key:variant["key"] as? String ?? ""
+        )
     }
 }
 
