@@ -40,8 +40,9 @@
   <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductItem']/constructor[@name='STRProductItem' and count(parameter)=11]/parameter[@name='p10']" name="name">ctaText</attr>
 
   <!-- STRProductVariant -->
-  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=2]/parameter[@name='p0']" name="name">name</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=2]/parameter[@name='p1']" name="name">value</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=3]/parameter[@name='p0']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=3]/parameter[@name='p1']" name="name">value</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=3]/parameter[@name='p2']" name="name">key</attr>
 
   <!-- StoryGroup -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p0']" name="name">uniqueId</attr>

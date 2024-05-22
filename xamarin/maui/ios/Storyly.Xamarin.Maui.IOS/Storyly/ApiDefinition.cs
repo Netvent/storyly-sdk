@@ -615,31 +615,35 @@ namespace Storyly
     }
 
     // @interface STRProductVariant : NSObject
-    [BaseType(typeof(NSObject))]
-    [DisableDefaultCtor]
-    interface STRProductVariant
-    {
-        // @property (readonly, copy, nonatomic) NSString * _Nonnull name;
-        [Export("name")]
-        string Name { get; }
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface STRProductVariant
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull name;
+		[Export ("name")]
+		string Name { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nonnull value;
-        [Export("value")]
-        string Value { get; }
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull value;
+		[Export ("value")]
+		string Value { get; }
 
-        // -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value __attribute__((objc_designated_initializer));
-        [Export("initWithName:value:")]
-        [DesignatedInitializer]
-        IntPtr Constructor(string name, string value);
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull key;
+		[Export ("key")]
+		string Key { get; }
 
-        // -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-        [Export("isEqual:")]
-        bool IsEqual([NullAllowed] NSObject @object);
+		// -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value key:(NSString * _Nonnull)key __attribute__((objc_designated_initializer));
+		[Export ("initWithName:value:key:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string name, string value, string key);
 
-        // @property (readonly, nonatomic) NSUInteger hash;
-        [Export("hash")]
-        nuint Hash { get; }
-    }
+		// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
+		[Export ("isEqual:")]
+		bool IsEqual ([NullAllowed] NSObject @object);
+
+		// @property (readonly, nonatomic) NSUInteger hash;
+		[Export ("hash")]
+		nuint Hash { get; }
+	}
 
     // @protocol StoryPriceFormatter
     [BaseType(typeof(NSObject))]
