@@ -44,20 +44,17 @@
   <attr path="/api/package[@name='com.appsamurai.storyly.data.managers.product']/class[@name='STRProductVariant']/constructor[@name='STRProductVariant' and count(parameter)=2]/parameter[@name='p1']" name="name">value</attr>
 
   <!-- StoryGroup -->
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p0']" name="name">uniqueId</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p1']" name="name">title</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p2']" name="name">iconUrl</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p3']" name="name">thematicIconUrls</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p4']" name="name">coverUrl</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p5']" name="name">index</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p6']" name="name">seen</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p7']" name="name">stories</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p8']" name="name">pinned</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p9']" name="name">type</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p10']" name="name">momentsUser</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p11']" name="name">style</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p12']" name="name">name</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=14]/parameter[@name='p13']" name="name">nudge</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p0']" name="name">uniqueId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p2']" name="name">iconUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p3']" name="name">index</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p4']" name="name">seen</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p5']" name="name">stories</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p6']" name="name">pinned</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p7']" name="name">type</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p8']" name="name">style</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p9']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p10']" name="name">nudge</attr>
 
   <!-- StoryGroupStyle -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupStyle']/constructor[@name='StoryGroupStyle' and count(parameter)=3]/parameter[@name='p0']" name="name">borderUnseenColors</attr>
@@ -72,14 +69,16 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupBadgeStyle']/constructor[@name='StoryGroupBadgeStyle' and count(parameter)=5]/parameter[@name='p4']" name="name">template</attr>
 
   <!-- Story -->
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p0']" name="name">uniqueId</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p1']" name="name">title</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p2']" name="name">name</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p3']" name="name">index</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p4']" name="name">seen</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p5']" name="name">currentTime</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p6']" name="name">media</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=8]/parameter[@name='p7']" name="name">products</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p0']" name="name">uniqueId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p1']" name="name">index</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p2']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p3']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p4']" name="name">seen</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p5']" name="name">currentTime</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p6']" name="name">previewUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p7']" name="name">storyComponentList</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p8']" name="name">actionUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p9']" name="name">products</attr>
 
   <!-- StoryMedia -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p0']" name="name">type</attr>
