@@ -102,6 +102,9 @@
     <PackageReference Include="Xamarin.Kotlin.StdLib">
       <Version>1.5.31</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.11.4</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <LibraryProjectZip Include="Jars\storyly-exoplayer-release.aar" />
