@@ -110,6 +110,9 @@
     <PackageReference Include="Xamarin.Google.Android.Material">
       <Version>1.10.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.11.4</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xamarin.storyly.binding\xamarin.storyly.binding.csproj">
