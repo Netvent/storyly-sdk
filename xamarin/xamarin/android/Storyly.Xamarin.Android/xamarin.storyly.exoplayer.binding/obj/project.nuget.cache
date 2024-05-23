@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4QRm7dQVBO4Rr/GVx7VGuW9RGGEPUQ3tEI6V2oddopOFPH6kE1YAB8ns3a5CEMzC6l3/3nfb3TquDj8Y9aNxcg==",
+  "dgSpecHash": "kX5Jk7FibwzlR8c/0ZweV3nBo0vAHTpzRaZIYckpRx6wiXPEt0cvlUq9l919Xr2KgMUnCXYJu0vUO0l2A/k9pw==",
   "success": true,
-  "projectFilePath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
+  "projectFilePath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
   "expectedPackageFiles": [
     "/Users/kadirsancak/.nuget/packages/xamarin.androidx.activity/1.0.0.1/xamarin.androidx.activity.1.0.0.1.nupkg.sha512",
     "/Users/kadirsancak/.nuget/packages/xamarin.androidx.annotation/1.3.0.1/xamarin.androidx.annotation.1.3.0.1.nupkg.sha512",

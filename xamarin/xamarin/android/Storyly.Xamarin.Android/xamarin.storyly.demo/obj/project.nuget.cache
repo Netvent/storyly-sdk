@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E3PEVr91vogPwWXTLimMtTaOlIs4A8j48SYX6cXeDETAVj+aRETE4y7EZXkWYRzr+uUz7C+guXjsm0sYV9XPag==",
+  "dgSpecHash": "e7rS7xp+SxqlIiJPn3RyWcmSxsYHmahP33eqEOiR5mgREuZnRSq4b2Noa0O63kUamHXb9NXV3C2tzmuFwKrSPA==",
   "success": true,
-  "projectFilePath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.demo/xamarin.storyly.demo.csproj",
+  "projectFilePath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.demo/xamarin.storyly.demo.csproj",
   "expectedPackageFiles": [
     "/Users/kadirsancak/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
     "/Users/kadirsancak/.nuget/packages/system.runtime.serialization.json/4.3.0/system.runtime.serialization.json.4.3.0.nupkg.sha512",

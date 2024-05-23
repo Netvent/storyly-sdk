@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.demo/xamarin.storyly.demo.csproj": {}
+    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.demo/xamarin.storyly.demo.csproj": {}
   },
   "projects": {
-    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.binding/xamarin.storyly.binding.csproj": {
+    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.binding/xamarin.storyly.binding.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.binding/xamarin.storyly.binding.csproj",
+        "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.binding/xamarin.storyly.binding.csproj",
         "projectName": "xamarin.storyly.binding",
-        "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.binding/xamarin.storyly.binding.csproj",
+        "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.binding/xamarin.storyly.binding.csproj",
         "packagesPath": "/Users/kadirsancak/.nuget/packages/",
-        "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.binding/obj/",
+        "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.binding/obj/",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -79,14 +79,14 @@
         }
       }
     },
-    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.demo/xamarin.storyly.demo.csproj": {
+    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.demo/xamarin.storyly.demo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.demo/xamarin.storyly.demo.csproj",
+        "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.demo/xamarin.storyly.demo.csproj",
         "projectName": "xamarin.storyly.demo",
-        "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.demo/xamarin.storyly.demo.csproj",
+        "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.demo/xamarin.storyly.demo.csproj",
         "packagesPath": "/Users/kadirsancak/.nuget/packages/",
-        "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.demo/obj/",
+        "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.demo/obj/",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -101,11 +101,11 @@
         "frameworks": {
           "monoandroid13.0": {
             "projectReferences": {
-              "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.binding/xamarin.storyly.binding.csproj": {
-                "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.binding/xamarin.storyly.binding.csproj"
+              "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.binding/xamarin.storyly.binding.csproj": {
+                "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.binding/xamarin.storyly.binding.csproj"
               },
-              "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj": {
-                "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj"
+              "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj": {
+                "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj"
               }
             }
           }
@@ -134,14 +134,14 @@
         }
       }
     },
-    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj": {
+    "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
+        "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
         "projectName": "xamarin.storyly.exoplayer.binding",
-        "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
+        "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
         "packagesPath": "/Users/kadirsancak/.nuget/packages/",
-        "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/obj/",
+        "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/obj/",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [

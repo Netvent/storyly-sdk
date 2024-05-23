@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Qb7kq0gHvrL82xCiskIwulH5L3vEpHsU9Rqk5cj7ZLupIF0ghnDsJUZIqNyWvhI7gsJjbeWlx9bK/Tz8NTJ3Rw==",
+  "dgSpecHash": "sevXdCMUnMb5vay3ZW9q8RVdyJwzsy3VHUWbXJV09G4XdvpYevQj+pVP/SAufANBF29hKj7XlUpGcGt90BrGEg==",
   "success": true,
-  "projectFilePath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.binding/xamarin.storyly.binding.csproj",
+  "projectFilePath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.binding/xamarin.storyly.binding.csproj",
   "expectedPackageFiles": [
     "/Users/kadirsancak/.nuget/packages/system.runtime.serialization.json/4.3.0/system.runtime.serialization.json.4.3.0.nupkg.sha512",
     "/Users/kadirsancak/.nuget/packages/xamarin.android.glide/4.11.0/xamarin.android.glide.4.11.0.nupkg.sha512",

@@ -3939,11 +3939,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
+      "projectUniqueName": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
       "projectName": "xamarin.storyly.exoplayer.binding",
-      "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
+      "projectPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/xamarin.storyly.exoplayer.binding.csproj",
       "packagesPath": "/Users/kadirsancak/.nuget/packages/",
-      "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin.android/xamarin.storyly.binding/xamarin.storyly.exoplayer.binding/obj/",
+      "outputPath": "/Users/kadirsancak/Projects/CrossPlatform/storyly-mobile/xamarin/xamarin/android/Storyly.Xamarin.Android/xamarin.storyly.exoplayer.binding/obj/",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
