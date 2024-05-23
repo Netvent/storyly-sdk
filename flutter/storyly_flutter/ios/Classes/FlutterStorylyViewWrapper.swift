@@ -445,7 +445,8 @@ extension FlutterStorylyViewWrapper {
     internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
         return [
             "name" : variant.name,
-            "value" : variant.value
+            "value" : variant.value,
+            "key": variant.key
         ]
     }
     
@@ -476,7 +477,8 @@ extension FlutterStorylyViewWrapper {
         return variants?.map {
             STRProductVariant(
                 name: $0["name"] as? String ?? "",
-                value: $0["value"] as? String ?? ""
+                value: $0["value"] as? String ?? "",
+                key: $0["key"] as? String ?? ""
             )
         } ?? []
     }

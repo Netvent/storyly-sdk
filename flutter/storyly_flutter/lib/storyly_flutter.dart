@@ -1078,13 +1078,17 @@ class STRProductItem {
 
 /// This data class represents a variant inside product
 class STRProductVariant {
-  STRProductVariant({required this.name, required this.value});
+  STRProductVariant(
+      {required this.name, required this.value, required this.key});
 
   /// Name of the product
   final String name;
 
   /// Value of the product group
   final String value;
+
+  /// Key of the product group
+  final String key;
 
   Map<String, dynamic> toJson() {
     return {
@@ -1095,9 +1099,7 @@ class STRProductVariant {
 
   factory STRProductVariant.fromJson(Map<String, dynamic> json) {
     return STRProductVariant(
-      name: json['name'],
-      value: json['value'],
-    );
+        name: json['name'], value: json['value'], key: json["key"]);
   }
 }
 

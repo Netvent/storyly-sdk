@@ -146,10 +146,10 @@ internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem
 internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVariant] {
     variants.compactMap { variant in
         STRProductVariant(
-            name: variant["name"] as? String ?? "",
+            name: variant["name"] as? String ?? "", 
             value: variant["value"] as? String ?? "",
-            key:variant["key"] as? String ?? ""
-        )
+            key: variant["key"] as? String ?? ""
+            )
     }
 }
 

@@ -246,6 +246,7 @@ declare module "storyly-react-native" {
   export interface STRProductVariant {
     name: string;
     value: string;
+    key: string;
   }
 
   export interface STRCart {

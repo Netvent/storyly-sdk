@@ -623,10 +623,14 @@ namespace Storyly
         [Export("value")]
         string Value { get; }
 
-        // -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value __attribute__((objc_designated_initializer));
-        [Export("initWithName:value:")]
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull key;
+        [Export("key")]
+        string Key { get; }
+
+        // -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value key:(NSString * _Nonnull)key __attribute__((objc_designated_initializer));
+        [Export("initWithName:value:key:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string name, string value);
+        IntPtr Constructor(string name, string value, string key);
 
         // -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
         [Export("isEqual:")]
