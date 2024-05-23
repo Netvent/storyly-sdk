@@ -61,7 +61,7 @@ namespace Storyly.Xamarin.iOS.Demo
 
         public override void StorylyActionClicked(StorylyView storylyView, UIViewController rootViewController, Story story)
         {
-            Console.WriteLine($"StorylyActionClicked:ActionUrl:{story.Media.ActionUrl}");
+            Console.WriteLine($"StorylyActionClicked:ActionUrl:{story.ActionUrl}");
         }
 
         public override void StorylyEvent(StorylyView storylyView, StorylyEvent @event, StoryGroup storyGroup, Story story, StoryComponent storyComponent)
