@@ -476,15 +476,18 @@ SWIFT_CLASS_NAMED("STRProductItem")
 
 
 /// Represents the variant of the storyly product
-/// \param name The name or label of the variant 
+/// \param name The name or label of the variant can be changed based on localization 
 ///
 /// \param value The value or specific option associated with the variant 
+///
+/// \param key Identifier of the variant, same with the xml tag of the variant in the product feed 
 ///
 SWIFT_CLASS_NAMED("STRProductVariant")
 @interface STRProductVariant : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSString * _Nonnull value;
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull key;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name value:(NSString * _Nonnull)value key:(NSString * _Nonnull)key OBJC_DESIGNATED_INITIALIZER;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly) NSUInteger hash;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;

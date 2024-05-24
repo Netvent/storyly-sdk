@@ -1820,9 +1820,59 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "key",
+            "printedName": "key",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@Storyly@objc(cs)STRProductVariant(py)key",
+            "mangledName": "$s7Storyly17STRProductVariantC3keySSvp",
+            "moduleName": "Storyly",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@Storyly@objc(cs)STRProductVariant(im)key",
+                "mangledName": "$s7Storyly17STRProductVariantC3keySSvg",
+                "moduleName": "Storyly",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(name:value:)",
+            "printedName": "init(name:value:key:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -1841,13 +1891,19 @@
                 "name": "String",
                 "printedName": "Swift.String",
                 "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Constructor",
-            "usr": "c:@M@Storyly@objc(cs)STRProductVariant(im)initWithName:value:",
-            "mangledName": "$s7Storyly17STRProductVariantC4name5valueACSS_SStcfc",
+            "usr": "c:@M@Storyly@objc(cs)STRProductVariant(im)initWithName:value:key:",
+            "mangledName": "$s7Storyly17STRProductVariantC4name5value3keyACSS_S2Stcfc",
             "moduleName": "Storyly",
-            "objc_name": "initWithName:value:",
+            "objc_name": "initWithName:value:key:",
             "declAttributes": [
               "AccessControl",
               "ObjC"
@@ -27441,44 +27497,58 @@
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
       "kind": "StringLiteral",
-      "offset": 3497,
+      "offset": 3527,
       "length": 3,
       "value": "\"n\""
     },
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
       "kind": "StringLiteral",
-      "offset": 3522,
+      "offset": 3552,
       "length": 3,
       "value": "\"v\""
     },
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
       "kind": "StringLiteral",
-      "offset": 3547,
+      "offset": 3577,
       "length": 3,
       "value": "\"o\""
     },
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
       "kind": "StringLiteral",
-      "offset": 3497,
+      "offset": 3600,
+      "length": 3,
+      "value": "\"k\""
+    },
+    {
+      "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
+      "kind": "StringLiteral",
+      "offset": 3527,
       "length": 3,
       "value": "\"n\""
     },
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
       "kind": "StringLiteral",
-      "offset": 3522,
+      "offset": 3552,
       "length": 3,
       "value": "\"v\""
     },
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
       "kind": "StringLiteral",
-      "offset": 3547,
+      "offset": 3577,
       "length": 3,
       "value": "\"o\""
+    },
+    {
+      "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/FallbackProductData.swift",
+      "kind": "StringLiteral",
+      "offset": 3600,
+      "length": 3,
+      "value": "\"k\""
     },
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/StorylyStyle.swift",
@@ -28246,14 +28316,14 @@
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Product\/STRProductItem.swift",
       "kind": "BooleanLiteral",
-      "offset": 4783,
+      "offset": 4957,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Product\/STRProductItem.swift",
       "kind": "StringLiteral",
-      "offset": 4606,
+      "offset": 4747,
       "length": 17,
       "value": "\"Storyly.STRProductVariant\""
     },

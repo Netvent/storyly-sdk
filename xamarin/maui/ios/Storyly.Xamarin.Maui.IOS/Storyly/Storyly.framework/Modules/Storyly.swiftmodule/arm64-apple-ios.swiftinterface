@@ -59,7 +59,8 @@ extension Swift.Array {
 @objc(STRProductVariant) public class STRProductVariant : ObjectiveC.NSObject {
   @objc final public let name: Swift.String
   @objc final public let value: Swift.String
-  @objc public init(name: Swift.String, value: Swift.String)
+  @objc final public let key: Swift.String
+  @objc public init(name: Swift.String, value: Swift.String, key: Swift.String)
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
   @objc override dynamic public var hash: Swift.Int {
     @objc get

@@ -17,25 +17,13 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
         storyGroupMap.putString("title", storyGroup.title)
         storyGroupMap.putString("iconUrl", storyGroup.iconUrl)
         storyGroupMap.putBoolean("pinned", storyGroup.pinned)
-        storyGroupMap.putMap("thematicIconUrls",  storyGroup.thematicIconUrls?.let { thematicIconUrls ->
-            Arguments.createMap().also {
-                thematicIconUrls.forEach { entry ->  it.putString(entry.key, entry.value) }
-            }
-        })
-        storyGroupMap.putString("coverUrl", storyGroup.coverUrl)
         storyGroupMap.putInt("index", storyGroup.index)
         storyGroupMap.putBoolean("seen", storyGroup.seen)
         storyGroupMap.putArray("stories", Arguments.createArray().also { storiesArray ->
             storyGroup.stories.forEach { story -> storiesArray.pushMap(createStoryMap(story)) }
         })
         storyGroupMap.putString("type", storyGroup.type.customName)
-        storyGroupMap.putMap("momentsUser", storyGroup.momentsUser?.let { momentsUser ->
-            Arguments.createMap().also {
-                it.putString("id", momentsUser.userId)
-                it.putString("avatarUrl", momentsUser.userId)
-                it.putString("username", momentsUser.username)
-            }
-        })
+        storyGroupMap.putString("name", storyGroup.name)
         storyGroupMap.putBoolean("nudge", storyGroup.nudge)
     }
 }
@@ -47,27 +35,17 @@ internal fun createStoryMap(story: Story): WritableMap {
         storyMap.putString("title", story.title)
         storyMap.putString("name", story.name)
         storyMap.putBoolean("seen", story.seen)
-        storyMap.putInt("currentTime", story.currentTime.toInt())
-        storyMap.putMap("media", createMediaMap(story))
+        story.currentTime?.toInt()?.let { storyMap.putInt("currentTime", it) }
+        storyMap.putString("actionUrl", story.actionUrl)
+        storyMap.putString("previewUrl", story.previewUrl)
+        storyMap.putArray("storyComponentList", Arguments.createArray().also { componentArray ->
+            story.storyComponentList?.forEach { componentArray.pushMap(createStoryComponentMap(it)) }
+        })
         storyMap.putArray("products", story.products?.let {
             Arguments.createArray().also { storiesArray ->
                 it.forEach { item -> storiesArray.pushMap(createSTRProductItemMap(item)) }
             }
         })
-    }
-}
-
-internal fun createMediaMap(story: Story): WritableMap {
-    return Arguments.createMap().also { storyMediaMap ->
-        storyMediaMap.putInt("type", story.media.type.ordinal)
-        storyMediaMap.putArray("storyComponentList", Arguments.createArray().also { componentArray ->
-            story.media.storyComponentList?.forEach { componentArray.pushMap(createStoryComponentMap(it)) }
-        })
-        storyMediaMap.putString("actionUrl", story.media.actionUrl)
-        storyMediaMap.putArray("actionUrlList", Arguments.createArray().also { urlArray ->
-            story.media.actionUrlList?.forEach { urlArray.pushString(it)  }
-        })
-        storyMediaMap.putString("previewUrl", story.media.previewUrl)
     }
 }
 
@@ -92,6 +70,7 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 storyComponentMap.putInt("selectedOptionIndex", quizComponent.selectedOptionIndex)
                 storyComponentMap.putString("customPayload", quizComponent.customPayload)
             }
+
             StoryComponentType.Poll -> {
                 val pollComponent = storyComponent as StoryPollComponent
                 storyComponentMap.putString("type", "poll")
@@ -105,19 +84,23 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 storyComponentMap.putInt("selectedOptionIndex", pollComponent.selectedOptionIndex)
                 storyComponentMap.putString("customPayload", pollComponent.customPayload)
             }
+
             StoryComponentType.Emoji -> {
                 val emojiComponent = storyComponent as StoryEmojiComponent
                 storyComponentMap.putString("type", "emoji")
                 storyComponentMap.putString("id", emojiComponent.id)
-                storyComponentMap.putArray("emojiCodes", Arguments.createArray().also { emojiCodesArray ->
-                    emojiComponent.emojiCodes.forEach { emojiCode ->
-                        emojiCodesArray.pushString(emojiCode)
-                    }
-                })
+                storyComponentMap.putArray(
+                    "emojiCodes",
+                    Arguments.createArray().also { emojiCodesArray ->
+                        emojiComponent.emojiCodes.forEach { emojiCode ->
+                            emojiCodesArray.pushString(emojiCode)
+                        }
+                    })
                 storyComponentMap.putInt("selectedEmojiIndex", emojiComponent.selectedEmojiIndex)
                 storyComponentMap.putString("customPayload", emojiComponent.customPayload)
 
             }
+
             StoryComponentType.Rating -> {
                 val ratingComponent = storyComponent as StoryRatingComponent
                 storyComponentMap.putString("type", "rating")
@@ -126,18 +109,21 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 storyComponentMap.putInt("rating", ratingComponent.rating)
                 storyComponentMap.putString("customPayload", ratingComponent.customPayload)
             }
+
             StoryComponentType.PromoCode -> {
                 val promoCodeComponent = storyComponent as StoryPromoCodeComponent
                 storyComponentMap.putString("type", "promocode")
                 storyComponentMap.putString("id", promoCodeComponent.id)
                 storyComponentMap.putString("text", promoCodeComponent.text)
             }
+
             StoryComponentType.Comment -> {
                 val commentComponent = storyComponent as StoryCommentComponent
                 storyComponentMap.putString("type", "comment")
                 storyComponentMap.putString("id", commentComponent.id)
                 storyComponentMap.putString("text", commentComponent.text)
             }
+
             else -> {
                 storyComponentMap.putString("id", storyComponent.id)
                 storyComponentMap.putString("type", storyComponent.type.name.lowercase())
@@ -164,7 +150,11 @@ internal fun createSTRProductItemMap(product: STRProductItem?): WritableMap {
                 product.imageUrls?.forEach { imageUrls.pushString(it) }
             })
             productItemMap.putArray("variants", Arguments.createArray().also { variantArray ->
-                product.variants.forEach { variant -> variantArray.pushMap(createSTRProductVariantMap(variant)) }
+                product.variants.forEach { variant ->
+                    variantArray.pushMap(
+                        createSTRProductVariantMap(variant)
+                    )
+                }
             })
         }
     } ?: Arguments.createMap()
@@ -174,6 +164,7 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): WritableMap
     return Arguments.createMap().also { productItemMap ->
         productItemMap.putString("name", variant.name)
         productItemMap.putString("value", variant.value)
+        productItemMap.putString("key", variant.key)
     }
 }
 
@@ -197,7 +188,8 @@ internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<S
     return variants?.map { variant ->
         STRProductVariant(
             name = variant["name"] as? String ?: "",
-            value = variant["value"] as? String ?: ""
+            value = variant["value"] as? String ?: "",
+            key = variant["key"] as? String ?: ""
         )
     } ?: listOf()
 }
@@ -248,7 +240,8 @@ internal fun createSTRProductInformationMap(productInfo: STRProductInformation):
 
 internal fun createSTRCart(cart: Map<String, Any?>): STRCart {
     return STRCart(
-        items = (cart["items"] as? List<Map<String, Any?>>)?.map { createSTRCartItem(it) } ?: listOf(),
+        items = (cart["items"] as? List<Map<String, Any?>>)?.map { createSTRCartItem(it) }
+            ?: listOf(),
         oldTotalPrice = (cart["oldTotalPrice"] as? Double)?.toFloat(),
         totalPrice = (cart["totalPrice"] as Double).toFloat(),
         currency = cart["currency"] as String

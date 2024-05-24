@@ -1,3 +1,7 @@
+### 2.18.1 (22.05.2024)
+* added key field for product variants to indicate variant type
+* fixed a visual bug for poll and quiz interactive components on android platform
+
 ### 2.18.0 (13.05.2024)
 * improved placement of product tag interactive component based on content
 * improved payload of product events
