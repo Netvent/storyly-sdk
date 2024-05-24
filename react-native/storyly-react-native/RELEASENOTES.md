@@ -1,5 +1,11 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.0.0 (24.05.2024)
+* improved load time of the Storyly Widget
+* removed Storyly Moments
+* IMPORTANT! removed StoryMedia class and media field from public Story class
+* IMPORTANT! added previewUrl, actionUrl and storyComponentList to the public Story class
+
 ### 2.18.1 (22.05.2024)
 * added key field for product variants to indicate variant type
 * fixed a visual bug for poll and quiz interactive components on android platform
