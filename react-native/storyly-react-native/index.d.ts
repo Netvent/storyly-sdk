@@ -151,12 +151,6 @@ declare module "storyly-react-native" {
       storyComponent: StoryComponent;
     }
 
-    export interface MomentsUser {
-      id?: string;
-      avatarUrl?: string;
-      username?: string;
-    }
-
     export interface StoryGroup {
       id: string;
       title: string;
@@ -166,7 +160,6 @@ declare module "storyly-react-native" {
       seen: boolean;
       stories: Story[];
       type: string,
-      momentsUser?: MomentsUser,
       name: string,
       nudge: boolean,
     }
