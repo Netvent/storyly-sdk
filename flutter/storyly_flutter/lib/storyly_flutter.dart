@@ -555,7 +555,6 @@ class StorylyParam {
       'userProperty': storylyUserProperty,
       'customParameter': storylyCustomParameters,
       'storylyIsTestMode': storylyTestMode,
-      'storylyPayload': storylyPayload,
       'storylyLayoutDirection': storylyLayoutDirection,
       'storylyLocale': storylyLocale,
     };
@@ -935,18 +934,17 @@ class StoryGroup {
 
 /// This data class represents a story inside a story group.
 class Story {
-  Story({
-    required this.id,
-    required this.title,
-    required this.index,
-    required this.seen,
-    required this.currentTime,
-    this.previewUrl,
-    this.actionUrl,
-    this.products,
-    this.name,
-    this.storyComponentList
-  });
+  Story(
+      {required this.id,
+      required this.title,
+      required this.index,
+      required this.seen,
+      required this.currentTime,
+      this.previewUrl,
+      this.actionUrl,
+      this.products,
+      this.name,
+      this.storyComponentList});
 
   /// ID of the story
   final String id;
@@ -1079,7 +1077,8 @@ class STRProductItem {
 
 /// This data class represents a variant inside product
 class STRProductVariant {
-  STRProductVariant({required this.name, required this.value, required this.key});
+  STRProductVariant(
+      {required this.name, required this.value, required this.key});
 
   /// Name of the product
   final String name;
@@ -1091,19 +1090,12 @@ class STRProductVariant {
   final String key;
 
   Map<String, dynamic> toJson() {
-    return {
-      "name": name,
-      "value": value,
-      "key": key
-    };
+    return {"name": name, "value": value, "key": key};
   }
 
   factory STRProductVariant.fromJson(Map<String, dynamic> json) {
     return STRProductVariant(
-      name: json['name'],
-      value: json['value'],
-      key: json["key"]
-    );
+        name: json['name'], value: json['value'], key: json["key"]);
   }
 }
 
