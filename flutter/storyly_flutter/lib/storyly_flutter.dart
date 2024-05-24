@@ -948,7 +948,7 @@ class Story {
     this.actionUrl,
     this.products,
     this.name,
-    this.actionUrlList
+    this.storyComponentList
   });
 
   /// ID of the story
@@ -975,7 +975,7 @@ class Story {
   /// Related product content of interactive incase of click action
   final List<STRProductItem>? products;
 
-  final List<String>? actionUrlList;
+  final List<StoryComponent?>? storyComponentList;
 
   final String? previewUrl;
 
@@ -989,8 +989,9 @@ class Story {
       currentTime: json['currentTime'],
       previewUrl: json['previewUrl'],
       actionUrl: json['actionUrl'],
-      actionUrlList: castOrNull(
-          json['actionUrlList']?.map<String>((e) => e as String).toList()),
+      storyComponentList: castOrNull(json['storyComponentList']
+          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
+          .toList()),
       products: List<STRProductItem>.from(
           json['products'].map((x) => STRProductItem.fromJson(x))),
     );
@@ -1166,42 +1167,6 @@ class STRCartItem {
       quantity: json['quantity'],
       oldTotalPrice: json['oldTotalPrice'],
       totalPrice: json['totalPrice'],
-    );
-  }
-}
-
-/// This data class represents the media of a story.
-class Media {
-  Media({
-    required this.type,
-    this.storyComponentList,
-    this.actionUrlList,
-    this.actionUrl,
-    this.previewUrl,
-  });
-
-  /// Type of the story
-  final int type;
-
-  final List<StoryComponent?>? storyComponentList;
-
-  final List<String>? actionUrlList;
-
-  /// URL which the user has just interacted with
-  final String? actionUrl;
-
-  final String? previewUrl;
-
-  factory Media.fromJson(Map<String, dynamic> json) {
-    return Media(
-      type: json['type'],
-      storyComponentList: castOrNull(json['storyComponentList']
-          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
-          .toList()),
-      actionUrlList: castOrNull(
-          json['actionUrlList']?.map<String>((e) => e as String).toList()),
-      actionUrl: json['actionUrl'],
-      previewUrl: json['previewUrl'],
     );
   }
 }
