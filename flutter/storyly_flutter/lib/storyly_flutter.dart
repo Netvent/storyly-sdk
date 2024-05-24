@@ -396,9 +396,6 @@ class StorylyParam {
   ///   size limit, your value will be set to null.
   String? storylyCustomParameters;
 
-  // This attribute is for user payload to use for Moments by Storyly
-  String? storylyPayload;
-
   /// This attribute defines whether it is a test device or not. If true,
   /// test groups are sent from the server.
   bool? storylyTestMode;
