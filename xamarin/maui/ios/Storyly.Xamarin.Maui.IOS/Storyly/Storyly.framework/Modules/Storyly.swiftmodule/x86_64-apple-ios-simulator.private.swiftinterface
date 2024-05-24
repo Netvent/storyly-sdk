@@ -80,17 +80,12 @@ extension Swift.Array {
   @objc @_Concurrency.MainActor(unsafe) weak final public var rootViewController: UIKit.UIViewController?
   @objc @_Concurrency.MainActor(unsafe) weak final public var delegate: (any Storyly.StorylyDelegate)?
   @objc @_Concurrency.MainActor(unsafe) weak final public var productDelegate: (any Storyly.StorylyProductDelegate)?
-  @objc @_Concurrency.MainActor(unsafe) weak final public var momentsDelegate: (any Storyly.StorylyMomentsDelegate)?
   @objc @_Concurrency.MainActor(unsafe) weak final public var storylyAdViewProvider: (any Storyly.StorylyAdViewProvider)?
   @_Concurrency.MainActor(unsafe) @objc override final public var accessibilityLabel: Swift.String? {
     @objc get
     @objc set
   }
   @_Concurrency.MainActor(unsafe) @objc override final public var accessibilityIdentifier: Swift.String? {
-    @objc get
-    @objc set
-  }
-  @objc @_Concurrency.MainActor(unsafe) final public var momentsItems: [Storyly.MomentsItem]? {
     @objc get
     @objc set
   }
@@ -116,31 +111,10 @@ extension Storyly.StorylyView {
   @objc public init(productId: Swift.String?, productGroupId: Swift.String?)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @objc(StorylyMomentsStyling) public class StorylyMomentsStyling : ObjectiveC.NSObject {
-  @_inheritsConvenienceInitializers @objc(StorylyMomentsStylingBuilder) public class Builder : ObjectiveC.NSObject {
-    @objc(setIconStyling:) public func setIconStyling(iconStyling: Storyly.StorylyMomentsIconStyling) -> Storyly.StorylyMomentsStyling.Builder
-    @objc(setLinkCtaStyling:) public func setLinkCtaStyling(linkCTAStyling: Storyly.StorylyMomentsLinkCTAStyling) -> Storyly.StorylyMomentsStyling.Builder
-    @objc(setTextStyling:) public func setTextStyling(textStyling: Storyly.StorylyMomentsTextStyling) -> Storyly.StorylyMomentsStyling.Builder
-    @objc(setMomentsUserAnalyticsVisibility:) public func setMomentsUserAnalyticsVisibility(isVisible: Swift.Bool) -> Storyly.StorylyMomentsStyling.Builder
-    @objc public func build() -> Storyly.StorylyMomentsStyling
-    @objc override dynamic public init()
-    @objc deinit
-  }
-  @objc deinit
-}
 @objc(StorylyProductDelegate) public protocol StorylyProductDelegate {
   @objc optional func storylyHydration(_ storylyView: Storyly.StorylyView, products: [Storyly.STRProductInformation])
   @objc optional func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent)
   @objc optional func storylyUpdateCartEvent(storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, cart: Storyly.STRCart?, change: Storyly.STRCartItem?, onSuccess: ((Storyly.STRCart?) -> Swift.Void)?, onFail: ((Storyly.STRCartEventResult) -> Swift.Void)?)
-}
-@_hasMissingDesignatedInitializers @objc(StorylyMomentsLinkCTAStyling) final public class StorylyMomentsLinkCTAStyling : ObjectiveC.NSObject {
-  @_inheritsConvenienceInitializers @objc(StorylyMomentsLinkCTAStylingBuilder) final public class Builder : ObjectiveC.NSObject {
-    @objc(setLinkTextColor:) final public func setLinkTextColor(color: UIKit.UIColor) -> Storyly.StorylyMomentsLinkCTAStyling.Builder
-    @objc final public func build() -> Storyly.StorylyMomentsLinkCTAStyling
-    @objc override dynamic public init()
-    @objc deinit
-  }
-  @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StorylyConfig) public class StorylyConfig : ObjectiveC.NSObject {
   public var labels: Swift.Set<Swift.String>? {
@@ -154,7 +128,6 @@ extension Storyly.StorylyView {
   @_inheritsConvenienceInitializers @objc(StorylyConfigBuilder) public class Builder : ObjectiveC.NSObject {
     @objc(setBarStyling:) public func setBarStyling(styling: Storyly.StorylyBarStyling) -> Storyly.StorylyConfig.Builder
     @objc(setStoryStyling:) public func setStoryStyling(styling: Storyly.StorylyStoryStyling) -> Storyly.StorylyConfig.Builder
-    @objc(setMomentsStyling:) public func setMomentsStyling(styling: Storyly.StorylyMomentsStyling) -> Storyly.StorylyConfig.Builder
     @objc(setStoryGroupStyling:) public func setStoryGroupStyling(styling: Storyly.StorylyStoryGroupStyling) -> Storyly.StorylyConfig.Builder
     @objc(setLayoutDirection:) public func setLayoutDirection(direction: Storyly.StorylyLayoutDirection) -> Storyly.StorylyConfig.Builder
     @objc(setCustomParameter:) public func setCustomParameter(parameter: Swift.String?) -> Storyly.StorylyConfig.Builder
@@ -165,26 +138,6 @@ extension Storyly.StorylyView {
     @objc(setShareConfig:) public func setShareConfig(config: Storyly.StorylyShareConfig) -> Storyly.StorylyConfig.Builder
     @objc(setLocale:) public func setLocale(locale: Swift.String?) -> Storyly.StorylyConfig.Builder
     @objc public func build() -> Storyly.StorylyConfig
-    @objc override dynamic public init()
-    @objc deinit
-  }
-  @objc deinit
-}
-@objc public protocol StorylyMomentsDelegate {
-  @objc optional func storyHeaderClicked(_ storylyView: Storyly.StorylyView, storyGroup: Storyly.StoryGroup?, story: Storyly.Story?)
-}
-@objc(MomentsItem) final public class MomentsItem : ObjectiveC.NSObject {
-  final public var momentsView: UIKit.UIView
-  @objc public init(momentsView: UIKit.UIView)
-  @objc deinit
-}
-@_hasMissingDesignatedInitializers @objc(StorylyMomentsIconStyling) public class StorylyMomentsIconStyling : ObjectiveC.NSObject {
-  @_inheritsConvenienceInitializers @objc(StorylyMomentsIconStylingBuilder) public class Builder : ObjectiveC.NSObject {
-    @objc(setStoryLikeIcon::) public func setStoryLikeIcon(likeIcon: UIKit.UIImage?, unlikeIcon: UIKit.UIImage?) -> Storyly.StorylyMomentsIconStyling.Builder
-    @objc(setStoryLikeAnimationIcon:) public func setStoryLikeAnimationIcon(icon: UIKit.UIImage?) -> Storyly.StorylyMomentsIconStyling.Builder
-    @objc(setStoryViewCountIcon:) public func setStoryViewCountIcon(icon: UIKit.UIImage?) -> Storyly.StorylyMomentsIconStyling.Builder
-    @objc(setStoryOptionsIcon:) public func setStoryOptionsIcon(icon: UIKit.UIImage?) -> Storyly.StorylyMomentsIconStyling.Builder
-    @objc public func build() -> Storyly.StorylyMomentsIconStyling
     @objc override dynamic public init()
     @objc deinit
   }
@@ -250,8 +203,6 @@ extension Storyly.StorylyView {
   @objc deinit
 }
 @objc(StorylyDelegate) public protocol StorylyDelegate {
-  @available(*, unavailable, message: "This function is removed in v1.18.0; please use the storylyLoaded with dataSource parameter")
-  @objc optional func storylyLoaded(_ storylyView: Storyly.StorylyView, storyGroupList: [Storyly.StoryGroup])
   @objc optional func storylyLoaded(_ storylyView: Storyly.StorylyView, storyGroupList: [Storyly.StoryGroup], dataSource: Storyly.StorylyDataSource)
   @objc optional func storylyLoadFailed(_ storylyView: Storyly.StorylyView, errorMessage: Swift.String)
   @objc optional func storylyActionClicked(_ storylyView: Storyly.StorylyView, rootViewController: UIKit.UIViewController, story: Storyly.Story)
@@ -285,19 +236,6 @@ extension Storyly.StorylyView {
     @objc override dynamic public init()
     @objc deinit
   }
-  @objc deinit
-}
-@_hasMissingDesignatedInitializers @objc(StorylyMomentsTextStyling) final public class StorylyMomentsTextStyling : ObjectiveC.NSObject {
-  @_inheritsConvenienceInitializers @objc(StorylyMomentsTextStylingBuilder) final public class Builder : ObjectiveC.NSObject {
-    @objc(setCustomFonts:) final public func setCustomFonts(fonts: [Storyly.MomentsCustomFont]) -> Storyly.StorylyMomentsTextStyling.Builder
-    @objc final public func build() -> Storyly.StorylyMomentsTextStyling
-    @objc override dynamic public init()
-    @objc deinit
-  }
-  @objc deinit
-}
-@objc final public class MomentsCustomFont : ObjectiveC.NSObject {
-  @objc public init(identifier: Swift.String, font: UIKit.UIFont)
   @objc deinit
 }
 @objc(StorylyInit) final public class StorylyInit : ObjectiveC.NSObject {
@@ -381,8 +319,6 @@ extension Storyly.StorylyView {
   case StoryCommentInputOpened
   case StoryCommentInputClosed
   case StorySeeked
-  case StoryLiked
-  case StoryUnliked
   case StoryProductCartAdded
   case StoryProductCartAddFailed
   case StoryProductSheetOpened
@@ -461,18 +397,15 @@ extension Storyly.StorylyView {
   @objc final public let uniqueId: Swift.String
   @objc final public let title: Swift.String
   @objc final public let iconUrl: Foundation.URL?
-  @objc final public let thematicIconUrls: [Swift.String : Foundation.URL]?
-  @objc final public let coverUrl: Foundation.URL?
   @objc final public let index: Swift.Int
   @objc final public let seen: Swift.Bool
   @objc final public let stories: [Storyly.Story]
   @objc final public let pinned: Swift.Bool
   @objc final public let type: Storyly.StoryGroupType
-  @objc final public let momentsUser: Storyly.MomentsUser?
   @objc final public let style: Storyly.StoryGroupStyle?
   @objc final public let name: Swift.String?
   @objc final public let nudge: Swift.Bool
-  @objc public init(id: Swift.String, title: Swift.String, iconUrl: Foundation.URL?, thematicIconUrls: [Swift.String : Foundation.URL]?, coverUrl: Foundation.URL?, index: Swift.Int, seen: Swift.Bool, stories: [Storyly.Story], pinned: Swift.Bool, type: Storyly.StoryGroupType, momentsUser: Storyly.MomentsUser?, style: Storyly.StoryGroupStyle?, name: Swift.String?, nudge: Swift.Bool)
+  @objc public init(id: Swift.String, title: Swift.String, iconUrl: Foundation.URL?, index: Swift.Int, seen: Swift.Bool, stories: [Storyly.Story], pinned: Swift.Bool, type: Storyly.StoryGroupType, style: Storyly.StoryGroupStyle?, name: Swift.String?, nudge: Swift.Bool)
   @objc deinit
 }
 @objc(StoryGroupStyle) final public class StoryGroupStyle : ObjectiveC.NSObject {
@@ -498,18 +431,11 @@ extension Storyly.StorylyView {
   @objc final public let index: Swift.Int
   @objc final public let seen: Swift.Bool
   @objc final public let currentTime: Swift.Int
-  @objc final public let media: Storyly.StoryMedia
-  @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, index: Swift.Int, title: Swift.String, name: Swift.String?, seen: Swift.Bool, currentTime: Swift.Int, media: Storyly.StoryMedia, products: [Storyly.STRProductItem]?)
-  @objc deinit
-}
-@objc(StoryMedia) final public class StoryMedia : ObjectiveC.NSObject {
-  @objc final public let type: Storyly.StoryType
-  @objc final public let storyComponentList: [Storyly.StoryComponent]?
-  @objc final public let actionUrlList: [Swift.String]?
-  @objc final public let actionUrl: Swift.String?
   @objc final public var previewUrl: Foundation.URL?
-  @objc public init(type: Storyly.StoryType, storyComponentList: [Storyly.StoryComponent]?, actionUrlList: [Swift.String]?, actionUrl: Swift.String?, previewUrl: Foundation.URL?)
+  @objc final public let storyComponentList: [Storyly.StoryComponent]?
+  @objc final public let actionUrl: Swift.String?
+  @objc final public let products: [Storyly.STRProductItem]?
+  @objc public init(id: Swift.String, index: Swift.Int, title: Swift.String, name: Swift.String?, seen: Swift.Bool, currentTime: Swift.Int, previewUrl: Foundation.URL?, storyComponentList: [Storyly.StoryComponent]?, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryComponent) public class StoryComponent : ObjectiveC.NSObject {
@@ -614,8 +540,6 @@ extension Storyly.StorylyView {
 @objc(StoryGroupType) public enum StoryGroupType : Swift.Int, Swift.Decodable {
   case Default
   case Ad
-  case MomentsDefault
-  case MomentsBlock
   case Live
   case AutomatedShoppable
   public init(from decoder: any Swift.Decoder) throws
@@ -653,13 +577,6 @@ extension Storyly.StorylyView {
   public var rawValue: Swift.Int {
     get
   }
-}
-@objc(MomentsUser) final public class MomentsUser : ObjectiveC.NSObject, Swift.Decodable {
-  @objc final public let userId: Swift.String?
-  @objc final public let avatarURL: Swift.String?
-  @objc final public let username: Swift.String?
-  required public init(from decoder: any Swift.Decoder) throws
-  @objc deinit
 }
 extension Storyly.StorylyLayoutDirection : Swift.Equatable {}
 extension Storyly.StorylyLayoutDirection : Swift.Hashable {}

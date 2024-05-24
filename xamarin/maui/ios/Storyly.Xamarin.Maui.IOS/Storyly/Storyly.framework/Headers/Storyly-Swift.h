@@ -303,49 +303,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if defined(__OBJC__)
 
 
-@class NSString;
-@class UIFont;
-
-/// This class represents a custom font in Moments Text Interactive
-SWIFT_CLASS("_TtC7Storyly17MomentsCustomFont")
-@interface MomentsCustomFont : NSObject
-/// Initializer of the MomentsCustomFont
-/// \param identifier Custom identifier of the font
-///
-/// \param font Custom font to use
-///
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier font:(UIFont * _Nonnull)font OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class UIView;
-
-/// This class defines the parent class of your custom Storyly Moments Views
-SWIFT_CLASS_NAMED("MomentsItem")
-@interface MomentsItem : NSObject
-/// StorylyInit initialization
-/// \param momentsView Your moments view to show in Storyly Bar
-///
-- (nonnull instancetype)initWithMomentsView:(UIView * _Nonnull)momentsView OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-/// This data class represents a Moments User provided by you
-SWIFT_CLASS_NAMED("MomentsUser")
-@interface MomentsUser : NSObject
-/// userId Id of the user
-@property (nonatomic, readonly, copy) NSString * _Nullable userId;
-/// avatarURL avatarURL of the user
-@property (nonatomic, readonly, copy) NSString * _Nullable avatarURL;
-/// username username of the user
-@property (nonatomic, readonly, copy) NSString * _Nullable username;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 
 
 
@@ -361,6 +318,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, PlayMode, "PlayMode", open) {
 
 @class STRCartItem;
 @class NSNumber;
+@class NSString;
 
 /// This class represent Cart of Storyly
 /// \param items List of STRCartItem objects representing the items added to the cart 
@@ -504,7 +462,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, ShareType, "ShareType", open) {
   ShareTypeScreenshot = 2,
 };
 
-@class StoryMedia;
+@class NSURL;
+@class StoryComponent;
 
 /// This data class represents a story inside a story group.
 SWIFT_CLASS_NAMED("Story")
@@ -521,8 +480,12 @@ SWIFT_CLASS_NAMED("Story")
 @property (nonatomic, readonly) BOOL seen;
 /// Time of the story that user watched
 @property (nonatomic, readonly) NSInteger currentTime;
-/// Media content of the story
-@property (nonatomic, readonly, strong) StoryMedia * _Nonnull media;
+/// URL of the preview image of the story
+@property (nonatomic, copy) NSURL * _Nullable previewUrl;
+/// List of story components in the story
+@property (nonatomic, readonly, copy) NSArray<StoryComponent *> * _Nullable storyComponentList;
+/// URL which the user has just interacted with
+@property (nonatomic, readonly, copy) NSString * _Nullable actionUrl;
 /// Related product content of interactive incase of click action
 @property (nonatomic, readonly, copy) NSArray<STRProductItem *> * _Nullable products;
 /// Story initialization
@@ -532,13 +495,21 @@ SWIFT_CLASS_NAMED("Story")
 ///
 /// \param title Title of the story
 ///
+/// \param name Name of the story
+///
 /// \param seen State of the story that shows whether the story is seen or not
 ///
 /// \param currentTime Time of the story that user watched
 ///
-/// \param media Media content of the story
+/// \param previewUrl URL of the preview image of the story
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime media:(StoryMedia * _Nonnull)media products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param storyComponentList List of story components in the story
+///
+/// \param actionUrl URL which the user has just interacted with
+///
+/// \param products Related product content of interactive incase of click action
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime previewUrl:(NSURL * _Nullable)previewUrl storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -649,7 +620,6 @@ SWIFT_CLASS_NAMED("StoryEmojiComponent")
 - (nonnull instancetype)initWithId:(NSString * _Nonnull)id emojiCodes:(NSArray<NSString *> * _Nonnull)emojiCodes selectedEmojiIndex:(NSInteger)selectedEmojiIndex customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSURL;
 enum StoryGroupType : NSInteger;
 @class StoryGroupStyle;
 
@@ -662,10 +632,6 @@ SWIFT_CLASS_NAMED("StoryGroup")
 @property (nonatomic, readonly, copy) NSString * _Nonnull title;
 /// URL of the story group icon image
 @property (nonatomic, readonly, copy) NSURL * _Nullable iconUrl;
-/// URLs of different the story group icon themes
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSURL *> * _Nullable thematicIconUrls;
-/// URL of the story group cover image
-@property (nonatomic, readonly, copy) NSURL * _Nullable coverUrl;
 /// Order index of the story group
 @property (nonatomic, readonly) NSInteger index;
 /// State of the story group that shows whether all of the stories are seen or not
@@ -676,8 +642,6 @@ SWIFT_CLASS_NAMED("StoryGroup")
 @property (nonatomic, readonly) BOOL pinned;
 /// Type of the story group
 @property (nonatomic, readonly) enum StoryGroupType type;
-/// Moments User of this group
-@property (nonatomic, readonly, strong) MomentsUser * _Nullable momentsUser;
 /// Style of this group
 @property (nonatomic, readonly, strong) StoryGroupStyle * _Nullable style;
 /// Name of this group
@@ -693,8 +657,6 @@ SWIFT_CLASS_NAMED("StoryGroup")
 ///
 /// \param thematicIconUrls URLs of different the story group icon themes
 ///
-/// \param coverUrl URL of the story group cover image
-///
 /// \param index Order index of the story group
 ///
 /// \param seen State of the story group that shows whether all of the stories are seen or not
@@ -705,15 +667,13 @@ SWIFT_CLASS_NAMED("StoryGroup")
 ///
 /// \param type Type of the story group
 ///
-/// \param momentsUser Moments User of this group
-///
 /// \param style Style of this group
 ///
 /// \param name Name of this group
 ///
 /// \param nudge Denotes whether story group is nudge or not
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl thematicIconUrls:(NSDictionary<NSString *, NSURL *> * _Nullable)thematicIconUrls coverUrl:(NSURL * _Nullable)coverUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type momentsUser:(MomentsUser * _Nullable)momentsUser style:(StoryGroupStyle * _Nullable)style name:(NSString * _Nullable)name nudge:(BOOL)nudge OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type style:(StoryGroupStyle * _Nullable)style name:(NSString * _Nullable)name nudge:(BOOL)nudge OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -791,14 +751,10 @@ typedef SWIFT_ENUM_NAMED(NSInteger, StoryGroupType, "StoryGroupType", open) {
   StoryGroupTypeDefault = 0,
 /// Denotes story group type is Ad
   StoryGroupTypeAd = 1,
-/// Denotes story group type is Moments
-  StoryGroupTypeMomentsDefault = 2,
-/// Denotes story group type is Moments Block
-  StoryGroupTypeMomentsBlock = 3,
 /// Denotes story group type is Live
-  StoryGroupTypeLive = 4,
+  StoryGroupTypeLive = 2,
 /// Denotes story group type is Product
-  StoryGroupTypeAutomatedShoppable = 5,
+  StoryGroupTypeAutomatedShoppable = 3,
 };
 
 @class NSCoder;
@@ -850,37 +806,6 @@ SWIFT_CLASS_NAMED("StoryImageQuizComponent")
 /// \param customPayload Custom payload for this image quiz if exists
 ///
 - (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nullable)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
-@end
-
-enum StoryType : NSInteger;
-
-/// This data class represents the media of a story.
-SWIFT_CLASS_NAMED("StoryMedia")
-@interface StoryMedia : NSObject
-/// Type of the story
-@property (nonatomic, readonly) enum StoryType type;
-/// List of story components in the story
-@property (nonatomic, readonly, copy) NSArray<StoryComponent *> * _Nullable storyComponentList;
-/// List of action urls in the story
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable actionUrlList;
-/// URL which the user has just interacted with
-@property (nonatomic, readonly, copy) NSString * _Nullable actionUrl;
-/// URL of the preview image of the story
-@property (nonatomic, copy) NSURL * _Nullable previewUrl;
-/// StoryMedia initialization
-/// \param type Type of the story
-///
-/// \param storyComponentList List of story components in the story
-///
-/// \param actionUrlList List of action urls in the story
-///
-/// \param actionUrl URL which the user has just interacted with
-///
-/// \param previewUrl URL of the preview image of the story
-///
-- (nonnull instancetype)initWithType:(enum StoryType)type storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList actionUrl:(NSString * _Nullable)actionUrl previewUrl:(NSURL * _Nullable)previewUrl OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -1115,7 +1040,6 @@ SWIFT_CLASS_NAMED("StorylyConfig")
 @end
 
 @class StorylyStoryStyling;
-@class StorylyMomentsStyling;
 @class StorylyStoryGroupStyling;
 enum StorylyLayoutDirection : NSInteger;
 @class StorylyProductConfig;
@@ -1132,10 +1056,6 @@ SWIFT_CLASS_NAMED("Builder")
 /// \param styling StorylyStoryStyling instance to set 
 ///
 - (StorylyConfigBuilder * _Nonnull)setStoryStyling:(StorylyStoryStyling * _Nonnull)styling SWIFT_WARN_UNUSED_RESULT;
-/// This function allows you to set StorylyMomentsStyling.
-/// \param styling StorylyMomentsStyling instance to set 
-///
-- (StorylyConfigBuilder * _Nonnull)setMomentsStyling:(StorylyMomentsStyling * _Nonnull)styling SWIFT_WARN_UNUSED_RESULT;
 /// This function allows you to set StorylyStoryGroupStyling.
 /// \param styling StorylyStoryGroupStyling instance to set 
 ///
@@ -1198,13 +1118,6 @@ enum StorylyEvent : NSInteger;
 SWIFT_PROTOCOL_NAMED("StorylyDelegate")
 @protocol StorylyDelegate
 @optional
-/// This function will let you know that Storyly has completed
-/// its network operations and story group list has just shown to the user.
-/// \param storylyView StorylyView instance in which storyly is loaded
-///
-/// \param storyGroupList List of story groups when storyly is loaded
-///
-- (void)storylyLoaded:(StorylyView * _Nonnull)storylyView storyGroupList:(NSArray<StoryGroup *> * _Nonnull)storyGroupList SWIFT_UNAVAILABLE_MSG("This function is removed in v1.18.0; please use the storylyLoaded with dataSource parameter");
 /// This function will let you know that Storyly has completed
 /// its network operations and story group list has just shown to the user.
 /// \param storylyView StorylyView instance in which storyly is loaded
@@ -1338,30 +1251,26 @@ typedef SWIFT_ENUM(NSInteger, StorylyEvent, open) {
   StorylyEventStoryCommentInputClosed = 32,
 /// Sent when a user seeks the video in long story
   StorylyEventStorySeeked = 33,
-/// Sent when a user likes a Moments story
-  StorylyEventStoryLiked = 34,
-/// Sent when a user unlikes a Moments story
-  StorylyEventStoryUnliked = 35,
 /// Sent when a product successfully added
-  StorylyEventStoryProductCartAdded = 36,
+  StorylyEventStoryProductCartAdded = 34,
 /// Sent when a product added failed
-  StorylyEventStoryProductCartAddFailed = 37,
+  StorylyEventStoryProductCartAddFailed = 35,
 /// Sent when product sheet is opened
-  StorylyEventStoryProductSheetOpened = 38,
+  StorylyEventStoryProductSheetOpened = 36,
 /// Sent when a product added
-  StorylyEventStoryProductAdded = 39,
+  StorylyEventStoryProductAdded = 37,
 /// Sent when a product updated
-  StorylyEventStoryProductUpdated = 40,
+  StorylyEventStoryProductUpdated = 38,
 /// Sent when product removed
-  StorylyEventStoryProductRemoved = 41,
+  StorylyEventStoryProductRemoved = 39,
 /// Sent when checkout button clicked
-  StorylyEventStoryCheckoutButtonClicked = 42,
+  StorylyEventStoryCheckoutButtonClicked = 40,
 /// Sent when cart button clicked from success sheet
-  StorylyEventStoryCartButtonClicked = 43,
+  StorylyEventStoryCartButtonClicked = 41,
 /// Sent when cart view clicked
-  StorylyEventStoryCartViewClicked = 44,
+  StorylyEventStoryCartViewClicked = 42,
 /// Sent  when product selected
-  StorylyEventStoryProductSelected = 45,
+  StorylyEventStoryProductSelected = 43,
 };
 
 
@@ -1412,132 +1321,6 @@ SWIFT_PROTOCOL("_TtP7Storyly18StorylyLoadingView_")
 - (void)show;
 /// Implement this method to include your hide actions
 - (void)hide;
-@end
-
-
-/// This delegate represents the class which notifies application when an event
-/// occurs in Storyly Moments.
-SWIFT_PROTOCOL("_TtP7Storyly22StorylyMomentsDelegate_")
-@protocol StorylyMomentsDelegate
-@optional
-/// This function will let you know that a user clicked header icon of a Storyly Moments story
-/// \param storylyView StorylyView instance in which storyly is loaded
-///
-/// \param storyGroup Story group in which the user clicked the icon
-///
-/// \param story Story in which the user user clicked the icon
-///
-- (void)storyHeaderClicked:(StorylyView * _Nonnull)storylyView storyGroup:(StoryGroup * _Nullable)storyGroup story:(Story * _Nullable)story;
-@end
-
-
-SWIFT_CLASS_NAMED("StorylyMomentsIconStyling")
-@interface StorylyMomentsIconStyling : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class UIImage;
-
-SWIFT_CLASS_NAMED("Builder")
-@interface StorylyMomentsIconStylingBuilder : NSObject
-/// Sets custom image to like icon. Max size of corresponding view is 20x20px.
-/// Scale type of the view is ContentMode.scaleAspectFit.
-- (StorylyMomentsIconStylingBuilder * _Nonnull)setStoryLikeIcon:(UIImage * _Nullable)likeIcon :(UIImage * _Nullable)unlikeIcon SWIFT_WARN_UNUSED_RESULT;
-/// Sets custom image to like animation icon.
-/// Scale type of the view is ContentMode.scaleAspectFit.
-- (StorylyMomentsIconStylingBuilder * _Nonnull)setStoryLikeAnimationIcon:(UIImage * _Nullable)icon SWIFT_WARN_UNUSED_RESULT;
-/// Sets custom image to view count icon. Max size of corresponding view is 20x20px.
-/// Scale type of the view is ContentMode.scaleAspectFit.
-- (StorylyMomentsIconStylingBuilder * _Nonnull)setStoryViewCountIcon:(UIImage * _Nullable)icon SWIFT_WARN_UNUSED_RESULT;
-/// Sets custom image to story options icon. Max size of corresponding view is 32x32px.
-/// Scale type of the view is ContentMode.scaleAspectFit.
-- (StorylyMomentsIconStylingBuilder * _Nonnull)setStoryOptionsIcon:(UIImage * _Nullable)icon SWIFT_WARN_UNUSED_RESULT;
-- (StorylyMomentsIconStyling * _Nonnull)build SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// This class holds the config properties of Moments Link CTA Interactive
-SWIFT_CLASS_NAMED("StorylyMomentsLinkCTAStyling")
-@interface StorylyMomentsLinkCTAStyling : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-/// Builder class of StorylyMomentsLinkCTAStyling
-SWIFT_CLASS_NAMED("Builder")
-@interface StorylyMomentsLinkCTAStylingBuilder : NSObject
-/// This function allows you to change the link text color of the Moments Link CTA view
-/// \param color Color to set
-///
-///
-/// returns:
-/// StorylyMomentsLinkCTAStyling instance
-- (StorylyMomentsLinkCTAStylingBuilder * _Nonnull)setLinkTextColor:(UIColor * _Nonnull)color SWIFT_WARN_UNUSED_RESULT;
-/// This function builds StorylyMomentsLinkCTAStyling with the current properties
-///
-/// returns:
-/// StorylyMomentsLinkCTAStyling instance
-- (StorylyMomentsLinkCTAStyling * _Nonnull)build SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS_NAMED("StorylyMomentsStyling")
-@interface StorylyMomentsStyling : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class StorylyMomentsTextStyling;
-
-SWIFT_CLASS_NAMED("Builder")
-@interface StorylyMomentsStylingBuilder : NSObject
-/// This function allows you to set custom icons to Moments
-/// \param iconStyling StorylyMomentsIconStyling instance to set 
-///
-- (StorylyMomentsStylingBuilder * _Nonnull)setIconStyling:(StorylyMomentsIconStyling * _Nonnull)iconStyling SWIFT_WARN_UNUSED_RESULT;
-/// This function allows you to customize Link CTA view
-/// \param linkCTAStyling StorylyMomentsLinkCTAStyling instance to set 
-///
-- (StorylyMomentsStylingBuilder * _Nonnull)setLinkCtaStyling:(StorylyMomentsLinkCTAStyling * _Nonnull)linkCTAStyling SWIFT_WARN_UNUSED_RESULT;
-- (StorylyMomentsStylingBuilder * _Nonnull)setTextStyling:(StorylyMomentsTextStyling * _Nonnull)textStyling SWIFT_WARN_UNUSED_RESULT;
-/// This function allows you to see the Moments story view count,like count and avatars of the last 3 liked users
-/// It is true by default.
-/// \param isVisible Show moments statistics if set to true 
-///
-- (StorylyMomentsStylingBuilder * _Nonnull)setMomentsUserAnalyticsVisibility:(BOOL)isVisible SWIFT_WARN_UNUSED_RESULT;
-- (StorylyMomentsStyling * _Nonnull)build SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// This class holds the config properties of Moments Text Interactive
-SWIFT_CLASS_NAMED("StorylyMomentsTextStyling")
-@interface StorylyMomentsTextStyling : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-/// Builder class of MomentsTextConfigBuilder
-SWIFT_CLASS_NAMED("Builder")
-@interface StorylyMomentsTextStylingBuilder : NSObject
-/// This function allows you to set different fonts that your users will be able to select in text interactive
-/// \param fonts Fonts to show to your users while creating a text interactive
-///
-///
-/// returns:
-/// Current builder
-- (StorylyMomentsTextStylingBuilder * _Nonnull)setCustomFonts:(NSArray<MomentsCustomFont *> * _Nonnull)fonts SWIFT_WARN_UNUSED_RESULT;
-/// This function builds StorylyMomentsTextStyling with the current properties
-///
-/// returns:
-/// StorylyMomentsTextStyling instance
-- (StorylyMomentsTextStyling * _Nonnull)build SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1643,6 +1426,7 @@ SWIFT_CLASS_NAMED("StorylyStoryGroupStyling")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class UIFont;
 
 /// Builder class of StorylyStoryGroupStyling
 SWIFT_CLASS_NAMED("Builder")
@@ -1731,6 +1515,7 @@ SWIFT_CLASS_NAMED("StorylyStoryStyling")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class UIImage;
 
 /// Builder class of StorylyStoryStyling
 /// \param styling StorylyBarStyling instance to set 
@@ -1797,15 +1582,10 @@ SWIFT_CLASS_NAMED("StorylyView")
 @property (nonatomic, weak) id <StorylyDelegate> _Nullable delegate;
 /// Delegate of the StorylyView which will notify you when an product related event occurs in StorylyView.
 @property (nonatomic, weak) id <StorylyProductDelegate> _Nullable productDelegate;
-/// Delegate of the StorylyMoments which will notify you when an event occurs in StorylyMoments.
-@property (nonatomic, weak) id <StorylyMomentsDelegate> _Nullable momentsDelegate;
 /// This property will allow you to add ad view between stories
 @property (nonatomic, weak) id <StorylyAdViewProvider> _Nullable storylyAdViewProvider;
 @property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
 @property (nonatomic, copy) NSString * _Nullable accessibilityIdentifier;
-/// This property allows you to add custom moments view to the
-/// beginning of the storyly bar such as ‘add your story’ or ‘user’s own stories’
-@property (nonatomic, copy) NSArray<MomentsItem *> * _Nullable momentsItems;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
