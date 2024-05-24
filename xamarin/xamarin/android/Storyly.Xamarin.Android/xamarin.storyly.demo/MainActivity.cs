@@ -6,6 +6,7 @@ using Com.Appsamurai.Storyly;
 using Com.Appsamurai.Storyly.Config;
 using Com.Appsamurai.Storyly.Analytics;
 using Com.Appsamurai.Storyly.Config.Styling.Group;
+using Com.Appsamurai.Storyly.Data.Managers.Product;
 using Android.Content;
 using Android.Graphics;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace xamarin.storyly.demo
 
         public void StorylyActionClicked(StorylyView storylyView, Story story)
         {
-            Log.Info("StorylyListener", story.Media.ActionUrl);
+            Log.Info("StorylyListener action clicked", story.ActionUrl);
         }
 
         public void StorylyEvent(StorylyView storylyView, StorylyEvent e, StoryGroup storyGroup, Story story, StoryComponent storyComponent)

@@ -58,7 +58,7 @@ namespace Storyly.Maui.Demo
 
         public override void StorylyActionClicked(StorylyView storylyView, UIViewController rootViewController, Story story)
         {
-            Console.WriteLine($"StorylyActionClicked:ActionUrl:{story.Media.ActionUrl}");
+            Console.WriteLine($"StorylyActionClicked:ActionUrl:{story.ActionUrl}");
         }
 
         public override void StorylyEvent(StorylyView storylyView, Storyly.StorylyEvent @event, StoryGroup storyGroup, Story story, StoryComponent storyComponent)

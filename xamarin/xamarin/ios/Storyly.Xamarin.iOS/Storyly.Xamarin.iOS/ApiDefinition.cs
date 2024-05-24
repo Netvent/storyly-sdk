@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using CoreGraphics;
 using Foundation;
 using ObjCRuntime;
@@ -34,6 +35,10 @@ namespace Storyly
         // @property (nonatomic, weak) id<StorylyProductDelegate> _Nullable productDelegate;
         [NullAllowed, Export("productDelegate", ArgumentSemantic.Weak)]
         NSObject WeakProductDelegate { get; set; }
+
+        // -(BOOL)openStoryWithPayload:(NSURL * _Nonnull)payload __attribute__((warn_unused_result("")));
+        [Export("openStoryWithPayload:")]
+        bool OpenStoryWithPayload(NSUrl payload);
 
         // -(void)resumeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
         [Export("resumeStoryWithAnimated:completion:")]
@@ -133,13 +138,9 @@ namespace Storyly
         [Export("title")]
         string Title { get; }
 
-        // @property (readonly, copy, nonatomic) NSURL * _Nonnull iconUrl;
-        [Export("iconUrl", ArgumentSemantic.Copy)]
+        // @property (readonly, copy, nonatomic) NSURL * _Nullable iconUrl;
+        [NullAllowed, Export("iconUrl", ArgumentSemantic.Copy)]
         NSUrl IconUrl { get; }
-
-        // @property (readonly, copy, nonatomic) NSURL * _Nullable coverUrl;
-        [NullAllowed, Export("coverUrl", ArgumentSemantic.Copy)]
-        NSUrl CoverUrl { get; }
 
         // @property (readonly, nonatomic) NSInteger index;
         [Export("index")]
@@ -161,13 +162,22 @@ namespace Storyly
         [Export("type")]
         StoryGroupType Type { get; }
 
+        // @property (readonly, nonatomic, strong) StoryGroupStyle * _Nullable style;
+        [NullAllowed, Export("style", ArgumentSemantic.Strong)]
+        StoryGroupStyle Style { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable name;
+        [NullAllowed, Export("name")]
+        string Name { get; }
+
         // @property (readonly, nonatomic) BOOL nudge;
         [Export("nudge")]
         bool Nudge { get; }
 
-        // @property (readonly, nonatomic, strong) StoryGroupStyle * _Nullable style;
-        [NullAllowed, Export("style", ArgumentSemantic.Strong)]
-        StoryGroupStyle Style { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type style:(StoryGroupStyle * _Nullable)style name:(NSString * _Nullable)name nudge:(BOOL)nudge __attribute__((objc_designated_initializer));
+        [Export("initWithId:title:iconUrl:index:seen:stories:pinned:type:style:name:nudge:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(string id, string title, [NullAllowed] NSUrl iconUrl, nint index, bool seen, Story[] stories, bool pinned, StoryGroupType type, [NullAllowed] StoryGroupStyle style, [NullAllowed] string name, bool nudge);
     }
 
     // @interface StoryGroupStyle : NSObject
@@ -235,39 +245,26 @@ namespace Storyly
         [Export("currentTime")]
         nint CurrentTime { get; }
 
-        // @property (readonly, nonatomic, strong) StoryMedia * _Nonnull media;
-        [Export("media", ArgumentSemantic.Strong)]
-        StoryMedia Media { get; }
-
-        // @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
-        [NullAllowed, Export("products", ArgumentSemantic.Copy)]
-        STRProductItem[] Products { get; }
-    }
-
-    // @interface StoryMedia : NSObject
-    [BaseType(typeof(NSObject))]
-    [DisableDefaultCtor]
-    interface StoryMedia
-    {
-        // @property (readonly, nonatomic) enum StoryType type;
-        [Export("type")]
-        StoryType Type { get; }
+        // @property (copy, nonatomic) NSURL * _Nullable previewUrl;
+        [NullAllowed, Export("previewUrl", ArgumentSemantic.Copy)]
+        NSUrl PreviewUrl { get; set; }
 
         // @property (readonly, copy, nonatomic) NSArray<StoryComponent *> * _Nullable storyComponentList;
         [NullAllowed, Export("storyComponentList", ArgumentSemantic.Copy)]
         StoryComponent[] StoryComponentList { get; }
 
-        // @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable actionUrlList;
-        [NullAllowed, Export("actionUrlList", ArgumentSemantic.Copy)]
-        string[] ActionUrlList { get; }
-
         // @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
         [NullAllowed, Export("actionUrl")]
         string ActionUrl { get; }
 
-        // @property (copy, nonatomic) NSURL * _Nullable previewUrl;
-        [NullAllowed, Export("previewUrl", ArgumentSemantic.Copy)]
-        NSUrl PreviewUrl { get; set; }
+        // @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+        [NullAllowed, Export("products", ArgumentSemantic.Copy)]
+        STRProductItem[] Products { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime previewUrl:(NSURL * _Nullable)previewUrl storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products __attribute__((objc_designated_initializer));
+        [Export("initWithId:index:title:name:seen:currentTime:previewUrl:storyComponentList:actionUrl:products:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(string id, nint index, string title, [NullAllowed] string name, bool seen, nint currentTime, [NullAllowed] NSUrl previewUrl, [NullAllowed] StoryComponent[] storyComponentList, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products);
     }
 
     // @interface StoryComponent : NSObject
@@ -722,6 +719,10 @@ namespace Storyly
         [Export("setShareConfig:")]
         StorylyConfigBuilder SetShareConfig(StorylyShareConfig config);
 
+        // -(StorylyConfigBuilder * _Nonnull)setLocale:(NSString * _Nullable)locale __attribute__((warn_unused_result("")));
+        [Export("setLocale:")]
+        StorylyConfigBuilder SetLocale([NullAllowed] string locale);
+
         // -(StorylyConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
         StorylyConfig Build();
@@ -952,6 +953,6 @@ namespace Storyly
 
         // -(StorylyProductConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
-        StorylyProductConfig Build();
+        StorylyProductConfig Build { get; }
     }
 }
