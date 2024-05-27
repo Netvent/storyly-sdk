@@ -4,6 +4,9 @@
 * removed Storyly Moments
 * IMPORTANT! removed StoryMedia class and media field from public Story class
 * IMPORTANT! added previewUrl, actionUrl and storyComponentList to the public Story class
+
+### 2.18.3 (27.05.2024)
+* added sdk play console verification
   
 ### 2.18.2 (20.05.2024)
 * added key field for product variants to indicate variant type
