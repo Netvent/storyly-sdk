@@ -1,4 +1,7 @@
 # Release Notes
+### 3.0.1 (27.05.2024)
+* improved monetization templates
+  
 ### 3.0.0 (21.05.2024)
 * improved load time of the Storyly Widget
 * removed Storyly Moments
