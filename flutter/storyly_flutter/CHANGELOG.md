@@ -1,3 +1,6 @@
+### 2.18.2 (29.05.2024)
+* improved monetization templates on ios platform
+
 ### 2.18.1 (22.05.2024)
 * added key field for product variants to indicate variant type
 * fixed a visual bug for poll and quiz interactive components on android platform
