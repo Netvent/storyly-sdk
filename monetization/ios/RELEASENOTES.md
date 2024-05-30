@@ -1,6 +1,9 @@
 # Release Notes
+### 3.0.0 (30.05.2024)
+* updated dependencies compatible with Storyly SDK v3
+
 ### 2.0.2 (29.05.2024)
-* updated versions of dependencies
+* updated dependencies compatible with Storyly SDK v2
 * added privacy manifest file for the monetization SDK
 
 ### 1.1.1 (03.11.2021)
