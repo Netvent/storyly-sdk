@@ -1,4 +1,7 @@
 # Release Notes
+### 2.0.0 (29.05.2024)
+* updated versions of dependencies
+
 ### 1.1.1 (03.11.2021)
 * added Google AdMob forwarding consent feature, [Forward consent to the Google Mobile Ads SDK](https://integration.storyly.io/android/monetization-quick-start.html#google-admob-consent-management)
 

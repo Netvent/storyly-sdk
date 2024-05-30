@@ -1,4 +1,8 @@
 # Release Notes
+### 2.0.2 (29.05.2024)
+* updated versions of dependencies
+* added privacy manifest file for the monetization SDK
+
 ### 1.1.1 (03.11.2021)
 * added Google AdMob forwarding consent feature, [Forward consent to the Google Mobile Ads SDK](https://integration.storyly.io/ios/monetization-quick-start.html#google-admob-consent-management)
 * released version with Xcode 12.5.1 for backward compatibility
