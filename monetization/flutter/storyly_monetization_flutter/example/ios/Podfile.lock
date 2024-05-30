@@ -1,63 +1,19 @@
 PODS:
   - Flutter (1.0.0)
-  - Google-Mobile-Ads-SDK (9.11.0.1):
-    - GoogleAppMeasurement (< 11.0, >= 7.0)
+  - Google-Mobile-Ads-SDK (11.5.0):
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleAppMeasurement (10.0.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.0.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
-    - GoogleUtilities/MethodSwizzler (~> 7.8)
-    - GoogleUtilities/Network (~> 7.8)
-    - "GoogleUtilities/NSData+zlib (~> 7.8)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.0.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.0.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
-    - GoogleUtilities/MethodSwizzler (~> 7.8)
-    - GoogleUtilities/Network (~> 7.8)
-    - "GoogleUtilities/NSData+zlib (~> 7.8)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.0.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
-    - GoogleUtilities/MethodSwizzler (~> 7.8)
-    - GoogleUtilities/Network (~> 7.8)
-    - "GoogleUtilities/NSData+zlib (~> 7.8)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleUserMessagingPlatform (2.0.1)
-  - GoogleUtilities/AppDelegateSwizzler (7.8.0):
-    - GoogleUtilities/Environment
-    - GoogleUtilities/Logger
-    - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.8.0):
-    - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.8.0):
-    - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.8.0):
-    - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.8.0):
-    - GoogleUtilities/Logger
-    - "GoogleUtilities/NSData+zlib"
-    - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.8.0)"
-  - GoogleUtilities/Reachability (7.8.0):
-    - GoogleUtilities/Logger
-  - nanopb (2.30909.0):
-    - nanopb/decode (= 2.30909.0)
-    - nanopb/encode (= 2.30909.0)
-  - nanopb/decode (2.30909.0)
-  - nanopb/encode (2.30909.0)
-  - PromisesObjC (2.1.1)
-  - Storyly (1.26.2)
-  - storyly_flutter (1.26.0):
+  - GoogleUserMessagingPlatform (2.4.0)
+  - Storyly (3.0.1)
+  - storyly_flutter (3.0.1):
     - Flutter
-    - Storyly (~> 1.26.0)
-  - storyly_monetization_flutter (1.2.0):
+    - Storyly (= 3.0.1)
+  - storyly_monetization_flutter (3.0.0):
     - Flutter
-    - storyly_flutter
-    - StorylyMonetization (~> 1.2.0)
-  - StorylyMonetization (1.2.0):
-    - Google-Mobile-Ads-SDK (~> 9.11)
-    - Storyly (~> 1.15)
+    - storyly_flutter (~> 3.0)
+    - StorylyMonetization (~> 3.0)
+  - StorylyMonetization (3.0.0):
+    - Google-Mobile-Ads-SDK (= 11.5.0)
+    - Storyly (~> 3.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -67,11 +23,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Google-Mobile-Ads-SDK
-    - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
-    - GoogleUtilities
-    - nanopb
-    - PromisesObjC
     - Storyly
     - StorylyMonetization
 
@@ -84,18 +36,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/storyly_monetization_flutter/ios"
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  Google-Mobile-Ads-SDK: 595bcae60a0ad9992a3f52fddb8aebda993a2d80
-  GoogleAppMeasurement: 7e48a3249792ac35d6f18f107f63f199a7e9d0ce
-  GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
-  GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
-  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  Storyly: 9f7694d816cbe22d1d5604b7653e75feabf1915f
-  storyly_flutter: 7b21add753cd8407b88fcbcfce32e06e1a20b798
-  storyly_monetization_flutter: ecbb7f3bd660631a729accd0d2f29401ec8b7d99
-  StorylyMonetization: 6f8d2b6b67dec6b92b57a097dfaadef23fb78804
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  Google-Mobile-Ads-SDK: 7db2098033ad3bfcd72a11e7503b49700a93029e
+  GoogleUserMessagingPlatform: f131fa7978d2ba88d7426702b057c2cc318e6595
+  Storyly: 79f8cfe3c8d8cee1fd903d27ed91b15fa3a4dd2a
+  storyly_flutter: 4cf310af3ebc59713764aee23b3ce31bd50fc16a
+  storyly_monetization_flutter: 068725109836148b2e5e6475207fdbd6558fbe80
+  StorylyMonetization: a800b2440b18761b41de361b87143b43e1719c6a
 
-PODFILE CHECKSUM: 1c55bb67f9da41fa023f80f450b252c4b1fb805c
+PODFILE CHECKSUM: 591c2f6ebe3cf80eddf9823806df57e06447523e
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2
