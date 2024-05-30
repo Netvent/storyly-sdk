@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'storyly_monetization_flutter'
-  s.version          = '1.2.0'
+  s.version          = '2.0.0'
   s.summary          = 'Storyly flutter plugin.'
   s.description      = <<-DESC
   Storyly for flutter
@@ -15,12 +15,12 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.platform = :ios, '10.0'
+  s.platform = :ios, '12.0'
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
   s.swift_versions = ["5.0", "5.1", "5.2", "5.3"]
 
-  s.dependency "StorylyMonetization", "~> 1.2.0"
-  s.dependency "storyly_flutter"
+  s.dependency "StorylyMonetization", "~> 2.0"
+  s.dependency "storyly_flutter", "~> 2.18"
 end
