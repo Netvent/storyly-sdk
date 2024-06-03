@@ -1,5 +1,10 @@
 # Release Notes
 
+### 2.19.0 - 30.05.2024 [for cdn](https://web-story.storyly.io/sdk/2.19.0/storyly-web.js)
+
+- Feature: Added Image Focal Point for cover image
+- Bug: Fixed monetization showing issue
+
 ### 2.17.0 - 08.04.2024 [for cdn](https://web-story.storyly.io/sdk/2.17.0/storyly-web.js)
 
 - Feature: Product bottom sheet and modal customization have been implemented.
