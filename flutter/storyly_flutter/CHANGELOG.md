@@ -1,4 +1,41 @@
-### 2.17.0 (08.04.2024)
+### 3.0.1 (30.05.2024)
+* improved monetization templates on ios platform
+
+### 3.0.0 (24.05.2024)
+* improved load time of the Storyly Widget
+* removed Storyly Moments
+* IMPORTANT! removed StoryMedia class and media field from public Story class
+* IMPORTANT! added previewUrl, actionUrl and storyComponentList to the public Story class
+
+### 2.18.2 (29.05.2024)
+* improved monetization templates on ios platform
+
+### 2.18.1 (22.05.2024)
+* added key field for product variants to indicate variant type
+* fixed a visual bug for poll and quiz interactive components on android platform
+
+### 2.18.0 (13.05.2024)
+* improved placement of product tag interactive component based on content
+* improved payload of product events
+* fixed storylyStoryDismissed delegate trigger time on ios platform
+* fixed an issue related to product payload of story impression events on android platform
+* improved monetization templates on android platform
+
+### 2.17.3 (06.05.2024)
+* improved usage of actionUrl and products in storylyActionClicked callback
+* fixed an issue related to visibility of the product catalog interactive component on android platform
+
+### 2.17.2 (25.04.2024)
+* fixed a bug related to analytic requests on ios platform
+
+### (DEPRECATED) 2.17.1 (24.04.2024)
+* fixed thumbnail image load issue of video stories
+* fixed story dismiss issue after a non-modal view controller presented over stories on ios platform
+* fixed a bug related to cta behavior of product related interactive components on android platform
+* fixed icon corner radius flick on fragment transitions on android platform
+* fixed a bug related to icon corner radius on android 8 and below devices on android platform
+
+### (DEPRECATED) 2.17.0 (08.04.2024)
 * fixed RTL support issues for product related interactive components
 * fixed bugs related to conditional stories
 * added additional bottom sheet customizations for product related interactive components

@@ -396,9 +396,6 @@ class StorylyParam {
   ///   size limit, your value will be set to null.
   String? storylyCustomParameters;
 
-  // This attribute is for user payload to use for Moments by Storyly
-  String? storylyPayload;
-
   /// This attribute defines whether it is a test device or not. If true,
   /// test groups are sent from the server.
   bool? storylyTestMode;
@@ -558,7 +555,6 @@ class StorylyParam {
       'userProperty': storylyUserProperty,
       'customParameter': storylyCustomParameters,
       'storylyIsTestMode': storylyTestMode,
-      'storylyPayload': storylyPayload,
       'storylyLayoutDirection': storylyLayoutDirection,
       'storylyLocale': storylyLocale,
     };
@@ -891,8 +887,7 @@ class StoryGroup {
     required this.pinned,
     required this.type,
     required this.nudge,
-    this.thematicIconUrls,
-    this.coverUrl,
+    this.name,
   });
 
   /// id ID of the story group
@@ -913,13 +908,11 @@ class StoryGroup {
   /// stories List of stories in the story group
   final List<Story> stories;
 
-  final Map<String, String>? thematicIconUrls;
-
-  final String? coverUrl;
-
   final bool pinned;
 
   final bool nudge;
+
+  final String? name;
 
   final int type;
 
@@ -931,12 +924,9 @@ class StoryGroup {
       iconUrl: json['iconUrl'],
       stories: List<Story>.from(json['stories'].map((x) => Story.fromJson(x))),
       id: json['id'],
-      thematicIconUrls: json['thematicIconUrls'] != null
-          ? Map<String, String>.from(json['thematicIconUrls'])
-          : null,
-      coverUrl: json['coverUrl'],
       pinned: json['pinned'],
       type: json['type'],
+      name: json['name'],
       nudge: json['nudge'],
     );
   }
@@ -944,16 +934,17 @@ class StoryGroup {
 
 /// This data class represents a story inside a story group.
 class Story {
-  Story({
-    required this.id,
-    required this.title,
-    required this.index,
-    required this.seen,
-    required this.currentTime,
-    required this.media,
-    this.products,
-    this.name,
-  });
+  Story(
+      {required this.id,
+      required this.title,
+      required this.index,
+      required this.seen,
+      required this.currentTime,
+      this.previewUrl,
+      this.actionUrl,
+      this.products,
+      this.name,
+      this.storyComponentList});
 
   /// ID of the story
   final String id;
@@ -973,11 +964,15 @@ class Story {
   /// Time of the story that user watched
   final int currentTime;
 
-  /// Media content of the story
-  final Media media;
+  /// URL which the user has just interacted with
+  final String? actionUrl;
 
   /// Related product content of interactive incase of click action
   final List<STRProductItem>? products;
+
+  final List<StoryComponent?>? storyComponentList;
+
+  final String? previewUrl;
 
   factory Story.fromJson(Map<String, dynamic> json) {
     return Story(
@@ -987,7 +982,11 @@ class Story {
       index: json['index'],
       seen: json['seen'],
       currentTime: json['currentTime'],
-      media: Media.fromJson(json['media']),
+      previewUrl: json['previewUrl'],
+      actionUrl: json['actionUrl'],
+      storyComponentList: castOrNull(json['storyComponentList']
+          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
+          .toList()),
       products: List<STRProductItem>.from(
           json['products'].map((x) => STRProductItem.fromJson(x))),
     );
@@ -1078,7 +1077,8 @@ class STRProductItem {
 
 /// This data class represents a variant inside product
 class STRProductVariant {
-  STRProductVariant({required this.name, required this.value});
+  STRProductVariant(
+      {required this.name, required this.value, required this.key});
 
   /// Name of the product
   final String name;
@@ -1086,18 +1086,16 @@ class STRProductVariant {
   /// Value of the product group
   final String value;
 
+  /// Key of the product group
+  final String key;
+
   Map<String, dynamic> toJson() {
-    return {
-      "name": name,
-      "value": value,
-    };
+    return {"name": name, "value": value, "key": key};
   }
 
   factory STRProductVariant.fromJson(Map<String, dynamic> json) {
     return STRProductVariant(
-      name: json['name'],
-      value: json['value'],
-    );
+        name: json['name'], value: json['value'], key: json["key"]);
   }
 }
 
@@ -1158,42 +1156,6 @@ class STRCartItem {
       quantity: json['quantity'],
       oldTotalPrice: json['oldTotalPrice'],
       totalPrice: json['totalPrice'],
-    );
-  }
-}
-
-/// This data class represents the media of a story.
-class Media {
-  Media({
-    required this.type,
-    this.storyComponentList,
-    this.actionUrlList,
-    this.actionUrl,
-    this.previewUrl,
-  });
-
-  /// Type of the story
-  final int type;
-
-  final List<StoryComponent?>? storyComponentList;
-
-  final List<String>? actionUrlList;
-
-  /// URL which the user has just interacted with
-  final String? actionUrl;
-
-  final String? previewUrl;
-
-  factory Media.fromJson(Map<String, dynamic> json) {
-    return Media(
-      type: json['type'],
-      storyComponentList: castOrNull(json['storyComponentList']
-          ?.map<StoryComponent?>((e) => getStorylyComponent(e))
-          .toList()),
-      actionUrlList: castOrNull(
-          json['actionUrlList']?.map<String>((e) => e as String).toList()),
-      actionUrl: json['actionUrl'],
-      previewUrl: json['previewUrl'],
     );
   }
 }

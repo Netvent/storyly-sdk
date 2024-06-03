@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storyly_demo/constants.dart';
+import 'package:storyly_demo/multi_screen_example.dart';
 import 'package:storyly_flutter/storyly_flutter.dart';
 
 import 'scroll_example.dart';
@@ -103,6 +104,17 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               child: const Text("Scroll Example"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MultiScreenExample(),
+                  ),
+                );
+              },
+              child: const Text("Multi-Screen Example"),
             ),
           ],
         ),

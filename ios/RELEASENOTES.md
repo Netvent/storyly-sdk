@@ -1,5 +1,35 @@
 # Release Notes
-### 2.17.0 (05.04.2024)
+### 3.0.1 (27.05.2024)
+* improved monetization templates
+  
+### 3.0.0 (21.05.2024)
+* improved load time of the Storyly Widget
+* removed Storyly Moments
+* IMPORTANT! removed StoryMedia class and media field from public Story class
+* IMPORTANT! added previewUrl, actionUrl and storyComponentList to the public Story class
+
+### 2.18.2 (27.05.2024)
+* improved monetization templates
+  
+### 2.18.1 (20.05.2024)
+* added key field for product variants to indicate variant type
+  
+### 2.18.0 (10.05.2024)
+* improved placement of product tag interactive component based on media
+* improved payload of product events
+* fixed storylyStoryDismissed delegate trigger time
+  
+### 2.17.3 (06.05.2024)
+* improved usage of actionUrl and products in storylyActionClicked callback
+
+### 2.17.2 (25.04.2024)
+* fixed a bug related to analytics requests
+  
+### (DEPRECATED) 2.17.1 (24.04.2024)
+* fixed thumbnail image load issue of video stories
+* fixed story dismiss issue after a non-modal view controller presented over stories
+  
+### (DEPRECATED) 2.17.0 (05.04.2024)
 * fixed RTL support issues for product related interactive components
 * fixed bugs related to conditional stories
 * added additional bottom sheet customizations for product related interactive components

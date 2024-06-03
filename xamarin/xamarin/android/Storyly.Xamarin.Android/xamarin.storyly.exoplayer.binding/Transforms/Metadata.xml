@@ -1,0 +1,115 @@
+﻿<metadata>ew
+
+    <!--Packages cleanup (ideally this node will be erased, but currently we have too much errors and warnings when we include all packages-->
+    <remove-node path="/api/package[not(
+        starts-with(@name, 'com.ifit.xamarin.exoplayer') or
+        @name='com.appsamurai.storyly.exoplayer2' or
+        @name='com.appsamurai.storyly.exoplayer2.analytics' or
+        @name='com.appsamurai.storyly.exoplayer2.audio' or
+        @name='com.appsamurai.storyly.exoplayer2.decoder' or
+        @name='com.appsamurai.storyly.exoplayer2.device' or
+        @name='com.appsamurai.storyly.exoplayer2.drm' or
+        @name='com.appsamurai.storyly.exoplayer2.ext.cronet' or
+        @name='com.appsamurai.storyly.exoplayer2.extractor' or
+        @name='com.appsamurai.storyly.exoplayer2.mediacodec' or
+        @name='com.appsamurai.storyly.exoplayer2.metadata' or
+        @name='com.appsamurai.storyly.exoplayer2.offline' or
+        @name='com.appsamurai.storyly.exoplayer2.source' or
+        @name='com.appsamurai.storyly.exoplayer2.source.ads' or
+        @name='com.appsamurai.storyly.exoplayer2.source.chunk' or
+        @name='com.appsamurai.storyly.exoplayer2.source.hls' or
+        @name='com.appsamurai.storyly.exoplayer2.source.hls.playlist' or
+        @name='com.appsamurai.storyly.exoplayer2.source.mediaparser' or
+        @name='com.appsamurai.storyly.exoplayer2.text' or
+        @name='com.appsamurai.storyly.exoplayer2.trackselection' or
+        @name='com.appsamurai.storyly.exoplayer2.ui' or
+        @name='com.appsamurai.storyly.exoplayer2.upstream' or
+        @name='com.appsamurai.storyly.exoplayer2.util' or
+        @name='com.appsamurai.storyly.exoplayer2.video' or
+        @name='com.appsamurai.storyly.exoplayer2.video.spherical'
+    )]" />
+
+    <!--Adjusting namespaces-->
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2']" name="managedName">Appsamurai.Storyly.Exoplayer2</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.analytics']" name="managedName">Appsamurai.Storyly.Exoplayer2.Analytics</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.audio']" name="managedName">Appsamurai.Storyly.Exoplayer2.Audio</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.decoder']" name="managedName">Appsamurai.Storyly.Exoplayer2.Decoder</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.device']" name="managedName">Appsamurai.Storyly.Exoplayer2.Device</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.drm']" name="managedName">Appsamurai.Storyly.Exoplayer2.Drm</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.ext.cronet']" name="managedName">Appsamurai.Storyly.Exoplayer2.Ext.Cronet</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.extractor']" name="managedName">Appsamurai.Storyly.Exoplayer2.Extractor</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.mediacodec']" name="managedName">Appsamurai.Storyly.Exoplayer2.MediaCodec</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.metadata']" name="managedName">Appsamurai.Storyly.Exoplayer2.Metadata</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.offline']" name="managedName">Appsamurai.Storyly.Exoplayer2.Offline</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.source']" name="managedName">Appsamurai.Storyly.Exoplayer2.Source</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.source.ads']" name="managedName">Appsamurai.Storyly.Exoplayer2.Source.Ads</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.source.chunk']" name="managedName">Appsamurai.Storyly.Exoplayer2.Source.Chunk</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.source.hls']" name="managedName">Appsamurai.Storyly.Exoplayer2.Source.Hls</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.source.hls.playlist']" name="managedName">Appsamurai.Storyly.Exoplayer2.Source.Hls.Playlist</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.source.mediaparser']" name="managedName">Appsamurai.Storyly.Exoplayer2.Source.MediaParser</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.text']" name="managedName">Appsamurai.Storyly.Exoplayer2.Text</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.trackselection']" name="managedName">Appsamurai.Storyly.Exoplayer2.TrackSelection</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.ui']" name="managedName">Appsamurai.Storyly.Exoplayer2.UI</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.upstream']" name="managedName">Appsamurai.Storyly.Exoplayer2.Upstream</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.util']" name="managedName">Appsamurai.Storyly.Exoplayer2.Util</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.video']" name="managedName">Appsamurai.Storyly.Exoplayer2.Video</attr>
+    <attr path="/api/package[@name='com.appsamurai.storyly.exoplayer2.video.spherical']" name="managedName">Appsamurai.Storyly.Exoplayer2.Video.Spherical</attr>
+
+
+    <!--Removing all event names from java listeners in order to prevent EventHandlers and EventArgs classes creation-->
+    <attr path="/api/package/*[substring(@name, string-length(@name) - string-length('Listener') + 1, string-length('Listener'))  = 'Listener']/method" name="eventName" />
+    <attr path="/api/package/*/method[
+        @name='addListener' or
+        @name='removeListener' or
+        @name='setListener'
+    ]" name="eventName" />
+
+    <remove-node path="/api/package[@name='com.appsamurai.storyly.exoplayer2']/*[not(
+        @name='BasePlayer' or
+        @name='BaseRenderer' or
+        @name='C' or
+        @name='ControlDispatcher' or
+        @name='DefaultLoadControl' or
+        @name='DefaultLoadControl.Builder' or
+        @name='DefaultRenderersFactory' or
+        @name='ExoPlaybackException' or
+        @name='ExoPlayer' or
+        @name='Format' or
+        @name='Format.Builder' or
+        @name='FormatHolder' or
+        @name='LoadControl' or
+        @name='LivePlaybackSpeedControl' or
+        @name='MediaItem' or
+        @name='MediaItem.Builder' or
+        @name='MediaItem.AdsConfiguration' or
+        @name='MediaItem.ClippingProperties' or
+        @name='MediaItem.DrmConfiguration' or
+        @name='MediaItem.LiveConfiguration' or
+        @name='MediaItem.PlaybackProperties' or
+        @name='MediaItem.Subtitle' or
+        @name='MediaMetadata' or
+        @name='PlaybackParameters' or
+        @name='Player' or
+        @name='Player.AudioComponent' or
+        @name='Player.DeviceComponent' or
+        @name='Player.EventListener' or
+        @name='Player.Events' or
+        @name='Player.MetadataComponent' or
+        @name='Player.TextComponent' or
+        @name='Player.VideoComponent' or
+        @name='PlayerMessage' or
+        @name='PlayerMessage.Sender' or
+        @name='PlayerMessage.Target' or
+        @name='Renderer' or             
+        @name='RendererCapabilities' or
+        @name='RendererConfiguration' or
+        @name='RenderersFactory' or
+        @name='SeekParameters' or
+        @name='SimpleExoPlayer' or
+        @name='SimpleExoPlayer.Builder' or
+        @name='Timeline' or
+        @name='Timeline.Period' or
+        @name='Timeline.Window'
+    )]" />
+
+</metadata>
