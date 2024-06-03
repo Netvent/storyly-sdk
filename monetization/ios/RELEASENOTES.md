@@ -1,4 +1,7 @@
 # Release Notes
+### 3.0.1 (03.06.2024)
+* updated Google Mobile Ads SDK version
+  
 ### 3.0.0 (30.05.2024)
 * updated dependencies compatible with Storyly SDK v3
 
