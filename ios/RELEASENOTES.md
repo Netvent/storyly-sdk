@@ -1,4 +1,8 @@
 # Release Notes
+### 3.1.0 (12.06.2024)
+* improved story group cover selection flow with focal points
+* improved missing product handling by filtering stories
+  
 ### 3.0.1 (27.05.2024)
 * improved monetization templates
   
