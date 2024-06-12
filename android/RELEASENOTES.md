@@ -8,6 +8,11 @@
 * IMPORTANT! removed StoryMedia class and media field from public Story class
 * IMPORTANT! added previewUrl, actionUrl and storyComponentList to the public Story class
 
+### 2.19.0 (12.06.2024)
+* improved story group cover selection flow with focal points
+* improved missing product handling by filtering stories
+* fixed a typo in portuguese translation
+
 ### 2.18.3 (27.05.2024)
 * added sdk play console verification
   
