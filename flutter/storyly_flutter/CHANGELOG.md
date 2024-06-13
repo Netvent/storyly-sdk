@@ -1,9 +1,10 @@
-### 3.0.1 (30.05.2024)
-* improved monetization templates on ios platform
 ### 3.1.0 (13.06.2024)
 * improved story group cover selection flow with focal points
 * improved missing product handling by filtering stories
 * fixed a typo in portuguese translation on android platform
+
+### 3.0.1 (30.05.2024)
+* improved monetization templates on ios platform
 
 ### 3.0.0 (24.05.2024)
 * improved load time of the Storyly Widget
