@@ -1,5 +1,10 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.1.0 (13.06.2024)
+* improved story group cover selection flow with focal points
+* improved missing product handling by filtering stories
+* fixed a typo in portuguese translation on android platform
+
 ### 3.0.1 (30.05.2024)
 * improved monetization templates on ios platform
 
