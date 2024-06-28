@@ -6,7 +6,6 @@ import {
     processColor,
 } from 'react-native';
 import { string, arrayOf, func, number, bool, object } from 'prop-types';
-import CryptoJS from 'crypto-js';
 
 class Storyly extends Component {
     refresh = () => {
@@ -295,7 +294,7 @@ class Storyly extends Component {
                 {storyGroupViewFactory ?
                     <STStorylyGroupViewFactory
                         ref={(ref) => { this.customViewFactoryRef = ref }}
-                        key={createHashFromJson(storylyConfig)}
+                        key={JSON.stringify(storylyConfig)}
                         width={storyGroupViewFactory.width}
                         height={storyGroupViewFactory.height}
                         CustomizedView={storyGroupViewFactory.customView} /> : <></>}
@@ -398,12 +397,6 @@ const STStorylyGroupViewFactory = forwardRef(({ width, height, CustomizedView },
 
     return (<>{customViewList}</>)
 })
-
-const createHashFromJson = (jsonObject) => {
-    const jsonString = JSON.stringify(jsonObject);
-    const hash = CryptoJS.SHA256(jsonString);
-    return hash.toString(CryptoJS.enc.Hex);
-};
 
 const STStorylyGroupView = requireNativeComponent('STStorylyGroupView', null);
 
