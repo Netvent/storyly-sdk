@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.1.1 (28.06.2024)
+* fixed a bug related to custom styling
+
 ### 3.1.0 (13.06.2024)
 * improved story group cover selection flow with focal points
 * improved missing product handling by filtering stories
