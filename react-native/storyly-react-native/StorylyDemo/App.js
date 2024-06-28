@@ -114,7 +114,7 @@ const CustomPortraitView = ({ storyGroup }) => {
                         borderRadius: 8
                     }}
                         source={{ uri: storyGroup.iconUrl }} />
-                    <View style={{ width: 100, height: 178, borderRadius: 8, position: 'absolute', backgroundColor: storyGroup.seen ? "#16ad055f" : "#1905ad5f" }}>
+                    <View style={{ width: 100, height: 168, borderRadius: 8, position: 'absolute', backgroundColor: storyGroup.seen ? "#16ad055f" : "#1905ad5f" }}>
                         <View style={{ flexDirection: 'column', width: 90, marginTop: 20, marginLeft: 5, height: "100%", alignItems: 'center', justifyContent: 'flex-start' }}>
                             {storyGroup.pinned ?
                                 <Image style={{ width: 20, height: 20, marginTop: 5, marginBottom: 10, borderRadius: 10 }} source={PIN_ICON} /> : <View style={{ width: 20, height: 20, marginTop: 5, marginBottom: 10 }} />}

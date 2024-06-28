@@ -210,7 +210,69 @@ class Storyly extends Component {
             storyProductFeed,
             ...otherProps
         } = this.props;
-        const factoryId = uuidv4();
+        const storylyConfig = {
+            'storylyInit': {
+                'storylyId': storylyId,
+                'storylySegments': storylySegments,
+                'userProperty': storylyUserProperty,
+                'customParameter': customParameter,
+                'storylyIsTestMode': storylyTestMode, 
+                'storylyLayoutDirection': storylyLayoutDirection,
+                'storylyLocale': storylyLocale,
+            },
+            'storyGroupStyling': {
+                'iconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
+                'iconBorderColorNotSeen': storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null,
+                'iconBackgroundColor': processColor(storyGroupIconBackgroundColor),
+                'pinIconColor': processColor(storyGroupPinIconColor),
+                'iconHeight': storyGroupIconHeight, 
+                'iconWidth': storyGroupIconWidth, 
+                'iconCornerRadius': storyGroupIconCornerRadius,
+                'iconBorderAnimation': storyGroupAnimation,
+                'titleSeenColor': processColor(storyGroupTextColorSeen), 
+                'titleNotSeenColor': processColor(storyGroupTextColorNotSeen),
+                'titleLineCount': storyGroupTextLines,
+                'titleFont': storyGroupTextTypeface, 
+                'titleTextSize': storyGroupTextSize,  
+                'titleVisible': storyGroupTextIsVisible, 
+                'groupSize': storyGroupSize,
+            },
+            'storyGroupViewFactory': {
+                'width': storyGroupViewFactory ? storyGroupViewFactory.width : 0,
+                'height': storyGroupViewFactory ? storyGroupViewFactory.height : 0,
+            },
+            'storyBarStyling': {
+                'orientation': storyGroupListOrientation,
+                'sections': storyGroupListSections,
+                'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
+                'verticalEdgePadding': storyGroupListVerticalEdgePadding,
+                'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
+                'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
+            },
+            'storyStyling': { 
+                'headerIconBorderColor': storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null,
+                'titleColor': processColor(storyItemTextColor),
+                'titleFont': storyItemTextTypeface,
+                'interactiveFont': storyInteractiveTextTypeface,
+                'progressBarColor': storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null,
+                'isTitleVisible': storyHeaderTextIsVisible,
+                'isHeaderIconVisible': storyHeaderIconIsVisible,
+                'isCloseButtonVisible': storyHeaderCloseButtonIsVisible,
+                'closeButtonIcon': storyHeaderCloseIcon,
+                'shareButtonIcon': storyHeaderShareIcon,
+            },
+            'storyShareConfig': {
+                'storylyShareUrl': storylyShareUrl,
+                'storylyFacebookAppID': storylyFacebookAppID,
+            },
+            'storyProductConfig': { 
+                'isFallbackEnabled': storyFallbackIsEnabled,
+                'isCartEnabled': storyCartIsEnabled,
+                'productFeed': storyProductFeed,
+            },
+        }
+
+
         return (
             <STStoryly
                 {...otherProps}
@@ -227,74 +289,12 @@ class Storyly extends Component {
                 onStorylyProductEvent={this._onStorylyProductEvent}
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
-                storyly={
-                    {
-                        'storylyInit': {
-                            'storylyId': storylyId,
-                            'storylySegments': storylySegments,
-                            'userProperty': storylyUserProperty,
-                            'customParameter': customParameter,
-                            'storylyIsTestMode': storylyTestMode, 
-                            'storylyLayoutDirection': storylyLayoutDirection,
-                            'storylyLocale': storylyLocale,
-                        },
-                        'storyGroupStyling': {
-                            'iconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
-                            'iconBorderColorNotSeen': storyGroupIconBorderColorNotSeen ? storyGroupIconBorderColorNotSeen.map(processColor) : null,
-                            'iconBackgroundColor': processColor(storyGroupIconBackgroundColor),
-                            'pinIconColor': processColor(storyGroupPinIconColor),
-                            'iconHeight': storyGroupIconHeight, 
-                            'iconWidth': storyGroupIconWidth, 
-                            'iconCornerRadius': storyGroupIconCornerRadius,
-                            'iconBorderAnimation': storyGroupAnimation,
-                            'titleSeenColor': processColor(storyGroupTextColorSeen), 
-                            'titleNotSeenColor': processColor(storyGroupTextColorNotSeen),
-                            'titleLineCount': storyGroupTextLines,
-                            'titleFont': storyGroupTextTypeface, 
-                            'titleTextSize': storyGroupTextSize,  
-                            'titleVisible': storyGroupTextIsVisible, 
-                            'groupSize': storyGroupSize,
-                        },
-                        'storyGroupViewFactory': {
-                            'width': storyGroupViewFactory ? storyGroupViewFactory.width : 0,
-                            'height': storyGroupViewFactory ? storyGroupViewFactory.height : 0,
-                        },
-                        'storyBarStyling': {
-                            'orientation': storyGroupListOrientation,
-                            'sections': storyGroupListSections,
-                            'horizontalEdgePadding': storyGroupListHorizontalEdgePadding,
-                            'verticalEdgePadding': storyGroupListVerticalEdgePadding,
-                            'horizontalPaddingBetweenItems': storyGroupListHorizontalPaddingBetweenItems,
-                            'verticalPaddingBetweenItems': storyGroupListVerticalPaddingBetweenItems,
-                        },
-                        'storyStyling': { 
-                            'headerIconBorderColor': storyItemIconBorderColor ? storyItemIconBorderColor.map(processColor) : null,
-                            'titleColor': processColor(storyItemTextColor),
-                            'titleFont': storyItemTextTypeface,
-                            'interactiveFont': storyInteractiveTextTypeface,
-                            'progressBarColor': storyItemProgressBarColor ? storyItemProgressBarColor.map(processColor) : null,
-                            'isTitleVisible': storyHeaderTextIsVisible,
-                            'isHeaderIconVisible': storyHeaderIconIsVisible,
-                            'isCloseButtonVisible': storyHeaderCloseButtonIsVisible,
-                            'closeButtonIcon': storyHeaderCloseIcon,
-                            'shareButtonIcon': storyHeaderShareIcon,
-                        },
-                        'storyShareConfig': {
-                            'storylyShareUrl': storylyShareUrl,
-                            'storylyFacebookAppID': storylyFacebookAppID,
-                        },
-                        'storyProductConfig': { 
-                            'isFallbackEnabled': storyFallbackIsEnabled,
-                            'isCartEnabled': storyCartIsEnabled,
-                            'productFeed': storyProductFeed,
-                        },
-                    }
-                }
+                storyly={ storylyConfig }
                 ref={el => (this._storylyView = el)}>
                 {storyGroupViewFactory ?
                     <STStorylyGroupViewFactory
                         ref={(ref) => { this.customViewFactoryRef = ref }}
-                        key={factoryId}
+                        key={JSON.stringify(storylyConfig)}
                         width={storyGroupViewFactory.width}
                         height={storyGroupViewFactory.height}
                         CustomizedView={storyGroupViewFactory.customView} /> : <></>}
@@ -397,14 +397,6 @@ const STStorylyGroupViewFactory = forwardRef(({ width, height, CustomizedView },
 
     return (<>{customViewList}</>)
 })
-
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
-    });
-}
-  
 
 const STStorylyGroupView = requireNativeComponent('STStorylyGroupView', null);
 
