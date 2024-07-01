@@ -1,5 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.2.0 (01.07.2024)
+* added sponsored story group feature
+* added style field to StoryGroup interface
+
 ### 3.1.1 (28.06.2024)
 * fixed a bug related to custom styling
 
