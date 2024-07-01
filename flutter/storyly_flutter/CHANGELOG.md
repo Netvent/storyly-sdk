@@ -1,3 +1,6 @@
+### 3.2.0 (01.07.2024)
+* added sponsored story group feature
+
 ### 3.1.0 (13.06.2024)
 * improved story group cover selection flow with focal points
 * improved missing product handling by filtering stories
