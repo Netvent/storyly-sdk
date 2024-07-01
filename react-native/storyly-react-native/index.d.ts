@@ -162,7 +162,8 @@ declare module "storyly-react-native" {
       type: string,
       name: string,
       nudge: boolean,
-    }
+      style?: StoryGroupStyle,
+    };
 
     export interface Story {
       id: string;
@@ -202,6 +203,21 @@ declare module "storyly-react-native" {
       | "video"
       | "vod";
   }
+
+  export interface StoryGroupStyle {
+    borderUnseenColors?: [string],
+    textUnseenColor?: string,
+    badge?: StoryGroupBadgeStyle,
+  }
+  
+  export interface StoryGroupBadgeStyle {
+    backgroundColor?: string,
+    textColor?: string,
+    endTime?: number,
+    template?: string,
+    text?: string,
+  }
+  
 
   export interface StoryGroupViewFactory {
     width: number;
