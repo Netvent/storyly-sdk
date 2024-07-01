@@ -249,7 +249,7 @@ internal extension UIImage {
 internal extension UIColor {
     convenience init?(hexString: String?) {
         guard let hexString = hexString else { return nil }
-
+        
         let start = hexString.index(hexString.startIndex, offsetBy: 1)
         let hexColor = String(hexString[start...])
         
@@ -270,5 +270,16 @@ internal extension UIColor {
             alpha = 1
         }
         self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    func toHexString() -> String {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        let rgb = (Int)(alpha * 255) << 24 |
+            (Int)(red * 255) << 16 |
+            (Int)(green * 255) << 8 |
+            (Int)(blue * 255) << 0
+        return String(format: "#%08x", rgb)
     }
 }

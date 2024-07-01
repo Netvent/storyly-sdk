@@ -24,6 +24,27 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         "type": storyGroup.type.description,
         "name": storyGroup.name,
         "nudge": storyGroup.nudge,
+        "style": createStoryGroupStyleMap(storyGroupStyle: storyGroup.style)
+    ]
+}
+
+func createStoryGroupStyleMap(storyGroupStyle: StoryGroupStyle?) -> [String: Any?]? {
+    guard let style = storyGroupStyle else { return nil }
+    return [
+        "borderUnseenColors": style.borderUnseenColors?.map { $0.toHexString() },
+        "textUnseenColor": style.textUnseenColor?.toHexString(),
+        "badge": createStoryGroupBadgeStyleMap(badge: style.badge)
+    ]
+}
+
+func createStoryGroupBadgeStyleMap(badge: StoryGroupBadgeStyle?) -> [String: Any?]? {
+    guard let badge = badge else { return nil }
+    return [
+        "backgroundColor": badge.backgroundColor?.toHexString(),
+        "textColor": badge.textColor?.toHexString(),
+        "endTime": badge.endTime,
+        "template": badge.template,
+        "text": badge.text,
     ]
 }
 

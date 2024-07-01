@@ -25,6 +25,26 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
         storyGroupMap.putString("type", storyGroup.type.customName)
         storyGroupMap.putString("name", storyGroup.name)
         storyGroupMap.putBoolean("nudge", storyGroup.nudge)
+        storyGroupMap.putMap("style", storyGroup.style?.let {
+            Arguments.createMap().apply {
+                putArray("borderUnseenColors", it.borderUnseenColors?.let { borderUnseenColors ->
+                    Arguments.createArray().also { colorMap ->
+                        borderUnseenColors.forEach { colorMap.pushString(it.toHexString()) }
+                    }
+                })
+                putString("textUnseenColor", it.textUnseenColor?.toHexString())
+                putMap("badge",  it.badge?.let { badge ->
+                    Arguments.createMap().apply {
+                        putString("backgroundColor", badge.backgroundColor?.toHexString())
+                        putString("textColor", badge.textColor?.toHexString())
+                        badge.endTime?.toInt()?.let { endTime -> putInt("endTime", endTime) }
+                        putString("template", badge.template)
+                        putString("text", badge.text)
+                    }
+
+                })
+            }
+        })
     }
 }
 
@@ -255,4 +275,9 @@ internal fun createSTRCartItem(cartItem: Map<String, Any?>): STRCartItem {
         totalPrice = (cartItem["totalPrice"] as Double).toFloat(),
         quantity = (cartItem["quantity"] as Double).toInt()
     )
+}
+
+
+internal fun Int.toHexString(): String {
+    return String.format("#%08X", this)
 }
