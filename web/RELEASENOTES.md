@@ -1,5 +1,11 @@
 # Release Notes
 
+### 3.2.1 - 01.07.2024 [for cdn](https://web-story.storyly.io/sdk/3.2.1/storyly-web.js)
+
+- Feature: Added Sponsored SG feature
+- Improvement: Changed Analytics Events (See: https://docs.storyly.io/docs/web-analytics)
+- Bug: Fixed major and minor bugs
+
 ### 2.19.0 - 30.05.2024 [for cdn](https://web-story.storyly.io/sdk/2.19.0/storyly-web.js)
 
 - Feature: Added Image Focal Point for cover image
