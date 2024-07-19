@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Basic View Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="BasicViewController" customModule="StorylyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="NavigationViewController" customModule="StorylyDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,10 +33,30 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="W4A-Cb-LxH" secondAttribute="trailing" id="s8p-1r-0Yb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="storylyView" destination="W4A-Cb-LxH" id="4Zo-sd-nfG"/>
+                        <segue destination="e8o-vb-ppN" kind="show" identifier="showDetail" id="v5q-n4-D8g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139" y="139"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="rzA-cx-vLn">
+            <objects>
+                <viewController id="e8o-vb-ppN" customClass="DetailViewController" customModule="StorylyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jxu-0s-kai" customClass="DetailView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4uv-lP-bBi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KJp-Vl-Ln7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvn-Bc-NDJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1280" y="139"/>
         </scene>
     </scenes>
     <resources>

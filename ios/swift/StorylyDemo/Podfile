@@ -1,8 +1,8 @@
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 use_frameworks!
-platform :ios, '9.0'
+platform :ios, '12.0'
 
 target 'StorylyDemo' do
-  pod 'Storyly', "1.19.1"
-  pod 'StorylyMonetization'
+  pod 'Storyly', "3.2.0"
+  pod 'SDWebImage', '~>3.7'
 end
