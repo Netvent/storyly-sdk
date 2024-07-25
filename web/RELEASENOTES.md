@@ -1,5 +1,11 @@
 # Release Notes
 
+### 3.3.0 - 25.07.2024 [for cdn](https://web-story.storyly.io/sdk/3.3.*/storyly-web.js)
+
+- Feature: Added Support Video Cover feature
+- Bug: Fixed Bottom Sheet opens when multiple Product Catalog
+- Bug: Fixed Product Image display on the Bottom Sheet
+
 ### 3.2.1 - 01.07.2024 [for cdn](https://web-story.storyly.io/sdk/3.2.1/storyly-web.js)
 
 - Feature: Added Sponsored SG feature
