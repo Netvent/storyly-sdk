@@ -1,4 +1,11 @@
 # Release Notes
+### 3.2.1 (22.07.2024)
+* improved storyly widget related analytic events
+* improved story group visibility related analytic events
+* improved missing monetization fields handling
+* improved story share handling for missing social apps
+* changed logo and text of Twitter to X on share sheet
+  
 ### 3.2.0 (28.06.2024)
 * added sponsored story group feature
   

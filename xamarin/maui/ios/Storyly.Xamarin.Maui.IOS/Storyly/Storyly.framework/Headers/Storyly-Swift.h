@@ -1570,6 +1570,7 @@ SWIFT_CLASS_NAMED("Builder")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class UIWindow;
 
 /// This class is the main view of Storyly.
 SWIFT_CLASS_NAMED("StorylyView")
@@ -1586,6 +1587,7 @@ SWIFT_CLASS_NAMED("StorylyView")
 @property (nonatomic, weak) id <StorylyAdViewProvider> _Nullable storylyAdViewProvider;
 @property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
 @property (nonatomic, copy) NSString * _Nullable accessibilityIdentifier;
+- (void)willMoveToWindow:(UIWindow * _Nullable)newWindow;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end

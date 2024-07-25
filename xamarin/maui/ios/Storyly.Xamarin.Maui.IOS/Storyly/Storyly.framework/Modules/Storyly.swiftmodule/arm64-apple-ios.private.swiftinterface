@@ -89,6 +89,7 @@ extension Swift.Array {
     @objc get
     @objc set
   }
+  @_Concurrency.MainActor(unsafe) @objc override final public func willMove(toWindow newWindow: UIKit.UIWindow?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
