@@ -632,6 +632,10 @@ SWIFT_CLASS_NAMED("StoryGroup")
 @property (nonatomic, readonly, copy) NSString * _Nonnull title;
 /// URL of the story group icon image
 @property (nonatomic, readonly, copy) NSURL * _Nullable iconUrl;
+/// URL of the story group icon video
+@property (nonatomic, readonly, copy) NSURL * _Nullable iconVideoUrl;
+/// URL of the story group icon video thumbnail
+@property (nonatomic, readonly, copy) NSURL * _Nullable iconVideoThumbnailUrl;
 /// Order index of the story group
 @property (nonatomic, readonly) NSInteger index;
 /// State of the story group that shows whether all of the stories are seen or not
@@ -673,7 +677,7 @@ SWIFT_CLASS_NAMED("StoryGroup")
 ///
 /// \param nudge Denotes whether story group is nudge or not
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type style:(StoryGroupStyle * _Nullable)style name:(NSString * _Nullable)name nudge:(BOOL)nudge OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl iconVideoUrl:(NSURL * _Nullable)iconVideoUrl iconVideoThumbnailUrl:(NSURL * _Nullable)iconVideoThumbnailUrl index:(NSInteger)index seen:(BOOL)seen stories:(NSArray<Story *> * _Nonnull)stories pinned:(BOOL)pinned type:(enum StoryGroupType)type style:(StoryGroupStyle * _Nullable)style name:(NSString * _Nullable)name nudge:(BOOL)nudge OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1627,6 +1631,7 @@ SWIFT_CLASS_NAMED("StorylyView")
 /// This function dismisses your already open external view
 - (void)dismissExternalActionView;
 @end
+
 
 
 

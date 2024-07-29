@@ -90,9 +90,9 @@ extension Swift.Array {
     @objc set
   }
   @_Concurrency.MainActor(unsafe) @objc override final public func willMove(toWindow newWindow: UIKit.UIWindow?)
+  @objc deinit
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
 }
 extension Storyly.StorylyView {
   @objc @_Concurrency.MainActor(unsafe) final public func refresh()
@@ -398,6 +398,8 @@ extension Storyly.StorylyView {
   @objc final public let uniqueId: Swift.String
   @objc final public let title: Swift.String
   @objc final public let iconUrl: Foundation.URL?
+  @objc final public let iconVideoUrl: Foundation.URL?
+  @objc final public let iconVideoThumbnailUrl: Foundation.URL?
   @objc final public let index: Swift.Int
   @objc final public let seen: Swift.Bool
   @objc final public let stories: [Storyly.Story]
@@ -406,7 +408,7 @@ extension Storyly.StorylyView {
   @objc final public let style: Storyly.StoryGroupStyle?
   @objc final public let name: Swift.String?
   @objc final public let nudge: Swift.Bool
-  @objc public init(id: Swift.String, title: Swift.String, iconUrl: Foundation.URL?, index: Swift.Int, seen: Swift.Bool, stories: [Storyly.Story], pinned: Swift.Bool, type: Storyly.StoryGroupType, style: Storyly.StoryGroupStyle?, name: Swift.String?, nudge: Swift.Bool)
+  @objc public init(id: Swift.String, title: Swift.String, iconUrl: Foundation.URL?, iconVideoUrl: Foundation.URL?, iconVideoThumbnailUrl: Foundation.URL?, index: Swift.Int, seen: Swift.Bool, stories: [Storyly.Story], pinned: Swift.Bool, type: Storyly.StoryGroupType, style: Storyly.StoryGroupStyle?, name: Swift.String?, nudge: Swift.Bool)
   @objc deinit
 }
 @objc(StoryGroupStyle) final public class StoryGroupStyle : ObjectiveC.NSObject {

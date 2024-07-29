@@ -1,4 +1,8 @@
 # Release Notes
+### 3.3.0 (29.07.2024)
+* added video covers for story groups
+* fixed a bug related to device orientation for tablets
+
 ### 3.2.1 (22.07.2024)
 * improved storyly widget related analytic events
 * improved story group visibility related analytic events
