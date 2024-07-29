@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.4.0 (29.07.2024)
+* added out of stock handling for product related interactive components
+
 ### 3.3.0 (29.07.2024)
 * added video covers for story groups
 * fixed a bug related to device orientation for tablets on android platform
