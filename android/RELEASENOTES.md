@@ -1,4 +1,7 @@
 # Release Notes
+### 3.4.1 (31.07.2024)
+* improved layout of story group and header icon
+
 ### 3.4.0 (29.07.2024)
 * added out of stock handling for product related interactive components
 
