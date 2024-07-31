@@ -1,5 +1,9 @@
 # Release Notes
 
+### 3.4.0 - 31.07.2024 [for cdn](https://web-story.storyly.io/sdk/3.4.*/storyly-web.js)
+
+- Feature: Added out of stock handling for product related interactive components
+
 ### 3.3.0 - 25.07.2024 [for cdn](https://web-story.storyly.io/sdk/3.3.*/storyly-web.js)
 
 - Feature: Added Support Video Cover feature
