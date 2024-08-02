@@ -1,4 +1,7 @@
 # Release Notes
+### 3.4.2 (02.08.2024)
+* improved story header icon background
+  
 ### 3.4.1 (31.07.2024)
 * improved layout of story group and header icon
 
