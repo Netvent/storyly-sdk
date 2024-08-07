@@ -9,7 +9,7 @@
 import UIKit
 import Storyly
 
-class NavigationViewController: UIViewController {
+class StorylyPageViewController: UIViewController {
 
     @IBOutlet weak var storylyView: StorylyView!
     private var lastStorylyView: StorylyView?
@@ -33,9 +33,12 @@ class NavigationViewController: UIViewController {
      }
 }
 
-extension NavigationViewController: StorylyDelegate {
-    
-    func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
+extension StorylyPageViewController: StorylyDelegate {
+    func storylyActionClicked(
+        _ storylyView: StorylyView,
+        rootViewController: UIViewController,
+        story: Story
+    ) {
         lastStorylyView = storylyView
         lastStorylyView?.pauseStory(animated: true) {
             self.performSegue(withIdentifier: "showDetail", sender: self)

@@ -13,7 +13,7 @@
 		41501BE525D18AA700928E7C /* CustomSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41501BE125D18AA600928E7C /* CustomSizeViewController.swift */; };
 		41501BE825D18AA700928E7C /* CustomSize.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BE425D18AA600928E7C /* CustomSize.storyboard */; };
 		41501BEF25D1B2FB00928E7C /* EventHandling.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */; };
-		7518CA882C4923EE00F03126 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518CA872C4923EE00F03126 /* NavigationViewController.swift */; };
+		7518CA882C4923EE00F03126 /* StorylyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518CA872C4923EE00F03126 /* StorylyPageViewController.swift */; };
 		7518CA8B2C4923FB00F03126 /* Navigation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7518CA892C4923FB00F03126 /* Navigation.storyboard */; };
 		7518CA8F2C49277000F03126 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7518CA8E2C49277000F03126 /* DetailViewController.swift */; };
 		A16DA837233B90E3000514FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16DA836233B90E3000514FA /* AppDelegate.swift */; };
@@ -35,7 +35,7 @@
 		41501BE425D18AA600928E7C /* CustomSize.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomSize.storyboard; sourceTree = "<group>"; };
 		41501BEE25D1B2FB00928E7C /* EventHandling.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventHandling.storyboard; sourceTree = "<group>"; };
 		736369B3007CB8524D1E56A7 /* Pods_StorylyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7518CA872C4923EE00F03126 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		7518CA872C4923EE00F03126 /* StorylyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorylyPageViewController.swift; sourceTree = "<group>"; };
 		7518CA8A2C4923FB00F03126 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Navigation.storyboard; sourceTree = "<group>"; };
 		7518CA8E2C49277000F03126 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8796B38706767D0054280E24 /* Pods-StorylyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyDemo.release.xcconfig"; path = "Target Support Files/Pods-StorylyDemo/Pods-StorylyDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				7518CA892C4923FB00F03126 /* Navigation.storyboard */,
-				7518CA872C4923EE00F03126 /* NavigationViewController.swift */,
+				7518CA872C4923EE00F03126 /* StorylyPageViewController.swift */,
 				7518CA8E2C49277000F03126 /* DetailViewController.swift */,
 			);
 			path = Navigation;
@@ -300,7 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7518CA882C4923EE00F03126 /* NavigationViewController.swift in Sources */,
+				7518CA882C4923EE00F03126 /* StorylyPageViewController.swift in Sources */,
 				7518CA8F2C49277000F03126 /* DetailViewController.swift in Sources */,
 				A16DA83B233B90E3000514FA /* BasicViewController.swift in Sources */,
 				41501BDF25D18A2500928E7C /* EventHandlingViewController.swift in Sources */,
