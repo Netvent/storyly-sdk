@@ -374,7 +374,7 @@ const STStorylyGroupViewFactory = forwardRef(({ width, height, CustomizedView },
     const onCreateCustomView = (_) => {
         setCustomViewList((current) => ([
             ...current, (
-                <STStorylyGroupView key={current.length} style={{ width: width, height: height }}>
+                <STStorylyGroupView key={current.length} style={{ width: width, height: height, position: 'absolute' }}>
                     <CustomizedView storyGroup={null} />
                 </STStorylyGroupView>
             )
@@ -385,7 +385,7 @@ const STStorylyGroupViewFactory = forwardRef(({ width, height, CustomizedView },
         let updated = customViewList.map((value, i) => {
             if (i === index) {
                 return (
-                    <STStorylyGroupView key={index} style={{ width: width, height: height }}>
+                    <STStorylyGroupView key={index} style={{ width: width, height: height, position: 'absolute' }}>
                         <CustomizedView storyGroup={storyGroup} />
                     </STStorylyGroupView>
                 )
