@@ -1,4 +1,7 @@
 # Release Notes
+### 3.4.3 (27.08.2024)
+* fixed a bug related to click action analytics
+
 ### 3.4.2 (02.08.2024)
 * improved story header icon background
   
