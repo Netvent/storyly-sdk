@@ -154,6 +154,12 @@ class Storyly extends Component {
         }
     }
 
+    _onStorylySizeChanged = (eventPayload) => {
+        if (this.props.onSizeChanged) {
+            this.props.onSizeChanged(eventPayload.nativeEvent);
+        }
+    }
+
     _onCreateCustomView = (_) => {
         this.customViewFactoryRef?.onCreateCustomView()
     }
@@ -287,6 +293,7 @@ class Storyly extends Component {
                 onStorylyProductHydration={this._onStorylyProductHydration} 
                 onStorylyCartUpdated={this._onStorylyCartUpdated} 
                 onStorylyProductEvent={this._onStorylyProductEvent}
+                onStorylySizeChanged={this._onStorylySizeChanged}
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
                 storyly={ storylyConfig }

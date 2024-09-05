@@ -157,6 +157,19 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                     })
                 })
             }
+
+            override fun storylySizeChanged(
+                storylyView: StorylyView,
+                size: Pair<Int, Int>
+            ) {
+                sendEvent(
+                    STStorylyManager.EVENT_STORYLY_SIZE_CHANGED,
+                    Arguments.createMap().apply {
+                        putString("width", size.first)
+                        putString("height", size.second)
+                    }
+                )
+            }
         }
     }
 

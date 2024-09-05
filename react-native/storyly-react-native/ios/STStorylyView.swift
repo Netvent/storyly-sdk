@@ -84,6 +84,9 @@ class STStorylyView: UIView {
     
     @objc(onStorylyCartUpdated)
     var onStorylyCartUpdated: RCTBubblingEventBlock?
+        
+    @objc(onStorylySizeChanged)
+    var onStorylySizeChanged: RCTBubblingEventBlock?
     
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
@@ -222,6 +225,15 @@ extension STStorylyView: StorylyDelegate {
             "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
         self.onStorylyUserInteracted?(map)
+    }
+
+    func storylySizeChanged(_ storylyView: StorylyView,
+                            size: CGSize) {
+        let map: [String : Any] = [
+            "width": size.width,
+            "height": size.height
+        ] 
+        self.onStorylySizeChanged?(map)
     }
 }
 
