@@ -208,6 +208,19 @@ class FlutterStorylyView(
                         )
                     )
                 }
+
+                override fun storylySizeChanged(
+                    storylyView: StorylyView,
+                    size: Pair<Int, Int>
+                ) {
+                    methodChannel.invokeMethod(
+                        "storylySizeChanged",
+                        mapOf(
+                            "width" to size.first,
+                            "height" to size.second
+                        )
+                    )
+                }
             }
         }
     }

@@ -391,6 +391,16 @@ extension FlutterStorylyViewWrapper {
                 "storyComponent": self.createStoryComponentMap(storyComponent: storyComponent)
             ])
     }
+
+    func storylySizeChanged(_ storylyView: StorylyView,
+                            size: CGSize) {
+        self.methodChannel.invokeMethod(
+            "storylySizeChanged",
+            arguments: [
+                "width": size.width,
+                "height": size.height
+            ])
+    }
     
     private func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         return [

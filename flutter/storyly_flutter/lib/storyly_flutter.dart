@@ -54,6 +54,12 @@ typedef StorylyViewUserInteractedCallback = void Function(
   StoryComponent? storyComponent,
 );
 
+/// [StorylyView] size changed callback
+typedef StorylyViewSizeChanged = void Function(
+  double width,
+  double height,
+);
+
 T? castOrNull<T>(x) => x is T ? x : null;
 
 /// Storyly UI Widget
@@ -114,6 +120,9 @@ class StorylyView extends StatefulWidget {
   /// specific interactive components.
   final StorylyViewUserInteractedCallback? storylyUserInteracted;
 
+  /// This callback function will notify when size updates.
+  final StorylyViewSizeChanged? storylySizeChanged;  
+
   const StorylyView(
       {Key? key,
       this.onStorylyViewCreated,
@@ -128,8 +137,9 @@ class StorylyView extends StatefulWidget {
       this.storylyUserInteracted,
       this.storylyOnProductHydration,
       this.storylyProductEvent,
-      this.storylyOnProductCartUpdated})
-      : super(key: key);
+      this.storylyOnProductCartUpdated,
+      this.storylySizeChanged
+    }): super(key: key);
 
   @override
   State<StorylyView> createState() => _StorylyViewState();
@@ -265,6 +275,13 @@ class _StorylyViewState extends State<StorylyView> {
 
         widget.storylyOnProductCartUpdated
             ?.call(jsonData['event'], cart, change, jsonData['responseId']);
+        break;
+      case 'storylySizeChanged':
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        widget.storylySizeChanged?.call(
+          jsonData["width"],
+          jsonData["height"]
+        );
         break;
     }
   }
