@@ -1,5 +1,10 @@
 # Release Notes
 
+### 3.5.0 - 19.08.2024 [for cdn](https://web-story.storyly.io/sdk/3.5.*/storyly-web.js)
+
+- Feature: Added Video Accessibility
+- Bug: Fixed Proxy Target Issue
+
 ### 3.4.0 - 31.07.2024 [for cdn](https://web-story.storyly.io/sdk/3.4.*/storyly-web.js)
 
 - Feature: Added out of stock handling for product related interactive components
