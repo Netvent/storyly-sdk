@@ -1,4 +1,9 @@
 # Release Notes
+### 3.6.0 (06.09.2024)
+* added story bar instance settings
+* fixed a bug related to IllegalStateException
+* fixed a bug related to Storyly load
+  
 ### 3.4.3 (27.08.2024)
 * fixed a bug related to click action analytics
 
