@@ -1,4 +1,8 @@
 # Release Notes
+### 3.6.0 (09.09.2024)
+* added story bar instance settings
+* fixed bug related to interactive component interaction
+
 ### 3.4.0 (29.07.2024)
 * added out of stock handling for product related interactive components
 

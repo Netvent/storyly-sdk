@@ -1183,6 +1183,13 @@ SWIFT_PROTOCOL_NAMED("StorylyDelegate")
 /// \param storyComponent Interactive story component if event is related with a story component
 ///
 - (void)storylyEvent:(StorylyView * _Nonnull)storylyView event:(enum StorylyEvent)event storyGroup:(StoryGroup * _Nullable)storyGroup story:(Story * _Nullable)story storyComponent:(StoryComponent * _Nullable)storyComponent;
+/// This function will notify you about StorylyView size changed for updating parent view size
+/// Only for when using Widget Gallery from Storyly Dashboard.
+/// \param storylyView StorylyView instance in which the event is received
+///
+/// \param size StorylyView size width and height
+///
+- (void)storylySizeChanged:(StorylyView * _Nonnull)storylyView size:(CGSize)size;
 @end
 
 /// This enum represents all possible events that can be sent from Storyly
@@ -1589,6 +1596,7 @@ SWIFT_CLASS_NAMED("StorylyView")
 @property (nonatomic, weak) id <StorylyProductDelegate> _Nullable productDelegate;
 /// This property will allow you to add ad view between stories
 @property (nonatomic, weak) id <StorylyAdViewProvider> _Nullable storylyAdViewProvider;
+- (void)layoutSubviews;
 @property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
 @property (nonatomic, copy) NSString * _Nullable accessibilityIdentifier;
 - (void)willMoveToWindow:(UIWindow * _Nullable)newWindow;
@@ -1613,12 +1621,9 @@ SWIFT_CLASS_NAMED("StorylyView")
 - (void)resumeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
 - (void)pauseStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
 - (void)closeStoryWithAnimated:(BOOL)animated completion:(void (^ _Nullable)(void))completion;
-/// \code
-/// * This function allows you to hydrate your products 
-/// *
-/// * - Parameter products: list of products to hydrate products
+/// This function allows you to hydrate your products
+/// \param products list of products to hydrate products
 ///
-/// \endcode
 - (void)hydrateProductsWithProducts:(NSArray<STRProductItem *> * _Nonnull)products;
 /// This function allows you to update your cart
 /// \param cart A STRCart objects to update cart

@@ -1,4 +1,12 @@
 # Release Notes
+### 3.6.0 (09.09.2024)
+* added story bar instance settings
+* fixed a bug related to IllegalStateException
+* fixed a bug related to Storyly load
+* fixed a bug related to click action analytics
+* improved story header icon background
+* improved layout of story group and header icon
+
 ### 3.4.0 (29.07.2024)
 * added out of stock handling for product related interactive components
 

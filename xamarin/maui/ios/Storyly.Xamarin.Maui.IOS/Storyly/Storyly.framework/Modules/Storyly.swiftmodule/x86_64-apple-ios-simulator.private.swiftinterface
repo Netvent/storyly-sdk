@@ -81,6 +81,7 @@ extension Swift.Array {
   @objc @_Concurrency.MainActor(unsafe) weak final public var delegate: (any Storyly.StorylyDelegate)?
   @objc @_Concurrency.MainActor(unsafe) weak final public var productDelegate: (any Storyly.StorylyProductDelegate)?
   @objc @_Concurrency.MainActor(unsafe) weak final public var storylyAdViewProvider: (any Storyly.StorylyAdViewProvider)?
+  @_Concurrency.MainActor(unsafe) @objc override final public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) @objc override final public var accessibilityLabel: Swift.String? {
     @objc get
     @objc set
@@ -212,6 +213,7 @@ extension Storyly.StorylyView {
   @objc optional func storylyStoryDismissed(_ storylyView: Storyly.StorylyView)
   @objc optional func storylyUserInteracted(_ storylyView: Storyly.StorylyView, storyGroup: Storyly.StoryGroup, story: Storyly.Story, storyComponent: Storyly.StoryComponent)
   @objc optional func storylyEvent(_ storylyView: Storyly.StorylyView, event: Storyly.StorylyEvent, storyGroup: Storyly.StoryGroup?, story: Storyly.Story?, storyComponent: Storyly.StoryComponent?)
+  @objc optional func storylySizeChanged(_ storylyView: Storyly.StorylyView, size: CoreFoundation.CGSize)
 }
 @_hasMissingDesignatedInitializers @objc(StorylyProductConfig) public class StorylyProductConfig : ObjectiveC.NSObject {
   @_inheritsConvenienceInitializers @objc(StorylyProductConfigBuilder) public class Builder : ObjectiveC.NSObject {
