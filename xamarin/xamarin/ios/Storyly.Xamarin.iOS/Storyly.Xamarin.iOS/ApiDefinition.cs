@@ -105,6 +105,10 @@ namespace Storyly
         // @optional -(void)storylyEvent:(StorylyView * _Nonnull)storylyView event:(enum StorylyEvent)event storyGroup:(StoryGroup * _Nullable)storyGroup story:(Story * _Nullable)story storyComponent:(StoryComponent * _Nullable)storyComponent;
         [Export("storylyEvent:event:storyGroup:story:storyComponent:")]
         void StorylyEvent(StorylyView storylyView, StorylyEvent @event, [NullAllowed] StoryGroup storyGroup, [NullAllowed] Story story, [NullAllowed] StoryComponent storyComponent);
+
+        // @optional -(void)storylySizeChanged:(StorylyView * _Nonnull)storylyView size:(CGSize)size;
+		[Export ("storylySizeChanged:size:")]
+		void StorylySizeChanged (StorylyView storylyView, CGSize size);
     }
 
     // @protocol StorylyProductDelegate
