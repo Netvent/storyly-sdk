@@ -62,6 +62,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         internal const val EVENT_STORYLY_ON_CART_UPDATED = "onStorylyCartUpdated"
         internal const val EVENT_STORYLY_PRODUCT_EVENT = "onStorylyProductEvent"
 
+        internal const val EVENT_STORYLY_SIZE_CHANGED = "onStorylySizeChanged"
+
         internal const val EVENT_ON_CREATE_CUSTOM_VIEW = "onCreateCustomView"
         internal const val EVENT_ON_UPDATE_CUSTOM_VIEW = "onUpdateCustomView"
     }

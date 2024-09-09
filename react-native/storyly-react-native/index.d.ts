@@ -66,6 +66,7 @@ declare module "storyly-react-native" {
       onProductHydration?: (event: StoryProductHydrationEvent) => void;
       onCartUpdate?: (event: StoryProductCartUpdateEvent) => void;
       onProductEvent?: (event: ProductEvent) => void;
+      onSizeChanged?: (event: SizeChangedEvent) => void;
     }
 
     export interface StoryLoadEvent {
@@ -108,6 +109,11 @@ declare module "storyly-react-native" {
       story?: Story;
       storyGroup?: StoryGroup;
       storyComponent?: StoryComponent;
+    }
+
+    export interface SizeChangedEvent {
+      width: number;
+      height: number;
     }
 
     export interface StoryComponent {

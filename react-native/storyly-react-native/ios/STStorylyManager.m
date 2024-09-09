@@ -49,5 +49,6 @@ RCT_EXPORT_VIEW_PROPERTY(onUpdateCustomView, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyProductHydration, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyProductEvent, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyCartUpdated, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylySizeChanged, RCTBubblingEventBlock)
 
 @end
