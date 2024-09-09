@@ -10,7 +10,24 @@ import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.appsamurai.storyly.*
+import com.appsamurai.storyly.Story
+import com.appsamurai.storyly.StoryCommentComponent
+import com.appsamurai.storyly.StoryComponent
+import com.appsamurai.storyly.StoryEmojiComponent
+import com.appsamurai.storyly.StoryGroup
+import com.appsamurai.storyly.StoryGroupAnimation
+import com.appsamurai.storyly.StoryGroupListOrientation
+import com.appsamurai.storyly.StoryGroupSize
+import com.appsamurai.storyly.StoryPollComponent
+import com.appsamurai.storyly.StoryPromoCodeComponent
+import com.appsamurai.storyly.StoryQuizComponent
+import com.appsamurai.storyly.StoryRatingComponent
+import com.appsamurai.storyly.StorylyDataSource
+import com.appsamurai.storyly.StorylyInit
+import com.appsamurai.storyly.StorylyLayoutDirection
+import com.appsamurai.storyly.StorylyListener
+import com.appsamurai.storyly.StorylyProductListener
+import com.appsamurai.storyly.StorylyView
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.config.StorylyConfig
 import com.appsamurai.storyly.config.StorylyProductConfig
@@ -18,15 +35,19 @@ import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
-import com.appsamurai.storyly.data.managers.product.*
+import com.appsamurai.storyly.data.managers.product.STRCart
+import com.appsamurai.storyly.data.managers.product.STRCartEventResult
+import com.appsamurai.storyly.data.managers.product.STRCartItem
+import com.appsamurai.storyly.data.managers.product.STRProductInformation
+import com.appsamurai.storyly.data.managers.product.STRProductItem
+import com.appsamurai.storyly.data.managers.product.STRProductVariant
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
+import java.util.Locale
+import java.util.UUID
 
 class FlutterStorylyViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     internal lateinit var context: Context
@@ -216,8 +237,8 @@ class FlutterStorylyView(
                     methodChannel.invokeMethod(
                         "storylySizeChanged",
                         mapOf(
-                            "width" to size.first,
-                            "height" to size.second
+                            "width" to size.first.toFloat(),
+                            "height" to size.second.toFloat()
                         )
                     )
                 }
