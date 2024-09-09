@@ -121,7 +121,7 @@ class StorylyView extends StatefulWidget {
   final StorylyViewUserInteractedCallback? storylyUserInteracted;
 
   /// This callback function will notify when size updates.
-  final StorylyViewSizeChanged? storylySizeChanged;  
+  final StorylyViewSizeChanged? storylySizeChanged;
 
   const StorylyView(
       {Key? key,
@@ -138,8 +138,8 @@ class StorylyView extends StatefulWidget {
       this.storylyOnProductHydration,
       this.storylyProductEvent,
       this.storylyOnProductCartUpdated,
-      this.storylySizeChanged
-    }): super(key: key);
+      this.storylySizeChanged})
+      : super(key: key);
 
   @override
   State<StorylyView> createState() => _StorylyViewState();
@@ -278,10 +278,7 @@ class _StorylyViewState extends State<StorylyView> {
         break;
       case 'storylySizeChanged':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
-        widget.storylySizeChanged?.call(
-          jsonData["width"],
-          jsonData["height"]
-        );
+        widget.storylySizeChanged?.call(jsonData["width"], jsonData["height"]);
         break;
     }
   }

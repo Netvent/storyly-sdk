@@ -1,3 +1,12 @@
+### 3.6.0 (09.09.2024)
+* added story bar instance settings
+* fixed a bug related to IllegalStateException on android platform
+* fixed a bug related to Storyly load on android platform
+* fixed a bug related to click action analytics on android platform
+* improved story header icon background on android platform
+* improved layout of story group and header icon on android platform
+* fixed bug related to interactive component interaction on ios platform
+
 ### 3.4.0 (29.07.2024)
 * added out of stock handling for product related interactive components
 

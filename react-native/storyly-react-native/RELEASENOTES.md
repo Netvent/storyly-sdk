@@ -1,6 +1,6 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
-### 3.6.0 (12.08.2024)
+### 3.6.0 (09.09.2024)
 * added story bar instance settings
 * fixed a bug related to IllegalStateException on android platform
 * fixed a bug related to Storyly load on android platform
