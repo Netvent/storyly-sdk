@@ -106,6 +106,20 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                     putMap("storyComponent", createStoryComponentMap(storyComponent))
                 })
             }
+
+
+            override fun storylySizeChanged(
+                storylyView: StorylyView,
+                size: Pair<Int, Int>
+            ) {
+                sendEvent(
+                    STStorylyManager.EVENT_STORYLY_SIZE_CHANGED,
+                    Arguments.createMap().apply {
+                        putInt("width", size.first)
+                        putInt("height", size.second)
+                    }
+                )
+            }
         }
 
         storylyView.storylyProductListener = object : StorylyProductListener {
@@ -156,19 +170,6 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                         }
                     })
                 })
-            }
-
-            override fun storylySizeChanged(
-                storylyView: StorylyView,
-                size: Pair<Int, Int>
-            ) {
-                sendEvent(
-                    STStorylyManager.EVENT_STORYLY_SIZE_CHANGED,
-                    Arguments.createMap().apply {
-                        putString("width", size.first)
-                        putString("height", size.second)
-                    }
-                )
             }
         }
     }
