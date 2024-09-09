@@ -82,6 +82,11 @@ namespace xamarin.storyly.demo
         {
             Log.Info("StorylyListener", "StorylyUserInteracted");
         }
+
+        public void StorylySizeChanged(StorylyView storylyView, Kotlin.Pair size)
+        {
+            Log.Info("StorylyListener", "StorylySizeChanged");
+        }
     }
 }
 
