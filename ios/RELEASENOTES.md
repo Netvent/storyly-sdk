@@ -1,4 +1,7 @@
 # Release Notes
+### 3.6.1 (13.09.2024)
+* improved synchronization between video story media and header
+
 ### 3.6.0 (06.09.2024)
 * added story bar instance settings
 * fixed bug related to interactive component interaction
