@@ -1,4 +1,7 @@
 # Release Notes
+### 3.6.1 (23.09.2024)
+* added logs for troubleshooting
+  
 ### 3.6.0 (06.09.2024)
 * added story bar instance settings
 * fixed a bug related to IllegalStateException
