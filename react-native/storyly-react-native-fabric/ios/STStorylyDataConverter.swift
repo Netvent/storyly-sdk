@@ -145,7 +145,8 @@ func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
 internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
     return [
         "name": variant.name,
-        "value": variant.value
+        "value": variant.value,
+        "key": variant.key
     ]
 }
 
