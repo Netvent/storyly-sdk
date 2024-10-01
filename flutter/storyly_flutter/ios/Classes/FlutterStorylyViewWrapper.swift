@@ -438,6 +438,7 @@ extension FlutterStorylyViewWrapper {
             "productId" : product.productId,
             "productGroupId" : product.productGroupId,
             "title" : product.title,
+            "url": product.url,
             "desc" : product.desc,
             "price" : product.price,
             "salesPrice" : product.salesPrice,
