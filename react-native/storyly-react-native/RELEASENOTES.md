@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.6.2 (01.10.2024)
+* fixed missing product url on android platform
+
 ### 3.6.1 (17.09.2024)
 * fixed a nullability issue
 
