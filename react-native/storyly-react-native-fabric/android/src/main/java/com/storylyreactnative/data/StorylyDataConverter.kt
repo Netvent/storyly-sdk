@@ -125,6 +125,7 @@ internal fun createSTRProductItemMap(product: STRProductItem?): Map<String, Any?
             "productId" to product.productId,
             "productGroupId" to product.productGroupId,
             "title" to product.title,
+            "url" to product.url,
             "desc" to product.desc,
             "price" to product.price.toDouble(),
             "salesPrice" to product.salesPrice?.toDouble(),
@@ -139,6 +140,7 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): Map<String,
     return mapOf(
         "name" to variant.name,
         "value" to variant.value,
+        "key" to variant.key,
     )
 }
 
@@ -154,12 +156,12 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         productId = product?.get("productId") as? String ?: "",
         productGroupId = product?.get("productGroupId") as? String ?: "",
         title = product?.get("title") as? String ?: "",
+        url = product["url"] as? String ?: "",
         desc = product?.get("desc") as? String ?: "",
         price = (product?.get("price") as Double).toFloat(),
         salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
         currency = product["currency"] as? String ?: "",
         imageUrls = product["imageUrls"] as? List<String>,
-        url = product["url"] as? String ?: "",
         variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>),
         ctaText = product["ctaText"] as? String,
     )

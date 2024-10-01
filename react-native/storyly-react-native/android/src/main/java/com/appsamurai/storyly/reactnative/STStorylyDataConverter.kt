@@ -158,6 +158,7 @@ internal fun createSTRProductItemMap(product: STRProductItem?): WritableMap {
             productItemMap.putString("productId", product.productId)
             productItemMap.putString("productGroupId", product.productGroupId)
             productItemMap.putString("title", product.title)
+            productItemMap.putString("url", product.url)
             productItemMap.putString("desc", product.desc)
             productItemMap.putDouble("price", product.price.toDouble())
             product.salesPrice?.let {
@@ -193,12 +194,12 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         productId = product?.get("productId") as? String ?: "",
         productGroupId = product?.get("productGroupId") as? String ?: "",
         title = product?.get("title") as? String ?: "",
+        url = product?.get("url") as? String ?: "",
         desc = product?.get("desc") as? String ?: "",
         price = (product?.get("price") as? Double)?.toFloat() ?: 0f,
         salesPrice = (product?.get("salesPrice") as? Double)?.toFloat(),
         currency = product?.get("currency") as? String ?: "",
         imageUrls = product?.get("imageUrls") as? List<String>,
-        url = product?.get("url") as? String ?: "",
         variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>),
         ctaText = product?.get("ctaText") as? String,
     )
