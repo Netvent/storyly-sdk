@@ -1,4 +1,7 @@
 # Release Notes
+### 3.6.2 (01.10.2024)
+* fixed a crash related to obfuscation of logging
+
 ### 3.6.1 (23.09.2024)
 * added logs for troubleshooting
   
