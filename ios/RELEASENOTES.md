@@ -1,4 +1,7 @@
 # Release Notes
+### 3.6.2 (10.10.2024)
+* improved AVAudioSession category changes
+
 ### 3.6.1 (13.09.2024)
 * improved synchronization between video story media and header
 
