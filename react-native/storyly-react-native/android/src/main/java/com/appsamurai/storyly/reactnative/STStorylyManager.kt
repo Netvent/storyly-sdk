@@ -16,6 +16,7 @@ import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
 import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
 import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
+import com.appsamurai.storyly.log.StorylyLogLevel
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -66,6 +67,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
         internal const val EVENT_ON_CREATE_CUSTOM_VIEW = "onCreateCustomView"
         internal const val EVENT_ON_UPDATE_CUSTOM_VIEW = "onUpdateCustomView"
+
+        internal const val EVENT_ON_STORYLY_LOG_RECEIVED = "onStorylyLogReceived"
     }
 
     override fun getName(): String = REACT_CLASS
@@ -93,7 +96,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             EVENT_ON_UPDATE_CUSTOM_VIEW,
             EVENT_STORYLY_ON_HYDRATION,
             EVENT_STORYLY_ON_CART_UPDATED,
-            EVENT_STORYLY_PRODUCT_EVENT
+            EVENT_STORYLY_PRODUCT_EVENT,
+            EVENT_ON_STORYLY_LOG_RECEIVED
         ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
         }
@@ -219,6 +223,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             .setUserData(if (json.hasKey("userProperty")) json.getMap("userProperty")?.toHashMap() as? Map<String, String> ?: emptyMap() else emptyMap())
             .setLayoutDirection(getStorylyLayoutDirection(json.getString("storylyLayoutDirection")))
             .setLocale(if (json.hasKey("storylyLocale")) json.getString("storylyLocale") else null)
+            .setLogLevel(getStorylyLogLevel(json.getString("storylyLogLevel")))
     }
 
     private fun stStorylyGroupStyling(
@@ -397,5 +402,14 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         name ?: return null
         val id = context.resources.getIdentifier(name, "drawable", context.packageName)
         return ContextCompat.getDrawable(context, id)
+    }
+
+    private fun getStorylyLogLevel(level: String?): StorylyLogLevel {
+        return when (level) {
+            "debug" -> StorylyLogLevel.DEBUG
+            "error" -> StorylyLogLevel.ERROR
+            "warning" -> StorylyLogLevel.WARNING
+            else -> StorylyLogLevel.OFF
+        }
     }
 }

@@ -55,6 +55,7 @@ declare module "storyly-react-native" {
 
       storylyLayoutDirection?: "ltr" | "rtl";
       storylyLocale?: string;
+      storylyLogLevel?: string;
 
       onLoad?: (event: StoryLoadEvent) => void;
       onFail?: (event: string) => void;
@@ -67,6 +68,7 @@ declare module "storyly-react-native" {
       onCartUpdate?: (event: StoryProductCartUpdateEvent) => void;
       onProductEvent?: (event: ProductEvent) => void;
       onSizeChanged?: (event: SizeChangedEvent) => void;
+      onLogReceived?: (event: string) => void;
     }
 
     export interface StoryLoadEvent {

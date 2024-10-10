@@ -17,6 +17,7 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
+import com.appsamurai.storyly.log.StorylyLogListener
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
@@ -170,6 +171,19 @@ class STStorylyView(context: Context) : FrameLayout(context) {
                         }
                     })
                 })
+            }
+        }
+
+        storylyView.storylyLogListener = object : StorylyLogListener {
+            override fun onSTRLogReceived(
+                log: String
+            ) {
+                sendEvent(
+                    STStorylyManager.EVENT_ON_STORYLY_LOG_RECEIVED,
+                    Arguments.createMap().apply {
+                        putString("log", log)
+                    }
+                )
             }
         }
     }
