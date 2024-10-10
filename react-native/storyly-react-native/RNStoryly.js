@@ -168,6 +168,12 @@ class Storyly extends Component {
         this.customViewFactoryRef?.onUpdateCustomView(eventPayload.nativeEvent)
     }
 
+    _onStorylyLogReceived = (eventPayload) => {
+        if (this.props.onLogReceived) {
+            this.props.onLogReceived(eventPayload.nativeEvent);
+        }
+    }
+
     render() {
         const {
             storylyId,
@@ -200,6 +206,7 @@ class Storyly extends Component {
             storyGroupAnimation,
             storylyLayoutDirection,
             storylyLocale,
+            storylyLogLevel,
             storyItemTextColor,
             storyItemIconBorderColor,
             storyItemProgressBarColor,
@@ -225,6 +232,7 @@ class Storyly extends Component {
                 'storylyIsTestMode': storylyTestMode, 
                 'storylyLayoutDirection': storylyLayoutDirection,
                 'storylyLocale': storylyLocale,
+                'storylyLogLevel': storylyLogLevel
             },
             'storyGroupStyling': {
                 'iconBorderColorSeen': storyGroupIconBorderColorSeen ? storyGroupIconBorderColorSeen.map(processColor) : null,
@@ -296,6 +304,7 @@ class Storyly extends Component {
                 onStorylySizeChanged={this._onStorylySizeChanged}
                 onCreateCustomView={this._onCreateCustomView}
                 onUpdateCustomView={this._onUpdateCustomView}
+                onStorylyLogReceived={this._onStorylyLogReceived}
                 storyly={ storylyConfig }
                 ref={el => (this._storylyView = el)}>
                 {storyGroupViewFactory ?
@@ -355,6 +364,7 @@ Storyly.propTypes = {
     storyFallbackIsEnabled: bool,
     storyCartIsEnabled: bool,
     storyProductFeed: object,
+    storylyLogLevel: string,
 
     onLoad: func,
     onFail: func,
@@ -367,6 +377,7 @@ Storyly.propTypes = {
     onProductHydration: func,
     onCartUpdate: func,
     onProductEvent: func,
+    onLogReceived: func
 }
 
 const STStoryly = requireNativeComponent('STStoryly', null);
