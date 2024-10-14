@@ -1,5 +1,10 @@
 # Release Notes
 
+### 3.6.0 - 19.08.2024 [for cdn](https://web-story.storyly.io/sdk/3.6.*/storyly-web.js)
+
+- Feature: Added Widget Style
+- Bug: Fixed scroll indicator overflow issue
+
 ### 3.5.0 - 19.08.2024 [for cdn](https://web-story.storyly.io/sdk/3.5.*/storyly-web.js)
 
 - Feature: Added Video Accessibility
