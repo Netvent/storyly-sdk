@@ -1,4 +1,7 @@
 # Release Notes
+### 4.0.0 (17.10.2024)
+* added vertical feed
+  
 ### 3.6.2 (10.10.2024)
 * improved AVAudioSession category changes
 
