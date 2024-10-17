@@ -1,6 +1,6 @@
 # Release Notes
 
-### 3.6.15 - 17.10.2024 [for cdn](https://web-story.storyly.io/sdk/3.6.*/storyly-web.js)
+### 3.6.15 - 17.10.2024 [for cdn](https://web-story.storyly.io/sdk/3.6.15/storyly-web.js)
 
 - Improvement: User events
 - Bug: Fixed cover visibility with focal point issue
