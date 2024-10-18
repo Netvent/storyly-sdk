@@ -1,4 +1,8 @@
 # Release Notes
+### 4.0.1 (18.10.2024)
+* improved vertical feed design
+* refactor initialization of vertical feed
+  
 ### 4.0.0 (17.10.2024)
 * added vertical feed
   
