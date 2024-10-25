@@ -5,7 +5,10 @@
   
 ### 4.0.0 (17.10.2024)
 * added vertical feed
-  
+
+### 3.6.3 (25.10.2024)
+* improved data processing flow
+
 ### 3.6.2 (01.10.2024)
 * fixed a crash related to obfuscation of logging
 
