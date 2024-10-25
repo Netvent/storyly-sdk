@@ -5,6 +5,10 @@
   
 ### 4.0.0 (17.10.2024)
 * added vertical feed
+
+### 3.6.3 (25.10.2024)
+* changed modifier of storylyId in StorylyInit
+* improved memory usage of gif media
   
 ### 3.6.2 (10.10.2024)
 * improved AVAudioSession category changes
