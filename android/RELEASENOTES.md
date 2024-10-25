@@ -1,4 +1,7 @@
 # Release Notes
+### 4.0.2 (25.10.2024)
+* improved data processing flow
+
 ### 4.0.1 (18.10.2024)
 * improved vertical feed design
 * refactor initialization of vertical feed
