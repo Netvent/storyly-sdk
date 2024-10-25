@@ -1,4 +1,8 @@
 # Release Notes
+### 4.0.2 (25.10.2024)
+* changed modifier of storylyId in StorylyInit
+* improved memory usage of gif media
+  
 ### 4.0.1 (18.10.2024)
 * improved vertical feed design
 * refactor initialization of vertical feed
