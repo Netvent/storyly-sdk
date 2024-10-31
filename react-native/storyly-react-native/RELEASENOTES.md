@@ -1,5 +1,11 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.6.3 (31.10.2024)
+* improved data processing flow on android platform
+* improved memory usage of gif media on ios platform
+* improved synchronization between video story media and header on ios platform
+* improved AVAudioSession category changes on ios platform
+
 ### 3.6.2 (01.10.2024)
 * fixed missing product url on android platform
 
