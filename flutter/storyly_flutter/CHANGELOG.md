@@ -1,3 +1,9 @@
+### 3.6.3 (31.10.2024)
+* improved data processing flow on android platform
+* improved memory usage of gif media on ios platform
+* improved synchronization between video story media and header on ios platform
+* improved AVAudioSession category changes on ios platform
+
 ### 3.6.0 (09.09.2024)
 * added story bar instance settings
 * fixed a bug related to IllegalStateException on android platform
