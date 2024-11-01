@@ -14,6 +14,9 @@
 ### 4.0.0 (17.10.2024)
 * added vertical feed
 
+### 3.6.4 (01.11.2024)
+* improved present function of StorylyViewController
+
 ### 3.6.3 (25.10.2024)
 * changed modifier of storylyId in StorylyInit
 * improved memory usage of gif media
