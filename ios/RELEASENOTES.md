@@ -1,4 +1,8 @@
 # Release Notes
+### 4.1.0 (01.11.2024)
+* added vertical feed presenter view
+* improved present function of StorylyViewController
+  
 ### 4.0.2 (25.10.2024)
 * changed modifier of storylyId in StorylyInit
 * improved memory usage of gif media
