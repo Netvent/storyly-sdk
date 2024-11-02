@@ -1,4 +1,7 @@
 # Release Notes
+### 4.1.0 (02.11.2024)
+* added vertical feed presenter view
+  
 ### 4.0.2 (25.10.2024)
 * improved data processing flow
 
