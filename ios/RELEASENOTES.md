@@ -14,6 +14,10 @@
 ### 4.0.0 (17.10.2024)
 * added vertical feed
 
+### 3.7.0 (05.11.2024)
+* IMPORTANT! renamed products field to actionProducts in Story class
+* added new public interactive component types
+
 ### 3.6.4 (01.11.2024)
 * improved present function of StorylyViewController
 
