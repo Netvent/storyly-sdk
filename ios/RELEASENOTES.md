@@ -1,4 +1,11 @@
 # Release Notes
+### 4.2.0 (05.11.2024)
+* IMPORTANT! renamed products field to actionProducts in Story class
+* IMPORTANT! renamed products field to actionProducts in VerticalFeedItem class
+* added new public interactive component types for Storyly and VerticalFeed
+* fixed a few bugs related to vertical feed image carousel
+* added like animation in vertical feed 
+  
 ### 4.1.0 (01.11.2024)
 * added vertical feed presenter view
 * improved present function of StorylyViewController
