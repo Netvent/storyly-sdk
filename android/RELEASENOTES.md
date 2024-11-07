@@ -1,4 +1,8 @@
 # Release Notes
+### 4.3.0 (07.11.2024)
+* IMPORTANT! renamed resume function to play in StorylyVerticalFeedPresenterView
+* changed play/pause handling of vertical feed for StorylyVerticalFeedPresenterView
+  
 ### 4.2.0 (06.11.2024)
 * IMPORTANT! renamed products field to actionProducts in Story class
 * IMPORTANT! renamed products field to actionProducts in VerticalFeedItem class
