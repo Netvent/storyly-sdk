@@ -283,7 +283,33 @@ namespace Storyly
         // @property (readonly, nonatomic) enum StoryComponentType type;
         [Export("type")]
         StoryComponentType Type { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export ("customPayload")]
+		string CustomPayload { get; }
     }
+
+    // @interface StoryButtonComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryButtonComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
 
     // @interface StoryCommentComponent : StoryComponent
     [BaseType(typeof(StoryComponent))]
@@ -306,9 +332,10 @@ namespace Storyly
         [Export("selectedEmojiIndex")]
         nint SelectedEmojiIndex { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCodes:(NSArray<NSString *> * _Nonnull)emojiCodes selectedEmojiIndex:(NSInteger)selectedEmojiIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:emojiCodes:selectedEmojiIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string[] emojiCodes, nint selectedEmojiIndex, [NullAllowed] string customPayload);
     }
 
     [BaseType(typeof(UIView))]
@@ -391,9 +418,10 @@ namespace Storyly
         [Export("selectedOptionIndex")]
         nint SelectedOptionIndex { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nullable)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string title, [NullAllowed] string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
     }
 
     // @interface StoryPollComponent : StoryComponent
@@ -412,10 +440,69 @@ namespace Storyly
         [Export("selectedOptionIndex")]
         nint SelectedOptionIndex { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:title:options:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string title, string[] options, nint selectedOptionIndex, [NullAllowed] string customPayload);
     }
+
+    // @interface StoryProductCardComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryProductCardComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
+
+    // @interface StoryProductCatalogComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryProductCatalogComponent
+	{
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable actionUrlList;
+		[NullAllowed, Export ("actionUrlList", ArgumentSemantic.Copy)]
+		string[] ActionUrlList { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:actionUrlList:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, [NullAllowed] string[] actionUrlList, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
+
+    // @interface StoryProductTagComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryProductTagComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
 
     // @interface StoryPromoCodeComponent : StoryComponent
     [BaseType(typeof(StoryComponent))]
@@ -424,6 +511,11 @@ namespace Storyly
         // @property (readonly, copy, nonatomic) NSString * _Nonnull text;
         [Export("text")]
         string Text { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string customPayload);
     }
 
     // @interface StoryQuizComponent : StoryComponent
@@ -445,10 +537,11 @@ namespace Storyly
         // @property (readonly, nonatomic) NSInteger selectedOptionIndex;
         [Export("selectedOptionIndex")]
         nint SelectedOptionIndex { get; }
-
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string title, string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
     }
 
     // @interface StoryRatingComponent : StoryComponent
@@ -463,10 +556,33 @@ namespace Storyly
         [Export("rating")]
         nint Rating { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCode:(NSString * _Nonnull)emojiCode rating:(NSInteger)rating customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:emojiCode:rating:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string emojiCode, nint rating, [NullAllowed] string customPayload);
     }
+
+    // @interface StorySwipeComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StorySwipeComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
 
     // @interface STRCart : NSObject
     [BaseType(typeof(NSObject))]
@@ -864,6 +980,10 @@ namespace Storyly
         // -(StorylyShareConfigBuilder * _Nonnull)setFacebookAppID:(NSString * _Nonnull)id __attribute__((warn_unused_result("")));
         [Export("setFacebookAppID:")]
         StorylyShareConfigBuilder SetFacebookAppID(string id);
+
+        // -(StorylyShareConfigBuilder * _Nonnull)setAppLogoVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export ("setAppLogoVisibility:")]
+		StorylyShareConfigBuilder SetAppLogoVisibility (bool isVisible);
 
         // -(StorylyShareConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
@@ -1265,9 +1385,9 @@ namespace Storyly
 		[Export ("pause")]
 		void Pause ();
 
-		// -(void)resume;
-		[Export ("resume")]
-		void Resume ();
+		// -(void)play;
+		[Export ("play")]
+		void Play ();
 
 		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
 		[Export ("initWithFrame:")]
