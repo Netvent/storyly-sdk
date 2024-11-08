@@ -261,14 +261,14 @@ namespace Storyly
         [NullAllowed, Export("actionUrl")]
         string ActionUrl { get; }
 
-        // @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
-        [NullAllowed, Export("products", ArgumentSemantic.Copy)]
-        STRProductItem[] Products { get; }
+        // @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable actionProducts;
+        [NullAllowed, Export("actionProducts", ArgumentSemantic.Copy)]
+        STRProductItem[] ActionProducts { get; }
 
-        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime previewUrl:(NSURL * _Nullable)previewUrl storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products __attribute__((objc_designated_initializer));
-        [Export("initWithId:index:title:name:seen:currentTime:previewUrl:storyComponentList:actionUrl:products:")]
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime previewUrl:(NSURL * _Nullable)previewUrl storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrl:(NSString * _Nullable)actionUrl actionProducts:(NSArray<STRProductItem *> * _Nullable)actionProducts __attribute__((objc_designated_initializer));
+        [Export("initWithId:index:title:name:seen:currentTime:previewUrl:storyComponentList:actionUrl:actionProducts:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string id, nint index, string title, [NullAllowed] string name, bool seen, nint currentTime, [NullAllowed] NSUrl previewUrl, [NullAllowed] StoryComponent[] storyComponentList, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products);
+        NativeHandle Constructor(string id, nint index, string title, [NullAllowed] string name, bool seen, nint currentTime, [NullAllowed] NSUrl previewUrl, [NullAllowed] StoryComponent[] storyComponentList, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] actionProducts);
     }
 
     // @interface StoryComponent : NSObject
