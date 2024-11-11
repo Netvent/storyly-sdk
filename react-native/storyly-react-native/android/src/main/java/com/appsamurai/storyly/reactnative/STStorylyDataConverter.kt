@@ -61,7 +61,7 @@ internal fun createStoryMap(story: Story): WritableMap {
         storyMap.putArray("storyComponentList", Arguments.createArray().also { componentArray ->
             story.storyComponentList?.forEach { componentArray.pushMap(createStoryComponentMap(it)) }
         })
-        storyMap.putArray("products", story.products?.let {
+        storyMap.putArray("products", story.actionProducts?.let {
             Arguments.createArray().also { storiesArray ->
                 it.forEach { item -> storiesArray.pushMap(createSTRProductItemMap(item)) }
             }

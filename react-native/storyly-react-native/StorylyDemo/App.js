@@ -11,6 +11,7 @@
 import React, { Component, useState, useRef, useEffect } from 'react';
 import { View, Image, Text, PixelRatio, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import { Storyly } from 'storyly-react-native';
+import { VerticalFeedBar } from 'storyly-react-native';
 
 
 const PIN_ICON = require('./assets/pin_icon.png');
@@ -83,15 +84,24 @@ export default class App extends Component {
                         storyGroupIconBorderColorSeen={["#FFFFFF", "#FFFFFF"]}
                         storyGroupIconBackgroundColor={"#000000"}
                         storyGroupPinIconColor={"#000000"} />
-                    <Storyly
-                        ref={ref => { this.storyly = ref }}
-                        style={{ width: '100%', height: 178, marginTop: 10, backgroundColor: "#ff00ff" }}
-                        storylyId={STORYLY_TOKEN}
-                        storyGroupViewFactory={{
-                            width: convertToNative(100),
-                            height: convertToNative(178),
-                            customView: CustomPortraitView
-                        }} />
+                    <VerticalFeedBar
+                        ref={ref => { this.verticalFeedBar = ref }}
+                        style={{ width: '100%', height: 250, marginTop: 10, backgroundColor: "#ff00ff" }}
+                        onLoad={loadEvent => {
+                            console.log(`[Vertical Feed] - onLoad`);
+                        }}
+                        onEvent={ verticalFeedEvent => {
+                            console.log(`[Vertical Feed] - onEvent ${verticalFeedEvent.event}`);
+                        }}
+                        onCartUpdate={ StoryProductCartUpdateEvent => {
+                            console.log(`[Vertical Feed] - onCartUpdate ${StoryProductCartUpdateEvent.event}`);
+                        }}
+                        onUserInteracted={ VerticalFeedItemInteractiveEvent => {
+                            console.log(`[Vertical Feed] - onUserInteracted ${VerticalFeedItemInteractiveEvent.story.id}`);
+                        }}
+                        storyGroupIconHeight={500}
+                        storyGroupIconCornerRadius={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(0) : 0}
+                        storylyId={"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MjA1MTEsImluc19pZCI6MjI5NDJ9.TXCs-M6guskLJA1JXmu7PlmPxUKfyw88lBpOdxmgpDI"}/>
                 </ScrollView>
             </View>
         );
