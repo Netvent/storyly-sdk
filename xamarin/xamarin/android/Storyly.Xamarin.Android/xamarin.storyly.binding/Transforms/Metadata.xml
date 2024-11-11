@@ -57,10 +57,28 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p9']" name="name">name</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroup']/constructor[@name='StoryGroup' and count(parameter)=11]/parameter[@name='p10']" name="name">nudge</attr>
 
+    <!-- VerticalFeedGroup -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p0']" name="name">uniqueId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p2']" name="name">iconUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p3']" name="name">index</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p4']" name="name">seen</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p5']" name="name">feedList</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p6']" name="name">pinned</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p7']" name="name">type</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p8']" name="name">style</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p9']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroup']/constructor[@name='VerticalFeedGroup' and count(parameter)=11]/parameter[@name='p10']" name="name">nudge</attr>
+
   <!-- StoryGroupStyle -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupStyle']/constructor[@name='StoryGroupStyle' and count(parameter)=3]/parameter[@name='p0']" name="name">borderUnseenColors</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupStyle']/constructor[@name='StoryGroupStyle' and count(parameter)=3]/parameter[@name='p1']" name="name">textUnseenColor</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupStyle']/constructor[@name='StoryGroupStyle' and count(parameter)=3]/parameter[@name='p2']" name="name">badge</attr>
+
+  <!-- VerticalFeedGroupStyle -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroupStyle']/constructor[@name='VerticalFeedGroupStyle' and count(parameter)=3]/parameter[@name='p0']" name="name">borderUnseenColors</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroupStyle']/constructor[@name='VerticalFeedGroupStyle' and count(parameter)=3]/parameter[@name='p1']" name="name">textUnseenColor</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedGroupStyle']/constructor[@name='VerticalFeedGroupStyle' and count(parameter)=3]/parameter[@name='p2']" name="name">badge</attr>
 
   <!-- StoryGroupBadgeStyle -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryGroupBadgeStyle']/constructor[@name='StoryGroupBadgeStyle' and count(parameter)=5]/parameter[@name='p0']" name="name">text</attr>
@@ -81,6 +99,18 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p8']" name="name">actionUrl</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p9']" name="name">products</attr>
 
+  <!-- VerticalFeedItem -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p0']" name="name">uniqueId</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p1']" name="name">index</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p2']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p3']" name="name">name</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p4']" name="name">seen</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p5']" name="name">currentTime</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p6']" name="name">previewUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p7']" name="name">storyComponentList</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p8']" name="name">actionUrl</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p9']" name="name">products</attr>
+
   <!-- StoryMedia -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p0']" name="name">type</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryMedia']/constructor[@name='StoryMedia' and count(parameter)=5]/parameter[@name='p1']" name="name">storyComponentList</attr>
@@ -92,6 +122,10 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryComponent']/constructor[@name='StoryComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryComponent']/constructor[@name='StoryComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">StoryComponentType</attr>
 
+  <!-- VerticalFeedItemComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemComponent']/constructor[@name='VerticalFeedItemComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemComponent']/constructor[@name='VerticalFeedItemComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">type</attr>
+
   <!-- StoryQuizComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p0']" name="name">id</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p1']" name="name">title</attr>
@@ -99,6 +133,14 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p3']" name="name">rightAnswerIndex</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p4']" name="name">selectedOptionIndex</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryQuizComponent']/constructor[@name='StoryQuizComponent' and count(parameter)=6]/parameter[@name='p5']" name="name">customPayload</attr>
+
+  <!-- VerticalFeedItemQuizComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemQuizComponent']/constructor[@name='VerticalFeedItemQuizComponent' and count(parameter)=6]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemQuizComponent']/constructor[@name='VerticalFeedItemQuizComponent' and count(parameter)=6]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemQuizComponent']/constructor[@name='VerticalFeedItemQuizComponent' and count(parameter)=6]/parameter[@name='p2']" name="name">options</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemQuizComponent']/constructor[@name='VerticalFeedItemQuizComponent' and count(parameter)=6]/parameter[@name='p3']" name="name">rightAnswerIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemQuizComponent']/constructor[@name='VerticalFeedItemQuizComponent' and count(parameter)=6]/parameter[@name='p4']" name="name">selectedOptionIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemQuizComponent']/constructor[@name='VerticalFeedItemQuizComponent' and count(parameter)=6]/parameter[@name='p5']" name="name">customPayload</attr>
 
   <!-- StoryImageQuizComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p0']" name="name">id</attr>
@@ -108,6 +150,14 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p4']" name="name">selectedOptionIndex</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryImageQuizComponent']/constructor[@name='StoryImageQuizComponent' and count(parameter)=6]/parameter[@name='p5']" name="name">customPayload</attr>
 
+  <!-- VerticalFeedItemImageQuizComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemImageQuizComponent']/constructor[@name='VerticalFeedItemImageQuizComponent' and count(parameter)=6]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemImageQuizComponent']/constructor[@name='VerticalFeedItemImageQuizComponent' and count(parameter)=6]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemImageQuizComponent']/constructor[@name='VerticalFeedItemImageQuizComponent' and count(parameter)=6]/parameter[@name='p2']" name="name">options</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemImageQuizComponent']/constructor[@name='VerticalFeedItemImageQuizComponent' and count(parameter)=6]/parameter[@name='p3']" name="name">rightAnswerIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemImageQuizComponent']/constructor[@name='VerticalFeedItemImageQuizComponent' and count(parameter)=6]/parameter[@name='p4']" name="name">selectedOptionIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemImageQuizComponent']/constructor[@name='VerticalFeedItemImageQuizComponent' and count(parameter)=6]/parameter[@name='p5']" name="name">customPayload</attr>
+
   <!-- StoryPollComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p0']" name="name">id</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p1']" name="name">title</attr>
@@ -115,11 +165,24 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p3']" name="name">selectedOptionIndex</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPollComponent']/constructor[@name='StoryPollComponent' and count(parameter)=5]/parameter[@name='p4']" name="name">customPayload</attr>
 
+  <!-- VerticalFeedItemPollComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemPollComponent']/constructor[@name='VerticalFeedItemPollComponent' and count(parameter)=5]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemPollComponent']/constructor[@name='VerticalFeedItemPollComponent' and count(parameter)=5]/parameter[@name='p1']" name="name">title</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemPollComponent']/constructor[@name='VerticalFeedItemPollComponent' and count(parameter)=5]/parameter[@name='p2']" name="name">options</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemPollComponent']/constructor[@name='VerticalFeedItemPollComponent' and count(parameter)=5]/parameter[@name='p3']" name="name">selectedOptionIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemPollComponent']/constructor[@name='VerticalFeedItemPollComponent' and count(parameter)=5]/parameter[@name='p4']" name="name">customPayload</attr>
+
   <!-- StoryEmojiComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p0']" name="name">id</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p1']" name="name">emojiCodes</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p2']" name="name">selectedEmojiIndex</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryEmojiComponent']/constructor[@name='StoryEmojiComponent' and count(parameter)=4]/parameter[@name='p3']" name="name">customPayload</attr>
+
+  <!-- VerticalFeedItemEmojiComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemEmojiComponent']/constructor[@name='VerticalFeedItemEmojiComponent' and count(parameter)=4]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemEmojiComponent']/constructor[@name='VerticalFeedItemEmojiComponent' and count(parameter)=4]/parameter[@name='p1']" name="name">emojiCodes</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemEmojiComponent']/constructor[@name='VerticalFeedItemEmojiComponent' and count(parameter)=4]/parameter[@name='p2']" name="name">selectedEmojiIndex</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemEmojiComponent']/constructor[@name='VerticalFeedItemEmojiComponent' and count(parameter)=4]/parameter[@name='p3']" name="name">customPayload</attr>
 
   <!-- StoryRatingComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryRatingComponent']/constructor[@name='StoryRatingComponent' and count(parameter)=4]/parameter[@name='p0']" name="name">id</attr>
@@ -127,23 +190,51 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryRatingComponent']/constructor[@name='StoryRatingComponent' and count(parameter)=4]/parameter[@name='p2']" name="name">rating</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryRatingComponent']/constructor[@name='StoryRatingComponent' and count(parameter)=4]/parameter[@name='p3']" name="name">customPayload</attr>
 
+  <!-- VerticalFeedItemRatingComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemRatingComponent']/constructor[@name='VerticalFeedItemRatingComponent' and count(parameter)=4]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemRatingComponent']/constructor[@name='VerticalFeedItemRatingComponent' and count(parameter)=4]/parameter[@name='p1']" name="name">emojiCode</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemRatingComponent']/constructor[@name='VerticalFeedItemRatingComponent' and count(parameter)=4]/parameter[@name='p2']" name="name">rating</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemRatingComponent']/constructor[@name='VerticalFeedItemRatingComponent' and count(parameter)=4]/parameter[@name='p3']" name="name">customPayload</attr>
+
   <!-- StoryPromoCodeComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPromoCodeComponent']/constructor[@name='StoryPromoCodeComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryPromoCodeComponent']/constructor[@name='StoryPromoCodeComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">text</attr>
+
+  <!-- VerticalFeedItemPromoCodeComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemPromoCodeComponent']/constructor[@name='VerticalFeedItemPromoCodeComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemPromoCodeComponent']/constructor[@name='VerticalFeedItemPromoCodeComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">text</attr>
 
   <!-- StoryCommentComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryCommentComponent']/constructor[@name='StoryCommentComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryCommentComponent']/constructor[@name='StoryCommentComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">text</attr>
 
+  <!-- VerticalFeedItemCommentComponent -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemCommentComponent']/constructor[@name='VerticalFeedItemCommentComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemCommentComponent']/constructor[@name='VerticalFeedItemCommentComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">text</attr>
 
   <!-- STRCartEventResult -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='STRCartEventResult']/constructor[@name='STRCartEventResult' and count(parameter)=1]/parameter[@name='p0']" name="name">text</attr>
-
 
   <!-- STRProductInformation -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='STRProductInformation']/constructor[@name='STRProductInformation' and count(parameter)=1]/parameter[@name='p0']" name="name">productId</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='STRProductInformation']/constructor[@name='STRProductInformation' and count(parameter)=2]/parameter[@name='p1']" name="name">productGroupId</attr>
 
+  <!-- StorylyVerticalFeedPresenterListener -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedActionClicked']" name="managedName">verticalFeedPresenterActionClicked</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedLoaded']" name="managedName">verticalFeedPresenterLoaded</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedLoadFailed']" name="managedName">verticalFeedPresenterLoadFailed</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedShown']" name="managedName">verticalFeedPresenterShown</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedShowFailed']" name="managedName">verticalFeedPresenterShowFailed</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedDismissed']" name="managedName">verticalFeedPresenterDismissed</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedUserInteracted']" name="managedName">verticalFeedPresenterUserInteracted</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterListener']/method[@name='verticalFeedEvent']" name="managedName">verticalFeedPresenterEvent</attr>
+
+  <!-- StorylyVerticalFeedPresenterProductListener -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterProductListener']/method[@name='verticalFeedHydration']" name="managedName">verticalFeedPresenterHydration</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterProductListener']/method[@name='verticalFeedEvent']" name="managedName">verticalFeedPresenterProductEvent</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedPresenterProductListener']/method[@name='verticalFeedUpdateCartEvent']" name="managedName">verticalFeedPresenterUpdateCartEvent</attr>
+
+  <!-- StorylyVerticalFeedProductListener -->
+  <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed.listener']/interface[@name='StorylyVerticalFeedProductListener']/method[@name='verticalFeedEvent']" name="managedName">verticalFeedProductEvent</attr>
 
 </metadata>
-
