@@ -10,3 +10,4 @@
 #import "UIImageView+ST_WebCache.h"
 #import "ST_SDAnimatedImageView.h"
 #import "ST_SDWebImageError.h"
+#import "ST_FLAnimatedImageView+WebCache.h"
