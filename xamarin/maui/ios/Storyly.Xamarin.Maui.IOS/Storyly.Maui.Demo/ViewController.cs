@@ -10,6 +10,7 @@ namespace Storyly.Maui.Demo
     static class Constants
     {
         public const string StorylyToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
+        public const string VerticalFeedToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MjA1MTEsImluc19pZCI6MjI5NDJ9.TXCs-M6guskLJA1JXmu7PlmPxUKfyw88lBpOdxmgpDI";
     }
 
     public partial class ViewController : UIViewController
@@ -23,21 +24,21 @@ namespace Storyly.Maui.Demo
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
-            var storylyView = new StorylyView(new CGRect(0, 50, 414, 90))
+            var storylyView = new StorylyView(new CGRect(0, 90, 414, 50))
             {
                 StorylyInit = new StorylyInit(
                     Constants.StorylyToken,
-                    new StorylyConfigBuilder().Build()),
+                    new StorylyBuilder().Build()),
                 RootViewController = this,
                 Delegate = new StorylyDelegateImpl()
             };
             View.AddSubview(storylyView);
 
-            var storylyViewCustomization = new StorylyView(new CGRect(0, 180, 414, 130))
+            var storylyViewCustomization = new StorylyView(new CGRect(0, 210, 414, 80))
             {
                 StorylyInit = new StorylyInit(
                     Constants.StorylyToken,
-                    new StorylyConfigBuilder()
+                    new StorylyBuilder()
                         .SetStoryGroupStyling(new StorylyStoryGroupStylingBuilder().SetSize(StoryGroupSize.Small)
                         .SetCustomGroupViewFactory(new CustomStoryGroupViewFactory())
                             .Build())
@@ -46,6 +47,60 @@ namespace Storyly.Maui.Demo
                 Delegate = new StorylyDelegateImpl()
             };
             View.AddSubview(storylyViewCustomization);
+
+            var verticalFeedBarView = new StorylyVerticalFeedBarView(new CGRect(0, 300, 414, 150))
+            {
+                StorylyVerticalFeedInit = new StorylyVerticalFeedInit(
+                   Constants.VerticalFeedToken,
+                   new StorylyVerticalFeedConfigBuilder()
+                   .SetVerticalFeedGroupStyling(new StorylyVerticalFeedGroupStylingBuilder()
+                   .SetIconHeight(150)
+                   .Build())
+                   .Build()),
+                RootViewController = this,
+                StorylyVerticalFeedDelegate = new VerticalFeedDelegateImpl()
+            };
+            View.AddSubview(verticalFeedBarView);
+
+            var verticalFeedView = new StorylyVerticalFeedView(new CGRect(0, 500, View.Frame.Width, View.Frame.Height - 450))
+            {
+                StorylyVerticalFeedInit = new StorylyVerticalFeedInit(
+                   Constants.VerticalFeedToken,
+                   new StorylyVerticalFeedConfigBuilder()
+                   .SetVerticalFeedBarStyling(new StorylyVerticalFeedBarStylingBuilder()
+                   .SetSection(3)
+                   .Build())
+                   .Build()),
+                RootViewController = this,
+                StorylyVerticalFeedDelegate = new VerticalFeedDelegateImpl()
+            };
+            View.AddSubview(verticalFeedView);
+
+            var presenterView = new StorylyVerticalFeedPresenterView(new CGRect(0, 0, View.Frame.Size.Width, View.Frame.Size.Height))
+            {
+                StorylyVerticalFeedInit = new StorylyVerticalFeedInit(
+                   Constants.StorylyToken,
+                   new StorylyVerticalFeedConfigBuilder().Build()),
+                RootViewController = this,
+            };
+
+            UIButton button = new UIButton(UIButtonType.System);
+            button.Frame = new CGRect(View.Frame.Width - 200, 50, 200, 50);
+            button.SetTitle("Toogle Presenter", UIControlState.Normal);
+
+            button.TouchUpInside += (sender, e) =>
+            {
+                if ( presenterView.Superview != null ) {
+                    presenterView.RemoveFromSuperview();
+                }
+                else
+                {
+                    View.AddSubview(presenterView);
+                    View.BringSubviewToFront(button);
+                }
+            };
+
+            View.AddSubview(button);
         }
     }
 
@@ -78,6 +133,35 @@ namespace Storyly.Maui.Demo
         }
     }
 
+    public partial class VerticalFeedDelegateImpl : StorylyVerticalFeedDelegate
+    {
+        public override void VerticalFeedLoaded(STRVerticalFeedView view, VerticalFeedGroup[] feedGroupList, StorylyDataSource dataSource)
+        {
+            Console.WriteLine($"StorylyLoaded:SGSize:{feedGroupList.Length}");
+        }
+
+        public override void VerticalFeedActionClicked(STRVerticalFeedView view, UIViewController rootViewController, VerticalFeedItem feedItem)
+        {
+            Console.WriteLine($"StorylyActionClicked:ActionUrl:{feedItem.ActionUrl}");
+        }
+
+        public override void VerticalFeedEvent(STRVerticalFeedView view, Storyly.VerticalFeedEvent @event, VerticalFeedGroup feedGroup, VerticalFeedItem feedItem, VerticalFeedItemComponent feedItemComponent)
+        {
+            Console.WriteLine($"StorylyEvent:StorylyEvent: {@event}");
+            if (feedItemComponent != null)
+            {
+                if (feedItemComponent.Type == VerticalFeedItemComponentType.Emoji)
+                {
+                    VerticalFeedEmojiComponent emojiComponent = (VerticalFeedEmojiComponent)feedItemComponent;
+                    if (emojiComponent != null)
+                    {
+                        Console.WriteLine($"StorylyEvent:StoryEmojiComponent:{emojiComponent.CustomPayload}");
+                    }
+                }
+            }
+        }
+    }
+
     public class CustomStoryGroupViewFactory : StoryGroupViewFactory
     {
         public override StoryGroupView CreateView
@@ -91,7 +175,7 @@ namespace Storyly.Maui.Demo
         {
             get
             {
-                return new CGSize(200, 100); // Replace with your actual view size
+                return new CGSize(200, 50); // Replace with your actual view size
             }
         }
     }
