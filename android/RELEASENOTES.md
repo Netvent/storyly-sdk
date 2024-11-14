@@ -25,6 +25,9 @@
 ### 4.0.0 (17.10.2024)
 * added vertical feed
 
+### 3.8.0 (14.11.2024)
+* added video cache for video stories
+
 ### 3.7.0 (06.11.2024)
 * IMPORTANT! renamed products field to actionProducts in Story class
 * added new public interactive component types
