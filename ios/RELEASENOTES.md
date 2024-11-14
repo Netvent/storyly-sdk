@@ -1,4 +1,7 @@
 # Release Notes
+### 4.3.3 (14.11.2024)
+* fixed a bug related to style changes
+  
 ### 4.3.2 (14.11.2024)
 * IMPORTANT! fixed a bug related to custom parameter assignment
   
