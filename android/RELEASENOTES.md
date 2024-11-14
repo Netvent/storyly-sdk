@@ -24,7 +24,11 @@
   
 ### 4.0.0 (17.10.2024)
 * added vertical feed
-
+  
+### 3.8.1 (14.11.2024)
+* improved StorylyView initialization flow
+* fixed a bug related to style changes
+  
 ### 3.8.0 (14.11.2024)
 * added video cache for video stories
 
