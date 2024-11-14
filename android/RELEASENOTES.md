@@ -1,4 +1,8 @@
 # Release Notes
+### 4.3.1 (14.11.2024)
+* improved StorylyView and VerticalFeedView initialization flow
+* fixed a bug related to style changes
+  
 ### 4.3.0 (07.11.2024)
 * IMPORTANT! renamed resume function to play in StorylyVerticalFeedPresenterView
 * changed play/pause handling of vertical feed for StorylyVerticalFeedPresenterView
