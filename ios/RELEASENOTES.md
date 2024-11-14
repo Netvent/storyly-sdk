@@ -1,4 +1,7 @@
 # Release Notes
+### 4.3.2 (14.11.2024)
+* IMPORTANT! fixed a bug related to custom parameter assignment
+  
 ### 4.3.1 (12.11.2024)
 * improved StorylyView and VerticalFeedView initialization flow
   
