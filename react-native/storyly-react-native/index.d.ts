@@ -121,6 +121,35 @@ declare module "storyly-react-native" {
       type: ReactionType;
     }
 
+    export interface StorySwipeComponent extends StoryComponent {
+      text: string;
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryButtonComponent extends StoryComponent {
+      text: string;
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryProductTagComponent extends StoryComponent {
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryProductCardComponent extends StoryComponent {
+      text: string;
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryProductCatalogComponent extends StoryComponent {
+      text: string;
+      actionUrlList?: string[];
+      products?: STRProductItem[];
+    }
+
     export interface StoryQuizComponent extends StoryComponent {
       title: string;
       options: string[];
@@ -169,7 +198,7 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
-    };
+    }
 
     export interface Story {
       id: string;
@@ -181,7 +210,7 @@ declare module "storyly-react-native" {
       actionUrl: string;
       previewUrl: string;
       storyComponentList?: StoryComponent[];
-      products?: STRProductItem[];
+      actionProducts?: STRProductItem[];
     }
 
     export interface Media {
