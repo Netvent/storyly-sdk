@@ -1,9 +1,13 @@
 # Release Notes
+### 4.3.3 (15.11.2024)
+* IMPORTANT! fixed a bug related to custom parameter assignment
+* fixed a bug related to style changes
+* improved StorylyView and VerticalFeedView initialization flow
+
 ### 4.3.0 (11.11.2024)
 * IMPORTANT! renamed products field to actionProducts in Story class
 * IMPORTANT! renamed products field to actionProducts in VerticalFeedItem class
 * IMPORTANT! renamed resume function to play in StorylyVerticalFeedPresenterView
-* IMPORTANT! renamed products field to actionProducts in Story class
 * added vertical feed
 * improved vertical feed design
 * added vertical feed presenter view

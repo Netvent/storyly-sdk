@@ -1,4 +1,7 @@
 # Release Notes
+### 4.3.1 (15.11.2024)
+* improved StorylyView and VerticalFeedView initialization flow
+* fixed a bug related to style changes
 
 ### 4.3.0 (11.11.2024)
 * IMPORTANT! renamed products field to actionProducts in Story class
