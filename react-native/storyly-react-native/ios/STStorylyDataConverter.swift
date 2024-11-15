@@ -64,7 +64,7 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "previewUrl": story.previewUrl?.absoluteString,
         "actionUrl": story.actionUrl,
         "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent: $0)},
-        "products": story.products?.map { product in createSTRProductItemMap(product: product) }
+        "actionProducts": story.actionProducts?.map { product in createSTRProductItemMap(product: product) }
     ]
 }
 
@@ -75,6 +75,39 @@ func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?
 
 func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
     switch storyComponent {
+        case let storyComponent as StoryButtonComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }   
+        ]
+        case let storyComponent as StorySwipeComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as StoryProductTagComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as StoryProductCardComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as StoryProductCatalogComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "actionUrlList": storyComponent.actionUrlList,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
         case let storyComponent as StoryQuizComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
@@ -170,7 +203,7 @@ internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVa
             name: variant["name"] as? String ?? "", 
             value: variant["value"] as? String ?? "",
             key: variant["key"] as? String ?? ""
-            )
+        )
     }
 }
 
