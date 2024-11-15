@@ -1,5 +1,14 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.8.1 (15.11.2024)
+* IMPORTANT! renamed products field to actionProducts in Story class
+* added new public interactive component types
+* improved StorylyView initialization flow
+* fixed a bug related to style changes
+* added video cache for video stories
+* improved interactive component add/remove flow on android platform
+* improved activity assignment flow in StorylyView on android platform
+
 ### 3.6.3 (31.10.2024)
 * improved data processing flow on android platform
 * improved memory usage of gif media on ios platform
