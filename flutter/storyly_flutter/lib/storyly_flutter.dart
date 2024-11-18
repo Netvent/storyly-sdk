@@ -637,6 +637,16 @@ StoryComponent? getStorylyComponent(Map<String, dynamic>? json) {
   if (json == null) return null;
 
   switch (json['type']) {
+    case 'buttonaction':
+      return StoryButtonActionComponent.fromJson(json);
+    case 'swipeaction':
+      return StorySwipeActionComponent.fromJson(json);
+    case 'producttag':
+      return StoryProductTagComponent.fromJson(json);
+    case 'productcard':
+      return StoryProductCardComponent.fromJson(json);
+    case 'productcatalog':
+      return StoryProductCatalogComponent.fromJson(json);
     case 'quiz':
       return StoryQuizComponent.fromJson(json);
     case 'poll':
@@ -880,6 +890,177 @@ class StoryCommentComponent implements StoryComponent {
   }
 }
 
+/// This data class represents the ButtonAction component.
+class StoryButtonActionComponent implements StoryComponent {
+  StoryButtonActionComponent({
+    required this.type,
+    required this.id,
+    required this.text,
+    this.actionUrl,
+    this.products,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  /// text text of the interactive component
+  final String text;
+
+  /// actionUrl action url assigned to the interactive component
+  final String? actionUrl;
+
+  /// products products assigned to the interactive component
+  final List<STRProductItem>? products;
+
+  factory StoryButtonActionComponent.fromJson(Map<String, dynamic> json) {
+    return StoryButtonActionComponent(
+      type: json['type'],
+      id: json['id'],
+      text: json['text'],
+      actionUrl: json['actionUrl'],
+      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+    );
+  }
+}
+
+/// This data class represents the SwipeAction component.
+class StorySwipeActionComponent implements StoryComponent {
+  StorySwipeActionComponent({
+    required this.type,
+    required this.id,
+    required this.text,
+    this.actionUrl,
+    this.products,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  /// text text of the interactive component
+  final String text;
+
+  /// actionUrl action url assigned to the interactive component
+  final String? actionUrl;
+
+  /// products products assigned to the interactive component
+  final List<STRProductItem>? products;
+
+  factory StorySwipeActionComponent.fromJson(Map<String, dynamic> json) {
+    return StorySwipeActionComponent(
+      type: json['type'],
+      id: json['id'],
+      text: json['text'],
+      actionUrl: json['actionUrl'],
+      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+    );
+  }
+}
+
+/// This data class represents the ProductTag component.
+class StoryProductTagComponent implements StoryComponent {
+  StoryProductTagComponent({
+    required this.type,
+    required this.id,
+    this.actionUrl,
+    this.products,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  /// actionUrl action url assigned to the interactive component
+  final String? actionUrl;
+
+  /// products products assigned to the interactive component
+  final List<STRProductItem>? products;
+
+  factory StoryProductTagComponent.fromJson(Map<String, dynamic> json) {
+    return StoryProductTagComponent(
+      type: json['type'],
+      id: json['id'],
+      actionUrl: json['actionUrl'],
+      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+    );
+  }
+}
+
+/// This data class represents the ProductCatalog component.
+class StoryProductCardComponent implements StoryComponent {
+  StoryProductCardComponent({
+    required this.type,
+    required this.id,
+    this.text,
+    this.actionUrl,
+    this.products,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  /// text text of the interactive component
+  final String? text;
+
+  /// actionUrl action url assigned to the interactive component
+  final String? actionUrl;
+
+  /// products products assigned to the interactive component
+  final List<STRProductItem>? products;
+
+  factory StoryProductCardComponent.fromJson(Map<String, dynamic> json) {
+    return StoryProductCardComponent(
+      type: json['type'],
+      id: json['id'],
+      text: json['text'],
+      actionUrl: json['actionUrl'],
+      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+    );
+  }
+}
+
+/// This data class represents the ProductCatalog component.
+class StoryProductCatalogComponent implements StoryComponent {
+  StoryProductCatalogComponent({
+    required this.type,
+    required this.id,
+    this.actionUrlList,
+    this.products,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  /// actionUrlList action url list assigned to the interactive component
+  final List<String>? actionUrlList;
+
+  /// products products assigned to the interactive component
+  final List<STRProductItem>? products;
+
+  factory StoryProductCatalogComponent.fromJson(Map<String, dynamic> json) {
+    return StoryProductCatalogComponent(
+      type: json['type'],
+      id: json['id'],
+      actionUrlList: castOrNull(
+            json['actionUrlList']?.map<String>((e) => e as String).toList()),
+      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+    );
+  }
+}
+
 List<StoryGroup> storyGroupFromJson(List<dynamic> json) {
   return List<StoryGroup>.from(json.map((x) => StoryGroup.fromJson(x)));
 }
@@ -956,7 +1137,7 @@ class Story {
       required this.currentTime,
       this.previewUrl,
       this.actionUrl,
-      this.products,
+      this.actionProducts,
       this.name,
       this.storyComponentList});
 
@@ -982,7 +1163,7 @@ class Story {
   final String? actionUrl;
 
   /// Related product content of interactive incase of click action
-  final List<STRProductItem>? products;
+  final List<STRProductItem>? actionProducts;
 
   final List<StoryComponent?>? storyComponentList;
 
@@ -1001,8 +1182,8 @@ class Story {
       storyComponentList: castOrNull(json['storyComponentList']
           ?.map<StoryComponent?>((e) => getStorylyComponent(e))
           .toList()),
-      products: List<STRProductItem>.from(
-          json['products'].map((x) => STRProductItem.fromJson(x))),
+      actionProducts: List<STRProductItem>.from(
+          json['actionProducts'].map((x) => STRProductItem.fromJson(x))),
     );
   }
 }

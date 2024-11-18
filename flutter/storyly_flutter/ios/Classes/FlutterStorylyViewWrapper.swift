@@ -428,7 +428,7 @@ extension FlutterStorylyViewWrapper {
             "previewUrl": story.previewUrl?.absoluteString,
             "actionUrl": story.actionUrl,
             "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
-            "products": (story.products ?? []).map { createSTRProductItemMap(product: $0) }
+            "actionProducts": (story.actionProducts ?? []).map { createSTRProductItemMap(product: $0) }
         ]
     }
     
@@ -529,6 +529,44 @@ extension FlutterStorylyViewWrapper {
     
     private func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         switch storyComponent {
+            case let buttonActionComponent as StoryButtonComponent:
+                return [
+                    "type": "buttonaction",
+                    "id": buttonActionComponent.id,
+                    "text": buttonActionComponent.text,
+                    "actionUrl": buttonActionComponent.actionUrl,
+                    "products": (buttonActionComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let swipeButtonActionComponent as StorySwipeComponent:
+                return [
+                    "type": "swipeaction",
+                    "id": swipeButtonActionComponent.id,
+                    "text": swipeButtonActionComponent.text,
+                    "actionUrl": swipeButtonActionComponent.actionUrl,
+                    "products": (swipeButtonActionComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let productTagComponent as StoryProductTagComponent:
+                return [
+                    "type": "producttag",
+                    "id": productTagComponent.id,
+                    "actionUrl": productTagComponent.actionUrl,
+                    "products": (productTagComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let productCardComponent as StoryProductCardComponent:
+                return [
+                    "type": "productcard",
+                    "id": productCardComponent.id,
+                    "text": productCardComponent.text,
+                    "actionUrl": productCardComponent.actionUrl,
+                    "products": (productCardComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let productCatalogComponent as StoryProductCatalogComponent:
+                return [
+                    "type": "productcatalog",
+                    "id": productCatalogComponent.id,
+                    "actionUrlList": productCatalogComponent.actionUrlList ?? [],
+                    "products": (productCatalogComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
             case let quizComponent as StoryQuizComponent:
                 return [
                     "type": "quiz",
