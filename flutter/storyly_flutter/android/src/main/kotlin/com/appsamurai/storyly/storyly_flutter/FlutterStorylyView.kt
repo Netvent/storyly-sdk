@@ -472,7 +472,7 @@ class FlutterStorylyView(
                     "id" to storyComponent.id,
                     "text" to storyComponent.text,
                     "actionUrl" to storyComponent.actionUrl,
-                    "products" to storyComponent.products
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
                 )
             }
 
@@ -482,7 +482,7 @@ class FlutterStorylyView(
                     "id" to storyComponent.id,
                     "text" to storyComponent.text,
                     "actionUrl" to storyComponent.actionUrl,
-                    "products" to storyComponent.products
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
                 )
             }
 
@@ -491,7 +491,7 @@ class FlutterStorylyView(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
                     "actionUrl" to storyComponent.actionUrl,
-                    "products" to storyComponent.products
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
                 )
             }
 
@@ -501,7 +501,7 @@ class FlutterStorylyView(
                     "id" to storyComponent.id,
                     "text" to storyComponent.text,
                     "actionUrl" to storyComponent.actionUrl,
-                    "products" to storyComponent.products
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
                 )
             }
 
@@ -509,8 +509,8 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
-                    "actionUrlList" to storyComponent.actionUrlList,
-                    "products" to storyComponent.products
+                    "actionUrlList" to (storyComponent.actionUrlList ?: listOf()),
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
                 )
             }
 

@@ -1054,7 +1054,8 @@ class StoryProductCatalogComponent implements StoryComponent {
     return StoryProductCatalogComponent(
       type: json['type'],
       id: json['id'],
-      actionUrlList: json['actionUrlList'],
+      actionUrlList: castOrNull(
+            json['actionUrlList']?.map<String>((e) => e as String).toList()),
       products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
     );
   }
