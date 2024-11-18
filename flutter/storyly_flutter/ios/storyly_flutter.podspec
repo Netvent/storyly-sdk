@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'storyly_flutter'
-  s.version          = '3.6.3'
+  s.version          = '3.8.1'
   s.summary          = 'Storyly flutter plugin.'
   s.description      = <<-DESC
   Storyly for flutter
@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
 
-  s.dependency "Storyly", "3.6.3"
+  s.dependency "Storyly", "3.8.1"
 end

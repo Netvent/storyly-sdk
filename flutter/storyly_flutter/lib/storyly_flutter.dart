@@ -921,7 +921,8 @@ class StoryButtonActionComponent implements StoryComponent {
       id: json['id'],
       text: json['text'],
       actionUrl: json['actionUrl'],
-      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+      products: List<STRProductItem>.from(
+          json['products'].map((x) => STRProductItem.fromJson(x))),
     );
   }
 }
@@ -957,7 +958,8 @@ class StorySwipeActionComponent implements StoryComponent {
       id: json['id'],
       text: json['text'],
       actionUrl: json['actionUrl'],
-      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+      products: List<STRProductItem>.from(
+          json['products'].map((x) => STRProductItem.fromJson(x))),
     );
   }
 }
@@ -988,7 +990,8 @@ class StoryProductTagComponent implements StoryComponent {
       type: json['type'],
       id: json['id'],
       actionUrl: json['actionUrl'],
-      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+      products: List<STRProductItem>.from(
+          json['products'].map((x) => STRProductItem.fromJson(x))),
     );
   }
 }
@@ -1024,7 +1027,8 @@ class StoryProductCardComponent implements StoryComponent {
       id: json['id'],
       text: json['text'],
       actionUrl: json['actionUrl'],
-      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+      products: List<STRProductItem>.from(
+          json['products'].map((x) => STRProductItem.fromJson(x))),
     );
   }
 }
@@ -1055,8 +1059,9 @@ class StoryProductCatalogComponent implements StoryComponent {
       type: json['type'],
       id: json['id'],
       actionUrlList: castOrNull(
-            json['actionUrlList']?.map<String>((e) => e as String).toList()),
-      products: List<STRProductItem>.from(json['products'].map((x) => STRProductItem.fromJson(x))),
+          json['actionUrlList']?.map<String>((e) => e as String).toList()),
+      products: List<STRProductItem>.from(
+          json['products'].map((x) => STRProductItem.fromJson(x))),
     );
   }
 }
