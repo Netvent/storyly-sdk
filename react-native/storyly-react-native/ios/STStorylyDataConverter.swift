@@ -142,16 +142,19 @@ func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         case let storyComponent as StoryPromoCodeComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
-            "text": storyComponent.text
+            "text": storyComponent.text,
+            "customPayload": storyComponent.customPayload
         ]
         case let storyComponent as StoryCommentComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
-            "text": storyComponent.text
+            "text": storyComponent.text,
+            "customPayload": storyComponent.customPayload
         ]
         default: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload
         ]
     }
 }

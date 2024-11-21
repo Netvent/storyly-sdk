@@ -119,6 +119,7 @@ declare module "storyly-react-native" {
     export interface StoryComponent {
       id: string;
       type: ReactionType;
+      customPayload?: string;
     }
 
     export interface StorySwipeComponent extends StoryComponent {
@@ -155,21 +156,18 @@ declare module "storyly-react-native" {
       options: string[];
       rightAnswerIndex?: number;
       selectedOptionIndex: number;
-      customPayload?: string;
     }
 
     export interface StoryPollComponent extends StoryComponent {
       title: string;
       emojiCodes: string[];
       selectedEmojiIndex: number;
-      customPayload?: string;
     }
 
     export interface StoryRatingComponent extends StoryComponent {
       title: string;
       emojiCodes: string[];
       selectedEmojiIndex: number;
-      customPayload?: string;
     }
 
     export interface StoryPromoCodeComponent extends StoryComponent {

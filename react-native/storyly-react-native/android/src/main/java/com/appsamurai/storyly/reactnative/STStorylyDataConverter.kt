@@ -202,6 +202,7 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 storyComponentMap.putString("type", "promocode")
                 storyComponentMap.putString("id", promoCodeComponent.id)
                 storyComponentMap.putString("text", promoCodeComponent.text)
+                storyComponentMap.putString("customPayload", promoCodeComponent.customPayload)
             }
 
             StoryComponentType.Comment -> {
@@ -209,11 +210,13 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 storyComponentMap.putString("type", "comment")
                 storyComponentMap.putString("id", commentComponent.id)
                 storyComponentMap.putString("text", commentComponent.text)
+                storyComponentMap.putString("customPayload", commentComponent.customPayload)
             }
 
             else -> {
                 storyComponentMap.putString("id", storyComponent.id)
                 storyComponentMap.putString("type", storyComponent.type.name.lowercase())
+                storyComponentMap.putString("customPayload", storyComponent.customPayload)
             }
         }
     }
