@@ -518,11 +518,11 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "rightAnswerIndex" to storyComponent.rightAnswerIndex,
                     "selectedOptionIndex" to storyComponent.selectedOptionIndex,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -530,10 +530,10 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "selectedOptionIndex" to storyComponent.selectedOptionIndex,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -541,9 +541,9 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "emojiCodes" to storyComponent.emojiCodes,
                     "selectedEmojiIndex" to storyComponent.selectedEmojiIndex,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -551,9 +551,9 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "emojiCode" to storyComponent.emojiCode,
                     "rating" to storyComponent.rating,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -561,6 +561,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "text" to storyComponent.text
                 )
             }
@@ -569,6 +570,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "text" to storyComponent.text
                 )
             }
@@ -577,6 +579,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                 )
             }
         }

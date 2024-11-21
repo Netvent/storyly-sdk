@@ -571,48 +571,57 @@ extension FlutterStorylyViewWrapper {
                 return [
                     "type": "quiz",
                     "id": quizComponent.id,
+                    "customPayload": quizComponent.customPayload,
                     "title": quizComponent.title,
                     "options": quizComponent.options,
                     "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
                     "selectedOptionIndex": quizComponent.selectedOptionIndex,
-                    "customPayload": quizComponent.customPayload]
+                ]
             case let pollComponent as StoryPollComponent:
                 return [
                     "type": "poll",
                     "id": pollComponent.id,
+                    "customPayload": pollComponent.customPayload,
                     "title": pollComponent.title,
                     "options": pollComponent.options,
                     "selectedOptionIndex": pollComponent.selectedOptionIndex,
-                    "customPayload": pollComponent.customPayload
                 ]
             case let emojiComponent as StoryEmojiComponent:
                 return [
                     "type": "emoji",
                     "id": emojiComponent.id,
+                    "customPayload": emojiComponent.customPayload,
                     "emojiCodes": emojiComponent.emojiCodes,
                     "selectedEmojiIndex": emojiComponent.selectedEmojiIndex,
-                    "customPayload": emojiComponent.customPayload]
+                ]
             case let ratingComponent as StoryRatingComponent:
                 return [
                     "type": "rating",
                     "id": ratingComponent.id,
+                    "customPayload": ratingComponent.customPayload,
                     "emojiCode": ratingComponent.emojiCode,
                     "rating": ratingComponent.rating,
-                    "customPayload": ratingComponent.customPayload]
+                ]
             case let promoCodeComponent as StoryPromoCodeComponent:
                 return [
                     "type": "promocode",
                     "id": promoCodeComponent.id,
-                    "text": promoCodeComponent.text]
+                    "customPayload": promoCodeComponent.customPayload,
+                    "text": promoCodeComponent.text
+                ]
             case let commentComponent as StoryCommentComponent:
                 return [
                     "type": "comment",
                     "id": commentComponent.id,
-                    "text": commentComponent.text]
+                    "customPayload": commentComponent.customPayload,
+                    "text": commentComponent.text
+                ]
             default:
                 return [
                     "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                    "id": storyComponent.id]
+                    "id": storyComponent.id,
+                    "customPayload": storyComponent.customPayload,
+                ]
                 
         }
     }
