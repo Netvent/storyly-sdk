@@ -59,7 +59,7 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "name": story.name,
         "seen": story.seen,
         "currentTime": story.currentTime,
-        "products": story.products?.map { product in createSTRProductItemMap(product: product) },
+//        "products": story.products?.map { product in createSTRProductItemMap(product: product) },
         "media": [
             "type": story.media.type.rawValue,
             "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
@@ -146,7 +146,7 @@ internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String:
     return [
         "name": variant.name,
         "value": variant.value,
-        "key": variant.key
+//        "key": variant.key
     ]
 }
 

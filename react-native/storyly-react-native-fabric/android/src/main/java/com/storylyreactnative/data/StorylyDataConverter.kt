@@ -38,7 +38,7 @@ internal fun createStoryMap(story: Story): Map<String, Any?> {
         "name" to story.name,
         "seen" to story.seen,
         "currentTime" to story.currentTime.toInt(),
-        "products" to story.products?.map { product -> createSTRProductItemMap(product) },
+//        "products" to story.products?.map { product -> createSTRProductItemMap(product) },
         "media" to mapOf(
             "type" to story.media.type.ordinal,
             "storyComponentList" to story.media.storyComponentList?.map { createStoryComponentMap(it) },
@@ -140,7 +140,7 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): Map<String,
     return mapOf(
         "name" to variant.name,
         "value" to variant.value,
-        "key" to variant.key,
+//        "key" to variant.key,
     )
 }
 
@@ -156,7 +156,7 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         productId = product?.get("productId") as? String ?: "",
         productGroupId = product?.get("productGroupId") as? String ?: "",
         title = product?.get("title") as? String ?: "",
-        url = product["url"] as? String ?: "",
+        url = product?.get("url") as? String ?: "",
         desc = product?.get("desc") as? String ?: "",
         price = (product?.get("price") as Double).toFloat(),
         salesPrice = (product["salesPrice"] as? Double)?.toFloat(),

@@ -50,7 +50,7 @@ interface NativeCommands {
   rejectCartChange: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
 }
 
-export const StorylyNativeCommands = codegenNativeCommands<NativeCommands>({
+export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: [
     "refresh",
     "resumeStory",
