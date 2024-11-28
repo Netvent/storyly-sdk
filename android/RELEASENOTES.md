@@ -2,7 +2,7 @@
 ### 4.4.0 (28.11.2024)
 * added customPayload to the missing layer types
 * added RTL support to share bottom sheet
-* fixed a bug related to product bottom sheet image load
+* fixed a bug related to product bottom sheet image load, fixed [#392](https://github.com/Netvent/storyly-mobile/issues/392)
 * fixed a bug related to conditional stories
 * added related storyComponents to Storyly and Vertical Feed listener methods
 * improved watch_length related analytics for Vertical Feed
@@ -44,7 +44,7 @@
 * added customPayload to the missing layer types
 * added RTL support to share bottom sheet
 * added related storyComponents to Storyly listener methods
-* fixed a bug related to product bottom sheet image load
+* fixed a bug related to product bottom sheet image load, fixed [#392](https://github.com/Netvent/storyly-mobile/issues/392)
 * fixed a bug related to conditional stories
   
 ### 3.8.1 (14.11.2024)
