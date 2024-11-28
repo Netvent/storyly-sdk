@@ -14,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import com.appsamurai.storyly.*
 import com.appsamurai.storyly.analytics.StorylyEvent
+import com.appsamurai.storyly.config.StorylyConfig
+import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
+import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
 import com.example.storylyjetpackcompose.ui.theme.StorylyJetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,10 +49,9 @@ fun StorylyView(token: String) {
         },
         update = { view ->
             view.storylyInit = StorylyInit(
-                storylyId = token.value,
-                segmentation = StorylySegmentation(segments = null),
-                customParameter = null,
-                isTestMode = true
+                token.value,
+                StorylyConfig.Builder()
+                    .build()
             )
             view.storylyListener = object : StorylyListener {
                 override fun storylyLoaded(
@@ -67,7 +69,8 @@ fun StorylyView(token: String) {
                 }
 
                 override fun storylyActionClicked(storylyView: StorylyView, story: Story) {
-                    Log.d("[Storyly]", "storylyActionClicked:${story.media.actionUrl}")
+                    // Navigate
+                    storylyView.pauseStory()
                 }
 
                 override fun storylyStoryShown(storylyView: StorylyView) {
