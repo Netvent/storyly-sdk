@@ -1,6 +1,6 @@
 # Release Notes
 ### 4.4.0 (28.11.2024)
-* added customPayload to the missing layer layer types
+* added customPayload to the missing layer types
 * added RTL support to share bottom sheet
 * fixed a bug related to product bottom sheet image load
 * fixed a bug related to conditional stories
@@ -39,6 +39,13 @@
   
 ### 4.0.0 (17.10.2024)
 * added vertical feed
+
+### 3.9.0 (28.11.2024)
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly listener methods
+* fixed a bug related to product bottom sheet image load
+* fixed a bug related to conditional stories
   
 ### 3.8.1 (14.11.2024)
 * improved StorylyView initialization flow
