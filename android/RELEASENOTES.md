@@ -1,4 +1,15 @@
 # Release Notes
+### 4.4.0 (28.11.2024)
+* added customPayload to the missing layer layer types
+* added RTL support to share bottom sheet
+* fixed a bug related to product bottom sheet image load
+* fixed a bug related to conditional stories
+* added related storyComponents to Storyly and Vertical Feed listener methods
+* improved watch_length related analytics for Vertical Feed
+* improved seen state handling for StorylyVerticalFeedPresenterView
+* added a swipe tutorial animation for Vertical Feed
+* improved layer placements for Vertical Feed
+  
 ### 4.3.1 (14.11.2024)
 * improved StorylyView and VerticalFeedView initialization flow
 * fixed a bug related to style changes
