@@ -470,6 +470,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "text" to storyComponent.text,
                     "actionUrl" to storyComponent.actionUrl,
                     "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
@@ -480,6 +481,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "text" to storyComponent.text,
                     "actionUrl" to storyComponent.actionUrl,
                     "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
@@ -490,6 +492,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "actionUrl" to storyComponent.actionUrl,
                     "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
                 )
@@ -499,6 +502,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "text" to storyComponent.text,
                     "actionUrl" to storyComponent.actionUrl,
                     "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
@@ -509,6 +513,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "actionUrlList" to (storyComponent.actionUrlList ?: listOf()),
                     "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
                 )
@@ -530,7 +535,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
-                    "customPayload" to storyComponent.customPayload
+                    "customPayload" to storyComponent.customPayload,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "selectedOptionIndex" to storyComponent.selectedOptionIndex,

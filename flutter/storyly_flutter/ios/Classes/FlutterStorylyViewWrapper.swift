@@ -533,6 +533,7 @@ extension FlutterStorylyViewWrapper {
                 return [
                     "type": "buttonaction",
                     "id": buttonActionComponent.id,
+                    "customPayload": buttonActionComponent.customPayload,
                     "text": buttonActionComponent.text,
                     "actionUrl": buttonActionComponent.actionUrl,
                     "products": (buttonActionComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
@@ -541,6 +542,7 @@ extension FlutterStorylyViewWrapper {
                 return [
                     "type": "swipeaction",
                     "id": swipeButtonActionComponent.id,
+                    "customPayload": swipeButtonActionComponent.customPayload,
                     "text": swipeButtonActionComponent.text,
                     "actionUrl": swipeButtonActionComponent.actionUrl,
                     "products": (swipeButtonActionComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
@@ -549,6 +551,7 @@ extension FlutterStorylyViewWrapper {
                 return [
                     "type": "producttag",
                     "id": productTagComponent.id,
+                    "customPayload": productTagComponent.customPayload,
                     "actionUrl": productTagComponent.actionUrl,
                     "products": (productTagComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
                 ]
@@ -556,6 +559,7 @@ extension FlutterStorylyViewWrapper {
                 return [
                     "type": "productcard",
                     "id": productCardComponent.id,
+                    "customPayload": productCardComponent.customPayload,
                     "text": productCardComponent.text,
                     "actionUrl": productCardComponent.actionUrl,
                     "products": (productCardComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
@@ -564,6 +568,7 @@ extension FlutterStorylyViewWrapper {
                 return [
                     "type": "productcatalog",
                     "id": productCatalogComponent.id,
+                    "customPayload": productCatalogComponent.customPayload,
                     "actionUrlList": productCatalogComponent.actionUrlList ?? [],
                     "products": (productCatalogComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
                 ]

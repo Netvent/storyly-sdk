@@ -908,6 +908,7 @@ class StoryButtonActionComponent implements StoryComponent {
   StoryButtonActionComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     required this.text,
     this.actionUrl,
     this.products,
@@ -918,6 +919,9 @@ class StoryButtonActionComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// text text of the interactive component
   final String text;
@@ -932,6 +936,7 @@ class StoryButtonActionComponent implements StoryComponent {
     return StoryButtonActionComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
@@ -945,6 +950,7 @@ class StorySwipeActionComponent implements StoryComponent {
   StorySwipeActionComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     required this.text,
     this.actionUrl,
     this.products,
@@ -955,6 +961,9 @@ class StorySwipeActionComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// text text of the interactive component
   final String text;
@@ -969,6 +978,7 @@ class StorySwipeActionComponent implements StoryComponent {
     return StorySwipeActionComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
@@ -982,6 +992,7 @@ class StoryProductTagComponent implements StoryComponent {
   StoryProductTagComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     this.actionUrl,
     this.products,
   });
@@ -991,6 +1002,9 @@ class StoryProductTagComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// actionUrl action url assigned to the interactive component
   final String? actionUrl;
@@ -1002,6 +1016,7 @@ class StoryProductTagComponent implements StoryComponent {
     return StoryProductTagComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
           json['products'].map((x) => STRProductItem.fromJson(x))),
@@ -1014,6 +1029,7 @@ class StoryProductCardComponent implements StoryComponent {
   StoryProductCardComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     this.text,
     this.actionUrl,
     this.products,
@@ -1024,6 +1040,9 @@ class StoryProductCardComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// text text of the interactive component
   final String? text;
@@ -1038,6 +1057,7 @@ class StoryProductCardComponent implements StoryComponent {
     return StoryProductCardComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
@@ -1051,6 +1071,7 @@ class StoryProductCatalogComponent implements StoryComponent {
   StoryProductCatalogComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     this.actionUrlList,
     this.products,
   });
@@ -1060,6 +1081,9 @@ class StoryProductCatalogComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// actionUrlList action url list assigned to the interactive component
   final List<String>? actionUrlList;
@@ -1071,6 +1095,7 @@ class StoryProductCatalogComponent implements StoryComponent {
     return StoryProductCatalogComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       actionUrlList: castOrNull(
           json['actionUrlList']?.map<String>((e) => e as String).toList()),
       products: List<STRProductItem>.from(
