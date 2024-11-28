@@ -30,20 +30,15 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         "id": storyGroup.uniqueId,
         "title": storyGroup.title,
         "iconUrl": storyGroup.iconUrl?.absoluteString,
-        "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
-        "coverUrl": storyGroup.coverUrl?.absoluteString,
+//        "thematicIconUrls": storyGroup.thematicIconUrls?.mapValues { $0.absoluteString },
+//        "coverUrl": storyGroup.coverUrl?.absoluteString,
         "index": storyGroup.index,
         "pinned": storyGroup.pinned,
         "seen": storyGroup.seen,
         "stories": storyGroup.stories.map { createStoryMap(story: $0) },
         "type": storyGroup.type.description,
-        "momentsUser": (storyGroup.momentsUser != nil) ? [
-            "id": storyGroup.momentsUser?.userId,
-            "avatarUrl": storyGroup.momentsUser?.avatarURL,
-            "username": storyGroup.momentsUser?.username,
-        ] : nil,
         "nudge": storyGroup.nudge
-    ]
+    ] as [String: Any?]
 }
 
 func createStoryMap(_ story: Story?) -> [String: Any?]? {
@@ -60,13 +55,13 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "seen": story.seen,
         "currentTime": story.currentTime,
 //        "products": story.products?.map { product in createSTRProductItemMap(product: product) },
-        "media": [
-            "type": story.media.type.rawValue,
-            "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
-            "actionUrl": story.media.actionUrl,
-            "previewUrl": story.media.previewUrl?.absoluteString,
-            "actionUrlList": story.media.actionUrlList
-        ] as [String: Any?]
+//        "media": [
+//            "type": story.media.type.rawValue,
+//            "storyComponentList": story.media.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
+//            "actionUrl": story.media.actionUrl,
+//            "previewUrl": story.media.previewUrl?.absoluteString,
+//            "actionUrlList": story.media.actionUrlList
+//        ] as [String: Any?]
     ]
 }
 
@@ -175,7 +170,7 @@ internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem
 
 internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVariant] {
     variants.compactMap { variant in
-        STRProductVariant(name: variant["name"] as? String ?? "", value: variant["value"] as? String ?? "")
+        STRProductVariant(name: variant["name"] as? String ?? "", value: variant["value"] as? String ?? "", key: "")
     }
 }
 

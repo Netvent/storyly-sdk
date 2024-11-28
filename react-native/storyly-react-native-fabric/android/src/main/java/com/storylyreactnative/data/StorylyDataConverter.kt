@@ -13,19 +13,12 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, Any?> {
         "title" to storyGroup.title,
         "iconUrl" to storyGroup.iconUrl,
         "pinned" to storyGroup.pinned,
-        "thematicIconUrls" to  (storyGroup.thematicIconUrls ?: emptyMap()),
-        "coverUrl" to storyGroup.coverUrl,
+//        "thematicIconUrls" to  (storyGroup.thematicIconUrls ?: emptyMap()),
+//        "coverUrl" to storyGroup.coverUrl,
         "index" to storyGroup.index,
         "seen" to storyGroup.seen,
         "stories" to storyGroup.stories.map { story -> createStoryMap(story) },
         "type" to storyGroup.type.customName,
-        "momentsUser" to storyGroup.momentsUser?.let { momentsUser ->
-            mapOf(
-                "id" to momentsUser.userId,
-                "avatarUrl" to momentsUser.userId,
-                "username" to momentsUser.username,
-            )
-        },
         "nudge" to storyGroup.nudge
     )
 }
@@ -37,15 +30,15 @@ internal fun createStoryMap(story: Story): Map<String, Any?> {
         "title" to story.title,
         "name" to story.name,
         "seen" to story.seen,
-        "currentTime" to story.currentTime.toInt(),
-//        "products" to story.products?.map { product -> createSTRProductItemMap(product) },
-        "media" to mapOf(
-            "type" to story.media.type.ordinal,
-            "storyComponentList" to story.media.storyComponentList?.map { createStoryComponentMap(it) },
-            "actionUrl" to story.media.actionUrl,
-            "actionUrlList" to story.media.actionUrlList,
-            "previewUrl" to story.media.previewUrl,
-        )
+        "currentTime" to story.currentTime?.toInt(),
+        "products" to story.actionProducts?.map { product -> createSTRProductItemMap(product) },
+//        "media" to mapOf(
+//            "type" to story.type.ordinal,
+//            "storyComponentList" to story.media.storyComponentList?.map { createStoryComponentMap(it) },
+//            "actionUrl" to story.media.actionUrl,
+//            "actionUrlList" to story.media.actionUrlList,
+//            "previewUrl" to story.media.previewUrl,
+//        )
     )
 }
 
@@ -140,7 +133,7 @@ internal fun createSTRProductVariantMap(variant: STRProductVariant): Map<String,
     return mapOf(
         "name" to variant.name,
         "value" to variant.value,
-//        "key" to variant.key,
+        "key" to variant.key,
     )
 }
 
@@ -171,7 +164,8 @@ internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<S
     return variants?.map { variant ->
         STRProductVariant(
             name = variant["name"] as? String ?: "",
-            value = variant["value"] as? String ?: ""
+            value = variant["value"] as? String ?: "",
+            key = variant["key"] as? String ?: "",
         )
     } ?: listOf()
 }
