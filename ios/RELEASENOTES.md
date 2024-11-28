@@ -44,6 +44,12 @@
 ### 4.0.0 (17.10.2024)
 * added vertical feed
 
+### 3.9.0 (28.11.2024)
+* added video share to Instagram Stories
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly delegate methods
+
 ### 3.8.1 (14.11.2024)
 * fixed a bug related to style changes
   
