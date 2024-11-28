@@ -53,7 +53,9 @@ export default function App() {
         onProductEvent={(event) => {
           console.log(`onProductEvent: ${JSON.stringify(event)}`)
         }}
-        // onSizeChanged{(event) => {}}
+        onSizeChanged={(event) => {
+          console.log(`onSizeChanged: ${JSON.stringify(event)}`)
+        }}
         storyGroupSize='large'
         style={{
           width: "100%",

@@ -78,6 +78,9 @@ public class STStorylyView: UIView {
     @objc(onStorylyCartUpdated)
     public var onStorylyCartUpdated: ((String) -> Void)?
     
+    @objc(onStorylySizeChanged)
+    public var onStorylySizeChanged: ((String) -> Void)?
+    
     public override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
         super.init(frame: frame)
@@ -251,6 +254,16 @@ class STStorylyDelegate: StorylyDelegate {
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onStorylyUserInteracted?(eventJson)
+    }
+    
+    
+    func storylySizeChanged(_ storylyView: StorylyView, size: CGSize) {
+        let map: [String : Any] = [
+            "width": size.width,
+            "height": size.height,
+        ]
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onStorylySizeChanged?(eventJson)
     }
 }
 

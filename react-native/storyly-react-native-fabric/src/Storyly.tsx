@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import StorylyNativeView, { Commands, applyBaseEvent } from "./fabric/StorylyReactNativeViewNativeComponent";
 import type { STRCart, STRProductItem } from "./data/story";
-import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent } from "./data/event";
+import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent, StorySizeChangedEvent } from "./data/event";
 import type { ViewProps } from "react-native";
 import { mapStorylyConfig } from "./data/config";
 
@@ -70,6 +70,7 @@ export interface StorylyProps extends ViewProps {
     onProductHydration?: (event: StoryProductHydrationEvent) => void;
     onCartUpdate?: (event: StoryProductCartUpdateEvent) => void;
     onProductEvent?: (event: ProductEvent) => void;
+    onSizeChanged?: (event: StorySizeChangedEvent) => void;
 }
 
 export interface StorylyMethods {
@@ -230,6 +231,12 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         }
     }
 
+    const _onStorylySizeChanged = (event: BaseEvent) => {
+        if (props.onSizeChanged) {
+            props.onSizeChanged(event as StorySizeChangedEvent)
+        }
+    }
+
     return (
         <StorylyNativeView
             {...props}
@@ -245,6 +252,7 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
             onStorylyProductHydration={applyBaseEvent(_onStorylyProductHydration)}
             onStorylyCartUpdated={applyBaseEvent(_onStorylyCartUpdated)}
             onStorylyProductEvent={applyBaseEvent(_onStorylyProductEvent)}
+            onStorylySizeChanged={applyBaseEvent(_onStorylySizeChanged)}
             storylyConfig={mapStorylyConfig(props)} />
     )
 })

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.net.Uri
 import com.appsamurai.storyly.PlayMode
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.common.MapBuilder
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
@@ -111,12 +110,12 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
 
     override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
         val events = super.getExportedCustomDirectEventTypeConstants()
-        val builder = MapBuilder.builder<String, Any>()
-        events?.forEach { builder.put(it.key, it.value) }
-        STEvent.Type.values().forEach {
-            builder.put(it.rawName, MapBuilder.of("registrationName", it.rawName))
+        val eventMap = mutableMapOf<String, Any>()
+        events?.forEach { eventMap[it.key] = it.value }
+        STEvent.Type.entries.forEach {
+            eventMap[it.rawName] = mapOf("registrationName" to it.rawName)
         }
-        return builder.build()
+        return eventMap
     }
 
     private fun getPlayMode(playMode: String?): PlayMode {

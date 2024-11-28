@@ -109,6 +109,13 @@ class STStorylyView(
                     "storyComponent" to createStoryComponentMap(storyComponent),
                 ))
             }
+
+            override fun storylySizeChanged(storylyView: StorylyView, size: Pair<Int, Int>) {
+                dispatchEvent(STEvent.Type.ON_STORYLY_SIZE_CHANGED, mapOf(
+                    "width" to size.first,
+                    "height" to size.second
+                ))
+            }
         }
 
         storylyView.storylyProductListener = object : StorylyProductListener {

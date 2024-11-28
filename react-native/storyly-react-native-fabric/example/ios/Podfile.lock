@@ -1510,7 +1510,7 @@ PODS:
     - React-perflogger (= 0.76.3)
     - React-utils (= 0.76.3)
   - SocketRocket (0.7.1)
-  - Storyly (3.8.1)
+  - Storyly (3.9.0)
   - storyly-react-native-fabric (3.8.1):
     - DoubleConversion
     - glog
@@ -1531,7 +1531,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Storyly (= 3.8.1)
+    - Storyly (= 3.9.0)
     - Yoga
   - Yoga (0.0.0)
 
@@ -1803,8 +1803,8 @@ SPEC CHECKSUMS:
   ReactCodegen: 11ba5753ff8fd0eade9f701a238b6bfbcfcc241d
   ReactCommon: cef332bed205215d2a0270e12e1feb337974ccfe
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Storyly: 0f7f26d8babff34a2abe2ee294fe0478ec573ecc
-  storyly-react-native-fabric: b2c3fb520d0c4f929e63489e51f2d286d28da3da
+  Storyly: 3d3e35e2141c03620f929bfd0db7e169dab58d08
+  storyly-react-native-fabric: 2f11f260ee2592e83a33f80f13983f521033e825
   Yoga: 748f06daed00132bf0a051dbb2f4347660ac1a98
 
 PODFILE CHECKSUM: fe5e5f97aa5554cd66698867601a69d4afa4d42a

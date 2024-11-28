@@ -114,12 +114,12 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  api('com.appsamurai.storyly:storyly:3.8.1')
+  api('com.appsamurai.storyly:storyly:3.9.0')
 }
 
 if (isNewArchitectureEnabled()) {
   react {
-    jsRootDir = file("../src/")
+    jsRootDir = file("../src")
     libraryName = codegenViewLibraryName
     codegenJavaPackageName = "com.storylyreactnative"
   }
