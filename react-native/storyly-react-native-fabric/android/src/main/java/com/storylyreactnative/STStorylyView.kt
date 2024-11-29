@@ -44,7 +44,9 @@ class STStorylyView(
         addView(storylyView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         storylyView.storylyListener = object : StorylyListener {
             override fun storylyActionClicked(storylyView: StorylyView, story: Story) {
-                dispatchEvent(STEvent.Type.ON_STORYLY_ACTION_CLICKED, createStoryMap(story))
+                dispatchEvent(STEvent.Type.ON_STORYLY_ACTION_CLICKED, mapOf(
+                    "story" to createStoryMap(story)
+                ))
             }
 
             override fun storylyLoaded(

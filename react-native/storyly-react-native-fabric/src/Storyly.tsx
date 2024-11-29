@@ -80,7 +80,7 @@ export interface StorylyMethods {
     closeStory: () => void;
     openStory: (url: string) => void;
     openStoryWithId: (groupId: string, storyId?: string, playMode?: string) => void;
-    hydrateProducts: (products: [STRProductItem]) => void;
+    hydrateProducts: (products: STRProductItem[]) => void;
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
     rejectCartChange: (responseId: string, failMsg: string) => void;
@@ -140,7 +140,7 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         }
     }
 
-    const hydrateProducts = (products: [STRProductItem]) => {
+    const hydrateProducts = (products: STRProductItem[]) => {
         if (storylyRef.current) {
             Commands.hydrateProducts(storylyRef.current, JSON.stringify({products}))
         }

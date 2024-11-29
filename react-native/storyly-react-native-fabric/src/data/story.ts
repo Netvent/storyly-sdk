@@ -91,7 +91,7 @@ export interface Story {
     name?: string;
     seen: boolean;
     currentTime?: number;
-    actionUrl: string;
+    actionUrl?: string;
     previewUrl?: string;
     storyComponentList?: StoryComponent[];
     actionProducts?: STRProductItem[];

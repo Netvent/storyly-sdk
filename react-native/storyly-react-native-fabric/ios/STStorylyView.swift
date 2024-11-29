@@ -148,6 +148,7 @@ extension STStorylyView {
         guard let map = decodePayload(raw: raw),
               let productMap = map["products"] as? [NSDictionary?] else { return }
         let products = productMap.map({ createSTRProductItem(productItem: $0) })
+        print("STR:STStorylyView:hydrateProducts(productIds:\(products.map { $0.productId })")
         storylyView?.hydrateProducts(products: products)
     }
     
@@ -156,7 +157,7 @@ extension STStorylyView {
         guard let map = decodePayload(raw: raw),
               let cartMap = map["cart"] as? NSDictionary,
               let cart = createSTRCart(cartMap: cartMap) else { return }
-        
+        print("STR:STStorylyView:updateCart(cartProductIds:\(cart.items.map { $0.item.productId})")
         storylyView?.updateCart(cart: cart)
     }
     
@@ -207,7 +208,6 @@ class STStorylyDelegate: StorylyDelegate {
             "storyGroupList": storyGroupList.map { createStoryGroupMap(storyGroup: $0) },
             "dataSource": dataSource.description
         ]
-        print("storylyLoaded: \(map)")
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onStorylyLoaded?(eventJson)
     }
@@ -219,7 +219,7 @@ class STStorylyDelegate: StorylyDelegate {
     }
     
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        guard let eventJson = encodeEvent(json: createStoryMap(story: story)) else { return }
+        guard let eventJson = encodeEvent(json: ["story": createStoryMap(story: story)]) else { return }
         view?.onStorylyActionClicked?(eventJson)
     }
     
