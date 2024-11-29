@@ -3,6 +3,36 @@
 export interface StoryComponent {
     id: string;
     type: ReactionType;
+    customPayload?: string;
+}
+
+export interface StorySwipeComponent extends StoryComponent {
+    text: string;
+    actionUrl?: string;
+    products?: STRProductItem[];
+}
+
+export interface StoryButtonComponent extends StoryComponent {
+    text: string;
+    actionUrl?: string;
+    products?: STRProductItem[];
+}
+
+export interface StoryProductTagComponent extends StoryComponent {
+    actionUrl?: string;
+    products?: STRProductItem[];
+}
+
+export interface StoryProductCardComponent extends StoryComponent {
+    text: string;
+    actionUrl?: string;
+    products?: STRProductItem[];
+}
+
+export interface StoryProductCatalogComponent extends StoryComponent {
+    text: string;
+    actionUrlList?: string[];
+    products?: STRProductItem[];
 }
 
 export interface StoryQuizComponent extends StoryComponent {
@@ -10,22 +40,27 @@ export interface StoryQuizComponent extends StoryComponent {
     options: string[];
     rightAnswerIndex?: number;
     selectedOptionIndex: number;
-    customPayload?: string;
 }
 
 export interface StoryPollComponent extends StoryComponent {
     title: string;
+    options: string[];
+    selectedOptionIndex: number;
+}
+
+
+export interface StoryEmojiComponent extends StoryComponent {
     emojiCodes: string[];
     selectedEmojiIndex: number;
-    customPayload?: string;
 }
+
 
 export interface StoryRatingComponent extends StoryComponent {
     title: string;
-    emojiCodes: string[];
-    selectedEmojiIndex: number;
-    customPayload?: string;
+    emojiCode: string;
+    rating: number;
 }
+
 
 export interface StoryPromoCodeComponent extends StoryComponent {
     text: string;
@@ -35,44 +70,47 @@ export interface StoryCommentComponent extends StoryComponent {
     text: string;
 }
 
-export interface MomentsUser {
-    id?: string;
-    avatarUrl?: string;
-    username?: string;
-}
-
 export interface StoryGroup {
     id: string;
     title: string;
     iconUrl?: string;
-    thematicIconUrls?: Record<string, string>;
-    coverUrl?: string;
     index: number;
+    pinned: boolean;
     seen: boolean;
     stories: Story[];
-    type: string;
-    pinned: boolean;
-    momentsUser?: MomentsUser;
-    nudge: boolean;
-}
+    type: string,
+    name?: string,
+    nudge: boolean,
+    style?: StoryGroupStyle,
+};
 
 export interface Story {
     id: string;
-    title: string;
-    name: string;
     index: number;
-    pinned: boolean;
+    title: string;
+    name?: string;
     seen: boolean;
-    currentTime: number;
-    media: {
-        type: number;
-        storyComponentList?: StoryComponent[];
-        actionUrl?: string;
-        actionUrlList?: string[];
-        previewUrl?: string;
-    };
-    products?: STRProductItem[];
+    currentTime?: number;
+    actionUrl: string;
+    previewUrl?: string;
+    storyComponentList?: StoryComponent[];
+    actionProducts?: STRProductItem[];
 }
+
+export interface StoryGroupStyle {
+    borderUnseenColors?: [string],
+    textUnseenColor?: string,
+    badge?: StoryGroupBadgeStyle,
+}
+
+export interface StoryGroupBadgeStyle {
+    backgroundColor?: string,
+    textColor?: string,
+    endTime?: number,
+    template?: string,
+    text?: string,
+}
+
 
 export type ReactionType =
     | "emoji"
@@ -95,12 +133,12 @@ export interface STRProductItem {
     productId: string;
     productGroupId: string;
     title: string;
-    desc: string;
+    url: string;
+    desc?: string;
     price: number;
     salesPrice?: number;
     currency: string;
     imageUrls?: string[];
-    url?: string;
     variants: STRProductVariant[];
     ctaText?: string;
 }
@@ -108,6 +146,7 @@ export interface STRProductItem {
 export interface STRProductVariant {
     name: string;
     value: string;
+    key: string;
 }
 
 export interface STRCart {

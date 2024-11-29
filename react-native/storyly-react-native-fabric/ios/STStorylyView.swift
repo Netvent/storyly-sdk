@@ -207,6 +207,7 @@ class STStorylyDelegate: StorylyDelegate {
             "storyGroupList": storyGroupList.map { createStoryGroupMap(storyGroup: $0) },
             "dataSource": dataSource.description
         ]
+        print("storylyLoaded: \(map)")
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onStorylyLoaded?(eventJson)
     }
@@ -218,16 +219,16 @@ class STStorylyDelegate: StorylyDelegate {
     }
     
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        guard let eventJson = encodeEvent(json: createStoryMap(story: story) as [String: Any]) else { return }
+        guard let eventJson = encodeEvent(json: createStoryMap(story: story)) else { return }
         view?.onStorylyActionClicked?(eventJson)
     }
     
     func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
-        let map: [String : Any] = [
+        let map: [String : Any?] = [
             "event": StorylyEventHelper.storylyEventName(event: event),
-            "storyGroup": createStoryGroupMap(storyGroup) as Any,
-            "story": createStoryMap(story) as Any,
-            "storyComponent": createStoryComponentMap(storyComponent) as Any
+            "storyGroup": createStoryGroupMap(storyGroup: storyGroup),
+            "story": createStoryMap(story: story),
+            "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onStorylyEvent?(eventJson)
@@ -247,7 +248,7 @@ class STStorylyDelegate: StorylyDelegate {
     }
     
     func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
-        let map: [String : Any] = [
+        let map: [String : Any?] = [
             "storyGroup": createStoryGroupMap(storyGroup: storyGroup),
             "story": createStoryMap(story: story),
             "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
@@ -258,7 +259,7 @@ class STStorylyDelegate: StorylyDelegate {
     
     
     func storylySizeChanged(_ storylyView: StorylyView, size: CGSize) {
-        let map: [String : Any] = [
+        let map: [String : Any?] = [
             "width": size.width,
             "height": size.height,
         ]
