@@ -97,7 +97,7 @@
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p6']" name="name">previewUrl</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p7']" name="name">storyComponentList</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p8']" name="name">actionUrl</attr>
-  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p9']" name="name">products</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='Story']/constructor[@name='Story' and count(parameter)=10]/parameter[@name='p9']" name="name">actionProducts</attr>
 
   <!-- VerticalFeedItem -->
   <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItem']/constructor[@name='VerticalFeedItem' and count(parameter)=10]/parameter[@name='p0']" name="name">uniqueId</attr>
@@ -121,6 +121,8 @@
   <!-- StoryComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryComponent']/constructor[@name='StoryComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
   <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryComponent']/constructor[@name='StoryComponent' and count(parameter)=2]/parameter[@name='p1']" name="name">StoryComponentType</attr>
+  <attr path="/api/package[@name='com.appsamurai.storyly']/class[@name='StoryComponent']/constructor[@name='StoryComponent' and count(parameter)=2]/parameter[@name='p2']" name="name">CustomPayload</attr>
+
 
   <!-- VerticalFeedItemComponent -->
   <attr path="/api/package[@name='com.appsamurai.storyly.verticalfeed']/class[@name='VerticalFeedItemComponent']/constructor[@name='VerticalFeedItemComponent' and count(parameter)=2]/parameter[@name='p0']" name="name">id</attr>
