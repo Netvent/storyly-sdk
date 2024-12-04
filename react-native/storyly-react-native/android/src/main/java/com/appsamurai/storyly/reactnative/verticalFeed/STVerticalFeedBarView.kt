@@ -39,7 +39,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
         verticalFeedBarView.storylyVerticalFeedListener = object : StorylyVerticalFeedListener {
             override fun verticalFeedActionClicked(view: STRVerticalFeedView, feedItem: VerticalFeedItem) {
                 sendEvent(STVerticalFeedManager.EVENT_STORYLY_ACTION_CLICKED, Arguments.createMap().also { eventMap ->
-                    eventMap.putMap("story", createVerticalFeedItem(feedItem))
+                    eventMap.putMap("feedItem", createVerticalFeedItem(feedItem))
                 })
             }
 
@@ -49,7 +49,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 dataSource: StorylyDataSource
             ) {
                 sendEvent(STVerticalFeedManager.EVENT_STORYLY_LOADED, Arguments.createMap().also { storyGroupListMap ->
-                    storyGroupListMap.putArray("storyGroupList", Arguments.createArray().also { storyGroups ->
+                    storyGroupListMap.putArray("feedGroupList", Arguments.createArray().also { storyGroups ->
                         feedGroupList.forEach { group ->
                             storyGroups.pushMap(createVerticalFeedGroup(group))
                         }
@@ -104,9 +104,9 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 feedItemComponent: VerticalFeedItemComponent
             ) {
                 sendEvent(STVerticalFeedManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().apply {
-                    putMap("storyGroup", createVerticalFeedGroup(feedGroup))
-                    putMap("story", createVerticalFeedItem(feedItem))
-                    putMap("storyComponent", createVerticalFeedComponentMap(feedItemComponent))
+                    putMap("feedGroup", createVerticalFeedGroup(feedGroup))
+                    putMap("feedItem", createVerticalFeedItem(feedItem))
+                    putMap("feedItemComponent", createVerticalFeedComponentMap(feedItemComponent))
                 })
             }
         }

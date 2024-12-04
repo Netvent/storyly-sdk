@@ -7,12 +7,12 @@
 import Storyly
 
 
-func createStoryGroupMap(_ storyGroup: StoryGroup?) -> [String: Any?]? {
+func createVerticalFeedGroupMap(_ storyGroup: VerticalFeedGroup?) -> [String: Any?]? {
     guard let storyGroup = storyGroup else { return nil }
     return createStoryGroupMap(storyGroup: storyGroup)
 }
     
-func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
+func createVerticalFeedGroupMap(storyGroup: VerticalFeedGroup) -> [String: Any?] {
     return [
         "id": storyGroup.uniqueId,
         "title": storyGroup.title,
@@ -20,7 +20,7 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         "index": storyGroup.index,
         "pinned": storyGroup.pinned,
         "seen": storyGroup.seen,
-        "stories": storyGroup.stories.map { createStoryMap(story: $0) },
+        "stories": storyGroup.feedList.map { createStoryMap(story: $0) },
         "type": storyGroup.type.description,
         "name": storyGroup.name,
         "nudge": storyGroup.nudge,
@@ -28,16 +28,16 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
     ]
 }
 
-func createStoryGroupStyleMap(storyGroupStyle: StoryGroupStyle?) -> [String: Any?]? {
+func createVerticalFeedGroupStyleMap(storyGroupStyle: VerticalFeedGroupStyle?) -> [String: Any?]? {
     guard let style = storyGroupStyle else { return nil }
     return [
         "borderUnseenColors": style.borderUnseenColors?.map { $0.toHexString() },
         "textUnseenColor": style.textUnseenColor?.toHexString(),
-        "badge": createStoryGroupBadgeStyleMap(badge: style.badge)
+        "badge": createVerticalFeedGroupBadgeStyleMap(badge: style.badge)
     ]
 }
 
-func createStoryGroupBadgeStyleMap(badge: StoryGroupBadgeStyle?) -> [String: Any?]? {
+func createVerticalFeedGroupBadgeStyleMap(badge: VerticalFeedGroupBadgeStyle?) -> [String: Any?]? {
     guard let badge = badge else { return nil }
     return [
         "backgroundColor": badge.backgroundColor?.toHexString(),
@@ -48,12 +48,12 @@ func createStoryGroupBadgeStyleMap(badge: StoryGroupBadgeStyle?) -> [String: Any
     ]
 }
 
-func createStoryMap(_ story: Story?) -> [String: Any?]? {
+func createVerticalFeedMap(_ story: Story?) -> [String: Any?]? {
     guard let story = story else { return nil }
     return createStoryMap(story: story)
 }
 
-func createVerticalFeedItemMap(story: VerticalFeedItem) -> [String: Any?] {
+func createVerticalFeedMap(story: Story) -> [String: Any?] {
     return [
         "id": story.uniqueId,
         "index": story.index,
@@ -63,7 +63,7 @@ func createVerticalFeedItemMap(story: VerticalFeedItem) -> [String: Any?] {
         "currentTime": story.currentTime,
         "previewUrl": story.previewUrl?.absoluteString,
         "actionUrl": story.actionUrl,
-        "storyComponentList": story.verticalFeedItemComponentList?.map { createStoryComponentMap(storyComponent: $0)},
+        "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent: $0)},
         "products": story.actionProducts?.map { product in createSTRProductItemMap(product: product) }
     ]
 }
@@ -73,10 +73,10 @@ func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?
     return createStoryComponentMap(storyComponent: storyComponent)
 }
 
-func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
+func createVerticalFeedItemComponentMap(storyComponent: VerticalFeedItemComponent) -> [String: Any?] {
     switch storyComponent {
-        case let storyComponent as StoryQuizComponent: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+        case let storyComponent as VerticalFeedQuizComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:verticalFeedComponent.type).lowercased(),
             "id": storyComponent.id,
             "title": storyComponent.title,
             "options": storyComponent.options,
@@ -84,40 +84,40 @@ func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
             "selectedOptionIndex": storyComponent.selectedOptionIndex,
             "customPayload": storyComponent.customPayload
         ]
-        case let storyComponent as StoryPollComponent: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+        case let storyComponent as VerticalFeedPollComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:verticalFeedComponent.type).lowercased(),
             "id": storyComponent.id,
             "title": storyComponent.title,
             "options": storyComponent.options,
             "selectedOptionIndex": storyComponent.selectedOptionIndex,
             "customPayload": storyComponent.customPayload
         ]
-        case let storyComponent as StoryEmojiComponent: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+        case let storyComponent as VerticalFeedEmojiComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
             "emojiCodes": storyComponent.emojiCodes,
             "selectedEmojiIndex": storyComponent.selectedEmojiIndex,
             "customPayload": storyComponent.customPayload
         ]
-        case let storyComponent as StoryRatingComponent: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+        case let storyComponent as VerticalFeedRatingComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
             "emojiCode": storyComponent.emojiCode,
             "rating": storyComponent.rating,
             "customPayload": storyComponent.customPayload
         ]
-        case let storyComponent as StoryPromoCodeComponent: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+        case let storyComponent as VerticalFeedPromoCodeComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
             "text": storyComponent.text
         ]
-        case let storyComponent as StoryCommentComponent: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+        case let storyComponent as VerticalFeedCommentComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
             "text": storyComponent.text
         ]
         default: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
         ]
     }

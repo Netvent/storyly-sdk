@@ -30,7 +30,7 @@ internal fun createVerticalFeedGroup(verticalFeedGroup: VerticalFeedGroup): Writ
         storyGroupMap.putBoolean("pinned", verticalFeedGroup.pinned)
         storyGroupMap.putInt("index", verticalFeedGroup.index)
         storyGroupMap.putBoolean("seen", verticalFeedGroup.seen)
-        storyGroupMap.putArray("stories", Arguments.createArray().also { storiesArray ->
+        storyGroupMap.putArray("feedList", Arguments.createArray().also { storiesArray ->
             verticalFeedGroup.feedList.forEach { story -> storiesArray.pushMap(
                 createVerticalFeedItem(story)
             ) }
@@ -71,7 +71,7 @@ internal fun createVerticalFeedItem(feedItem: VerticalFeedItem): WritableMap {
         feedItem.currentTime?.toInt()?.let { storyMap.putInt("currentTime", it) }
         storyMap.putString("actionUrl", feedItem.actionUrl)
         storyMap.putString("previewUrl", feedItem.previewUrl)
-        storyMap.putArray("storyComponentList", Arguments.createArray().also { componentArray ->
+        storyMap.putArray("verticalFeedItemComponentList", Arguments.createArray().also { componentArray ->
             feedItem.verticalFeedItemComponentList?.forEach { componentArray.pushMap(
                 createVerticalFeedComponentMap(it)
             ) }

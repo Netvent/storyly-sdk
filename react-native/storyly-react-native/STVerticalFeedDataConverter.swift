@@ -53,7 +53,7 @@ func createStoryMap(_ story: Story?) -> [String: Any?]? {
     return createStoryMap(story: story)
 }
 
-func createVerticalFeedItemMap(story: VerticalFeedItem) -> [String: Any?] {
+func createStoryMap(story: Story) -> [String: Any?] {
     return [
         "id": story.uniqueId,
         "index": story.index,
@@ -63,7 +63,7 @@ func createVerticalFeedItemMap(story: VerticalFeedItem) -> [String: Any?] {
         "currentTime": story.currentTime,
         "previewUrl": story.previewUrl?.absoluteString,
         "actionUrl": story.actionUrl,
-        "storyComponentList": story.verticalFeedItemComponentList?.map { createStoryComponentMap(storyComponent: $0)},
+        "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent: $0)},
         "products": story.actionProducts?.map { product in createSTRProductItemMap(product: product) }
     ]
 }

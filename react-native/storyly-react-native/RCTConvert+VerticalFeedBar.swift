@@ -225,7 +225,7 @@ private func getStorylyLayoutDirection(direction: String?) -> StorylyLayoutDirec
     }
 }
 
-internal func getStoryGroupListOrientation(orientation: String?) -> StoryGroupListOrientation {
+private func getStoryGroupListOrientation(orientation: String?) -> StoryGroupListOrientation {
     switch orientation {
         case "horizontal": return .Horizontal
         case "vertical": return .Vertical

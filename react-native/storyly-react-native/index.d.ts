@@ -282,4 +282,225 @@ declare module "storyly-react-native" {
     productId?: string;
     productGroupId?: string;
   }
+
+  export namespace VerticalFeedBar {
+    export interface Props extends ViewProps {
+      storylyId: string;
+      customParameter?: string;
+      storylyTestMode?: boolean;
+      storylySegments?: string[];
+      storylyUserProperty?: Record<string, string>;
+      storylyLayoutDirection?: "ltr" | "rtl";
+      storylyLocale?: string;
+      storylyMaxItemCount?: number;
+
+      //ShareConfig
+      storylyShareUrl?: string;
+      storylyFacebookAppID?: string;
+
+      //BarStyling
+      storyGroupListOrientation?: "horizontal" | "vertical";
+      storyGroupListSections?: number;
+      storyGroupListHorizontalEdgePadding?: number;
+      storyGroupListVerticalEdgePadding?: number;
+      storyGroupListHorizontalPaddingBetweenItems?: number;
+      storyGroupListVerticalPaddingBetweenItems?: number;
+
+      //GroupStyling
+      storyGroupIconHeight?: number;
+      storyGroupIconCornerRadius?: number;
+      storyGroupIconBackgroundColor?: string;
+      storyGroupTextColor?: string;
+      storyGroupTextTypeface?: string;
+      storyGroupTextIsVisible?: boolean;
+      storyGroupTextLines?: number;
+      storyGroupTextSize?: number;
+      storyGroupMinImpressionCountToShowIcon?: number;
+      storyGroupMinLikeCountToShowIcon?: number;
+      storyGroupTypeIndicatorVisibility?: boolean;
+
+      //VerticalFeedCustomization
+      storyItemProgressBarColor?: string[];
+      storyItemTextTypeface?: string;
+      storyItemInteractiveTypeface?: string;
+      storyItemTextColor?: string;
+      storyItemTitleVisibility?: boolean;
+      storyHeaderCloseButtonIsVisible?: boolean;
+      storyHeaderCloseIcon?: string;
+      storyHeaderShareButtonIsVisible?: boolean;
+      storyHeaderShareIcon?: string;
+      storyHeaderLikeButtonIsVisible?: boolean;
+      storyHeaderLikeIcon?: string;
+
+      //ProductConfig
+      storyFallbackIsEnabled?: boolean;
+      storyCartIsEnabled?: boolean;
+      storyProductFeed?: Record<string, STRProductItem[]>;
+
+      onLoad?: (event: VerticalFeedLoadEvent) => void;
+      onFail?: (event: string) => void;
+      onStoryOpen?: () => void;
+      onStoryClose?: () => void;
+      onEvent?: (event: VerticalFeedEvent) => void;
+      onPress?: (event: VerticalFeedPressEvent) => void;
+      onUserInteracted?: (event: VerticalFeedItemInteractiveEvent) => void;
+      onProductHydration?: (event: VerticalFeedProductHydrationEvent) => void;
+      onCartUpdate?: (event: VerticalFeedProductCartUpdateEvent) => void;
+      onProductEvent?: (event: ProductEvent) => void;
+    }
+
+    export interface VerticalFeedLoadEvent {
+      feedGroupList: VerticalFeedGroup[];
+      dataSource: string;
+    }
+
+    export interface VerticalFeedFailEvent {
+      errorMessage: string;
+    }
+
+    export interface VerticalFeedPressEvent {
+      feedItem: VerticalFeedItem;
+    }
+
+    export interface VerticalFeedEvent {
+      event: string;
+      feedItem?: VerticalFeedItem;
+      feedGroup?: VerticalFeedGroup;
+      feedItemComponent?: VerticalFeedItemComponent;
+    }
+
+    export interface VerticalFeedProductHydrationEvent {
+      products: STRProductInformation[];
+    }
+
+    export interface VerticalFeedProductCartUpdateEvent {
+      event: string;
+      cart: STRCart;
+      change: STRCartItem;
+      responseId: string;
+    }
+
+    export interface ProductEvent {
+      event: string;
+    }
+
+    export interface VerticalFeedHydrationEvent {
+      event: string;
+      feedItem?: VerticalFeedItem;
+      feedGroup?: VerticalFeedGroup;
+      feedItemComponent?: VerticalFeedItemComponent;
+    }
+
+    export interface VerticalFeedItemComponent {
+      id: string;
+      type: ReactionType;
+    }
+
+    export interface VerticalFeedItemQuizComponent extends VerticalFeedItemComponent {
+      title: string;
+      options: string[];
+      rightAnswerIndex?: number;
+      selectedOptionIndex: number;
+      customPayload?: string;
+    }
+
+    export interface VerticalFeedItemPollComponent extends VerticalFeedItemComponent {
+      title: string;
+      emojiCodes: string[];
+      selectedEmojiIndex: number;
+      customPayload?: string;
+    }
+
+    export interface VerticalFeedItemRatingComponent extends VerticalFeedItemComponent {
+      title: string;
+      emojiCodes: string[];
+      selectedEmojiIndex: number;
+      customPayload?: string;
+    }
+
+    export interface VerticalFeedItemPromoCodeComponent extends VerticalFeedItemComponent {
+      text: string;
+    }
+
+    export interface VerticalFeedItemCommentComponent extends VerticalFeedItemComponent {
+      text: string;
+    }
+
+    export interface VerticalFeedItemInteractiveEvent {
+      story: VerticalFeedItem;
+      storyGroup: VerticalFeedGroup;
+      storyComponent: VerticalFeedItemComponent;
+    }
+
+    export interface VerticalFeedGroup {
+      id: string;
+      title: string;
+      iconUrl?: string;
+      index: number;
+      pinned: boolean;
+      seen: boolean;
+      feedList: VerticalFeedItem[];
+      type: string,
+      name: string,
+      nudge: boolean,
+      style?: StoryGroupStyle,
+    };
+
+    export interface VerticalFeedItem {
+      id: string;
+      index: number;
+      title: string;
+      name: string;
+      seen: boolean;
+      currentTime: number;
+      actionUrl: string;
+      previewUrl: string;
+      verticalFeedItemComponentList?: VerticalFeedItemComponent[];
+      products?: STRProductItem[];
+    }
+
+    export type ReactionType =
+      | "emoji"
+      | "rating"
+      | "poll"
+      | "quiz"
+      | "countdown"
+      | "promocode"
+      | "swipeaction"
+      | "buttonaction"
+      | "text"
+      | "image"
+      | "producttag"
+      | "productcard"
+      | "comment"
+      | "video"
+      | "vod";
+  }
+
+  export interface VerticalFeedGroupStyle {
+    borderUnseenColors?: [string],
+    textUnseenColor?: string,
+    badge?: VerticalFeedGroupBadgeStyle,
+  }
+  
+  export interface VerticalFeedGroupBadgeStyle {
+    backgroundColor?: string,
+    textColor?: string,
+    endTime?: number,
+    template?: string,
+    text?: string,
+  }
+
+  export class VerticalFeedBar extends Component<Storyly.Props> {
+    refresh: () => void;
+    pauseStory: () => void;
+    resumeStory: () => void;
+    closeStory: () => void;
+    openStory: (storyUriFromTheDashboard: string) => void;
+    openStoryWithId: (storyGroupId: string, storyId?: string, playMode?: String) => void;
+    hydrateProducts: (products: STRProductItem[]) => void;
+    updateCart: (cart: STRCart) => void;
+    approveCartChange: (responseId: string, cart: STRCart) => void;
+    rejectCartChange: (responseId: string, failMessage: string) => void;
+  }
 }
