@@ -1,4 +1,9 @@
 # Release Notes
+### 4.5.0 (04.12.2024)
+* added video share to Instagram Stories for Storyly
+* improved areas for next/previous clicks
+* added config for app logo visibility for shared media
+  
 ### 4.4.0 (28.11.2024)
 * added customPayload to the missing layer types
 * added RTL support to share bottom sheet
