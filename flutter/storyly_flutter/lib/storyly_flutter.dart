@@ -672,10 +672,13 @@ class StoryComponent {
   /// id of the interactive component
   final String id;
 
-  StoryComponent(this.type, this.id);
+  /// custom payload for the interactive component if exists
+  final String? customPayload;
+ 
+  StoryComponent(this.type, this.id, this.customPayload);
 
   factory StoryComponent.fromJson(Map<String, dynamic> json) {
-    return StoryComponent(json['type'], json['id']);
+    return StoryComponent(json['type'], json['id'], json['customPayload']);
   }
 }
 
@@ -684,8 +687,8 @@ class StoryQuizComponent implements StoryComponent {
   StoryQuizComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     this.rightAnswerIndex,
-    this.customPayload,
     required this.title,
     required this.options,
     required this.selectedOptionIndex,
@@ -697,11 +700,11 @@ class StoryQuizComponent implements StoryComponent {
   @override
   final String id;
 
+  @override
+  final String? customPayload;
+
   /// rightAnswerIndex Index of the right answer if exists
   final int? rightAnswerIndex;
-
-  /// customPayload Custom payload for this quiz if exists
-  final String? customPayload;
 
   /// title Title of the quiz if exists
   final String title;
@@ -716,8 +719,8 @@ class StoryQuizComponent implements StoryComponent {
     return StoryQuizComponent(
       type: json['type'],
       id: json['id'],
-      rightAnswerIndex: json['rightAnswerIndex'],
       customPayload: json['customPayload'],
+      rightAnswerIndex: json['rightAnswerIndex'],
       title: json['title'],
       options: List<String>.from(json['options'].map((x) => x)),
       selectedOptionIndex: json['selectedOptionIndex'],
@@ -730,8 +733,8 @@ class StoryPollComponent implements StoryComponent {
   StoryPollComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     required this.options,
-    this.customPayload,
     required this.selectedOptionIndex,
     required this.title,
   });
@@ -742,11 +745,11 @@ class StoryPollComponent implements StoryComponent {
   @override
   final String id;
 
+  @override
+  final String? customPayload;
+
   /// options List of options in the poll
   final List<String> options;
-
-  /// customPayload Custom payload for this poll if exists
-  final String? customPayload;
 
   /// selectedOptionIndex Option index that the user selected
   final int selectedOptionIndex;
@@ -758,8 +761,8 @@ class StoryPollComponent implements StoryComponent {
     return StoryPollComponent(
       type: json['type'],
       id: json['id'],
-      options: List<String>.from(json['options'].map((x) => x)),
       customPayload: json['customPayload'],
+      options: List<String>.from(json['options'].map((x) => x)),
       selectedOptionIndex: json['selectedOptionIndex'],
       title: json['title'],
     );
@@ -771,7 +774,7 @@ class StoryEmojiComponent implements StoryComponent {
   StoryEmojiComponent({
     required this.type,
     required this.id,
-    this.customPayload,
+    required this.customPayload,
     required this.selectedEmojiIndex,
     required this.emojiCodes,
   });
@@ -782,7 +785,7 @@ class StoryEmojiComponent implements StoryComponent {
   @override
   final String id;
 
-  /// customPayload Custom payload for this emoji if exists
+  @override
   final String? customPayload;
 
   /// selectedEmojiIndex Emoji index that the user selected
@@ -807,7 +810,7 @@ class StoryRatingComponent implements StoryComponent {
   StoryRatingComponent({
     required this.type,
     required this.id,
-    this.customPayload,
+    required this.customPayload,
     required this.rating,
     required this.emojiCode,
   });
@@ -818,7 +821,7 @@ class StoryRatingComponent implements StoryComponent {
   @override
   final String id;
 
-  /// customPayload Custom payload for this rating if exists
+  @override
   final String? customPayload;
 
   /// rating Rating value which user rated in the component
@@ -843,6 +846,7 @@ class StoryPromocodeComponent implements StoryComponent {
   StoryPromocodeComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     required this.text,
   });
 
@@ -852,6 +856,9 @@ class StoryPromocodeComponent implements StoryComponent {
   @override
   final String id;
 
+  @override
+  final String? customPayload;
+
   /// copied value from user in Promocode component
   final String text;
 
@@ -859,6 +866,7 @@ class StoryPromocodeComponent implements StoryComponent {
     return StoryPromocodeComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
     );
   }
@@ -869,6 +877,7 @@ class StoryCommentComponent implements StoryComponent {
   StoryCommentComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     required this.text,
   });
 
@@ -878,6 +887,9 @@ class StoryCommentComponent implements StoryComponent {
   @override
   final String id;
 
+  @override
+  final String? customPayload;
+
   /// user sent value in Comment component
   final String text;
 
@@ -885,6 +897,7 @@ class StoryCommentComponent implements StoryComponent {
     return StoryCommentComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
     );
   }
@@ -895,6 +908,7 @@ class StoryButtonActionComponent implements StoryComponent {
   StoryButtonActionComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     required this.text,
     this.actionUrl,
     this.products,
@@ -905,6 +919,9 @@ class StoryButtonActionComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// text text of the interactive component
   final String text;
@@ -919,6 +936,7 @@ class StoryButtonActionComponent implements StoryComponent {
     return StoryButtonActionComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
@@ -932,6 +950,7 @@ class StorySwipeActionComponent implements StoryComponent {
   StorySwipeActionComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     required this.text,
     this.actionUrl,
     this.products,
@@ -942,6 +961,9 @@ class StorySwipeActionComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// text text of the interactive component
   final String text;
@@ -956,6 +978,7 @@ class StorySwipeActionComponent implements StoryComponent {
     return StorySwipeActionComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
@@ -969,6 +992,7 @@ class StoryProductTagComponent implements StoryComponent {
   StoryProductTagComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     this.actionUrl,
     this.products,
   });
@@ -978,6 +1002,9 @@ class StoryProductTagComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// actionUrl action url assigned to the interactive component
   final String? actionUrl;
@@ -989,6 +1016,7 @@ class StoryProductTagComponent implements StoryComponent {
     return StoryProductTagComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
           json['products'].map((x) => STRProductItem.fromJson(x))),
@@ -1001,6 +1029,7 @@ class StoryProductCardComponent implements StoryComponent {
   StoryProductCardComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     this.text,
     this.actionUrl,
     this.products,
@@ -1011,6 +1040,9 @@ class StoryProductCardComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// text text of the interactive component
   final String? text;
@@ -1025,6 +1057,7 @@ class StoryProductCardComponent implements StoryComponent {
     return StoryProductCardComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       text: json['text'],
       actionUrl: json['actionUrl'],
       products: List<STRProductItem>.from(
@@ -1038,6 +1071,7 @@ class StoryProductCatalogComponent implements StoryComponent {
   StoryProductCatalogComponent({
     required this.type,
     required this.id,
+    required this.customPayload,
     this.actionUrlList,
     this.products,
   });
@@ -1047,6 +1081,9 @@ class StoryProductCatalogComponent implements StoryComponent {
 
   @override
   final String id;
+
+  @override
+  final String? customPayload;
 
   /// actionUrlList action url list assigned to the interactive component
   final List<String>? actionUrlList;
@@ -1058,6 +1095,7 @@ class StoryProductCatalogComponent implements StoryComponent {
     return StoryProductCatalogComponent(
       type: json['type'],
       id: json['id'],
+      customPayload: json['customPayload'],
       actionUrlList: castOrNull(
           json['actionUrlList']?.map<String>((e) => e as String).toList()),
       products: List<STRProductItem>.from(
