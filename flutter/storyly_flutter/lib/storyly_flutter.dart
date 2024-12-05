@@ -674,7 +674,7 @@ class StoryComponent {
 
   /// custom payload for the interactive component if exists
   final String? customPayload;
- 
+
   StoryComponent(this.type, this.id, this.customPayload);
 
   factory StoryComponent.fromJson(Map<String, dynamic> json) {

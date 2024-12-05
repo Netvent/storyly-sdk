@@ -1,3 +1,11 @@
+### 3.10.0 (05.12.2024)
+* added video share to Instagram Stories
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly delegate and listener methods
+* fixed a bug related to product bottom sheet image load on android platform, fixed [#392](https://github.com/Netvent/storyly-mobile/issues/392)
+* fixed a bug related to conditional stories on android platform
+
 ### 3.8.1 (18.11.2024)
 * IMPORTANT! renamed products field to actionProducts in Story class
 * added new public interactive component types
