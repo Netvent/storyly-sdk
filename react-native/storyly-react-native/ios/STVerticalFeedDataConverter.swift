@@ -48,12 +48,12 @@ func createVerticalFeedGroupBadgeStyleMap(badge: VerticalFeedGroupBadgeStyle?) -
     ]
 }
 
-func createVerticalFeedMap(_ story: Story?) -> [String: Any?]? {
+func createVerticalFeedItemMap(_ story: VerticalFeedItem?) -> [String: Any?]? {
     guard let story = story else { return nil }
-    return createStoryMap(story: story)
+    return createVerticalFeedItemMap(story: story)
 }
 
-func createVerticalFeedMap(story: Story) -> [String: Any?] {
+func createVerticalFeedItemMap(story: VerticalFeedItem) -> [String: Any?] {
     return [
         "id": story.uniqueId,
         "index": story.index,
@@ -63,160 +63,63 @@ func createVerticalFeedMap(story: Story) -> [String: Any?] {
         "currentTime": story.currentTime,
         "previewUrl": story.previewUrl?.absoluteString,
         "actionUrl": story.actionUrl,
-        "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent: $0)},
+        "storyComponentList": story.verticalFeedItemComponentList?.map { createVerticalFeedItemComponentMap(storyComponent: $0)},
         "products": story.actionProducts?.map { product in createSTRProductItemMap(product: product) }
     ]
 }
 
-func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?]? {
+func createVerticalFeedItemComponentMap(_ storyComponent: VerticalFeedItemComponent?) -> [String: Any?]? {
     guard let storyComponent = storyComponent else { return nil }
-    return createStoryComponentMap(storyComponent: storyComponent)
+    return createVerticalFeedItemComponentMap(storyComponent: storyComponent)
 }
 
 func createVerticalFeedItemComponentMap(storyComponent: VerticalFeedItemComponent) -> [String: Any?] {
     switch storyComponent {
-        case let storyComponent as VerticalFeedQuizComponent: return [
-            "type": StoryComponentTypeHelper.storyComponentName(componentType:verticalFeedComponent.type).lowercased(),
-            "id": storyComponent.id,
-            "title": storyComponent.title,
-            "options": storyComponent.options,
-            "rightAnswerIndex": storyComponent.rightAnswerIndex,
-            "selectedOptionIndex": storyComponent.selectedOptionIndex,
-            "customPayload": storyComponent.customPayload
-        ]
-        case let storyComponent as VerticalFeedPollComponent: return [
+        case let verticalFeedComponent as VerticalFeedQuizComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:verticalFeedComponent.type).lowercased(),
-            "id": storyComponent.id,
-            "title": storyComponent.title,
-            "options": storyComponent.options,
-            "selectedOptionIndex": storyComponent.selectedOptionIndex,
-            "customPayload": storyComponent.customPayload
+            "id": verticalFeedComponent.id,
+            "title": verticalFeedComponent.title,
+            "options": verticalFeedComponent.options,
+            "rightAnswerIndex": verticalFeedComponent.rightAnswerIndex,
+            "selectedOptionIndex": verticalFeedComponent.selectedOptionIndex,
+            "customPayload": verticalFeedComponent.customPayload
         ]
-        case let storyComponent as VerticalFeedEmojiComponent: return [
-            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
-            "id": storyComponent.id,
-            "emojiCodes": storyComponent.emojiCodes,
-            "selectedEmojiIndex": storyComponent.selectedEmojiIndex,
-            "customPayload": storyComponent.customPayload
+        case let verticalFeedComponent as VerticalFeedPollComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:verticalFeedComponent.type).lowercased(),
+            "id": verticalFeedComponent.id,
+            "title": verticalFeedComponent.title,
+            "options": verticalFeedComponent.options,
+            "selectedOptionIndex": verticalFeedComponent.selectedOptionIndex,
+            "customPayload": verticalFeedComponent.customPayload
         ]
-        case let storyComponent as VerticalFeedRatingComponent: return [
+        case let verticalFeedComponent as VerticalFeedEmojiComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
-            "id": storyComponent.id,
-            "emojiCode": storyComponent.emojiCode,
-            "rating": storyComponent.rating,
-            "customPayload": storyComponent.customPayload
+            "id": verticalFeedComponent.id,
+            "emojiCodes": verticalFeedComponent.emojiCodes,
+            "selectedEmojiIndex": verticalFeedComponent.selectedEmojiIndex,
+            "customPayload": verticalFeedComponent.customPayload
         ]
-        case let storyComponent as VerticalFeedPromoCodeComponent: return [
+        case let verticalFeedComponent as VerticalFeedRatingComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
-            "id": storyComponent.id,
-            "text": storyComponent.text
+            "id": verticalFeedComponent.id,
+            "emojiCode": verticalFeedComponent.emojiCode,
+            "rating": verticalFeedComponent.rating,
+            "customPayload": verticalFeedComponent.customPayload
         ]
-        case let storyComponent as VerticalFeedCommentComponent: return [
+        case let verticalFeedComponent as VerticalFeedPromoCodeComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
-            "id": storyComponent.id,
-            "text": storyComponent.text
+            "id": verticalFeedComponent.id,
+            "text": verticalFeedComponent.text
+        ]
+        case let verticalFeedComponent as VerticalFeedCommentComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
+            "id": verticalFeedComponent.id,
+            "text": verticalFeedComponent.text
         ]
         default: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
         ]
     }
-}
-
-func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
-    guard let product = product else { return [:] }
-
-    return [
-        "productId": product.productId,
-        "productGroupId": product.productGroupId,
-        "title": product.title,
-        "url": product.url,
-        "desc": product.desc,
-        "price": product.price,
-        "salesPrice": product.salesPrice, 
-        "currency": product.currency,
-        "variants": product.variants?.compactMap { createSTRProductVariantMap(variant: $0) },
-        "imageUrls": product.imageUrls.map { $0 }
-    ]
-}
-
-internal func createSTRProductVariantMap(variant: STRProductVariant) -> [String: Any?] {
-    return [
-        "name": variant.name,
-        "value": variant.value,
-        "key": variant.key
-    ]
-}
-
-internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem {
-    return STRProductItem(
-        productId: productItem?["productId"] as? String ?? "",
-        productGroupId: productItem?["productGroupId"] as? String ?? "",
-        title: productItem?["title"] as? String ?? "",
-        url: productItem?["url"] as? String ?? "",
-        description: productItem?["desc"] as? String,
-        price: Float((productItem?["price"] as? Double) ?? 0.0),
-        salesPrice: (productItem?["salesPrice"] as? NSNumber),
-        currency: productItem?["currency"] as? String ?? "",
-        imageUrls: productItem?["imageUrls"] as? [String],
-        variants:  createSTRProductVariant(variants: productItem?["variants"] as? [NSDictionary] ?? []),
-        ctaText: productItem?["ctaText"] as? String
-    )
-}
-
-internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVariant] {
-    variants.compactMap { variant in
-        STRProductVariant(
-            name: variant["name"] as? String ?? "", 
-            value: variant["value"] as? String ?? "",
-            key: variant["key"] as? String ?? ""
-            )
-    }
-}
-
-internal func createSTRCartMap(cart: STRCart?) -> [String: Any?]? {
-    guard let cart = cart else { return nil }
-    return [
-        "items": cart.items.map { createSTRCartItemMap(cartItem: $0) },
-        "oldTotalPrice": cart.oldTotalPrice,
-        "totalPrice": cart.totalPrice,
-        "currency": cart.currency
-    ]
-}
-
-internal func createSTRCartItemMap(cartItem: STRCartItem?) -> [String: Any?] {
-    guard let cartItem = cartItem else { return [:] }
-    return [
-        "item": createSTRProductItemMap(product: cartItem.item),
-        "quantity": cartItem.quantity,
-        "oldTotalPrice": cartItem.oldTotalPrice,
-        "totalPrice": cartItem.totalPrice
-    ]
-}
-
-internal func createSTRProductInformationMap(productInfo: STRProductInformation?) -> [String: Any?] {
-    guard let productInfo = productInfo else { return [:] }
-    return [
-        "productId": productInfo.productId,
-        "productGroupId": productInfo.productGroupId
-    ]
-}
-
-internal func createSTRCartItem(cartItemMap: NSDictionary) -> STRCartItem {
-    return STRCartItem(
-        item: createSTRProductItem(productItem: cartItemMap["item"] as? NSDictionary),
-        quantity: cartItemMap["quantity"] as? Int ?? 0,
-        totalPrice: cartItemMap["totalPrice"] as? NSNumber,
-        oldTotalPrice: cartItemMap["oldTotalPrice"] as? NSNumber
-    )
-}
-
-internal func createSTRCart(cartMap: NSDictionary) -> STRCart {
-    return STRCart(
-        items: (cartMap["items"] as? [NSDictionary])?.map { createSTRCartItem(cartItemMap: $0) } ?? [],
-        totalPrice: cartMap["totalPrice"] as? Float ?? 0.0,
-        oldTotalPrice: cartMap["oldTotalPrice"] as? NSNumber,
-        currency: cartMap["currency"] as? String ?? ""
-    )
 }
 
