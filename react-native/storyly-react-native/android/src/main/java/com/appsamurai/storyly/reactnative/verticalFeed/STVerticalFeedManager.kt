@@ -7,18 +7,14 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.DisplayMetrics
 import android.util.TypedValue
-import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.*
-import com.appsamurai.storyly.config.StorylyConfig
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
-import com.appsamurai.storyly.config.styling.bar.StorylyBarStyling
-import com.appsamurai.storyly.config.styling.group.StorylyStoryGroupStyling
-import com.appsamurai.storyly.config.styling.story.StorylyStoryStyling
 import com.appsamurai.storyly.reactnative.createSTRCart
 import com.appsamurai.storyly.reactnative.createSTRProductItem
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedBarView
+import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
 import com.appsamurai.storyly.verticalfeed.config.StorylyVerticalFeedConfig
 import com.appsamurai.storyly.verticalfeed.config.bar.StorylyVerticalFeedBarStyling
@@ -184,17 +180,17 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
         println("STR:STStorylyManager:setPropStoryly:${storylyBundle}")
         val storylyInitJson = storylyBundle.getMap("storylyInit") ?: return
         val storylyId = storylyInitJson.getString("storylyId") ?: return
-        val storyGroupStylingJson = storylyBundle.getMap("storyGroupStyling") ?: return
-        val storyBarStylingJson = storylyBundle.getMap("storyBarStyling") ?: return
-        val storyStylingJson = storylyBundle.getMap("storyStyling") ?: return
-        val storyShareConfig = storylyBundle.getMap("storyShareConfig") ?: return
-        val storyProductConfig = storylyBundle.getMap("storyProductConfig") ?: return
+        val storyGroupStylingJson = storylyBundle.getMap("verticalFeedGroupStyling") ?: return
+        val storyBarStylingJson = storylyBundle.getMap("verticalFeedItemBarStyling") ?: return
+        val storyStylingJson = storylyBundle.getMap("verticalFeedCustomization") ?: return
+        val storyShareConfig = storylyBundle.getMap("verticalFeedItemShareConfig") ?: return
+        val storyProductConfig = storylyBundle.getMap("verticalFeedItemProductConfig") ?: return
 
         var storylyConfigBuilder = StorylyVerticalFeedConfig.Builder()
-        storylyConfigBuilder = stStorylyInit(json = storylyInitJson, configBuilder = storylyConfigBuilder)
-        storylyConfigBuilder = stStorylyGroupStyling(context = view.context, json = storyGroupStylingJson, configBuilder = storylyConfigBuilder)
-        storylyConfigBuilder = stStoryBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
-        storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stVerticalFeedInit(json = storylyInitJson, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stVerticalFeedGroupStyling(context = view.context, json = storyGroupStylingJson, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stVerticalFeedItemBarStyling(json = storyBarStylingJson, configBuilder = storylyConfigBuilder)
+        storylyConfigBuilder = stVerticalFeedCustomization(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
 
@@ -207,7 +203,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
         }
     }
 
-    private fun stStorylyInit(
+    private fun stVerticalFeedInit(
         json: ReadableMap,
         configBuilder: StorylyVerticalFeedConfig.Builder
     ): StorylyVerticalFeedConfig.Builder {
@@ -220,7 +216,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
             .setLocale(if (json.hasKey("storylyLocale")) json.getString("storylyLocale") else null)
     }
 
-    private fun stStorylyGroupStyling(
+    private fun stVerticalFeedGroupStyling(
         context: Context,
         json: ReadableMap,
         configBuilder: StorylyVerticalFeedConfig.Builder,
@@ -231,6 +227,19 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
         groupStylingBuilder = if (json.hasKey("iconCornerRadius")) groupStylingBuilder.setIconCornerRadius(json.getInt("iconCornerRadius")) else groupStylingBuilder.setIconCornerRadius(dpToPixel(40))
         if (json.hasKey("titleTextSize")) groupStylingBuilder = groupStylingBuilder.setTitleTextSize(Pair(TypedValue.COMPLEX_UNIT_PX, json.getInt("titleTextSize")))
         if (json.hasKey("titleVisible")) groupStylingBuilder = groupStylingBuilder.setTitleVisibility(json.getBoolean("titleVisible"))
+        if (json.hasKey("textTypeface")) groupStylingBuilder = groupStylingBuilder.setTypeface(getTypeface(context, json.getString("textTypeface")))
+        if (json.hasKey("textColor")) groupStylingBuilder = groupStylingBuilder.setTextColor(json.getInt("textColor"))
+        if (json.hasKey("typeIndicatorVisible")) groupStylingBuilder = groupStylingBuilder.setTypeIndicatorVisibility(json.getBoolean("typeIndicatorVisible"))
+        if (json.hasKey("groupOrder")) groupStylingBuilder = groupStylingBuilder.setGroupOrder(getStorylyGroupOrder(json.getString("groupOrder")))
+        if (json.hasKey("minLikeCountToShowIcon")) groupStylingBuilder = groupStylingBuilder.setMinLikeCountToShowIcon(json.getInt("minLikeCountToShowIcon"))
+        if (json.hasKey("minImpressionCountToShowIcon")) groupStylingBuilder = groupStylingBuilder.setMinImpressionCountToShowIcon(json.getInt("minImpressionCountToShowIcon"))
+
+        getDrawable(context, if (json.hasKey("impressionIcon")) json.getString("impressionIcon") else null)?.let {
+            groupStylingBuilder = groupStylingBuilder.setImpressionIcon(it)
+        }
+        getDrawable(context, if (json.hasKey("likeIcon")) json.getString("likeIcon") else null)?.let {
+            groupStylingBuilder = groupStylingBuilder.setLikeIcon(it)
+        }
 
         return configBuilder
             .setVerticalFeedGroupStyling(
@@ -239,7 +248,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
             )
     }
 
-    private fun stStoryBarStyling(
+    private fun stVerticalFeedItemBarStyling(
         json: ReadableMap,
         configBuilder: StorylyVerticalFeedConfig.Builder
     ): StorylyVerticalFeedConfig.Builder {
@@ -291,7 +300,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
             )
     }
 
-    private fun stStoryStyling(
+    private fun stVerticalFeedCustomization(
         context: Context,
         json: ReadableMap,
         configBuilder: StorylyVerticalFeedConfig.Builder
@@ -301,9 +310,14 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
         if (json.hasKey("interactiveFont")) storyStylingBuilder = storyStylingBuilder.setInteractiveTypeface(getTypeface(context, json.getString("interactiveFont")))
         json.getArray("progressBarColor")?.let { storyStylingBuilder = storyStylingBuilder.setProgressBarColor(convertColorArray(it)) }
         if (json.hasKey("isTitleVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isTitleVisible"))
+        if (json.hasKey("isProgressBarVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isProgressBarVisible"))
         if (json.hasKey("isCloseButtonVisible")) storyStylingBuilder = storyStylingBuilder.setCloseButtonVisibility(json.getBoolean("isCloseButtonVisible"))
+        if (json.hasKey("isLikeButtonVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isLikeButtonVisible"))
+        if (json.hasKey("isShareButtonVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isShareButtonVisible"))
+
         storyStylingBuilder = storyStylingBuilder.setCloseButtonIcon(getDrawable(context, if (json.hasKey("closeButtonIcon")) json.getString("closeButtonIcon") else null))
         storyStylingBuilder = storyStylingBuilder.setShareButtonIcon(getDrawable(context, if (json.hasKey("shareButtonIcon")) json.getString("shareButtonIcon") else null))
+        storyStylingBuilder = storyStylingBuilder.setShareButtonIcon(getDrawable(context, if (json.hasKey("likeButtonIcon")) json.getString("likeButtonIcon") else null))
 
         return configBuilder
             .setVerticalFeedStyling(
@@ -317,6 +331,13 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
             "ltr" -> StorylyLayoutDirection.LTR
             "rtl" -> StorylyLayoutDirection.RTL
             else -> StorylyLayoutDirection.LTR
+        }
+    }
+
+    private fun getStorylyGroupOrder(groupOrder: String?): StorylyVerticalFeedGroupOrder {
+        return when (groupOrder) {
+            "bySeenState" -> StorylyVerticalFeedGroupOrder.BySeenState
+            else -> StorylyVerticalFeedGroupOrder.Static
         }
     }
 

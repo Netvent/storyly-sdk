@@ -76,7 +76,7 @@ internal fun createVerticalFeedItem(feedItem: VerticalFeedItem): WritableMap {
                 createVerticalFeedComponentMap(it)
             ) }
         })
-        storyMap.putArray("products", feedItem.actionProducts?.let {
+        storyMap.putArray("actionProducts", feedItem.actionProducts?.let {
             Arguments.createArray().also { storiesArray ->
                 it.forEach { item -> storiesArray.pushMap(createSTRProductItemMap(item)) }
             }

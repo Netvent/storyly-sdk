@@ -169,7 +169,7 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
-    };
+    }
 
     export interface Story {
       id: string;
@@ -299,48 +299,49 @@ declare module "storyly-react-native" {
       storylyFacebookAppID?: string;
 
       //BarStyling
-      storyGroupListOrientation?: "horizontal" | "vertical";
-      storyGroupListSections?: number;
-      storyGroupListHorizontalEdgePadding?: number;
-      storyGroupListVerticalEdgePadding?: number;
-      storyGroupListHorizontalPaddingBetweenItems?: number;
-      storyGroupListVerticalPaddingBetweenItems?: number;
+      verticalFeedGroupListSections?: number;
+      verticalFeedGroupListHorizontalEdgePadding?: number;
+      verticalFeedGroupListVerticalEdgePadding?: number;
+      verticalFeedGroupListHorizontalPaddingBetweenItems?: number;
+      verticalFeedGroupListVerticalPaddingBetweenItems?: number;
 
       //GroupStyling
-      storyGroupIconHeight?: number;
-      storyGroupIconCornerRadius?: number;
-      storyGroupIconBackgroundColor?: string;
-      storyGroupTextColor?: string;
-      storyGroupTextTypeface?: string;
-      storyGroupTextIsVisible?: boolean;
-      storyGroupTextLines?: number;
-      storyGroupTextSize?: number;
-      storyGroupMinImpressionCountToShowIcon?: number;
-      storyGroupMinLikeCountToShowIcon?: number;
-      storyGroupTypeIndicatorVisibility?: boolean;
+      verticalFeedGroupIconHeight?: number;
+      verticalFeedGroupIconCornerRadius?: number;
+      verticalFeedGroupIconBackgroundColor?: string;
+      verticalFeedGroupTextSize?: number;
+      verticalFeedGroupTextIsVisible?: boolean;
+      verticalFeedGroupTextTypeface?: string;
+      verticalFeedGroupTextColor?: string;
+      verticalFeedTypeIndicatorIsVisible?: boolean;
+      verticalFeedGroupOrder?: "bySeenState" | "static";
+      verticalFeedGroupMinLikeCountToShowIcon?: number;
+      verticalFeedGroupMinImpressionCountToShowIcon?: number;
+      verticalFeedGroupImpressionIcon?: string;
+      verticalFeedGroupLikeIcon?: string;
 
       //VerticalFeedCustomization
-      storyItemProgressBarColor?: string[];
-      storyItemTextTypeface?: string;
-      storyItemInteractiveTypeface?: string;
-      storyItemTextColor?: string;
-      storyItemTitleVisibility?: boolean;
-      storyHeaderCloseButtonIsVisible?: boolean;
-      storyHeaderCloseIcon?: string;
-      storyHeaderShareButtonIsVisible?: boolean;
-      storyHeaderShareIcon?: string;
-      storyHeaderLikeButtonIsVisible?: boolean;
-      storyHeaderLikeIcon?: string;
+      verticalFeedItemTextTypeface?: string;
+      verticalFeedItemInteractiveTextTypeface?: string;
+      verticalFeedItemProgressBarColor?: string[];
+      verticalFeedItemTitleVisibility?: boolean;
+      verticalFeedItemProgressBarVisibility?: boolean;
+      verticalFeedItemCloseButtonIsVisible?: boolean;
+      verticalFeedItemLikeButtonIsVisible?: boolean;
+      verticalFeedItemShareButtonIsVisible?: boolean;
+      verticalFeedItemCloseIcon?: string;
+      verticalFeedItemShareIcon?: string;
+      verticalFeedItemLikeIcon?: string;
 
       //ProductConfig
-      storyFallbackIsEnabled?: boolean;
-      storyCartIsEnabled?: boolean;
-      storyProductFeed?: Record<string, STRProductItem[]>;
+      verticalFeedFallbackIsEnabled?: boolean;
+      verticalFeedCartIsEnabled?: boolean;
+      verticalFeedProductFeed?: Record<string, STRProductItem[]>;
 
       onLoad?: (event: VerticalFeedLoadEvent) => void;
       onFail?: (event: string) => void;
-      onStoryOpen?: () => void;
-      onStoryClose?: () => void;
+      onVerticalFeedOpen?: () => void;
+      onVerticalFeedClose?: () => void;
       onEvent?: (event: VerticalFeedEvent) => void;
       onPress?: (event: VerticalFeedPressEvent) => void;
       onUserInteracted?: (event: VerticalFeedItemInteractiveEvent) => void;
@@ -444,7 +445,7 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
-    };
+    }
 
     export interface VerticalFeedItem {
       id: string;
@@ -456,7 +457,7 @@ declare module "storyly-react-native" {
       actionUrl: string;
       previewUrl: string;
       verticalFeedItemComponentList?: VerticalFeedItemComponent[];
-      products?: STRProductItem[];
+      actionProducts?: STRProductItem[];
     }
 
     export type ReactionType =
@@ -491,7 +492,7 @@ declare module "storyly-react-native" {
     text?: string,
   }
 
-  export class VerticalFeedBar extends Component<Storyly.Props> {
+  export class VerticalFeedBar extends Component<VerticalFeedBar.Props> {
     refresh: () => void;
     pauseStory: () => void;
     resumeStory: () => void;

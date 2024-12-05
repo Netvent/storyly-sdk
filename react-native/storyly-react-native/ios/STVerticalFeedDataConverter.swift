@@ -9,7 +9,7 @@ import Storyly
 
 func createVerticalFeedGroupMap(_ storyGroup: VerticalFeedGroup?) -> [String: Any?]? {
     guard let storyGroup = storyGroup else { return nil }
-    return createStoryGroupMap(storyGroup: storyGroup)
+    return createVerticalFeedGroupMap(storyGroup: storyGroup)
 }
     
 func createVerticalFeedGroupMap(storyGroup: VerticalFeedGroup) -> [String: Any?] {
@@ -20,11 +20,11 @@ func createVerticalFeedGroupMap(storyGroup: VerticalFeedGroup) -> [String: Any?]
         "index": storyGroup.index,
         "pinned": storyGroup.pinned,
         "seen": storyGroup.seen,
-        "stories": storyGroup.feedList.map { createStoryMap(story: $0) },
+        "stories": storyGroup.feedList.map { createVerticalFeedItemMap(story: $0) },
         "type": storyGroup.type.description,
         "name": storyGroup.name,
         "nudge": storyGroup.nudge,
-        "style": createStoryGroupStyleMap(storyGroupStyle: storyGroup.style)
+        "style": createVerticalFeedGroupStyleMap(storyGroupStyle: storyGroup.style)
     ]
 }
 
