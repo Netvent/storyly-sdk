@@ -45,6 +45,9 @@
 ### 4.0.0 (17.10.2024)
 * added vertical feed
 
+### 3.10.0 (05.12.2024)
+* added video share to Instagram Stories
+
 ### 3.9.0 (28.11.2024)
 * added customPayload to the missing layer types
 * added RTL support to share bottom sheet
