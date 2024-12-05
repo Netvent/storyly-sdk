@@ -1,6 +1,7 @@
 import { processColor, type ProcessedColorValue } from "react-native";
 import type { StorylyProps } from "../Storyly";
 import type { STRProductItem } from "./story";
+import type { Optional } from "./util";
 
 export interface StorylyConfig {
     storylyInit: {
