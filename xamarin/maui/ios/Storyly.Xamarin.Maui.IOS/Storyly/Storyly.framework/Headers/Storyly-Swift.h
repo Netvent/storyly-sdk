@@ -687,6 +687,8 @@ SWIFT_CLASS_NAMED("StoryComponent")
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 /// Type of the interactive component
 @property (nonatomic, readonly) enum StoryComponentType type;
+/// Custom payload for the interactive component if exists
+@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -708,7 +710,9 @@ SWIFT_CLASS_NAMED("StoryButtonComponent")
 ///
 /// \param actionUrl action url assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for button component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -722,7 +726,9 @@ SWIFT_CLASS_NAMED("StoryCommentComponent")
 ///
 /// \param text Comment text that the user sent
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for Comment component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -791,8 +797,6 @@ SWIFT_CLASS_NAMED("StoryEmojiComponent")
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull emojiCodes;
 /// Emoji index that the user selected
 @property (nonatomic, readonly) NSInteger selectedEmojiIndex;
-/// Custom payload for this emoji if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// StoryEmojiComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -980,8 +984,6 @@ SWIFT_CLASS_NAMED("StoryImageQuizComponent")
 @property (nonatomic, readonly, strong) NSNumber * _Nullable rightAnswerIndex;
 /// Option index that the user selected
 @property (nonatomic, readonly) NSInteger selectedOptionIndex;
-/// Custom payload for this image quiz if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// StoryImageQuizComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -1008,8 +1010,6 @@ SWIFT_CLASS_NAMED("StoryPollComponent")
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull options;
 /// Option index that the user selected
 @property (nonatomic, readonly) NSInteger selectedOptionIndex;
-/// Custom payload for this poll if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// StoryPollComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -1051,7 +1051,9 @@ SWIFT_CLASS_NAMED("StoryProductCardComponent")
 ///
 /// \param actionUrl action url assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for ProductCard component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1067,7 +1069,9 @@ SWIFT_CLASS_NAMED("StoryProductCatalogComponent")
 ///
 /// \param actionUrlLList action url list assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for ProductCatalog component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1083,7 +1087,9 @@ SWIFT_CLASS_NAMED("StoryProductTagComponent")
 ///
 /// \param actionUrl action url assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for ProductTag component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1097,7 +1103,9 @@ SWIFT_CLASS_NAMED("StoryPromoCodeComponent")
 ///
 /// \param text PromoCode text that the user copied
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for PromoCode component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1112,8 +1120,6 @@ SWIFT_CLASS_NAMED("StoryQuizComponent")
 @property (nonatomic, readonly, strong) NSNumber * _Nullable rightAnswerIndex;
 /// Option index that the user selected
 @property (nonatomic, readonly) NSInteger selectedOptionIndex;
-/// Custom payload for this quiz if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// StoryQuizComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -1138,8 +1144,6 @@ SWIFT_CLASS_NAMED("StoryRatingComponent")
 @property (nonatomic, readonly, copy) NSString * _Nonnull emojiCode;
 /// Rating value which user rated in the component
 @property (nonatomic, readonly) NSInteger rating;
-/// Custom payload for this rating if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// StoryRatingComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -1167,7 +1171,9 @@ SWIFT_CLASS_NAMED("StorySwipeComponent")
 ///
 /// \param text text of the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for Swipe component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// This enum represents the type of a story content
@@ -1459,42 +1465,48 @@ typedef SWIFT_ENUM(NSInteger, StorylyEvent, open) {
   StorylyEventStoryInteractiveImpression = 25,
 /// Sent when a user clikcs a product tag point
   StorylyEventStoryProductTagExpanded = 26,
+/// Sent when a user clicks button
+  StorylyEventStoryButtonActionClicked = 27,
+/// Sent when a user clicks image button
+  StorylyEventStoryImageButtonActionClicked = 28,
+/// Sent when a user clicks swipe action
+  StorylyEventStorySwipeActionClicked = 29,
 /// Sent when a user clicks a product expanded area
-  StorylyEventStoryProductTagClicked = 27,
+  StorylyEventStoryProductTagClicked = 30,
 /// Sent when a user clicks a product card area
-  StorylyEventStoryProductCardClicked = 28,
+  StorylyEventStoryProductCardClicked = 31,
 /// Sent when a user clicks a product catalog area
-  StorylyEventStoryProductCatalogClicked = 29,
+  StorylyEventStoryProductCatalogClicked = 32,
 /// Sent when a user copy a promo code
-  StorylyEventStoryPromoCodeCopied = 30,
+  StorylyEventStoryPromoCodeCopied = 33,
 /// Sent when a user sends a comment
-  StorylyEventStoryCommentSent = 31,
+  StorylyEventStoryCommentSent = 34,
 /// Sent when a user opens input area
-  StorylyEventStoryCommentInputOpened = 32,
+  StorylyEventStoryCommentInputOpened = 35,
 /// Sent when a user closes input area
-  StorylyEventStoryCommentInputClosed = 33,
+  StorylyEventStoryCommentInputClosed = 36,
 /// Sent when a user seeks the video in long story
-  StorylyEventStorySeeked = 34,
+  StorylyEventStorySeeked = 37,
 /// Sent when a product successfully added
-  StorylyEventStoryProductCartAdded = 35,
+  StorylyEventStoryProductCartAdded = 38,
 /// Sent when a product added failed
-  StorylyEventStoryProductCartAddFailed = 36,
+  StorylyEventStoryProductCartAddFailed = 39,
 /// Sent when product sheet is opened
-  StorylyEventStoryProductSheetOpened = 37,
+  StorylyEventStoryProductSheetOpened = 40,
 /// Sent when a product added
-  StorylyEventStoryProductAdded = 38,
+  StorylyEventStoryProductAdded = 41,
 /// Sent when a product updated
-  StorylyEventStoryProductUpdated = 39,
+  StorylyEventStoryProductUpdated = 42,
 /// Sent when product removed
-  StorylyEventStoryProductRemoved = 40,
+  StorylyEventStoryProductRemoved = 43,
 /// Sent when checkout button clicked
-  StorylyEventStoryCheckoutButtonClicked = 41,
+  StorylyEventStoryCheckoutButtonClicked = 44,
 /// Sent when cart button clicked from success sheet
-  StorylyEventStoryCartButtonClicked = 42,
+  StorylyEventStoryCartButtonClicked = 45,
 /// Sent when cart view clicked
-  StorylyEventStoryCartViewClicked = 43,
+  StorylyEventStoryCartViewClicked = 46,
 /// Sent  when product selected
-  StorylyEventStoryProductSelected = 44,
+  StorylyEventStoryProductSelected = 47,
 };
 
 
@@ -1635,6 +1647,10 @@ SWIFT_CLASS_NAMED("Builder")
 /// \param id AppID from your meta development account 
 ///
 - (StorylyShareConfigBuilder * _Nonnull)setFacebookAppID:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
+/// This function allows you to set the visibility of the app icon on the shared media.
+/// \param isVisible Visibility of app icon, default is true 
+///
+- (StorylyShareConfigBuilder * _Nonnull)setAppLogoVisibility:(BOOL)isVisible SWIFT_WARN_UNUSED_RESULT;
 /// This function builds StorylyShareConfig with the current properties
 ///
 /// returns:
@@ -2290,6 +2306,8 @@ SWIFT_CLASS_NAMED("VerticalFeedItemComponent")
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 /// Type of the interactive component
 @property (nonatomic, readonly) enum VerticalFeedItemComponentType type;
+/// Custom payload for the interactive component if exists
+@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2311,7 +2329,9 @@ SWIFT_CLASS_NAMED("VerticalFeedButtonComponent")
 ///
 /// \param actionUrl action url assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for Button component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2325,7 +2345,9 @@ SWIFT_CLASS_NAMED("VerticalFeedCommentComponent")
 ///
 /// \param text Comment text that the user sent
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for Comment component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2336,8 +2358,6 @@ SWIFT_CLASS_NAMED("VerticalFeedEmojiComponent")
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull emojiCodes;
 /// Emoji index that the user selected
 @property (nonatomic, readonly) NSInteger selectedEmojiIndex;
-/// Custom payload for this emoji if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// VerticalFeedEmojiComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -2406,42 +2426,48 @@ typedef SWIFT_ENUM(NSInteger, VerticalFeedEvent, open) {
   VerticalFeedEventVerticalFeedItemInteractiveImpression = 25,
 /// Sent when a user clicks a product tag point
   VerticalFeedEventVerticalFeedItemProductTagExpanded = 26,
+/// Sent when a user clicks button
+  VerticalFeedEventVerticalFeedItemButtonActionClicked = 27,
+/// Sent when a user clicks image button
+  VerticalFeedEventVerticalFeedItemImageButtonActionClicked = 28,
+/// Sent when a user clicks swipe action
+  VerticalFeedEventVerticalFeedItemSwipeActionClicked = 29,
 /// Sent when a user clicks a product expanded area
-  VerticalFeedEventVerticalFeedItemProductTagClicked = 27,
+  VerticalFeedEventVerticalFeedItemProductTagClicked = 30,
 /// Sent when a user clicks a product card area
-  VerticalFeedEventVerticalFeedItemProductCardClicked = 28,
+  VerticalFeedEventVerticalFeedItemProductCardClicked = 31,
 /// Sent when a user clicks a product catalog area
-  VerticalFeedEventVerticalFeedItemProductCatalogClicked = 29,
+  VerticalFeedEventVerticalFeedItemProductCatalogClicked = 32,
 /// Sent when a user copies a promo code
-  VerticalFeedEventVerticalFeedItemPromoCodeCopied = 30,
+  VerticalFeedEventVerticalFeedItemPromoCodeCopied = 33,
 /// Sent when a user sends a comment
-  VerticalFeedEventVerticalFeedItemCommentSent = 31,
+  VerticalFeedEventVerticalFeedItemCommentSent = 34,
 /// Sent when a user opens the input area
-  VerticalFeedEventVerticalFeedItemCommentInputOpened = 32,
+  VerticalFeedEventVerticalFeedItemCommentInputOpened = 35,
 /// Sent when a user closes the input area
-  VerticalFeedEventVerticalFeedItemCommentInputClosed = 33,
+  VerticalFeedEventVerticalFeedItemCommentInputClosed = 36,
 /// Sent when a user seeks the video in a long VerticalFeedItem
-  VerticalFeedEventVerticalFeedItemSeeked = 34,
+  VerticalFeedEventVerticalFeedItemSeeked = 37,
 /// Sent when a product is successfully added
-  VerticalFeedEventVerticalFeedItemProductCartAdded = 35,
+  VerticalFeedEventVerticalFeedItemProductCartAdded = 38,
 /// Sent when adding a product failed
-  VerticalFeedEventVerticalFeedItemProductCartAddFailed = 36,
+  VerticalFeedEventVerticalFeedItemProductCartAddFailed = 39,
 /// Sent when the product sheet is opened
-  VerticalFeedEventVerticalFeedItemProductSheetOpened = 37,
+  VerticalFeedEventVerticalFeedItemProductSheetOpened = 40,
 /// Sent when a product is added
-  VerticalFeedEventVerticalFeedItemProductAdded = 38,
+  VerticalFeedEventVerticalFeedItemProductAdded = 41,
 /// Sent when a product is updated
-  VerticalFeedEventVerticalFeedItemProductUpdated = 39,
+  VerticalFeedEventVerticalFeedItemProductUpdated = 42,
 /// Sent when a product is removed
-  VerticalFeedEventVerticalFeedItemProductRemoved = 40,
+  VerticalFeedEventVerticalFeedItemProductRemoved = 43,
 /// Sent when the checkout button is clicked
-  VerticalFeedEventVerticalFeedItemCheckoutButtonClicked = 41,
+  VerticalFeedEventVerticalFeedItemCheckoutButtonClicked = 44,
 /// Sent when the cart button is clicked from the success sheet
-  VerticalFeedEventVerticalFeedItemCartButtonClicked = 42,
+  VerticalFeedEventVerticalFeedItemCartButtonClicked = 45,
 /// Sent when the cart view is clicked
-  VerticalFeedEventVerticalFeedItemCartViewClicked = 43,
+  VerticalFeedEventVerticalFeedItemCartViewClicked = 46,
 /// Sent when a product is selected
-  VerticalFeedEventVerticalFeedItemProductSelected = 44,
+  VerticalFeedEventVerticalFeedItemProductSelected = 47,
 };
 
 
@@ -2610,8 +2636,6 @@ SWIFT_CLASS_NAMED("VerticalFeedImageQuizComponent")
 @property (nonatomic, readonly, strong) NSNumber * _Nullable rightAnswerIndex;
 /// Option index that the user selected
 @property (nonatomic, readonly) NSInteger selectedOptionIndex;
-/// Custom payload for this image quiz if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// VerticalFeedImageQuizComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -2745,8 +2769,6 @@ SWIFT_CLASS_NAMED("VerticalFeedPollComponent")
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull options;
 /// Option index that the user selected
 @property (nonatomic, readonly) NSInteger selectedOptionIndex;
-/// Custom payload for this poll if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// VerticalFeedPollComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -2778,7 +2800,9 @@ SWIFT_CLASS_NAMED("VerticalFeedProductCardComponent")
 ///
 /// \param actionUrl action url assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for ProductCard component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2794,7 +2818,9 @@ SWIFT_CLASS_NAMED("VerticalFeedProductCatalogComponent")
 ///
 /// \param actionUrlLList action url list assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for ProductCatalog component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2810,7 +2836,9 @@ SWIFT_CLASS_NAMED("VerticalFeedProductTagComponent")
 ///
 /// \param actionUrl action url assigned to the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for ProductTag component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2824,7 +2852,9 @@ SWIFT_CLASS_NAMED("VerticalFeedPromoCodeComponent")
 ///
 /// \param text PromoCode text that the user copied
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for PromoCode component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2839,8 +2869,6 @@ SWIFT_CLASS_NAMED("VerticalFeedQuizComponent")
 @property (nonatomic, readonly, strong) NSNumber * _Nullable rightAnswerIndex;
 /// Option index that the user selected
 @property (nonatomic, readonly) NSInteger selectedOptionIndex;
-/// Custom payload for this quiz if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// VerticalFeedQuizComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -2865,8 +2893,6 @@ SWIFT_CLASS_NAMED("VerticalFeedRatingComponent")
 @property (nonatomic, readonly, copy) NSString * _Nonnull emojiCode;
 /// Rating value which user rated in the component
 @property (nonatomic, readonly) NSInteger rating;
-/// Custom payload for this rating if exists
-@property (nonatomic, readonly, copy) NSString * _Nullable customPayload;
 /// VerticalFeedRatingComponent initialization
 /// \param id Id of the interactive component
 ///
@@ -2894,7 +2920,9 @@ SWIFT_CLASS_NAMED("VerticalFeedSwipeComponent")
 ///
 /// \param text text of the interactive component
 ///
-- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products OBJC_DESIGNATED_INITIALIZER;
+/// \param customPayload Custom payload for Swipe component if exists
+///
+- (nonnull instancetype)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// This enum represents the type of a verticalFeed content

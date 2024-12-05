@@ -1,4 +1,16 @@
 # Release Notes
+### 4.5.0 (05.12.2024)
+* improved areas for next/previous clicks
+* added config for app logo visibility for shared media
+* added video share to Instagram Stories for Storyly
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly and Vertical Feed delegate methods
+* improved watch_length related analytics for Vertical Feed
+* improved seen state handling for StorylyVerticalFeedPresenterView
+* added a swipe tutorial animation for Vertical Feed
+* improved layer placements for Vertical Feed
+
 ### 4.3.3 (15.11.2024)
 * IMPORTANT! fixed a bug related to custom parameter assignment
 * fixed a bug related to style changes

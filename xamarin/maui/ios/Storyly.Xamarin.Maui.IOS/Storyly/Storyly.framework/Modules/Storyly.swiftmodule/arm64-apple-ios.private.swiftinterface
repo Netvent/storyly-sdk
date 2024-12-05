@@ -5,6 +5,7 @@
 import AVFoundation
 import AVKit
 import AudioToolbox
+import CoreFoundation
 import DeveloperToolsSupport
 import Dispatch
 import Foundation
@@ -105,6 +106,9 @@ extension Storyly.StorylyVerticalFeedPresenterView {
   case VerticalFeedItemRated
   case VerticalFeedItemInteractiveImpression
   case VerticalFeedItemProductTagExpanded
+  case VerticalFeedItemButtonActionClicked
+  case VerticalFeedItemImageButtonActionClicked
+  case VerticalFeedItemSwipeActionClicked
   case VerticalFeedItemProductTagClicked
   case VerticalFeedItemProductCardClicked
   case VerticalFeedItemProductCatalogClicked
@@ -409,6 +413,7 @@ extension Storyly.StorylyView {
   @_inheritsConvenienceInitializers @objc(StorylyShareConfigBuilder) public class Builder : ObjectiveC.NSObject {
     @objc(setShareUrl:) public func setShareUrl(url: Swift.String) -> Storyly.StorylyShareConfig.Builder
     @objc(setFacebookAppID:) public func setFacebookAppID(id: Swift.String) -> Storyly.StorylyShareConfig.Builder
+    @objc(setAppLogoVisibility:) public func setAppLogoVisibility(isVisible: Swift.Bool) -> Storyly.StorylyShareConfig.Builder
     @objc public func build() -> Storyly.StorylyShareConfig
     @objc override dynamic public init()
     @objc deinit
@@ -612,6 +617,7 @@ extension Storyly.StorylyView {
 @_hasMissingDesignatedInitializers @objc(VerticalFeedItemComponent) public class VerticalFeedItemComponent : ObjectiveC.NSObject {
   @objc final public let id: Swift.String
   @objc final public let type: Storyly.VerticalFeedItemComponentType
+  @objc final public let customPayload: Swift.String?
   @objc deinit
 }
 @objc(VerticalFeedItemComponentType) public enum VerticalFeedItemComponentType : Swift.Int {
@@ -653,7 +659,6 @@ extension Storyly.StorylyView {
   @objc final public let options: [Swift.String]?
   @objc final public let rightAnswerIndex: Foundation.NSNumber?
   @objc final public let selectedOptionIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, title: Swift.String, options: [Swift.String]?, rightAnswerIndex: Foundation.NSNumber?, selectedOptionIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
@@ -662,7 +667,6 @@ extension Storyly.StorylyView {
   @objc final public let options: [Swift.String]
   @objc final public let rightAnswerIndex: Foundation.NSNumber?
   @objc final public let selectedOptionIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, title: Swift.String, options: [Swift.String], rightAnswerIndex: Foundation.NSNumber?, selectedOptionIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
@@ -670,65 +674,62 @@ extension Storyly.StorylyView {
   @objc final public let title: Swift.String
   @objc final public let options: [Swift.String]
   @objc final public let selectedOptionIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, title: Swift.String, options: [Swift.String], selectedOptionIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedEmojiComponent) final public class VerticalFeedEmojiComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let emojiCodes: [Swift.String]
   @objc final public let selectedEmojiIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, emojiCodes: [Swift.String], selectedEmojiIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedRatingComponent) final public class VerticalFeedRatingComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let emojiCode: Swift.String
   @objc final public let rating: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, emojiCode: Swift.String, rating: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedPromoCodeComponent) final public class VerticalFeedPromoCodeComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let text: Swift.String
-  @objc public init(id: Swift.String, text: Swift.String)
+  @objc public init(id: Swift.String, text: Swift.String, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedCommentComponent) final public class VerticalFeedCommentComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let text: Swift.String
-  @objc public init(id: Swift.String, text: Swift.String)
+  @objc public init(id: Swift.String, text: Swift.String, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedSwipeComponent) final public class VerticalFeedSwipeComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let text: Swift.String
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedButtonComponent) final public class VerticalFeedButtonComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let text: Swift.String
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedProductTagComponent) final public class VerticalFeedProductTagComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedProductCardComponent) final public class VerticalFeedProductCardComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let text: Swift.String
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerticalFeedProductCatalogComponent) final public class VerticalFeedProductCatalogComponent : Storyly.VerticalFeedItemComponent {
   @objc final public let actionUrlList: [Swift.String]?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, actionUrlList: [Swift.String]?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, actionUrlList: [Swift.String]?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @objc(VerticalFeedGroupType) public enum VerticalFeedGroupType : Swift.Int, Swift.Decodable {
@@ -774,6 +775,9 @@ extension Storyly.StorylyView {
   case StoryRated
   case StoryInteractiveImpression
   case StoryProductTagExpanded
+  case StoryButtonActionClicked
+  case StoryImageButtonActionClicked
+  case StorySwipeActionClicked
   case StoryProductTagClicked
   case StoryProductCardClicked
   case StoryProductCatalogClicked
@@ -918,6 +922,7 @@ extension Storyly.StorylyView {
 @_hasMissingDesignatedInitializers @objc(StoryComponent) public class StoryComponent : ObjectiveC.NSObject {
   @objc final public let id: Swift.String
   @objc final public let type: Storyly.StoryComponentType
+  @objc final public let customPayload: Swift.String?
   @objc deinit
 }
 @objc(StoryComponentType) public enum StoryComponentType : Swift.Int {
@@ -959,7 +964,6 @@ extension Storyly.StorylyView {
   @objc final public let options: [Swift.String]?
   @objc final public let rightAnswerIndex: Foundation.NSNumber?
   @objc final public let selectedOptionIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, title: Swift.String, options: [Swift.String]?, rightAnswerIndex: Foundation.NSNumber?, selectedOptionIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
@@ -968,7 +972,6 @@ extension Storyly.StorylyView {
   @objc final public let options: [Swift.String]
   @objc final public let rightAnswerIndex: Foundation.NSNumber?
   @objc final public let selectedOptionIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, title: Swift.String, options: [Swift.String], rightAnswerIndex: Foundation.NSNumber?, selectedOptionIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
@@ -976,65 +979,62 @@ extension Storyly.StorylyView {
   @objc final public let title: Swift.String
   @objc final public let options: [Swift.String]
   @objc final public let selectedOptionIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, title: Swift.String, options: [Swift.String], selectedOptionIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryEmojiComponent) final public class StoryEmojiComponent : Storyly.StoryComponent {
   @objc final public let emojiCodes: [Swift.String]
   @objc final public let selectedEmojiIndex: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, emojiCodes: [Swift.String], selectedEmojiIndex: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryRatingComponent) final public class StoryRatingComponent : Storyly.StoryComponent {
   @objc final public let emojiCode: Swift.String
   @objc final public let rating: Swift.Int
-  @objc final public let customPayload: Swift.String?
   @objc public init(id: Swift.String, emojiCode: Swift.String, rating: Swift.Int, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryPromoCodeComponent) final public class StoryPromoCodeComponent : Storyly.StoryComponent {
   @objc final public let text: Swift.String
-  @objc public init(id: Swift.String, text: Swift.String)
+  @objc public init(id: Swift.String, text: Swift.String, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryCommentComponent) final public class StoryCommentComponent : Storyly.StoryComponent {
   @objc final public let text: Swift.String
-  @objc public init(id: Swift.String, text: Swift.String)
+  @objc public init(id: Swift.String, text: Swift.String, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StorySwipeComponent) final public class StorySwipeComponent : Storyly.StoryComponent {
   @objc final public let text: Swift.String
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryButtonComponent) final public class StoryButtonComponent : Storyly.StoryComponent {
   @objc final public let text: Swift.String
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryProductTagComponent) final public class StoryProductTagComponent : Storyly.StoryComponent {
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryProductCardComponent) final public class StoryProductCardComponent : Storyly.StoryComponent {
   @objc final public let text: Swift.String
   @objc final public let actionUrl: Swift.String?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, text: Swift.String, actionUrl: Swift.String?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(StoryProductCatalogComponent) final public class StoryProductCatalogComponent : Storyly.StoryComponent {
   @objc final public let actionUrlList: [Swift.String]?
   @objc final public let products: [Storyly.STRProductItem]?
-  @objc public init(id: Swift.String, actionUrlList: [Swift.String]?, products: [Storyly.STRProductItem]?)
+  @objc public init(id: Swift.String, actionUrlList: [Swift.String]?, products: [Storyly.STRProductItem]?, customPayload: Swift.String?)
   @objc deinit
 }
 @objc(PlayMode) public enum PlayMode : Swift.Int, Swift.RawRepresentable, Swift.Decodable {
