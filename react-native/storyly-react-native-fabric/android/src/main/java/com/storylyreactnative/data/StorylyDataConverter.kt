@@ -67,7 +67,6 @@ internal fun createStoryMap(story: Story): Map<String, Any?> {
         "name" to story.name,
         "seen" to story.seen,
         "currentTime" to story.currentTime?.toInt(),
-        "products" to story.actionProducts?.map { product -> createSTRProductItemMap(product) },
         "actionUrl" to story.actionUrl,
         "previewUrl" to story.previewUrl,
         "storyComponentList" to story.storyComponentList?.map { createStoryComponentMap(it) },

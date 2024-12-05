@@ -98,17 +98,17 @@ export interface Story {
 }
 
 export interface StoryGroupStyle {
-    borderUnseenColors?: [string],
-    textUnseenColor?: string,
-    badge?: StoryGroupBadgeStyle,
+    borderUnseenColors?: string[];
+    textUnseenColor?: string;
+    badge?: StoryGroupBadgeStyle;
 }
 
 export interface StoryGroupBadgeStyle {
-    backgroundColor?: string,
-    textColor?: string,
-    endTime?: number,
-    template?: string,
-    text?: string,
+    backgroundColor?: string;
+    textColor?: string;
+    endTime?: number;
+    template?: string;
+    text?: string;
 }
 
 

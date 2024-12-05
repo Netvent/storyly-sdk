@@ -67,7 +67,6 @@ func createStoryMap(story: Story?) -> [String: Any?]? {
         "name": story.name,
         "seen": story.seen,
         "currentTime": story.currentTime,
-        "products": story.actionProducts?.map { createSTRProductItemMap(product: $0) },
         "actionUrl": story.actionUrl,
         "previewUrl": story.previewUrl?.absoluteString,
         "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent: $0) },
