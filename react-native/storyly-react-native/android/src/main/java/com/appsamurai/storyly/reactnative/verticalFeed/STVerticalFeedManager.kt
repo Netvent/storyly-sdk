@@ -177,7 +177,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
 
     @ReactProp(name = "storyly")
     fun setPropStoryly(view: STVerticalFeedBarView, storylyBundle: ReadableMap) {
-        println("STR:STStorylyManager:setPropStoryly:${storylyBundle}")
+        println("STR:STVerticalFeedManager:setPropStoryly:${storylyBundle}")
         val storylyInitJson = storylyBundle.getMap("storylyInit") ?: return
         val storylyId = storylyInitJson.getString("storylyId") ?: return
         val storyGroupStylingJson = storylyBundle.getMap("verticalFeedGroupStyling") ?: return

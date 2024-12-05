@@ -113,20 +113,20 @@ class VerticalFeedBar extends Component {
     }
 
     _onStorylyVerticalFeedPresented = (eventPayload) => {
-        if (this.props.onStoryOpen) {
-            this.props.onStoryOpen();
+        if (this.props.onVerticalFeedOpen) {
+            this.props.onVerticalFeedOpen();
         }
     }
 
     _onStorylyVerticalFeedPresentFailed = (eventPayload) => {
-        if (this.props.onStoryOpenFailed) {
-            this.props.onStoryOpenFailed(eventPayload.nativeEvent);
+        if (this.props.onVerticalFeedOpenFailed) {
+            this.props.onVerticalFeedOpenFailed(eventPayload.nativeEvent);
         }
     }
 
     _onStorylyVerticalFeedDismissed = (eventPayload) => {
-        if (this.props.onStoryClose) {
-            this.props.onStoryClose();
+        if (this.props.onVerticalFeedClose) {
+            this.props.onVerticalFeedClose();
         }
     }
 
@@ -164,6 +164,7 @@ class VerticalFeedBar extends Component {
             storylyShareUrl,
             storylyFacebookAppID,
             verticalFeedGroupIconHeight,
+            verticalFeedGroupIconCornerRadius,
             verticalFeedGroupListSections,
             verticalFeedGroupListHorizontalEdgePadding,
             verticalFeedGroupListVerticalEdgePadding,
@@ -177,16 +178,11 @@ class VerticalFeedBar extends Component {
             verticalFeedGroupLikeIcon,
             verticalFeedGroupTextTypeface,
             verticalFeedGroupTextSize,
-            verticalFeedGroupTextLines,
             verticalFeedGroupTextColor,
             verticalFeedTypeIndicatorIsVisible,
-            verticalFeedGroupIconBorderColorSeen,
-            verticalFeedGroupIconBorderColorNotSeen,
             verticalFeedGroupIconBackgroundColor,
-            verticalFeedGroupPinIconColor,
             storylyLayoutDirection,
             storylyLocale,
-            verticalFeedItemIconBorderColor,
             verticalFeedItemProgressBarColor,
             verticalFeedItemProgressBarVisibility,
             verticalFeedItemTextTypeface,
@@ -215,9 +211,9 @@ class VerticalFeedBar extends Component {
             },
             'verticalFeedGroupStyling': {
                 'iconBackgroundColor': processColor(verticalFeedGroupIconBackgroundColor),
+                'iconCornerRadius': verticalFeedGroupIconCornerRadius,
                 'iconHeight': verticalFeedGroupIconHeight, 
                 'textColor': processColor(verticalFeedGroupTextColor), 
-                'titleLineCount': verticalFeedGroupTextLines,
                 'titleFont': verticalFeedGroupTextTypeface, 
                 'titleTextSize': verticalFeedGroupTextSize,  
                 'titleVisible': verticalFeedGroupTextIsVisible, 
@@ -243,9 +239,9 @@ class VerticalFeedBar extends Component {
                 'isCloseButtonVisible': verticalFeedItemCloseButtonIsVisible,
                 'islikeButtonVisible': verticalFeedItemLikeButtonIsVisible,
                 'isShareButtonVisible': verticalFeedItemShareButtonIsVisible,
-                'isShareButtonVisible': verticalFeedItemShareButtonIsVisible,
                 'closeButtonIcon': verticalFeedItemCloseIcon,
                 'shareButtonIcon': verticalFeedItemShareIcon,
+                "likeButtonIcon": verticalFeedItemLikeIcon,
                 'isProgressBarVisible': verticalFeedItemProgressBarVisibility,
             },
             'verticalFeedItemShareConfig': {
@@ -294,10 +290,20 @@ VerticalFeedBar.propTypes = {
     verticalFeedGroupOrder: string,
     verticalFeedGroupTextTypeface: string,
     verticalFeedGroupTextSize: number,
-    verticalFeedGroupTextLines: number,
-    verticalFeedGroupTextColorSeen: string,
-    verticalFeedGroupTextColorNotSeen: string,
-    verticalFeedGroupPinIconColor: string,
+    verticalFeedGroupIconHeight: number,
+    verticalFeedGroupIconCornerRadius: number,
+    verticalFeedGroupTextColor: string,
+    verticalFeedGroupMinLikeCountToShowIcon: number,
+    verticalFeedGroupMinImpressionCountToShowIcon: number,
+    verticalFeedGroupImpressionIcon: string,
+    verticalFeedGroupLikeIcon: string,
+    verticalFeedTypeIndicatorIsVisible: bool,
+
+    verticalFeedGroupListSections: number,
+    verticalFeedGroupListHorizontalEdgePadding: number,
+    verticalFeedGroupListVerticalEdgePadding: number,
+    verticalFeedGroupListHorizontalPaddingBetweenItems: number,
+    verticalFeedGroupListVerticalPaddingBetweenItems: number,
 
     verticalFeedItemProgressBarColor: arrayOf(string),
     verticalFeedItemProgressBarVisibility: bool,
@@ -305,19 +311,12 @@ VerticalFeedBar.propTypes = {
     verticalFeedItemShareButtonIsVisible: bool,
     verticalFeedItemTextTypeface: string,
     verticalFeedItemInteractiveTextTypeface: string,
-    verticalFeedGroupIconHeight: number,
-    verticalFeedGroupIconWidth: number,
-    verticalFeedGroupIconCornerRadius: number,
-    verticalFeedGroupListSections: number,
-    verticalFeedGroupListHorizontalEdgePadding: number,
-    verticalFeedGroupListVerticalEdgePadding: number,
-    verticalFeedGroupListHorizontalPaddingBetweenItems: number,
-    verticalFeedGroupListVerticalPaddingBetweenItems: number,
     verticalFeedItemTitleVisibility: bool,
     verticalFeedItemCloseButtonIsVisible: bool,
     verticalFeedItemCloseIcon: string,
     verticalFeedItemShareIcon: string,
     verticalFeedItemLikeIcon: string,
+
     storylyLayoutDirection: string,
     verticalFeedFallbackIsEnabled: bool,
     verticalFeedCartIsEnabled: bool,
@@ -327,9 +326,9 @@ VerticalFeedBar.propTypes = {
     onFail: func,
     onPress: func,
     onEvent: func,
-    onStoryOpen: func,
-    onStoryOpenFailed: func,
-    onStoryClose: func,
+    onVerticalFeedOpen: func,
+    onVerticalFeedOpenFailed: func,
+    onVerticalFeedClose: func,
     onUserInteracted: func,
     onProductHydration: func,
     onCartUpdate: func,
