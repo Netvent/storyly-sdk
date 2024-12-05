@@ -1,11 +1,27 @@
 package com.storylyreactnative.data
 
-import com.appsamurai.storyly.*
+import com.appsamurai.storyly.Story
+import com.appsamurai.storyly.StoryButtonComponent
+import com.appsamurai.storyly.StoryCommentComponent
+import com.appsamurai.storyly.StoryComponent
+import com.appsamurai.storyly.StoryComponentType
+import com.appsamurai.storyly.StoryEmojiComponent
+import com.appsamurai.storyly.StoryGroup
+import com.appsamurai.storyly.StoryGroupBadgeStyle
+import com.appsamurai.storyly.StoryGroupStyle
+import com.appsamurai.storyly.StoryPollComponent
+import com.appsamurai.storyly.StoryProductCardComponent
+import com.appsamurai.storyly.StoryProductCatalogComponent
+import com.appsamurai.storyly.StoryProductTagComponent
+import com.appsamurai.storyly.StoryPromoCodeComponent
+import com.appsamurai.storyly.StoryQuizComponent
+import com.appsamurai.storyly.StoryRatingComponent
+import com.appsamurai.storyly.StorySwipeComponent
 import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartItem
+import com.appsamurai.storyly.data.managers.product.STRProductInformation
 import com.appsamurai.storyly.data.managers.product.STRProductItem
 import com.appsamurai.storyly.data.managers.product.STRProductVariant
-import com.appsamurai.storyly.data.managers.product.STRProductInformation
 
 internal fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, Any?> {
     return mapOf(
@@ -13,20 +29,33 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, Any?> {
         "title" to storyGroup.title,
         "iconUrl" to storyGroup.iconUrl,
         "pinned" to storyGroup.pinned,
-        "thematicIconUrls" to  (storyGroup.thematicIconUrls ?: emptyMap()),
-        "coverUrl" to storyGroup.coverUrl,
         "index" to storyGroup.index,
         "seen" to storyGroup.seen,
         "stories" to storyGroup.stories.map { story -> createStoryMap(story) },
         "type" to storyGroup.type.customName,
-        "momentsUser" to storyGroup.momentsUser?.let { momentsUser ->
-            mapOf(
-                "id" to momentsUser.userId,
-                "avatarUrl" to momentsUser.userId,
-                "username" to momentsUser.username,
-            )
-        },
-        "nudge" to storyGroup.nudge
+        "name" to storyGroup.name,
+        "nudge" to storyGroup.nudge,
+        "style" to createStoryGroupStyleMap(storyGroup.style)
+    )
+}
+
+internal fun createStoryGroupStyleMap(style: StoryGroupStyle?): Map<String, Any?>? {
+    style ?: return null
+    return mapOf(
+        "borderUnseenColors" to style.borderUnseenColors?.map { it.toHexString() },
+        "textUnseenColor" to style.textUnseenColor?.toHexString(),
+        "badge" to createStoryGroupStyleBadgeMap(style.badge)
+    )
+}
+
+internal fun createStoryGroupStyleBadgeMap(badge: StoryGroupBadgeStyle?): Map<String, Any?>? {
+    badge ?: return null
+    return mapOf(
+        "backgroundColor" to badge.backgroundColor,
+        "textColor" to badge.textColor,
+        "endTime" to badge.endTime,
+        "template" to badge.template,
+        "text" to badge.text,
     )
 }
 
@@ -37,30 +66,79 @@ internal fun createStoryMap(story: Story): Map<String, Any?> {
         "title" to story.title,
         "name" to story.name,
         "seen" to story.seen,
-        "currentTime" to story.currentTime.toInt(),
-        "products" to story.products?.map { product -> createSTRProductItemMap(product) },
-        "media" to mapOf(
-            "type" to story.media.type.ordinal,
-            "storyComponentList" to story.media.storyComponentList?.map { createStoryComponentMap(it) },
-            "actionUrl" to story.media.actionUrl,
-            "actionUrlList" to story.media.actionUrlList,
-            "previewUrl" to story.media.previewUrl,
-        )
+        "currentTime" to story.currentTime?.toInt(),
+        "actionUrl" to story.actionUrl,
+        "previewUrl" to story.previewUrl,
+        "storyComponentList" to story.storyComponentList?.map { createStoryComponentMap(it) },
+        "actionProducts" to story.actionProducts?.map { createSTRProductItemMap(it) },
     )
 }
 
 internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String, Any?> {
     return when (storyComponent.type) {
+        StoryComponentType.ButtonAction -> {
+            val buttonComponent = storyComponent as StoryButtonComponent
+            mapOf(
+                "type" to "buttonaction",
+                "id" to buttonComponent.id,
+                "customPayload" to buttonComponent.customPayload,
+                "text" to buttonComponent.text,
+                "actionUrl" to buttonComponent.actionUrl,
+                "products" to  buttonComponent.products?.map { createSTRProductItemMap(it) }
+            )
+        }
+        StoryComponentType.SwipeAction -> {
+            val swipeComponent = storyComponent as StorySwipeComponent
+            mapOf(
+                "type" to "swipeaction",
+                "id" to swipeComponent.id,
+                "customPayload" to swipeComponent.customPayload,
+                "text" to swipeComponent.text,
+                "actionUrl" to swipeComponent.actionUrl,
+                "products" to swipeComponent.products?.map { createSTRProductItemMap(it) }
+            )
+        }
+        StoryComponentType.ProductTag -> {
+            val ptagComponent = storyComponent as StoryProductTagComponent
+            mapOf(
+                "type" to "producttag",
+                "id" to ptagComponent.id,
+                "customPayload" to ptagComponent.customPayload,
+                "actionUrl" to ptagComponent.actionUrl,
+                "products" to ptagComponent.products?.map { createSTRProductItemMap(it) },
+            )
+        }
+        StoryComponentType.ProductCard -> {
+            val pcardComponent = storyComponent as StoryProductCardComponent
+            mapOf(
+                "type" to "productcard",
+                "id" to pcardComponent.id,
+                "customPayload" to pcardComponent.customPayload,
+                "text" to pcardComponent.text,
+                "actionUrl" to pcardComponent.actionUrl,
+                "products" to pcardComponent.products?.map { createSTRProductItemMap(it) },
+            )
+        }
+        StoryComponentType.ProductCatalog -> {
+            val catalogComponent = storyComponent as StoryProductCatalogComponent
+            mapOf(
+                "type" to "productcatalog",
+                "id" to catalogComponent.id,
+                "customPayload" to catalogComponent.customPayload,
+                "actionUrlList" to catalogComponent.actionUrlList?.filterNotNull(),
+                "products" to catalogComponent.products?.map { createSTRProductItemMap(it) },
+            )
+        }
         StoryComponentType.Quiz -> {
             val quizComponent = storyComponent as StoryQuizComponent
             mapOf(
                 "type" to "quiz",
                 "id" to quizComponent.id,
+                "customPayload" to quizComponent.customPayload,
                 "title" to quizComponent.title,
                 "options" to quizComponent.options,
                 "rightAnswerIndex" to quizComponent.rightAnswerIndex,
-                "selectedOptionIndex" to quizComponent.selectedOptionIndex,
-                "customPayload" to quizComponent.customPayload,
+                "selectedOptionIndex" to quizComponent.selectedOptionIndex
             )
         }
         StoryComponentType.Poll -> {
@@ -68,10 +146,10 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String
             mapOf(
                 "type" to "poll",
                 "id" to pollComponent.id,
+                "customPayload" to pollComponent.customPayload,
                 "title" to pollComponent.title,
                 "options" to pollComponent.options,
                 "selectedOptionIndex" to pollComponent.selectedOptionIndex,
-                "customPayload" to pollComponent.customPayload,
             )
         }
         StoryComponentType.Emoji -> {
@@ -79,9 +157,9 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String
             mapOf(
                 "type" to "emoji",
                 "id" to emojiComponent.id,
+                "customPayload" to emojiComponent.customPayload,
                 "emojiCodes" to emojiComponent.emojiCodes,
                 "selectedEmojiIndex" to emojiComponent.selectedEmojiIndex,
-                "customPayload" to emojiComponent.customPayload,
             )
         }
         StoryComponentType.Rating -> {
@@ -89,9 +167,9 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String
             mapOf(
                 "type" to "rating",
                 "id" to ratingComponent.id,
+                "customPayload" to ratingComponent.customPayload,
                 "emojiCode" to ratingComponent.emojiCode,
                 "rating" to ratingComponent.rating,
-                "customPayload" to ratingComponent.customPayload,
             )
         }
         StoryComponentType.PromoCode -> {
@@ -99,6 +177,7 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String
             mapOf(
                 "type" to "promocode",
                 "id" to promoCodeComponent.id,
+                "customPayload" to promoCodeComponent.customPayload,
                 "text" to promoCodeComponent.text,
             )
         }
@@ -107,6 +186,7 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String
             mapOf(
                 "type" to "comment",
                 "id" to commentComponent.id,
+                "customPayload" to commentComponent.customPayload,
                 "text" to commentComponent.text,
             )
         }
@@ -114,6 +194,7 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String
             mapOf(
                 "id" to storyComponent.id,
                 "type" to storyComponent.type.name.lowercase(),
+                "customPayload" to storyComponent.customPayload,
             )
         }
     }
@@ -132,6 +213,7 @@ internal fun createSTRProductItemMap(product: STRProductItem?): Map<String, Any?
             "currency" to product.currency,
             "imageUrls" to product.imageUrls,
             "variants" to product.variants.map { variant -> createSTRProductVariantMap(variant) },
+            "ctaText" to product.ctaText,
         )
     } ?: emptyMap()
 }
@@ -156,14 +238,14 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         productId = product?.get("productId") as? String ?: "",
         productGroupId = product?.get("productGroupId") as? String ?: "",
         title = product?.get("title") as? String ?: "",
-        url = product["url"] as? String ?: "",
+        url = product?.get("url") as? String ?: "",
         desc = product?.get("desc") as? String ?: "",
-        price = (product?.get("price") as Double).toFloat(),
-        salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
-        currency = product["currency"] as? String ?: "",
-        imageUrls = product["imageUrls"] as? List<String>,
-        variants = createSTRProductVariant(product["variants"] as? List<Map<String, Any?>>),
-        ctaText = product["ctaText"] as? String,
+        price = (product?.get("price") as? Double)?.toFloat() ?: 0f,
+        salesPrice = (product?.get("salesPrice") as? Double)?.toFloat(),
+        currency = product?.get("currency") as? String ?: "",
+        imageUrls = product?.get("imageUrls") as? List<String>,
+        variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>),
+        ctaText = product?.get("ctaText") as? String,
     )
 }
 
@@ -171,7 +253,8 @@ internal fun createSTRProductVariant(variants: List<Map<String, Any?>>?): List<S
     return variants?.map { variant ->
         STRProductVariant(
             name = variant["name"] as? String ?: "",
-            value = variant["value"] as? String ?: ""
+            value = variant["value"] as? String ?: "",
+            key = variant["key"] as? String ?: "",
         )
     } ?: listOf()
 }
@@ -215,3 +298,6 @@ internal fun createSTRCartItem(cartItem: Map<String, Any?>): STRCartItem {
         quantity = (cartItem["quantity"] as Double).toInt()
     )
 }
+
+
+internal fun Int.toHexString() = Integer.toHexString(this)

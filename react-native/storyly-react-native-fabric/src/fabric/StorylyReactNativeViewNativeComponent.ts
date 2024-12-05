@@ -22,6 +22,7 @@ interface StorylyNativeProps extends ViewProps {
   onStorylyProductHydration: BubblingEventHandler<Event>;
   onStorylyCartUpdated: BubblingEventHandler<Event>;
   onStorylyProductEvent: BubblingEventHandler<Event>;
+  onStorylySizeChanged: BubblingEventHandler<Event>;
 }
 
 export const applyBaseEvent = (callback: (event: BaseEvent)=>void) => {
@@ -50,7 +51,7 @@ interface NativeCommands {
   rejectCartChange: (viewRef: React.ElementRef<StorylyComponentType>, raw: string) => void;
 }
 
-export const StorylyNativeCommands = codegenNativeCommands<NativeCommands>({
+export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: [
     "refresh",
     "resumeStory",

@@ -78,6 +78,9 @@ public class STStorylyView: UIView {
     @objc(onStorylyCartUpdated)
     public var onStorylyCartUpdated: ((String) -> Void)?
     
+    @objc(onStorylySizeChanged)
+    public var onStorylySizeChanged: ((String) -> Void)?
+    
     public override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
         super.init(frame: frame)
@@ -145,6 +148,7 @@ extension STStorylyView {
         guard let map = decodePayload(raw: raw),
               let productMap = map["products"] as? [NSDictionary?] else { return }
         let products = productMap.map({ createSTRProductItem(productItem: $0) })
+        print("STR:STStorylyView:hydrateProducts(productIds:\(products.map { $0.productId })")
         storylyView?.hydrateProducts(products: products)
     }
     
@@ -153,7 +157,7 @@ extension STStorylyView {
         guard let map = decodePayload(raw: raw),
               let cartMap = map["cart"] as? NSDictionary,
               let cart = createSTRCart(cartMap: cartMap) else { return }
-        
+        print("STR:STStorylyView:updateCart(cartProductIds:\(cart.items.map { $0.item.productId})")
         storylyView?.updateCart(cart: cart)
     }
     
@@ -215,16 +219,16 @@ class STStorylyDelegate: StorylyDelegate {
     }
     
     func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        guard let eventJson = encodeEvent(json: createStoryMap(story: story) as [String: Any]) else { return }
+        guard let eventJson = encodeEvent(json: ["story": createStoryMap(story: story)]) else { return }
         view?.onStorylyActionClicked?(eventJson)
     }
     
     func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
-        let map: [String : Any] = [
+        let map: [String : Any?] = [
             "event": StorylyEventHelper.storylyEventName(event: event),
-            "storyGroup": createStoryGroupMap(storyGroup) as Any,
-            "story": createStoryMap(story) as Any,
-            "storyComponent": createStoryComponentMap(storyComponent) as Any
+            "storyGroup": createStoryGroupMap(storyGroup: storyGroup),
+            "story": createStoryMap(story: story),
+            "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onStorylyEvent?(eventJson)
@@ -244,13 +248,23 @@ class STStorylyDelegate: StorylyDelegate {
     }
     
     func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
-        let map: [String : Any] = [
+        let map: [String : Any?] = [
             "storyGroup": createStoryGroupMap(storyGroup: storyGroup),
             "story": createStoryMap(story: story),
             "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
         ]
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onStorylyUserInteracted?(eventJson)
+    }
+    
+    
+    func storylySizeChanged(_ storylyView: StorylyView, size: CGSize) {
+        let map: [String : Any?] = [
+            "width": size.width,
+            "height": size.height,
+        ]
+        guard let eventJson = encodeEvent(json: map) else { return }
+        view?.onStorylySizeChanged?(eventJson)
     }
 }
 

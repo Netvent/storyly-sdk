@@ -1,7 +1,7 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import StorylyNativeView, { StorylyNativeCommands, applyBaseEvent } from "./fabric/StorylyReactNativeViewNativeComponent";
+import { forwardRef, useImperativeHandle, useRef } from "react";
+import StorylyNativeView, { Commands, applyBaseEvent } from "./fabric/StorylyReactNativeViewNativeComponent";
 import type { STRCart, STRProductItem } from "./data/story";
-import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent } from "./data/event";
+import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent, StorySizeChangedEvent } from "./data/event";
 import type { ViewProps } from "react-native";
 import { mapStorylyConfig } from "./data/config";
 
@@ -70,6 +70,7 @@ export interface StorylyProps extends ViewProps {
     onProductHydration?: (event: StoryProductHydrationEvent) => void;
     onCartUpdate?: (event: StoryProductCartUpdateEvent) => void;
     onProductEvent?: (event: ProductEvent) => void;
+    onSizeChanged?: (event: StorySizeChangedEvent) => void;
 }
 
 export interface StorylyMethods {
@@ -79,7 +80,7 @@ export interface StorylyMethods {
     closeStory: () => void;
     openStory: (url: string) => void;
     openStoryWithId: (groupId: string, storyId?: string, playMode?: string) => void;
-    hydrateProducts: (products: [STRProductItem]) => void;
+    hydrateProducts: (products: STRProductItem[]) => void;
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
     rejectCartChange: (responseId: string, failMsg: string) => void;
@@ -104,62 +105,62 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
 
     const refresh = () => {
         if (storylyRef.current) {
-            StorylyNativeCommands.refresh(storylyRef.current)
+            Commands.refresh(storylyRef.current)
         }
     }
 
 
     const resumeStory = () => {
         if (storylyRef.current) {
-            StorylyNativeCommands.resumeStory(storylyRef.current)
+            Commands.resumeStory(storylyRef.current)
         }
     }
 
     const pauseStory = () => {
         if (storylyRef.current) {
-            StorylyNativeCommands.pauseStory(storylyRef.current)
+            Commands.pauseStory(storylyRef.current)
         }
     }
 
     const closeStory = () => {
         if (storylyRef.current) {
-            StorylyNativeCommands.closeStory(storylyRef.current)
+            Commands.closeStory(storylyRef.current)
         }
     }
 
     const openStory = (url: string) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.openStory(storylyRef.current, JSON.stringify({url}))
+            Commands.openStory(storylyRef.current, JSON.stringify({url}))
         }
     }
 
     const openStoryWithId = (groupId: string, storyId?: string, playMode?: string) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.openStoryWithId(storylyRef.current, JSON.stringify({groupId, storyId, playMode}))
+            Commands.openStoryWithId(storylyRef.current, JSON.stringify({groupId, storyId, playMode}))
         }
     }
 
-    const hydrateProducts = (products: [STRProductItem]) => {
+    const hydrateProducts = (products: STRProductItem[]) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.hydrateProducts(storylyRef.current, JSON.stringify({products}))
+            Commands.hydrateProducts(storylyRef.current, JSON.stringify({products}))
         }
     }
 
     const updateCart = (cart: STRCart) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.updateCart(storylyRef.current, JSON.stringify({cart}))
+            Commands.updateCart(storylyRef.current, JSON.stringify({cart}))
         }
     }
 
     const approveCartChange = (responseId: string, cart: STRCart) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.approveCartChange(storylyRef.current, JSON.stringify({responseId, cart}))
+            Commands.approveCartChange(storylyRef.current, JSON.stringify({responseId, cart}))
         }
     }
 
     const rejectCartChange = (responseId: string, failMessage: string) => {
         if (storylyRef.current) {
-            StorylyNativeCommands.rejectCartChange(storylyRef.current, JSON.stringify({responseId, failMessage}))
+            Commands.rejectCartChange(storylyRef.current, JSON.stringify({responseId, failMessage}))
         }
     }
 
@@ -230,6 +231,12 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         }
     }
 
+    const _onStorylySizeChanged = (event: BaseEvent) => {
+        if (props.onSizeChanged) {
+            props.onSizeChanged(event as StorySizeChangedEvent)
+        }
+    }
+
     return (
         <StorylyNativeView
             {...props}
@@ -245,6 +252,7 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
             onStorylyProductHydration={applyBaseEvent(_onStorylyProductHydration)}
             onStorylyCartUpdated={applyBaseEvent(_onStorylyCartUpdated)}
             onStorylyProductEvent={applyBaseEvent(_onStorylyProductEvent)}
+            onStorylySizeChanged={applyBaseEvent(_onStorylySizeChanged)}
             storylyConfig={mapStorylyConfig(props)} />
     )
 })
