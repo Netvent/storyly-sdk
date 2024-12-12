@@ -16,8 +16,8 @@ class VerticalFeedBarBundle: NSObject {
 }
 
 extension RCTConvert {
-    @objc(setVerticalFeedBarBundle:)
-    static func setVerticalFeedBarBundle(json: NSDictionary) -> VerticalFeedBarBundle? {
+    @objc(stVerticalFeedBarBundle:)
+    static func stVerticalFeedBarBundle(json: NSDictionary) -> VerticalFeedBarBundle? {
         print("STR:RCTConvert+Extension:stStorylyBundle(json:\(json))")
         
         guard let storylyInitJson = json["storylyInit"] as? NSDictionary else { return nil }

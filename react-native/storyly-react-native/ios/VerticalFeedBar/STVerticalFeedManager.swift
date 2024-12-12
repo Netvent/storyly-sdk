@@ -6,7 +6,7 @@
 //
 
 
-@objc (STVerticalFeedManager)
+@objc(STVerticalFeedManager)
 class STVerticalFeedManager: RCTViewManager {
     
     override func view() -> UIView! {
@@ -26,10 +26,7 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 stStorylyView.refresh()
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
-            
         }
     }
 
@@ -40,10 +37,7 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 stStorylyView.resumeStory()
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
-            
         }
     }
 
@@ -54,10 +48,7 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 stStorylyView.pauseStory()
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
-            
         }
     }
 
@@ -68,10 +59,7 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 stStorylyView.closeStory()
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
-            
         }
     }
     
@@ -82,8 +70,6 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 _ = stStorylyView.openStory(payload: payload as URL)
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
         }
     }
@@ -95,8 +81,6 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 _ = stStorylyView.openStory(storyGroupId: storyGroupId , storyId: storyId, playMode: playMode)
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
         }
     }
@@ -108,8 +92,6 @@ class STVerticalFeedManager: RCTViewManager {
             if let stStorylyView = view as? STVerticalFeedBarView {
                 let products = products.map { createSTRProductItem(productItem: $0)}
                 stStorylyView.hydrateProducts(products: products)
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
         }
     }
@@ -120,8 +102,6 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 stStorylyView.updateCart(cart: createSTRCart(cartMap: cartMap))
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
         }
     }
@@ -136,8 +116,6 @@ class STVerticalFeedManager: RCTViewManager {
                 } else {
                     stStorylyView.approveCartChange(responseId: responseId)
                 }
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
         }
     }
@@ -148,8 +126,6 @@ class STVerticalFeedManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
                 stStorylyView.rejectCartChange(responseId: responseId, failMessage: failMessage)
-            } else {
-                STLogErr("Invalid view returned from registry, expecting STVerticalFeedBarView, got: \(String(describing: view))")
             }
         }
     }

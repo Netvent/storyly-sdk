@@ -237,7 +237,7 @@ class VerticalFeedBar extends Component {
                 'progressBarColor': verticalFeedItemProgressBarColor ? verticalFeedItemProgressBarColor.map(processColor) : null,
                 'isTitleVisible': verticalFeedItemTitleVisibility,
                 'isCloseButtonVisible': verticalFeedItemCloseButtonIsVisible,
-                'islikeButtonVisible': verticalFeedItemLikeButtonIsVisible,
+                'isLikeButtonVisible': verticalFeedItemLikeButtonIsVisible,
                 'isShareButtonVisible': verticalFeedItemShareButtonIsVisible,
                 'closeButtonIcon': verticalFeedItemCloseIcon,
                 'shareButtonIcon': verticalFeedItemShareIcon,

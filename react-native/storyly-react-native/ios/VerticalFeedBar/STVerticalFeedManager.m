@@ -3,7 +3,7 @@
 
 @interface RCT_EXTERN_REMAP_MODULE(STVerticalFeedBar, STVerticalFeedManager, NSObject)
 
-RCT_EXTERN_METHOD(refresh2:(nonnull NSNumber *)reactTag)
+RCT_EXTERN_METHOD(refresh:(nonnull NSNumber *)reactTag)
 
 RCT_EXTERN_METHOD(openStory:(nonnull NSNumber *)reactTag
                   payload:(nonnull NSURL *)payload)
@@ -34,7 +34,7 @@ RCT_EXTERN_METHOD(pauseStory:(nonnull NSNumber *)reactTag)
 
 RCT_EXTERN_METHOD(closeStory:(nonnull NSNumber *)reactTag)
 
-RCT_REMAP_VIEW_PROPERTY(storyly, storylyBundle, stStorylyBundle)
+RCT_REMAP_VIEW_PROPERTY(storyly, storylyBundle, stVerticalFeedBarBundle)
 
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)
