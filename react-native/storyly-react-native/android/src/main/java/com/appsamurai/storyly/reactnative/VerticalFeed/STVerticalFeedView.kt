@@ -1,4 +1,4 @@
-package com.appsamurai.storyly.reactnative.verticalFeed
+package com.appsamurai.storyly.reactnative.VerticalFeed
 
 import android.content.Context
 import android.view.Choreographer
@@ -12,7 +12,11 @@ import com.appsamurai.storyly.data.managers.product.STRProductInformation
 import com.appsamurai.storyly.reactnative.createSTRCartItemMap
 import com.appsamurai.storyly.reactnative.createSTRCartMap
 import com.appsamurai.storyly.reactnative.createSTRProductInformationMap
-import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedBarView
+import com.appsamurai.storyly.reactnative.verticalFeedBar.STVerticalFeedBarManager
+import com.appsamurai.storyly.reactnative.verticalFeedBar.createVerticalFeedComponentMap
+import com.appsamurai.storyly.reactnative.verticalFeedBar.createVerticalFeedGroup
+import com.appsamurai.storyly.reactnative.verticalFeedBar.createVerticalFeedItem
+import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
 import com.appsamurai.storyly.verticalfeed.VerticalFeedGroup
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItem
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponent
@@ -28,17 +32,17 @@ import java.lang.ref.WeakReference
 import java.util.UUID
 import kotlin.properties.Delegates
 
-class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
+class STVerticalFeedView(context: Context) : FrameLayout(context) {
 
     private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
 
-    internal var verticalFeedBarView: StorylyVerticalFeedBarView? by Delegates.observable(null) { _, _, _ ->
+    internal var verticalFeedView: StorylyVerticalFeedView? by Delegates.observable(null) { _, _, _ ->
         removeAllViews()
-        val verticalFeedBarView = verticalFeedBarView ?: return@observable
+        val verticalFeedBarView = verticalFeedView ?: return@observable
         addView(verticalFeedBarView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         verticalFeedBarView.storylyVerticalFeedListener = object : StorylyVerticalFeedListener {
             override fun verticalFeedActionClicked(view: STRVerticalFeedView, feedItem: VerticalFeedItem) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_ACTION_CLICKED, Arguments.createMap().also { eventMap ->
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_ACTION_CLICKED, Arguments.createMap().also { eventMap ->
                     eventMap.putMap("feedItem", createVerticalFeedItem(feedItem))
                 })
             }
@@ -48,7 +52,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 feedGroupList: List<VerticalFeedGroup>,
                 dataSource: StorylyDataSource
             ) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_LOADED, Arguments.createMap().also { storyGroupListMap ->
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_LOADED, Arguments.createMap().also { storyGroupListMap ->
                     storyGroupListMap.putArray("feedGroupList", Arguments.createArray().also { storyGroups ->
                         feedGroupList.forEach { group ->
                             storyGroups.pushMap(createVerticalFeedGroup(group))
@@ -62,7 +66,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 view: STRVerticalFeedView,
                 errorMessage: String
             ) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_LOAD_FAILED, Arguments.createMap().also { eventMap ->
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_LOAD_FAILED, Arguments.createMap().also { eventMap ->
                     eventMap.putString("errorMessage", errorMessage)
                 })
             }
@@ -74,7 +78,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 feedItem: VerticalFeedItem?,
                 feedItemComponent: VerticalFeedItemComponent?
             ) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_EVENT, Arguments.createMap().also { eventMap ->
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_EVENT, Arguments.createMap().also { eventMap ->
                     eventMap.putString("event", event.name)
                     feedGroup?.let { eventMap.putMap("feedGroup", createVerticalFeedGroup(it)) }
                     feedItem?.let { eventMap.putMap("feedItem", createVerticalFeedItem(it)) }
@@ -83,18 +87,18 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
             }
 
             override fun verticalFeedShown(view: STRVerticalFeedView) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_VERTICAL_FEED_PRESENTED, null)
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_VERTICAL_FEED_PRESENTED, null)
             }
 
             override fun verticalFeedShowFailed(view: STRVerticalFeedView, errorMessage: String) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_VERTICAL_FEED_PRESENT_FAILED, Arguments.createMap().also { eventMap ->
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_VERTICAL_FEED_PRESENT_FAILED, Arguments.createMap().also { eventMap ->
                     eventMap.putString("errorMessage", errorMessage)
                 })
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_VERTICAL_FEED_PRESENTED, null)
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_VERTICAL_FEED_PRESENTED, null)
             }
 
             override fun verticalFeedDismissed(view: STRVerticalFeedView) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_VERTICAL_FEED_DISMISSED, null)
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_VERTICAL_FEED_DISMISSED, null)
             }
 
             override fun verticalFeedUserInteracted(
@@ -103,7 +107,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 feedItem: VerticalFeedItem,
                 feedItemComponent: VerticalFeedItemComponent
             ) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().apply {
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_USER_INTERACTED, Arguments.createMap().apply {
                     putMap("feedGroup", createVerticalFeedGroup(feedGroup))
                     putMap("feedItem", createVerticalFeedItem(feedItem))
                     putMap("feedItemComponent", createVerticalFeedComponentMap(feedItemComponent))
@@ -131,7 +135,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 }
 
                 sendEvent(
-                    STVerticalFeedManager.EVENT_STORYLY_ON_CART_UPDATED,
+                    STVerticalFeedBarManager.EVENT_STORYLY_ON_CART_UPDATED,
                     eventParameters
                 )
             }
@@ -141,7 +145,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 event: VerticalFeedEvent
             ) {
                 sendEvent(
-                    STVerticalFeedManager.EVENT_STORYLY_PRODUCT_EVENT,
+                    STVerticalFeedBarManager.EVENT_STORYLY_PRODUCT_EVENT,
                     Arguments.createMap().apply {
                         putString("event", event.name)
                     }
@@ -152,7 +156,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
                 view: STRVerticalFeedView,
                 products: List<STRProductInformation>
             ) {
-                sendEvent(STVerticalFeedManager.EVENT_STORYLY_ON_HYDRATION, Arguments.createMap().also { productInformationMap ->
+                sendEvent(STVerticalFeedBarManager.EVENT_STORYLY_ON_HYDRATION, Arguments.createMap().also { productInformationMap ->
                     productInformationMap.putArray("products", Arguments.createArray().also { productMap ->
                         products.forEach { productInfo ->
                             productMap.pushMap(createSTRProductInformationMap(productInfo))
@@ -168,7 +172,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
 
     private val choreographerFrameCallback: Choreographer.FrameCallback by lazy {
         Choreographer.FrameCallback {
-            if (isAttachedToWindow && verticalFeedBarView?.isAttachedToWindow == true) {
+            if (isAttachedToWindow && verticalFeedView?.isAttachedToWindow == true) {
                 manuallyLayout()
                 viewTreeObserver.dispatchOnGlobalLayout()
                 Choreographer.getInstance().postFrameCallback(choreographerFrameCallback)
@@ -180,7 +184,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
         (context as? ReactContext)?.addLifecycleEventListener(object : LifecycleEventListener {
             override fun onHostResume() {
                 val activity = (context as? ReactContext)?.currentActivity ?: return
-                verticalFeedBarView?.activity = WeakReference(activity)
+                verticalFeedView?.activity = WeakReference(activity)
             }
 
             override fun onHostPause() {}
@@ -200,7 +204,7 @@ class STVerticalFeedBarView(context: Context) : FrameLayout(context) {
     }
 
     private fun manuallyLayout() {
-        val storylyView = verticalFeedBarView ?: return
+        val storylyView = verticalFeedView ?: return
         storylyView.measure(
             MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
             MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)

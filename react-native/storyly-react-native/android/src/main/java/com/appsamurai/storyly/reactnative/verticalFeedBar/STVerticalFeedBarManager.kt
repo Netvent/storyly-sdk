@@ -1,4 +1,4 @@
-package com.appsamurai.storyly.reactnative.VerticalFeed
+package com.appsamurai.storyly.reactnative.verticalFeedBar
 
 import android.content.Context
 import android.content.res.Resources
@@ -16,7 +16,6 @@ import com.appsamurai.storyly.reactnative.createSTRProductItem
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedBarView
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
-import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
 import com.appsamurai.storyly.verticalfeed.config.StorylyVerticalFeedConfig
 import com.appsamurai.storyly.verticalfeed.config.bar.StorylyVerticalFeedBarStyling
 import com.appsamurai.storyly.verticalfeed.config.customization.StorylyVerticalFeedCustomization
@@ -28,9 +27,9 @@ import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
-class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
+class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
     companion object {
-        private const val REACT_CLASS = "STVerticalFeed"
+        private const val REACT_CLASS = "STVerticalFeedBar"
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
@@ -73,9 +72,9 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
 
     override fun getName(): String = REACT_CLASS
 
-    override fun createViewInstance(reactContext: ThemedReactContext): STVerticalFeedView = STVerticalFeedView(reactContext)
+    override fun createViewInstance(reactContext: ThemedReactContext): STVerticalFeedBarView = STVerticalFeedBarView(reactContext)
 
-    override fun removeViewAt(parent: STVerticalFeedView, index: Int) {}
+    override fun removeViewAt(parent: STVerticalFeedBarView, index: Int) {}
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         val builder = MapBuilder.builder<String, Any>()
@@ -114,25 +113,25 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
         )
     }
 
-    override fun receiveCommand(root: STVerticalFeedView, commandId: Int, args: ReadableArray?) {
+    override fun receiveCommand(root: STVerticalFeedBarView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
-            COMMAND_REFRESH_CODE -> root.verticalFeedView?.refresh()
+            COMMAND_REFRESH_CODE -> root.verticalFeedBarView?.refresh()
             COMMAND_OPEN_STORY_CODE -> {
                 val payloadStr: String = args?.getString(0) ?: return
-                root.verticalFeedView?.openStory(Uri.parse(payloadStr))
+                root.verticalFeedBarView?.openStory(Uri.parse(payloadStr))
             }
 
             COMMAND_HYDRATE_PRODUCT_CODE -> {
                 (args?.getArray(0)?.toArrayList() as? List<Map<String, Any?>>)?.let {
                     val productItems = it.map { createSTRProductItem(it) }
-                    root.verticalFeedView?.hydrateProducts(productItems)
+                    root.verticalFeedBarView?.hydrateProducts(productItems)
                 }
             }
 
             COMMAND_UPDATE_CART_CODE -> {
                 (args?.getMap(0)?.toHashMap() as? Map<String, Any?>)?.let {
                     val cart = createSTRCart(it)
-                    root.verticalFeedView?.updateCart(cart)
+                    root.verticalFeedBarView?.updateCart(cart)
                 }
             }
 
@@ -159,12 +158,12 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
                 val storyGroupId: String = args?.getString(0) ?: return
                 val storyId: String? = if (args.size() > 1) args.getString(1) else null
                 val playMode: String? = if (args.size() > 2) args.getString(2) else null
-                root.verticalFeedView?.openStory(storyGroupId, storyId, getPlayMode(playMode))
+                root.verticalFeedBarView?.openStory(storyGroupId, storyId, getPlayMode(playMode))
             }
 
-            COMMAND_RESUME_STORY_CODE -> root.verticalFeedView?.resumeStory()
-            COMMAND_PAUSE_STORY_CODE -> root.verticalFeedView?.pauseStory()
-            COMMAND_CLOSE_STORY_CODE -> root.verticalFeedView?.closeStory()
+            COMMAND_RESUME_STORY_CODE -> root.verticalFeedBarView?.resumeStory()
+            COMMAND_PAUSE_STORY_CODE -> root.verticalFeedBarView?.pauseStory()
+            COMMAND_CLOSE_STORY_CODE -> root.verticalFeedBarView?.closeStory()
         }
     }
 
@@ -177,7 +176,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
     }
 
     @ReactProp(name = "storyly")
-    fun setPropStoryly(view: STVerticalFeedView, storylyBundle: ReadableMap) {
+    fun setPropStoryly(view: STVerticalFeedBarView, storylyBundle: ReadableMap) {
         println("STR:STVerticalFeedManager:setPropStoryly:${storylyBundle}")
         val storylyInitJson = storylyBundle.getMap("storylyInit") ?: return
         val storylyId = storylyInitJson.getString("storylyId") ?: return
@@ -195,7 +194,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
 
-        view.verticalFeedView = StorylyVerticalFeedView(view.activity).apply {
+        view.verticalFeedBarView = StorylyVerticalFeedBarView(view.activity).apply {
             storylyVerticalFeedInit = StorylyVerticalFeedInit(
                 storylyId = storylyId,
                 config = storylyConfigBuilder
@@ -256,7 +255,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
         return configBuilder
             .setVerticalFeedBarStyling(
                 StorylyVerticalFeedBarStyling.Builder()
-                    .setSection(if (json.hasKey("sections")) json.getInt("sections") else 2)
+                    .setSection(if (json.hasKey("sections")) json.getInt("sections") else 1)
                     .setHorizontalEdgePadding(if (json.hasKey("horizontalEdgePadding")) json.getInt("horizontalEdgePadding") else dpToPixel(4))
                     .setVerticalEdgePadding(if (json.hasKey("verticalEdgePadding")) json.getInt("verticalEdgePadding") else dpToPixel(4))
                     .setHorizontalPaddingBetweenItems(if (json.hasKey("horizontalPaddingBetweenItems")) json.getInt("horizontalPaddingBetweenItems") else dpToPixel(8))

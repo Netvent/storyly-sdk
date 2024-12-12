@@ -4,5 +4,8 @@ module.exports = {
     },
     get VerticalFeedBar() {
         return require('./RNVerticalFeedBar').default;
+    },
+    get VerticalFeed() {
+        return require('./RNVerticalFeed').default;
     }
 }

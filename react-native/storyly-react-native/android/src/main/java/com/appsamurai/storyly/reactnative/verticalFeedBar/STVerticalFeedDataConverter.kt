@@ -1,11 +1,5 @@
-package com.appsamurai.storyly.reactnative.verticalFeed
+package com.appsamurai.storyly.reactnative.verticalFeedBar
 
-import com.appsamurai.storyly.*
-import com.appsamurai.storyly.data.managers.product.STRCart
-import com.appsamurai.storyly.data.managers.product.STRCartItem
-import com.appsamurai.storyly.data.managers.product.STRProductItem
-import com.appsamurai.storyly.data.managers.product.STRProductVariant
-import com.appsamurai.storyly.data.managers.product.STRProductInformation
 import com.appsamurai.storyly.reactnative.createSTRProductItemMap
 import com.appsamurai.storyly.reactnative.toHexString
 import com.appsamurai.storyly.verticalfeed.VerticalFeedGroup
