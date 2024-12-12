@@ -7,5 +7,8 @@ module.exports = {
     },
     get VerticalFeed() {
         return require('./RNVerticalFeed').default;
+    },
+    get VerticalFeedPresenter() {
+        return require('./RNVerticalFeedPresenter').default;
     }
 }
