@@ -14,7 +14,7 @@
 * added video cache for video stories
 * improved interactive component add/remove flow on android platform
 * improved activity assignment flow in StorylyView on android platform
-  
+
 ### 3.6.3 (31.10.2024)
 * improved data processing flow on android platform
 * improved memory usage of gif media on ios platform

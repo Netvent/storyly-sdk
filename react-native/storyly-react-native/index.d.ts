@@ -119,6 +119,36 @@ declare module "storyly-react-native" {
     export interface StoryComponent {
       id: string;
       type: ReactionType;
+      customPayload?: string;
+    }
+
+    export interface StorySwipeComponent extends StoryComponent {
+      text: string;
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryButtonComponent extends StoryComponent {
+      text: string;
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryProductTagComponent extends StoryComponent {
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryProductCardComponent extends StoryComponent {
+      text: string;
+      actionUrl?: string;
+      products?: STRProductItem[];
+    }
+
+    export interface StoryProductCatalogComponent extends StoryComponent {
+      text: string;
+      actionUrlList?: string[];
+      products?: STRProductItem[];
     }
 
     export interface StoryQuizComponent extends StoryComponent {
@@ -126,21 +156,18 @@ declare module "storyly-react-native" {
       options: string[];
       rightAnswerIndex?: number;
       selectedOptionIndex: number;
-      customPayload?: string;
     }
 
     export interface StoryPollComponent extends StoryComponent {
       title: string;
       emojiCodes: string[];
       selectedEmojiIndex: number;
-      customPayload?: string;
     }
 
     export interface StoryRatingComponent extends StoryComponent {
       title: string;
       emojiCodes: string[];
       selectedEmojiIndex: number;
-      customPayload?: string;
     }
 
     export interface StoryPromoCodeComponent extends StoryComponent {
@@ -181,7 +208,7 @@ declare module "storyly-react-native" {
       actionUrl: string;
       previewUrl: string;
       storyComponentList?: StoryComponent[];
-      products?: STRProductItem[];
+      actionProducts?: STRProductItem[];
     }
 
     export interface Media {

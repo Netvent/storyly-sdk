@@ -61,7 +61,7 @@ internal fun createStoryMap(story: Story): WritableMap {
         storyMap.putArray("storyComponentList", Arguments.createArray().also { componentArray ->
             story.storyComponentList?.forEach { componentArray.pushMap(createStoryComponentMap(it)) }
         })
-        storyMap.putArray("products", story.actionProducts?.let {
+        storyMap.putArray("actionProducts", story.actionProducts?.let {
             Arguments.createArray().also { storiesArray ->
                 it.forEach { item -> storiesArray.pushMap(createSTRProductItemMap(item)) }
             }
@@ -72,10 +72,83 @@ internal fun createStoryMap(story: Story): WritableMap {
 internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMap {
     return Arguments.createMap().also { storyComponentMap ->
         when (storyComponent.type) {
+            StoryComponentType.ButtonAction -> {
+                val buttonComponent = storyComponent as StoryButtonComponent
+                storyComponentMap.putString("type", "buttonaction")
+                storyComponentMap.putString("text", buttonComponent.text)
+                storyComponentMap.putString("id", buttonComponent.id)
+                storyComponentMap.putString("customPayload", buttonComponent.customPayload)
+                storyComponentMap.putString("actionUrl", buttonComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    buttonComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            StoryComponentType.SwipeAction -> {
+                val swipeComponent = storyComponent as StorySwipeComponent
+                storyComponentMap.putString("type", "swipeaction")
+                storyComponentMap.putString("id", swipeComponent.id)
+                storyComponentMap.putString("customPayload", swipeComponent.customPayload)
+                storyComponentMap.putString("text", swipeComponent.text)
+                storyComponentMap.putString("actionUrl", swipeComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    swipeComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            StoryComponentType.ProductTag -> {
+                val ptagComponent = storyComponent as StoryProductTagComponent
+                storyComponentMap.putString("type", "producttag")
+                storyComponentMap.putString("id", ptagComponent.id)
+                storyComponentMap.putString("customPayload", ptagComponent.customPayload)
+                storyComponentMap.putString("actionUrl", ptagComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    ptagComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            StoryComponentType.ProductCard -> {
+                val pcardComponent = storyComponent as StoryProductCardComponent
+                storyComponentMap.putString("type", "productcard")
+                storyComponentMap.putString("id", pcardComponent.id)
+                storyComponentMap.putString("customPayload", pcardComponent.customPayload)
+                storyComponentMap.putString("text", pcardComponent.text)
+                storyComponentMap.putString("actionUrl", pcardComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    pcardComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            StoryComponentType.ProductCatalog -> {
+                val catalogComponent = storyComponent as StoryProductCatalogComponent
+                storyComponentMap.putString("type", "productcatalog")
+                storyComponentMap.putString("id", catalogComponent.id)
+                storyComponentMap.putString("customPayload", catalogComponent.customPayload)
+                storyComponentMap.putArray("actionUrlList", Arguments.createArray().also { actionUrlArray ->
+                    catalogComponent.actionUrlList?.forEach { actionUrl ->
+                        actionUrlArray.pushString(actionUrl)
+                    }
+                })
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    catalogComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
             StoryComponentType.Quiz -> {
                 val quizComponent = storyComponent as StoryQuizComponent
                 storyComponentMap.putString("type", "quiz")
                 storyComponentMap.putString("id", quizComponent.id)
+                storyComponentMap.putString("customPayload", quizComponent.customPayload)
                 storyComponentMap.putString("title", quizComponent.title)
                 storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
                     quizComponent.options.forEach { option ->
@@ -88,13 +161,13 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                     storyComponentMap.putNull("rightAnswerIndex")
                 }
                 storyComponentMap.putInt("selectedOptionIndex", quizComponent.selectedOptionIndex)
-                storyComponentMap.putString("customPayload", quizComponent.customPayload)
             }
 
             StoryComponentType.Poll -> {
                 val pollComponent = storyComponent as StoryPollComponent
                 storyComponentMap.putString("type", "poll")
                 storyComponentMap.putString("id", pollComponent.id)
+                storyComponentMap.putString("customPayload", pollComponent.customPayload)
                 storyComponentMap.putString("title", pollComponent.title)
                 storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
                     pollComponent.options.forEach { option ->
@@ -102,13 +175,14 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                     }
                 })
                 storyComponentMap.putInt("selectedOptionIndex", pollComponent.selectedOptionIndex)
-                storyComponentMap.putString("customPayload", pollComponent.customPayload)
+
             }
 
             StoryComponentType.Emoji -> {
                 val emojiComponent = storyComponent as StoryEmojiComponent
                 storyComponentMap.putString("type", "emoji")
                 storyComponentMap.putString("id", emojiComponent.id)
+                storyComponentMap.putString("customPayload", emojiComponent.customPayload)
                 storyComponentMap.putArray(
                     "emojiCodes",
                     Arguments.createArray().also { emojiCodesArray ->
@@ -117,7 +191,6 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                         }
                     })
                 storyComponentMap.putInt("selectedEmojiIndex", emojiComponent.selectedEmojiIndex)
-                storyComponentMap.putString("customPayload", emojiComponent.customPayload)
 
             }
 
@@ -125,15 +198,16 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 val ratingComponent = storyComponent as StoryRatingComponent
                 storyComponentMap.putString("type", "rating")
                 storyComponentMap.putString("id", ratingComponent.id)
+                storyComponentMap.putString("customPayload", ratingComponent.customPayload)
                 storyComponentMap.putString("emojiCode", ratingComponent.emojiCode)
                 storyComponentMap.putInt("rating", ratingComponent.rating)
-                storyComponentMap.putString("customPayload", ratingComponent.customPayload)
             }
 
             StoryComponentType.PromoCode -> {
                 val promoCodeComponent = storyComponent as StoryPromoCodeComponent
                 storyComponentMap.putString("type", "promocode")
                 storyComponentMap.putString("id", promoCodeComponent.id)
+                storyComponentMap.putString("customPayload", promoCodeComponent.customPayload)
                 storyComponentMap.putString("text", promoCodeComponent.text)
             }
 
@@ -141,12 +215,14 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 val commentComponent = storyComponent as StoryCommentComponent
                 storyComponentMap.putString("type", "comment")
                 storyComponentMap.putString("id", commentComponent.id)
+                storyComponentMap.putString("customPayload", commentComponent.customPayload)
                 storyComponentMap.putString("text", commentComponent.text)
             }
 
             else -> {
                 storyComponentMap.putString("id", storyComponent.id)
                 storyComponentMap.putString("type", storyComponent.type.name.lowercase())
+                storyComponentMap.putString("customPayload", storyComponent.customPayload)
             }
         }
     }

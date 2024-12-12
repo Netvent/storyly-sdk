@@ -64,7 +64,7 @@ func createStoryMap(story: Story) -> [String: Any?] {
         "previewUrl": story.previewUrl?.absoluteString,
         "actionUrl": story.actionUrl,
         "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent: $0)},
-        "products": story.actionProducts?.map { product in createSTRProductItemMap(product: product) }
+        "actionProducts": story.actionProducts?.map { product in createSTRProductItemMap(product: product) }
     ]
 }
 
@@ -75,6 +75,44 @@ func createStoryComponentMap(_ storyComponent: StoryComponent?) -> [String: Any?
 
 func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
     switch storyComponent {
+        case let storyComponent as StoryButtonComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }   
+        ]
+        case let storyComponent as StorySwipeComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as StoryProductTagComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as StoryProductCardComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as StoryProductCatalogComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "actionUrlList": storyComponent.actionUrlList,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
         case let storyComponent as StoryQuizComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
@@ -109,16 +147,19 @@ func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         case let storyComponent as StoryPromoCodeComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
-            "text": storyComponent.text
+            "text": storyComponent.text,
+            "customPayload": storyComponent.customPayload
         ]
         case let storyComponent as StoryCommentComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
-            "text": storyComponent.text
+            "text": storyComponent.text,
+            "customPayload": storyComponent.customPayload
         ]
         default: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload
         ]
     }
 }
@@ -170,7 +211,7 @@ internal func createSTRProductVariant(variants: [NSDictionary]) -> [STRProductVa
             name: variant["name"] as? String ?? "", 
             value: variant["value"] as? String ?? "",
             key: variant["key"] as? String ?? ""
-            )
+        )
     }
 }
 
