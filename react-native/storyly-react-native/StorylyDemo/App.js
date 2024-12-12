@@ -50,7 +50,7 @@ export default class App extends Component {
                                 console.log(`[Vertical Feed Presenter] - onCartUpdate ${StoryProductCartUpdateEvent.event} ${StoryProductCartUpdateEvent.change.toString()}`);
                             }}
                             onUserInteracted={ VerticalFeedItemInteractiveEvent => {
-                                console.log(`[Vertical Feed Presenter] - onUserInteracted ${VerticalFeedItemInteractiveEvent.story.toString()}`);
+                                console.log(`[Vertical Feed Presenter] - onUserInteracted ${VerticalFeedItemInteractiveEvent.storyComponent}`);
                             }}
                             onPress={ VerticalFeedPressEvent => {
                                 console.log(`[Vertical Feed Presenter] - onPress ${VerticalFeedPressEvent.feedItem}`);
@@ -113,7 +113,7 @@ export default class App extends Component {
                             console.log(`[Vertical Feed Bar] - onCartUpdate ${StoryProductCartUpdateEvent.event} ${StoryProductCartUpdateEvent.change.toString()}`);
                         }}
                         onUserInteracted={ VerticalFeedItemInteractiveEvent => {
-                            console.log(`[Vertical Feed Bar] - onUserInteracted ${VerticalFeedItemInteractiveEvent.story.toString()}`);
+                            console.log(`[Vertical Feed Bar] - onUserInteracted ${VerticalFeedItemInteractiveEvent.storyComponent}`);
                         }}
                         onPress={ VerticalFeedPressEvent => {
                             console.log(`[Vertical Feed Bar] - onPress ${VerticalFeedPressEvent.feedItem}`);
@@ -135,7 +135,7 @@ export default class App extends Component {
                             console.log(`[Vertical Feed] - onCartUpdate ${StoryProductCartUpdateEvent.event} ${StoryProductCartUpdateEvent.change.toString()}`);
                         }}
                         onUserInteracted={ VerticalFeedItemInteractiveEvent => {
-                            console.log(`[Vertical Feed] - onUserInteracted ${VerticalFeedItemInteractiveEvent.story.toString()}`);
+                            console.log(`[Vertical Feed] - onUserInteracted ${VerticalFeedItemInteractiveEvent.storyComponent}`);
                         }}
                         onPress={ VerticalFeedPressEvent => {
                             console.log(`[Vertical Feed] - onPress ${VerticalFeedPressEvent.feedItem}`);
