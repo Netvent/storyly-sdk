@@ -1,17 +1,35 @@
 package com.appsamurai.storyly.reactnative.verticalFeedBar
 
+import com.appsamurai.storyly.StoryButtonComponent
+import com.appsamurai.storyly.StoryCommentComponent
+import com.appsamurai.storyly.StoryComponent
+import com.appsamurai.storyly.StoryComponentType
+import com.appsamurai.storyly.StoryEmojiComponent
+import com.appsamurai.storyly.StoryPollComponent
+import com.appsamurai.storyly.StoryProductCardComponent
+import com.appsamurai.storyly.StoryProductCatalogComponent
+import com.appsamurai.storyly.StoryProductTagComponent
+import com.appsamurai.storyly.StoryPromoCodeComponent
+import com.appsamurai.storyly.StoryQuizComponent
+import com.appsamurai.storyly.StoryRatingComponent
+import com.appsamurai.storyly.StorySwipeComponent
 import com.appsamurai.storyly.reactnative.createSTRProductItemMap
 import com.appsamurai.storyly.reactnative.toHexString
 import com.appsamurai.storyly.verticalfeed.VerticalFeedGroup
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItem
+import com.appsamurai.storyly.verticalfeed.VerticalFeedItemButtonComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemCommentComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponentType
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemEmojiComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemPollComponent
+import com.appsamurai.storyly.verticalfeed.VerticalFeedItemProductCardComponent
+import com.appsamurai.storyly.verticalfeed.VerticalFeedItemProductCatalogComponent
+import com.appsamurai.storyly.verticalfeed.VerticalFeedItemProductTagComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemPromoCodeComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemQuizComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemRatingComponent
+import com.appsamurai.storyly.verticalfeed.VerticalFeedItemSwipeComponent
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
 
@@ -81,6 +99,73 @@ internal fun createVerticalFeedItem(feedItem: VerticalFeedItem): WritableMap {
 internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedItemComponent): WritableMap {
     return Arguments.createMap().also { storyComponentMap ->
         when (verticalFeedComponent.type) {
+            VerticalFeedItemComponentType.ButtonAction -> {
+                val buttonComponent = verticalFeedComponent as VerticalFeedItemButtonComponent
+                storyComponentMap.putString("type", "buttonaction")
+                storyComponentMap.putString("text", buttonComponent.text)
+                storyComponentMap.putString("id", buttonComponent.id)
+                storyComponentMap.putString("actionUrl", buttonComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    buttonComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            VerticalFeedItemComponentType.SwipeAction -> {
+                val swipeComponent = verticalFeedComponent as VerticalFeedItemSwipeComponent
+                storyComponentMap.putString("type", "swipeaction")
+                storyComponentMap.putString("id", swipeComponent.id)
+                storyComponentMap.putString("text", swipeComponent.text)
+                storyComponentMap.putString("actionUrl", swipeComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    swipeComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            VerticalFeedItemComponentType.ProductTag -> {
+                val ptagComponent = verticalFeedComponent as VerticalFeedItemProductTagComponent
+                storyComponentMap.putString("type", "producttag")
+                storyComponentMap.putString("id", ptagComponent.id)
+                storyComponentMap.putString("actionUrl", ptagComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    ptagComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            VerticalFeedItemComponentType.ProductCard -> {
+                val pcardComponent = verticalFeedComponent as VerticalFeedItemProductCardComponent
+                storyComponentMap.putString("type", "productcard")
+                storyComponentMap.putString("id", pcardComponent.id)
+                storyComponentMap.putString("text", pcardComponent.text)
+                storyComponentMap.putString("actionUrl", pcardComponent.actionUrl)
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    pcardComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
+            VerticalFeedItemComponentType.ProductCatalog -> {
+                val catalogComponent = verticalFeedComponent as VerticalFeedItemProductCatalogComponent
+                storyComponentMap.putString("type", "productcatalog")
+                storyComponentMap.putString("id", catalogComponent.id)
+                storyComponentMap.putArray("actionUrlList", Arguments.createArray().also { actionUrlArray ->
+                    catalogComponent.actionUrlList?.forEach { actionUrl ->
+                        actionUrlArray.pushString(actionUrl)
+                    }
+                })
+                storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
+                    catalogComponent.products?.forEach { product ->
+                        productsArray.pushMap(createSTRProductItemMap(product))
+                    }
+                })
+            }
+
             VerticalFeedItemComponentType.Quiz -> {
                 val quizComponent = verticalFeedComponent as VerticalFeedItemQuizComponent
                 storyComponentMap.putString("type", "quiz")

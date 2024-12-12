@@ -75,6 +75,44 @@ func createVerticalFeedItemComponentMap(_ storyComponent: VerticalFeedItemCompon
 
 func createVerticalFeedItemComponentMap(storyComponent: VerticalFeedItemComponent) -> [String: Any?] {
     switch storyComponent {
+        case let storyComponent as VerticalFeedButtonComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as VerticalFeedSwipeComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as VerticalFeedProductTagComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as VerticalFeedProductCardComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "text": storyComponent.text,
+            "actionUrl": storyComponent.actionUrl,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
+        case let storyComponent as VerticalFeedProductCatalogComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload,
+            "actionUrlList": storyComponent.actionUrlList,
+            "products": storyComponent.products?.map { product in createSTRProductItemMap(product: product) }
+        ]
         case let verticalFeedComponent as VerticalFeedQuizComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:verticalFeedComponent.type).lowercased(),
             "id": verticalFeedComponent.id,
