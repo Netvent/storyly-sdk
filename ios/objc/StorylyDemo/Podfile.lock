@@ -1,16 +1,16 @@
 PODS:
-  - Storyly (2.4.0)
+  - Storyly (4.3.3)
 
 DEPENDENCIES:
-  - Storyly (= 2.4.0)
+  - Storyly (= 4.3.3)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Storyly
 
 SPEC CHECKSUMS:
-  Storyly: c19f50039bca21c69bdece7b17f03a35c8dc9650
+  Storyly: 38b929ec16fb41f72b7588552632420feca9145a
 
-PODFILE CHECKSUM: 9c05c6cb7e0c40d5d0fac938a7c344dbaee12555
+PODFILE CHECKSUM: 2d006566d7116f1626edecb42d5cbd9cc21c6c61
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2

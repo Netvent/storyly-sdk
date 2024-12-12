@@ -37,6 +37,5 @@ dependencies {
 
     implementation "com.github.skydoves:colorpickerview:2.2.4"
 
-    implementation 'com.appsamurai.storyly:storyly:1.32.5'
-    implementation 'com.appsamurai.storyly:storyly-monetization:1.1.0'
+    implementation 'com.appsamurai.storyly:storyly:4.4.0'
 }

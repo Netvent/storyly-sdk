@@ -1,4 +1,27 @@
 # Release Notes
+### 4.5.0 (04.12.2024)
+* improved areas for next/previous clicks
+* added config for app logo visibility for shared media
+  
+### 4.4.0 (28.11.2024)
+* added video share to Instagram Stories for Storyly
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly and Vertical Feed delegate methods
+* improved watch_length related analytics for Vertical Feed
+* improved seen state handling for StorylyVerticalFeedPresenterView
+* added a swipe tutorial animation for Vertical Feed
+* improved layer placements for Vertical Feed
+  
+### 4.3.3 (14.11.2024)
+* fixed a bug related to style changes
+  
+### 4.3.2 (14.11.2024)
+* IMPORTANT! fixed a bug related to custom parameter assignment
+  
+### 4.3.1 (12.11.2024)
+* improved StorylyView and VerticalFeedView initialization flow
+  
 ### 4.3.0 (07.11.2024)
 * IMPORTANT! renamed resume function to play in StorylyVerticalFeedPresenterView
 * changed play/pause handling of vertical feed for StorylyVerticalFeedPresenterView
@@ -24,6 +47,21 @@
   
 ### 4.0.0 (17.10.2024)
 * added vertical feed
+
+### 3.9.0 (28.11.2024)
+* added video share to Instagram Stories
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly delegate methods
+
+### 3.8.1 (14.11.2024)
+* fixed a bug related to style changes
+  
+### 3.8.0 (14.11.2024)
+* added video cache for video stories
+  
+### 3.7.1 (12.11.2024)
+* improved StorylyView initialization flow
 
 ### 3.7.0 (05.11.2024)
 * IMPORTANT! renamed products field to actionProducts in Story class

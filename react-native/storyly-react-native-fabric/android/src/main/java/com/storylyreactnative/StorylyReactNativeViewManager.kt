@@ -2,10 +2,8 @@ package com.storylyreactnative
 
 import android.app.Activity
 import android.net.Uri
-import android.view.View
 import com.appsamurai.storyly.PlayMode
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.common.MapBuilder
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
@@ -13,7 +11,6 @@ import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.viewmanagers.StorylyReactNativeViewManagerDelegate
 import com.facebook.react.viewmanagers.StorylyReactNativeViewManagerInterface
-import com.facebook.soloader.SoLoader
 import com.storylyreactnative.data.STEvent
 import com.storylyreactnative.data.createSTRCart
 import com.storylyreactnative.data.createSTRProductItem
@@ -113,12 +110,12 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
 
     override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
         val events = super.getExportedCustomDirectEventTypeConstants()
-        val builder = MapBuilder.builder<String, Any>()
-        events?.forEach { builder.put(it.key, it.value) }
-        STEvent.Type.values().forEach {
-            builder.put(it.rawName, MapBuilder.of("registrationName", it.rawName))
+        val eventMap = mutableMapOf<String, Any>()
+        events?.forEach { eventMap[it.key] = it.value }
+        STEvent.Type.entries.forEach {
+            eventMap[it.rawName] = mapOf("registrationName" to it.rawName)
         }
-        return builder.build()
+        return eventMap
     }
 
     private fun getPlayMode(playMode: String?): PlayMode {
@@ -131,11 +128,5 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
 
     companion object {
         const val NAME = "StorylyReactNativeView"
-
-        init {
-            if (BuildConfig.CODEGEN_MODULE_REGISTRATION != null) {
-                SoLoader.loadLibrary(BuildConfig.CODEGEN_MODULE_REGISTRATION)
-            }
-        }
     }
 }

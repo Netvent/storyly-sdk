@@ -39,5 +39,6 @@ internal class STEvent(
         ON_STORYLY_ON_HYDRATION("onStorylyProductHydration"),
         ON_STORYLY_ON_CART_UPDATED("onStorylyCartUpdated"),
         ON_STORYLY_PRODUCT_EVENT("onStorylyProductEvent"),
+        ON_STORYLY_SIZE_CHANGED("onStorylySizeChanged"),
     }
 }

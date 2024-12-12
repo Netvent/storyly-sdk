@@ -8,7 +8,7 @@
 # VSCode
 .vscode/
 jsconfig.json
-
+\.yarn/
 # Xcode
 #
 build/

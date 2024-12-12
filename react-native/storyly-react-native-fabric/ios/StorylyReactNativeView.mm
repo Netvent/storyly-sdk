@@ -82,6 +82,10 @@ using namespace facebook::react;
           [weakSelf storylyEventEmitter]
             ->onStorylyProductEvent(StorylyReactNativeViewEventEmitter::OnStorylyProductEvent{std::string([raw UTF8String])});
       };
+      _stStorylyView.onStorylySizeChanged = ^(NSString* raw) {
+          [weakSelf storylyEventEmitter]
+            ->onStorylySizeChanged(StorylyReactNativeViewEventEmitter::OnStorylySizeChanged{std::string([raw UTF8String])});
+      };
       
       self.contentView = _stStorylyView;
       

@@ -30,6 +30,10 @@
     [[storylyViewProgrammatic.topAnchor constraintEqualToAnchor:self.storylyView.bottomAnchor constant:50] setActive:YES];
     [[storylyViewProgrammatic.heightAnchor constraintEqualToConstant:120] setActive:YES];
     
+    NSDictionary *userData = @{
+        @"name": @"This is the name field",
+        @"surname": @"This is the surname field"
+    };
 
     StorylyStoryGroupStyling *groupStyling = [[[[[[[StorylyStoryGroupStylingBuilder alloc] init]
                                               setSize:StoryGroupSizeCustom]
@@ -42,19 +46,20 @@
                                      setHorizontalPaddingBetweenItems:15]
                                      build];
     
-    StorylyStoryStyling *storyStyling = [[[[StorylyStoryStylingBuilder alloc] init]
+    StorylyStoryStyling *storyStyling = [[[[StorylyStoryBuilder alloc] init]
                                          setTitleColor: UIColor.redColor]
                                          build];
              
-    StorylyConfig *storylyConfig = [[[[[[StorylyConfigBuilder alloc] init]
+    StorylyConfig *storylyConfig = [[[[[[[StorylyBuilder alloc] init]
                                      setStoryGroupStyling:groupStyling]
                                      setBarStyling:barStyling]
                                      setStoryStyling:storyStyling]
+                                     setUserData:userData]
                                      build];
          
        
-    storylyViewProgrammatic.storylyInit = [[StorylyInit alloc] initWithStorylyId:STORYLY_INSTANCE_TOKEN config:storylyConfig];
-    self.storylyView.storylyInit = [[StorylyInit alloc] initWithStorylyId:STORYLY_INSTANCE_TOKEN config:storylyConfig];
+    storylyViewProgrammatic.storylyInit = [[StorylyInit alloc] initWithStorylyId:STORYLY_PROGRAMMATIC_TOKEN config:storylyConfig];
+    self.storylyView.storylyInit = [[StorylyInit alloc] initWithStorylyId:STORYLY_INSTANCE_TOKEN config: [[[StorylyBuilder alloc] init] build]];
 }
 
 - (void)storylyLoaded:(StorylyView *)storylyView
@@ -71,7 +76,7 @@
 - (void)storylyActionClicked:(StorylyView *)storylyView
           rootViewController:(UIViewController *)rootViewController
                        story:(Story *)story {
-    NSLog(@"[storyly] IntegrationViewController:storylyActionClicked - story action_url {%@)}", story.media.actionUrl);
+    NSLog(@"[storyly] IntegrationViewController:storylyActionClicked - story action_url {%@)}", story.actionUrl);
     [storylyView closeStoryWithAnimated:true completion:nil];
 }
 
