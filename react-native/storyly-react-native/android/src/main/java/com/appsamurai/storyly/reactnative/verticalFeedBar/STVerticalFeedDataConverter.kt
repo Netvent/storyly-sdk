@@ -105,6 +105,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("text", buttonComponent.text)
                 storyComponentMap.putString("id", buttonComponent.id)
                 storyComponentMap.putString("actionUrl", buttonComponent.actionUrl)
+                storyComponentMap.putString("customPayload", buttonComponent.customPayload)
                 storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
                     buttonComponent.products?.forEach { product ->
                         productsArray.pushMap(createSTRProductItemMap(product))
@@ -118,6 +119,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("id", swipeComponent.id)
                 storyComponentMap.putString("text", swipeComponent.text)
                 storyComponentMap.putString("actionUrl", swipeComponent.actionUrl)
+                storyComponentMap.putString("customPayload", swipeComponent.customPayload)
                 storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
                     swipeComponent.products?.forEach { product ->
                         productsArray.pushMap(createSTRProductItemMap(product))
@@ -130,6 +132,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("type", "producttag")
                 storyComponentMap.putString("id", ptagComponent.id)
                 storyComponentMap.putString("actionUrl", ptagComponent.actionUrl)
+                storyComponentMap.putString("customPayload", ptagComponent.customPayload)
                 storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
                     ptagComponent.products?.forEach { product ->
                         productsArray.pushMap(createSTRProductItemMap(product))
@@ -143,6 +146,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("id", pcardComponent.id)
                 storyComponentMap.putString("text", pcardComponent.text)
                 storyComponentMap.putString("actionUrl", pcardComponent.actionUrl)
+                storyComponentMap.putString("customPayload", pcardComponent.customPayload)
                 storyComponentMap.putArray("products", Arguments.createArray().also { productsArray ->
                     pcardComponent.products?.forEach { product ->
                         productsArray.pushMap(createSTRProductItemMap(product))
@@ -154,6 +158,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 val catalogComponent = verticalFeedComponent as VerticalFeedItemProductCatalogComponent
                 storyComponentMap.putString("type", "productcatalog")
                 storyComponentMap.putString("id", catalogComponent.id)
+                storyComponentMap.putString("customPayload", catalogComponent.customPayload)
                 storyComponentMap.putArray("actionUrlList", Arguments.createArray().also { actionUrlArray ->
                     catalogComponent.actionUrlList?.forEach { actionUrl ->
                         actionUrlArray.pushString(actionUrl)
@@ -171,6 +176,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("type", "quiz")
                 storyComponentMap.putString("id", quizComponent.id)
                 storyComponentMap.putString("title", quizComponent.title)
+                storyComponentMap.putString("customPayload", quizComponent.customPayload)
                 storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
                     quizComponent.options.forEach { option ->
                         optionsArray.pushString(option)
@@ -212,7 +218,6 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                     })
                 storyComponentMap.putInt("selectedEmojiIndex", emojiComponent.selectedEmojiIndex)
                 storyComponentMap.putString("customPayload", emojiComponent.customPayload)
-
             }
 
             VerticalFeedItemComponentType.Rating -> {
@@ -229,6 +234,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("type", "promocode")
                 storyComponentMap.putString("id", promoCodeComponent.id)
                 storyComponentMap.putString("text", promoCodeComponent.text)
+                storyComponentMap.putString("customPayload", promoCodeComponent.customPayload)
             }
 
             VerticalFeedItemComponentType.Comment -> {
@@ -236,11 +242,13 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("type", "comment")
                 storyComponentMap.putString("id", commentComponent.id)
                 storyComponentMap.putString("text", commentComponent.text)
+                storyComponentMap.putString("customPayload", commentComponent.customPayload)
             }
 
             else -> {
                 storyComponentMap.putString("id", verticalFeedComponent.id)
                 storyComponentMap.putString("type", verticalFeedComponent.type.name.lowercase())
+                storyComponentMap.putString("customPayload", verticalFeedComponent.customPayload)
             }
         }
     }

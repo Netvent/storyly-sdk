@@ -147,16 +147,19 @@ func createVerticalFeedItemComponentMap(storyComponent: VerticalFeedItemComponen
         case let verticalFeedComponent as VerticalFeedPromoCodeComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": verticalFeedComponent.id,
-            "text": verticalFeedComponent.text
+            "text": verticalFeedComponent.text,
+            "customPayload": verticalFeedComponent.customPayload
         ]
         case let verticalFeedComponent as VerticalFeedCommentComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": verticalFeedComponent.id,
-            "text": verticalFeedComponent.text
+            "text": verticalFeedComponent.text,
+            "customPayload": verticalFeedComponent.customPayload
         ]
         default: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,
+            "customPayload": storyComponent.customPayload
         ]
     }
 }

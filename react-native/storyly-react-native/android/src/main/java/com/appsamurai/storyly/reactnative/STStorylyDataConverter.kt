@@ -200,6 +200,7 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 storyComponentMap.putString("id", ratingComponent.id)
                 storyComponentMap.putString("customPayload", ratingComponent.customPayload)
                 storyComponentMap.putString("emojiCode", ratingComponent.emojiCode)
+                storyComponentMap.putString("customPayload", ratingComponent.customPayload)
                 storyComponentMap.putInt("rating", ratingComponent.rating)
             }
 
