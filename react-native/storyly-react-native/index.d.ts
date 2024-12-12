@@ -314,7 +314,7 @@ declare module "storyly-react-native" {
       verticalFeedGroupTextTypeface?: string;
       verticalFeedGroupTextColor?: string;
       verticalFeedTypeIndicatorIsVisible?: boolean;
-      verticalFeedGroupOrder?: "bySeenState" | "static";
+      verticalFeedGroupOrder?: "static" |"bySeenState" ;
       verticalFeedGroupMinLikeCountToShowIcon?: number;
       verticalFeedGroupMinImpressionCountToShowIcon?: number;
       verticalFeedGroupImpressionIcon?: string;

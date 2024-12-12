@@ -181,7 +181,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
         val storylyInitJson = storylyBundle.getMap("storylyInit") ?: return
         val storylyId = storylyInitJson.getString("storylyId") ?: return
         val storyGroupStylingJson = storylyBundle.getMap("verticalFeedGroupStyling") ?: return
-        val storyBarStylingJson = storylyBundle.getMap("verticalFeedItemBarStyling") ?: return
+        val storyBarStylingJson = storylyBundle.getMap("verticalFeedBarStyling") ?: return
         val storyStylingJson = storylyBundle.getMap("verticalFeedCustomization") ?: return
         val storyShareConfig = storylyBundle.getMap("verticalFeedItemShareConfig") ?: return
         val storyProductConfig = storylyBundle.getMap("verticalFeedItemProductConfig") ?: return
@@ -223,8 +223,8 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
     ): StorylyVerticalFeedConfig.Builder {
         var groupStylingBuilder = StorylyVerticalFeedGroupStyling.Builder()
         if (json.hasKey("iconBackgroundColor")) groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(json.getInt("iconBackgroundColor"))
-        groupStylingBuilder = if (json.hasKey("iconHeight")) groupStylingBuilder.setIconHeight(json.getInt("iconHeight")) else groupStylingBuilder.setIconHeight(dpToPixel(80))
-        groupStylingBuilder = if (json.hasKey("iconCornerRadius")) groupStylingBuilder.setIconCornerRadius(json.getInt("iconCornerRadius")) else groupStylingBuilder.setIconCornerRadius(dpToPixel(40))
+        if (json.hasKey("iconHeight")) groupStylingBuilder = groupStylingBuilder.setIconHeight(json.getInt("iconHeight"))
+        if (json.hasKey("iconCornerRadius")) groupStylingBuilder = groupStylingBuilder.setIconCornerRadius(json.getInt("iconCornerRadius"))
         if (json.hasKey("titleTextSize")) groupStylingBuilder = groupStylingBuilder.setTitleTextSize(Pair(TypedValue.COMPLEX_UNIT_PX, json.getInt("titleTextSize")))
         if (json.hasKey("titleVisible")) groupStylingBuilder = groupStylingBuilder.setTitleVisibility(json.getBoolean("titleVisible"))
         if (json.hasKey("textTypeface")) groupStylingBuilder = groupStylingBuilder.setTypeface(getTypeface(context, json.getString("textTypeface")))
@@ -312,8 +312,8 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedBarView>() {
         if (json.hasKey("isTitleVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isTitleVisible"))
         if (json.hasKey("isProgressBarVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isProgressBarVisible"))
         if (json.hasKey("isCloseButtonVisible")) storyStylingBuilder = storyStylingBuilder.setCloseButtonVisibility(json.getBoolean("isCloseButtonVisible"))
-        if (json.hasKey("isLikeButtonVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isLikeButtonVisible"))
-        if (json.hasKey("isShareButtonVisible")) storyStylingBuilder = storyStylingBuilder.setTitleVisibility(json.getBoolean("isShareButtonVisible"))
+        if (json.hasKey("isLikeButtonVisible")) storyStylingBuilder = storyStylingBuilder.setLikeButtonVisibility(json.getBoolean("isLikeButtonVisible"))
+        if (json.hasKey("isShareButtonVisible")) storyStylingBuilder = storyStylingBuilder.setShareButtonVisibility(json.getBoolean("isShareButtonVisible"))
 
         storyStylingBuilder = storyStylingBuilder.setCloseButtonIcon(getDrawable(context, if (json.hasKey("closeButtonIcon")) json.getString("closeButtonIcon") else null))
         storyStylingBuilder = storyStylingBuilder.setShareButtonIcon(getDrawable(context, if (json.hasKey("shareButtonIcon")) json.getString("shareButtonIcon") else null))

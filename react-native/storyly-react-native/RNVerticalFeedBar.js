@@ -336,6 +336,5 @@ VerticalFeedBar.propTypes = {
 }
 
 const STVerticalFeedBar = requireNativeComponent('STVerticalFeedBar', null);
-const STVerticalFeedBarGroupView = requireNativeComponent('STVerticalFeedBarGroupView', null);
 
 export default VerticalFeedBar;

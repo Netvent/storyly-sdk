@@ -14,7 +14,7 @@ class STVerticalFeedBarView: UIView {
     private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
     
     @objc(storylyBundle)
-    var storylyBundle: StorylyBundle? = nil {
+    var storylyBundle: VerticalFeedBarBundle? = nil {
         didSet {
             self.storylyView = self.storylyBundle?.storylyView
         }
@@ -25,8 +25,8 @@ class STVerticalFeedBarView: UIView {
             oldValue?.removeFromSuperview()
             guard let storylyView = storylyView else { return }
             storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
-            storylyView.delegate = self
-            storylyView.productDelegate = self
+            storylyView.storylyVerticalFeedDelegate = self
+            storylyView.storylyVerticalFeedProductDelegate = self
             addSubview(storylyView)
             
             storylyView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,13 +75,10 @@ class STVerticalFeedBarView: UIView {
     
     @objc(onStorylyCartUpdated)
     var onStorylyCartUpdated: RCTBubblingEventBlock?
-        
-    @objc(onStorylySizeChanged)
-    var onStorylySizeChanged: RCTBubblingEventBlock?
     
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
-        self.storylyView = StorylyView(frame: frame)
+        self.storylyView = StorylyVerticalFeedBarView(frame: frame)
         super.init(frame: frame)
         
         self.backgroundColor = .clear
@@ -96,17 +93,12 @@ class STVerticalFeedBarView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
-        print("STR:STStorylyView:insertReactSubview(subview:\(subview):at\(atIndex))")
-        guard let subview = subview as? STStorylyGroupView else { return }
-        storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
-    }
 
     override func removeReactSubview(_ subview: UIView!) {}
 }
 
 extension STVerticalFeedBarView {
+    
     func refresh() {
         print("STR:STStorylyView:refresh()")
         storylyView?.refresh()
@@ -148,17 +140,17 @@ extension STVerticalFeedBarView {
     
     func resumeStory() {
         print("STR:STStorylyView:resumeStory()")
-        storylyView?.resumeStory(animated: false)
+        storylyView?.resumeVerticalFeed(animated: false)
     }
 
     func pauseStory() {
-         print("STR:STStorylyView:pauseStory()")
-         storylyView?.pauseStory(animated: false)
+        print("STR:STStorylyView:pauseStory()")
+        storylyView?.pauseVerticalFeed(animated: false)
     }
 
     func closeStory() {
-         print("STR:STStorylyView:closeStory()")
-         storylyView?.closeStory(animated: false)
+        print("STR:STStorylyView:closeStory()")
+        storylyView?.closeVerticalFeed(animated: false)
     }
     
     private func getPlayMode(playMode: String?) -> PlayMode {
@@ -171,77 +163,67 @@ extension STVerticalFeedBarView {
 }
 
 extension STVerticalFeedBarView: StorylyVerticalFeedDelegate {
-    func storylyLoaded(_ storylyView: StorylyView, storyGroupList: [StoryGroup], dataSource: StorylyDataSource) {
+    func verticalFeedLoaded(_ view: STRVerticalFeedView, feedGroupList: [VerticalFeedGroup], dataSource: StorylyDataSource) {
         let map: [String : Any] = [
-            "storyGroupList": storyGroupList.map { createStoryGroupMap(storyGroup: $0) },
+            "feedGroupList": feedGroupList.map { createVerticalFeedGroupMap(storyGroup: $0) },
             "dataSource": dataSource.description
         ]
         self.onStorylyLoaded?(map)
     }
     
-    func storylyLoadFailed(_ storylyView: StorylyView, errorMessage: String) {
+    func verticalFeedLoadFailed(_ view: STRVerticalFeedView, errorMessage: String) {
         self.onStorylyLoadFailed?(["errorMessage": errorMessage])
     }
     
-    func storylyActionClicked(_ storylyView: StorylyView, rootViewController: UIViewController, story: Story) {
-        self.onStorylyActionClicked?(["story": createStoryMap(story: story)])
+    func verticalFeedActionClicked(_ view: STRVerticalFeedView,
+                                   rootViewController: UIViewController,
+                                   feedItem: VerticalFeedItem) {
+        self.onStorylyActionClicked?(["feedItem": createVerticalFeedItemMap(story: feedItem)])
     }
     
-    func storylyEvent(_ storylyView: StorylyView, event: StorylyEvent, storyGroup: StoryGroup?, story: Story?, storyComponent: StoryComponent?) {
+    func verticalFeedEvent(_ view: STRVerticalFeedView, event: VerticalFeedEvent, feedGroup: VerticalFeedGroup?, feedItem: VerticalFeedItem?, feedItemComponent: VerticalFeedItemComponent?) {
         let map: [String : Any] = [
-            "event": StorylyEventHelper.storylyEventName(event: event),
-            "storyGroup": createStoryGroupMap(storyGroup) as Any,
-            "story": createStoryMap(story) as Any,
-            "storyComponent": createStoryComponentMap(storyComponent) as Any
+            "event": VerticalFeedEventHelper.verticalFeedEventName(event: event),
+            "feedGroup": createVerticalFeedGroupMap(feedGroup) as Any,
+            "feedItem": createVerticalFeedItemMap(feedItem) as Any,
+            "feedItemComponent": createVerticalFeedItemComponentMap(feedItemComponent) as Any
         ]
         self.onStorylyEvent?(map)
     }
     
-    func storylyStoryPresented(_ storylyView: StorylyView) {
+    func verticalFeedPresented(_ view: STRVerticalFeedView) {
         self.onStorylyStoryPresented?([:])
     }
     
-    func storylyStoryPresentFailed(_ storylyView: StorylyView, errorMessage: String) {
+    func verticalFeedPresentFailed(_ view: STRVerticalFeedView, errorMessage: String) {
         self.onStorylyStoryPresentFailed?(["errorMessage": errorMessage])
     }
     
-    func storylyStoryDismissed(_ storylyView: StorylyView) {
+    func verticalFeedDismissed(_ view: STRVerticalFeedView) {
         self.onStorylyStoryDismissed?([:])
     }
     
-    func storylyUserInteracted(_ storylyView: StorylyView, storyGroup: StoryGroup, story: Story, storyComponent: StoryComponent) {
+    func verticalFeedUserInteracted(_ view: STRVerticalFeedView, feedGroup: VerticalFeedGroup, feedItem: VerticalFeedItem, feedItemComponent: VerticalFeedItemComponent) {
         let map: [String : Any] = [
-            "storyGroup": createStoryGroupMap(storyGroup: storyGroup),
-            "story": createStoryMap(story: story),
-            "storyComponent": createStoryComponentMap(storyComponent: storyComponent)
+            "feedGroup": createVerticalFeedGroupMap(storyGroup: feedGroup),
+            "feedItem": createVerticalFeedItemMap(story: feedItem),
+            "feedItemComponent": createVerticalFeedItemComponentMap(storyComponent: feedItemComponent)
         ]
         self.onStorylyUserInteracted?(map)
     }
-
-    func storylySizeChanged(_ storylyView: StorylyView,
-                            size: CGSize) {
-        let map: [String : Any] = [
-            "width": size.width,
-            "height": size.height
-        ] 
-        self.onStorylySizeChanged?(map)
-    }
 }
 
-extension STVerticalFeedBarView: StorylyProductDelegate {
-    func storylyEvent(
-        _ storylyView: StorylyView,
-        event: StorylyEvent
-    ) {
+extension STVerticalFeedBarView: StorylyVerticalFeedProductDelegate {
+    func verticalFeedEvent(_ view: STRVerticalFeedView, event: VerticalFeedEvent) {
         let map: [String : Any] = [
-            "event": StorylyEventHelper.storylyEventName(event: event)
+            "event": VerticalFeedEventHelper.verticalFeedEventName(event: event)
         ]
         self.onStorylyProductEvent?(map)
     }
     
-    func storylyUpdateCartEvent(
-        storylyView: StorylyView,
-        event: StorylyEvent,
+    func verticalFeedUpdateCartEvent(
+        view: STRVerticalFeedView,
+        event: VerticalFeedEvent,
         cart: STRCart?,
         change: STRCartItem?,
         onSuccess: ((STRCart?) -> Void)?,
@@ -250,7 +232,7 @@ extension STVerticalFeedBarView: StorylyProductDelegate {
         let responseId = UUID().uuidString
         cartUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
         let map: [String : Any] = [
-            "event": StorylyEventHelper.storylyEventName(event: event),
+            "event": VerticalFeedEventHelper.verticalFeedEventName(event: event),
             "cart": createSTRCartMap(cart: cart),
             "change": createSTRCartItemMap(cartItem: change),
             "responseId": responseId
@@ -258,7 +240,7 @@ extension STVerticalFeedBarView: StorylyProductDelegate {
         self.onStorylyCartUpdated?(map)
     }
 
-    func storylyHydration(_ storylyView: Storyly.StorylyView, products: [STRProductInformation]) {
+    func verticalFeedHydration(_ view: STRVerticalFeedView, products: [STRProductInformation]) {
         let map: [String : Any] = [
             "products": products.map { createSTRProductInformationMap(productInfo: $0) },
         ]

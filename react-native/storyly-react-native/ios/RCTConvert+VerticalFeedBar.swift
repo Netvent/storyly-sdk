@@ -22,17 +22,16 @@ extension RCTConvert {
         
         guard let storylyInitJson = json["storylyInit"] as? NSDictionary else { return nil }
         guard let storylyId = storylyInitJson["storylyId"] as? String else { return nil }
-        guard let storyGroupStylingJson = json["storyGroupStyling"] as? NSDictionary else { return nil }
-        guard let storyGroupViewFactoryJson = json["storyGroupViewFactory"] as? NSDictionary else { return nil }
-        guard let storyBarStylingJson = json["storyBarStyling"] as? NSDictionary else { return nil }
-        guard let storyStylingJson = json["storyStyling"] as? NSDictionary else { return nil }
-        guard let storyShareConfig = json["storyShareConfig"] as? NSDictionary else { return nil }
-        guard let storyProductConfig = json["storyProductConfig"] as? NSDictionary else { return nil }
+        guard let storyGroupStylingJson = json["verticalFeedGroupStyling"] as? NSDictionary else { return nil }
+        guard let storyBarStylingJson = json["verticalFeedBarStyling"] as? NSDictionary else { return nil }
+        guard let storyStylingJson = json["verticalFeedCustomization"] as? NSDictionary else { return nil }
+        guard let storyShareConfig = json["verticalFeedItemShareConfig"] as? NSDictionary else { return nil }
+        guard let storyProductConfig = json["verticalFeedItemProductConfig"] as? NSDictionary else { return nil }
 
         var storylyConfigBuilder = StorylyVerticalFeedConfig.Builder()
         storylyConfigBuilder = stVerticalFeedInit(json: storylyInitJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stVerticalFeedGroupStyling(json: storyGroupStylingJson, configBuilder: &storylyConfigBuilder)
-        storylyConfigBuilder = stVerticalFeedBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
+        storylyConfigBuilder = stVerticalFeedItemBarStyling(json: storyBarStylingJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stVerticalFeedCustomization(json: storyStylingJson, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json: storyShareConfig, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json: storyProductConfig, configBuilder: &storylyConfigBuilder)
@@ -65,34 +64,82 @@ private func stVerticalFeedGroupStyling(
     configBuilder: inout StorylyVerticalFeedConfig.Builder
 ) -> StorylyVerticalFeedConfig.Builder {
     var groupStylingBuilder = StorylyVerticalFeedGroupStyling.Builder()
-    if let iconBackgroundColorJson = json["iconBackgroundColor"] as? NSNumber {
-        groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(color: RCTConvert.uiColor(iconBackgroundColorJson))
+    
+    if let iconBackgroundColor = json["iconBackgroundColor"] as? NSNumber {
+        groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(color: RCTConvert.uiColor(iconBackgroundColor))
     }
-    return configBuilder
-        .setVerticalFeedGroupStyling(
-            styling: groupStylingBuilder
-                .setIconHeight(height: json["iconHeight"] as? CGFloat ?? 80)
-                .setIconCornerRadius(radius: json["iconCornerRadius"] as? CGFloat ?? 40)
-                .setFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: CGFloat(json["titleTextSize"] as? Int ?? 12)))
-                .setTitleVisibility(isVisible: json["titleVisible"] as? Bool ?? true)
-                .build()
-        )
+    if let iconHeight = json["iconHeight"] as? CGFloat {
+        groupStylingBuilder = groupStylingBuilder.setIconHeight(height: iconHeight)
+    }
+    if let iconCornerRadius = json["iconCornerRadius"] as? CGFloat {
+        groupStylingBuilder = groupStylingBuilder.setIconCornerRadius(radius: iconCornerRadius)
+    }
+    if let titleVisible = json["titleVisible"] as? Bool {
+        groupStylingBuilder = groupStylingBuilder.setTitleVisibility(isVisible: titleVisible)
+    }
+    if let textTypeface = json["textTypeface"] as? NSString {
+        groupStylingBuilder = groupStylingBuilder.setFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: 14, defaultWeight: .semibold))
+    }
+    if let textColor = json["textColor"] as? NSNumber {
+        groupStylingBuilder = groupStylingBuilder.setTextColor(RCTConvert.uiColor(textColor))
+    }
+    if let typeIndicatorVisible = json["typeIndicatorVisible"] as? Bool {
+        groupStylingBuilder = groupStylingBuilder.setTypeIndicatorVisibility(typeIndicatorVisible)
+    }
+    if let groupOrder = json["groupOrder"] as? String {
+        groupStylingBuilder = groupStylingBuilder.setGroupOrder(order: getStorylyGroupOrder(groupOrder: groupOrder))
+    }
+    if let minLikeCountToShowIcon = json["minLikeCountToShowIcon"] as? Int {
+        groupStylingBuilder = groupStylingBuilder.setMinLikeCountToShowIcon(minLikeCountToShowIcon)
+    }
+    if let minImpressionCountToShowIcon = json["minImpressionCountToShowIcon"] as? Int {
+        groupStylingBuilder = groupStylingBuilder.setMinImpressionCountToShowIcon(minImpressionCountToShowIcon)
+    }
+
+    if let impressionIcon = json["impressionIcon"] as? String {
+        if let image = UIImage(named: impressionIcon) {
+            groupStylingBuilder = groupStylingBuilder.setImpressionIcon(image)
+        }
+    }
+    
+    if let likeIcon = json["likeIcon"] as? String {
+        if let image = UIImage(named: likeIcon) {
+            groupStylingBuilder = groupStylingBuilder.setLikeIcon(image)
+        }
+    }
+
+    return configBuilder.setVerticalFeedGroupStyling(
+        styling: groupStylingBuilder.build()
+    )
 }
 
-private func stVerticalFeedBarStyling(
+private func stVerticalFeedItemBarStyling(
     json: NSDictionary,
     configBuilder: inout StorylyVerticalFeedConfig.Builder
 ) -> StorylyVerticalFeedConfig.Builder {
-    return configBuilder
-        .setVerticalFeedBarStyling(
-            styling: StorylyVerticalFeedBarStyling.Builder()
-                .setSection(count: (json["sections"] as? Int ) ?? 1)
-                .setHorizontalEdgePadding(padding: (json["horizontalEdgePadding"] as? CGFloat) ?? 4)
-                .setVerticalEdgePadding(padding: (json["verticalEdgePadding"] as? CGFloat) ?? 4)
-                .setHorizontalPaddingBetweenItems(padding: (json["horizontalPaddingBetweenItems"] as? CGFloat) ?? 8)
-                .setVerticalPaddingBetweenItems(padding: (json["verticalPaddingBetweenItems"] as? CGFloat) ?? 8)
-                .build()
-        )
+    var barStylingBuilder = StorylyVerticalFeedBarStyling.Builder()
+    
+    if let section = json["sections"] as? Int {
+        barStylingBuilder = barStylingBuilder.setSection(count: section)
+    }
+    
+    if let edgePadding = json["horizontalEdgePadding"] as? CGFloat {
+        barStylingBuilder = barStylingBuilder.setHorizontalEdgePadding(padding: edgePadding)
+    }
+    
+    if let edgePadding = json["verticalEdgePadding"] as? CGFloat {
+        barStylingBuilder = barStylingBuilder.setVerticalEdgePadding(padding: edgePadding)
+    }
+    
+    if let paddingBetweenItems = json["horizontalPaddingBetweenItems"] as? CGFloat {
+        barStylingBuilder = barStylingBuilder.setHorizontalPaddingBetweenItems(padding: paddingBetweenItems)
+    }
+    
+    if let paddingBetweenItems = json["verticalPaddingBetweenItems"] as? CGFloat {
+        barStylingBuilder = barStylingBuilder.setVerticalPaddingBetweenItems(padding: paddingBetweenItems)
+    }
+    
+    return configBuilder.setVerticalFeedBarStyling(styling: barStylingBuilder.build())
 }
 
 private func stVerticalFeedCustomization(
@@ -100,19 +147,51 @@ private func stVerticalFeedCustomization(
     configBuilder: inout StorylyVerticalFeedConfig.Builder
 ) -> StorylyVerticalFeedConfig.Builder {
     var storyStylingBuilder = StorylyVerticalFeedCustomization.Builder()
+    
+    if let titleFont = json["titleFont"] as? NSString {
+        storyStylingBuilder = storyStylingBuilder.setTitleFont(font: getCustomFont(typeface: titleFont, fontSize: 14, defaultWeight: .semibold))
+    }
+    if let interactiveFont = json["interactiveFont"] as? NSString {
+        storyStylingBuilder = storyStylingBuilder.setInteractiveFont(font: getCustomFont(typeface: interactiveFont, fontSize: 14, defaultWeight: .semibold))
+    }
     if let progressBarColorJson = json["progressBarColor"] as? NSArray {
         storyStylingBuilder = storyStylingBuilder.setProgressBarColor(colors: RCTConvert.uiColorArray(progressBarColorJson))
     }
-    return configBuilder
-        .setVerticalFeedStyling(styling: storyStylingBuilder
-            .setTitleFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: 14, defaultWeight: .semibold))
-            .setInteractiveFont(font: getCustomFont(typeface: json["interactiveFont"] as? NSString, fontSize: 14, defaultWeight: .regular))
-            .setTitleVisibility(isVisible: json["isTitleVisible"] as? Bool ?? true)
-            .setCloseButtonVisibility(isVisible: json["isCloseButtonVisible"] as? Bool ?? true)
-            .setCloseButtonIcon(icon: UIImage(named: json["closeButtonIcon"] as? String))
-            .setShareButtonIcon(icon: UIImage(named: json["shareButtonIcon"] as? String))
-            .build()
-        )
+    if let isTitleVisible = json["isTitleVisible"] as? Bool {
+        storyStylingBuilder = storyStylingBuilder.setTitleVisibility(isVisible: isTitleVisible)
+    }
+    if let isProgressBarVisible = json["isProgressBarVisible"] as? Bool {
+        storyStylingBuilder = storyStylingBuilder.setProgressBarVisibility(isVisible: isProgressBarVisible)
+    }
+    if let isCloseButtonVisible = json["isCloseButtonVisible"] as? Bool {
+        storyStylingBuilder = storyStylingBuilder.setCloseButtonVisibility(isVisible: isCloseButtonVisible)
+    }
+    if let isLikeButtonVisible = json["isLikeButtonVisible"] as? Bool {
+        storyStylingBuilder = storyStylingBuilder.setLikeButtonVisibility(isVisible: isLikeButtonVisible)
+    }
+    if let isShareButtonVisible = json["isShareButtonVisible"] as? Bool {
+        storyStylingBuilder = storyStylingBuilder.setShareButtonVisibility(isVisible: isShareButtonVisible)
+    }
+
+    if let closeButtonIconName = json["closeButtonIcon"] as? String {
+        if let image = UIImage(named: closeButtonIconName) {
+            storyStylingBuilder = storyStylingBuilder.setCloseButtonIcon(icon: image)
+        }
+    }
+    if let closeButtonIconName = json["shareButtonIcon"] as? String {
+        if let image = UIImage(named: closeButtonIconName) {
+            storyStylingBuilder = storyStylingBuilder.setShareButtonIcon(icon: image)
+        }
+    }
+    if let closeButtonIconName = json["likeButtonIcon"] as? String {
+        if let image = UIImage(named: closeButtonIconName) {
+            storyStylingBuilder = storyStylingBuilder.setLikeButtonIcon(icon: image)
+        }
+    }
+
+    return configBuilder.setVerticalFeedStyling(
+        styling: storyStylingBuilder.build()
+    )
 }
 
 private func stShareConfig(
@@ -163,6 +242,15 @@ private func getStorylyLayoutDirection(direction: String?) -> StorylyLayoutDirec
         case "ltr": return .LTR
         case "rtl": return .RTL
         default: return .LTR
+    }
+}
+
+private func getStorylyGroupOrder(groupOrder: String?) -> StorylyVerticalFeedGroupOrder {
+    switch groupOrder {
+    case "bySeenState":
+        return .BySeenState
+    default:
+        return .Static
     }
 }
 
