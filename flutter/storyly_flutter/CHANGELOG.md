@@ -1,3 +1,6 @@
+### 3.11.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+
 ### 3.10.0 (05.12.2024)
 * added video share to Instagram Stories
 * added customPayload to the missing layer types
