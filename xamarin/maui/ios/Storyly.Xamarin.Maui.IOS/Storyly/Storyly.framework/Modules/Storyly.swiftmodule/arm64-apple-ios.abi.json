@@ -52098,6 +52098,13 @@
       "value": "false"
     },
     {
+      "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Data\/Managers\/Processing\/StorylyLocalDataManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 191,
+      "length": 1,
+      "value": "3"
+    },
+    {
       "filePath": "\/Users\/yigit\/storyly\/storyly-ios-sdk\/Storyly\/Storyly\/Source\/Util\/Font\/STRFont.swift",
       "kind": "StringLiteral",
       "offset": 185,

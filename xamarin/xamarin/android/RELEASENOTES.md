@@ -1,4 +1,7 @@
 # Release Notes
+### 4.6.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+
 ### 4.5.0 (05.12.2024)
 * added video share to Instagram Stories for Storyly
 * improved areas for next/previous clicks

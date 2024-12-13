@@ -1,4 +1,7 @@
 # Release Notes
+### 4.6.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+
 ### 4.5.0 (05.12.2024)
 * improved areas for next/previous clicks
 * added config for app logo visibility for shared media
