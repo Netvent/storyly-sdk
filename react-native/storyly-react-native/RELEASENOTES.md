@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 3.11.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+  
 ### 3.10.0 (05.12.2024)
 * added video share to Instagram Stories
 * added customPayload to the missing layer types
