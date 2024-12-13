@@ -1,6 +1,6 @@
 {
   "name": "storyly-react-native-fabric",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "description": "A fabric version of react-native component for Storyly",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
