@@ -1,4 +1,7 @@
 # Release Notes
+### 4.6.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+
 ### 4.5.0 (04.12.2024)
 * improved areas for next/previous clicks
 * added config for app logo visibility for shared media
@@ -47,6 +50,9 @@
   
 ### 4.0.0 (17.10.2024)
 * added vertical feed
+
+### 3.11.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
 
 ### 3.9.0 (28.11.2024)
 * added video share to Instagram Stories
