@@ -3,16 +3,20 @@ package com.storylyreactnative
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.Choreographer
-import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.appsamurai.storyly.*
+import com.appsamurai.storyly.Story
+import com.appsamurai.storyly.StoryComponent
+import com.appsamurai.storyly.StoryGroup
+import com.appsamurai.storyly.StorylyDataSource
+import com.appsamurai.storyly.StorylyListener
+import com.appsamurai.storyly.StorylyProductListener
+import com.appsamurai.storyly.StorylyView
 import com.appsamurai.storyly.analytics.StorylyEvent
 import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
-import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerHelper
@@ -40,7 +44,9 @@ class STStorylyView(
         addView(storylyView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         storylyView.storylyListener = object : StorylyListener {
             override fun storylyActionClicked(storylyView: StorylyView, story: Story) {
-                dispatchEvent(STEvent.Type.ON_STORYLY_ACTION_CLICKED, createStoryMap(story))
+                dispatchEvent(STEvent.Type.ON_STORYLY_ACTION_CLICKED, mapOf(
+                    "story" to createStoryMap(story)
+                ))
             }
 
             override fun storylyLoaded(
@@ -103,6 +109,13 @@ class STStorylyView(
                     "storyGroup" to createStoryGroupMap(storyGroup),
                     "story" to createStoryMap(story),
                     "storyComponent" to createStoryComponentMap(storyComponent),
+                ))
+            }
+
+            override fun storylySizeChanged(storylyView: StorylyView, size: Pair<Int, Int>) {
+                dispatchEvent(STEvent.Type.ON_STORYLY_SIZE_CHANGED, mapOf(
+                    "width" to size.first,
+                    "height" to size.second
                 ))
             }
         }

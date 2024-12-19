@@ -58,7 +58,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
     // Storyly SDK
-    implementation 'com.appsamurai.storyly:storyly:1.31.3'
+    implementation 'com.appsamurai.storyly:storyly:3.9.0'
     // Moments SDK
     implementation 'com.appsamurai.storyly:storyly-moments:0.5.1'
 }

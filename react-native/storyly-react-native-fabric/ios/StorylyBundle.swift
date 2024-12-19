@@ -256,4 +256,15 @@ internal extension UIColor {
         }
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
+    
+    func toHexString() -> String {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        let rgb = (Int)(alpha * 255) << 24 |
+            (Int)(red * 255) << 16 |
+            (Int)(green * 255) << 8 |
+            (Int)(blue * 255) << 0
+        return String(format: "#%08x", rgb)
+    }
 }

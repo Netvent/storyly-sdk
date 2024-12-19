@@ -1,4 +1,82 @@
 # Release Notes
+### 4.6.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+  
+### 4.5.0 (04.12.2024)
+* added video share to Instagram Stories for Storyly
+* improved areas for next/previous clicks
+* added config for app logo visibility for shared media
+  
+### 4.4.0 (28.11.2024)
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* fixed a bug related to product bottom sheet image load, fixed [#392](https://github.com/Netvent/storyly-mobile/issues/392)
+* fixed a bug related to conditional stories
+* added related storyComponents to Storyly and Vertical Feed listener methods
+* improved watch_length related analytics for Vertical Feed
+* improved seen state handling for StorylyVerticalFeedPresenterView
+* added a swipe tutorial animation for Vertical Feed
+* improved layer placements for Vertical Feed
+  
+### 4.3.1 (14.11.2024)
+* improved StorylyView and VerticalFeedView initialization flow
+* fixed a bug related to style changes
+  
+### 4.3.0 (07.11.2024)
+* IMPORTANT! renamed resume function to play in StorylyVerticalFeedPresenterView
+* changed play/pause handling of vertical feed for StorylyVerticalFeedPresenterView
+  
+### 4.2.0 (06.11.2024)
+* IMPORTANT! renamed products field to actionProducts in Story class
+* IMPORTANT! renamed products field to actionProducts in VerticalFeedItem class
+* added new public interactive component types for Storyly and VerticalFeed
+* improved interactive component add/remove flow
+* improved activity assignment flow in StorylyView and VerticalFeed views
+* fixed a few bugs related to vertical feed image carousel
+* added like animation in vertical feed
+  
+### 4.1.0 (02.11.2024)
+* added vertical feed presenter view
+  
+### 4.0.2 (25.10.2024)
+* improved data processing flow
+
+### 4.0.1 (18.10.2024)
+* improved vertical feed design
+* refactor initialization of vertical feed
+  
+### 4.0.0 (17.10.2024)
+* added vertical feed
+
+### 3.11.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+
+### 3.10.0 (05.12.2024)
+* added video share to Instagram Stories
+
+### 3.9.0 (28.11.2024)
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly listener methods
+* fixed a bug related to product bottom sheet image load, fixed [#392](https://github.com/Netvent/storyly-mobile/issues/392)
+* fixed a bug related to conditional stories
+  
+### 3.8.1 (14.11.2024)
+* improved StorylyView initialization flow
+* fixed a bug related to style changes
+  
+### 3.8.0 (14.11.2024)
+* added video cache for video stories
+
+### 3.7.0 (06.11.2024)
+* IMPORTANT! renamed products field to actionProducts in Story class
+* added new public interactive component types
+* improved interactive component add/remove flow
+* improved activity assignment flow in StorylyView
+
+### 3.6.3 (25.10.2024)
+* improved data processing flow
+
 ### 3.6.2 (01.10.2024)
 * fixed a crash related to obfuscation of logging
 

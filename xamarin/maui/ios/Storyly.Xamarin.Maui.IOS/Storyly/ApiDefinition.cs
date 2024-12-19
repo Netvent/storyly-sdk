@@ -261,14 +261,14 @@ namespace Storyly
         [NullAllowed, Export("actionUrl")]
         string ActionUrl { get; }
 
-        // @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
-        [NullAllowed, Export("products", ArgumentSemantic.Copy)]
-        STRProductItem[] Products { get; }
+        // @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable actionProducts;
+        [NullAllowed, Export("actionProducts", ArgumentSemantic.Copy)]
+        STRProductItem[] ActionProducts { get; }
 
-        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime previewUrl:(NSURL * _Nullable)previewUrl storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products __attribute__((objc_designated_initializer));
-        [Export("initWithId:index:title:name:seen:currentTime:previewUrl:storyComponentList:actionUrl:products:")]
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime previewUrl:(NSURL * _Nullable)previewUrl storyComponentList:(NSArray<StoryComponent *> * _Nullable)storyComponentList actionUrl:(NSString * _Nullable)actionUrl actionProducts:(NSArray<STRProductItem *> * _Nullable)actionProducts __attribute__((objc_designated_initializer));
+        [Export("initWithId:index:title:name:seen:currentTime:previewUrl:storyComponentList:actionUrl:actionProducts:")]
         [DesignatedInitializer]
-        IntPtr Constructor(string id, nint index, string title, [NullAllowed] string name, bool seen, nint currentTime, [NullAllowed] NSUrl previewUrl, [NullAllowed] StoryComponent[] storyComponentList, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products);
+        NativeHandle Constructor(string id, nint index, string title, [NullAllowed] string name, bool seen, nint currentTime, [NullAllowed] NSUrl previewUrl, [NullAllowed] StoryComponent[] storyComponentList, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] actionProducts);
     }
 
     // @interface StoryComponent : NSObject
@@ -283,7 +283,33 @@ namespace Storyly
         // @property (readonly, nonatomic) enum StoryComponentType type;
         [Export("type")]
         StoryComponentType Type { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+		[NullAllowed, Export ("customPayload")]
+		string CustomPayload { get; }
     }
+
+    // @interface StoryButtonComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryButtonComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
 
     // @interface StoryCommentComponent : StoryComponent
     [BaseType(typeof(StoryComponent))]
@@ -306,9 +332,10 @@ namespace Storyly
         [Export("selectedEmojiIndex")]
         nint SelectedEmojiIndex { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCodes:(NSArray<NSString *> * _Nonnull)emojiCodes selectedEmojiIndex:(NSInteger)selectedEmojiIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:emojiCodes:selectedEmojiIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string[] emojiCodes, nint selectedEmojiIndex, [NullAllowed] string customPayload);
     }
 
     [BaseType(typeof(UIView))]
@@ -391,9 +418,10 @@ namespace Storyly
         [Export("selectedOptionIndex")]
         nint SelectedOptionIndex { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nullable)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string title, [NullAllowed] string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
     }
 
     // @interface StoryPollComponent : StoryComponent
@@ -412,10 +440,69 @@ namespace Storyly
         [Export("selectedOptionIndex")]
         nint SelectedOptionIndex { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:title:options:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string title, string[] options, nint selectedOptionIndex, [NullAllowed] string customPayload);
     }
+
+    // @interface StoryProductCardComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryProductCardComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
+
+    // @interface StoryProductCatalogComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryProductCatalogComponent
+	{
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable actionUrlList;
+		[NullAllowed, Export ("actionUrlList", ArgumentSemantic.Copy)]
+		string[] ActionUrlList { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:actionUrlList:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, [NullAllowed] string[] actionUrlList, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
+
+    // @interface StoryProductTagComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StoryProductTagComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
 
     // @interface StoryPromoCodeComponent : StoryComponent
     [BaseType(typeof(StoryComponent))]
@@ -424,6 +511,11 @@ namespace Storyly
         // @property (readonly, copy, nonatomic) NSString * _Nonnull text;
         [Export("text")]
         string Text { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string customPayload);
     }
 
     // @interface StoryQuizComponent : StoryComponent
@@ -445,10 +537,11 @@ namespace Storyly
         // @property (readonly, nonatomic) NSInteger selectedOptionIndex;
         [Export("selectedOptionIndex")]
         nint SelectedOptionIndex { get; }
-
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string title, string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
     }
 
     // @interface StoryRatingComponent : StoryComponent
@@ -463,10 +556,33 @@ namespace Storyly
         [Export("rating")]
         nint Rating { get; }
 
-        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
-        [NullAllowed, Export("customPayload")]
-        string CustomPayload { get; }
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCode:(NSString * _Nonnull)emojiCode rating:(NSInteger)rating customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:emojiCode:rating:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string emojiCode, nint rating, [NullAllowed] string customPayload);
     }
+
+    // @interface StorySwipeComponent : StoryComponent
+	[BaseType (typeof(StoryComponent))]
+	interface StorySwipeComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+		[Export ("initWithId:text:actionUrl:products:customPayload:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+	}
 
     // @interface STRCart : NSObject
     [BaseType(typeof(NSObject))]
@@ -672,60 +788,27 @@ namespace Storyly
         IntPtr Constructor(string storylyId, StorylyConfig config);
     }
 
-    // @interface StorylyConfig : NSObject
-    [BaseType(typeof(NSObject))]
-    [DisableDefaultCtor]
+    // @interface StorylyConfig : STRConfig
+    [BaseType(typeof(STRConfig))]
     interface StorylyConfig
     {
     }
 
-    // @interface StorylyConfigBuilder : NSObject
-    [BaseType(typeof(NSObject))]
-    interface StorylyConfigBuilder
+    // @interface StorylyBuilder : Builder
+    [BaseType(typeof(STRConfigBuilder))]
+    interface StorylyBuilder
     {
-        // -(StorylyConfigBuilder * _Nonnull)setBarStyling:(StorylyBarStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
-        [Export("setBarStyling:")]
-        StorylyConfigBuilder SetBarStyling(StorylyBarStyling styling);
-
-        // -(StorylyConfigBuilder * _Nonnull)setStoryStyling:(StorylyStoryStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+        // -(instancetype _Nonnull)setStoryStyling:(StorylyStoryStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
         [Export("setStoryStyling:")]
-        StorylyConfigBuilder SetStoryStyling(StorylyStoryStyling styling);
+        StorylyBuilder SetStoryStyling(StorylyStoryStyling styling);
 
-        // -(StorylyConfigBuilder * _Nonnull)setStoryGroupStyling:(StorylyStoryGroupStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+        // -(instancetype _Nonnull)setBarStyling:(StorylyBarStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+        [Export("setBarStyling:")]
+        StorylyBuilder SetBarStyling(StorylyBarStyling styling);
+
+        // -(instancetype _Nonnull)setStoryGroupStyling:(StorylyStoryGroupStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
         [Export("setStoryGroupStyling:")]
-        StorylyConfigBuilder SetStoryGroupStyling(StorylyStoryGroupStyling styling);
-
-        // -(StorylyConfigBuilder * _Nonnull)setLayoutDirection:(enum StorylyLayoutDirection)direction __attribute__((warn_unused_result("")));
-        [Export("setLayoutDirection:")]
-        StorylyConfigBuilder SetLayoutDirection(StorylyLayoutDirection direction);
-
-        // -(StorylyConfigBuilder * _Nonnull)setCustomParameter:(NSString * _Nullable)parameter __attribute__((warn_unused_result("")));
-        [Export("setCustomParameter:")]
-        StorylyConfigBuilder SetCustomParameter([NullAllowed] string parameter);
-
-        // -(StorylyConfigBuilder * _Nonnull)setLabels:(NSSet<NSString *> * _Nullable)labels __attribute__((warn_unused_result("")));
-        [Export("setLabels:")]
-        StorylyConfigBuilder SetLabels([NullAllowed] NSSet<NSString> labels);
-
-        // -(StorylyConfigBuilder * _Nonnull)setUserData:(NSDictionary<NSString *,NSString *> * _Nonnull)data __attribute__((warn_unused_result("")));
-        [Export("setUserData:")]
-        StorylyConfigBuilder SetUserData(NSDictionary<NSString, NSString> data);
-
-        // -(StorylyConfigBuilder * _Nonnull)setTestMode:(BOOL)isTest __attribute__((warn_unused_result("")));
-        [Export("setTestMode:")]
-        StorylyConfigBuilder SetTestMode(bool isTest);
-
-        // -(StorylyConfigBuilder * _Nonnull)setProductConfig:(StorylyProductConfig * _Nonnull)config __attribute__((warn_unused_result("")));
-        [Export("setProductConfig:")]
-        StorylyConfigBuilder SetProductConfig(StorylyProductConfig config);
-
-        // -(StorylyConfigBuilder * _Nonnull)setShareConfig:(StorylyShareConfig * _Nonnull)config __attribute__((warn_unused_result("")));
-        [Export("setShareConfig:")]
-        StorylyConfigBuilder SetShareConfig(StorylyShareConfig config);
-
-        // -(StorylyConfigBuilder * _Nonnull)setLocale:(NSString * _Nullable)locale __attribute__((warn_unused_result("")));
-        [Export("setLocale:")]
-        StorylyConfigBuilder SetLocale([NullAllowed] string locale);
+        StorylyBuilder SetStoryGroupStyling(StorylyStoryGroupStyling styling);
 
         // -(StorylyConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
@@ -772,56 +855,27 @@ namespace Storyly
         StorylyBarStyling Build();
     }
 
-    // @interface StorylyStoryStyling : NSObject
-    [BaseType(typeof(NSObject))]
-    [DisableDefaultCtor]
+    // @interface StorylyStoryStyling : STRStoryStyling
+    [BaseType(typeof(STRStoryStyling))]
     interface StorylyStoryStyling
     {
     }
 
-    // @interface StorylyStoryStylingBuilder : NSObject
-    [BaseType(typeof(NSObject))]
-    interface StorylyStoryStylingBuilder
+    // @interface StorylyStoryBuilder : STRStoryBuilder
+    [BaseType(typeof(STRStoryBuilder))]
+    interface StorylyStoryBuilder
     {
-        // -(StorylyStoryStylingBuilder * _Nonnull)setHeaderIconBorderColor:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
+        // -(StorylyStoryBuilder * _Nonnull)setHeaderIconBorderColor:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
         [Export("setHeaderIconBorderColor:")]
-        StorylyStoryStylingBuilder SetHeaderIconBorderColor(UIColor[] colors);
+        StorylyStoryBuilder SetHeaderIconBorderColor(UIColor[] colors);
 
-        // -(StorylyStoryStylingBuilder * _Nonnull)setTitleColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+        // -(StorylyStoryBuilder * _Nonnull)setTitleColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
         [Export("setTitleColor:")]
-        StorylyStoryStylingBuilder SetTitleColor(UIColor color);
+        StorylyStoryBuilder SetTitleColor(UIColor color);
 
-        // -(StorylyStoryStylingBuilder * _Nonnull)setTitleFont:(UIFont * _Nonnull)font __attribute__((warn_unused_result("")));
-        [Export("setTitleFont:")]
-        StorylyStoryStylingBuilder SetTitleFont(UIFont font);
-
-        // -(StorylyStoryStylingBuilder * _Nonnull)setInteractiveFont:(UIFont * _Nonnull)font __attribute__((warn_unused_result("")));
-        [Export("setInteractiveFont:")]
-        StorylyStoryStylingBuilder SetInteractiveFont(UIFont font);
-
-        // -(StorylyStoryStylingBuilder * _Nonnull)setProgressBarColor:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
-        [Export("setProgressBarColor:")]
-        StorylyStoryStylingBuilder SetProgressBarColor(UIColor[] colors);
-
-        // -(StorylyStoryStylingBuilder * _Nonnull)setTitleVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
-        [Export("setTitleVisibility:")]
-        StorylyStoryStylingBuilder SetTitleVisibility(bool isVisible);
-
-        // -(StorylyStoryStylingBuilder * _Nonnull)setHeaderIconVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+        // -(StorylyStoryBuilder * _Nonnull)setHeaderIconVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
         [Export("setHeaderIconVisibility:")]
-        StorylyStoryStylingBuilder SetHeaderIconVisibility(bool isVisible);
-
-        // -(StorylyStoryStylingBuilder * _Nonnull)setCloseButtonVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
-        [Export("setCloseButtonVisibility:")]
-        StorylyStoryStylingBuilder SetCloseButtonVisibility(bool isVisible);
-
-        // -(StorylyStoryStylingBuilder * _Nonnull)setCloseButtonIcon:(UIImage * _Nullable)icon __attribute__((warn_unused_result("")));
-        [Export("setCloseButtonIcon:")]
-        StorylyStoryStylingBuilder SetCloseButtonIcon([NullAllowed] UIImage icon);
-
-        // -(StorylyStoryStylingBuilder * _Nonnull)setShareButtonIcon:(UIImage * _Nullable)icon __attribute__((warn_unused_result("")));
-        [Export("setShareButtonIcon:")]
-        StorylyStoryStylingBuilder SetShareButtonIcon([NullAllowed] UIImage icon);
+        StorylyStoryBuilder SetHeaderIconVisibility(bool isVisible);
 
         // -(StorylyStoryStyling * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
@@ -927,6 +981,10 @@ namespace Storyly
         [Export("setFacebookAppID:")]
         StorylyShareConfigBuilder SetFacebookAppID(string id);
 
+        // -(StorylyShareConfigBuilder * _Nonnull)setAppLogoVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export ("setAppLogoVisibility:")]
+		StorylyShareConfigBuilder SetAppLogoVisibility (bool isVisible);
+
         // -(StorylyShareConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
         StorylyShareConfig Build();
@@ -957,6 +1015,945 @@ namespace Storyly
 
         // -(StorylyProductConfig * _Nonnull)build __attribute__((warn_unused_result("")));
         [Export("build")]
-        StorylyProductConfig Build { get; }
+        StorylyProductConfig Build();
+    }
+
+    // @interface STRVerticalFeedView : UIView
+	[BaseType (typeof(UIView))]
+	interface STRVerticalFeedView
+	{
+		// @property (nonatomic, strong) StorylyVerticalFeedInit * _Nonnull storylyVerticalFeedInit;
+		[Export ("storylyVerticalFeedInit", ArgumentSemantic.Strong)]
+		StorylyVerticalFeedInit StorylyVerticalFeedInit { get; set; }
+
+		// @property (nonatomic, weak) UIViewController * _Nullable rootViewController;
+		[NullAllowed, Export ("rootViewController", ArgumentSemantic.Weak)]
+		UIViewController RootViewController { get; set; }
+
+		[Wrap ("WeakStorylyVerticalFeedDelegate")]
+		[NullAllowed]
+		StorylyVerticalFeedDelegate StorylyVerticalFeedDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<StorylyVerticalFeedDelegate> _Nullable storylyVerticalFeedDelegate;
+		[NullAllowed, Export ("storylyVerticalFeedDelegate", ArgumentSemantic.Weak)]
+		NSObject WeakStorylyVerticalFeedDelegate { get; set; }
+
+		[Wrap ("WeakStorylyVerticalFeedProductDelegate")]
+		[NullAllowed]
+		StorylyVerticalFeedProductDelegate StorylyVerticalFeedProductDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<StorylyVerticalFeedProductDelegate> _Nullable storylyVerticalFeedProductDelegate;
+		[NullAllowed, Export ("storylyVerticalFeedProductDelegate", ArgumentSemantic.Weak)]
+		NSObject WeakStorylyVerticalFeedProductDelegate { get; set; }
+
+		// -(void)layoutSubviews;
+		[Export ("layoutSubviews")]
+		void LayoutSubviews ();
+
+		// @property (copy, nonatomic) NSString * _Nullable accessibilityLabel;
+		[NullAllowed, Export ("accessibilityLabel")]
+		string AccessibilityLabel { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable accessibilityIdentifier;
+		[NullAllowed, Export ("accessibilityIdentifier")]
+		string AccessibilityIdentifier { get; set; }
+
+		// -(void)willMoveToWindow:(UIWindow * _Nullable)newWindow;
+		[Export ("willMoveToWindow:")]
+		void WillMoveToWindow ([NullAllowed] UIWindow newWindow);
+
+		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+		[Export ("initWithFrame:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (CGRect frame);
+	}
+
+    // @interface StorylyVerticalFeedBarStyling : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyVerticalFeedBarStyling
+	{
+	}
+
+	// @interface StorylyVerticalFeedBarStylingBuilder : NSObject
+	[BaseType (typeof(NSObject))]
+	interface StorylyVerticalFeedBarStylingBuilder
+	{
+		// -(StorylyVerticalFeedBarStylingBuilder * _Nonnull)setSection:(NSInteger)count __attribute__((warn_unused_result("")));
+		[Export ("setSection:")]
+		StorylyVerticalFeedBarStylingBuilder SetSection (nint count);
+
+		// -(StorylyVerticalFeedBarStylingBuilder * _Nonnull)setHorizontalEdgePadding:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export ("setHorizontalEdgePadding:")]
+		StorylyVerticalFeedBarStylingBuilder SetHorizontalEdgePadding (nfloat padding);
+
+		// -(StorylyVerticalFeedBarStylingBuilder * _Nonnull)setVerticalEdgePadding:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export ("setVerticalEdgePadding:")]
+		StorylyVerticalFeedBarStylingBuilder SetVerticalEdgePadding (nfloat padding);
+
+		// -(StorylyVerticalFeedBarStylingBuilder * _Nonnull)setHorizontalPaddingBetweenItems:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export ("setHorizontalPaddingBetweenItems:")]
+		StorylyVerticalFeedBarStylingBuilder SetHorizontalPaddingBetweenItems (nfloat padding);
+
+		// -(StorylyVerticalFeedBarStylingBuilder * _Nonnull)setVerticalPaddingBetweenItems:(CGFloat)padding __attribute__((warn_unused_result("")));
+		[Export ("setVerticalPaddingBetweenItems:")]
+		StorylyVerticalFeedBarStylingBuilder SetVerticalPaddingBetweenItems (nfloat padding);
+
+		// -(StorylyVerticalFeedBarStyling * _Nonnull)build __attribute__((warn_unused_result("")));
+		[Export("build")]
+		StorylyVerticalFeedBarStyling Build();
+	}
+
+	// @interface StorylyVerticalFeedBarView : STRVerticalFeedView
+	[BaseType (typeof(STRVerticalFeedView))]
+	interface StorylyVerticalFeedBarView
+	{
+		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+		[Export ("initWithFrame:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (CGRect frame);
+	}
+
+	// @interface StorylyVerticalFeedConfig : STRConfig
+	[BaseType (typeof(STRConfig))]
+	interface StorylyVerticalFeedConfig
+	{
+	}
+
+	// @interface StorylyVerticalFeedConfigBuilder : Builder
+	[BaseType (typeof(STRConfigBuilder))]
+	interface StorylyVerticalFeedConfigBuilder
+	{
+		// -(instancetype _Nonnull)setVerticalFeedConfig:(StorylyVerticalFeedCustomization * _Nonnull)styling __attribute__((warn_unused_result("")));
+		[Export ("setVerticalFeedConfig:")]
+		StorylyVerticalFeedConfigBuilder SetVerticalFeedConfig (StorylyVerticalFeedCustomization styling);
+
+		// -(instancetype _Nonnull)setVerticalFeedBarStyling:(StorylyVerticalFeedBarStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+		[Export ("setVerticalFeedBarStyling:")]
+		StorylyVerticalFeedConfigBuilder SetVerticalFeedBarStyling (StorylyVerticalFeedBarStyling styling);
+
+		// -(instancetype _Nonnull)setVerticalFeedGroupStyling:(StorylyVerticalFeedGroupStyling * _Nonnull)styling __attribute__((warn_unused_result("")));
+		[Export ("setVerticalFeedGroupStyling:")]
+		StorylyVerticalFeedConfigBuilder SetVerticalFeedGroupStyling (StorylyVerticalFeedGroupStyling styling);
+
+        // -(StorylyVerticalFeedConfig * _Nonnull)build __attribute__((warn_unused_result("")));
+        [Export("build")]
+        StorylyVerticalFeedConfig Build();
+    }
+
+    // @interface StorylyVerticalFeedCustomization : STRStoryStyling
+    [BaseType(typeof(STRStoryStyling))]
+    interface StorylyVerticalFeedCustomization
+    {
+    }
+
+    // @interface StorylyVerticalFeedCustomizationBuilder : STRStoryBuilder
+    [BaseType(typeof(STRStoryBuilder))]
+    interface StorylyVerticalFeedCustomizationBuilder
+    {
+        // -(StorylyVerticalFeedCustomizationBuilder * _Nonnull)setProgressBarVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+        [Export("setProgressBarVisibility:")]
+        StorylyVerticalFeedCustomizationBuilder SetProgressBarVisibility(bool isVisible);
+
+        // -(StorylyVerticalFeedCustomizationBuilder * _Nonnull)setLikeButtonVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+        [Export("setLikeButtonVisibility:")]
+        StorylyVerticalFeedCustomizationBuilder SetLikeButtonVisibility(bool isVisible);
+
+        // -(StorylyVerticalFeedCustomizationBuilder * _Nonnull)setLikeButtonIcon:(UIImage * _Nullable)icon __attribute__((warn_unused_result("")));
+        [Export("setLikeButtonIcon:")]
+        StorylyVerticalFeedCustomizationBuilder SetLikeButtonIcon([NullAllowed] UIImage icon);
+
+        // -(StorylyVerticalFeedCustomizationBuilder * _Nonnull)setShareButtonVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+        [Export("setShareButtonVisibility:")]
+        StorylyVerticalFeedCustomizationBuilder SetShareButtonVisibility(bool isVisible);
+
+        // -(StorylyVerticalFeedCustomization * _Nonnull)build __attribute__((warn_unused_result("")));
+        [Export("build")]
+        StorylyVerticalFeedCustomization Build();
+    }
+
+    // @protocol StorylyVerticalFeedDelegate
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+	interface StorylyVerticalFeedDelegate
+	{
+		// @optional -(void)verticalFeedLoaded:(STRVerticalFeedView * _Nonnull)view feedGroupList:(NSArray<VerticalFeedGroup *> * _Nonnull)feedGroupList dataSource:(enum StorylyDataSource)dataSource;
+		[Export ("verticalFeedLoaded:feedGroupList:dataSource:")]
+		void VerticalFeedLoaded (STRVerticalFeedView view, VerticalFeedGroup[] feedGroupList, StorylyDataSource dataSource);
+
+		// @optional -(void)verticalFeedLoadFailed:(STRVerticalFeedView * _Nonnull)view errorMessage:(NSString * _Nonnull)errorMessage;
+		[Export ("verticalFeedLoadFailed:errorMessage:")]
+		void VerticalFeedLoadFailed (STRVerticalFeedView view, string errorMessage);
+
+		// @optional -(void)verticalFeedActionClicked:(STRVerticalFeedView * _Nonnull)view rootViewController:(UIViewController * _Nonnull)rootViewController feedItem:(VerticalFeedItem * _Nonnull)feedItem;
+		[Export ("verticalFeedActionClicked:rootViewController:feedItem:")]
+		void VerticalFeedActionClicked (STRVerticalFeedView view, UIViewController rootViewController, VerticalFeedItem feedItem);
+
+		// @optional -(void)verticalFeedPresented:(STRVerticalFeedView * _Nonnull)view;
+		[Export ("verticalFeedPresented:")]
+		void VerticalFeedPresented (STRVerticalFeedView view);
+
+		// @optional -(void)verticalFeedPresentFailed:(STRVerticalFeedView * _Nonnull)view errorMessage:(NSString * _Nonnull)errorMessage;
+		[Export ("verticalFeedPresentFailed:errorMessage:")]
+		void VerticalFeedPresentFailed (STRVerticalFeedView view, string errorMessage);
+
+		// @optional -(void)verticalFeedDismissed:(STRVerticalFeedView * _Nonnull)view;
+		[Export ("verticalFeedDismissed:")]
+		void VerticalFeedDismissed (STRVerticalFeedView view);
+
+		// @optional -(void)verticalFeedUserInteracted:(STRVerticalFeedView * _Nonnull)view feedGroup:(VerticalFeedGroup * _Nonnull)feedGroup feedItem:(VerticalFeedItem * _Nonnull)feedItem feedItemComponent:(VerticalFeedItemComponent * _Nonnull)feedItemComponent;
+		[Export ("verticalFeedUserInteracted:feedGroup:feedItem:feedItemComponent:")]
+		void VerticalFeedUserInteracted (STRVerticalFeedView view, VerticalFeedGroup feedGroup, VerticalFeedItem feedItem, VerticalFeedItemComponent feedItemComponent);
+
+		// @optional -(void)verticalFeedEvent:(STRVerticalFeedView * _Nonnull)view event:(enum VerticalFeedEvent)event feedGroup:(VerticalFeedGroup * _Nullable)feedGroup feedItem:(VerticalFeedItem * _Nullable)feedItem feedItemComponent:(VerticalFeedItemComponent * _Nullable)feedItemComponent;
+		[Export ("verticalFeedEvent:event:feedGroup:feedItem:feedItemComponent:")]
+		void VerticalFeedEvent (STRVerticalFeedView view, VerticalFeedEvent @event, [NullAllowed] VerticalFeedGroup feedGroup, [NullAllowed] VerticalFeedItem feedItem, [NullAllowed] VerticalFeedItemComponent feedItemComponent);
+	}
+
+	// @interface StorylyVerticalFeedGroupStyling : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyVerticalFeedGroupStyling
+	{
+	}
+
+	// @interface StorylyVerticalFeedGroupStylingBuilder : NSObject
+	[BaseType (typeof(NSObject))]
+	interface StorylyVerticalFeedGroupStylingBuilder
+	{
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setIconBackgroundColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+		[Export ("setIconBackgroundColor:")]
+		StorylyVerticalFeedGroupStylingBuilder SetIconBackgroundColor (UIColor color);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setIconHeight:(CGFloat)height __attribute__((warn_unused_result("")));
+		[Export ("setIconHeight:")]
+		StorylyVerticalFeedGroupStylingBuilder SetIconHeight (nfloat height);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setIconCornerRadius:(CGFloat)radius __attribute__((warn_unused_result("")));
+		[Export ("setIconCornerRadius:")]
+		StorylyVerticalFeedGroupStylingBuilder SetIconCornerRadius (nfloat radius);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setIconThematicImageLabel:(NSString * _Nullable)label __attribute__((warn_unused_result("")));
+		[Export ("setIconThematicImageLabel:")]
+		StorylyVerticalFeedGroupStylingBuilder SetIconThematicImageLabel ([NullAllowed] string label);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setTitleFont:(UIFont * _Nullable)font __attribute__((warn_unused_result("")));
+		[Export ("setTitleFont:")]
+		StorylyVerticalFeedGroupStylingBuilder SetTitleFont ([NullAllowed] UIFont font);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setTitleVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export ("setTitleVisibility:")]
+		StorylyVerticalFeedGroupStylingBuilder SetTitleVisibility (bool isVisible);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setGroupOrder:(enum VerticalFeedGroupOrder)order __attribute__((warn_unused_result("")));
+		[Export ("setGroupOrder:")]
+		StorylyVerticalFeedGroupStylingBuilder SetGroupOrder (VerticalFeedGroupOrder order);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setImpressionIcon:(UIImage * _Nonnull)image __attribute__((warn_unused_result("")));
+		[Export ("setImpressionIcon:")]
+		StorylyVerticalFeedGroupStylingBuilder SetImpressionIcon (UIImage image);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setLikeIcon:(UIImage * _Nonnull)image __attribute__((warn_unused_result("")));
+		[Export ("setLikeIcon:")]
+		StorylyVerticalFeedGroupStylingBuilder SetLikeIcon (UIImage image);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setTextColor:(UIColor * _Nonnull)color __attribute__((warn_unused_result("")));
+		[Export ("setTextColor:")]
+		StorylyVerticalFeedGroupStylingBuilder SetTextColor (UIColor color);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setMinImpressionCountToShowIcon:(NSInteger)count __attribute__((warn_unused_result("")));
+		[Export ("setMinImpressionCountToShowIcon:")]
+		StorylyVerticalFeedGroupStylingBuilder SetMinImpressionCountToShowIcon (nint count);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setMinLikeCountToShowIcon:(NSInteger)count __attribute__((warn_unused_result("")));
+		[Export ("setMinLikeCountToShowIcon:")]
+		StorylyVerticalFeedGroupStylingBuilder SetMinLikeCountToShowIcon (nint count);
+
+		// -(StorylyVerticalFeedGroupStylingBuilder * _Nonnull)setTypeIndicatorVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+		[Export ("setTypeIndicatorVisibility:")]
+		StorylyVerticalFeedGroupStylingBuilder SetTypeIndicatorVisibility (bool isVisible);
+
+		// -(StorylyVerticalFeedGroupStyling * _Nonnull)build __attribute__((warn_unused_result("")));
+		[Export("build")]
+		StorylyVerticalFeedGroupStyling Build();
+	}
+
+    // @interface StorylyVerticalFeedInit : NSObject
+    [BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface StorylyVerticalFeedInit
+	{
+		// @property (nonatomic, strong) StorylyVerticalFeedConfig * _Nonnull config;
+		[Export ("config", ArgumentSemantic.Strong)]
+		StorylyVerticalFeedConfig Config { get; set; }
+
+		// -(instancetype _Nonnull)initWithStorylyId:(NSString * _Nonnull)storylyId config:(StorylyVerticalFeedConfig * _Nonnull)config __attribute__((objc_designated_initializer));
+		[Export ("initWithStorylyId:config:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string storylyId, StorylyVerticalFeedConfig config);
+	}
+
+    // @protocol StorylyVerticalFeedPresenterDelegate
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+	interface StorylyVerticalFeedPresenterDelegate
+	{
+		// @optional -(void)verticalFeedLoaded:(StorylyVerticalFeedPresenterView * _Nonnull)view feedGroupList:(NSArray<VerticalFeedGroup *> * _Nonnull)feedGroupList dataSource:(enum StorylyDataSource)dataSource;
+		[Export ("verticalFeedLoaded:feedGroupList:dataSource:")]
+		void VerticalFeedLoaded (StorylyVerticalFeedPresenterView view, VerticalFeedGroup[] feedGroupList, StorylyDataSource dataSource);
+
+		// @optional -(void)verticalFeedLoadFailed:(StorylyVerticalFeedPresenterView * _Nonnull)view errorMessage:(NSString * _Nonnull)errorMessage;
+		[Export ("verticalFeedLoadFailed:errorMessage:")]
+		void VerticalFeedLoadFailed (StorylyVerticalFeedPresenterView view, string errorMessage);
+
+		// @optional -(void)verticalFeedActionClicked:(StorylyVerticalFeedPresenterView * _Nonnull)view feedItem:(VerticalFeedItem * _Nonnull)feedItem;
+		[Export ("verticalFeedActionClicked:feedItem:")]
+		void VerticalFeedActionClicked (StorylyVerticalFeedPresenterView view, VerticalFeedItem feedItem);
+
+		// @optional -(void)verticalFeedPresented:(StorylyVerticalFeedPresenterView * _Nonnull)view;
+		[Export ("verticalFeedPresented:")]
+		void VerticalFeedPresented (StorylyVerticalFeedPresenterView view);
+
+		// @optional -(void)verticalFeedPresentFailed:(StorylyVerticalFeedPresenterView * _Nonnull)view errorMessage:(NSString * _Nonnull)errorMessage;
+		[Export ("verticalFeedPresentFailed:errorMessage:")]
+		void VerticalFeedPresentFailed (StorylyVerticalFeedPresenterView view, string errorMessage);
+
+		// @optional -(void)verticalFeedDismissed:(StorylyVerticalFeedPresenterView * _Nonnull)view;
+		[Export ("verticalFeedDismissed:")]
+		void VerticalFeedDismissed (StorylyVerticalFeedPresenterView view);
+
+		// @optional -(void)verticalFeedUserInteracted:(StorylyVerticalFeedPresenterView * _Nonnull)view feedGroup:(VerticalFeedGroup * _Nonnull)feedGroup feedItem:(VerticalFeedItem * _Nonnull)feedItem feedItemComponent:(VerticalFeedItemComponent * _Nonnull)feedItemComponent;
+		[Export ("verticalFeedUserInteracted:feedGroup:feedItem:feedItemComponent:")]
+		void VerticalFeedUserInteracted (StorylyVerticalFeedPresenterView view, VerticalFeedGroup feedGroup, VerticalFeedItem feedItem, VerticalFeedItemComponent feedItemComponent);
+
+		// @optional -(void)verticalFeedEvent:(StorylyVerticalFeedPresenterView * _Nonnull)view event:(enum VerticalFeedEvent)event feedGroup:(VerticalFeedGroup * _Nullable)feedGroup feedItem:(VerticalFeedItem * _Nullable)feedItem feedItemComponent:(VerticalFeedItemComponent * _Nullable)feedItemComponent;
+		[Export ("verticalFeedEvent:event:feedGroup:feedItem:feedItemComponent:")]
+		void VerticalFeedEvent (StorylyVerticalFeedPresenterView view, VerticalFeedEvent @event, [NullAllowed] VerticalFeedGroup feedGroup, [NullAllowed] VerticalFeedItem feedItem, [NullAllowed] VerticalFeedItemComponent feedItemComponent);
+	}
+
+    // @protocol StorylyVerticalFeedPresenterProductDelegate
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+	interface StorylyVerticalFeedPresenterProductDelegate
+	{
+		// @optional -(void)verticalFeedHydration:(StorylyVerticalFeedPresenterView * _Nonnull)view products:(NSArray<STRProductInformation *> * _Nonnull)products;
+		[Export ("verticalFeedHydration:products:")]
+		void VerticalFeedHydration (StorylyVerticalFeedPresenterView view, STRProductInformation[] products);
+
+		// @optional -(void)verticalFeedEvent:(StorylyVerticalFeedPresenterView * _Nonnull)view event:(enum VerticalFeedEvent)event;
+		[Export ("verticalFeedEvent:event:")]
+		void VerticalFeedEvent (StorylyVerticalFeedPresenterView view, VerticalFeedEvent @event);
+
+		// @optional -(void)verticalFeedUpdateCartEventWithView:(StorylyVerticalFeedPresenterView * _Nonnull)view event:(enum VerticalFeedEvent)event cart:(STRCart * _Nullable)cart change:(STRCartItem * _Nullable)change onSuccess:(void (^ _Nullable)(STRCart * _Nullable))onSuccess onFail:(void (^ _Nullable)(STRCartEventResult * _Nonnull))onFail;
+		[Export ("verticalFeedUpdateCartEventWithView:event:cart:change:onSuccess:onFail:")]
+		void VerticalFeedUpdateCartEventWithView (StorylyVerticalFeedPresenterView view, VerticalFeedEvent @event, [NullAllowed] STRCart cart, [NullAllowed] STRCartItem change, [NullAllowed] Action<STRCart> onSuccess, [NullAllowed] Action<STRCartEventResult> onFail);
+	}
+
+	// @interface StorylyVerticalFeedPresenterView : UIView
+	[BaseType (typeof(UIView))]
+	interface StorylyVerticalFeedPresenterView
+	{
+		// @property (nonatomic, strong) StorylyVerticalFeedInit * _Nonnull storylyVerticalFeedInit;
+		[Export ("storylyVerticalFeedInit", ArgumentSemantic.Strong)]
+		StorylyVerticalFeedInit StorylyVerticalFeedInit { get; set; }
+
+		// @property (nonatomic, weak) UIViewController * _Nullable rootViewController;
+		[NullAllowed, Export ("rootViewController", ArgumentSemantic.Weak)]
+		UIViewController RootViewController { get; set; }
+
+		[Wrap ("WeakStorylyVerticalFeedDelegate")]
+		[NullAllowed]
+		StorylyVerticalFeedPresenterDelegate StorylyVerticalFeedDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<StorylyVerticalFeedPresenterDelegate> _Nullable storylyVerticalFeedDelegate;
+		[NullAllowed, Export ("storylyVerticalFeedDelegate", ArgumentSemantic.Weak)]
+		NSObject WeakStorylyVerticalFeedDelegate { get; set; }
+
+		[Wrap ("WeakStorylyVerticalFeedProductDelegate")]
+		[NullAllowed]
+		StorylyVerticalFeedPresenterProductDelegate StorylyVerticalFeedProductDelegate { get; set; }
+
+		// @property (nonatomic, weak) id<StorylyVerticalFeedPresenterProductDelegate> _Nullable storylyVerticalFeedProductDelegate;
+		[NullAllowed, Export ("storylyVerticalFeedProductDelegate", ArgumentSemantic.Weak)]
+		NSObject WeakStorylyVerticalFeedProductDelegate { get; set; }
+
+		// -(void)willMoveToWindow:(UIWindow * _Nullable)newWindow;
+		[Export ("willMoveToWindow:")]
+		void WillMoveToWindow ([NullAllowed] UIWindow newWindow);
+
+		// -(void)pause;
+		[Export ("pause")]
+		void Pause ();
+
+		// -(void)play;
+		[Export ("play")]
+		void Play ();
+
+		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+		[Export ("initWithFrame:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (CGRect frame);
+	}
+
+    // @protocol StorylyVerticalFeedProductDelegate
+    [BaseType(typeof(NSObject))]
+    [Protocol, Model]
+	interface StorylyVerticalFeedProductDelegate
+	{
+		// @optional -(void)verticalFeedHydration:(STRVerticalFeedView * _Nonnull)view products:(NSArray<STRProductInformation *> * _Nonnull)products;
+		[Export ("verticalFeedHydration:products:")]
+		void VerticalFeedHydration (STRVerticalFeedView view, STRProductInformation[] products);
+
+		// @optional -(void)verticalFeedEvent:(STRVerticalFeedView * _Nonnull)view event:(enum VerticalFeedEvent)event;
+		[Export ("verticalFeedEvent:event:")]
+		void VerticalFeedEvent (STRVerticalFeedView view, VerticalFeedEvent @event);
+
+		// @optional -(void)verticalFeedUpdateCartEventWithView:(STRVerticalFeedView * _Nonnull)view event:(enum VerticalFeedEvent)event cart:(STRCart * _Nullable)cart change:(STRCartItem * _Nullable)change onSuccess:(void (^ _Nullable)(STRCart * _Nullable))onSuccess onFail:(void (^ _Nullable)(STRCartEventResult * _Nonnull))onFail;
+		[Export ("verticalFeedUpdateCartEventWithView:event:cart:change:onSuccess:onFail:")]
+		void VerticalFeedUpdateCartEventWithView (STRVerticalFeedView view, VerticalFeedEvent @event, [NullAllowed] STRCart cart, [NullAllowed] STRCartItem change, [NullAllowed] Action<STRCart> onSuccess, [NullAllowed] Action<STRCartEventResult> onFail);
+	}
+
+	// @interface StorylyVerticalFeedView : STRVerticalFeedView
+	[BaseType (typeof(STRVerticalFeedView))]
+	interface StorylyVerticalFeedView
+	{
+		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+		[Export ("initWithFrame:")]
+		[DesignatedInitializer]
+        IntPtr Constructor (CGRect frame);
+    }
+
+    // @interface VerticalFeedItemComponent : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface VerticalFeedItemComponent
+	{
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull id;
+        [Export("id")]
+        string Id { get; }
+
+        // @property (readonly, nonatomic) enum VerticalFeedItemComponentType type;
+        [Export("type")]
+        VerticalFeedItemComponentType Type { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable customPayload;
+        [NullAllowed, Export("customPayload")]
+        string CustomPayload { get; }
+    }
+
+	// @interface VerticalFeedButtonComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedButtonComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:text:actionUrl:products:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedCommentComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedCommentComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:text:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string text, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedEmojiComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedEmojiComponent
+	{
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull emojiCodes;
+		[Export ("emojiCodes", ArgumentSemantic.Copy)]
+		string[] EmojiCodes { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedEmojiIndex;
+		[Export ("selectedEmojiIndex")]
+		nint SelectedEmojiIndex { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCodes:(NSArray<NSString *> * _Nonnull)emojiCodes selectedEmojiIndex:(NSInteger)selectedEmojiIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:emojiCodes:selectedEmojiIndex:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string[] emojiCodes, nint selectedEmojiIndex, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedEventHelper : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC7Storyly23VerticalFeedEventHelper")]
+	interface VerticalFeedEventHelper
+	{
+		// +(NSString * _Nonnull)verticalFeedEventNameWithEvent:(enum VerticalFeedEvent)event __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("verticalFeedEventNameWithEvent:")]
+		string VerticalFeedEventNameWithEvent (VerticalFeedEvent @event);
+	}
+
+	// @interface VerticalFeedGroup : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface VerticalFeedGroup
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull uniqueId;
+		[Export ("uniqueId")]
+		string UniqueId { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export ("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSURL * _Nullable iconUrl;
+		[NullAllowed, Export ("iconUrl", ArgumentSemantic.Copy)]
+		NSUrl IconUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSURL * _Nullable iconVideoUrl;
+		[NullAllowed, Export ("iconVideoUrl", ArgumentSemantic.Copy)]
+		NSUrl IconVideoUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSURL * _Nullable iconVideoThumbnailUrl;
+		[NullAllowed, Export ("iconVideoThumbnailUrl", ArgumentSemantic.Copy)]
+		NSUrl IconVideoThumbnailUrl { get; }
+
+		// @property (readonly, nonatomic) NSInteger index;
+		[Export ("index")]
+		nint Index { get; }
+
+		// @property (readonly, nonatomic) BOOL seen;
+		[Export ("seen")]
+		bool Seen { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<VerticalFeedItem *> * _Nonnull feedList;
+		[Export ("feedList", ArgumentSemantic.Copy)]
+		VerticalFeedItem[] FeedList { get; }
+
+		// @property (readonly, nonatomic) BOOL pinned;
+		[Export ("pinned")]
+		bool Pinned { get; }
+
+		// @property (readonly, nonatomic) enum VerticalFeedGroupType type;
+		[Export ("type")]
+		VerticalFeedGroupType Type { get; }
+
+		// @property (readonly, nonatomic, strong) VerticalFeedGroupStyle * _Nullable style;
+		[NullAllowed, Export ("style", ArgumentSemantic.Strong)]
+		VerticalFeedGroupStyle Style { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable name;
+		[NullAllowed, Export ("name")]
+		string Name { get; }
+
+		// @property (readonly, nonatomic) BOOL nudge;
+		[Export ("nudge")]
+		bool Nudge { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title iconUrl:(NSURL * _Nullable)iconUrl iconVideoUrl:(NSURL * _Nullable)iconVideoUrl iconVideoThumbnailUrl:(NSURL * _Nullable)iconVideoThumbnailUrl index:(NSInteger)index seen:(BOOL)seen feedList:(NSArray<VerticalFeedItem *> * _Nonnull)feedList pinned:(BOOL)pinned type:(enum VerticalFeedGroupType)type style:(VerticalFeedGroupStyle * _Nullable)style name:(NSString * _Nullable)name nudge:(BOOL)nudge __attribute__((objc_designated_initializer));
+		[Export ("initWithId:title:iconUrl:iconVideoUrl:iconVideoThumbnailUrl:index:seen:feedList:pinned:type:style:name:nudge:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, string title, [NullAllowed] NSUrl iconUrl, [NullAllowed] NSUrl iconVideoUrl, [NullAllowed] NSUrl iconVideoThumbnailUrl, nint index, bool seen, VerticalFeedItem[] feedList, bool pinned, VerticalFeedGroupType type, [NullAllowed] VerticalFeedGroupStyle style, [NullAllowed] string name, bool nudge);
+	}
+
+	// @interface VerticalFeedGroupBadgeStyle : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface VerticalFeedGroupBadgeStyle
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nullable text;
+		[NullAllowed, Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, nonatomic, strong) UIColor * _Nullable textColor;
+		[NullAllowed, Export ("textColor", ArgumentSemantic.Strong)]
+		UIColor TextColor { get; }
+
+		// @property (readonly, nonatomic, strong) UIColor * _Nullable backgroundColor;
+		[NullAllowed, Export ("backgroundColor", ArgumentSemantic.Strong)]
+		UIColor BackgroundColor { get; }
+
+		// @property (readonly, nonatomic, strong) NSNumber * _Nullable endTime;
+		[NullAllowed, Export ("endTime", ArgumentSemantic.Strong)]
+		NSNumber EndTime { get; }
+
+		// @property (readonly, getter = template, copy, nonatomic) NSString * _Nullable template_;
+		[NullAllowed, Export ("template_")]
+		string Template_ { [Bind ("template")] get; }
+
+		// -(instancetype _Nonnull)initWithText:(NSString * _Nullable)text textColor:(UIColor * _Nullable)textColor backgroundColor:(UIColor * _Nullable)backgroundColor endTime:(NSNumber * _Nullable)endTime template:(NSString * _Nullable)template_ __attribute__((objc_designated_initializer));
+		[Export ("initWithText:textColor:backgroundColor:endTime:template:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor ([NullAllowed] string text, [NullAllowed] UIColor textColor, [NullAllowed] UIColor backgroundColor, [NullAllowed] NSNumber endTime, [NullAllowed] string template_);
+	}
+
+	// @interface VerticalFeedGroupStyle : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface VerticalFeedGroupStyle
+	{
+		// @property (readonly, copy, nonatomic) NSArray<UIColor *> * _Nullable borderUnseenColors;
+		[NullAllowed, Export ("borderUnseenColors", ArgumentSemantic.Copy)]
+		UIColor[] BorderUnseenColors { get; }
+
+		// @property (readonly, nonatomic, strong) UIColor * _Nullable textUnseenColor;
+		[NullAllowed, Export ("textUnseenColor", ArgumentSemantic.Strong)]
+		UIColor TextUnseenColor { get; }
+
+		// @property (readonly, nonatomic, strong) VerticalFeedGroupBadgeStyle * _Nullable badge;
+		[NullAllowed, Export ("badge", ArgumentSemantic.Strong)]
+		VerticalFeedGroupBadgeStyle Badge { get; }
+
+		// -(instancetype _Nonnull)initWithBorderUnseenColors:(NSArray<UIColor *> * _Nullable)borderUnseenColors textUnseenColor:(UIColor * _Nullable)textUnseenColor badge:(VerticalFeedGroupBadgeStyle * _Nullable)badge __attribute__((objc_designated_initializer));
+		[Export ("initWithBorderUnseenColors:textUnseenColor:badge:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor ([NullAllowed] UIColor[] borderUnseenColors, [NullAllowed] UIColor textUnseenColor, [NullAllowed] VerticalFeedGroupBadgeStyle badge);
+	}
+
+	// @interface VerticalFeedImageQuizComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedImageQuizComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export ("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable options;
+		[NullAllowed, Export ("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic, strong) NSNumber * _Nullable rightAnswerIndex;
+		[NullAllowed, Export ("rightAnswerIndex", ArgumentSemantic.Strong)]
+		NSNumber RightAnswerIndex { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export ("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nullable)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string title, [NullAllowed] string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedItem : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface VerticalFeedItem
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull uniqueId;
+		[Export ("uniqueId")]
+		string UniqueId { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export ("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable name;
+		[NullAllowed, Export ("name")]
+		string Name { get; }
+
+		// @property (readonly, nonatomic) NSInteger index;
+		[Export ("index")]
+		nint Index { get; }
+
+		// @property (readonly, nonatomic) BOOL seen;
+		[Export ("seen")]
+		bool Seen { get; }
+
+		// @property (readonly, nonatomic) NSInteger currentTime;
+		[Export ("currentTime")]
+		nint CurrentTime { get; }
+
+		// @property (copy, nonatomic) NSURL * _Nullable previewUrl;
+		[NullAllowed, Export ("previewUrl", ArgumentSemantic.Copy)]
+		NSUrl PreviewUrl { get; set; }
+
+		// @property (readonly, copy, nonatomic) NSArray<VerticalFeedItemComponent *> * _Nullable verticalFeedItemComponentList;
+		[NullAllowed, Export ("verticalFeedItemComponentList", ArgumentSemantic.Copy)]
+		VerticalFeedItemComponent[] VerticalFeedItemComponentList { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable actionProducts;
+		[NullAllowed, Export ("actionProducts", ArgumentSemantic.Copy)]
+		STRProductItem[] ActionProducts { get; }
+
+		// -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id index:(NSInteger)index title:(NSString * _Nonnull)title name:(NSString * _Nullable)name seen:(BOOL)seen currentTime:(NSInteger)currentTime previewUrl:(NSURL * _Nullable)previewUrl verticalFeedItemComponentList:(NSArray<VerticalFeedItemComponent *> * _Nullable)verticalFeedItemComponentList actionUrl:(NSString * _Nullable)actionUrl actionProducts:(NSArray<STRProductItem *> * _Nullable)actionProducts __attribute__((objc_designated_initializer));
+		[Export ("initWithId:index:title:name:seen:currentTime:previewUrl:verticalFeedItemComponentList:actionUrl:actionProducts:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string id, nint index, string title, [NullAllowed] string name, bool seen, nint currentTime, [NullAllowed] NSUrl previewUrl, [NullAllowed] VerticalFeedItemComponent[] verticalFeedItemComponentList, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] actionProducts);
+	}
+
+	// @interface VerticalFeedItemComponentTypeHelper : NSObject
+	[BaseType (typeof(NSObject))]
+	interface VerticalFeedItemComponentTypeHelper
+	{
+		// +(NSString * _Nonnull)verticalFeedItemComponentNameWithComponentType:(enum VerticalFeedItemComponentType)componentType __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("verticalFeedItemComponentNameWithComponentType:")]
+		string VerticalFeedItemComponentNameWithComponentType (VerticalFeedItemComponentType componentType);
+	}
+
+	// @interface VerticalFeedPollComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedPollComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export ("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
+		[Export ("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export ("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:title:options:selectedOptionIndex:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string title, string[] options, nint selectedOptionIndex, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedProductCardComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedProductCardComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:text:actionUrl:products:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedProductCatalogComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedProductCatalogComponent
+	{
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable actionUrlList;
+		[NullAllowed, Export ("actionUrlList", ArgumentSemantic.Copy)]
+		string[] ActionUrlList { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id actionUrlList:(NSArray<NSString *> * _Nullable)actionUrlList products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:actionUrlList:products:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, [NullAllowed] string[] actionUrlList, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedProductTagComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedProductTagComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:actionUrl:products:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedPromoCodeComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedPromoCodeComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:text:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string text, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedQuizComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedQuizComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export ("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull options;
+		[Export ("options", ArgumentSemantic.Copy)]
+		string[] Options { get; }
+
+		// @property (readonly, nonatomic, strong) NSNumber * _Nullable rightAnswerIndex;
+		[NullAllowed, Export ("rightAnswerIndex", ArgumentSemantic.Strong)]
+		NSNumber RightAnswerIndex { get; }
+
+		// @property (readonly, nonatomic) NSInteger selectedOptionIndex;
+		[Export ("selectedOptionIndex")]
+		nint SelectedOptionIndex { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id title:(NSString * _Nonnull)title options:(NSArray<NSString *> * _Nonnull)options rightAnswerIndex:(NSNumber * _Nullable)rightAnswerIndex selectedOptionIndex:(NSInteger)selectedOptionIndex customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:title:options:rightAnswerIndex:selectedOptionIndex:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string title, string[] options, [NullAllowed] NSNumber rightAnswerIndex, nint selectedOptionIndex, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedRatingComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedRatingComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull emojiCode;
+		[Export ("emojiCode")]
+		string EmojiCode { get; }
+
+		// @property (readonly, nonatomic) NSInteger rating;
+		[Export ("rating")]
+		nint Rating { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id emojiCode:(NSString * _Nonnull)emojiCode rating:(NSInteger)rating customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:emojiCode:rating:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string emojiCode, nint rating, [NullAllowed] string customPayload);
+    }
+
+	// @interface VerticalFeedSwipeComponent : VerticalFeedItemComponent
+	[BaseType (typeof(VerticalFeedItemComponent))]
+	interface VerticalFeedSwipeComponent
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull text;
+		[Export ("text")]
+		string Text { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable actionUrl;
+		[NullAllowed, Export ("actionUrl")]
+		string ActionUrl { get; }
+
+		// @property (readonly, copy, nonatomic) NSArray<STRProductItem *> * _Nullable products;
+		[NullAllowed, Export ("products", ArgumentSemantic.Copy)]
+		STRProductItem[] Products { get; }
+
+        // -(instancetype _Nonnull)initWithId:(NSString * _Nonnull)id text:(NSString * _Nonnull)text actionUrl:(NSString * _Nullable)actionUrl products:(NSArray<STRProductItem *> * _Nullable)products customPayload:(NSString * _Nullable)customPayload __attribute__((objc_designated_initializer));
+        [Export("initWithId:text:actionUrl:products:customPayload:")]
+        [DesignatedInitializer]
+        NativeHandle Constructor(string id, string text, [NullAllowed] string actionUrl, [NullAllowed] STRProductItem[] products, [NullAllowed] string customPayload);
+    }
+
+    // @interface STRStoryStyling : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRStoryStyling
+    {
+    }
+
+    // @interface STRStoryBuilder : NSObject
+    [BaseType(typeof(NSObject))]
+    interface STRStoryBuilder
+    {
+        // -(instancetype _Nonnull)setTitleFont:(UIFont * _Nonnull)font __attribute__((warn_unused_result("")));
+        [Export("setTitleFont:")]
+        STRStoryBuilder SetTitleFont(UIFont font);
+
+        // -(instancetype _Nonnull)setInteractiveFont:(UIFont * _Nullable)font __attribute__((warn_unused_result("")));
+        [Export("setInteractiveFont:")]
+        STRStoryBuilder SetInteractiveFont([NullAllowed] UIFont font);
+
+        // -(instancetype _Nonnull)setProgressBarColor:(NSArray<UIColor *> * _Nonnull)colors __attribute__((warn_unused_result("")));
+        [Export("setProgressBarColor:")]
+        STRStoryBuilder SetProgressBarColor(UIColor[] colors);
+
+        // -(instancetype _Nonnull)setTitleVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+        [Export("setTitleVisibility:")]
+        STRStoryBuilder SetTitleVisibility(bool isVisible);
+
+        // -(instancetype _Nonnull)setCloseButtonVisibility:(BOOL)isVisible __attribute__((warn_unused_result("")));
+        [Export("setCloseButtonVisibility:")]
+        STRStoryBuilder SetCloseButtonVisibility(bool isVisible);
+
+        // -(instancetype _Nonnull)setCloseButtonIcon:(UIImage * _Nullable)icon __attribute__((warn_unused_result("")));
+        [Export("setCloseButtonIcon:")]
+        STRStoryBuilder SetCloseButtonIcon([NullAllowed] UIImage icon);
+
+        // -(instancetype _Nonnull)setShareButtonIcon:(UIImage * _Nullable)icon __attribute__((warn_unused_result("")));
+        [Export("setShareButtonIcon:")]
+        STRStoryBuilder SetShareButtonIcon([NullAllowed] UIImage icon);
+    }
+
+    // @interface STRConfig : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface STRConfig
+    {
+    }
+
+    // @interface STRConfigBuilder : NSObject
+    [BaseType(typeof(NSObject))]
+    interface STRConfigBuilder
+    {
+        // -(instancetype _Nonnull)setLayoutDirection:(enum StorylyLayoutDirection)direction __attribute__((warn_unused_result("")));
+        [Export("setLayoutDirection:")]
+        STRConfigBuilder SetLayoutDirection(StorylyLayoutDirection direction);
+
+        // -(instancetype _Nonnull)setCustomParameter:(NSString * _Nullable)parameter __attribute__((warn_unused_result("")));
+        [Export("setCustomParameter:")]
+        STRConfigBuilder SetCustomParameter([NullAllowed] string parameter);
+
+        // -(instancetype _Nonnull)setLabels:(NSSet<NSString *> * _Nullable)labels __attribute__((warn_unused_result("")));
+        [Export("setLabels:")]
+        STRConfigBuilder SetLabels([NullAllowed] NSSet<NSString> labels);
+
+        // -(instancetype _Nonnull)setUserData:(NSDictionary<NSString *,NSString *> * _Nonnull)data __attribute__((warn_unused_result("")));
+        [Export("setUserData:")]
+        STRConfigBuilder SetUserData(NSDictionary<NSString, NSString> data);
+
+        // -(instancetype _Nonnull)setTestMode:(BOOL)isTest __attribute__((warn_unused_result("")));
+        [Export("setTestMode:")]
+        STRConfigBuilder SetTestMode(bool isTest);
+
+        // -(instancetype _Nonnull)setProductConfig:(StorylyProductConfig * _Nonnull)config __attribute__((warn_unused_result("")));
+        [Export("setProductConfig:")]
+        STRConfigBuilder SetProductConfig(StorylyProductConfig config);
+
+        // -(instancetype _Nonnull)setShareConfig:(StorylyShareConfig * _Nonnull)config __attribute__((warn_unused_result("")));
+        [Export("setShareConfig:")]
+        STRConfigBuilder SetShareConfig(StorylyShareConfig config);
+
+        // -(instancetype _Nonnull)setLocale:(NSString * _Nullable)locale __attribute__((warn_unused_result("")));
+        [Export("setLocale:")]
+        STRConfigBuilder SetLocale([NullAllowed] string locale);
+
+        // -(STRConfigBuilder * _Nonnull)setMute:(BOOL)isMuted __attribute__((warn_unused_result("")));
+        [Export("setMute:")]
+        STRConfigBuilder SetMute(bool isMuted);
     }
 }

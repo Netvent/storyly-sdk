@@ -1,3 +1,29 @@
+### 3.11.0 (13.12.2024)
+* added local data cache invalidation on minor and major sdk version change
+
+### 3.10.0 (05.12.2024)
+* added video share to Instagram Stories
+* added customPayload to the missing layer types
+* added RTL support to share bottom sheet
+* added related storyComponents to Storyly delegate and listener methods
+* fixed a bug related to product bottom sheet image load on android platform, fixed [#392](https://github.com/Netvent/storyly-mobile/issues/392)
+* fixed a bug related to conditional stories on android platform
+
+### 3.8.1 (18.11.2024)
+* IMPORTANT! renamed products field to actionProducts in Story class
+* added new public interactive component types
+* improved StorylyView initialization flow
+* fixed a bug related to style changes
+* added video cache for video stories
+* improved interactive component add/remove flow on android platform
+* improved activity assignment flow in StorylyView on android platform
+  
+### 3.6.3 (31.10.2024)
+* improved data processing flow on android platform
+* improved memory usage of gif media on ios platform
+* improved synchronization between video story media and header on ios platform
+* improved AVAudioSession category changes on ios platform
+
 ### 3.6.0 (09.09.2024)
 * added story bar instance settings
 * fixed a bug related to IllegalStateException on android platform

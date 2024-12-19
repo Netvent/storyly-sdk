@@ -5,11 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="presenter"
+        android:textSize="12dp"
+        android:layout_marginEnd="24dp"
+        android:id="@+id/presenterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <com.appsamurai.storyly.StorylyView
         android:id="@+id/storylyView"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/presenterButton"
 		android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:layout_gravity="center"
 		android:layout_height="wrap_content"/>
 
@@ -20,6 +30,24 @@
 		android:layout_width="match_parent"
         android:layout_gravity="center"
 		android:layout_height="wrap_content"/>
+
+    <com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedBarView
+        app:layout_constraintTop_toBottomOf="@id/customStorylyView"
+        android:id="@+id/vfBarView"
+        android:layout_marginTop="50dp"
+		android:layout_width="match_parent"
+        android:layout_gravity="center"
+		android:layout_height="wrap_content"/>
+
+    <com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
+        app:layout_constraintTop_toBottomOf="@id/vfBarView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/vfView"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="8dp"
+		android:layout_width="match_parent"
+        android:layout_gravity="center"
+		android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

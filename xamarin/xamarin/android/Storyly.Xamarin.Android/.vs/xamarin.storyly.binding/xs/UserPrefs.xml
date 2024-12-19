@@ -1,7 +1,15 @@
-﻿<Properties StartupConfiguration="{2B1129E0-A65F-40EF-BFD5-15094F232AC5}|Default">
+﻿<Properties StartupConfiguration="{2D3303A4-A6E7-405E-BD55-4800A59DA411}|Default">
+  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.demo AndroidDesignerPreferredTheme="AppTheme" AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.9x16" />
+  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.binding PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="13.2.2.0" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.9x16" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="xamarin.storyly.demo/MainActivity.cs">
     <Files>
-      <File FileName="xamarin.storyly.demo/MainActivity.cs" Line="13" Column="1" />
+      <File FileName="xamarin.storyly.demo/MainActivity.cs" Line="19" Column="1" />
       <File FileName="xamarin.storyly.binding/Transforms/Metadata.xml" />
       <File FileName="xamarin.storyly.exoplayer.binding/Transforms/Metadata.xml" />
       <File FileName="xamarin.storyly.demo/Resources/layout/activity_main.xml" />
@@ -9,24 +17,14 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="xamarin.storyly.binding">
+          <Node name="xamarin.storyly.binding" expanded="True">
             <Node name="xamarin.storyly.binding" selected="True" />
-            <Node name="xamarin.storyly.exoplayer.binding">
-              <Node name="References" expanded="True" />
-              <Node name="Jars" expanded="True" />
-              <Node name="Transforms" expanded="True" />
-            </Node>
+            <Node name="xamarin.storyly.demo" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.demo AndroidDesignerPreferredTheme="AppTheme" AndroidDesignerPreferredDevice="Nexus 4" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.binding PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
