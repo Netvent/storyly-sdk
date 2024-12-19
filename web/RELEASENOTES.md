@@ -2,7 +2,7 @@
 
 ### 3.6.24 - 17.10.2024 [for cdn](https://web-story.storyly.io/sdk/3.6.24/storyly-web.js)
 
-- Bug: Fixed cta, swipe up and sponsored colors text on dark mode
+- Bug: Fixed cta, swipe up and sponsored text colors on dark mode
 - Bug: Fixed position of the story groups shifting or can not see story groups after scrolling
 - Bug: Fixed fired unnecessary warning messages
 
