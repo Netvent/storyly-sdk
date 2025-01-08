@@ -231,7 +231,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         json.getArray("iconBorderColorSeen")?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorSeen(convertColorArray(it)) }
         json.getArray("iconBorderColorNotSeen")?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorNotSeen(convertColorArray(it)) }
         if (json.hasKey("iconBackgroundColor")) groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(json.getInt("iconBackgroundColor"))
+
+        if (json.hasKey("pinIconVisible")) groupStylingBuilder = groupStylingBuilder.setPinIconVisibility(json.getBoolean("pinIconVisible"))
         if (json.hasKey("pinIconColor")) groupStylingBuilder = groupStylingBuilder.setPinIconColor(json.getInt("pinIconColor"))
+
         groupStylingBuilder = if (json.hasKey("iconHeight")) groupStylingBuilder.setIconHeight(json.getInt("iconHeight")) else groupStylingBuilder.setIconHeight(dpToPixel(80))
         groupStylingBuilder = if (json.hasKey("iconWidth")) groupStylingBuilder.setIconWidth(json.getInt("iconWidth")) else groupStylingBuilder.setIconWidth(dpToPixel(80))
 

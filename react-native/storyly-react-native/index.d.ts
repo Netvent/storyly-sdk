@@ -29,6 +29,7 @@ declare module "storyly-react-native" {
       storyGroupTextColorNotSeen?: string;
       storyGroupTextIsVisible?: boolean;
       storyGroupTextTypeface?: string;
+      storyGroupPinIconVisible?: boolean;
       storyGroupPinIconColor?: string;
 
       storyGroupListOrientation?: "horizontal" | "vertical";

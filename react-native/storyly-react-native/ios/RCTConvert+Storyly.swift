@@ -99,6 +99,7 @@ private func stStorylyGroupStyling(
                 .setTitleLineCount(count: json["titleLineCount"] as? Int ?? 2)
                 .setTitleFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: CGFloat(json["titleTextSize"] as? Int ?? 12)))
                 .setTitleVisibility(isVisible: json["titleVisible"] as? Bool ?? true)
+                .setPinIconVisibility(isVisible: json["pinIconVisible"] as? Bool ?? true)
                 .setCustomGroupViewFactory(factory: groupViewFactory)
                 .build()
         )
