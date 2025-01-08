@@ -1,5 +1,5 @@
 declare module "storyly-react-native" {
-  import { Component } from "react";
+  import { Component, JSX } from "react";
   import { ViewProps } from "react-native";
 
   export namespace Storyly {
@@ -16,6 +16,7 @@ declare module "storyly-react-native" {
       storyGroupAnimation?: "border-rotation" | "disabled";
       storyGroupIconWidth?: number;
       storyGroupIconHeight?: number;
+      storyGroupCustomIconSizeList?: StoryGroupCustomIconSize[];
       storyGroupIconCornerRadius?: number;
       storyGroupIconBackgroundColor?: string;
       storyGroupIconBorderColorSeen?: string[];
@@ -169,7 +170,7 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
-    };
+    }
 
     export interface Story {
       id: string;
@@ -208,6 +209,14 @@ declare module "storyly-react-native" {
       | "comment"
       | "video"
       | "vod";
+
+    export type StoryGroupCustomIconSizeType =
+      | "pinned";
+  
+    export interface StoryGroupCustomIconSize {
+      type: StoryGroupCustomIconSizeType;
+      size: number;
+    }
   }
 
   export interface StoryGroupStyle {
@@ -215,7 +224,7 @@ declare module "storyly-react-native" {
     textUnseenColor?: string,
     badge?: StoryGroupBadgeStyle,
   }
-  
+
   export interface StoryGroupBadgeStyle {
     backgroundColor?: string,
     textColor?: string,
@@ -223,7 +232,7 @@ declare module "storyly-react-native" {
     template?: string,
     text?: string,
   }
-  
+
 
   export interface StoryGroupViewFactory {
     width: number;
@@ -256,7 +265,7 @@ declare module "storyly-react-native" {
     url?: string;
     variants: STRProductVariant[];
     ctaText?: string;
-  } 
+  }
 
   export interface STRProductVariant {
     name: string;
@@ -269,7 +278,7 @@ declare module "storyly-react-native" {
     totalPrice: number;
     oldTotalPrice?: number;
     currency: string;
-  } 
+  }
 
   export interface STRCartItem {
     item: STRProductItem;

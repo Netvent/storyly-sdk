@@ -92,6 +92,7 @@ private func stStorylyGroupStyling(
             styling: groupStylingBuilder
                 .setIconHeight(height: json["iconHeight"] as? CGFloat ?? 80)
                 .setIconWidth(width: json["iconWidth"] as? CGFloat ?? 80)
+                .setCustomIconSizeList(customIconSizeList: getStoryGroupCustomIconSize(sizeList: json["customIconSizeList"] as? [NSDictionary]))
                 .setIconCornerRadius(radius: json["iconCornerRadius"] as? CGFloat ?? 40)
                 .setSize(size: getStoryGroupSize(groupSize: json["groupSize"] as? String))
                 .setIconBorderAnimation(animation: getStoryGroupAnimation(groupAnimation: json["iconBorderAnimation"] as? String))
@@ -199,6 +200,20 @@ private func stProductConfig(
         .setProductConfig(config: productConfigBuilder
             .build()
         )
+}
+
+private func getStoryGroupCustomIconSize(sizeList: [NSDictionary]) -> [StoryGroupCustomIconSize]? {
+    return sizeList?.compactMap { element in
+        guard let type = element["type"] as? String,
+              let size = element["size"] as? CGFloat else { return nil }
+              
+        let type: StoryGroupCustomIconSizeType
+        switch type {
+            case "pinned": type = .Pinned
+            default: return nil
+        }
+        StoryGroupCustomIconSize(type: type, size: size)
+    }
 }
 
 private func getStoryGroupSize(groupSize: String?) -> StoryGroupSize {
