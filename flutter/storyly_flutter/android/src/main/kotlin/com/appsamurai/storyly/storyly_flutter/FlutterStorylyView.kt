@@ -11,6 +11,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.appsamurai.storyly.Story
+import com.appsamurai.storyly.StoryButtonComponent
 import com.appsamurai.storyly.StoryCommentComponent
 import com.appsamurai.storyly.StoryComponent
 import com.appsamurai.storyly.StoryEmojiComponent
@@ -19,9 +20,13 @@ import com.appsamurai.storyly.StoryGroupAnimation
 import com.appsamurai.storyly.StoryGroupListOrientation
 import com.appsamurai.storyly.StoryGroupSize
 import com.appsamurai.storyly.StoryPollComponent
+import com.appsamurai.storyly.StoryProductCardComponent
+import com.appsamurai.storyly.StoryProductCatalogComponent
+import com.appsamurai.storyly.StoryProductTagComponent
 import com.appsamurai.storyly.StoryPromoCodeComponent
 import com.appsamurai.storyly.StoryQuizComponent
 import com.appsamurai.storyly.StoryRatingComponent
+import com.appsamurai.storyly.StorySwipeComponent
 import com.appsamurai.storyly.StorylyDataSource
 import com.appsamurai.storyly.StorylyInit
 import com.appsamurai.storyly.StorylyLayoutDirection
@@ -455,21 +460,74 @@ class FlutterStorylyView(
             "previewUrl" to story.previewUrl,
             "actionUrl" to story.actionUrl,
             "storyComponentList" to story.storyComponentList?.map { component -> createStoryComponentMap(component) },
-            "products" to (story.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
+            "actionProducts" to (story.actionProducts ?: listOf()).map { product -> createSTRProductItemMap(product) }
         )
     }
 
     private fun createStoryComponentMap(storyComponent: StoryComponent): Map<String, *> {
         when (storyComponent) {
+            is StoryButtonComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
+                    "text" to storyComponent.text,
+                    "actionUrl" to storyComponent.actionUrl,
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
+                )
+            }
+
+            is StorySwipeComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
+                    "text" to storyComponent.text,
+                    "actionUrl" to storyComponent.actionUrl,
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
+                )
+            }
+
+            is StoryProductTagComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
+                    "actionUrl" to storyComponent.actionUrl,
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
+                )
+            }
+
+            is StoryProductCardComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
+                    "text" to storyComponent.text,
+                    "actionUrl" to storyComponent.actionUrl,
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
+                )
+            }
+
+            is StoryProductCatalogComponent -> {
+                return mapOf(
+                    "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
+                    "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
+                    "actionUrlList" to (storyComponent.actionUrlList ?: listOf()),
+                    "products" to (storyComponent.products ?: listOf()).map { product -> createSTRProductItemMap(product) }
+                )
+            }
+
             is StoryQuizComponent -> {
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "rightAnswerIndex" to storyComponent.rightAnswerIndex,
                     "selectedOptionIndex" to storyComponent.selectedOptionIndex,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -477,10 +535,10 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "title" to storyComponent.title,
                     "options" to storyComponent.options,
                     "selectedOptionIndex" to storyComponent.selectedOptionIndex,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -488,9 +546,9 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "emojiCodes" to storyComponent.emojiCodes,
                     "selectedEmojiIndex" to storyComponent.selectedEmojiIndex,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -498,9 +556,9 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "emojiCode" to storyComponent.emojiCode,
                     "rating" to storyComponent.rating,
-                    "customPayload" to storyComponent.customPayload
                 )
             }
 
@@ -508,6 +566,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "text" to storyComponent.text
                 )
             }
@@ -516,6 +575,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                     "text" to storyComponent.text
                 )
             }
@@ -524,6 +584,7 @@ class FlutterStorylyView(
                 return mapOf(
                     "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                     "id" to storyComponent.id,
+                    "customPayload" to storyComponent.customPayload,
                 )
             }
         }
