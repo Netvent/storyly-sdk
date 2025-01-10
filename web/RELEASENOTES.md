@@ -1,5 +1,10 @@
 # Release Notes
 
+### 3.6.26 - 01.10.2025 [for cdn](https://web-story.storyly.io/sdk/3.6.26/storyly-web.js)
+
+- Improvement: If sales price and price the same, price is not showing
+- Bug: Fixed bar layout oveflow after using scroll indicator
+
 ### 3.6.24 - 17.10.2024 [for cdn](https://web-story.storyly.io/sdk/3.6.24/storyly-web.js)
 
 - Bug: Fixed cta, swipe up and sponsored text colors on dark mode
