@@ -1,6 +1,6 @@
 # Release Notes
 
-### 3.6.27 - 12.01.2025 [for cdn](https://web-story.storyly.io/sdk/3.6.26/storyly-web.js)
+### 3.6.27 - 12.01.2025 [for cdn](https://web-story.storyly.io/sdk/3.6.27/storyly-web.js)
 
 - Improvement: Added localization support for "Total" and "Go to checkout" texts
 
