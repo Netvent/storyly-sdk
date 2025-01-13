@@ -345,16 +345,16 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         return STStoryGroupViewFactory(context, width, height)
     }
 
-    fun getStoryGroupCustomIconSize(sizeList: ReadableArray?): List<StoryGroupCustomIconSize>? {
+    private fun getStoryGroupCustomIconSize(sizeList: ReadableArray?): List<StoryGroupCustomIconSize> {
         return sizeList?.toArrayList()?.mapNotNull { element ->
             val map = (element as? Map<*, *>) ?: return@mapNotNull null
             val type = when (map["type"] as? String) {
-                "pinned" -> StoryGroupSize.Small
+                "pinned" -> StoryGroupCustomIconType.Pinned
                 else -> null
             } ?: return@mapNotNull null
             val size = (map["size"] as? Number)?.toInt() ?: return@mapNotNull null
             StoryGroupCustomIconSize(type, size)
-        }
+        } ?: emptyList()
     }
 
     private fun getStoryGroupSize(size: String?): StoryGroupSize {
