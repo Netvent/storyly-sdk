@@ -231,9 +231,15 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         json.getArray("iconBorderColorSeen")?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorSeen(convertColorArray(it)) }
         json.getArray("iconBorderColorNotSeen")?.let { groupStylingBuilder = groupStylingBuilder.setIconBorderColorNotSeen(convertColorArray(it)) }
         if (json.hasKey("iconBackgroundColor")) groupStylingBuilder = groupStylingBuilder.setIconBackgroundColor(json.getInt("iconBackgroundColor"))
+
+        if (json.hasKey("pinIconVisible")) groupStylingBuilder = groupStylingBuilder.setPinIconVisibility(json.getBoolean("pinIconVisible"))
         if (json.hasKey("pinIconColor")) groupStylingBuilder = groupStylingBuilder.setPinIconColor(json.getInt("pinIconColor"))
+
         groupStylingBuilder = if (json.hasKey("iconHeight")) groupStylingBuilder.setIconHeight(json.getInt("iconHeight")) else groupStylingBuilder.setIconHeight(dpToPixel(80))
         groupStylingBuilder = if (json.hasKey("iconWidth")) groupStylingBuilder.setIconWidth(json.getInt("iconWidth")) else groupStylingBuilder.setIconWidth(dpToPixel(80))
+
+        json.getArray("customIconSizeList")?.let { groupStylingBuilder =  groupStylingBuilder.setCustomIconSizeList(getStoryGroupCustomIconSize(it)) }
+
         groupStylingBuilder = if (json.hasKey("iconCornerRadius")) groupStylingBuilder.setIconCornerRadius(json.getInt("iconCornerRadius")) else groupStylingBuilder.setIconCornerRadius(dpToPixel(40))
         groupStylingBuilder = groupStylingBuilder.setIconBorderAnimation(getStoryGroupAnimation(json.getString("iconBorderAnimation")))
         if (json.hasKey("titleSeenColor")) groupStylingBuilder = groupStylingBuilder.setTitleSeenColor(json.getInt("titleSeenColor"))
@@ -337,6 +343,18 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         val height = if (json.hasKey("height")) json.getInt("height") else return null
         if (width <= 0 || height <= 0) return null
         return STStoryGroupViewFactory(context, width, height)
+    }
+
+    private fun getStoryGroupCustomIconSize(sizeList: ReadableArray?): List<StoryGroupCustomIconSize> {
+        return sizeList?.toArrayList()?.mapNotNull { element ->
+            val map = (element as? Map<*, *>) ?: return@mapNotNull null
+            val type = when (map["type"] as? String) {
+                "pinned" -> StoryGroupCustomIconType.Pinned
+                else -> null
+            } ?: return@mapNotNull null
+            val size = (map["size"] as? Number)?.toInt() ?: return@mapNotNull null
+            StoryGroupCustomIconSize(type, size)
+        } ?: emptyList()
     }
 
     private fun getStoryGroupSize(size: String?): StoryGroupSize {
