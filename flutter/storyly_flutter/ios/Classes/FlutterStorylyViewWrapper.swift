@@ -428,7 +428,7 @@ extension FlutterStorylyViewWrapper {
             "previewUrl": story.previewUrl?.absoluteString,
             "actionUrl": story.actionUrl,
             "storyComponentList": story.storyComponentList?.map { createStoryComponentMap(storyComponent:$0) },
-            "products": (story.products ?? []).map { createSTRProductItemMap(product: $0) }
+            "actionProducts": (story.actionProducts ?? []).map { createSTRProductItemMap(product: $0) }
         ]
     }
     
@@ -529,52 +529,104 @@ extension FlutterStorylyViewWrapper {
     
     private func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
         switch storyComponent {
+            case let buttonActionComponent as StoryButtonComponent:
+                return [
+                    "type": "buttonaction",
+                    "id": buttonActionComponent.id,
+                    "customPayload": buttonActionComponent.customPayload,
+                    "text": buttonActionComponent.text,
+                    "actionUrl": buttonActionComponent.actionUrl,
+                    "products": (buttonActionComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let swipeButtonActionComponent as StorySwipeComponent:
+                return [
+                    "type": "swipeaction",
+                    "id": swipeButtonActionComponent.id,
+                    "customPayload": swipeButtonActionComponent.customPayload,
+                    "text": swipeButtonActionComponent.text,
+                    "actionUrl": swipeButtonActionComponent.actionUrl,
+                    "products": (swipeButtonActionComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let productTagComponent as StoryProductTagComponent:
+                return [
+                    "type": "producttag",
+                    "id": productTagComponent.id,
+                    "customPayload": productTagComponent.customPayload,
+                    "actionUrl": productTagComponent.actionUrl,
+                    "products": (productTagComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let productCardComponent as StoryProductCardComponent:
+                return [
+                    "type": "productcard",
+                    "id": productCardComponent.id,
+                    "customPayload": productCardComponent.customPayload,
+                    "text": productCardComponent.text,
+                    "actionUrl": productCardComponent.actionUrl,
+                    "products": (productCardComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
+            case let productCatalogComponent as StoryProductCatalogComponent:
+                return [
+                    "type": "productcatalog",
+                    "id": productCatalogComponent.id,
+                    "customPayload": productCatalogComponent.customPayload,
+                    "actionUrlList": productCatalogComponent.actionUrlList ?? [],
+                    "products": (productCatalogComponent.products ?? []).compactMap { self.createSTRProductItemMap(product: $0) }
+                ]
             case let quizComponent as StoryQuizComponent:
                 return [
                     "type": "quiz",
                     "id": quizComponent.id,
+                    "customPayload": quizComponent.customPayload,
                     "title": quizComponent.title,
                     "options": quizComponent.options,
                     "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
                     "selectedOptionIndex": quizComponent.selectedOptionIndex,
-                    "customPayload": quizComponent.customPayload]
+                ]
             case let pollComponent as StoryPollComponent:
                 return [
                     "type": "poll",
                     "id": pollComponent.id,
+                    "customPayload": pollComponent.customPayload,
                     "title": pollComponent.title,
                     "options": pollComponent.options,
                     "selectedOptionIndex": pollComponent.selectedOptionIndex,
-                    "customPayload": pollComponent.customPayload
                 ]
             case let emojiComponent as StoryEmojiComponent:
                 return [
                     "type": "emoji",
                     "id": emojiComponent.id,
+                    "customPayload": emojiComponent.customPayload,
                     "emojiCodes": emojiComponent.emojiCodes,
                     "selectedEmojiIndex": emojiComponent.selectedEmojiIndex,
-                    "customPayload": emojiComponent.customPayload]
+                ]
             case let ratingComponent as StoryRatingComponent:
                 return [
                     "type": "rating",
                     "id": ratingComponent.id,
+                    "customPayload": ratingComponent.customPayload,
                     "emojiCode": ratingComponent.emojiCode,
                     "rating": ratingComponent.rating,
-                    "customPayload": ratingComponent.customPayload]
+                ]
             case let promoCodeComponent as StoryPromoCodeComponent:
                 return [
                     "type": "promocode",
                     "id": promoCodeComponent.id,
-                    "text": promoCodeComponent.text]
+                    "customPayload": promoCodeComponent.customPayload,
+                    "text": promoCodeComponent.text
+                ]
             case let commentComponent as StoryCommentComponent:
                 return [
                     "type": "comment",
                     "id": commentComponent.id,
-                    "text": commentComponent.text]
+                    "customPayload": commentComponent.customPayload,
+                    "text": commentComponent.text
+                ]
             default:
                 return [
                     "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
-                    "id": storyComponent.id]
+                    "id": storyComponent.id,
+                    "customPayload": storyComponent.customPayload,
+                ]
                 
         }
     }

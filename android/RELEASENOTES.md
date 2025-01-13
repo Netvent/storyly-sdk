@@ -1,4 +1,11 @@
 # Release Notes
+### 4.7.0 (10.01.2024)
+* refactor layout of share bottom sheet 
+* added config for pin icon visibility
+* added dynamic cover size option for pinned story groups
+* fixed a bug related to edge padding settings for vertical feed view 
+* fixed a bug related to openStory method while opening the conditional stories
+  
 ### 4.6.0 (13.12.2024)
 * added local data cache invalidation on minor and major sdk version change
   
