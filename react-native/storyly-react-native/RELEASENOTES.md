@@ -1,5 +1,12 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.7.0 (13.01.2025)
+* added vertical feed
+* added config for pin icon visibility
+* added dynamic cover size option for pinned story groups
+* added config for app logo visibility for shared media
+* improved areas for next/previous clicks
+
 ### 3.11.0 (13.12.2024)
 * added local data cache invalidation on minor and major sdk version change
   
