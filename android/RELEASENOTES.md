@@ -55,6 +55,9 @@
 ### 4.0.0 (17.10.2024)
 * added vertical feed
 
+### 3.12.0 (13.01.2025)
+* fixed a bug related to openStory method while opening the conditional stories
+
 ### 3.11.0 (13.12.2024)
 * added local data cache invalidation on minor and major sdk version change
 
