@@ -1,5 +1,5 @@
 # Release Notes
-### 4.7.0 (10.01.2024)
+### 4.7.0 (10.01.2025)
 * refactor layout of share bottom sheet 
 * added config for pin icon visibility
 * added dynamic cover size option for pinned story groups
