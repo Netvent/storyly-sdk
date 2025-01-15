@@ -87,11 +87,15 @@ private func stStorylyGroupStyling(
     if let titleNotSeenColorJson = json["titleNotSeenColor"] as? NSNumber {
         groupStylingBuilder = groupStylingBuilder.setTitleNotSeenColor(color: RCTConvert.uiColor(titleNotSeenColorJson))
     }
+    if let pinIconVisible = json["pinIconVisible"] as? Bool {
+        groupStylingBuilder = groupStylingBuilder.setPinIconVisibility(isVisible: pinIconVisible)
+    }
     return configBuilder
         .setStoryGroupStyling(
             styling: groupStylingBuilder
                 .setIconHeight(height: json["iconHeight"] as? CGFloat ?? 80)
                 .setIconWidth(width: json["iconWidth"] as? CGFloat ?? 80)
+                .setCustomIconSizeList(customIconSizeList: getStoryGroupCustomIconSize(list: json["customIconSizeList"] as? [NSDictionary]) ?? [])
                 .setIconCornerRadius(radius: json["iconCornerRadius"] as? CGFloat ?? 40)
                 .setSize(size: getStoryGroupSize(groupSize: json["groupSize"] as? String))
                 .setIconBorderAnimation(animation: getStoryGroupAnimation(groupAnimation: json["iconBorderAnimation"] as? String))
@@ -199,6 +203,19 @@ private func stProductConfig(
         .setProductConfig(config: productConfigBuilder
             .build()
         )
+}
+
+private func getStoryGroupCustomIconSize(list: [NSDictionary]?) -> [StoryGroupCustomIconSize] {
+    return list?.compactMap { (element: NSDictionary) in
+        guard let typeRaw = element["type"] as? String,
+              let size = element["size"] as? CGFloat else { return nil }
+        let type: StoryGroupCustomIconType
+        switch typeRaw {
+            case "pinned": type = .Pinned
+            default: return nil
+        }
+        return StoryGroupCustomIconSize(type: type, size: size)
+    } ?? []
 }
 
 private func getStoryGroupSize(groupSize: String?) -> StoryGroupSize {
