@@ -1,5 +1,11 @@
 # Release Notes
 
+### 4.0.3 - 16.01.2025 [for cdn](https://web-story.storyly.io/sdk/4.0.0/storyly-web.js)
+
+- Fix: Shoppable Bottom sheet does not open bug
+- Fix: Custom styling pin icon bug
+- Improvement: Story title field passing to storyViewed callback
+
 ### 4.0.0 - 15.01.2025 [for cdn](https://web-story.storyly.io/sdk/4.0.0/storyly-web.js)
 
 - Feature: Video Feed
