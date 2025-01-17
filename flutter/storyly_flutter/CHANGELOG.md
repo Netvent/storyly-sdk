@@ -1,3 +1,6 @@
+### 3.12.1 (17.01.2025)
+* fixed a bug related to openStory for sg play mode
+
 ### 3.12.0 (13.01.2025)
 * fixed a bug related to openStory method while opening the conditional stories
 
