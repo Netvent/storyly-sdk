@@ -1,4 +1,10 @@
 # Release Notes
+### 4.8.0 (17.01.2025)
+* improved story rendering while transitioning between stories
+* improved skeleton view rendering flow
+* fixed areas for next/previous clicks for RTL layouts
+* fixed a bug related to openStory for sg play mode
+
 ### 4.7.0 (10.01.2025)
 * refactor layout of share bottom sheet 
 * added config for pin icon visibility
