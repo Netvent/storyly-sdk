@@ -1,5 +1,12 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.8.0 (17.01.2025)
+* IMPORTANT! fixed crash related to widget style on android platform
+* improved story rendering while transitioning between stories
+* improved skeleton view rendering flow
+* fixed areas for next/previous clicks for RTL layouts
+* fixed a bug related to openStory for sg play mode
+
 ### 4.7.0 (13.01.2025)
 * added vertical feed
 * added config for pin icon visibility
