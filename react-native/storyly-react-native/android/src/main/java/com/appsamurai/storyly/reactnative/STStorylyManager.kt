@@ -93,7 +93,8 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             EVENT_ON_UPDATE_CUSTOM_VIEW,
             EVENT_STORYLY_ON_HYDRATION,
             EVENT_STORYLY_ON_CART_UPDATED,
-            EVENT_STORYLY_PRODUCT_EVENT
+            EVENT_STORYLY_PRODUCT_EVENT,
+            EVENT_STORYLY_SIZE_CHANGED,
         ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
         }
