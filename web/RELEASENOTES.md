@@ -1,6 +1,6 @@
 # Release Notes
 
-### 4.1 - 20.01.2025 [for cdn](https://web-story.storyly.io/sdk/4.1.0/storyly-web.js)
+### 4.1.0 - 20.01.2025 [for cdn](https://web-story.storyly.io/sdk/4.1.0/storyly-web.js)
 
 - Feature: Tap&Go
 - Fix: The blinking issue during resize, caused by the simultaneous use of the bar layout and scroll indicator fixed
