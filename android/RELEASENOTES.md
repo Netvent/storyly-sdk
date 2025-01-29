@@ -1,4 +1,10 @@
 # Release Notes
+### 4.9.0 (29.01.2025)
+* added support for tap and go groups
+* improved failure recovery for analytic requests
+* improved interactive component initial animations for prefetched stories  
+* fixed resizing of CTA button of product bottom sheet
+
 ### 4.8.0 (17.01.2025)
 * improved story rendering while transitioning between stories
 * improved skeleton view rendering flow
