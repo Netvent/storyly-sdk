@@ -1,5 +1,11 @@
 # Release Notes
 
+### 4.1 - 20.01.2025 [for cdn](https://web-story.storyly.io/sdk/4.1.0/storyly-web.js)
+
+- Feature: Tap&Go
+- Fix: The blinking issue during resize, caused by the simultaneous use of the bar layout and scroll indicator fixed
+- Fix: The bug causing cover videos to appear full screen on some iPhone devices fixed
+
 ### 4.0.4 - 20.01.2025 [for cdn](https://web-story.storyly.io/sdk/4.0.4/storyly-web.js)
 
 - Fix: Accessibility activation bug fixed
