@@ -1,8 +1,4 @@
 ﻿<Properties StartupConfiguration="{2B1129E0-A65F-40EF-BFD5-15094F232AC5}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.demo AndroidDesignerPreferredDevice="Nexus 4" AndroidDesignerPreferredTheme="AppTheme" />
   <MonoDevelop.Ide.Workbench ActiveDocument="xamarin.storyly.demo/MainActivity.cs">
     <Files>
       <File FileName="xamarin.storyly.demo/MainActivity.cs" Line="13" Column="1" />
@@ -13,14 +9,14 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="xamarin.storyly.binding" expanded="True">
-            <Node name="xamarin.storyly.demo" expanded="True">
-              <Node name="Resources" expanded="True">
+          <Node name="xamarin.storyly.binding">
+            <Node name="xamarin.storyly.binding" selected="True" />
+            <Node name="xamarin.storyly.demo">
+              <Node name="Resources">
                 <Node name="layout" expanded="True" />
               </Node>
-              <Node name="MainActivity.cs" selected="True" />
             </Node>
-            <Node name="xamarin.storyly.exoplayer.binding" expanded="True">
+            <Node name="xamarin.storyly.exoplayer.binding">
               <Node name="References" expanded="True" />
               <Node name="Jars" expanded="True" />
               <Node name="Transforms" expanded="True" />
@@ -30,8 +26,12 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.binding PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.demo AndroidDesignerPreferredTheme="AppTheme" AndroidDesignerPreferredDevice="Nexus 4" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.xamarin.storyly.binding PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

@@ -9,7 +9,7 @@
     <RootNamespace>Storyly</RootNamespace>
     <AssemblyName>Storyly.MAUI</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ReleaseVersion>2.18.1</ReleaseVersion>
+    <ReleaseVersion>2.18.3</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
     <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
