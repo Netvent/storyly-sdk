@@ -7,6 +7,8 @@
 * improved story rendering while transitioning between stories
 * improved skeleton view rendering flow
 * fixed areas for next/previous clicks for RTL layouts
+
+### 4.7.1 (04.02.2025)
 * fixed a bug related to openStory for sg play mode
 
 ### 4.7.0 (10.01.2025)
