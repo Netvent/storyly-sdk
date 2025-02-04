@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.7.1 (04.02.2025)
+* fixed a bug related to openStory for sg play mode
+
 ### 4.7.0 (13.01.2025)
 * added vertical feed
 * added config for pin icon visibility
