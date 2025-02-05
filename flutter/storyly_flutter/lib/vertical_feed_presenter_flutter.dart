@@ -11,20 +11,20 @@ import 'vertical_feed_data.dart';
 
 
 
-/// Vertical Feed Bar UI Widget
-class VerticalFeedBar extends StatefulWidget {
-  /// This callback function allows you to access `VerticalFeedController`
+/// Vertical Feed Presenter UI Widget
+class VerticalFeedPresenter extends StatefulWidget {
+  /// This callback function allows you to access `VerticalFeedPresenterController`
   ///
   /// ```dart
   /// VerticalFeedBar(
   ///   onVerticalFeedCreated: onVerticalFeedCreated,
   /// )
   ///
-  /// void onVerticalFeedCreated(VerticalFeedController verticalFeedController) {
+  /// void onVerticalFeedCreated(VerticalFeedPresenterController verticalFeedController) {
   ///   this.verticalFeedController = verticalFeedController;
   /// }
   /// ```
-  final VerticalFeedCreatedCallback? onVerticalFeedCreated;
+  final VerticalFeedPresenterCreatedCallback? onVerticalFeedCreated;
 
   /// Android specific [VerticalFeedParam]
   final VerticalFeedParam? androidParam;
@@ -72,7 +72,7 @@ class VerticalFeedBar extends StatefulWidget {
   /// This callback function will notify you about updates the cart in a VerticalFeedBar component
   final VerticalFeedOnProductCartUpdatedCallback? verticalFeedOnProductCartUpdated;
 
-  const VerticalFeedBar(
+  const VerticalFeedPresenter(
       {Key? key,
       this.onVerticalFeedCreated,
       this.androidParam,
@@ -91,13 +91,13 @@ class VerticalFeedBar extends StatefulWidget {
     }) : super(key: key);
 
   @override
-  State<VerticalFeedBar> createState() => _VerticalFeedBarState();
+  State<VerticalFeedPresenter> createState() => _VerticalFeedPresenterState();
 }
 
-class _VerticalFeedBarState extends State<VerticalFeedBar> {
+class _VerticalFeedPresenterState extends State<VerticalFeedPresenter> {
   @override
   Widget build(BuildContext context) {
-    const viewType = 'FlutterVerticalFeedBar';
+    const viewType = 'FlutterVerticalFeedPresenter';
 
     if (defaultTargetPlatform == TargetPlatform.android) {
       return PlatformViewLink(
@@ -150,12 +150,12 @@ class _VerticalFeedBarState extends State<VerticalFeedBar> {
 
   void _onPlatformViewCreated(int _id) {
     final methodChannel = MethodChannel(
-      'com.appsamurai.storyly/flutter_vertical_feed_$_id',
+      'com.appsamurai.storyly/flutter_vertical_feed_presenter_$_id',
     );
     methodChannel.setMethodCallHandler(_handleMethod);
 
     widget.onVerticalFeedCreated
-        ?.call(VerticalFeedController(_id, methodChannel));
+        ?.call(VerticalFeedPresenterController(_id, methodChannel));
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {

@@ -10,6 +10,13 @@ typedef VerticalFeedCreatedCallback = void Function(
   VerticalFeedController controller,
 );
 
+
+/// [VerticalFeed] created callback
+typedef VerticalFeedPresenterCreatedCallback = void Function(
+  VerticalFeedPresenterController controller,
+);
+
+
 /// [VerticalFeed] loaded callback
 typedef VerticalFeedLoadedCallback = void Function(
   List<VerticalFeedGroup> feedGroupList,
@@ -114,6 +121,73 @@ class VerticalFeedController {
         'uri': uri,
       },
     );
+  }
+
+  /// This function allows you to hydrate products.
+  Future<void> hydrateProducts(List<STRProductItem> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateProducts',
+      <String, dynamic>{
+        'products': products.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
+  /// This function allows you to update your cart.
+  Future<void> updateCart(Map cart) {
+    return _methodChannel.invokeMethod(
+      'updateCart',
+      <String, dynamic>{
+        'items': cart['items'],
+        'totalPrice': cart['totalPrice'],
+        'oldTotalPrice': cart['oldTotalPrice'],
+        'currency': cart['currency'],
+      },
+    );
+  }
+
+  Future<void> approveCartChange(
+      String responseId, Map<String, dynamic>? cart) {
+    return _methodChannel.invokeMethod(
+      'approveCartChange',
+      <String, dynamic>{'responseId': responseId, 'cart': cart},
+    );
+  }
+
+  Future<void> rejectCartChange(String responseId, String failMessage) {
+    return _methodChannel.invokeMethod(
+      'rejectCartChange',
+      <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
+    );
+  }
+}
+
+
+class VerticalFeedPresenterController {
+  final MethodChannel _methodChannel;
+  final int _viewId;
+
+  VerticalFeedPresenterController(this._viewId, this._methodChannel);
+
+  // This function allows to get `VerticalFeed` viewId
+  int getViewId() {
+    return _viewId;
+  }
+
+  /// This function allows you to refetch the data from network
+  /// by default you do not need to use this function.
+  Future<void> refresh() {
+    return _methodChannel.invokeMethod('refresh');
+  }
+
+  /// This function allows you to pause the presenter
+  Future<void> pause() {
+    return _methodChannel.invokeMethod('pause');
+  }
+
+  /// This function allows you to play the presenter
+  Future<void> play() {
+    return _methodChannel.invokeMethod('play');
   }
 
   /// This function allows you to hydrate products.

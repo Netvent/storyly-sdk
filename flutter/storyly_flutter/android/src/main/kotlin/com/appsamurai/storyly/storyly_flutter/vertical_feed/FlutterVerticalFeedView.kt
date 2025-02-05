@@ -1,4 +1,4 @@
-package com.appsamurai.storyly.storyly_flutter
+package com.appsamurai.storyly.storyly_flutter.vertical_feed
 
 import android.content.Context
 import android.net.Uri
@@ -10,7 +10,12 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
-import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedBarView
+import com.appsamurai.storyly.storyly_flutter.createSTRCart
+import com.appsamurai.storyly.storyly_flutter.createSTRCartItemMap
+import com.appsamurai.storyly.storyly_flutter.createSTRCartMap
+import com.appsamurai.storyly.storyly_flutter.createSTRProductInformationMap
+import com.appsamurai.storyly.storyly_flutter.createSTRProductItem
+import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
 import com.appsamurai.storyly.verticalfeed.VerticalFeedGroup
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItem
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponent
@@ -24,14 +29,13 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import java.util.UUID
 
-
-class FlutterVerticalFeedBarViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+class FlutterVerticalFeedViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     internal lateinit var context: Context
 
-    override fun create(context: Context?, viewId: Int, args: Any?): PlatformView = FlutterVerticalFeedBarView(this.context, messenger, viewId, args as HashMap<String, Any>)
+    override fun create(context: Context?, viewId: Int, args: Any?): PlatformView = FlutterVerticalFeedView(this.context, messenger, viewId, args as HashMap<String, Any>)
 }
 
-class FlutterVerticalFeedBarView(
+class FlutterVerticalFeedView(
     private val context: Context,
     messenger: BinaryMessenger,
     viewId: Int,
@@ -40,7 +44,7 @@ class FlutterVerticalFeedBarView(
 
     private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
 
-    private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_vertical_feed_bar_$viewId").apply {
+    private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_vertical_feed_$viewId").apply {
         setMethodCallHandler { call, _ ->
             val callArguments = call.arguments as? Map<String, *>
             when (call.method) {
@@ -84,8 +88,8 @@ class FlutterVerticalFeedBarView(
         }
     }
 
-    private val verticalFeedView: StorylyVerticalFeedBarView by lazy {
-        StorylyVerticalFeedBarView(context).apply {
+    private val verticalFeedView: StorylyVerticalFeedView by lazy {
+        StorylyVerticalFeedView(context).apply {
             storylyVerticalFeedInit = VerticalFeedInitMapper(context).getStorylyInit(json = args) ?: return@apply
 
             storylyVerticalFeedProductListener = object : StorylyVerticalFeedProductListener {

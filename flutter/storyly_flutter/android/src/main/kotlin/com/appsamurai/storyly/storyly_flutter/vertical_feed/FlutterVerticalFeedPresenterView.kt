@@ -1,7 +1,7 @@
-package com.appsamurai.storyly.storyly_flutter
+package com.appsamurai.storyly.storyly_flutter.vertical_feed
+
 
 import android.content.Context
-import android.net.Uri
 import android.view.View
 import com.appsamurai.storyly.StorylyDataSource
 import com.appsamurai.storyly.StorylyListener
@@ -10,13 +10,17 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
-import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
+import com.appsamurai.storyly.storyly_flutter.createSTRCart
+import com.appsamurai.storyly.storyly_flutter.createSTRCartItemMap
+import com.appsamurai.storyly.storyly_flutter.createSTRCartMap
+import com.appsamurai.storyly.storyly_flutter.createSTRProductInformationMap
+import com.appsamurai.storyly.storyly_flutter.createSTRProductItem
+import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedPresenterView
 import com.appsamurai.storyly.verticalfeed.VerticalFeedGroup
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItem
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponent
-import com.appsamurai.storyly.verticalfeed.core.STRVerticalFeedView
-import com.appsamurai.storyly.verticalfeed.listener.StorylyVerticalFeedListener
-import com.appsamurai.storyly.verticalfeed.listener.StorylyVerticalFeedProductListener
+import com.appsamurai.storyly.verticalfeed.listener.StorylyVerticalFeedPresenterListener
+import com.appsamurai.storyly.verticalfeed.listener.StorylyVerticalFeedPresenterProductListener
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.StandardMessageCodec
@@ -24,13 +28,14 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import java.util.UUID
 
-class FlutterVerticalFeedViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+
+class FlutterVerticalFeedPresenterViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     internal lateinit var context: Context
 
-    override fun create(context: Context?, viewId: Int, args: Any?): PlatformView = FlutterVerticalFeedView(this.context, messenger, viewId, args as HashMap<String, Any>)
+    override fun create(context: Context?, viewId: Int, args: Any?): PlatformView = FlutterVerticalFeedPresenterView(this.context, messenger, viewId, args as HashMap<String, Any>)
 }
 
-class FlutterVerticalFeedView(
+class FlutterVerticalFeedPresenterView(
     private val context: Context,
     messenger: BinaryMessenger,
     viewId: Int,
@@ -39,20 +44,13 @@ class FlutterVerticalFeedView(
 
     private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
 
-    private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_vertical_feed_$viewId").apply {
+    private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_vertical_feed_presenter_$viewId").apply {
         setMethodCallHandler { call, _ ->
             val callArguments = call.arguments as? Map<String, *>
             when (call.method) {
                 "refresh" -> verticalFeedView.refresh()
-                "resumeStory" -> verticalFeedView.resumeStory()
-                "pauseStory" -> verticalFeedView.pauseStory()
-                "closeStory" -> verticalFeedView.closeStory()
-                "openStory" -> verticalFeedView.openStory(
-                    callArguments?.get("storyGroupId") as? String ?: "",
-                    callArguments?.getOrElse("storyId") { null } as? String
-                )
-
-                "openStoryUri" -> verticalFeedView.openStory(Uri.parse(callArguments?.get("uri") as? String))
+                "pause" -> verticalFeedView.pause()
+                "play" -> verticalFeedView.play()
                 "hydrateProducts" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
                     val products = it.map { product -> createSTRProductItem(product) }
                     verticalFeedView.hydrateProducts(products)
@@ -83,13 +81,13 @@ class FlutterVerticalFeedView(
         }
     }
 
-    private val verticalFeedView: StorylyVerticalFeedView by lazy {
-        StorylyVerticalFeedView(context).apply {
+    private val verticalFeedView: StorylyVerticalFeedPresenterView by lazy {
+        StorylyVerticalFeedPresenterView(context).apply {
             storylyVerticalFeedInit = VerticalFeedInitMapper(context).getStorylyInit(json = args) ?: return@apply
 
-            storylyVerticalFeedProductListener = object : StorylyVerticalFeedProductListener {
+            storylyVerticalFeedProductListener = object : StorylyVerticalFeedPresenterProductListener {
                 override fun verticalFeedEvent(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     event: VerticalFeedEvent
                 ) {
                     methodChannel.invokeMethod(
@@ -101,7 +99,7 @@ class FlutterVerticalFeedView(
                 }
 
                 override fun verticalFeedHydration(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     products: List<STRProductInformation>
                 ) {
                     methodChannel.invokeMethod(
@@ -113,7 +111,7 @@ class FlutterVerticalFeedView(
                 }
 
                 override fun verticalFeedUpdateCartEvent(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     event: VerticalFeedEvent,
                     cart: STRCart?,
                     change: STRCartItem?,
@@ -135,10 +133,10 @@ class FlutterVerticalFeedView(
                 }
             }
 
-            storylyVerticalFeedListener = object : StorylyVerticalFeedListener {
+            storylyVerticalFeedListener = object : StorylyVerticalFeedPresenterListener {
 
                 override fun verticalFeedLoaded(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     feedGroupList: List<VerticalFeedGroup>,
                     dataSource: StorylyDataSource
                 ) {
@@ -152,14 +150,14 @@ class FlutterVerticalFeedView(
                 }
 
                 override fun verticalFeedLoadFailed(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     errorMessage: String
                 ) {
                     methodChannel.invokeMethod("verticalFeedLoadFailed", errorMessage)
                 }
 
                 override fun verticalFeedEvent(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     event: VerticalFeedEvent,
                     feedGroup: VerticalFeedGroup?,
                     feedItem: VerticalFeedItem?,
@@ -174,23 +172,23 @@ class FlutterVerticalFeedView(
                     )
                 }
 
-                override fun verticalFeedShown(view: STRVerticalFeedView) {
+                override fun verticalFeedShown(view: StorylyVerticalFeedPresenterView) {
                     methodChannel.invokeMethod("verticalFeedShown", null)
                 }
 
                 override fun verticalFeedShowFailed(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     errorMessage: String
                 ) {
                     methodChannel.invokeMethod("verticalFeedShowFailed", errorMessage)
                 }
 
-                override fun verticalFeedDismissed(view: STRVerticalFeedView) {
+                override fun verticalFeedDismissed(view: StorylyVerticalFeedPresenterView) {
                     methodChannel.invokeMethod("verticalFeedDismissed", null)
                 }
 
                 override fun verticalFeedActionClicked(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     feedItem: VerticalFeedItem
                 ) {
                     methodChannel.invokeMethod(
@@ -200,7 +198,7 @@ class FlutterVerticalFeedView(
                 }
 
                 override fun verticalFeedUserInteracted(
-                    view: STRVerticalFeedView,
+                    view: StorylyVerticalFeedPresenterView,
                     feedGroup: VerticalFeedGroup,
                     feedItem: VerticalFeedItem,
                     feedItemComponent: VerticalFeedItemComponent

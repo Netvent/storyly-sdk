@@ -1,4 +1,4 @@
-package com.appsamurai.storyly.storyly_flutter
+package com.appsamurai.storyly.storyly_flutter.vertical_feed
 
 import android.content.Context
 import android.graphics.Color
@@ -6,6 +6,11 @@ import android.util.TypedValue
 import com.appsamurai.storyly.StorylyLayoutDirection
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
+import com.appsamurai.storyly.storyly_flutter.createSTRProductItem
+import com.appsamurai.storyly.storyly_flutter.createSTRProductItemMap
+import com.appsamurai.storyly.storyly_flutter.getDrawable
+import com.appsamurai.storyly.storyly_flutter.getTypeface
+import com.appsamurai.storyly.storyly_flutter.getTypefaceOrNull
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
 import com.appsamurai.storyly.verticalfeed.VerticalFeedGroup
