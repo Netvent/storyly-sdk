@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.1.2 - 04.02.2025 [for cdn](https://web-story.storyly.io/sdk/4.1.2/storyly-web.js)
+
+- Fix: Complete event for Desktop view bug fixed
+
 ### 4.1.1 - 04.02.2025 [for cdn](https://web-story.storyly.io/sdk/4.1.1/storyly-web.js)
 
 - Fix: Mobile view rendering bug fixed
