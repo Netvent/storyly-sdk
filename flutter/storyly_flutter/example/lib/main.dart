@@ -162,9 +162,14 @@ class VerticalFeedPage extends StatefulWidget {
 
 class _VerticalFeedPageState extends State<VerticalFeedPage> {
   late VerticalFeedController verticalFeedController;
+  late VerticalFeedController verticalFeedBarController;
 
   void onVerticalFeedCreated(VerticalFeedController verticalFeedController) {
     this.verticalFeedController = verticalFeedController;
+  }
+
+  void onVerticalFeedBarCreated(VerticalFeedController verticalFeedController) {
+    verticalFeedBarController = verticalFeedController;
   }
 
   @override
@@ -178,14 +183,14 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
               height: 220,
               color: Colors.cyan,
               child: VerticalFeedBar(
-                onVerticalFeedCreated: onVerticalFeedCreated,
+                onVerticalFeedCreated: onVerticalFeedBarCreated,
                 androidParam: VerticalFeedParam()
                   ..storylyId = STORYLY_TOKEN
                   ..verticalFeedGroupListSections = 1
                   ..verticalFeedGroupIconHeight = (devicePixelRatio * 200).toInt(),
                 iosParam: VerticalFeedParam()..storylyId = STORYLY_TOKEN,
-                verticalFeedLoaded: (storyGroups, dataSource) {
-                  debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
+                verticalFeedLoaded: (feedGroupList, dataSource) {
+                  debugPrint("VerticalFeedBar: verticalFeedLoaded -> storyGroups: ${feedGroupList.length} - $dataSource");
                 },
               ),
             ),
@@ -201,8 +206,8 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                 iosParam: VerticalFeedParam()
                   ..storylyId = STORYLY_TOKEN
                   ..verticalFeedGroupListSections = 2,
-                verticalFeedLoaded: (storyGroups, dataSource) {
-                  debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
+                verticalFeedLoaded: (feedGroupList, dataSource) {
+                  debugPrint("VerticalFeed: verticalFeedLoaded -> storyGroups: ${feedGroupList.length} - $dataSource");
                 },
               ),
             ),
@@ -270,8 +275,8 @@ class _VerticalFeedPresenterPageState extends State<VerticalFeedPresenterPage> {
           onVerticalFeedCreated: onVerticalFeedPresenterCreated,
           androidParam: VerticalFeedParam()..storylyId = STORYLY_TOKEN,
           iosParam: VerticalFeedParam()..storylyId = STORYLY_TOKEN,
-          verticalFeedLoaded: (storyGroups, dataSource) {
-            debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
+          verticalFeedLoaded: (feedGroupList, dataSource) {
+            debugPrint("VerticalFeedPresenter: verticalFeedLoaded -> storyGroups: ${feedGroupList.length}");
           },
         ),
       ),
