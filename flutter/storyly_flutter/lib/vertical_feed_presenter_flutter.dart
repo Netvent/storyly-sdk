@@ -163,7 +163,7 @@ class _VerticalFeedPresenterState extends State<VerticalFeedPresenter> {
       case 'verticalFeedLoaded':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
         widget.verticalFeedLoaded?.call(
-          verticalFeedGroupFromJson(jsonData['feedGroup']),
+          verticalFeedGroupFromJson(jsonData['feedGroupList']),
           jsonData['dataSource'],
         );
         break;

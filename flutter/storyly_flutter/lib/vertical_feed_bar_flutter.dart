@@ -150,7 +150,7 @@ class _VerticalFeedBarState extends State<VerticalFeedBar> {
 
   void _onPlatformViewCreated(int _id) {
     final methodChannel = MethodChannel(
-      'com.appsamurai.storyly/flutter_vertical_feed_$_id',
+      'com.appsamurai.storyly/flutter_vertical_feed_bar_$_id',
     );
     methodChannel.setMethodCallHandler(_handleMethod);
 
@@ -163,7 +163,7 @@ class _VerticalFeedBarState extends State<VerticalFeedBar> {
       case 'verticalFeedLoaded':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
         widget.verticalFeedLoaded?.call(
-          verticalFeedGroupFromJson(jsonData['feedGroup']),
+          verticalFeedGroupFromJson(jsonData['feedGroupList']),
           jsonData['dataSource'],
         );
         break;
