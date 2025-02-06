@@ -394,6 +394,7 @@ internal fun createSTRProductItemMap(product: STRProductItem?): Map<String, *> {
         "salesPrice" to product.salesPrice?.toDouble(),
         "currency" to product.currency,
         "imageUrls" to product.imageUrls,
+        "ctaText" to product.ctaText,
         "variants" to product.variants.map {
             createSTRProductVariantMap(it)
         }

@@ -248,6 +248,7 @@ internal func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?
         "salesPrice" : product.salesPrice,
         "currency" : product.currency,
         "imageUrls" : product.imageUrls,
+        "ctaText" to product.ctaText,
         "variants" : product.variants?.compactMap { createSTRProductVariantMap(variant: $0) }
     ]
 }
