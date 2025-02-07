@@ -201,7 +201,7 @@ internal class VerticalFeedInitMapper {
     }
 }
 
-internal func createStoryGroupMap(storyGroup: VerticalFeedGroup?) -> [String: Any]? {
+internal func createStoryGroupMap(storyGroup: VerticalFeedGroup?) -> [String: Any?]? {
     guard let storyGroup = storyGroup else { return nil }
     return [
         "id": storyGroup.uniqueId,
@@ -217,7 +217,7 @@ internal func createStoryGroupMap(storyGroup: VerticalFeedGroup?) -> [String: An
     ]
 }
 
-internal func createStoryMap(story: VerticalFeedItem?) -> [String: Any]? {
+internal func createStoryMap(story: VerticalFeedItem?) -> [String: Any?]? {
     guard let story = story else { return nil }
     return [
         "id": story.uniqueId,
@@ -233,7 +233,7 @@ internal func createStoryMap(story: VerticalFeedItem?) -> [String: Any]? {
     ]
 }
 
-internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?) -> [String: Any]? {
+internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?) -> [String: Any?]? {
     guard let storyComponent = storyComponent else { return nil }
     switch storyComponent {
     case let buttonComponent as VerticalFeedButtonComponent:
@@ -243,7 +243,7 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
             "customPayload": buttonComponent.customPayload,
             "text": buttonComponent.text,
             "actionUrl": buttonComponent.actionUrl,
-            "products": (buttonComponent.products ?? []).map { product in createSTRProductItemMap(product: product) }
+            "products": (buttonComponent.products ?? []).compactMap { createSTRProductItemMap(product: $0) }
         ]
     case let swipeComponent as VerticalFeedSwipeComponent:
         return [
@@ -252,7 +252,7 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
             "customPayload": swipeComponent.customPayload,
             "text": swipeComponent.text,
             "actionUrl": swipeComponent.actionUrl,
-            "products": (swipeComponent.products ?? []).map { product in createSTRProductItemMap(product: product) }
+            "products": (swipeComponent.products ?? []).compactMap { createSTRProductItemMap(product: $0) }
         ]
     case let productTagComponent as VerticalFeedProductTagComponent:
         return [
@@ -260,7 +260,7 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
             "id": productTagComponent.id,
             "customPayload": productTagComponent.customPayload,
             "actionUrl": productTagComponent.actionUrl,
-            "products": (productTagComponent.products ?? []).map { product in createSTRProductItemMap(product: product) }
+            "products": (productTagComponent.products ?? []).compactMap { createSTRProductItemMap(product: $0) }
         ]
     case let productCardComponent as VerticalFeedProductCardComponent:
         return [
@@ -269,15 +269,15 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
             "customPayload": productCardComponent.customPayload,
             "text": productCardComponent.text,
             "actionUrl": productCardComponent.actionUrl,
-            "products": (productCardComponent.products ?? []).map { product in createSTRProductItemMap(product: product) }
+            "products": (productCardComponent.products ?? []).compactMap { createSTRProductItemMap(product: $0) }
         ]
     case let productCatalogComponent as VerticalFeedProductCatalogComponent:
         return [
             "type": "productcatalog",
             "id": productCatalogComponent.id,
             "customPayload": productCatalogComponent.customPayload,
-            "actionUrlList": (productCatalogComponent.actionUrlList ?? []),
-            "products": (productCatalogComponent.products ?? []).map { product in createSTRProductItemMap(product: product) }
+            "actionUrlList": productCatalogComponent.actionUrlList ?? [],
+            "products": (productCatalogComponent.products ?? []).compactMap { createSTRProductItemMap(product: $0) }
         ]
     case let quizComponent as VerticalFeedQuizComponent:
         return [
@@ -286,8 +286,8 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
             "customPayload": quizComponent.customPayload,
             "title": quizComponent.title,
             "options": quizComponent.options,
-            "rightAnswerIndex": quizComponent.rightAnswerIndex,
-            "selectedOptionIndex": quizComponent.selectedOptionIndex
+            "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
+            "selectedOptionIndex": quizComponent.selectedOptionIndex,
         ]
     case let pollComponent as VerticalFeedPollComponent:
         return [
@@ -332,7 +332,8 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
         return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType: storyComponent.type).lowercased(),
             "id": storyComponent.id,
-            "customPayload": storyComponent.customPayload
+            "customPayload": storyComponent.customPayload,
         ]
+        
     }
 }

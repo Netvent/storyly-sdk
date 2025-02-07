@@ -275,8 +275,6 @@ class VerticalFeedParam {
 
   /** List Config */
 
-  /// This attribute changes orientation value of story group list
-  String? verticalFeedGroupListOrientation;
 
   /// This attribute changes based on orientation horizontal orientation row count
   /// or vertical orientation column count of vertical feed group list
@@ -351,7 +349,6 @@ class VerticalFeedParam {
   /// header text.
   bool? verticalFeedItemTitleIsVisible;
 
-
   /// This attribute allows you to changes the visibility of vertical feed
   /// header close button.
   bool? verticalFeedItemCloseButtonIsVisible;
@@ -359,7 +356,6 @@ class VerticalFeedParam {
   /// This attribute allows you to use custom icon for
   /// header close button.
   String? verticalFeedItemCloseIcon;
-
 
   /// This attribute allows you to changes the visibility of vertical feed
   /// share button.
