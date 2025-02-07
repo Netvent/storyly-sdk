@@ -49,7 +49,7 @@ class VerticalFeed extends StatefulWidget {
 
   /// This callback function will let you know that user dismissed the current
   /// story while watching it.
-  final VoidCallback? verticalFeedStoryDismissed;
+  final VoidCallback? verticalFeedDismissed;
 
   /// This callback function will notify your application in case of Swipe Up
   /// or CTA Button action.
@@ -82,7 +82,7 @@ class VerticalFeed extends StatefulWidget {
       this.verticalFeedActionClicked,
       this.verticalFeedShown,
       this.verticalFeedShowFailed,
-      this.verticalFeedStoryDismissed,
+      this.verticalFeedDismissed,
       this.verticalFeedEvent,
       this.verticalFeedOnProductHydration,
       this.verticalFeedProductEvent,
@@ -176,8 +176,8 @@ class _VerticalFeedState extends State<VerticalFeed> {
       case 'verticalFeedShowFailed':
         widget.verticalFeedShowFailed?.call(call.arguments);
         break;
-      case 'verticalFeedStoryDismissed':
-        widget.verticalFeedStoryDismissed?.call();
+      case 'verticalFeedDismissed':
+        widget.verticalFeedDismissed?.call();
         break;
       case 'verticalFeedActionClicked':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
