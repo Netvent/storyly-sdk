@@ -145,7 +145,7 @@ extension FlutterVerticalFeedViewWrapper: StorylyVerticalFeedProductDelegate {
     ) {
         
         methodChannel.invokeMethod(
-            "verticalFeedEvent",
+            "verticalFeedProductEvent",
             arguments: ["event": event.stringValue]
         )
     }
@@ -155,7 +155,7 @@ extension FlutterVerticalFeedViewWrapper: StorylyVerticalFeedProductDelegate {
         products: [STRProductInformation]
     ) {
         methodChannel.invokeMethod(
-            "verticalFeedOnHydration",
+            "verticalFeedOnProductHydration",
             arguments: [
                 "products": products.map { createSTRProductInformationMap(productInfo: $0) }
             ]

@@ -98,7 +98,7 @@ class FlutterVerticalFeedView(
                     event: VerticalFeedEvent
                 ) {
                     methodChannel.invokeMethod(
-                        "verticalFeedEvent",
+                        "verticalFeedProductEvent",
                         mapOf(
                             "event" to event.name,
                         )
@@ -110,7 +110,7 @@ class FlutterVerticalFeedView(
                     products: List<STRProductInformation>
                 ) {
                     methodChannel.invokeMethod(
-                        "verticalFeedOnHydration",
+                        "verticalFeedOnProductHydration",
                         mapOf(
                             "products" to products.map { createSTRProductInformationMap(it) }
                         )
