@@ -4,6 +4,7 @@
 //
 //  Created by Haldun Melih Fadillioglu on 25.10.2022.
 //
+@_spi(InternalFramework) 
 import Storyly
 
 @objc(StorylyBundle)
@@ -40,11 +41,13 @@ extension RCTConvert {
         storylyConfigBuilder = stShareConfig(json: storyShareConfig, configBuilder: &storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json: storyProductConfig, configBuilder: &storylyConfigBuilder)
 
+        let storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework(framework: "rn")
+
         let storylyView = StorylyView()
         storylyView.storylyInit = StorylyInit(
             storylyId: storylyId,
-            config: storylyConfigBuilder
-                .build()
+            config: storylyConfig
         )
         return StorylyBundle(storylyView: storylyView, storyGroupViewFactory: storyGroupViewFactory)
     }

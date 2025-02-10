@@ -180,12 +180,14 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
         storylyConfigBuilder = stVerticalFeedCustomization(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
+        
+        val storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework("rn")
 
         view.verticalFeedView = StorylyVerticalFeedPresenterView(view.activity).apply {
             storylyVerticalFeedInit = StorylyVerticalFeedInit(
                 storylyId = storylyId,
-                config = storylyConfigBuilder
-                    .build()
+                config = storylyConfig
             )
         }
     }

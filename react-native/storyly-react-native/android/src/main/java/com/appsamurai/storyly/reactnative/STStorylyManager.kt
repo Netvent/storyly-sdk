@@ -198,12 +198,14 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         storylyConfigBuilder = stStoryStyling(context = view.context, json = storyStylingJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
+        
+        val storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework("rn")
 
         view.storylyView = StorylyView(view.activity).apply {
             storylyInit = StorylyInit(
                 storylyId = storylyId,
-                config = storylyConfigBuilder
-                    .build()
+                config = storylyConfig
             )
         }
         view.storyGroupViewFactory = storyGroupViewFactory
