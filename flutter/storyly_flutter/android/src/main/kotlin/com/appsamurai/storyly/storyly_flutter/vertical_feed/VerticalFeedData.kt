@@ -57,11 +57,12 @@ internal class VerticalFeedInitMapper(
         storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
 
+        val storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework("flutter")
 
         return StorylyVerticalFeedInit(
             storylyId = storylyId,
-            config = storylyConfigBuilder
-                .build()
+            config = storylyConfig
         )
     }
 

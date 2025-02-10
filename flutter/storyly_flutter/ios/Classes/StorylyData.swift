@@ -1,7 +1,6 @@
+@_spi(InternalFramework) 
 import Storyly
 import UIKit
-
-
 
 internal class StorylyInitMapper {
     
@@ -24,10 +23,12 @@ internal class StorylyInitMapper {
         storylyConfigBuilder = stShareConfig(json: shareConfigJson, configBuilder: &storylyConfigBuilder )
         storylyConfigBuilder = stProductConfig(json: productConfigJson, configBuilder: &storylyConfigBuilder )
         
+        let storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework(framework: "flutter")
+
         return StorylyInit(
             storylyId: storylyId,
-            config: storylyConfigBuilder
-                .build()
+            config: storylyConfig
         )
     }
     
