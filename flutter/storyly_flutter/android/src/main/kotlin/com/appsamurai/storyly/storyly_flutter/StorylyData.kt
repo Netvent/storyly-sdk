@@ -58,11 +58,12 @@ internal class StorylyInitMapper(
         storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
 
+        val storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework("flutter")
 
         return StorylyInit(
             storylyId = storylyId,
-            config = storylyConfigBuilder
-                .build()
+            config = storylyConfig
         )
     }
 
