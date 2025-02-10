@@ -451,6 +451,9 @@ class _VerticalFeedPresenterPageState extends State<VerticalFeedPresenterPage> {
               (event, feedGroup, feedItem, verticalFeedItemComponent) {
             debugPrint(
                 "VerticalFeedPresenter: verticalFeedEvent: $event: ${feedGroup?.id}: ${feedItem?.id}: ${verticalFeedItemComponent?.type}");
+                if (event == "VerticalFeedGroupClosed") {
+                  Navigator.pop(context);
+                }
           },
           verticalFeedActionClicked: (feedItem) {
             debugPrint(
