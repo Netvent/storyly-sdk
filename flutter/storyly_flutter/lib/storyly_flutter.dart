@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+import 'storyly_util.dart';
+
 /// [StorylyView] created callback
 typedef StorylyViewCreatedCallback = void Function(
   StorylyViewController controller,
@@ -59,8 +61,6 @@ typedef StorylyViewSizeChanged = void Function(
   double width,
   double height,
 );
-
-T? castOrNull<T>(x) => x is T ? x : null;
 
 /// Storyly UI Widget
 class StorylyView extends StatefulWidget {
@@ -1412,11 +1412,5 @@ class ProductInformation {
   factory ProductInformation.fromJson(Map<String, dynamic> json) {
     return ProductInformation(
         productId: json['productId'], productGroupId: json['productGroupId']);
-  }
-}
-
-extension StorylyHexColor on Color {
-  String toHexString() {
-    return '#${value.toRadixString(16).padLeft(8, '0')}';
   }
 }
