@@ -194,11 +194,13 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
 
+        val storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework("rn")
+        
         view.verticalFeedBarView = StorylyVerticalFeedBarView(view.activity).apply {
             storylyVerticalFeedInit = StorylyVerticalFeedInit(
                 storylyId = storylyId,
-                config = storylyConfigBuilder
-                    .build()
+                config = storylyConfig
             )
         }
     }
