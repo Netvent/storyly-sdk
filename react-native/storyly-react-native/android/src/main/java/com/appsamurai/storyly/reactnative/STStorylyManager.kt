@@ -1,5 +1,6 @@
 package com.appsamurai.storyly.reactnative
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -200,7 +201,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
         
         val storylyConfig = storylyConfigBuilder.build()
-        storylyConfig.setFramework("rn")
+        stFrameworkSet(storylyConfig)
 
         view.storylyView = StorylyView(view.activity).apply {
             storylyInit = StorylyInit(
@@ -209,6 +210,11 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             )
         }
         view.storyGroupViewFactory = storyGroupViewFactory
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun stFrameworkSet(config: StorylyConfig) {
+        config.setFramework("rn")
     }
 
     private fun stStorylyInit(

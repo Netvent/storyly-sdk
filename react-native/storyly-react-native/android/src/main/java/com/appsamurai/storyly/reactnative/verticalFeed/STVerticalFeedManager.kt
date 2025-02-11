@@ -1,5 +1,6 @@
 package com.appsamurai.storyly.reactnative.verticalFeed
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -195,7 +196,7 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
 
         val storylyConfig = storylyConfigBuilder.build()
-        storylyConfig.setFramework("rn")
+        stFrameworkSet(storylyConfig)
 
         view.verticalFeedView = StorylyVerticalFeedView(view.activity).apply {
             storylyVerticalFeedInit = StorylyVerticalFeedInit(
@@ -203,6 +204,11 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
                 config = storylyConfig
             )
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun stFrameworkSet(config: StorylyVerticalFeedConfig) {
+        config.setFramework("rn")
     }
 
     private fun stVerticalFeedInit(
