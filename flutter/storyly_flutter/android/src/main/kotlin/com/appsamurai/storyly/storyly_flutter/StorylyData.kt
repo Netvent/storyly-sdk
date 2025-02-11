@@ -1,5 +1,6 @@
 package com.appsamurai.storyly.storyly_flutter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.TypedValue
@@ -59,12 +60,17 @@ internal class StorylyInitMapper(
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
 
         val storylyConfig = storylyConfigBuilder.build()
-        storylyConfig.setFramework("flutter")
+        stFrameworkSet(storylyConfig)
 
         return StorylyInit(
             storylyId = storylyId,
             config = storylyConfig
         )
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun stFrameworkSet(config: StorylyConfig) {
+        config.setFramework("flutter")
     }
 
     private fun stStorylyInit(
