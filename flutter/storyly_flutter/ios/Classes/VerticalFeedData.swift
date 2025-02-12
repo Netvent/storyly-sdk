@@ -1,6 +1,6 @@
-import UIKit
+@_spi(InternalFramework) 
 import Storyly
-
+import UIKit
 
 internal class VerticalFeedInitMapper {
 
@@ -24,9 +24,12 @@ internal class VerticalFeedInitMapper {
         storylyConfigBuilder = stShareConfig(json: storyShareConfigJson, configBuilder: storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json: storyProductConfigJson, configBuilder: storylyConfigBuilder)
 
+        let storylyConfig = storylyConfigBuilder.build()
+        storylyConfig.setFramework(framework: "flutter")
+
         return StorylyVerticalFeedInit(
             storylyId: storylyId,
-            config: storylyConfigBuilder.build()
+            config: storylyConfig
         )
     }
 

@@ -1,9 +1,11 @@
 package com.appsamurai.storyly.storyly_flutter.vertical_feed
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.TypedValue
 import com.appsamurai.storyly.StorylyLayoutDirection
+import com.appsamurai.storyly.config.StorylyConfig
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.storyly_flutter.createSTRProductItem
@@ -57,12 +59,18 @@ internal class VerticalFeedInitMapper(
         storylyConfigBuilder = stShareConfig(json = storyShareConfigJson, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfigJson, configBuilder = storylyConfigBuilder)
 
+        val storylyConfig = storylyConfigBuilder.build()
+        stFrameworkSet(storylyConfig)
 
         return StorylyVerticalFeedInit(
             storylyId = storylyId,
-            config = storylyConfigBuilder
-                .build()
+            config = storylyConfig
         )
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun stFrameworkSet(config: StorylyVerticalFeedConfig) {
+        config.setFramework("flutter")
     }
 
     private fun stStorylyInit(
