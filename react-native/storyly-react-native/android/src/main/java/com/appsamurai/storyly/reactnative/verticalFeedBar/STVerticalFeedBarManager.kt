@@ -1,5 +1,6 @@
 package com.appsamurai.storyly.reactnative.verticalFeedBar
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -194,13 +195,20 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
         storylyConfigBuilder = stShareConfig(json = storyShareConfig, configBuilder = storylyConfigBuilder)
         storylyConfigBuilder = stProductConfig(json = storyProductConfig, configBuilder = storylyConfigBuilder)
 
+        val storylyConfig = storylyConfigBuilder.build()
+        stFrameworkSet(storylyConfig)
+        
         view.verticalFeedBarView = StorylyVerticalFeedBarView(view.activity).apply {
             storylyVerticalFeedInit = StorylyVerticalFeedInit(
                 storylyId = storylyId,
-                config = storylyConfigBuilder
-                    .build()
+                config = storylyConfig
             )
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun stFrameworkSet(config: StorylyVerticalFeedConfig) {
+        config.setFramework("rn")
     }
 
     private fun stVerticalFeedInit(
