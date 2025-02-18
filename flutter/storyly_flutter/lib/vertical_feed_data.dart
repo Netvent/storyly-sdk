@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -10,12 +9,10 @@ typedef VerticalFeedCreatedCallback = void Function(
   VerticalFeedController controller,
 );
 
-
 /// [VerticalFeed] created callback
 typedef VerticalFeedPresenterCreatedCallback = void Function(
   VerticalFeedPresenterController controller,
 );
-
 
 /// [VerticalFeed] loaded callback
 typedef VerticalFeedLoadedCallback = void Function(
@@ -59,9 +56,7 @@ typedef VerticalFeedOnProductHydrationCallback = void Function(
 );
 
 /// [VerticalFeed]  on product event callback
-typedef VerticalFeedProductEventCallback = void Function(
-  String event
-  );
+typedef VerticalFeedProductEventCallback = void Function(String event);
 
 /// [VerticalFeed]  on product cart callback
 typedef VerticalFeedOnProductCartUpdatedCallback = void Function(
@@ -70,7 +65,6 @@ typedef VerticalFeedOnProductCartUpdatedCallback = void Function(
   STRCartItem? change,
   String responseId,
 );
-
 
 class VerticalFeedController {
   final MethodChannel _methodChannel;
@@ -162,7 +156,6 @@ class VerticalFeedController {
   }
 }
 
-
 class VerticalFeedPresenterController {
   final MethodChannel _methodChannel;
   final int _viewId;
@@ -229,7 +222,6 @@ class VerticalFeedPresenterController {
   }
 }
 
-
 /// This class is used to customize the [VerticalFeed]
 class VerticalFeedParam {
   /// This attribute required for your app's correct initialization.
@@ -263,7 +255,6 @@ class VerticalFeedParam {
   /// the storyly view. Sample convention is en-GB
   String? storylyLocale;
 
-
   /** Share Config */
 
   /// This attibute allows you to change share URL of stories.
@@ -272,9 +263,7 @@ class VerticalFeedParam {
   /// This attibute allows you to set Facebook app id to be used in Instagram share to storiess.
   String? storylyFacebookAppID;
 
-
   /** List Config */
-
 
   /// This attribute changes based on orientation horizontal orientation row count
   /// or vertical orientation column count of vertical feed group list
@@ -293,7 +282,6 @@ class VerticalFeedParam {
 
   /// This attribute changes vertical padding value between vertical feed groups
   int? verticalFeedGroupListVerticalPaddingBetweenItems;
-
 
   /** Group Styling */
 
@@ -328,7 +316,7 @@ class VerticalFeedParam {
   bool? verticalFeedTypeIndicatorIsVisible;
 
   /// This attribute allows you to change the order of the vertical feed group.
-  String?  verticalFeedGroupOrder;
+  String? verticalFeedGroupOrder;
 
   /// This attribute allows you to set minimum like count to show like icon
   int? verticalFeedGroupMinLikeCountToShowIcon;
@@ -341,7 +329,6 @@ class VerticalFeedParam {
 
   /// This attribute allows you to set minimum like count to show like icon.
   String? verticalFeedGroupLikeIcon;
-
 
   /** Story Styling */
 
@@ -389,7 +376,6 @@ class VerticalFeedParam {
   /// vertical feed view.
   String? verticalFeedInteractiveTextTypeface;
 
-
   /** Product Config */
 
   /// This attribute allows you to enable hydration from feed data from backend
@@ -401,31 +387,32 @@ class VerticalFeedParam {
   /// This attribute allows you to set product feed
   Map<String, List<STRProductItem>>? storyProductFeed;
 
-
   Map<String, dynamic> toMap() {
     final paramsMap = <String, dynamic>{};
-  
+
     paramsMap['storylyInit'] = {
-        'storylyId': storylyId,
-        'storylySegments': storylySegments,
-        'userProperty': storylyUserProperty,
-        'customParameter': storylyCustomParameters,
-        'storylyIsTestMode': storylyTestMode, 
-        'storylyLayoutDirection': storylyLayoutDirection,
-        'storylyLocale': storylyLocale,
+      'storylyId': storylyId,
+      'storylySegments': storylySegments,
+      'userProperty': storylyUserProperty,
+      'customParameter': storylyCustomParameters,
+      'storylyIsTestMode': storylyTestMode,
+      'storylyLayoutDirection': storylyLayoutDirection,
+      'storylyLocale': storylyLocale,
     };
     paramsMap['verticalFeedGroupStyling'] = {
-      'iconBackgroundColor': verticalFeedGroupIconBackgroundColor?.toHexString(),
+      'iconBackgroundColor':
+          verticalFeedGroupIconBackgroundColor?.toHexString(),
       'iconCornerRadius': verticalFeedGroupIconCornerRadius,
-      'iconHeight': verticalFeedGroupIconHeight, 
-      'textColor': verticalFeedGroupTextColor?.toHexString(), 
-      'titleFont': verticalFeedGroupTextTypeface, 
-      'titleTextSize': verticalFeedGroupTextSize,  
-      'titleVisible': verticalFeedGroupTextIsVisible, 
+      'iconHeight': verticalFeedGroupIconHeight,
+      'textColor': verticalFeedGroupTextColor?.toHexString(),
+      'titleFont': verticalFeedGroupTextTypeface,
+      'titleTextSize': verticalFeedGroupTextSize,
+      'titleVisible': verticalFeedGroupTextIsVisible,
       'groupOrder': verticalFeedGroupOrder,
       'typeIndicatorVisible': verticalFeedTypeIndicatorIsVisible,
       'minLikeCountToShowIcon': verticalFeedGroupMinLikeCountToShowIcon,
-      'minImpressionCountToShowIcon': verticalFeedGroupMinImpressionCountToShowIcon,
+      'minImpressionCountToShowIcon':
+          verticalFeedGroupMinImpressionCountToShowIcon,
       'impressionIcon': verticalFeedGroupImpressionIcon,
       'likeIcon': verticalFeedGroupLikeIcon,
     };
@@ -433,10 +420,12 @@ class VerticalFeedParam {
       'sections': verticalFeedGroupListSections,
       'horizontalEdgePadding': verticalFeedGroupListHorizontalEdgePadding,
       'verticalEdgePadding': verticalFeedGroupListVerticalEdgePadding,
-      'horizontalPaddingBetweenItems': verticalFeedGroupListHorizontalPaddingBetweenItems,
-      'verticalPaddingBetweenItems': verticalFeedGroupListVerticalPaddingBetweenItems,
+      'horizontalPaddingBetweenItems':
+          verticalFeedGroupListHorizontalPaddingBetweenItems,
+      'verticalPaddingBetweenItems':
+          verticalFeedGroupListVerticalPaddingBetweenItems,
     };
-    paramsMap['verticalFeedCustomization'] = { 
+    paramsMap['verticalFeedCustomization'] = {
       'titleFont': verticalFeedItemTextTypeface,
       'interactiveFont': verticalFeedInteractiveTextTypeface,
       'progressBarColor': verticalFeedItemProgressBarColor
@@ -455,7 +444,7 @@ class VerticalFeedParam {
       'storylyShareUrl': storylyShareUrl,
       'storylyFacebookAppID': storylyFacebookAppID,
     };
-    paramsMap['verticalFeedItemProductConfig'] = { 
+    paramsMap['verticalFeedItemProductConfig'] = {
       'isFallbackEnabled': isProductFallbackEnabled,
       'isCartEnabled': isProductCartEnabled,
       'productFeed': storyProductFeed?.map(
@@ -465,9 +454,8 @@ class VerticalFeedParam {
   }
 }
 
-
-
-VerticalFeedItemComponent? getVerticalFeedItemComponent(Map<String, dynamic>? json) {
+VerticalFeedItemComponent? getVerticalFeedItemComponent(
+    Map<String, dynamic>? json) {
   if (json == null) return null;
 
   switch (json['type']) {
@@ -512,7 +500,8 @@ class VerticalFeedItemComponent {
   VerticalFeedItemComponent(this.type, this.id, this.customPayload);
 
   factory VerticalFeedItemComponent.fromJson(Map<String, dynamic> json) {
-    return VerticalFeedItemComponent(json['type'], json['id'], json['customPayload']);
+    return VerticalFeedItemComponent(
+        json['type'], json['id'], json['customPayload']);
   }
 }
 
@@ -696,7 +685,8 @@ class VerticalFeedItemPromocodeComponent implements VerticalFeedItemComponent {
   /// copied value from user in Promocode component
   final String text;
 
-  factory VerticalFeedItemPromocodeComponent.fromJson(Map<String, dynamic> json) {
+  factory VerticalFeedItemPromocodeComponent.fromJson(
+      Map<String, dynamic> json) {
     return VerticalFeedItemPromocodeComponent(
       type: json['type'],
       id: json['id'],
@@ -738,7 +728,8 @@ class VerticalFeedItemCommentComponent implements VerticalFeedItemComponent {
 }
 
 /// This data class represents the ButtonAction component.
-class VerticalFeedItemButtonActionComponent implements VerticalFeedItemComponent {
+class VerticalFeedItemButtonActionComponent
+    implements VerticalFeedItemComponent {
   VerticalFeedItemButtonActionComponent({
     required this.type,
     required this.id,
@@ -766,7 +757,8 @@ class VerticalFeedItemButtonActionComponent implements VerticalFeedItemComponent
   /// products products assigned to the interactive component
   final List<STRProductItem>? products;
 
-  factory VerticalFeedItemButtonActionComponent.fromJson(Map<String, dynamic> json) {
+  factory VerticalFeedItemButtonActionComponent.fromJson(
+      Map<String, dynamic> json) {
     return VerticalFeedItemButtonActionComponent(
       type: json['type'],
       id: json['id'],
@@ -780,7 +772,8 @@ class VerticalFeedItemButtonActionComponent implements VerticalFeedItemComponent
 }
 
 /// This data class represents the SwipeAction component.
-class VerticalFeedItemSwipeActionComponent implements VerticalFeedItemComponent {
+class VerticalFeedItemSwipeActionComponent
+    implements VerticalFeedItemComponent {
   VerticalFeedItemSwipeActionComponent({
     required this.type,
     required this.id,
@@ -808,7 +801,8 @@ class VerticalFeedItemSwipeActionComponent implements VerticalFeedItemComponent 
   /// products products assigned to the interactive component
   final List<STRProductItem>? products;
 
-  factory VerticalFeedItemSwipeActionComponent.fromJson(Map<String, dynamic> json) {
+  factory VerticalFeedItemSwipeActionComponent.fromJson(
+      Map<String, dynamic> json) {
     return VerticalFeedItemSwipeActionComponent(
       type: json['type'],
       id: json['id'],
@@ -846,7 +840,8 @@ class VerticalFeedItemProductTagComponent implements VerticalFeedItemComponent {
   /// products products assigned to the interactive component
   final List<STRProductItem>? products;
 
-  factory VerticalFeedItemProductTagComponent.fromJson(Map<String, dynamic> json) {
+  factory VerticalFeedItemProductTagComponent.fromJson(
+      Map<String, dynamic> json) {
     return VerticalFeedItemProductTagComponent(
       type: json['type'],
       id: json['id'],
@@ -859,7 +854,8 @@ class VerticalFeedItemProductTagComponent implements VerticalFeedItemComponent {
 }
 
 /// This data class represents the ProductCatalog component.
-class VerticalFeedItemProductCardComponent implements VerticalFeedItemComponent {
+class VerticalFeedItemProductCardComponent
+    implements VerticalFeedItemComponent {
   VerticalFeedItemProductCardComponent({
     required this.type,
     required this.id,
@@ -887,7 +883,8 @@ class VerticalFeedItemProductCardComponent implements VerticalFeedItemComponent 
   /// products products assigned to the interactive component
   final List<STRProductItem>? products;
 
-  factory VerticalFeedItemProductCardComponent.fromJson(Map<String, dynamic> json) {
+  factory VerticalFeedItemProductCardComponent.fromJson(
+      Map<String, dynamic> json) {
     return VerticalFeedItemProductCardComponent(
       type: json['type'],
       id: json['id'],
@@ -901,7 +898,8 @@ class VerticalFeedItemProductCardComponent implements VerticalFeedItemComponent 
 }
 
 /// This data class represents the ProductCatalog component.
-class VerticalFeedItemProductCatalogComponent implements VerticalFeedItemComponent {
+class VerticalFeedItemProductCatalogComponent
+    implements VerticalFeedItemComponent {
   VerticalFeedItemProductCatalogComponent({
     required this.type,
     required this.id,
@@ -925,7 +923,8 @@ class VerticalFeedItemProductCatalogComponent implements VerticalFeedItemCompone
   /// products products assigned to the interactive component
   final List<STRProductItem>? products;
 
-  factory VerticalFeedItemProductCatalogComponent.fromJson(Map<String, dynamic> json) {
+  factory VerticalFeedItemProductCatalogComponent.fromJson(
+      Map<String, dynamic> json) {
     return VerticalFeedItemProductCatalogComponent(
       type: json['type'],
       id: json['id'],
@@ -939,7 +938,8 @@ class VerticalFeedItemProductCatalogComponent implements VerticalFeedItemCompone
 }
 
 List<VerticalFeedGroup> verticalFeedGroupFromJson(List<dynamic> json) {
-  return List<VerticalFeedGroup>.from(json.map((x) => VerticalFeedGroup.fromJson(x)));
+  return List<VerticalFeedGroup>.from(
+      json.map((x) => VerticalFeedGroup.fromJson(x)));
 }
 
 /// This data class represents a story group in the VerticalFeed.
@@ -989,7 +989,8 @@ class VerticalFeedGroup {
       title: json['title'],
       index: json['index'],
       iconUrl: json['iconUrl'],
-      feedList: List<VerticalFeedItem>.from(json['feedList'].map((x) => VerticalFeedItem.fromJson(x))),
+      feedList: List<VerticalFeedItem>.from(
+          json['feedList'].map((x) => VerticalFeedItem.fromJson(x))),
       id: json['id'],
       pinned: json['pinned'],
       type: json['type'],
@@ -1051,9 +1052,11 @@ class VerticalFeedItem {
       currentTime: json['currentTime'],
       previewUrl: json['previewUrl'],
       actionUrl: json['actionUrl'],
-      verticalFeedItemComponentList: castOrNull(json['verticalFeedItemComponentList']
-          ?.map<VerticalFeedItemComponent?>((e) => getVerticalFeedItemComponent(e))
-          .toList()),
+      verticalFeedItemComponentList: castOrNull(
+          json['verticalFeedItemComponentList']
+              ?.map<VerticalFeedItemComponent?>(
+                  (e) => getVerticalFeedItemComponent(e))
+              .toList()),
       actionProducts: List<STRProductItem>.from(
           json['actionProducts'].map((x) => STRProductItem.fromJson(x))),
     );

@@ -9,8 +9,6 @@ import 'package:flutter/services.dart';
 import 'storyly_flutter.dart';
 import 'vertical_feed_data.dart';
 
-
-
 /// Vertical Feed Presenter UI Widget
 class VerticalFeedPresenter extends StatefulWidget {
   /// This callback function allows you to access `VerticalFeedPresenterController`
@@ -70,25 +68,26 @@ class VerticalFeedPresenter extends StatefulWidget {
   final VerticalFeedProductEventCallback? verticalFeedProductEvent;
 
   /// This callback function will notify you about updates the cart in a VerticalFeedBar component
-  final VerticalFeedOnProductCartUpdatedCallback? verticalFeedOnProductCartUpdated;
+  final VerticalFeedOnProductCartUpdatedCallback?
+      verticalFeedOnProductCartUpdated;
 
-  const VerticalFeedPresenter(
-      {Key? key,
-      this.onVerticalFeedCreated,
-      this.androidParam,
-      this.iosParam,
-      this.verticalFeedLoaded,
-      this.verticalFeedLoadFailed,
-      this.verticalFeedActionClicked,
-      this.verticalFeedShown,
-      this.verticalFeedShowFailed,
-      this.verticalFeedDismissed,
-      this.verticalFeedEvent,
-      this.verticalFeedOnProductHydration,
-      this.verticalFeedProductEvent,
-      this.verticalFeedOnProductCartUpdated,
-      this.verticalFeedUserInteracted,
-    }) : super(key: key);
+  const VerticalFeedPresenter({
+    Key? key,
+    this.onVerticalFeedCreated,
+    this.androidParam,
+    this.iosParam,
+    this.verticalFeedLoaded,
+    this.verticalFeedLoadFailed,
+    this.verticalFeedActionClicked,
+    this.verticalFeedShown,
+    this.verticalFeedShowFailed,
+    this.verticalFeedDismissed,
+    this.verticalFeedEvent,
+    this.verticalFeedOnProductHydration,
+    this.verticalFeedProductEvent,
+    this.verticalFeedOnProductCartUpdated,
+    this.verticalFeedUserInteracted,
+  }) : super(key: key);
 
   @override
   State<VerticalFeedPresenter> createState() => _VerticalFeedPresenterState();
@@ -230,4 +229,3 @@ class _VerticalFeedPresenterState extends State<VerticalFeedPresenter> {
     }
   }
 }
-

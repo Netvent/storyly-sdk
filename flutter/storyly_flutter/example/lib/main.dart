@@ -113,7 +113,7 @@ class _StorylyPageState extends State<StatefulWidget> {
             androidParam: StorylyParam()
               ..storylyId = STORYLY_TOKEN
               ..storyGroupSize = "custom"
-              ..storyGroupIconHeight = px (80)
+              ..storyGroupIconHeight = px(80)
               ..storyGroupIconWidth = px(80)
               ..storylyLayoutDirection = "rtl"
               ..storyGroupIconCornerRadius = px(20)
@@ -216,8 +216,7 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                       "VerticalFeedBar: verticalFeedShowFailed: $message");
                 },
                 verticalFeedDismissed: () {
-                  debugPrint(
-                      "VerticalFeedBar: verticalFeedDismissed");
+                  debugPrint("VerticalFeedBar: verticalFeedDismissed");
                 },
                 verticalFeedOnProductHydration: (products) {
                   debugPrint(
@@ -451,9 +450,9 @@ class _VerticalFeedPresenterPageState extends State<VerticalFeedPresenterPage> {
               (event, feedGroup, feedItem, verticalFeedItemComponent) {
             debugPrint(
                 "VerticalFeedPresenter: verticalFeedEvent: $event: ${feedGroup?.id}: ${feedItem?.id}: ${verticalFeedItemComponent?.type}");
-                if (event == "VerticalFeedGroupClosed") {
-                  Navigator.pop(context);
-                }
+            if (event == "VerticalFeedGroupClosed") {
+              Navigator.pop(context);
+            }
           },
           verticalFeedActionClicked: (feedItem) {
             debugPrint(
@@ -530,10 +529,12 @@ String debugProductItem(ProductInformation p) {
   return "${p.productGroupId}-${p.productId}";
 }
 
-
 int px(int x) {
   if (Platform.isAndroid) {
-    return (WidgetsBinding.instance.platformDispatcher.views.first.devicePixelRatio * x).round();
+    return (WidgetsBinding
+                .instance.platformDispatcher.views.first.devicePixelRatio *
+            x)
+        .round();
   } else {
     return x;
   }
