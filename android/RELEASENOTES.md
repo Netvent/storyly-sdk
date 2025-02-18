@@ -1,4 +1,10 @@
 # Release Notes
+### 4.10.0 (18.02.2025)
+* improved vertical feed loading and rendering flow
+* added framework information for analytical purposes 
+* fixed a visual bug related to play button for vertical feed
+* fixed a bug related to StorylyView edge padding
+  
 ### 4.9.0 (29.01.2025)
 * added support for tap and go groups
 * improved failure recovery for analytic requests
