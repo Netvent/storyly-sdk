@@ -1,4 +1,7 @@
 # Release Notes
+### 4.10.1 (22.02.2025)
+* added missing localization fields for Hebrew
+
 ### 4.10.0 (18.02.2025)
 * improved vertical feed loading and rendering flow
 * added framework information for analytical purposes 
