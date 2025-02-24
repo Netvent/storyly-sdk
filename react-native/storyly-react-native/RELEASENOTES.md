@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.10.1 (24.02.2025)
+* added missing localization fields for Hebrew
+
 ### 4.10.0 (18.02.2025) 
 * improved vertical feed loading and rendering flow
 * added framework information for analytical purposes
