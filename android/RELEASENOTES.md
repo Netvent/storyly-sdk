@@ -1,4 +1,18 @@
 # Release Notes
+### 4.11.0 (04.03.2025)
+* adapted edge-to-edge display to Storyly for android >= 35 
+* adapted edge-to-edge display to Vertical Feed for android >= 35 
+* added accessibility fields for Turkish
+* added support for single response comment interactive component
+* fixed a bug related opacity of image quiz interactive component
+* improved story description accessibility field for English and Hebrew
+* improved quiz interactive component with enabled/disabled percentage information
+* improved image quiz interactive component with enabled/disabled percentage information
+* improved poll interactive component with enabled/disabled percentage information
+* improved emoji interactive component with enabled/disabled percentage information
+* improved rating interactive component with enabled/disabled average information
+* decreased animation duration for quiz, image quiz and emoji interactive components
+  
 ### 4.10.1 (22.02.2025)
 * added missing localization fields for Hebrew
   
