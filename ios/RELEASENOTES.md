@@ -1,4 +1,17 @@
 # Release Notes
+### 4.11.0 (04.03.2025)
+* added accessibility fields for Turkish
+* added support for single response comment interactive component
+* fixed a crash related to video cache
+* fixed layout issues on iPad devices for Storyly
+* improved story description accessibility field for English and Hebrew
+* improved quiz interactive component with enabled/disabled percentage information
+* improved image quiz interactive component with enabled/disabled percentage information
+* improved poll interactive component with enabled/disabled percentage information
+* improved emoji interactive component with enabled/disabled percentage information
+* improved rating interactive component with enabled/disabled average answer information
+* decreased animation duration for quiz, image quiz and emoji interactive components
+
 ### 4.10.1 (22.02.2025)
 * added missing localization fields for Hebrew
 
