@@ -1,6 +1,6 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
-### 4.11.0 (04.03.2025)
+### 4.11.0 (05.03.2025)
 * added accessibility fields for Turkish
 * added support for single response comment interactive component
 * improved story description accessibility field for English and Hebrew
