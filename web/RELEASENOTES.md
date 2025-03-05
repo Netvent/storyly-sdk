@@ -1,5 +1,14 @@
 # Release Notes
 
+### 4.2.0 - 05.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.2.0/storyly-web.js)
+
+- Improvement: Quiz interactive component with enabled/disabled percentage information
+- Improvement: Image quiz interactive component with enabled/disabled percentage information
+- Improvement: Poll interactive component with enabled/disabled percentage information
+- Improvement: Emoji interactive component with enabled/disabled percentage information
+- Improvement: Rating interactive component with enabled/disabled percentage information
+- Fix: Image CTA width/height 100% bug fixed
+
 ### 4.1.3 - 06.02.2025 [for cdn](https://web-story.storyly.io/sdk/4.1.3/storyly-web.js)
 
 - Fix: Complete event bug fixed
