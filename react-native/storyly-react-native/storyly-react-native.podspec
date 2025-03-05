@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "Storyly", "4.10.1"
+  s.dependency "Storyly", "4.11.0"
 end
 
