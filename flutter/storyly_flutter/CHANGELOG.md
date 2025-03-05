@@ -1,3 +1,22 @@
+### 4.10.0 (18.02.2025) 
+* added vertical feed
+* added framework information for analytical purposes
+* added support for tap and go groups
+* improved vertical feed loading and rendering flow
+* improved story rendering while transitioning between stories
+* improved skeleton view rendering flow
+* improved areas for next/previous clicks
+* refactor layout of share bottom sheet
+* fixed a visual bug related to play button for vertical feed on android platform
+* fixed a bug related to StorylyView edge padding on android platform
+* fixed resizing of CTA button of product bottom sheet on android platform
+* improved failure recovery for analytic requests on android platform
+* improved interactive component initial animations for prefetched stories on android platform  
+* fixed a bug related to story group/story transitions when voiceover is enabled on ios platform
+* fixed a bug related to RTL layouts for storyly and vertical feed on ios platform
+* fixed a bug related to scroll behavior of VerticalFeedPresenterView on ios platform
+* fixed a bug related to focal point for group covers on ios platform
+
 ### 3.12.1 (17.01.2025)
 * fixed a bug related to openStory for sg play mode
 

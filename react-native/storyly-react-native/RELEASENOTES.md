@@ -1,5 +1,21 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.10.1 (24.02.2025)
+* added missing localization fields for Hebrew
+
+### 4.10.0 (18.02.2025) 
+* improved vertical feed loading and rendering flow
+* added framework information for analytical purposes
+* added support for tap and go groups
+* fixed a visual bug related to play button for vertical feed on android platform
+* fixed a bug related to StorylyView edge padding on android platform
+* fixed resizing of CTA button of product bottom sheet on android platform
+* improved failure recovery for analytic requests on android platform
+* improved interactive component initial animations for prefetched stories on android platform  
+* fixed a bug related to story group/story transitions when voiceover is enabled on ios platform
+* fixed a bug related to RTL layouts for storyly and vertical feed on ios platform
+* fixed a bug related to scroll behavior of VerticalFeedPresenterView on ios platform
+
 ### 4.8.0 (17.01.2025)
 * IMPORTANT! fixed crash related to widget style on android platform
 * improved story rendering while transitioning between stories

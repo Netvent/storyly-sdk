@@ -1,4 +1,26 @@
 # Release Notes
+### 4.11.0 (04.03.2025)
+* added accessibility fields for Turkish
+* added support for single response comment interactive component
+* fixed a crash related to video cache
+* fixed layout issues on iPad devices for Storyly
+* improved story description accessibility field for English and Hebrew
+* improved quiz interactive component with enabled/disabled percentage information
+* improved image quiz interactive component with enabled/disabled percentage information
+* improved poll interactive component with enabled/disabled percentage information
+* improved emoji interactive component with enabled/disabled percentage information
+* improved rating interactive component with enabled/disabled average answer information
+* decreased animation duration for quiz, image quiz and emoji interactive components
+
+### 4.10.1 (22.02.2025)
+* added missing localization fields for Hebrew
+
+### 4.10.0 (18.02.2025)
+* improved vertical feed loading and rendering flow
+* added framework information for analytical purposes 
+* fixed a bug related to story group/story transitions when voiceover is enabled
+* fixed a bug related to RTL layouts for storyly and vertical feed
+  
 ### 4.9.0 (29.01.2025)
 * added support for tap and go groups
 * fixed a bug related to scroll behavior of VerticalFeedPresenterView
@@ -18,6 +40,7 @@
 * fixed a bug related to edge padding settings for vertical feed view 
 * fixed a bug related to vertical feed bar view layout
 * fixed a bug related to openStory method while opening the conditional stories
+* fixed a bug related to focal point for group covers
   
 ### 4.6.0 (13.12.2024)
 * added local data cache invalidation on minor and major sdk version change
