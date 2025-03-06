@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.3.0 - 06.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.3.0/storyly-web.js)
+
+- Improvement: Added the ability to enter a single answer in the question layer
+
 ### 4.2.0 - 05.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.2.0/storyly-web.js)
 
 - Improvement: Quiz interactive component with enabled/disabled percentage information
