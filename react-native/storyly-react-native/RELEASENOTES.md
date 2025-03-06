@@ -1,5 +1,21 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.11.0 (05.03.2025)
+* added accessibility fields for Turkish
+* added support for single response comment interactive component
+* improved story description accessibility field for English and Hebrew
+* improved quiz interactive component with enabled/disabled percentage information
+* improved image quiz interactive component with enabled/disabled percentage information
+* improved poll interactive component with enabled/disabled percentage information
+* improved emoji interactive component with enabled/disabled percentage information
+* improved rating interactive component with enabled/disabled average answer information
+* decreased animation duration for quiz, image quiz and emoji interactive components
+* adapted edge-to-edge display to Storyly for android >= 35 on android platform
+* adapted edge-to-edge display to Vertical Feed for android >= 35
+* fixed a bug related opacity of image quiz interactive component on android platform
+* fixed a crash related to video cache on ios platform
+* fixed layout issues on iPad devices for Storyly  on ios platform
+
 ### 4.10.1 (24.02.2025)
 * added missing localization fields for Hebrew
 
