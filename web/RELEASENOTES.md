@@ -1,5 +1,11 @@
 # Release Notes
 
+### 4.4.0 - 12.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.4.0/storyly-web.js)
+
+- Feature: Added wishlist for products
+- Improvement: Firing noStoryGroup callback when data loading from cache
+- Fix: Fixed video cover fullscreen bug
+
 ### 4.3.0 - 06.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.3.0/storyly-web.js)
 
 - Improvement: Added the ability to enter a single answer in the question layer
