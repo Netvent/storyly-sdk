@@ -1,4 +1,9 @@
 # Release Notes
+### 4.12.0 (13.03.2025)
+* added product wishlist support for product catalog component and product detail sheet
+* fixed a bug related to border color of rating interactive component
+* fixed a bug related to keyboard focus of comment interactive component
+
 ### 4.11.0 (04.03.2025)
 * added accessibility fields for Turkish
 * added support for single response comment interactive component
