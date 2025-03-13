@@ -1,4 +1,7 @@
 # Release Notes
+### 4.12.0 (13.03.2025)
+* added product wishlist support for product catalog component and product detail sheet
+  
 ### 4.11.0 (04.03.2025)
 * adapted edge-to-edge display to Storyly for android >= 35 
 * adapted edge-to-edge display to Vertical Feed for android >= 35 
