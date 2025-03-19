@@ -71,6 +71,10 @@ class VerticalFeedBar extends StatefulWidget {
   final VerticalFeedOnProductCartUpdatedCallback?
       verticalFeedOnProductCartUpdated;
 
+  /// This callback function will notify you about updates the wishlist in a VerticalFeedBar component
+  final VerticalFeedOnWishlistUpdatedCallback?
+      verticalFeedOnWishlistUpdated;     
+
   const VerticalFeedBar({
     Key? key,
     this.onVerticalFeedCreated,
@@ -86,6 +90,7 @@ class VerticalFeedBar extends StatefulWidget {
     this.verticalFeedOnProductHydration,
     this.verticalFeedProductEvent,
     this.verticalFeedOnProductCartUpdated,
+    this.verticalFeedOnWishlistUpdated,
     this.verticalFeedUserInteracted,
   }) : super(key: key);
 
@@ -225,6 +230,16 @@ class _VerticalFeedBarState extends State<VerticalFeedBar> {
 
         widget.verticalFeedOnProductCartUpdated
             ?.call(jsonData['event'], cart, change, jsonData['responseId']);
+        break;
+      case 'verticalFeedOnWishlistUpdated':
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        var item = null;
+        if (jsonData['item'] != null) {
+          item = STRProductItem.fromJson(jsonData['item']);
+        }
+
+        widget.verticalFeedOnWishlistUpdated
+            ?.call(jsonData['event'], item, jsonData['responseId']);
         break;
     }
   }

@@ -16,6 +16,8 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
+import com.appsamurai.storyly.data.managers.product.STRProductItem
+import com.appsamurai.storyly.data.managers.product.STRWishlistEventResult
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.StandardMessageCodec
@@ -37,6 +39,7 @@ class FlutterStorylyView(
 ) : PlatformView, StorylyListener {
 
     private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
+    private var wishlistUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>> = mutableMapOf()
 
     private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_storyly_view_$viewId").apply {
         setMethodCallHandler { call, _ ->
@@ -75,6 +78,24 @@ class FlutterStorylyView(
                     val onFail = cartUpdateSuccessFailCallbackMap[it]?.second
                     (callArguments["failMessage"] as? String)?.let { failMessage ->
                         onFail?.invoke(STRCartEventResult(failMessage))
+                    }
+                    cartUpdateSuccessFailCallbackMap.remove(it)
+                }
+
+                "approveWishlistChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onSuccess = wishlistUpdateSuccessFailCallbackMap[it]?.first
+                    (callArguments["item"] as? Map<String, Any?>)?.let { item ->
+                        onSuccess?.invoke(createSTRProductItem(item))
+                    } ?: kotlin.run {
+                        onSuccess?.invoke(null)
+                    }
+                    cartUpdateSuccessFailCallbackMap.remove(it)
+                }
+
+                "rejectWishlistChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onFail = wishlistUpdateSuccessFailCallbackMap[it]?.second
+                    (callArguments["failMessage"] as? String)?.let { failMessage ->
+                        onFail?.invoke(STRWishlistEventResult(failMessage))
                     }
                     cartUpdateSuccessFailCallbackMap.remove(it)
                 }
@@ -129,6 +150,26 @@ class FlutterStorylyView(
                             "event" to event.name,
                             "cart" to createSTRCartMap(cart),
                             "change" to createSTRCartItemMap(change),
+                            "responseId" to responseId
+                        )
+                    )
+                }
+
+                override fun storylyUpdateWishlistEvent(
+                    storylyView: StorylyView,
+                    item: STRProductItem?,
+                    event: StorylyEvent,
+                    onSuccess: ((STRProductItem?) -> Unit)?,
+                    onFail: ((STRWishlistEventResult) -> Unit)?
+                ) {
+                    val responseId = UUID.randomUUID().toString()
+                    wishlistUpdateSuccessFailCallbackMap[responseId] = Pair(onSuccess, onFail)
+
+                    methodChannel.invokeMethod(
+                        "storylyOnWishlistUpdated",
+                        mapOf(
+                            "event" to event.name,
+                            "item" to createSTRProductItemMap(item),
                             "responseId" to responseId
                         )
                     )

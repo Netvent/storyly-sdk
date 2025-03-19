@@ -7,7 +7,8 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
     private let methodChannel: FlutterMethodChannel
     
     private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
-    
+    private var wishlistUpdateSuccessFailCallbackMap: [String: (((STRProductItem?) -> Void)?, ((STRWishlistEventResult) -> Void)?)] = [:]
+
     init(frame: CGRect,
          args: [String: Any],
          methodChannel: FlutterMethodChannel) {
@@ -55,6 +56,23 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                        let failMessage = callArguments?["failMessage"] as? String {
                         onFail(STRCartEventResult(message: failMessage))
                         self.cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                    }
+                case "approveWishlistChange":
+                    if let responseId = callArguments?["responseId"] as? String,
+                       let onSuccess = self.wishlistUpdateSuccessFailCallbackMap[responseId]?.0 as? (STRProductItem?) -> Void {
+                        if let item = callArguments?["item"] as? [String : Any?] {
+                            onSuccess(createSTRProductItem(product: item))
+                        } else {
+                            onSuccess(nil)
+                        }
+                        self.wishlistUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                    }
+                case "rejectWishlistChange":
+                    if let responseId = callArguments?["responseId"] as? String,
+                       let onFail = self.wishlistUpdateSuccessFailCallbackMap[responseId]?.1 as? (STRWishlistEventResult) -> Void,
+                       let failMessage = callArguments?["failMessage"] as? String {
+                        onFail(STRWishlistEventResult(message: failMessage))
+                        self.wishlistUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
                     }
                 default: do {}
             }
@@ -116,6 +134,25 @@ extension FlutterStorylyViewWrapper: StorylyProductDelegate {
                 ]
             )
         
+    }
+    
+    func storylyUpdateWishlistEvent(
+        storylyView: StorylyView,
+        item: STRProductItem?,
+        event: StorylyEvent,
+        onSuccess: ((STRProductItem?) -> Void)?,
+        onFail: ((STRWishlistEventResult) -> Void)?) {
+            let responseId = UUID().uuidString
+            self.wishlistUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+            
+            self.methodChannel.invokeMethod(
+                "storylyOnWishlistUpdated",
+                arguments: [
+                    "event": event.stringValue,
+                    "item": createSTRProductItemMap(product: item),
+                    "responseId": responseId
+                ]
+            )
     }
 }
 

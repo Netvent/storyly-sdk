@@ -66,6 +66,13 @@ typedef VerticalFeedOnProductCartUpdatedCallback = void Function(
   String responseId,
 );
 
+/// [VerticalFeed]  on wishlist callback
+typedef VerticalFeedOnWishlistUpdatedCallback = void Function(
+  String event,
+  STRProductItem? item,
+  String responseId,
+);
+
 class VerticalFeedController {
   final MethodChannel _methodChannel;
   final int _viewId;
@@ -154,6 +161,21 @@ class VerticalFeedController {
       <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
     );
   }
+
+  Future<void> approveWishlistChange(
+      String responseId, Map<String, dynamic>? item) {
+    return _methodChannel.invokeMethod(
+      'approveWishlistChange',
+      <String, dynamic>{'responseId': responseId, 'item': item},
+    );
+  }
+
+  Future<void> rejectWishlistChange(String responseId, String failMessage) {
+    return _methodChannel.invokeMethod(
+      'rejectWishlistChange',
+      <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
+    );
+  }
 }
 
 class VerticalFeedPresenterController {
@@ -217,6 +239,21 @@ class VerticalFeedPresenterController {
   Future<void> rejectCartChange(String responseId, String failMessage) {
     return _methodChannel.invokeMethod(
       'rejectCartChange',
+      <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
+    );
+  }
+
+  Future<void> approveWishlistChange(
+      String responseId, Map<String, dynamic>? item) {
+    return _methodChannel.invokeMethod(
+      'approveWishlistChange',
+      <String, dynamic>{'responseId': responseId, 'item': item},
+    );
+  }
+
+  Future<void> rejectWishlistChange(String responseId, String failMessage) {
+    return _methodChannel.invokeMethod(
+      'rejectWishlistChange',
       <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
     );
   }

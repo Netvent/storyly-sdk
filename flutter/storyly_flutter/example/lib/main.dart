@@ -8,7 +8,7 @@ import 'package:storyly_flutter/vertical_feed_bar_flutter.dart';
 import 'package:storyly_flutter/vertical_feed_presenter_flutter.dart';
 
 const String STORYLY_TOKEN =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjU4OTMsImFwcF9pZCI6MjA1MDksImluc19pZCI6MjI5Mzd9.Nrd4PJhcf9dZ9dhWfK3Jb75Eq7WiK1CVgAMJ8QxTcWA";
 
 void main() {
   runApp(const MyApp());
@@ -78,9 +78,15 @@ class StorylyPage extends StatefulWidget {
 
 class _StorylyPageState extends State<StatefulWidget> {
   late StorylyViewController storylyViewController;
+  late StorylyViewController customStorylyViewController;
+  late VerticalFeedController verticalFeedController;
 
   void onStorylyViewCreated(StorylyViewController storylyViewController) {
     this.storylyViewController = storylyViewController;
+  }
+
+  void onCustomStorylyViewCreated(StorylyViewController storylyViewController) {
+    customStorylyViewController = storylyViewController;
   }
 
   @override
@@ -103,13 +109,18 @@ class _StorylyPageState extends State<StatefulWidget> {
             storylyLoaded: (storyGroups, dataSource) {
               debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
             },
+            storylyOnWishlistUpdated: (event, item, responseId) {
+                  storylyViewController.approveWishlistChange(responseId, 
+                  item?.toJson(wishlistState: !(item.wishlist ?? false))
+                );
+            },
           )),
       const Padding(padding: EdgeInsets.all(8.0)),
       Container(
           height: 170,
           color: Colors.orange,
           child: StorylyView(
-            onStorylyViewCreated: onStorylyViewCreated,
+            onStorylyViewCreated: onCustomStorylyViewCreated,
             androidParam: StorylyParam()
               ..storylyId = STORYLY_TOKEN
               ..storyGroupSize = "custom"
@@ -148,6 +159,11 @@ class _StorylyPageState extends State<StatefulWidget> {
             storylyLoaded: (storyGroups, dataSource) {
               debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
             },
+            storylyOnWishlistUpdated: (event, item, responseId) {
+                  customStorylyViewController.approveWishlistChange(responseId, 
+                  item?.toJson(wishlistState: !(item.wishlist ?? false))
+                );
+            },
           )),
     ])));
   }
@@ -169,7 +185,7 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
   }
 
   void onVerticalFeedBarCreated(VerticalFeedController verticalFeedController) {
-    verticalFeedBarController = verticalFeedController;
+    this.verticalFeedBarController = verticalFeedController;
   }
 
   @override
@@ -226,10 +242,10 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                   debugPrint(
                       "VerticalFeedBar: verticalFeedProductEvent: $event");
                 },
-                verticalFeedOnProductCartUpdated:
-                    (event, cart, change, responseId) {
-                  debugPrint(
-                      "VerticalFeedBar: verticalFeedOnProductCartUpdated: $event");
+                verticalFeedOnWishlistUpdated: (event, item, responseId) {
+                  verticalFeedBarController.approveWishlistChange(responseId, 
+                  item?.toJson(wishlistState: !(item.wishlist ?? false))
+                );
                 },
               ),
             ),
@@ -283,6 +299,11 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                   debugPrint(
                       "VerticalFeed: verticalFeedOnProductCartUpdated: $event");
                 },
+                verticalFeedOnWishlistUpdated: (event, item, responseId) {
+                  verticalFeedController.approveWishlistChange(responseId, 
+                  item?.toJson(wishlistState: !(item.wishlist ?? false))
+                );
+                }
               ),
             ),
             // Add a button to open VerticalFeedPresenterPage
@@ -485,6 +506,11 @@ class _VerticalFeedPresenterPageState extends State<VerticalFeedPresenterPage> {
             debugPrint(
                 "VerticalFeedPresenter: verticalFeedOnProductCartUpdated: $event");
           },
+          verticalFeedOnWishlistUpdated: (event, item, responseId) {
+             verticalFeedPresenterController.approveWishlistChange(responseId, 
+             item?.toJson(wishlistState: !(item.wishlist ?? false))
+             );
+          }
         ),
       ),
     );
