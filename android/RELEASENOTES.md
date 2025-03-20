@@ -8,6 +8,7 @@
 * added accessibility fields for Turkish
 * added support for single response comment interactive component
 * fixed a bug related opacity of image quiz interactive component
+* fixed a crash related to countdown interactive component
 * improved story description accessibility field for English and Hebrew
 * improved quiz interactive component with enabled/disabled percentage information
 * improved image quiz interactive component with enabled/disabled percentage information
