@@ -88,6 +88,22 @@ class VerticalFeedPresenter extends Component {
         );
     }
 
+    approveWishlistChange = (responseId, item) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._verticalFeedBarView),
+            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.approveWishlistChange,
+            [responseId, item],
+        );
+    }
+
+    rejectWishlistChange = (responseId, failMessage) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._verticalFeedBarView),
+            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.rejectWishlistChange,
+            [responseId, failMessage],
+        );
+    }
+
     _onStorylyLoaded = (eventPayload) => {
         if (this.props.onLoad) {
             this.props.onLoad(eventPayload.nativeEvent);
@@ -145,6 +161,12 @@ class VerticalFeedPresenter extends Component {
     _onStorylyCartUpdated = (eventPayload) => {
         if (this.props.onCartUpdate) {
             this.props.onCartUpdate(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyWishlistUpdated = (eventPayload) => {
+        if (this.props.onWishlistUpdate) {
+            this.props.onWishlistUpdate(eventPayload.nativeEvent);
         }
     }
 
@@ -269,6 +291,7 @@ class VerticalFeedPresenter extends Component {
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onStorylyProductHydration={this._onStorylyProductHydration} 
                 onStorylyCartUpdated={this._onStorylyCartUpdated} 
+                onStorylyWishlistUpdated={this._onStorylyWishlistUpdated} 
                 onStorylyProductEvent={this._onStorylyProductEvent}
                 storyly={ storylyConfig }
                 ref={el => (this._verticalFeedBarView = el)}>

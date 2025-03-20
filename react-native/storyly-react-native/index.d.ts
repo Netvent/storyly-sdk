@@ -67,6 +67,7 @@ declare module "storyly-react-native" {
       onUserInteracted?: (event: StoryInteractiveEvent) => void;
       onProductHydration?: (event: StoryProductHydrationEvent) => void;
       onCartUpdate?: (event: StoryProductCartUpdateEvent) => void;
+      onWishlistUpdate?: (event: StoryWishlistUpdateEvent) => void;
       onProductEvent?: (event: ProductEvent) => void;
       onSizeChanged?: (event: SizeChangedEvent) => void;
     }
@@ -99,6 +100,12 @@ declare module "storyly-react-native" {
       event: string;
       cart: STRCart;
       change: STRCartItem;
+      responseId: string;
+    }
+
+    export interface StoryWishlistUpdateEvent {
+      event: string;
+      item: STRProductItem;
       responseId: string;
     }
 
@@ -279,6 +286,8 @@ declare module "storyly-react-native" {
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
     rejectCartChange: (responseId: string, failMessage: string) => void;
+    approveWishlistChange: (responseId: string, item: STRProductItem) => void;
+    rejectWishlistChange: (responseId: string, failMessage: string) => void;
   }
 
   export interface STRProductItem {
@@ -293,6 +302,7 @@ declare module "storyly-react-native" {
     url?: string;
     variants: STRProductVariant[];
     ctaText?: string;
+    wishlist?: boolean;
   }
 
   export interface STRProductVariant {
@@ -384,6 +394,7 @@ declare module "storyly-react-native" {
       onUserInteracted?: (event: VerticalFeedItemInteractiveEvent) => void;
       onProductHydration?: (event: VerticalFeedProductHydrationEvent) => void;
       onCartUpdate?: (event: VerticalFeedProductCartUpdateEvent) => void;
+      onWishlistUpdate?: (event: VerticalFeedWishlistUpdateEvent) => void;
       onProductEvent?: (event: ProductEvent) => void;
     }
 
@@ -415,6 +426,12 @@ declare module "storyly-react-native" {
       event: string;
       cart: STRCart;
       change: STRCartItem;
+      responseId: string;
+    }
+
+    export interface VerticalFeedWishlistUpdateEvent {
+      event: string;
+      item: STRProductItem;
       responseId: string;
     }
 
@@ -570,6 +587,8 @@ declare module "storyly-react-native" {
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
     rejectCartChange: (responseId: string, failMessage: string) => void;
+    approveWishlistChange: (responseId: string, item: STRProductItem) => void;
+    rejectWishlistChange: (responseId: string, failMessage: string) => void;
   }
 
   export namespace VerticalFeed {
@@ -636,6 +655,7 @@ declare module "storyly-react-native" {
       onUserInteracted?: (event: VerticalFeedItemInteractiveEvent) => void;
       onProductHydration?: (event: VerticalFeedProductHydrationEvent) => void;
       onCartUpdate?: (event: VerticalFeedProductCartUpdateEvent) => void;
+      onWishlistUpdate?: (event: VerticalFeedWishlistUpdateEvent) => void;
       onProductEvent?: (event: ProductEvent) => void;
     }
 
@@ -667,6 +687,12 @@ declare module "storyly-react-native" {
       event: string;
       cart: STRCart;
       change: STRCartItem;
+      responseId: string;
+    }
+
+    export interface VerticalFeedWishlistUpdateEvent {
+      event: string;
+      item: STRProductItem;
       responseId: string;
     }
 
@@ -822,6 +848,8 @@ declare module "storyly-react-native" {
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
     rejectCartChange: (responseId: string, failMessage: string) => void;
+    approveWishlistChange: (responseId: string, item: STRProductItem) => void;
+    rejectWishlistChange: (responseId: string, failMessage: string) => void;
   }
 
   export namespace VerticalFeedPresenter {
@@ -888,6 +916,7 @@ declare module "storyly-react-native" {
       onUserInteracted?: (event: VerticalFeedItemInteractiveEvent) => void;
       onProductHydration?: (event: VerticalFeedProductHydrationEvent) => void;
       onCartUpdate?: (event: VerticalFeedProductCartUpdateEvent) => void;
+      onWishlistUpdate?: (event: VerticalFeedWishlistUpdateEvent) => void;
       onProductEvent?: (event: ProductEvent) => void;
     }
 
@@ -919,6 +948,12 @@ declare module "storyly-react-native" {
       event: string;
       cart: STRCart;
       change: STRCartItem;
+      responseId: string;
+    }
+
+    export interface VerticalFeedWishlistUpdateEvent {
+      event: string;
+      item: STRProductItem;
       responseId: string;
     }
 
@@ -1074,5 +1109,7 @@ declare module "storyly-react-native" {
     updateCart: (cart: STRCart) => void;
     approveCartChange: (responseId: string, cart: STRCart) => void;
     rejectCartChange: (responseId: string, failMessage: string) => void;
+    approveWishlistChange: (responseId: string, item: STRProductItem) => void;
+    rejectWishlistChange: (responseId: string, failMessage: string) => void;
   }
 }

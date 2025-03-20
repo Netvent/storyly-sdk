@@ -88,6 +88,22 @@ class Storyly extends Component {
         );
     }
 
+    approveWishlistChange = (responseId, item) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.approveWishlistChange,
+            [responseId, item],
+        );
+    }
+
+    rejectWishlistChange = (responseId, failMessage) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.rejectWishlistChange,
+            [responseId, failMessage],
+        );
+    }
+
     _onStorylyLoaded = (eventPayload) => {
         if (this.props.onLoad) {
             this.props.onLoad(eventPayload.nativeEvent);
@@ -145,6 +161,12 @@ class Storyly extends Component {
     _onStorylyCartUpdated = (eventPayload) => {
         if (this.props.onCartUpdate) {
             this.props.onCartUpdate(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyWishlistUpdated = (eventPayload) => {
+        if (this.props.onWishlistUpdate) {
+            this.props.onWishlistUpdate(eventPayload.nativeEvent);
         }
     }
 
@@ -296,6 +318,7 @@ class Storyly extends Component {
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onStorylyProductHydration={this._onStorylyProductHydration} 
                 onStorylyCartUpdated={this._onStorylyCartUpdated} 
+                onStorylyWishlistUpdated={this._onStorylyWishlistUpdated} 
                 onStorylyProductEvent={this._onStorylyProductEvent}
                 onStorylySizeChanged={this._onStorylySizeChanged}
                 onCreateCustomView={this._onCreateCustomView}

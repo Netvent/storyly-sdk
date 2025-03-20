@@ -13,6 +13,9 @@ import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.reactnative.createSTRCart
 import com.appsamurai.storyly.reactnative.createSTRProductItem
+import com.appsamurai.storyly.reactnative.verticalFeed.STVerticalFeedManager
+import com.appsamurai.storyly.reactnative.verticalFeedBar.STVerticalFeedBarManager
+import com.appsamurai.storyly.reactnative.verticalFeedBar.STVerticalFeedBarManager.Companion
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedPresenterView
@@ -51,7 +54,10 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
         private const val COMMAND_PAUSE_STORY_CODE = 11
         private const val COMMAND_CLOSE_STORY_NAME = "closeStory"
         private const val COMMAND_CLOSE_STORY_CODE = 12
-
+        private const val COMMAND_APPROVE_WISHLIST_CHANGE_NAME = "approveWishlistChange"
+        private const val COMMAND_APPROVE_WISHLIST_CHANGE_CODE = 13
+        private const val COMMAND_REJECT_WISHLIST_CHANGE_NAME = "rejectWishlistChange"
+        private const val COMMAND_REJECT_WISHLIST_CHANGE_CODE = 14
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -64,6 +70,7 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
         internal const val EVENT_STORYLY_ON_HYDRATION = "onStorylyProductHydration"
         internal const val EVENT_STORYLY_ON_CART_UPDATED = "onStorylyCartUpdated"
+        internal const val EVENT_STORYLY_ON_WISHLIST_UPDATED = "onStorylyWishlistUpdated"
         internal const val EVENT_STORYLY_PRODUCT_EVENT = "onStorylyProductEvent"
 
         internal const val EVENT_ON_CREATE_CUSTOM_VIEW = "onCreateCustomView"
@@ -91,6 +98,7 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
             EVENT_ON_UPDATE_CUSTOM_VIEW,
             EVENT_STORYLY_ON_HYDRATION,
             EVENT_STORYLY_ON_CART_UPDATED,
+            EVENT_STORYLY_ON_WISHLIST_UPDATED,
             EVENT_STORYLY_PRODUCT_EVENT
         ).forEach {
             builder.put(it, MapBuilder.of("registrationName", it))
@@ -109,7 +117,9 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
             COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE,
             COMMAND_RESUME_STORY_NAME to COMMAND_RESUME_STORY_CODE,
             COMMAND_PAUSE_STORY_NAME to COMMAND_PAUSE_STORY_CODE,
-            COMMAND_CLOSE_STORY_NAME to COMMAND_CLOSE_STORY_CODE
+            COMMAND_CLOSE_STORY_NAME to COMMAND_CLOSE_STORY_CODE,
+            COMMAND_APPROVE_WISHLIST_CHANGE_NAME to COMMAND_APPROVE_WISHLIST_CHANGE_CODE,
+            COMMAND_REJECT_WISHLIST_CHANGE_NAME to COMMAND_REJECT_WISHLIST_CHANGE_CODE,
         )
     }
 
@@ -148,6 +158,25 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
                 val responseId: String = args?.getString(0) ?: return
                 val failMessage: String = if (args.size() > 1) args.getString(1) else ""
                 root.rejectCartChange(responseId, failMessage)
+            }
+
+            COMMAND_APPROVE_WISHLIST_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
+                if (args.size() > 1) {
+                    (args.getMap(1)?.toHashMap() as? Map<String, Any?>)?.let {
+                        root.approveWishlistChange(responseId, createSTRProductItem(it))
+                    } ?: run {
+                        root.approveWishlistChange(responseId)
+                    }
+                } else {
+                    root.approveWishlistChange(responseId)
+                }
+            }
+
+            COMMAND_REJECT_WISHLIST_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
+                val failMessage: String = if (args.size() > 1) args.getString(1) else ""
+                root.rejectWishlistChange(responseId, failMessage)
             }
 
             COMMAND_RESUME_STORY_CODE -> root.verticalFeedView?.play()

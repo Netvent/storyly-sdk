@@ -48,7 +48,10 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
         private const val COMMAND_PAUSE_STORY_CODE = 11
         private const val COMMAND_CLOSE_STORY_NAME = "closeStory"
         private const val COMMAND_CLOSE_STORY_CODE = 12
-
+        private const val COMMAND_APPROVE_WISHLIST_CHANGE_NAME = "approveWishlistChange"
+        private const val COMMAND_APPROVE_WISHLIST_CHANGE_CODE = 13
+        private const val COMMAND_REJECT_WISHLIST_CHANGE_NAME = "rejectWishlistChange"
+        private const val COMMAND_REJECT_WISHLIST_CHANGE_CODE = 14
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -61,6 +64,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
 
         internal const val EVENT_STORYLY_ON_HYDRATION = "onStorylyProductHydration"
         internal const val EVENT_STORYLY_ON_CART_UPDATED = "onStorylyCartUpdated"
+        internal const val EVENT_STORYLY_ON_WISHLIST_UPDATED = "onStorylyWishlistUpdated"
         internal const val EVENT_STORYLY_PRODUCT_EVENT = "onStorylyProductEvent"
 
         internal const val EVENT_STORYLY_SIZE_CHANGED = "onStorylySizeChanged"
@@ -94,6 +98,7 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             EVENT_ON_UPDATE_CUSTOM_VIEW,
             EVENT_STORYLY_ON_HYDRATION,
             EVENT_STORYLY_ON_CART_UPDATED,
+            EVENT_STORYLY_ON_WISHLIST_UPDATED,
             EVENT_STORYLY_PRODUCT_EVENT,
             EVENT_STORYLY_SIZE_CHANGED,
         ).forEach {
@@ -113,7 +118,9 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
             COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE,
             COMMAND_RESUME_STORY_NAME to COMMAND_RESUME_STORY_CODE,
             COMMAND_PAUSE_STORY_NAME to COMMAND_PAUSE_STORY_CODE,
-            COMMAND_CLOSE_STORY_NAME to COMMAND_CLOSE_STORY_CODE
+            COMMAND_CLOSE_STORY_NAME to COMMAND_CLOSE_STORY_CODE,
+            COMMAND_APPROVE_WISHLIST_CHANGE_NAME to COMMAND_APPROVE_WISHLIST_CHANGE_CODE,
+            COMMAND_REJECT_WISHLIST_CHANGE_NAME to COMMAND_REJECT_WISHLIST_CHANGE_CODE
         )
     }
 
@@ -156,6 +163,25 @@ class STStorylyManager : ViewGroupManager<STStorylyView>() {
                 val responseId: String = args?.getString(0) ?: return
                 val failMessage: String = if (args.size() > 1) args.getString(1) else ""
                 root.rejectCartChange(responseId, failMessage)
+            }
+
+            COMMAND_APPROVE_WISHLIST_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
+                if (args.size() > 1) {
+                    (args.getMap(1)?.toHashMap() as? Map<String, Any?>)?.let {
+                        root.approveWishlistChange(responseId, createSTRProductItem(it))
+                    } ?: run {
+                        root.approveWishlistChange(responseId)
+                    }
+                } else {
+                    root.approveWishlistChange(responseId)
+                }
+            }
+
+            COMMAND_REJECT_WISHLIST_CHANGE_CODE -> {
+                val responseId: String = args?.getString(0) ?: return
+                val failMessage: String = if (args.size() > 1) args.getString(1) else ""
+                root.rejectWishlistChange(responseId, failMessage)
             }
 
             COMMAND_OPEN_STORY_WITH_ID_CODE -> {
