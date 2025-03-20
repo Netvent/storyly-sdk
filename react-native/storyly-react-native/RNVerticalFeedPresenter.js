@@ -63,6 +63,14 @@ class VerticalFeedPresenter extends Component {
             [products],
         );
     }
+    
+    hydrateWishlist = (products) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._verticalFeedBarView),
+            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.hydrateWishlist,
+            [products],
+        );
+    } 
 
     updateCart = (cart) => {
         UIManager.dispatchViewManagerCommand(

@@ -63,6 +63,17 @@ class STVerticalFeedPresenterManager: RCTViewManager {
         }
     }
     
+    @objc(hydrateWishlist:products:)
+    func hydrateWishlist(reactTag: NSNumber, products: [NSDictionary]) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STVerticalFeedPresenterView {
+                let products = products.map { createSTRProductItem(productItem: $0)}
+                stStorylyView.hydrateWishlist(products: products)
+            }
+        }
+    }
+    
     @objc(updateCart:cartMap:)
     func updateCart(reactTag: NSNumber, cartMap: NSDictionary) {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in

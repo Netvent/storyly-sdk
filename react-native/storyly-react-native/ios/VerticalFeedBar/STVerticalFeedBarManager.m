@@ -17,6 +17,9 @@ RCT_EXTERN_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
 RCT_EXTERN_METHOD(hydrateProducts:(nonnull NSNumber *)reactTag
                   products:(nonnull NSArray<NSDictionary *> *)products)
 
+RCT_EXTERN_METHOD(hydrateWishlist:(nonnull NSNumber *)reactTag
+                  products:(nonnull NSArray<NSDictionary *> *)products)  
+                  
 RCT_EXTERN_METHOD(updateCart:(nonnull NSNumber *)reactTag
                   cart:(nonnull NSDictionary * *)cart)
 

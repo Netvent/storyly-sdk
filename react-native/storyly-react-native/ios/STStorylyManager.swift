@@ -114,6 +114,19 @@ class STStorylyManager: RCTViewManager {
         }
     }
     
+    @objc(hydrateWishlist:products:)
+    func hydrateWishlist(reactTag: NSNumber, products: [NSDictionary]) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STStorylyView {
+                let products = products.map { createSTRProductItem(productItem: $0)}
+                stStorylyView.hydrateWishlist(products: products)
+            } else {
+                STLogErr("Invalid view returned from registry, expecting STStorylyView, got: \(String(describing: view))")
+            }
+        }
+    }
+    
     @objc(updateCart:cartMap:)
     func updateCart(reactTag: NSNumber, cartMap: NSDictionary) {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in

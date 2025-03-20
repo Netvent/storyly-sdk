@@ -64,6 +64,14 @@ class Storyly extends Component {
         );
     }
 
+    hydrateWishlist = (products) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._storylyView),
+            UIManager.getViewManagerConfig('STStoryly').Commands.hydrateWishlist,
+            [products],
+        );
+    }
+
     updateCart = (cart) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._storylyView),

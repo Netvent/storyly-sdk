@@ -58,6 +58,8 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
         private const val COMMAND_APPROVE_WISHLIST_CHANGE_CODE = 13
         private const val COMMAND_REJECT_WISHLIST_CHANGE_NAME = "rejectWishlistChange"
         private const val COMMAND_REJECT_WISHLIST_CHANGE_CODE = 14
+        private const val COMMAND_HYDRATE_WISHLIST_NAME = "hydrateWishlist"
+        private const val COMMAND_HYDRATE_WISHLIST_CODE = 15
 
         internal const val EVENT_STORYLY_LOADED = "onStorylyLoaded"
         internal const val EVENT_STORYLY_LOAD_FAILED = "onStorylyLoadFailed"
@@ -112,6 +114,7 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
             COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
             COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
+            COMMAND_HYDRATE_WISHLIST_NAME to COMMAND_HYDRATE_WISHLIST_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
             COMMAND_APPROVE_CART_CHANGE_NAME to COMMAND_APPROVE_CART_CHANGE_CODE,
             COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE,
@@ -137,6 +140,13 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
                     root.verticalFeedBarView?.hydrateProducts(productItems)
                 }
             }
+
+            COMMAND_HYDRATE_WISHLIST_CODE -> {
+                (args?.getArray(0)?.toArrayList() as? List<Map<String, Any?>>)?.let {
+                    val productItems = it.map { createSTRProductItem(it) }
+                    root.verticalFeedBarView?.hydrateWishlist(productItems)
+                }
+            }              
 
             COMMAND_UPDATE_CART_CODE -> {
                 (args?.getMap(0)?.toHashMap() as? Map<String, Any?>)?.let {

@@ -111,6 +111,10 @@ extension STVerticalFeedPresenterView {
     func hydrateProducts(products: [STRProductItem]) {
         storylyView?.hydrateProducts(products: products)
     }
+    
+    func hydrateWishlist(products: [STRProductItem]) {
+        storylyView?.hydrateWishlist(products: products)
+    }
 
     func updateCart(cart: STRCart) {
         storylyView?.updateCart(cart: cart)
