@@ -67,6 +67,11 @@ class FlutterVerticalFeedView(
                     verticalFeedView.hydrateProducts(products)
                 }
 
+                "hydrateWishlist" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
+                    val products = it.map { product -> createSTRProductItem(product) }
+                    verticalFeedView.hydrateWishlist(products)
+                }
+
                 "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
                     verticalFeedView.updateCart(createSTRCart(it))
                 }
@@ -96,7 +101,7 @@ class FlutterVerticalFeedView(
                     } ?: kotlin.run {
                         onSuccess?.invoke(null)
                     }
-                    cartUpdateSuccessFailCallbackMap.remove(it)
+                    wishlistUpdateSuccessFailCallbackMap.remove(it)
                 }
 
                 "rejectWishlistChange" -> (callArguments?.get("responseId") as? String)?.let {
@@ -104,7 +109,7 @@ class FlutterVerticalFeedView(
                     (callArguments["failMessage"] as? String)?.let { failMessage ->
                         onFail?.invoke(STRWishlistEventResult(failMessage))
                     }
-                    cartUpdateSuccessFailCallbackMap.remove(it)
+                    wishlistUpdateSuccessFailCallbackMap.remove(it)
                 }
             }
         }

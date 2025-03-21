@@ -364,6 +364,16 @@ class StorylyViewController {
     );
   }
 
+  /// This function allows you to hydrate products.
+  Future<void> hydrateWishlist(List<STRProductItem> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateWishlist',
+      <String, dynamic>{
+        'products': products.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
   /// This function allows you to update your cart.
   Future<void> updateCart(Map cart) {
     return _methodChannel.invokeMethod(
@@ -1318,7 +1328,7 @@ class STRProductItem {
   /// Wishlist state of product
   final bool? wishlist;
 
-  Map<String, dynamic> toJson({bool? wishlistState = null}) {
+  Map<String, dynamic> toJson() {
     return {
       "productId": productId,
       "productGroupId": productGroupId,
@@ -1331,7 +1341,7 @@ class STRProductItem {
       "url": url,
       "variants": variants?.map((e) => e.toJson()).toList(),
       "ctaText": ctaText,
-      "wishlist": wishlistState ?? wishlist
+      "wishlist": wishlist
     };
   }
 

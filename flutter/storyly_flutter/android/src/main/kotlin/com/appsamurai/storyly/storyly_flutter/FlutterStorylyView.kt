@@ -60,6 +60,11 @@ class FlutterStorylyView(
                     storylyView.hydrateProducts(products)
                 }
 
+                "hydrateWishlist" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
+                    val products = it.map { product -> createSTRProductItem(product) }
+                    storylyView.hydrateWishlist(products)
+                }
+
                 "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
                     storylyView.updateCart(createSTRCart(it))
                 }
@@ -89,7 +94,7 @@ class FlutterStorylyView(
                     } ?: kotlin.run {
                         onSuccess?.invoke(null)
                     }
-                    cartUpdateSuccessFailCallbackMap.remove(it)
+                    wishlistUpdateSuccessFailCallbackMap.remove(it)
                 }
 
                 "rejectWishlistChange" -> (callArguments?.get("responseId") as? String)?.let {
@@ -97,7 +102,7 @@ class FlutterStorylyView(
                     (callArguments["failMessage"] as? String)?.let { failMessage ->
                         onFail?.invoke(STRWishlistEventResult(failMessage))
                     }
-                    cartUpdateSuccessFailCallbackMap.remove(it)
+                    wishlistUpdateSuccessFailCallbackMap.remove(it)
                 }
             }
         }

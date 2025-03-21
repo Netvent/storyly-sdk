@@ -134,6 +134,16 @@ class VerticalFeedController {
     );
   }
 
+  /// This function allows you to hydrate products.
+  Future<void> hydrateWishlist(List<STRProductItem> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateWishlist',
+      <String, dynamic>{
+        'products': products.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
   /// This function allows you to update your cart.
   Future<void> updateCart(Map cart) {
     return _methodChannel.invokeMethod(
@@ -209,6 +219,16 @@ class VerticalFeedPresenterController {
   Future<void> hydrateProducts(List<STRProductItem> products) {
     return _methodChannel.invokeMethod(
       'hydrateProducts',
+      <String, dynamic>{
+        'products': products.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
+  /// This function allows you to hydrate products.
+  Future<void> hydrateWishlist(List<STRProductItem> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateWishlist',
       <String, dynamic>{
         'products': products.map((e) => e.toJson()).toList(),
       },

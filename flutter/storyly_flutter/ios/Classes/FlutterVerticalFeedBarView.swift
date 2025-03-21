@@ -95,6 +95,11 @@ internal class FlutterVerticalFeedViewBarWrapper: UIView {
                     let storylyProducts = products.compactMap { createSTRProductItem(product: $0) }
                     self.verticalFeedView.hydrateProducts(products: storylyProducts)
                 }
+            case "hydrateWishlist":
+                if let products = callArguments?["products"] as? [[String : Any?]] {
+                    let storylyProducts = products.compactMap { createSTRProductItem(product: $0) }
+                    self.verticalFeedView.hydrateWishlist(products: storylyProducts)
+                }    
             case "updateCart":
                 if let cart = callArguments?["cart"] as? [String : Any?] {
                     self.verticalFeedView.updateCart(cart: createSTRCart(cartMap: cart))

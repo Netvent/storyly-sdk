@@ -36,6 +36,11 @@ internal class FlutterStorylyViewWrapper: UIView, StorylyDelegate {
                         let storylyProducts = products.compactMap { createSTRProductItem(product: $0) }
                         self.storylyView.hydrateProducts(products: storylyProducts)
                     }
+                 case "hydrateWishlist":
+                    if let products = callArguments?["products"] as? [[String : Any?]] {
+                        let storylyProducts = products.compactMap { createSTRProductItem(product: $0) }
+                        self.storylyView.hydrateWishlist(products: storylyProducts)
+                    }
                 case "updateCart":
                     if let cart = callArguments?["cart"] as? [String : Any?] {
                         self.storylyView.updateCart(cart: createSTRCart(cartMap: cart))
