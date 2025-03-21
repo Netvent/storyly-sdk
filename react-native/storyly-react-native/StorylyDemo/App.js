@@ -54,6 +54,10 @@ export default class App extends Component {
                             }}
                             onPress={ VerticalFeedPressEvent => {
                                 console.log(`[Vertical Feed Presenter] - onPress ${VerticalFeedPressEvent.feedItem}`);
+                            }}
+                            onWishlistUpdate={ event => {                 
+                                event.item.wishlist = !event.item.wishlist      
+                                this.verticalFeedPresenter.approveWishlistChange(event.responseId, event.item)
                             }} />
                     </ShowHideAnimation>
 
@@ -64,6 +68,7 @@ export default class App extends Component {
                     </TouchableOpacity>
 
                     <Storyly
+                        ref={ref => { this.storylyView = ref }}
                         style={{ width: '100%', height: 100, marginTop: 10, backgroundColor: "#00ffff" }}
                         storylyId={STORYLY_TOKEN}
                         storyGroupSize="small"
@@ -73,13 +78,22 @@ export default class App extends Component {
                         storyInteractiveTextTypeface={"Lobster1.4.otf"}
                         storyItemProgressBarColor={["#00FF00", "#FF0000"]}
                         storyItemIconBorderColor={["#FF0000", "#FF0000"]}
+                        onWishlistUpdate={ event => {                 
+                            event.item.wishlist = !event.item.wishlist      
+                            this.storylyView.approveWishlistChange(event.responseId, event.item)
+                        }}
                         onLoad={loadEvent => {
                             console.log(`[Storyly] default - onLoad`);
                         }} />
                     <Storyly
+                        ref={ref => { this.largeStoryly = ref }}
                         style={{ width: '100%', height: 120, marginTop: 10, backgroundColor: "#7fff00" }}
                         storylyId={STORYLY_TOKEN}
-                        storyGroupSize="large" />
+                        storyGroupSize="large"
+                        onWishlistUpdate={ event => {                 
+                            event.item.wishlist = !event.item.wishlist      
+                            this.largeStoryly.approveWishlistChange(event.responseId, event.item)
+                        }} />
                     <Storyly
                         ref={ref => { this.customStoryly = ref }}
                         style={{ width: '100%', height: 170, marginTop: 10, backgroundColor: "#e9967a" }}
@@ -98,7 +112,11 @@ export default class App extends Component {
                         storyGroupIconBorderColorNotSeen={["#FF0000", "#FF0000"]}
                         storyGroupIconBorderColorSeen={["#FFFFFF", "#FFFFFF"]}
                         storyGroupIconBackgroundColor={"#000000"}
-                        storyGroupPinIconColor={"#000000"} />
+                        storyGroupPinIconColor={"#000000"} 
+                        onWishlistUpdate={ event => {                 
+                            event.item.wishlist = !event.item.wishlist      
+                            this.customStoryly.approveWishlistChange(event.responseId, event.item)
+                        }}/>
                     <VerticalFeedBar
                         ref={ref => { this.verticalFeedBar = ref }}
                         verticalFeedGroupIconHeight={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(200) : 200}
@@ -117,6 +135,11 @@ export default class App extends Component {
                         }}
                         onPress={ VerticalFeedPressEvent => {
                             console.log(`[Vertical Feed Bar] - onPress ${VerticalFeedPressEvent.feedItem}`);
+                        }}
+                        onWishlistUpdate={ event => {       
+                            console.log(`feed wishlist update`);                     
+                            event.item.wishlist = !event.item.wishlist      
+                            this.verticalFeedBar.approveWishlistChange(event.responseId, event.item)
                         }}
                         storyGroupIconCornerRadius={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(0) : 0}
                         storylyId={"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MjA1MTEsImluc19pZCI6MjI5NDJ9.TXCs-M6guskLJA1JXmu7PlmPxUKfyw88lBpOdxmgpDI"}/>
@@ -139,6 +162,11 @@ export default class App extends Component {
                         }}
                         onPress={ VerticalFeedPressEvent => {
                             console.log(`[Vertical Feed] - onPress ${VerticalFeedPressEvent.feedItem}`);
+                        }}
+                        onWishlistUpdate={ event => {      
+                            console.log(`feed wishlist ${event}`);           
+                            event.item.wishlist = !event.item.wishlist      
+                            this.verticalFeed.approveWishlistChange(event.responseId, event.item)
                         }}
                         storyGroupIconCornerRadius={Platform.OS === 'android' ? PixelRatio.getPixelSizeForLayoutSize(0) : 0}
                         storylyId={"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MjA1MTEsImluc19pZCI6MjI5NDJ9.TXCs-M6guskLJA1JXmu7PlmPxUKfyw88lBpOdxmgpDI"}/>

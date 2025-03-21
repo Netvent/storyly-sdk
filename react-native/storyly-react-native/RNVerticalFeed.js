@@ -64,6 +64,14 @@ class VerticalFeed extends Component {
         );
     }
 
+    hydrateWishlist = (products) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._verticalFeedBarView),
+            UIManager.getViewManagerConfig('STVerticalFeed').Commands.hydrateWishlist,
+            [products],
+        );
+    }
+
     updateCart = (cart) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
@@ -84,6 +92,22 @@ class VerticalFeed extends Component {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
             UIManager.getViewManagerConfig('STVerticalFeed').Commands.rejectCartChange,
+            [responseId, failMessage],
+        );
+    }
+
+    approveWishlistChange = (responseId, item) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._verticalFeedBarView),
+            UIManager.getViewManagerConfig('STVerticalFeed').Commands.approveWishlistChange,
+            [responseId, item],
+        );
+    }
+
+    rejectWishlistChange = (responseId, failMessage) => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this._verticalFeedBarView),
+            UIManager.getViewManagerConfig('STVerticalFeed').Commands.rejectWishlistChange,
             [responseId, failMessage],
         );
     }
@@ -145,6 +169,12 @@ class VerticalFeed extends Component {
     _onStorylyCartUpdated = (eventPayload) => {
         if (this.props.onCartUpdate) {
             this.props.onCartUpdate(eventPayload.nativeEvent);
+        }
+    }
+
+    _onStorylyWishlistUpdated = (eventPayload) => {
+        if (this.props.onWishlistUpdate) {
+            this.props.onWishlistUpdate(eventPayload.nativeEvent);
         }
     }
 
@@ -269,6 +299,7 @@ class VerticalFeed extends Component {
                 onStorylyUserInteracted={this._onStorylyUserInteracted}
                 onStorylyProductHydration={this._onStorylyProductHydration} 
                 onStorylyCartUpdated={this._onStorylyCartUpdated} 
+                onStorylyWishlistUpdated={this._onStorylyWishlistUpdated} 
                 onStorylyProductEvent={this._onStorylyProductEvent}
                 storyly={ storylyConfig }
                 ref={el => (this._verticalFeedBarView = el)}>

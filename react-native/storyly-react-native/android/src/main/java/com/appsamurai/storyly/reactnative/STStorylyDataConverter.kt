@@ -254,6 +254,7 @@ internal fun createSTRProductItemMap(product: STRProductItem?): WritableMap {
                     )
                 }
             })
+            productItemMap.putBoolean("wishlist", product.wishlist ?: false)
         }
     } ?: Arguments.createMap()
 }
@@ -279,6 +280,7 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         imageUrls = product?.get("imageUrls") as? List<String>,
         variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>),
         ctaText = product?.get("ctaText") as? String,
+        wishlist = product?.get("wishlist") as? Boolean
     )
 }
 

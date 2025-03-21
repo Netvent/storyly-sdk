@@ -17,6 +17,9 @@ RCT_EXTERN_METHOD(openStoryWithId:(nonnull NSNumber *)reactTag
 RCT_EXTERN_METHOD(hydrateProducts:(nonnull NSNumber *)reactTag
                   products:(nonnull NSArray<NSDictionary *> *)products)
 
+RCT_EXTERN_METHOD(hydrateWishlist:(nonnull NSNumber *)reactTag
+                  products:(nonnull NSArray<NSDictionary *> *)products)
+
 RCT_EXTERN_METHOD(updateCart:(nonnull NSNumber *)reactTag
                   cart:(nonnull NSDictionary * *)cart)
 
@@ -25,6 +28,14 @@ RCT_EXTERN_METHOD(approveCartChange:(nonnull NSNumber *)reactTag
                   cart:(NSDictionary * *)cart)
 
 RCT_EXTERN_METHOD(rejectCartChange:(nonnull NSNumber *)reactTag
+                  responseId:(nonnull NSString *)responseId
+                  failMessage:(nonnull NSString *)failMessage)
+
+RCT_EXTERN_METHOD(approveWishlistChange:(nonnull NSNumber *)reactTag
+                  responseId:(nonnull NSString *)responseId
+                  item:(NSDictionary * *)item)
+
+RCT_EXTERN_METHOD(rejectWishlistChange:(nonnull NSNumber *)reactTag
                   responseId:(nonnull NSString *)responseId
                   failMessage:(nonnull NSString *)failMessage)
                   
@@ -47,5 +58,6 @@ RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyProductHydration, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyProductEvent, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStorylyCartUpdated, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyWishlistUpdated, RCTBubblingEventBlock)
 
 @end

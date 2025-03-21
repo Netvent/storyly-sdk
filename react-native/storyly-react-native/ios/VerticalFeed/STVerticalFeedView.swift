@@ -12,7 +12,8 @@ import Storyly
 class STVerticalFeedView: UIView {
     
     private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
-    
+    private var wishlistUpdateSuccessFailCallbackMap: [String: (((STRProductItem?) -> Void)?, ((STRWishlistEventResult) -> Void)?)] = [:]
+
     @objc(storylyBundle)
     var storylyBundle: VerticalFeedBundle? = nil {
         didSet {
@@ -76,6 +77,9 @@ class STVerticalFeedView: UIView {
     @objc(onStorylyCartUpdated)
     var onStorylyCartUpdated: RCTBubblingEventBlock?
     
+    @objc(onStorylyWishlistUpdated)
+    var onStorylyWishlistUpdated: RCTBubblingEventBlock?
+    
     override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
         self.storylyView = StorylyVerticalFeedView(frame: frame)
@@ -117,6 +121,10 @@ extension STVerticalFeedView {
     func hydrateProducts(products: [STRProductItem]) {
         storylyView?.hydrateProducts(products: products)
     }
+    
+    func hydrateWishlist(products: [STRProductItem]) {
+        storylyView?.hydrateWishlist(products: products)
+    }
 
     func updateCart(cart: STRCart) {
         storylyView?.updateCart(cart: cart)
@@ -136,6 +144,22 @@ extension STVerticalFeedView {
         guard let onFail = cartUpdateSuccessFailCallbackMap[responseId]?.1 else { return }
         onFail(STRCartEventResult(message: failMessage))
         cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+    }
+    
+    func approveWishlistChange(responseId: String, item: STRProductItem? = nil) {
+        guard let onSuccess = wishlistUpdateSuccessFailCallbackMap[responseId]?.0 else { return }
+        if let item = item {
+            onSuccess(item)
+        } else {
+            onSuccess(nil)
+        }
+        wishlistUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+    }
+    
+    func rejectWishlistChange(responseId: String, failMessage: String) {
+        guard let onFail = wishlistUpdateSuccessFailCallbackMap[responseId]?.1 else { return }
+        onFail(STRWishlistEventResult(message: failMessage))
+        wishlistUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
     }
     
     func resumeStory() {
@@ -238,6 +262,17 @@ extension STVerticalFeedView: StorylyVerticalFeedProductDelegate {
             "responseId": responseId
         ]
         self.onStorylyCartUpdated?(map)
+    }
+    
+    func verticalFeedUpdateWishlistEvent(view: STRVerticalFeedView, item: STRProductItem?, event: StorylyEvent, onSuccess: ((STRProductItem?) -> Void)?, onFail: ((STRWishlistEventResult) -> Void)?) {
+        let responseId = UUID().uuidString
+        wishlistUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+        let map: [String : Any] = [
+            "event": StorylyEventHelper.storylyEventName(event: event),
+            "item": createSTRProductItemMap(product: item),
+            "responseId": responseId
+        ]
+        self.onStorylyWishlistUpdated?(map)
     }
 
     func verticalFeedHydration(_ view: STRVerticalFeedView, products: [STRProductInformation]) {

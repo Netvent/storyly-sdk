@@ -9,9 +9,13 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
+import com.appsamurai.storyly.data.managers.product.STRProductItem
+import com.appsamurai.storyly.data.managers.product.STRWishlistEventResult
+import com.appsamurai.storyly.reactnative.STStorylyManager
 import com.appsamurai.storyly.reactnative.createSTRCartItemMap
 import com.appsamurai.storyly.reactnative.createSTRCartMap
 import com.appsamurai.storyly.reactnative.createSTRProductInformationMap
+import com.appsamurai.storyly.reactnative.createSTRProductItemMap
 import com.appsamurai.storyly.reactnative.verticalFeedBar.createVerticalFeedComponentMap
 import com.appsamurai.storyly.reactnative.verticalFeedBar.createVerticalFeedGroup
 import com.appsamurai.storyly.reactnative.verticalFeedBar.createVerticalFeedItem
@@ -34,6 +38,7 @@ import kotlin.properties.Delegates
 class STVerticalFeedView(context: Context) : FrameLayout(context) {
 
     private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
+    private var wishlistUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>> = mutableMapOf()
 
     internal var verticalFeedView: StorylyVerticalFeedView? by Delegates.observable(null) { _, _, _ ->
         removeAllViews()
@@ -139,6 +144,28 @@ class STVerticalFeedView(context: Context) : FrameLayout(context) {
                 )
             }
 
+            override fun verticalFeedUpdateWishlistEvent(
+                view: STRVerticalFeedView,
+                item: STRProductItem?,
+                event: VerticalFeedEvent,
+                onSuccess: ((STRProductItem?) -> Unit)?,
+                onFail: ((STRWishlistEventResult) -> Unit)?
+            ) {
+                val responseId = UUID.randomUUID().toString()
+                wishlistUpdateSuccessFailCallbackMap[responseId] = Pair(onSuccess, onFail)
+
+                val eventParameters = Arguments.createMap().apply {
+                    putString("event", event.name)
+                    putMap("item", createSTRProductItemMap(item))
+                    putString("responseId", responseId)
+                }
+
+                sendEvent(
+                    STVerticalFeedManager.EVENT_STORYLY_ON_WISHLIST_UPDATED,
+                    eventParameters
+                )
+            }
+
             override fun verticalFeedEvent(
                 view: STRVerticalFeedView,
                 event: VerticalFeedEvent
@@ -223,5 +250,15 @@ class STVerticalFeedView(context: Context) : FrameLayout(context) {
     internal fun rejectCartChange(responseId: String, failMessage: String) {
         cartUpdateSuccessFailCallbackMap[responseId]?.second?.invoke(STRCartEventResult(failMessage))
         cartUpdateSuccessFailCallbackMap.remove(responseId)
+    }
+
+    internal fun approveWishlistChange(responseId: String, item: STRProductItem? = null) {
+        wishlistUpdateSuccessFailCallbackMap[responseId]?.first?.invoke(item)
+        wishlistUpdateSuccessFailCallbackMap.remove(responseId)
+    }
+
+    internal fun rejectWishlistChange(responseId: String, failMessage: String) {
+        wishlistUpdateSuccessFailCallbackMap[responseId]?.second?.invoke(STRWishlistEventResult(failMessage))
+        wishlistUpdateSuccessFailCallbackMap.remove(responseId)
     }
 }
