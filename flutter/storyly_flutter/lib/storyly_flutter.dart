@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -48,6 +49,10 @@ typedef StoryProductEventCallback = void Function(String event);
 /// [StorylyView]  on product cart callback
 typedef StorylyOnProductCartUpdatedCallback = void Function(
     String event, STRCart? cart, STRCartItem? change, String responseId);
+
+/// [StorylyView]  on wishlist update callback
+typedef StorylyOnWishlistUpdatedCallback = void Function(
+    String event, STRProductItem? item, String responseId);
 
 /// [StorylyView] user interacted callback
 typedef StorylyViewUserInteractedCallback = void Function(
@@ -108,6 +113,9 @@ class StorylyView extends StatefulWidget {
   /// This callback function will notify you about updates the cart in a StorylyView component
   final StorylyOnProductCartUpdatedCallback? storylyOnProductCartUpdated;
 
+  /// This callback function will notify you about updates the wishlist in a StorylyView component
+  final StorylyOnWishlistUpdatedCallback? storylyOnWishlistUpdated;
+
   /// This callback function will let you know that stories are started to be
   /// shown to the users.
   final VoidCallback? storylyStoryShown;
@@ -138,6 +146,7 @@ class StorylyView extends StatefulWidget {
       this.storylyOnProductHydration,
       this.storylyProductEvent,
       this.storylyOnProductCartUpdated,
+      this.storylyOnWishlistUpdated,
       this.storylySizeChanged})
       : super(key: key);
 
@@ -276,6 +285,16 @@ class _StorylyViewState extends State<StorylyView> {
         widget.storylyOnProductCartUpdated
             ?.call(jsonData['event'], cart, change, jsonData['responseId']);
         break;
+      case 'storylyOnWishlistUpdated':
+        final jsonData = jsonDecode(jsonEncode(call.arguments));
+        var item = null;
+        if (jsonData['item'] != null) {
+          item = STRProductItem.fromJson(jsonData['item']);
+        }
+
+        widget.storylyOnWishlistUpdated
+            ?.call(jsonData['event'], item, jsonData['responseId']);
+        break;
       case 'storylySizeChanged':
         final jsonData = jsonDecode(jsonEncode(call.arguments));
         widget.storylySizeChanged?.call(jsonData["width"], jsonData["height"]);
@@ -345,6 +364,16 @@ class StorylyViewController {
     );
   }
 
+  /// This function allows you to hydrate products.
+  Future<void> hydrateWishlist(List<STRProductItem> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateWishlist',
+      <String, dynamic>{
+        'products': products.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
   /// This function allows you to update your cart.
   Future<void> updateCart(Map cart) {
     return _methodChannel.invokeMethod(
@@ -369,6 +398,21 @@ class StorylyViewController {
   Future<void> rejectCartChange(String responseId, String failMessage) {
     return _methodChannel.invokeMethod(
       'rejectCartChange',
+      <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
+    );
+  }
+
+  Future<void> approveWishlistChange(
+      String responseId, Map<String, dynamic>? item) {
+    return _methodChannel.invokeMethod(
+      'approveWishlistChange',
+      <String, dynamic>{'responseId': responseId, 'item': item},
+    );
+  }
+
+  Future<void> rejectWishlistChange(String responseId, String failMessage) {
+    return _methodChannel.invokeMethod(
+      'rejectWishlistChange',
       <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
     );
   }
@@ -1244,7 +1288,9 @@ class STRProductItem {
       this.imageUrls,
       this.url,
       this.variants,
-      this.ctaText});
+      this.ctaText,
+      this.wishlist
+      });
 
   /// ID of the product
   final String productId;
@@ -1279,6 +1325,9 @@ class STRProductItem {
   /// CTA text of product
   final String? ctaText;
 
+  /// Wishlist state of product
+  final bool? wishlist;
+
   Map<String, dynamic> toJson() {
     return {
       "productId": productId,
@@ -1292,6 +1341,7 @@ class STRProductItem {
       "url": url,
       "variants": variants?.map((e) => e.toJson()).toList(),
       "ctaText": ctaText,
+      "wishlist": wishlist
     };
   }
 
@@ -1309,7 +1359,8 @@ class STRProductItem {
         url: json['url'],
         variants: List<STRProductVariant>.from(
             json['variants'].map((x) => STRProductVariant.fromJson(x))),
-        ctaText: json['ctaText']);
+        ctaText: json['ctaText'],
+        wishlist: json['wishlist']);
   }
 }
 

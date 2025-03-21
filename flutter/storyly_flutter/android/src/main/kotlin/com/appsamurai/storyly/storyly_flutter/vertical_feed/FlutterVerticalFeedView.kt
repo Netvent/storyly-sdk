@@ -10,11 +10,14 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
+import com.appsamurai.storyly.data.managers.product.STRProductItem
+import com.appsamurai.storyly.data.managers.product.STRWishlistEventResult
 import com.appsamurai.storyly.storyly_flutter.createSTRCart
 import com.appsamurai.storyly.storyly_flutter.createSTRCartItemMap
 import com.appsamurai.storyly.storyly_flutter.createSTRCartMap
 import com.appsamurai.storyly.storyly_flutter.createSTRProductInformationMap
 import com.appsamurai.storyly.storyly_flutter.createSTRProductItem
+import com.appsamurai.storyly.storyly_flutter.createSTRProductItemMap
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
 import com.appsamurai.storyly.verticalfeed.VerticalFeedGroup
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItem
@@ -43,6 +46,7 @@ class FlutterVerticalFeedView(
 ) : PlatformView, StorylyListener {
 
     private var cartUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>> = mutableMapOf()
+    private var wishlistUpdateSuccessFailCallbackMap: MutableMap<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>> = mutableMapOf()
 
     private val methodChannel: MethodChannel = MethodChannel(messenger, "com.appsamurai.storyly/flutter_vertical_feed_$viewId").apply {
         setMethodCallHandler { call, _ ->
@@ -61,6 +65,11 @@ class FlutterVerticalFeedView(
                 "hydrateProducts" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
                     val products = it.map { product -> createSTRProductItem(product) }
                     verticalFeedView.hydrateProducts(products)
+                }
+
+                "hydrateWishlist" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
+                    val products = it.map { product -> createSTRProductItem(product) }
+                    verticalFeedView.hydrateWishlist(products)
                 }
 
                 "updateCart" -> (callArguments?.get("cart") as? Map<String, Any?>)?.let {
@@ -83,6 +92,24 @@ class FlutterVerticalFeedView(
                         onFail?.invoke(STRCartEventResult(failMessage))
                     }
                     cartUpdateSuccessFailCallbackMap.remove(it)
+                }
+
+                "approveWishlistChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onSuccess = wishlistUpdateSuccessFailCallbackMap[it]?.first
+                    (callArguments["item"] as? Map<String, Any?>)?.let { item ->
+                        onSuccess?.invoke(createSTRProductItem(item))
+                    } ?: kotlin.run {
+                        onSuccess?.invoke(null)
+                    }
+                    wishlistUpdateSuccessFailCallbackMap.remove(it)
+                }
+
+                "rejectWishlistChange" -> (callArguments?.get("responseId") as? String)?.let {
+                    val onFail = wishlistUpdateSuccessFailCallbackMap[it]?.second
+                    (callArguments["failMessage"] as? String)?.let { failMessage ->
+                        onFail?.invoke(STRWishlistEventResult(failMessage))
+                    }
+                    wishlistUpdateSuccessFailCallbackMap.remove(it)
                 }
             }
         }
@@ -134,6 +161,26 @@ class FlutterVerticalFeedView(
                             "event" to event.name,
                             "cart" to createSTRCartMap(cart),
                             "change" to createSTRCartItemMap(change),
+                            "responseId" to responseId
+                        )
+                    )
+                }
+
+                override fun verticalFeedUpdateWishlistEvent(
+                    view: STRVerticalFeedView,
+                    item: STRProductItem?,
+                    event: VerticalFeedEvent,
+                    onSuccess: ((STRProductItem?) -> Unit)?,
+                    onFail: ((STRWishlistEventResult) -> Unit)?
+                ) {
+                    val responseId = UUID.randomUUID().toString()
+                    wishlistUpdateSuccessFailCallbackMap[responseId] = Pair(onSuccess, onFail)
+
+                    methodChannel.invokeMethod(
+                        "verticalFeedOnWishlistUpdated",
+                        mapOf(
+                            "event" to event.name,
+                            "item" to createSTRProductItemMap(item),
                             "responseId" to responseId
                         )
                     )

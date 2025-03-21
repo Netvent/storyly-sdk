@@ -78,9 +78,15 @@ class StorylyPage extends StatefulWidget {
 
 class _StorylyPageState extends State<StatefulWidget> {
   late StorylyViewController storylyViewController;
+  late StorylyViewController customStorylyViewController;
+  late VerticalFeedController verticalFeedController;
 
   void onStorylyViewCreated(StorylyViewController storylyViewController) {
     this.storylyViewController = storylyViewController;
+  }
+
+  void onCustomStorylyViewCreated(StorylyViewController storylyViewController) {
+    customStorylyViewController = storylyViewController;
   }
 
   @override
@@ -103,13 +109,38 @@ class _StorylyPageState extends State<StatefulWidget> {
             storylyLoaded: (storyGroups, dataSource) {
               debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
             },
+            storylyOnProductHydration: (info) => {
+              storylyViewController.hydrateWishlist([
+                STRProductItem(
+                    productId: "1",
+                    productGroupId: "1",
+                    price: 10,
+                    currency: "")
+              ])
+            },
+            storylyOnWishlistUpdated: (event, item, responseId) {
+              storylyViewController.approveWishlistChange(responseId, {
+                "productId": item?.productId,
+                "productGroupId": item?.productGroupId,
+                "title": item?.title,
+                "desc": item?.desc,
+                "price": item?.price,
+                "salesPrice": item?.salesPrice,
+                "currency": item?.currency,
+                "imageUrls": item?.imageUrls,
+                "url": item?.url,
+                "variants": item?.variants?.map((e) => e.toJson()).toList(),
+                "ctaText": item?.ctaText,
+                "wishlist": !(item?.wishlist ?? false)
+              });
+            },
           )),
       const Padding(padding: EdgeInsets.all(8.0)),
       Container(
           height: 170,
           color: Colors.orange,
           child: StorylyView(
-            onStorylyViewCreated: onStorylyViewCreated,
+            onStorylyViewCreated: onCustomStorylyViewCreated,
             androidParam: StorylyParam()
               ..storylyId = STORYLY_TOKEN
               ..storyGroupSize = "custom"
@@ -148,6 +179,23 @@ class _StorylyPageState extends State<StatefulWidget> {
             storylyLoaded: (storyGroups, dataSource) {
               debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
             },
+            storylyOnWishlistUpdated: (event, item, responseId) {
+              customStorylyViewController.approveWishlistChange(responseId,
+              {
+                "productId": item?.productId,
+                "productGroupId": item?.productGroupId,
+                "title": item?.title,
+                "desc": item?.desc,
+                "price": item?.price,
+                "salesPrice": item?.salesPrice,
+                "currency": item?.currency,
+                "imageUrls": item?.imageUrls,
+                "url": item?.url,
+                "variants": item?.variants?.map((e) => e.toJson()).toList(),
+                "ctaText": item?.ctaText,
+                "wishlist": !(item?.wishlist ?? false)
+              });
+            },
           )),
     ])));
   }
@@ -169,7 +217,7 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
   }
 
   void onVerticalFeedBarCreated(VerticalFeedController verticalFeedController) {
-    verticalFeedBarController = verticalFeedController;
+    this.verticalFeedBarController = verticalFeedController;
   }
 
   @override
@@ -219,6 +267,14 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                   debugPrint("VerticalFeedBar: verticalFeedDismissed");
                 },
                 verticalFeedOnProductHydration: (products) {
+                  verticalFeedBarController.hydrateWishlist([
+                    STRProductItem(
+                        productId: "1",
+                        productGroupId: "1",
+                        price: 10,
+                        currency: "")
+                  ]);
+
                   debugPrint(
                       "VerticalFeedBar: verticalFeedOnProductHydration: [${products.map((e) => debugProductItem(e)).join(", ")}]");
                 },
@@ -226,10 +282,22 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                   debugPrint(
                       "VerticalFeedBar: verticalFeedProductEvent: $event");
                 },
-                verticalFeedOnProductCartUpdated:
-                    (event, cart, change, responseId) {
-                  debugPrint(
-                      "VerticalFeedBar: verticalFeedOnProductCartUpdated: $event");
+                verticalFeedOnWishlistUpdated: (event, item, responseId) {
+                  verticalFeedBarController.approveWishlistChange(responseId,
+                  {
+                "productId": item?.productId,
+                "productGroupId": item?.productGroupId,
+                "title": item?.title,
+                "desc": item?.desc,
+                "price": item?.price,
+                "salesPrice": item?.salesPrice,
+                "currency": item?.currency,
+                "imageUrls": item?.imageUrls,
+                "url": item?.url,
+                "variants": item?.variants?.map((e) => e.toJson()).toList(),
+                "ctaText": item?.ctaText,
+                "wishlist": !(item?.wishlist ?? false)
+              });
                 },
               ),
             ),
@@ -238,52 +306,71 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
               height: 400,
               color: Colors.cyan,
               child: VerticalFeed(
-                onVerticalFeedCreated: onVerticalFeedCreated,
-                androidParam: getFeedParam(context),
-                iosParam: getFeedParam(context),
-                verticalFeedLoaded: (feedGroupList, dataSource) {
-                  debugPrint(
-                      "VerticalFeed: verticalFeedLoaded: $dataSource: [${feedGroupList.map((e) => debugVerticalGroup(e))}]");
-                },
-                verticalFeedLoadFailed: (message) {
-                  debugPrint("VerticalFeed: verticalFeedLoadFailed: $message");
-                },
-                verticalFeedEvent:
-                    (event, feedGroup, feedItem, verticalFeedItemComponent) {
-                  debugPrint(
-                      "VerticalFeed: verticalFeedEvent: $event: ${feedGroup?.id}: ${feedItem?.id}: ${verticalFeedItemComponent?.type}");
-                },
-                verticalFeedActionClicked: (feedItem) {
-                  debugPrint(
-                      "VerticalFeed: verticalFeedActionClicked: ${feedItem.id}: ${feedItem.actionUrl}");
-                },
-                verticalFeedUserInteracted:
-                    (feedGroup, feedItem, verticalFeedItemComponent) {
-                  debugPrint(
-                      "VerticalFeed: verticalFeedUserInteracted: ${debugVerticalGroup(feedGroup)}: ${debugVerticalItem(feedItem)}: ${verticalFeedItemComponent?.type}");
-                },
-                verticalFeedShown: () {
-                  debugPrint("VerticalFeed: verticalFeedShown");
-                },
-                verticalFeedShowFailed: (message) {
-                  debugPrint("VerticalFeed: verticalFeedShowFailed: $message");
-                },
-                verticalFeedDismissed: () {
-                  debugPrint("VerticalFeed: verticalFeedDismissed");
-                },
-                verticalFeedOnProductHydration: (products) {
-                  debugPrint(
-                      "VerticalFeed: verticalFeedOnProductHydration: [${products.map((e) => debugProductItem(e)).join(", ")}]");
-                },
-                verticalFeedProductEvent: (event) {
-                  debugPrint("VerticalFeed: verticalFeedProductEvent: $event");
-                },
-                verticalFeedOnProductCartUpdated:
-                    (event, cart, change, responseId) {
-                  debugPrint(
-                      "VerticalFeed: verticalFeedOnProductCartUpdated: $event");
-                },
-              ),
+                  onVerticalFeedCreated: onVerticalFeedCreated,
+                  androidParam: getFeedParam(context),
+                  iosParam: getFeedParam(context),
+                  verticalFeedLoaded: (feedGroupList, dataSource) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedLoaded: $dataSource: [${feedGroupList.map((e) => debugVerticalGroup(e))}]");
+                  },
+                  verticalFeedLoadFailed: (message) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedLoadFailed: $message");
+                  },
+                  verticalFeedEvent:
+                      (event, feedGroup, feedItem, verticalFeedItemComponent) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedEvent: $event: ${feedGroup?.id}: ${feedItem?.id}: ${verticalFeedItemComponent?.type}");
+                  },
+                  verticalFeedActionClicked: (feedItem) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedActionClicked: ${feedItem.id}: ${feedItem.actionUrl}");
+                  },
+                  verticalFeedUserInteracted:
+                      (feedGroup, feedItem, verticalFeedItemComponent) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedUserInteracted: ${debugVerticalGroup(feedGroup)}: ${debugVerticalItem(feedItem)}: ${verticalFeedItemComponent?.type}");
+                  },
+                  verticalFeedShown: () {
+                    debugPrint("VerticalFeed: verticalFeedShown");
+                  },
+                  verticalFeedShowFailed: (message) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedShowFailed: $message");
+                  },
+                  verticalFeedDismissed: () {
+                    debugPrint("VerticalFeed: verticalFeedDismissed");
+                  },
+                  verticalFeedOnProductHydration: (products) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedOnProductHydration: [${products.map((e) => debugProductItem(e)).join(", ")}]");
+                  },
+                  verticalFeedProductEvent: (event) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedProductEvent: $event");
+                  },
+                  verticalFeedOnProductCartUpdated:
+                      (event, cart, change, responseId) {
+                    debugPrint(
+                        "VerticalFeed: verticalFeedOnProductCartUpdated: $event");
+                  },
+                  verticalFeedOnWishlistUpdated: (event, item, responseId) {
+                    verticalFeedController.approveWishlistChange(responseId,
+                    {
+                "productId": item?.productId,
+                "productGroupId": item?.productGroupId,
+                "title": item?.title,
+                "desc": item?.desc,
+                "price": item?.price,
+                "salesPrice": item?.salesPrice,
+                "currency": item?.currency,
+                "imageUrls": item?.imageUrls,
+                "url": item?.url,
+                "variants": item?.variants?.map((e) => e.toJson()).toList(),
+                "ctaText": item?.ctaText,
+                "wishlist": !(item?.wishlist ?? false)
+              });
+                  }),
             ),
             // Add a button to open VerticalFeedPresenterPage
             ElevatedButton(
@@ -435,57 +522,81 @@ class _VerticalFeedPresenterPageState extends State<VerticalFeedPresenterPage> {
       body: Container(
         color: Colors.cyan,
         child: VerticalFeedPresenter(
-          onVerticalFeedCreated: onVerticalFeedPresenterCreated,
-          androidParam: getFeedPresenterParam(context),
-          iosParam: getFeedPresenterParam(context),
-          verticalFeedLoaded: (feedGroupList, dataSource) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedLoaded: $dataSource: [${feedGroupList.map((e) => debugVerticalGroup(e))}]");
-          },
-          verticalFeedLoadFailed: (message) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedLoadFailed: $message");
-          },
-          verticalFeedEvent:
-              (event, feedGroup, feedItem, verticalFeedItemComponent) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedEvent: $event: ${feedGroup?.id}: ${feedItem?.id}: ${verticalFeedItemComponent?.type}");
-            if (event == "VerticalFeedGroupClosed") {
-              Navigator.pop(context);
-            }
-          },
-          verticalFeedActionClicked: (feedItem) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedActionClicked: ${feedItem.id}: ${feedItem.actionUrl}");
-          },
-          verticalFeedUserInteracted:
-              (feedGroup, feedItem, verticalFeedItemComponent) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedUserInteracted: ${debugVerticalGroup(feedGroup)}: ${debugVerticalItem(feedItem)}: ${verticalFeedItemComponent?.type}");
-          },
-          verticalFeedShown: () {
-            debugPrint("VerticalFeedPresenter: verticalFeedShown");
-          },
-          verticalFeedShowFailed: (message) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedShowFailed: $message");
-          },
-          verticalFeedDismissed: () {
-            debugPrint("VerticalFeedPresenter: verticalFeedDismissed");
-          },
-          verticalFeedOnProductHydration: (products) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedOnProductHydration: [${products.map((e) => debugProductItem(e)).join(", ")}]");
-          },
-          verticalFeedProductEvent: (event) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedProductEvent: $event");
-          },
-          verticalFeedOnProductCartUpdated: (event, cart, change, responseId) {
-            debugPrint(
-                "VerticalFeedPresenter: verticalFeedOnProductCartUpdated: $event");
-          },
-        ),
+            onVerticalFeedCreated: onVerticalFeedPresenterCreated,
+            androidParam: getFeedPresenterParam(context),
+            iosParam: getFeedPresenterParam(context),
+            verticalFeedLoaded: (feedGroupList, dataSource) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedLoaded: $dataSource: [${feedGroupList.map((e) => debugVerticalGroup(e))}]");
+            },
+            verticalFeedLoadFailed: (message) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedLoadFailed: $message");
+            },
+            verticalFeedEvent:
+                (event, feedGroup, feedItem, verticalFeedItemComponent) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedEvent: $event: ${feedGroup?.id}: ${feedItem?.id}: ${verticalFeedItemComponent?.type}");
+              if (event == "VerticalFeedGroupClosed") {
+                Navigator.pop(context);
+              }
+            },
+            verticalFeedActionClicked: (feedItem) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedActionClicked: ${feedItem.id}: ${feedItem.actionUrl}");
+            },
+            verticalFeedUserInteracted:
+                (feedGroup, feedItem, verticalFeedItemComponent) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedUserInteracted: ${debugVerticalGroup(feedGroup)}: ${debugVerticalItem(feedItem)}: ${verticalFeedItemComponent?.type}");
+            },
+            verticalFeedShown: () {
+              debugPrint("VerticalFeedPresenter: verticalFeedShown");
+            },
+            verticalFeedShowFailed: (message) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedShowFailed: $message");
+            },
+            verticalFeedDismissed: () {
+              debugPrint("VerticalFeedPresenter: verticalFeedDismissed");
+            },
+            verticalFeedOnProductHydration: (products) {
+              verticalFeedPresenterController.hydrateWishlist([
+                STRProductItem(
+                    productId: "1",
+                    productGroupId: "1",
+                    price: 10,
+                    currency: "")
+              ]);
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedOnProductHydration: [${products.map((e) => debugProductItem(e)).join(", ")}]");
+            },
+            verticalFeedProductEvent: (event) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedProductEvent: $event");
+            },
+            verticalFeedOnProductCartUpdated:
+                (event, cart, change, responseId) {
+              debugPrint(
+                  "VerticalFeedPresenter: verticalFeedOnProductCartUpdated: $event");
+            },
+            verticalFeedOnWishlistUpdated: (event, item, responseId) {
+              verticalFeedPresenterController.approveWishlistChange(responseId,
+              {
+                "productId": item?.productId,
+                "productGroupId": item?.productGroupId,
+                "title": item?.title,
+                "desc": item?.desc,
+                "price": item?.price,
+                "salesPrice": item?.salesPrice,
+                "currency": item?.currency,
+                "imageUrls": item?.imageUrls,
+                "url": item?.url,
+                "variants": item?.variants?.map((e) => e.toJson()).toList(),
+                "ctaText": item?.ctaText,
+                "wishlist": !(item?.wishlist ?? false)
+              });
+            }),
       ),
     );
   }
