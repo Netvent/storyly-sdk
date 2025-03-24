@@ -180,8 +180,7 @@ class _StorylyPageState extends State<StatefulWidget> {
               debugPrint("storylyLoaded -> storyGroups: ${storyGroups.length}");
             },
             storylyOnWishlistUpdated: (event, item, responseId) {
-              customStorylyViewController.approveWishlistChange(responseId,
-              {
+              customStorylyViewController.approveWishlistChange(responseId, {
                 "productId": item?.productId,
                 "productGroupId": item?.productGroupId,
                 "title": item?.title,
@@ -283,21 +282,20 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                       "VerticalFeedBar: verticalFeedProductEvent: $event");
                 },
                 verticalFeedOnWishlistUpdated: (event, item, responseId) {
-                  verticalFeedBarController.approveWishlistChange(responseId,
-                  {
-                "productId": item?.productId,
-                "productGroupId": item?.productGroupId,
-                "title": item?.title,
-                "desc": item?.desc,
-                "price": item?.price,
-                "salesPrice": item?.salesPrice,
-                "currency": item?.currency,
-                "imageUrls": item?.imageUrls,
-                "url": item?.url,
-                "variants": item?.variants?.map((e) => e.toJson()).toList(),
-                "ctaText": item?.ctaText,
-                "wishlist": !(item?.wishlist ?? false)
-              });
+                  verticalFeedBarController.approveWishlistChange(responseId, {
+                    "productId": item?.productId,
+                    "productGroupId": item?.productGroupId,
+                    "title": item?.title,
+                    "desc": item?.desc,
+                    "price": item?.price,
+                    "salesPrice": item?.salesPrice,
+                    "currency": item?.currency,
+                    "imageUrls": item?.imageUrls,
+                    "url": item?.url,
+                    "variants": item?.variants?.map((e) => e.toJson()).toList(),
+                    "ctaText": item?.ctaText,
+                    "wishlist": !(item?.wishlist ?? false)
+                  });
                 },
               ),
             ),
@@ -355,21 +353,21 @@ class _VerticalFeedPageState extends State<VerticalFeedPage> {
                         "VerticalFeed: verticalFeedOnProductCartUpdated: $event");
                   },
                   verticalFeedOnWishlistUpdated: (event, item, responseId) {
-                    verticalFeedController.approveWishlistChange(responseId,
-                    {
-                "productId": item?.productId,
-                "productGroupId": item?.productGroupId,
-                "title": item?.title,
-                "desc": item?.desc,
-                "price": item?.price,
-                "salesPrice": item?.salesPrice,
-                "currency": item?.currency,
-                "imageUrls": item?.imageUrls,
-                "url": item?.url,
-                "variants": item?.variants?.map((e) => e.toJson()).toList(),
-                "ctaText": item?.ctaText,
-                "wishlist": !(item?.wishlist ?? false)
-              });
+                    verticalFeedController.approveWishlistChange(responseId, {
+                      "productId": item?.productId,
+                      "productGroupId": item?.productGroupId,
+                      "title": item?.title,
+                      "desc": item?.desc,
+                      "price": item?.price,
+                      "salesPrice": item?.salesPrice,
+                      "currency": item?.currency,
+                      "imageUrls": item?.imageUrls,
+                      "url": item?.url,
+                      "variants":
+                          item?.variants?.map((e) => e.toJson()).toList(),
+                      "ctaText": item?.ctaText,
+                      "wishlist": !(item?.wishlist ?? false)
+                    });
                   }),
             ),
             // Add a button to open VerticalFeedPresenterPage
@@ -581,8 +579,8 @@ class _VerticalFeedPresenterPageState extends State<VerticalFeedPresenterPage> {
                   "VerticalFeedPresenter: verticalFeedOnProductCartUpdated: $event");
             },
             verticalFeedOnWishlistUpdated: (event, item, responseId) {
-              verticalFeedPresenterController.approveWishlistChange(responseId,
-              {
+              verticalFeedPresenterController
+                  .approveWishlistChange(responseId, {
                 "productId": item?.productId,
                 "productGroupId": item?.productGroupId,
                 "title": item?.title,

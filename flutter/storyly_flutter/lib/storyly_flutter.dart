@@ -1289,8 +1289,7 @@ class STRProductItem {
       this.url,
       this.variants,
       this.ctaText,
-      this.wishlist
-      });
+      this.wishlist});
 
   /// ID of the product
   final String productId;

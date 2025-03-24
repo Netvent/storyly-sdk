@@ -72,8 +72,7 @@ class VerticalFeedBar extends StatefulWidget {
       verticalFeedOnProductCartUpdated;
 
   /// This callback function will notify you about updates the wishlist in a VerticalFeedBar component
-  final VerticalFeedOnWishlistUpdatedCallback?
-      verticalFeedOnWishlistUpdated;     
+  final VerticalFeedOnWishlistUpdatedCallback? verticalFeedOnWishlistUpdated;
 
   const VerticalFeedBar({
     Key? key,

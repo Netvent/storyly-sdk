@@ -1,3 +1,11 @@
+### 4.12.1 (24.03.2025)
+* added product wishlist support for product catalog component and product detail sheet
+* added StorylyBarImpression as a public Storyly event
+* improved iconUrl of StoryGroup by providing dark theme url
+* fixed a bug related to re-addition of product card interactive component on android platform
+* fixed a bug related to border color of rating interactive component on ios platform
+* fixed a bug related to keyboard focus of comment interactive component on ios platform
+
 ### 4.11.0 (05.03.2025)
 * added accessibility fields for Turkish
 * added support for single response comment interactive component
@@ -10,6 +18,7 @@
 * decreased animation duration for quiz, image quiz and emoji interactive components
 * adapted edge-to-edge display to Storyly for android >= 35 on android platform
 * adapted edge-to-edge display to Vertical Feed for android >= 35
+* fixed a crash related to countdown interactive component on android platform
 * fixed a bug related opacity of image quiz interactive component on android platform
 * fixed a crash related to video cache on ios platform
 * fixed layout issues on iPad devices for Storyly  on ios platform
