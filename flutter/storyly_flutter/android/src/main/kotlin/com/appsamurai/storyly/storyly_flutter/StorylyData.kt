@@ -404,7 +404,8 @@ internal fun createSTRProductItemMap(product: STRProductItem?): Map<String, *> {
         "ctaText" to product.ctaText,
         "variants" to product.variants.map {
             createSTRProductVariantMap(it)
-        }
+        },
+        "wishlist" to product.wishlist
     )
 }
 
@@ -429,6 +430,7 @@ internal fun createSTRProductItem(product: Map<String, Any?>?): STRProductItem {
         imageUrls = product?.get("imageUrls") as? List<String>,
         variants = createSTRProductVariant(product?.get("variants") as? List<Map<String, Any?>>),
         ctaText = product?.get("ctaText") as? String,
+        wishlist = product?.get("wishlist") as? Boolean ?: false
     )
 }
 

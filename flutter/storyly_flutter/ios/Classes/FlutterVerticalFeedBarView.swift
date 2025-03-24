@@ -65,7 +65,8 @@ internal class FlutterVerticalFeedViewBarWrapper: UIView {
     private let methodChannel: FlutterMethodChannel
     
     private var cartUpdateSuccessFailCallbackMap: [String: (((STRCart?) -> Void)?, ((STRCartEventResult) -> Void)?)] = [:]
-    
+    private var wishlistUpdateSuccessFailCallbackMap: [String: (((STRProductItem?) -> Void)?, ((STRWishlistEventResult) -> Void)?)] = [:]
+
     init(frame: CGRect,
          args: [String: Any],
          methodChannel: FlutterMethodChannel) {
@@ -94,6 +95,11 @@ internal class FlutterVerticalFeedViewBarWrapper: UIView {
                     let storylyProducts = products.compactMap { createSTRProductItem(product: $0) }
                     self.verticalFeedView.hydrateProducts(products: storylyProducts)
                 }
+            case "hydrateWishlist":
+                if let products = callArguments?["products"] as? [[String : Any?]] {
+                    let storylyProducts = products.compactMap { createSTRProductItem(product: $0) }
+                    self.verticalFeedView.hydrateWishlist(products: storylyProducts)
+                }    
             case "updateCart":
                 if let cart = callArguments?["cart"] as? [String : Any?] {
                     self.verticalFeedView.updateCart(cart: createSTRCart(cartMap: cart))
@@ -114,6 +120,23 @@ internal class FlutterVerticalFeedViewBarWrapper: UIView {
                    let failMessage = callArguments?["failMessage"] as? String {
                     onFail(STRCartEventResult(message: failMessage))
                     self.cartUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                }
+            case "approveWishlistChange":
+                if let responseId = callArguments?["responseId"] as? String,
+                   let onSuccess = self.wishlistUpdateSuccessFailCallbackMap[responseId]?.0 as? (STRProductItem?) -> Void {
+                    if let item = callArguments?["item"] as? [String : Any?] {
+                        onSuccess(createSTRProductItem(product: item))
+                    } else {
+                        onSuccess(nil)
+                    }
+                    self.wishlistUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
+                }
+            case "rejectWishlistChange":
+                if let responseId = callArguments?["responseId"] as? String,
+                   let onFail = self.wishlistUpdateSuccessFailCallbackMap[responseId]?.1 as? (STRWishlistEventResult) -> Void,
+                   let failMessage = callArguments?["failMessage"] as? String {
+                    onFail(STRWishlistEventResult(message: failMessage))
+                    self.wishlistUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
                 }
             default: do {}
             }
@@ -182,6 +205,20 @@ extension FlutterVerticalFeedViewBarWrapper: StorylyVerticalFeedProductDelegate 
                 "responseId": responseId
             ]  as [String: Any?]
         )
+    }
+    
+    func verticalFeedUpdateWishlistEvent(view: STRVerticalFeedView, item: STRProductItem?, event: StorylyEvent, onSuccess: ((STRProductItem?) -> Void)?, onFail: ((STRWishlistEventResult) -> Void)?) {
+            let responseId = UUID().uuidString
+            self.wishlistUpdateSuccessFailCallbackMap[responseId] = (onSuccess, onFail)
+            
+            self.methodChannel.invokeMethod(
+                "verticalFeedOnWishlistUpdated",
+                arguments: [
+                    "event": event.stringValue,
+                    "item": createSTRProductItemMap(product: item),
+                    "responseId": responseId
+                ]
+            )
     }
 }
 

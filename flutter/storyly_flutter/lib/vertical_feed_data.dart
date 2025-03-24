@@ -66,6 +66,13 @@ typedef VerticalFeedOnProductCartUpdatedCallback = void Function(
   String responseId,
 );
 
+/// [VerticalFeed]  on wishlist callback
+typedef VerticalFeedOnWishlistUpdatedCallback = void Function(
+  String event,
+  STRProductItem? item,
+  String responseId,
+);
+
 class VerticalFeedController {
   final MethodChannel _methodChannel;
   final int _viewId;
@@ -127,6 +134,16 @@ class VerticalFeedController {
     );
   }
 
+  /// This function allows you to hydrate products.
+  Future<void> hydrateWishlist(List<STRProductItem> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateWishlist',
+      <String, dynamic>{
+        'products': products.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
   /// This function allows you to update your cart.
   Future<void> updateCart(Map cart) {
     return _methodChannel.invokeMethod(
@@ -151,6 +168,21 @@ class VerticalFeedController {
   Future<void> rejectCartChange(String responseId, String failMessage) {
     return _methodChannel.invokeMethod(
       'rejectCartChange',
+      <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
+    );
+  }
+
+  Future<void> approveWishlistChange(
+      String responseId, Map<String, dynamic>? item) {
+    return _methodChannel.invokeMethod(
+      'approveWishlistChange',
+      <String, dynamic>{'responseId': responseId, 'item': item},
+    );
+  }
+
+  Future<void> rejectWishlistChange(String responseId, String failMessage) {
+    return _methodChannel.invokeMethod(
+      'rejectWishlistChange',
       <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
     );
   }
@@ -193,6 +225,16 @@ class VerticalFeedPresenterController {
     );
   }
 
+  /// This function allows you to hydrate products.
+  Future<void> hydrateWishlist(List<STRProductItem> products) {
+    return _methodChannel.invokeMethod(
+      'hydrateWishlist',
+      <String, dynamic>{
+        'products': products.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
   /// This function allows you to update your cart.
   Future<void> updateCart(Map cart) {
     return _methodChannel.invokeMethod(
@@ -217,6 +259,21 @@ class VerticalFeedPresenterController {
   Future<void> rejectCartChange(String responseId, String failMessage) {
     return _methodChannel.invokeMethod(
       'rejectCartChange',
+      <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
+    );
+  }
+
+  Future<void> approveWishlistChange(
+      String responseId, Map<String, dynamic>? item) {
+    return _methodChannel.invokeMethod(
+      'approveWishlistChange',
+      <String, dynamic>{'responseId': responseId, 'item': item},
+    );
+  }
+
+  Future<void> rejectWishlistChange(String responseId, String failMessage) {
+    return _methodChannel.invokeMethod(
+      'rejectWishlistChange',
       <String, dynamic>{'responseId': responseId, 'failMessage': failMessage},
     );
   }
