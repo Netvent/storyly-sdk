@@ -63,6 +63,17 @@ class STVerticalFeedPresenterManager: RCTViewManager {
         }
     }
     
+    @objc(hydrateWishlist:products:)
+    func hydrateWishlist(reactTag: NSNumber, products: [NSDictionary]) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STVerticalFeedPresenterView {
+                let products = products.map { createSTRProductItem(productItem: $0)}
+                stStorylyView.hydrateWishlist(products: products)
+            }
+        }
+    }
+    
     @objc(updateCart:cartMap:)
     func updateCart(reactTag: NSNumber, cartMap: NSDictionary) {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
@@ -93,6 +104,30 @@ class STVerticalFeedPresenterManager: RCTViewManager {
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedPresenterView {
                 stStorylyView.rejectCartChange(responseId: responseId, failMessage: failMessage)
+            }
+        }
+    }
+    
+    @objc(approveWishlistChange:responseId:item:)
+    func approveWishlistChange(reactTag: NSNumber, responseId: String, item: NSDictionary?) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STVerticalFeedPresenterView {
+                if let _item = item {
+                    stStorylyView.approveWishlistChange(responseId: responseId, item: createSTRProductItem(productItem: _item))
+                } else {
+                    stStorylyView.approveWishlistChange(responseId: responseId)
+                }
+            }
+        }
+    }
+    
+    @objc(rejectWishlistChange:responseId:failMessage:)
+    func rejectWishlistChange(reactTag: NSNumber, responseId: String, failMessage: String) {
+        self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
+            let view = viewRegistry?[reactTag]
+            if let stStorylyView = view as? STVerticalFeedPresenterView {
+                stStorylyView.rejectWishlistChange(responseId: responseId, failMessage: failMessage)
             }
         }
     }

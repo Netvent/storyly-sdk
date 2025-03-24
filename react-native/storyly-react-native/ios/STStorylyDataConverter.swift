@@ -177,7 +177,8 @@ func createSTRProductItemMap(product: STRProductItem?) -> [String: Any?] {
         "salesPrice": product.salesPrice, 
         "currency": product.currency,
         "variants": product.variants?.compactMap { createSTRProductVariantMap(variant: $0) },
-        "imageUrls": product.imageUrls.map { $0 }
+        "imageUrls": product.imageUrls.map { $0 },
+        "wishlist": product.wishlist
     ]
 }
 
@@ -201,7 +202,8 @@ internal func createSTRProductItem(productItem: NSDictionary?) -> STRProductItem
         currency: productItem?["currency"] as? String ?? "",
         imageUrls: productItem?["imageUrls"] as? [String],
         variants:  createSTRProductVariant(variants: productItem?["variants"] as? [NSDictionary] ?? []),
-        ctaText: productItem?["ctaText"] as? String
+        ctaText: productItem?["ctaText"] as? String,
+        wishlist:productItem?["wishlist"] as? Bool ?? false
     )
 }
 
