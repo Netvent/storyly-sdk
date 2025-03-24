@@ -1,4 +1,9 @@
 # Release Notes
+### 4.12.1 (24.03.2025)
+* added StorylyBarImpression as a public Storyly event
+* fixed a bug related to re-addition of product card interactive component
+* improved iconUrl of StoryGroup by providing dark theme url
+  
 ### 4.12.0 (13.03.2025)
 * added product wishlist support for product catalog component and product detail sheet
   
