@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.4.2 - 21.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.4.2/storyly-web.js)
+
+- Fix: Fixed multiple layout loading
+
 ### 4.4.0 - 12.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.4.0/storyly-web.js)
 
 - Feature: Added wishlist for products
