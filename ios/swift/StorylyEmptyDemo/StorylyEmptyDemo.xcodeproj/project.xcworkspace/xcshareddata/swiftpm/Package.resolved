@@ -1,0 +1,24 @@
+{
+  "originHash" : "f276dd4bea1074e3eede3f307fe3114014e6984f2b8c021265bdc6228a00fa99",
+  "pins" : [
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
+        "version" : "5.21.0"
+      }
+    },
+    {
+      "identity" : "storyly-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/netvent/storyly-ios",
+      "state" : {
+        "revision" : "2d416e77fc2335575c45dbe01e68950e1ae255d3",
+        "version" : "4.12.1"
+      }
+    }
+  ],
+  "version" : 3
+}
