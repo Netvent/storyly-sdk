@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.5.0 - 27.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.5.0/storyly-web.js)
+
+- Fix: Fixed tranparent cover border. [if you use custom styling please check](https://docs.storyly.io/docs/web-set-up-storyly-bar#custom-story-group-styling)
+
 ### 4.4.2 - 21.03.2025 [for cdn](https://web-story.storyly.io/sdk/4.4.2/storyly-web.js)
 
 - Fix: Fixed multiple layout loading
