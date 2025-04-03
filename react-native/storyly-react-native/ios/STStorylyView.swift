@@ -72,10 +72,18 @@ class STStorylyView: UIView {
     var onStorylyUserInteracted: RCTBubblingEventBlock?
     
     @objc(onCreateCustomView)
-    var onCreateCustomView: RCTBubblingEventBlock?
+    var onCreateCustomView: RCTBubblingEventBlock? {
+        didSet {
+            storyGroupViewFactory?.onCreateCustomView = self.onCreateCustomView
+        }
+    }
     
     @objc(onUpdateCustomView)
-    var onUpdateCustomView: RCTBubblingEventBlock?
+    var onUpdateCustomView: RCTBubblingEventBlock? {
+        didSet {
+            storyGroupViewFactory?.onUpdateCustomView = self.onUpdateCustomView
+        }
+    }
 
     @objc(onStorylyProductHydration)
     var onProductHydration: RCTBubblingEventBlock?
