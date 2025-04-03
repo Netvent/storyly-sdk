@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.12.2 (03.04.2025)
+* fixed a bug related to custom group styling events on ios platform
+
 ### 4.12.1 (24.03.2025)
 * added product wishlist support for product catalog component and product detail sheet
 * added StorylyBarImpression as a public Storyly event
