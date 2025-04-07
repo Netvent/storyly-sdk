@@ -102,7 +102,7 @@ class VerticalFeedController {
     return _methodChannel.invokeMethod('closeStory');
   }
 
-  /// This function allows you to open a specific story using
+  /// This function allows you to open a specific vertical feed item using
   /// `groupId` and `itemId`.
   Future<void> open(String groupId, String? itemId) {
     return _methodChannel.invokeMethod(
