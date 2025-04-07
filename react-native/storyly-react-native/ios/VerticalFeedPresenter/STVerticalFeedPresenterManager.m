@@ -5,15 +5,6 @@
 
 RCT_EXTERN_METHOD(refresh:(nonnull NSNumber *)reactTag)
 
-RCT_EXTERN_METHOD(open:(nonnull NSNumber *)reactTag
-                  payload:(nonnull NSURL *)payload)
-
-RCT_EXTERN_METHOD(openWithId:(nonnull NSNumber *)reactTag
-                  groupId:(nonnull NSString *)groupId
-                  itemId:(NSString *)itemId
-                  playMode:(NSString *)playMode
-                  )
-
 RCT_EXTERN_METHOD(hydrateProducts:(nonnull NSNumber *)reactTag
                   products:(nonnull NSArray<NSDictionary *> *)products)
 
