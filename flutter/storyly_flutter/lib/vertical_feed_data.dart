@@ -103,21 +103,21 @@ class VerticalFeedController {
   }
 
   /// This function allows you to open a specific story using
-  /// `storyGroupId` and `storyId`.
-  Future<void> openStory(String storyGroupId, String? storyId) {
+  /// `groupId` and `itemId`.
+  Future<void> open(String groupId, String? itemId) {
     return _methodChannel.invokeMethod(
-      'openStory',
+      'open',
       <String, dynamic>{
-        'storyGroupId': storyGroupId,
-        'storyId': storyId,
+        'groupId': groupId,
+        'itemId': itemId,
       },
     );
   }
 
   /// This function allows you to open using deeplink uri.
-  Future<void> openStoryUri(String uri) {
+  Future<void> openUri(String uri) {
     return _methodChannel.invokeMethod(
-      'openStoryUri',
+      'openUri',
       <String, dynamic>{
         'uri': uri,
       },

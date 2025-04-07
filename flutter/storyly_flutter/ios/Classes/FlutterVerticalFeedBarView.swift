@@ -82,13 +82,13 @@ internal class FlutterVerticalFeedViewBarWrapper: UIView {
             case "start": self.verticalFeedView.resumeVerticalFeed(animated: true)
             case "pauseStory": self.verticalFeedView.pauseVerticalFeed(animated: true)
             case "closeStory": self.verticalFeedView.closeVerticalFeed(animated: true)
-            case "openStory":
-                _ = self.verticalFeedView.openStory(storyGroupId: callArguments?["storyGroupId"] as? String ?? "",
-                                                    storyId: callArguments?["storyId"] as? String)
-            case "openStoryUri":
+            case "open":
+                _ = self.verticalFeedView.open(groupId: callArguments?["groupId"] as? String ?? "",
+                                                itemId: callArguments?["itemId"] as? String)
+            case "openUri":
                 if let payloadString = callArguments?["uri"] as? String,
                    let payloadUrl = URL(string: payloadString) {
-                    _ = self.verticalFeedView.openStory(payload: payloadUrl)
+                    _ = self.verticalFeedView.open(payload: payloadUrl)
                 }
             case "hydrateProducts":
                 if let products = callArguments?["products"] as? [[String : Any?]] {
