@@ -40,19 +40,19 @@ class VerticalFeedPresenter extends Component {
         );
     };
 
-    openStory = (payload) => {
+    open = (payload) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.openStory,
+            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.open,
             [payload],
         );
     };
 
-    openStoryWithId = (storyGroupId, storyId, playMode) => {
+    openWithId = (groupId, itemId, playMode) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.openStoryWithId,
-            [storyGroupId, storyId, playMode],
+            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.openWithId,
+            [groupId, itemId, playMode],
         );
     };
 

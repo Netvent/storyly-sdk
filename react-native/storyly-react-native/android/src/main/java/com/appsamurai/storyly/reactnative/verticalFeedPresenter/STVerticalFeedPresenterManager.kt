@@ -36,10 +36,10 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
-        private const val COMMAND_OPEN_STORY_NAME = "openStory"
-        private const val COMMAND_OPEN_STORY_CODE = 4
-        private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
-        private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
+        private const val COMMAND_OPEN_NAME = "open"
+        private const val COMMAND_OPEN_CODE = 4
+        private const val COMMAND_OPEN_WITH_ID_NAME = "openWithId"
+        private const val COMMAND_OPEN_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
         private const val COMMAND_UPDATE_CART_NAME = "updateCart"
@@ -111,8 +111,8 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
             COMMAND_REFRESH_NAME to COMMAND_REFRESH_CODE,
-            COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
-            COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
+            COMMAND_OPEN_NAME to COMMAND_OPEN_CODE,
+            COMMAND_OPEN_WITH_ID_NAME to COMMAND_OPEN_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
             COMMAND_HYDRATE_WISHLIST_NAME to COMMAND_HYDRATE_WISHLIST_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
