@@ -36,10 +36,10 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
-        private const val COMMAND_OPEN_STORY_NAME = "openStory"
-        private const val COMMAND_OPEN_STORY_CODE = 4
-        private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
-        private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
+        private const val COMMAND_OPEN_NAME = "open"
+        private const val COMMAND_OPEN_CODE = 4
+        private const val COMMAND_OPEN_WITH_ID_NAME = "openWithId"
+        private const val COMMAND_OPEN_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
         private const val COMMAND_UPDATE_CART_NAME = "updateCart"
@@ -111,8 +111,8 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
             COMMAND_REFRESH_NAME to COMMAND_REFRESH_CODE,
-            COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
-            COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
+            COMMAND_OPEN_NAME to COMMAND_OPEN_CODE,
+            COMMAND_OPEN_WITH_ID_NAME to COMMAND_OPEN_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
             COMMAND_HYDRATE_WISHLIST_NAME to COMMAND_HYDRATE_WISHLIST_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
@@ -129,9 +129,9 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
     override fun receiveCommand(root: STVerticalFeedBarView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             COMMAND_REFRESH_CODE -> root.verticalFeedBarView?.refresh()
-            COMMAND_OPEN_STORY_CODE -> {
+            COMMAND_OPEN_CODE -> {
                 val payloadStr: String = args?.getString(0) ?: return
-                root.verticalFeedBarView?.openStory(Uri.parse(payloadStr))
+                root.verticalFeedBarView?.open(Uri.parse(payloadStr))
             }
 
             COMMAND_HYDRATE_PRODUCT_CODE -> {
@@ -193,11 +193,11 @@ class STVerticalFeedBarManager : ViewGroupManager<STVerticalFeedBarView>() {
                 root.rejectWishlistChange(responseId, failMessage)
             }
 
-            COMMAND_OPEN_STORY_WITH_ID_CODE -> {
-                val storyGroupId: String = args?.getString(0) ?: return
-                val storyId: String? = if (args.size() > 1) args.getString(1) else null
+            COMMAND_OPEN_WITH_ID_CODE -> {
+                val groupId: String = args?.getString(0) ?: return
+                val itemId: String? = if (args.size() > 1) args.getString(1) else null
                 val playMode: String? = if (args.size() > 2) args.getString(2) else null
-                root.verticalFeedBarView?.openStory(storyGroupId, storyId, getPlayMode(playMode))
+                root.verticalFeedBarView?.open(groupId, itemId, getPlayMode(playMode))
             }
 
             COMMAND_RESUME_STORY_CODE -> root.verticalFeedBarView?.resumeStory()

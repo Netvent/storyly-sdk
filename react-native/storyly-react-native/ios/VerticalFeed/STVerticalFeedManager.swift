@@ -63,24 +63,24 @@ class STVerticalFeedManager: RCTViewManager {
         }
     }
     
-    @objc(openStory:payload:)
-    func openStory(reactTag: NSNumber, payload: NSURL) {
-        print("STR:STStorylyManager:openStory(payload:\(payload.absoluteString ?? ""))")
+    @objc(open:payload:)
+    func open(reactTag: NSNumber, payload: NSURL) {
+        print("STR:STStorylyManager:open(payload:\(payload.absoluteString ?? ""))")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
-                _ = stStorylyView.openStory(payload: payload as URL)
+                _ = stStorylyView.open(payload: payload as URL)
             }
         }
     }
     
-    @objc(openStoryWithId:storyGroupId:storyId:playMode:)
-    func openStory(reactTag: NSNumber, storyGroupId: String, storyId: String?, playMode: String?) {
-        print("STR:STStorylyManager:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
+    @objc(openWithId:groupId:itemId:playMode:)
+    func open(reactTag: NSNumber, groupId: String, itemId: String?, playMode: String?) {
+        print("STR:STStorylyManager:open(groupId:\(groupId):itemId:\(itemId))")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedBarView {
-                _ = stStorylyView.openStory(storyGroupId: storyGroupId , storyId: storyId, playMode: playMode)
+                _ = stStorylyView.open(groupId: groupId , itemId: itemId, playMode: playMode)
             }
         }
     }
