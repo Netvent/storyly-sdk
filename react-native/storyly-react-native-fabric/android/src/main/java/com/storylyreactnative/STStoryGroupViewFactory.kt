@@ -37,7 +37,7 @@ class STStoryGroupViewFactory(
     }
 
     private fun onUpdateView(customView: STStoryGroupView, storyGroup: StoryGroup?) {
-        val index = customViewList.indexOf(customView).takeIf { it != -1 } ?: returns
+        val index = customViewList.indexOf(customView).takeIf { it != -1 } ?: return
         dispatchEvent?.invoke(
             STEvent.Type.ON_UPDATE_CUSTOM_VIEW, mapOf(
                 "index" to index,
