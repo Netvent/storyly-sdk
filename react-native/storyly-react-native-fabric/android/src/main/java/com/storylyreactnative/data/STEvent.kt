@@ -3,6 +3,7 @@ package com.storylyreactnative.data
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.events.Event
+import com.facebook.react.uimanager.events.RCTEventEmitter
 import org.json.JSONObject
 
 internal class STEvent(
@@ -14,7 +15,9 @@ internal class STEvent(
 
     override fun getEventName() = event.rawName
 
-    override fun getCoalescingKey(): Short = 0
+    override fun canCoalesce(): Boolean {
+        return false
+    }
 
     override fun getEventData(): WritableMap? = Arguments.createMap().apply {
         raw?.let {
@@ -40,5 +43,8 @@ internal class STEvent(
         ON_STORYLY_ON_CART_UPDATED("onStorylyCartUpdated"),
         ON_STORYLY_PRODUCT_EVENT("onStorylyProductEvent"),
         ON_STORYLY_SIZE_CHANGED("onStorylySizeChanged"),
+
+        ON_CREATE_CUSTOM_VIEW("onCreateCustomView"),
+        ON_UPDATE_CUSTOM_VIEW("onUpdateCustomView"),
     }
 }

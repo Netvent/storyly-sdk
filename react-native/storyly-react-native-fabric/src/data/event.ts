@@ -58,3 +58,8 @@ export interface StorySizeChangedEvent extends BaseEvent {
   width: number;
   height: number;
 }
+
+export interface UpdateCustomViewEvent extends BaseEvent {
+  index: number;
+  storyGroup?: StoryGroup;
+}

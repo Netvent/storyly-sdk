@@ -30,6 +30,10 @@ export interface StorylyConfig {
         titleVisible?: boolean,
         groupSize?: string,
     }
+    storyGroupViewFactory: {
+        width: number,
+        height: number,
+    }
     storyBarStyling: {
         orientation?: string,
         sections?: number,
@@ -71,6 +75,10 @@ export const mapStorylyConfig = (props: StorylyProps) => {
             'storylyIsTestMode': props.storylyTestMode,
             'storylyLayoutDirection': props.storylyLayoutDirection,
             'storylyLocale': props.storylyLocale,
+        },
+        'storyGroupViewFactory': {
+            'width': props.storyGroupViewFactory ? props.storyGroupViewFactory.width : 0,
+            'height': props.storyGroupViewFactory ? props.storyGroupViewFactory.height : 0,
         },
         'storyGroupStyling': {
             'iconBorderColorSeen': props.storyGroupIconBorderColorSeen ? props.storyGroupIconBorderColorSeen.map(processColor) : undefined,

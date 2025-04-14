@@ -1,9 +1,10 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import StorylyNativeView, { Commands, applyBaseEvent } from "./fabric/StorylyReactNativeViewNativeComponent";
 import type { STRCart, STRProductItem } from "./data/story";
-import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent, StorySizeChangedEvent } from "./data/event";
+import type { BaseEvent, ProductEvent, StoryEvent, StoryFailEvent, StoryInteractiveEvent, StoryLoadEvent, StoryPresentFail, StoryPressEvent, StoryProductCartUpdateEvent, StoryProductHydrationEvent, StorySizeChangedEvent, UpdateCustomViewEvent } from "./data/event";
 import type { ViewProps } from "react-native";
 import { mapStorylyConfig } from "./data/config";
+import { STStorylyGroupViewFactory, type StoryGroupViewFactory, type StorylyGroupViewFactoryHandle } from "./StorylyGroupViewFactory";
 
 type StorylyNativeComponentRef = InstanceType<typeof StorylyNativeView>;
 
@@ -24,6 +25,8 @@ export interface StorylyProps extends ViewProps {
     storyGroupIconBackgroundColor?: string;
     storyGroupIconBorderColorSeen?: string[];
     storyGroupIconBorderColorNotSeen?: string[];
+
+    storyGroupViewFactory?: StoryGroupViewFactory;
 
     storyGroupTextSize?: number;
     storyGroupTextLines?: number;
@@ -89,6 +92,7 @@ export interface StorylyMethods {
 const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
 
     const storylyRef = useRef<StorylyNativeComponentRef>(null);
+    const customGroupRef = useRef<StorylyGroupViewFactoryHandle>(null);
 
     useImperativeHandle(ref, () => ({
         refresh,
@@ -130,37 +134,37 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
 
     const openStory = (url: string) => {
         if (storylyRef.current) {
-            Commands.openStory(storylyRef.current, JSON.stringify({url}))
+            Commands.openStory(storylyRef.current, JSON.stringify({ url }))
         }
     }
 
     const openStoryWithId = (groupId: string, storyId?: string, playMode?: string) => {
         if (storylyRef.current) {
-            Commands.openStoryWithId(storylyRef.current, JSON.stringify({groupId, storyId, playMode}))
+            Commands.openStoryWithId(storylyRef.current, JSON.stringify({ groupId, storyId, playMode }))
         }
     }
 
     const hydrateProducts = (products: STRProductItem[]) => {
         if (storylyRef.current) {
-            Commands.hydrateProducts(storylyRef.current, JSON.stringify({products}))
+            Commands.hydrateProducts(storylyRef.current, JSON.stringify({ products }))
         }
     }
 
     const updateCart = (cart: STRCart) => {
         if (storylyRef.current) {
-            Commands.updateCart(storylyRef.current, JSON.stringify({cart}))
+            Commands.updateCart(storylyRef.current, JSON.stringify({ cart }))
         }
     }
 
     const approveCartChange = (responseId: string, cart: STRCart) => {
         if (storylyRef.current) {
-            Commands.approveCartChange(storylyRef.current, JSON.stringify({responseId, cart}))
+            Commands.approveCartChange(storylyRef.current, JSON.stringify({ responseId, cart }))
         }
     }
 
     const rejectCartChange = (responseId: string, failMessage: string) => {
         if (storylyRef.current) {
-            Commands.rejectCartChange(storylyRef.current, JSON.stringify({responseId, failMessage}))
+            Commands.rejectCartChange(storylyRef.current, JSON.stringify({ responseId, failMessage }))
         }
     }
 
@@ -237,6 +241,17 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
         }
     }
 
+    const _onCreateCustomView = (_: BaseEvent) => {
+        console.log("create base view");
+        customGroupRef.current?.onCreateCustomView()
+    }
+
+    const _onUpdateCustomView = (event: BaseEvent) => {
+        console.log("update base view");
+        customGroupRef.current?.onUpdateCustomView(event as UpdateCustomViewEvent)
+    }
+
+    const storylyConfig = mapStorylyConfig(props)
     return (
         <StorylyNativeView
             {...props}
@@ -253,7 +268,20 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
             onStorylyCartUpdated={applyBaseEvent(_onStorylyCartUpdated)}
             onStorylyProductEvent={applyBaseEvent(_onStorylyProductEvent)}
             onStorylySizeChanged={applyBaseEvent(_onStorylySizeChanged)}
-            storylyConfig={mapStorylyConfig(props)} />
+            onCreateCustomView={applyBaseEvent(_onCreateCustomView)}
+            onUpdateCustomView={applyBaseEvent(_onUpdateCustomView)}
+            storylyConfig={storylyConfig} >
+
+            {props.storyGroupViewFactory ?
+                <STStorylyGroupViewFactory
+                    ref={customGroupRef}
+                    key={storylyConfig}
+                    width={props.storyGroupViewFactory.width}
+                    height={props.storyGroupViewFactory.height}
+                    customView={props.storyGroupViewFactory.customView}
+                />
+                : <></>}
+        </StorylyNativeView>
     )
 })
 

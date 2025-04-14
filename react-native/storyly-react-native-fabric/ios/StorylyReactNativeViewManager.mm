@@ -4,31 +4,39 @@
 #import "StorylyReactNativeView.h"
 
 
- @interface StorylyReactNativeViewManager : RCTViewManager
- @end
+@interface StorylyReactNativeViewManager : RCTViewManager
+@end
 
- @implementation StorylyReactNativeViewManager
+@implementation StorylyReactNativeViewManager
 
- RCT_EXPORT_MODULE(StorylyReactNativeView)
+RCT_EXPORT_MODULE(StorylyReactNativeView)
 
 - (UIView *)view
 {
   return [[UIView alloc] init];
 }
 
- RCT_EXPORT_VIEW_PROPERTY(storylyConfig, NSString)
++ (BOOL)requiresMainQueueSetup
+{
+    return TRUE;
+}
 
- RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyEvent, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyActionClicked, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresented, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresentFailed, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryDismissed, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyProductHydration, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyProductEvent, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylyCartUpdated, RCTBubblingEventBlock)
- RCT_EXPORT_VIEW_PROPERTY(onStorylySizeChanged, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(storylyConfig, NSString)
 
- @end
+RCT_EXPORT_VIEW_PROPERTY(onStorylyLoaded, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyLoadFailed, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyEvent, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyActionClicked, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresented, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryPresentFailed, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyStoryDismissed, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyUserInteracted, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyProductHydration, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyProductEvent, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylyCartUpdated, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStorylySizeChanged, RCTBubblingEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(onCreateCustomView, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onUpdateCustomView, RCTBubblingEventBlock)
+
+@end

@@ -23,6 +23,9 @@ interface StorylyNativeProps extends ViewProps {
   onStorylyCartUpdated: BubblingEventHandler<Event>;
   onStorylyProductEvent: BubblingEventHandler<Event>;
   onStorylySizeChanged: BubblingEventHandler<Event>;
+
+  onCreateCustomView: BubblingEventHandler<Event>;
+  onUpdateCustomView: BubblingEventHandler<Event>;
 }
 
 export const applyBaseEvent = (callback: (event: BaseEvent)=>void) => {
