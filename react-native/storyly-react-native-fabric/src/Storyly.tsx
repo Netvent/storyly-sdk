@@ -242,12 +242,10 @@ const Storyly = forwardRef<StorylyMethods, StorylyProps>((props, ref) => {
     }
 
     const _onCreateCustomView = (_: BaseEvent) => {
-        console.log("create base view");
         customGroupRef.current?.onCreateCustomView()
     }
 
     const _onUpdateCustomView = (event: BaseEvent) => {
-        console.log("update base view");
         customGroupRef.current?.onUpdateCustomView(event as UpdateCustomViewEvent)
     }
 

@@ -27,12 +27,10 @@ export const STStorylyGroupViewFactory = forwardRef<StorylyGroupViewFactoryHandl
     }))
 
     const onCreateCustomView = () => {
-        console.log("STR:RN:onCreateCustomView")
         setCustomViewList((current) => ([...current, null]))
     }
 
     const onUpdateCustomView = ({index, storyGroup}: UpdateCustomViewEvent) => {
-        console.log(`STR:RN:onUpdateCustomView:${index}:${storyGroup?.id}`);
         setCustomViewList((current) => (
             [...current.map((value, i) => ((i === index) ? storyGroup : value))]
         ))

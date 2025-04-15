@@ -35,7 +35,6 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
     }
 
     override fun addView(parent: STStorylyView, child: View, index: Int) {
-        println("RN:Android:StorylyReactNativeViewManager:addView:index=${index}")
         parent.onAttachCustomReactNativeView(child, index)
     }
 

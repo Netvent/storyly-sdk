@@ -25,7 +25,7 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
     
     func createView() -> StoryGroupView {
         let storyGroupView = STStoryGroupView(frame: .zero)
-        storyGroupView.onViewUpdate = self.onUpdateView//        storyGroupView.onViewRemove = self.onRemoveView
+        storyGroupView.onViewUpdate = self.onUpdateView
         customViewList.append(storyGroupView)
         onCreateCustomView?()
         return storyGroupView
@@ -50,7 +50,7 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
     }
     
     private func onUpdateView(_ groupView: STStoryGroupView, _ storyGroup: StoryGroup?) {
-        guard var index = self.customViewList.firstIndex(of: groupView) else { return }
+        guard let index = self.customViewList.firstIndex(of: groupView) else { return }
         onUpdateCustomView?([
             "index": index,
             "storyGroup": createStoryGroupMap(storyGroup: storyGroup) as Any
