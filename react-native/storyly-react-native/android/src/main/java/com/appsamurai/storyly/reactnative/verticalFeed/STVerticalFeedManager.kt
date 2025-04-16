@@ -19,6 +19,7 @@ import com.appsamurai.storyly.reactnative.createSTRProductItem
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
+import com.appsamurai.storyly.verticalfeed.VFPlayMode
 import com.appsamurai.storyly.verticalfeed.config.StorylyVerticalFeedConfig
 import com.appsamurai.storyly.verticalfeed.config.bar.StorylyVerticalFeedBarStyling
 import com.appsamurai.storyly.verticalfeed.config.customization.StorylyVerticalFeedCustomization
@@ -206,11 +207,11 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
         }
     }
 
-    private fun getPlayMode(playMode: String?): PlayMode {
+    private fun getPlayMode(playMode: String?): VFPlayMode {
         return when (playMode) {
-            "story-group" -> PlayMode.StoryGroup
-            "story" -> PlayMode.Story
-            else -> PlayMode.Default
+            "feed-group" -> VFPlayMode.FeedGroup
+            "feed" -> VFPlayMode.Feed
+            else -> VFPlayMode.Default
         }
     }
 

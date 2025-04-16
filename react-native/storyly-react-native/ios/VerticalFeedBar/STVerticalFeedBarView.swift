@@ -177,10 +177,10 @@ extension STVerticalFeedBarView {
         storylyView?.closeVerticalFeed(animated: false)
     }
     
-    private func getPlayMode(playMode: String?) -> PlayMode {
+    private func getPlayMode(playMode: String?) -> VFPlayMode {
         switch playMode {
-            case "story-group": return .StoryGroup
-            case "story": return .Story
+            case "feed-group": return .FeedGroup
+            case "feed": return .Feed
             default: return .Default
         }
     }

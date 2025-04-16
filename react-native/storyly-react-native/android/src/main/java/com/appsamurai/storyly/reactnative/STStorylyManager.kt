@@ -10,7 +10,15 @@ import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.appsamurai.storyly.*
+import com.appsamurai.storyly.PlayMode
+import com.appsamurai.storyly.StoryGroupAnimation
+import com.appsamurai.storyly.StoryGroupCustomIconSize
+import com.appsamurai.storyly.StoryGroupCustomIconType
+import com.appsamurai.storyly.StoryGroupListOrientation
+import com.appsamurai.storyly.StoryGroupSize
+import com.appsamurai.storyly.StorylyInit
+import com.appsamurai.storyly.StorylyLayoutDirection
+import com.appsamurai.storyly.StorylyView
 import com.appsamurai.storyly.config.StorylyConfig
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig

@@ -8,14 +8,12 @@ import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
-import com.appsamurai.storyly.*
+import com.appsamurai.storyly.PlayMode
+import com.appsamurai.storyly.StorylyLayoutDirection
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.reactnative.createSTRCart
 import com.appsamurai.storyly.reactnative.createSTRProductItem
-import com.appsamurai.storyly.reactnative.verticalFeed.STVerticalFeedManager
-import com.appsamurai.storyly.reactnative.verticalFeedBar.STVerticalFeedBarManager
-import com.appsamurai.storyly.reactnative.verticalFeedBar.STVerticalFeedBarManager.Companion
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedPresenterView
@@ -185,14 +183,6 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
             COMMAND_RESUME_STORY_CODE -> root.verticalFeedView?.play()
             COMMAND_PAUSE_STORY_CODE -> root.verticalFeedView?.pause()
-        }
-    }
-
-    private fun getPlayMode(playMode: String?): PlayMode {
-        return when (playMode) {
-            "story-group" -> PlayMode.StoryGroup
-            "story" -> PlayMode.Story
-            else -> PlayMode.Default
         }
     }
 
