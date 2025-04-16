@@ -1,4 +1,12 @@
 # Release Notes
+### 4.13.0 (16.04.2025)
+* IMPORTANT! renamed openStory function and PlayMode for Vertical Feed
+* added data cache invalidation for customParameter changes
+* improved asset load mechanism by prioritizing app bundle
+* improved interactive component initial animations for prefetched stories
+* fixed a memory leak related to video covers
+* fixed wishlist icon visibility for static product catalog interactive component
+  
 ### 4.12.1 (24.03.2025)
 * added StorylyBarImpression as a public Storyly event
 * improved iconUrl of StoryGroup by providing dark theme url
