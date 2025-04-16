@@ -86,7 +86,14 @@ using namespace facebook::react;
           [weakSelf storylyEventEmitter]
             ->onStorylySizeChanged(StorylyReactNativeViewEventEmitter::OnStorylySizeChanged{std::string([raw UTF8String])});
       };
-      
+      _stStorylyView.onCreateCustomView = ^() {
+          [weakSelf storylyEventEmitter]
+            ->onCreateCustomView(StorylyReactNativeViewEventEmitter::OnCreateCustomView{});
+      };
+      _stStorylyView.onUpdateCustomView = ^(NSString* raw) {
+          [weakSelf storylyEventEmitter]
+            ->onUpdateCustomView(StorylyReactNativeViewEventEmitter::OnUpdateCustomView{std::string([raw UTF8String])});
+      };
       self.contentView = _stStorylyView;
       
      NSLog([NSString stringWithFormat:@"StorylyReactNativeView:initWithFrame: %@", _stStorylyView]);
@@ -181,6 +188,10 @@ using namespace facebook::react;
 
 - (void)rejectCartChange:(nonnull NSString *)raw {
     [_stStorylyView rejectCartChange: raw];
+}
+
+- (void)insertSubview:(UIView *)view atIndex:(NSInteger)index {
+    [_stStorylyView insertReactSubview:(STStorylyGroupView *) view atIndex:index];
 }
 
 @end

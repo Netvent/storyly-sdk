@@ -2,6 +2,7 @@ package com.storylyreactnative
 
 import android.app.Activity
 import android.net.Uri
+import android.view.View
 import com.appsamurai.storyly.PlayMode
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.module.annotations.ReactModule
@@ -33,6 +34,10 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
         return STStorylyView(context)
     }
 
+    override fun addView(parent: STStorylyView, child: View, index: Int) {
+        parent.onAttachCustomReactNativeView(child, index)
+    }
+
     override fun receiveCommand(root: STStorylyView, commandId: String?, args: ReadableArray?) {
         delegate.receiveCommand(root, commandId, args)
     }
@@ -40,11 +45,13 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
     @ReactProp(name = "storylyConfig")
     override fun setStorylyConfig(view: STStorylyView?, value: String?) {
         val activity = view?.activity as? Activity ?: return
-
         val rawConfig = value?.let { jsonStringToMap(it) } ?: return
         val bundle = createStorylyBundle(activity, rawConfig)
         view.apply {
             storylyView = bundle?.storylyView
+            storyGroupViewFactory = bundle?.storyGroupViewFactory?.apply {
+                dispatchEvent = view::dispatchEvent
+            }
         }
     }
 

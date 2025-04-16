@@ -24,9 +24,11 @@ public class STStorylyView: UIView {
             guard let storyBundleRaw = storyBundleRaw,
                   let storylyBundle = StorylyBundle.build(rawJson: storyBundleRaw) else {
                 storylyView = nil
+                storyGroupViewFactory = nil
                 return
             }
             storylyView = storylyBundle.storylyView
+            storyGroupViewFactory = storylyBundle.storyGroupViewFactory
         }
     }
     
@@ -44,6 +46,19 @@ public class STStorylyView: UIView {
             storylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         }
     }
+    
+    private var storyGroupViewFactory: STStoryGroupViewFactory? = nil {
+        didSet {
+            guard let storyGroupViewFactory = storyGroupViewFactory else { return }
+            storyGroupViewFactory.onCreateCustomView = { [weak self] in
+                self?.onCreateCustomView?()
+            }
+            storyGroupViewFactory.onUpdateCustomView = { [weak self] data in
+                guard let event = encodeEvent(json: data) else { return }
+                self?.onUpdateCustomView?(event)
+            }
+        }
+     }
     
     @objc(onStorylyLoaded)
     public var onStorylyLoaded: ((String) -> Void)?
@@ -81,6 +96,13 @@ public class STStorylyView: UIView {
     @objc(onStorylySizeChanged)
     public var onStorylySizeChanged: ((String) -> Void)?
     
+    @objc(onCreateCustomView)
+    public var onCreateCustomView: (() -> Void)?
+    
+    @objc(onUpdateCustomView)
+    public var onUpdateCustomView: ((String) -> Void)?
+    
+    
     public override init(frame: CGRect) {
         print("STR:STStorylyView:init(frame:\(frame))")
         super.init(frame: frame)
@@ -96,7 +118,10 @@ public class STStorylyView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-
+    
+    public override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
+        storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
+    }
 }
 
 extension STStorylyView {

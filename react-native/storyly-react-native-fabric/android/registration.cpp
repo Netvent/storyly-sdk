@@ -7,6 +7,7 @@ namespace react {
 void registerProviders() {
     auto providerRegistry = CoreComponentsRegistry::sharedProviderRegistry();
     providerRegistry->add(concreteComponentDescriptorProvider<StorylyReactNativeViewComponentDescriptor>());
+    providerRegistry->add(concreteComponentDescriptorProvider<StorylyGroupViewComponentDescriptor>());
 }
 
 }
