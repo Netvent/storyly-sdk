@@ -1,4 +1,9 @@
 # Release Notes
+### 4.13.0 (16.04.2025)
+* IMPORTANT! renamed openStory function and PlayMode for Vertical Feed
+* added data cache invalidation for customParameter changes
+* fixed a bug related to timed interactive animations
+
 ### 4.12.1 (24.03.2025)
 * added StorylyBarImpression as a public Storyly event
 * fixed a bug related to re-addition of product card interactive component
