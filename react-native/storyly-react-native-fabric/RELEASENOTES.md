@@ -1,5 +1,51 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+
+### 4.13.0 (16.04.2025)
+* fixed a bug related to timed interactive animations on android platform
+* added data cache invalidation for customParameter changes
+* improved asset load mechanism by prioritizing app bundle on ios platform
+* improved interactive component initial animations for prefetched stories on ios platform
+* fixed a memory leak related to video covers on ios platform
+* fixed a bug related to custom group styling events on ios platform
+* added StorylyBarImpression as a public Storyly event
+* improved iconUrl of StoryGroup by providing dark theme url
+* fixed a bug related to re-addition of product card interactive component on android platform
+* fixed a bug related to border color of rating interactive component on ios platform
+* fixed a bug related to keyboard focus of comment interactive component on ios platform
+* added accessibility fields for Turkish
+* added support for single response comment interactive component
+* improved story description accessibility field for English and Hebrew
+* improved quiz interactive component with enabled/disabled percentage information
+* improved image quiz interactive component with enabled/disabled percentage information
+* improved poll interactive component with enabled/disabled percentage information
+* improved emoji interactive component with enabled/disabled percentage information
+* improved rating interactive component with enabled/disabled average answer information
+* decreased animation duration for quiz, image quiz and emoji interactive components
+* adapted edge-to-edge display to Storyly for android >= 35 on android platform
+* fixed a bug related opacity of image quiz interactive component on android platform
+* fixed a crash related to countdown interactive component on android platform
+* fixed a crash related to video cache on ios platform
+* fixed layout issues on iPad devices for Storyly  on ios platform
+* added missing localization fields for Hebrew
+* added framework information for analytical purposes
+* added support for tap and go groups
+* fixed a bug related to StorylyView edge padding on android platform
+* fixed resizing of CTA button of product bottom sheet on android platform
+* improved failure recovery for analytic requests on android platform
+* improved interactive component initial animations for prefetched stories on android platform  
+* fixed a bug related to story group/story transitions when voiceover is enabled on ios platform
+* fixed a bug related to RTL layouts for storyly on ios platform
+* IMPORTANT! fixed crash related to widget style on android platform
+* improved story rendering while transitioning between stories
+* improved skeleton view rendering flow
+* fixed areas for next/previous clicks for RTL layouts
+* fixed a bug related to openStory for sg play mode
+* added config for pin icon visibility
+* added dynamic cover size option for pinned story groups
+* added config for app logo visibility for shared media
+* improved areas for next/previous clicks
+
 ### 3.11.0 (13.12.2024)
 * added local data cache invalidation on minor and major sdk version change
 

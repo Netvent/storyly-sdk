@@ -3,6 +3,7 @@ import { type ViewProps } from 'react-native';
 import type { UpdateCustomViewEvent } from "./data/event";
 import React from "react";
 import type { StoryGroup } from "./data/story";
+import { type Optional } from './data/util';
 import StorylyGroupView from "./fabric/StorylyGroupViewNativeComponent"
 
 
