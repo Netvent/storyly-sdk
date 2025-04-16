@@ -2,6 +2,7 @@ package com.storylyreactnative
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.Choreographer
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,8 @@ import com.appsamurai.storyly.data.managers.product.STRCart
 import com.appsamurai.storyly.data.managers.product.STRCartEventResult
 import com.appsamurai.storyly.data.managers.product.STRCartItem
 import com.appsamurai.storyly.data.managers.product.STRProductInformation
+import com.appsamurai.storyly.data.managers.product.STRProductItem
+import com.appsamurai.storyly.data.managers.product.STRWishlistEventResult
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerHelper
@@ -142,6 +145,17 @@ class STStorylyView(
                         "responseId" to responseId,
                     )
                 )
+            }
+
+            override fun storylyUpdateWishlistEvent(
+                storylyView: StorylyView,
+                item: STRProductItem?,
+                event: StorylyEvent,
+                onSuccess: ((STRProductItem?) -> Unit)?,
+                onFail: ((STRWishlistEventResult) -> Unit)?
+            ) {
+                Log.w("[Storyly-RN]", "storylyUpdateWishlistEvent not implemented")
+                onFail?.invoke(STRWishlistEventResult("storylyUpdateWishlistEvent not implemented"))
             }
 
             override fun storylyEvent(

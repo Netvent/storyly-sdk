@@ -343,4 +343,9 @@ class STStorylyProductDelegate: StorylyProductDelegate {
         guard let eventJson = encodeEvent(json: map) else { return }
         view?.onStorylyProductHydration?(eventJson)
     }
+    
+    func storylyUpdateWishlistEvent(storylyView: StorylyView, item: STRProductItem?, event: StorylyEvent, onSuccess: ((STRProductItem?) -> Void)?, onFail: ((STRWishlistEventResult) -> Void)?) {
+        print("storylyUpdateWishlistEvent not implemented")
+        onFail?(STRWishlistEventResult(message: "storylyUpdateWishlistEvent not implemented"))
+    }
 }
