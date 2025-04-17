@@ -56,12 +56,12 @@ class FlutterVerticalFeedView(
                 "resumeStory" -> verticalFeedView.resumeStory()
                 "pauseStory" -> verticalFeedView.pauseStory()
                 "closeStory" -> verticalFeedView.closeStory()
-                "openStory" -> verticalFeedView.openStory(
-                    callArguments?.get("storyGroupId") as? String ?: "",
-                    callArguments?.getOrElse("storyId") { null } as? String
+                "open" -> verticalFeedView.open(
+                    callArguments?.get("groupId") as? String ?: "",
+                    callArguments?.getOrElse("itemId") { null } as? String
                 )
 
-                "openStoryUri" -> verticalFeedView.openStory(Uri.parse(callArguments?.get("uri") as? String))
+                "openUri" -> verticalFeedView.open(Uri.parse(callArguments?.get("uri") as? String))
                 "hydrateProducts" -> (callArguments?.get("products") as? List<Map<String, Any?>>)?.let {
                     val products = it.map { product -> createSTRProductItem(product) }
                     verticalFeedView.hydrateProducts(products)
