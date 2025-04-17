@@ -161,14 +161,6 @@ extension STVerticalFeedPresenterView {
         print("STR:STStorylyView:pauseStory()")
         storylyView?.pause()
     }
-    
-    private func getPlayMode(playMode: String?) -> PlayMode {
-        switch playMode {
-            case "story-group": return .StoryGroup
-            case "story": return .Story
-            default: return .Default
-        }
-    }
 }
 
 extension STVerticalFeedPresenterView: StorylyVerticalFeedPresenterDelegate {

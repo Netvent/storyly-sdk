@@ -40,19 +40,19 @@ class VerticalFeedBar extends Component {
         );
     };
 
-    openStory = (payload) => {
+    open = (payload) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedBar').Commands.openStory,
+            UIManager.getViewManagerConfig('STVerticalFeedBar').Commands.open,
             [payload],
         );
     };
 
-    openStoryWithId = (storyGroupId, storyId, playMode) => {
+    openWithId = (groupId, itemId, playMode) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedBar').Commands.openStoryWithId,
-            [storyGroupId, storyId, playMode],
+            UIManager.getViewManagerConfig('STVerticalFeedBar').Commands.openWithId,
+            [groupId, itemId, playMode],
         );
     };
 

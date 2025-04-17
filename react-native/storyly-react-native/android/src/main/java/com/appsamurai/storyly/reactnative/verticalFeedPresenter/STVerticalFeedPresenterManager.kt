@@ -8,14 +8,12 @@ import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
-import com.appsamurai.storyly.*
+import com.appsamurai.storyly.PlayMode
+import com.appsamurai.storyly.StorylyLayoutDirection
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
 import com.appsamurai.storyly.reactnative.createSTRCart
 import com.appsamurai.storyly.reactnative.createSTRProductItem
-import com.appsamurai.storyly.reactnative.verticalFeed.STVerticalFeedManager
-import com.appsamurai.storyly.reactnative.verticalFeedBar.STVerticalFeedBarManager
-import com.appsamurai.storyly.reactnative.verticalFeedBar.STVerticalFeedBarManager.Companion
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedPresenterView
@@ -36,10 +34,6 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
-        private const val COMMAND_OPEN_STORY_NAME = "openStory"
-        private const val COMMAND_OPEN_STORY_CODE = 4
-        private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
-        private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
         private const val COMMAND_UPDATE_CART_NAME = "updateCart"
@@ -111,8 +105,6 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
             COMMAND_REFRESH_NAME to COMMAND_REFRESH_CODE,
-            COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
-            COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
             COMMAND_HYDRATE_WISHLIST_NAME to COMMAND_HYDRATE_WISHLIST_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
@@ -191,14 +183,6 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
             COMMAND_RESUME_STORY_CODE -> root.verticalFeedView?.play()
             COMMAND_PAUSE_STORY_CODE -> root.verticalFeedView?.pause()
-        }
-    }
-
-    private fun getPlayMode(playMode: String?): PlayMode {
-        return when (playMode) {
-            "story-group" -> PlayMode.StoryGroup
-            "story" -> PlayMode.Story
-            else -> PlayMode.Default
         }
     }
 

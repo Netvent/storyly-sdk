@@ -40,22 +40,6 @@ class VerticalFeedPresenter extends Component {
         );
     };
 
-    openStory = (payload) => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.openStory,
-            [payload],
-        );
-    };
-
-    openStoryWithId = (storyGroupId, storyId, playMode) => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.openStoryWithId,
-            [storyGroupId, storyId, playMode],
-        );
-    };
-
     hydrateProducts = (products) => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),

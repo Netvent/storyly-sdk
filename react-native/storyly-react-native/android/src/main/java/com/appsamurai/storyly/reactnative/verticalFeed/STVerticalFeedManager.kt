@@ -19,6 +19,7 @@ import com.appsamurai.storyly.reactnative.createSTRProductItem
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedGroupOrder
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedInit
 import com.appsamurai.storyly.verticalfeed.StorylyVerticalFeedView
+import com.appsamurai.storyly.verticalfeed.VFPlayMode
 import com.appsamurai.storyly.verticalfeed.config.StorylyVerticalFeedConfig
 import com.appsamurai.storyly.verticalfeed.config.bar.StorylyVerticalFeedBarStyling
 import com.appsamurai.storyly.verticalfeed.config.customization.StorylyVerticalFeedCustomization
@@ -36,10 +37,10 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
 
         private const val COMMAND_REFRESH_NAME = "refresh"
         private const val COMMAND_REFRESH_CODE = 1
-        private const val COMMAND_OPEN_STORY_NAME = "openStory"
-        private const val COMMAND_OPEN_STORY_CODE = 4
-        private const val COMMAND_OPEN_STORY_WITH_ID_NAME = "openStoryWithId"
-        private const val COMMAND_OPEN_STORY_WITH_ID_CODE = 5
+        private const val COMMAND_OPEN_NAME = "open"
+        private const val COMMAND_OPEN_CODE = 4
+        private const val COMMAND_OPEN_WITH_ID_NAME = "openWithId"
+        private const val COMMAND_OPEN_WITH_ID_CODE = 5
         private const val COMMAND_HYDRATE_PRODUCT_NAME = "hydrateProducts"
         private const val COMMAND_HYDRATE_PRODUCT_CODE = 6
         private const val COMMAND_UPDATE_CART_NAME = "updateCart"
@@ -111,8 +112,8 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
             COMMAND_REFRESH_NAME to COMMAND_REFRESH_CODE,
-            COMMAND_OPEN_STORY_NAME to COMMAND_OPEN_STORY_CODE,
-            COMMAND_OPEN_STORY_WITH_ID_NAME to COMMAND_OPEN_STORY_WITH_ID_CODE,
+            COMMAND_OPEN_NAME to COMMAND_OPEN_CODE,
+            COMMAND_OPEN_WITH_ID_NAME to COMMAND_OPEN_WITH_ID_CODE,
             COMMAND_HYDRATE_PRODUCT_NAME to COMMAND_HYDRATE_PRODUCT_CODE,
             COMMAND_HYDRATE_WISHLIST_NAME to COMMAND_HYDRATE_WISHLIST_CODE,
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
@@ -129,9 +130,9 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
     override fun receiveCommand(root: STVerticalFeedView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             COMMAND_REFRESH_CODE -> root.verticalFeedView?.refresh()
-            COMMAND_OPEN_STORY_CODE -> {
+            COMMAND_OPEN_CODE -> {
                 val payloadStr: String = args?.getString(0) ?: return
-                root.verticalFeedView?.openStory(Uri.parse(payloadStr))
+                root.verticalFeedView?.open(Uri.parse(payloadStr))
             }
 
             COMMAND_HYDRATE_PRODUCT_CODE -> {
@@ -193,11 +194,11 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
                 root.rejectWishlistChange(responseId, failMessage)
             }
 
-            COMMAND_OPEN_STORY_WITH_ID_CODE -> {
-                val storyGroupId: String = args?.getString(0) ?: return
-                val storyId: String? = if (args.size() > 1) args.getString(1) else null
+            COMMAND_OPEN_WITH_ID_CODE -> {
+                val groupId: String = args?.getString(0) ?: return
+                val itemId: String? = if (args.size() > 1) args.getString(1) else null
                 val playMode: String? = if (args.size() > 2) args.getString(2) else null
-                root.verticalFeedView?.openStory(storyGroupId, storyId, getPlayMode(playMode))
+                root.verticalFeedView?.open(groupId, itemId, getPlayMode(playMode))
             }
 
             COMMAND_RESUME_STORY_CODE -> root.verticalFeedView?.resumeStory()
@@ -206,11 +207,11 @@ class STVerticalFeedManager : ViewGroupManager<STVerticalFeedView>() {
         }
     }
 
-    private fun getPlayMode(playMode: String?): PlayMode {
+    private fun getPlayMode(playMode: String?): VFPlayMode {
         return when (playMode) {
-            "story-group" -> PlayMode.StoryGroup
-            "story" -> PlayMode.Story
-            else -> PlayMode.Default
+            "feed-group" -> VFPlayMode.FeedGroup
+            "feed" -> VFPlayMode.Feed
+            else -> VFPlayMode.Default
         }
     }
 

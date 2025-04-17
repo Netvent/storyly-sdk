@@ -108,14 +108,14 @@ extension STVerticalFeedView {
         storylyView?.refresh()
     }
     
-    func openStory(payload: URL) {
-        print("STR:STStorylyView:openStory(payload:\(payload))")
-        storylyView?.openStory(payload: payload)
+    func open(payload: URL) {
+        print("STR:STStorylyView:open(payload:\(payload))")
+        storylyView?.open(payload: payload)
     }
     
-    func openStory(storyGroupId: String, storyId: String?, playMode: String?) {
-        print("STR:STStorylyView:openStory(storyGroupId:\(storyGroupId):storyId:\(storyId))")
-        storylyView?.openStory(storyGroupId: storyGroupId, storyId: storyId, play: getPlayMode(playMode: playMode))
+    func open(groupId: String, itemId: String?, playMode: String?) {
+        print("STR:STStorylyView:open(groupId:\(groupId):itemId:\(itemId))")
+        storylyView?.open(groupId: groupId, itemId: itemId, play: getPlayMode(playMode: playMode))
     }
 
     func hydrateProducts(products: [STRProductItem]) {
@@ -177,10 +177,10 @@ extension STVerticalFeedView {
         storylyView?.closeVerticalFeed(animated: false)
     }
     
-    private func getPlayMode(playMode: String?) -> PlayMode {
+    private func getPlayMode(playMode: String?) -> VFPlayMode {
         switch playMode {
-            case "story-group": return .StoryGroup
-            case "story": return .Story
+            case "feed-group": return .FeedGroup
+            case "feed": return .Feed
             default: return .Default
         }
     }
