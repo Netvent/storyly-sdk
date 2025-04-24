@@ -396,7 +396,7 @@ internal func createStoryComponentMap(storyComponent: StoryComponent) -> [String
             "id": imageQuizComponent.id,
             "customPayload": imageQuizComponent.customPayload,
             "title": imageQuizComponent.title,
-            "options": imageQuizComponent.options,
+            "options": imageQuizComponent.options ?? [],
             "rightAnswerIndex": imageQuizComponent.rightAnswerIndex?.intValue,
             "selectedOptionIndex": imageQuizComponent.selectedOptionIndex,
         ]

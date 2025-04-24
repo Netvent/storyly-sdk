@@ -298,7 +298,7 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
             "id": imageQuizComponent.id,
             "customPayload": imageQuizComponent.customPayload,
             "title": imageQuizComponent.title,
-            "options": imageQuizComponent.options,
+            "options": imageQuizComponent.options ?? [],
             "rightAnswerIndex": imageQuizComponent.rightAnswerIndex?.intValue,
             "selectedOptionIndex": imageQuizComponent.selectedOptionIndex,
         ]
