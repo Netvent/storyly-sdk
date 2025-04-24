@@ -163,6 +163,25 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
                 storyComponentMap.putInt("selectedOptionIndex", quizComponent.selectedOptionIndex)
             }
 
+            StoryComponentType.ImageQuiz -> {
+                val quizComponent = storyComponent as StoryImageQuizComponent
+                storyComponentMap.putString("type", "quiz")
+                storyComponentMap.putString("id", quizComponent.id)
+                storyComponentMap.putString("customPayload", quizComponent.customPayload)
+                storyComponentMap.putString("title", quizComponent.title)
+                storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
+                    quizComponent.options?.forEach { option ->
+                        optionsArray.pushString(option)
+                    }
+                })
+                quizComponent.rightAnswerIndex?.let {
+                    storyComponentMap.putInt("rightAnswerIndex", it)
+                } ?: run {
+                    storyComponentMap.putNull("rightAnswerIndex")
+                }
+                storyComponentMap.putInt("selectedOptionIndex", quizComponent.selectedOptionIndex)
+            }
+
             StoryComponentType.Poll -> {
                 val pollComponent = storyComponent as StoryPollComponent
                 storyComponentMap.putString("type", "poll")

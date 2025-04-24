@@ -122,6 +122,15 @@ func createStoryComponentMap(storyComponent: StoryComponent) -> [String: Any?] {
             "selectedOptionIndex": storyComponent.selectedOptionIndex,
             "customPayload": storyComponent.customPayload
         ]
+        case let storyComponent as StoryImageQuizComponent: return [
+            "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
+            "id": storyComponent.id,
+            "title": storyComponent.title,
+            "options": storyComponent.options,
+            "rightAnswerIndex": storyComponent.rightAnswerIndex,
+            "selectedOptionIndex": storyComponent.selectedOptionIndex,
+            "customPayload": storyComponent.customPayload
+        ]
         case let storyComponent as StoryPollComponent: return [
             "type": StoryComponentTypeHelper.storyComponentName(componentType:storyComponent.type).lowercased(),
             "id": storyComponent.id,

@@ -167,6 +167,13 @@ declare module "storyly-react-native" {
       selectedOptionIndex: number;
     }
 
+    export interface StoryImageQuizComponent extends StoryComponent {
+      title: string;
+      options: string[];
+      rightAnswerIndex?: number;
+      selectedOptionIndex: number;
+    }
+
     export interface StoryPollComponent extends StoryComponent {
       title: string;
       emojiCodes: string[];
