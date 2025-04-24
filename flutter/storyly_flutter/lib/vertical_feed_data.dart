@@ -528,6 +528,8 @@ VerticalFeedItemComponent? getVerticalFeedItemComponent(
       return VerticalFeedItemProductCatalogComponent.fromJson(json);
     case 'quiz':
       return VerticalFeedItemQuizComponent.fromJson(json);
+    case 'imagequiz':
+      return VerticalFeedItemImageQuizComponent.fromJson(json);
     case 'poll':
       return VerticalFeedItemPollComponent.fromJson(json);
     case 'emoji':
@@ -597,6 +599,53 @@ class VerticalFeedItemQuizComponent implements VerticalFeedItemComponent {
 
   factory VerticalFeedItemQuizComponent.fromJson(Map<String, dynamic> json) {
     return VerticalFeedItemQuizComponent(
+      type: json['type'],
+      id: json['id'],
+      customPayload: json['customPayload'],
+      rightAnswerIndex: json['rightAnswerIndex'],
+      title: json['title'],
+      options: List<String>.from(json['options'].map((x) => x)),
+      selectedOptionIndex: json['selectedOptionIndex'],
+    );
+  }
+}
+
+
+/// This data class represents the ImageQuiz component.
+class VerticalFeedItemImageQuizComponent implements VerticalFeedItemComponent {
+  VerticalFeedItemImageQuizComponent({
+    required this.type,
+    required this.id,
+    required this.customPayload,
+    this.rightAnswerIndex,
+    required this.title,
+    required this.options,
+    required this.selectedOptionIndex,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  @override
+  final String? customPayload;
+
+  /// rightAnswerIndex Index of the right answer if exists
+  final int? rightAnswerIndex;
+
+  /// title Title of the quiz if exists
+  final String title;
+
+  /// options List of options in the image quiz
+  final List<String> options;
+
+  /// selectedOptionIndex Option index that the user selected
+  final int selectedOptionIndex;
+
+  factory VerticalFeedItemImageQuizComponent.fromJson(Map<String, dynamic> json) {
+    return VerticalFeedItemImageQuizComponent(
       type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
