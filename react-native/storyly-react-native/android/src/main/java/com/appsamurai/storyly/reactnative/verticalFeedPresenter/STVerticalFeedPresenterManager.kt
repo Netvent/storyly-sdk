@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
-import com.appsamurai.storyly.PlayMode
 import com.appsamurai.storyly.StorylyLayoutDirection
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
@@ -42,12 +41,10 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
         private const val COMMAND_APPROVE_CART_CHANGE_CODE = 8
         private const val COMMAND_REJECT_CART_CHANGE_NAME = "rejectCartChange"
         private const val COMMAND_REJECT_CART_CHANGE_CODE = 9
-        private const val COMMAND_RESUME_STORY_NAME = "resumeStory"
-        private const val COMMAND_RESUME_STORY_CODE = 10
-        private const val COMMAND_PAUSE_STORY_NAME = "pauseStory"
-        private const val COMMAND_PAUSE_STORY_CODE = 11
-        private const val COMMAND_CLOSE_STORY_NAME = "closeStory"
-        private const val COMMAND_CLOSE_STORY_CODE = 12
+        private const val COMMAND_PLAY_NAME = "play"
+        private const val COMMAND_PLAY_CODE = 10
+        private const val COMMAND_PAUSE_NAME = "pause"
+        private const val COMMAND_PAUSE_CODE = 11
         private const val COMMAND_APPROVE_WISHLIST_CHANGE_NAME = "approveWishlistChange"
         private const val COMMAND_APPROVE_WISHLIST_CHANGE_CODE = 13
         private const val COMMAND_REJECT_WISHLIST_CHANGE_NAME = "rejectWishlistChange"
@@ -110,9 +107,8 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
             COMMAND_UPDATE_CART_NAME to COMMAND_UPDATE_CART_CODE,
             COMMAND_APPROVE_CART_CHANGE_NAME to COMMAND_APPROVE_CART_CHANGE_CODE,
             COMMAND_REJECT_CART_CHANGE_NAME to COMMAND_REJECT_CART_CHANGE_CODE,
-            COMMAND_RESUME_STORY_NAME to COMMAND_RESUME_STORY_CODE,
-            COMMAND_PAUSE_STORY_NAME to COMMAND_PAUSE_STORY_CODE,
-            COMMAND_CLOSE_STORY_NAME to COMMAND_CLOSE_STORY_CODE,
+            COMMAND_PLAY_NAME to COMMAND_PLAY_CODE,
+            COMMAND_PAUSE_NAME to COMMAND_PAUSE_CODE,
             COMMAND_APPROVE_WISHLIST_CHANGE_NAME to COMMAND_APPROVE_WISHLIST_CHANGE_CODE,
             COMMAND_REJECT_WISHLIST_CHANGE_NAME to COMMAND_REJECT_WISHLIST_CHANGE_CODE,
         )
@@ -181,8 +177,8 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
                 root.rejectWishlistChange(responseId, failMessage)
             }
 
-            COMMAND_RESUME_STORY_CODE -> root.verticalFeedView?.play()
-            COMMAND_PAUSE_STORY_CODE -> root.verticalFeedView?.pause()
+            COMMAND_PLAY_CODE -> root.verticalFeedView?.play()
+            COMMAND_PAUSE_CODE -> root.verticalFeedView?.pause()
         }
     }
 

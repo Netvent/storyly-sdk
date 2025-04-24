@@ -152,12 +152,12 @@ extension STVerticalFeedPresenterView {
         wishlistUpdateSuccessFailCallbackMap.removeValue(forKey: responseId)
     }
     
-    func resumeStory() {
+    func play() {
         print("STR:STStorylyView:resumeStory()")
         storylyView?.play()
     }
 
-    func pauseStory() {
+    func pause() {
         print("STR:STStorylyView:pauseStory()")
         storylyView?.pause()
     }

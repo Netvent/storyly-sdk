@@ -41,7 +41,7 @@ export default class App extends Component {
                             storylyId={"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MjA1MTEsImluc19pZCI6MjI5NDJ9.TXCs-M6guskLJA1JXmu7PlmPxUKfyw88lBpOdxmgpDI"}
                             onLoad={loadEvent => {
                                 console.log(`[Vertical Feed Presenter] - onLoad`);
-                                this.verticalFeedPresenter.resumeStory()
+                                this.verticalFeedPresenter.play()
                             }}
                             onEvent={ verticalFeedEvent => {
                                 console.log(`[Vertical Feed Presenter] - onEvent ${verticalFeedEvent.event} ${verticalFeedEvent.feedGroup.toString()}`);
@@ -54,6 +54,7 @@ export default class App extends Component {
                             }}
                             onPress={ VerticalFeedPressEvent => {
                                 console.log(`[Vertical Feed Presenter] - onPress ${VerticalFeedPressEvent.feedItem}`);
+                                this.verticalFeedPresenter.pause()
                             }}
                             onWishlistUpdate={ event => {                 
                                 event.item.wishlist = !event.item.wishlist      

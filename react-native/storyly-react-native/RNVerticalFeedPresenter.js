@@ -16,26 +16,18 @@ class VerticalFeedPresenter extends Component {
         );
     };
 
-    resumeStory = () => {
+    play = () => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.resumeStory,
+            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.play,
             [],
         );
     };
 
-    pauseStory = () => {
+    pause = () => {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.pauseStory,
-            [],
-        );
-    };
-
-    closeStory = () => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this._verticalFeedBarView),
-            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.closeStory,
+            UIManager.getViewManagerConfig('STVerticalFeedPresenter').Commands.pause,
             [],
         );
     };
