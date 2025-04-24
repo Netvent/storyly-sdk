@@ -194,7 +194,7 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
 
             VerticalFeedItemComponentType.ImageQuiz-> {
                 val quizComponent = verticalFeedComponent as VerticalFeedItemImageQuizComponent
-                storyComponentMap.putString("type", "quiz")
+                storyComponentMap.putString("type", "imagequiz")
                 storyComponentMap.putString("id", quizComponent.id)
                 storyComponentMap.putString("title", quizComponent.title)
                 storyComponentMap.putString("customPayload", quizComponent.customPayload)

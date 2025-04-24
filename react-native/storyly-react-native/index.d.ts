@@ -497,6 +497,13 @@ declare module "storyly-react-native" {
       customPayload?: string;
     }
 
+    export interface VerticalFeedItemImageQuizComponent extends StoryComponent {
+      title: string;
+      options: string[];
+      rightAnswerIndex?: number;
+      selectedOptionIndex: number;
+    }
+
     export interface VerticalFeedItemPollComponent extends VerticalFeedItemComponent {
       title: string;
       emojiCodes: string[];

@@ -165,7 +165,7 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): WritableMa
 
             StoryComponentType.ImageQuiz -> {
                 val quizComponent = storyComponent as StoryImageQuizComponent
-                storyComponentMap.putString("type", "quiz")
+                storyComponentMap.putString("type", "imagequiz")
                 storyComponentMap.putString("id", quizComponent.id)
                 storyComponentMap.putString("customPayload", quizComponent.customPayload)
                 storyComponentMap.putString("title", quizComponent.title)
