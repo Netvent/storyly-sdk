@@ -9,6 +9,7 @@ import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.viewmanagers.StorylyGroupViewManagerDelegate
 import com.facebook.react.viewmanagers.StorylyGroupViewManagerInterface
+import com.facebook.react.views.view.ReactViewGroup
 
 @ReactModule(name = StorylyGroupViewManager.NAME)
 class StorylyGroupViewManager : ViewGroupManager<STStorylyGroupView>(),
@@ -32,4 +33,4 @@ class StorylyGroupViewManager : ViewGroupManager<STStorylyGroupView>(),
 }
 
 
-class STStorylyGroupView(context: Context) : FrameLayout(context)
+class STStorylyGroupView(context: Context) : ReactViewGroup(context)
