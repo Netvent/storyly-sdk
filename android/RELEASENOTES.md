@@ -1,4 +1,10 @@
 # Release Notes
+### 4.14.0 (29.04.2025)
+* added network configuration to customize hosts
+* added VerticalFeedBarImpression as a public Vertical Feed event
+* added setTitleTextSize function to StorylyStoryStyling
+* fixed a bug related to dark cover update for custom styling
+  
 ### 4.13.0 (16.04.2025)
 * IMPORTANT! renamed openStory function and PlayMode for Vertical Feed
 * added data cache invalidation for customParameter changes
