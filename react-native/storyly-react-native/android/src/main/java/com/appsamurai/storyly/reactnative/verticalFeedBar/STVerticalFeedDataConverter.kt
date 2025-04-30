@@ -22,6 +22,7 @@ import com.appsamurai.storyly.verticalfeed.VerticalFeedItemCommentComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponentType
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemEmojiComponent
+import com.appsamurai.storyly.verticalfeed.VerticalFeedItemImageQuizComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemPollComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemProductCardComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemProductCatalogComponent
@@ -179,6 +180,26 @@ internal fun createVerticalFeedComponentMap(verticalFeedComponent: VerticalFeedI
                 storyComponentMap.putString("customPayload", quizComponent.customPayload)
                 storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
                     quizComponent.options.forEach { option ->
+                        optionsArray.pushString(option)
+                    }
+                })
+                quizComponent.rightAnswerIndex?.let {
+                    storyComponentMap.putInt("rightAnswerIndex", it)
+                } ?: run {
+                    storyComponentMap.putNull("rightAnswerIndex")
+                }
+                storyComponentMap.putInt("selectedOptionIndex", quizComponent.selectedOptionIndex)
+                storyComponentMap.putString("customPayload", quizComponent.customPayload)
+            }
+
+            VerticalFeedItemComponentType.ImageQuiz-> {
+                val quizComponent = verticalFeedComponent as VerticalFeedItemImageQuizComponent
+                storyComponentMap.putString("type", "imagequiz")
+                storyComponentMap.putString("id", quizComponent.id)
+                storyComponentMap.putString("title", quizComponent.title)
+                storyComponentMap.putString("customPayload", quizComponent.customPayload)
+                storyComponentMap.putArray("options", Arguments.createArray().also { optionsArray ->
+                    quizComponent.options?.forEach { option ->
                         optionsArray.pushString(option)
                     }
                 })

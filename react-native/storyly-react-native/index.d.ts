@@ -167,6 +167,13 @@ declare module "storyly-react-native" {
       selectedOptionIndex: number;
     }
 
+    export interface StoryImageQuizComponent extends StoryComponent {
+      title: string;
+      options: string[];
+      rightAnswerIndex?: number;
+      selectedOptionIndex: number;
+    }
+
     export interface StoryPollComponent extends StoryComponent {
       title: string;
       emojiCodes: string[];
@@ -488,6 +495,13 @@ declare module "storyly-react-native" {
       rightAnswerIndex?: number;
       selectedOptionIndex: number;
       customPayload?: string;
+    }
+
+    export interface VerticalFeedItemImageQuizComponent extends StoryComponent {
+      title: string;
+      options: string[];
+      rightAnswerIndex?: number;
+      selectedOptionIndex: number;
     }
 
     export interface VerticalFeedItemPollComponent extends VerticalFeedItemComponent {

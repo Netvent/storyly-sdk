@@ -122,6 +122,15 @@ func createVerticalFeedItemComponentMap(storyComponent: VerticalFeedItemComponen
             "selectedOptionIndex": verticalFeedComponent.selectedOptionIndex,
             "customPayload": verticalFeedComponent.customPayload
         ]
+        case let verticalFeedComponent as VerticalFeedImageQuizComponent: return [
+            "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:verticalFeedComponent.type).lowercased(),
+            "id": verticalFeedComponent.id,
+            "title": verticalFeedComponent.title,
+            "options": verticalFeedComponent.options,
+            "rightAnswerIndex": verticalFeedComponent.rightAnswerIndex,
+            "selectedOptionIndex": verticalFeedComponent.selectedOptionIndex,
+            "customPayload": verticalFeedComponent.customPayload
+        ]
         case let verticalFeedComponent as VerticalFeedPollComponent: return [
             "type": VerticalFeedItemComponentTypeHelper.verticalFeedItemComponentName(componentType:verticalFeedComponent.type).lowercased(),
             "id": verticalFeedComponent.id,
