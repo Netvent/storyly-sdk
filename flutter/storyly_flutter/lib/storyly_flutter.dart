@@ -773,7 +773,6 @@ class StoryQuizComponent implements StoryComponent {
   }
 }
 
-
 /// This data class represents the ImageQuiz component.
 class StoryImageQuizComponent implements StoryComponent {
   StoryImageQuizComponent({
@@ -819,7 +818,6 @@ class StoryImageQuizComponent implements StoryComponent {
     );
   }
 }
-
 
 /// This data class represents the Poll component.
 class StoryPollComponent implements StoryComponent {

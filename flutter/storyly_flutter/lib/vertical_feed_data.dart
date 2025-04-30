@@ -610,7 +610,6 @@ class VerticalFeedItemQuizComponent implements VerticalFeedItemComponent {
   }
 }
 
-
 /// This data class represents the ImageQuiz component.
 class VerticalFeedItemImageQuizComponent implements VerticalFeedItemComponent {
   VerticalFeedItemImageQuizComponent({
@@ -644,7 +643,8 @@ class VerticalFeedItemImageQuizComponent implements VerticalFeedItemComponent {
   /// selectedOptionIndex Option index that the user selected
   final int selectedOptionIndex;
 
-  factory VerticalFeedItemImageQuizComponent.fromJson(Map<String, dynamic> json) {
+  factory VerticalFeedItemImageQuizComponent.fromJson(
+      Map<String, dynamic> json) {
     return VerticalFeedItemImageQuizComponent(
       type: json['type'],
       id: json['id'],
