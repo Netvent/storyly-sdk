@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
-import com.appsamurai.storyly.PlayMode
 import com.appsamurai.storyly.StorylyLayoutDirection
 import com.appsamurai.storyly.config.StorylyProductConfig
 import com.appsamurai.storyly.config.StorylyShareConfig
@@ -158,7 +157,7 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
             COMMAND_REJECT_CART_CHANGE_CODE -> {
                 val responseId: String = args?.getString(0) ?: return
-                val failMessage: String = if (args.size() > 1) args.getString(1) else ""
+                val failMessage: String = if (args.size() > 1) args.getString(1) ?: "" else ""
                 root.rejectCartChange(responseId, failMessage)
             }
 
@@ -177,7 +176,7 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
             COMMAND_REJECT_WISHLIST_CHANGE_CODE -> {
                 val responseId: String = args?.getString(0) ?: return
-                val failMessage: String = if (args.size() > 1) args.getString(1) else ""
+                val failMessage: String = if (args.size() > 1) args.getString(1) ?: "" else ""
                 root.rejectWishlistChange(responseId, failMessage)
             }
 
