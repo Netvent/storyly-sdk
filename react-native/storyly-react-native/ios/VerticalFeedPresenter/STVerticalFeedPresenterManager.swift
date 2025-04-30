@@ -36,7 +36,7 @@ class STVerticalFeedPresenterManager: RCTViewManager {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedPresenterView {
-                stStorylyView.resumeStory()
+                stStorylyView.play()
             }
         }
     }
@@ -47,7 +47,7 @@ class STVerticalFeedPresenterManager: RCTViewManager {
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedPresenterView {
-                stStorylyView.pauseStory()
+                stStorylyView.pause()
             }
         }
     }
