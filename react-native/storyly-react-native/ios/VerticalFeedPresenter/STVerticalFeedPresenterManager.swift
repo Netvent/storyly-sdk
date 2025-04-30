@@ -30,8 +30,8 @@ class STVerticalFeedPresenterManager: RCTViewManager {
         }
     }
 
-    @objc(resumeStory:)
-    func resumeStory(reactTag: NSNumber) {
+    @objc(play:)
+    func play(reactTag: NSNumber) {
         print("STR:STStorylyManager:resumeStory()")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
@@ -41,8 +41,8 @@ class STVerticalFeedPresenterManager: RCTViewManager {
         }
     }
 
-    @objc(pauseStory:)
-    func pauseStory(reactTag: NSNumber) {
+    @objc(pause:)
+    func pause(reactTag: NSNumber) {
         print("STR:STStorylyManager:pauseStory()")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
