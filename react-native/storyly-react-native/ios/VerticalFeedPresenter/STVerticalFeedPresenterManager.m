@@ -30,11 +30,9 @@ RCT_EXTERN_METHOD(rejectWishlistChange:(nonnull NSNumber *)reactTag
                   responseId:(nonnull NSString *)responseId
                   failMessage:(nonnull NSString *)failMessage)
                   
-RCT_EXTERN_METHOD(resumeStory:(nonnull NSNumber *)reactTag)
+RCT_EXTERN_METHOD(play:(nonnull NSNumber *)reactTag)
 
-RCT_EXTERN_METHOD(pauseStory:(nonnull NSNumber *)reactTag)
-
-RCT_EXTERN_METHOD(closeStory:(nonnull NSNumber *)reactTag)
+RCT_EXTERN_METHOD(pause:(nonnull NSNumber *)reactTag)
 
 RCT_REMAP_VIEW_PROPERTY(storyly, storylyBundle, stVerticalFeedPresenterBundle)
 

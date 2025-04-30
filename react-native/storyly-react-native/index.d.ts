@@ -1117,9 +1117,8 @@ declare module "storyly-react-native" {
 
   export class VerticalFeedPresenter extends Component<VerticalFeedPresenter.Props> {
     refresh: () => void;
-    pauseStory: () => void;
-    resumeStory: () => void;
-    closeStory: () => void;
+    play: () => void;
+    pause: () => void;
     hydrateProducts: (products: STRProductItem[]) => void;
     hydrateWishlist: (products: STRProductItem[]) => void;
     updateCart: (cart: STRCart) => void;
