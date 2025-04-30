@@ -312,7 +312,7 @@ internal fun createStoryComponentMap(storyComponent: VerticalFeedItemComponent):
                 "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
                 "id" to storyComponent.id,
                 "customPayload" to storyComponent.customPayload,
-                "title" to storyComponent.title ?: "",
+                "title" to (storyComponent.title ?: ""),
                 "options" to (storyComponent.options ?: emptyList()),
                 "rightAnswerIndex" to storyComponent.rightAnswerIndex,
                 "selectedOptionIndex" to storyComponent.selectedOptionIndex,
