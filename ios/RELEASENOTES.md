@@ -1,6 +1,6 @@
 # Release Notes
 ### 4.14.0 (29.04.2025)
-* added network configuration to customize hosts
+* added API endpoint configuration to StorylyConfig 
 * added VerticalFeedBarImpression as a public Vertical Feed event
 * fixed a bug related to swipe interactive component animation
 * fixed a bug related to dark cover update for custom styling

@@ -1,5 +1,20 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.14.0 (30.04.2025)
+* IMPORTANT! renamed openStory function for Vertical Feed
+* fixed nullable string cast issue for latest versions of react native
+* fixed a bug related to dark cover update for custom styling
+* fixed a bug related to swipe interactive component animationg on ios platform
+* fixed a memory leak related to video covers on ios platform
+* fixed wishlist icon visibility for static product catalog interactive component on ios platform
+* fixed a bug related to timed interactive animations on android platform
+* added StoryImageQuizComponent
+* added play and pause function for VerticalFeedPresenter
+* added data cache invalidation for customParameter changes
+* added VerticalFeedBarImpression as a public Vertical Feed event
+* improved asset load mechanism by prioritizing app bundle on ios platform
+* improved interactive component initial animations for prefetched stories on ios platform
+
 ### 4.12.2 (03.04.2025)
 * fixed a bug related to custom group styling events on ios platform
 

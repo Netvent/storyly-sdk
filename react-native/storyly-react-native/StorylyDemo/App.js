@@ -126,7 +126,7 @@ export default class App extends Component {
                             console.log(`[Vertical Feed Bar] - onLoad`);
                         }}
                         onEvent={ verticalFeedEvent => {
-                            console.log(`[Vertical Feed Bar] - onEvent ${verticalFeedEvent.event} ${verticalFeedEvent.feedGroup.toString()}`);
+                            console.log(`[Vertical Feed Bar] - onEvent ${verticalFeedEvent.event}}`);
                         }}
                         onCartUpdate={ StoryProductCartUpdateEvent => {
                             console.log(`[Vertical Feed Bar] - onCartUpdate ${StoryProductCartUpdateEvent.event} ${StoryProductCartUpdateEvent.change.toString()}`);
@@ -153,7 +153,7 @@ export default class App extends Component {
                             console.log(`[Vertical Feed] - onLoad`);
                         }}
                         onEvent={ verticalFeedEvent => {
-                            console.log(`[Vertical Feed] - onEvent ${verticalFeedEvent.event} ${verticalFeedEvent.feedGroup.toString()}`);
+                            console.log(`[Vertical Feed] - onEvent ${verticalFeedEvent.event}`);
                         }}
                         onCartUpdate={ StoryProductCartUpdateEvent => {
                             console.log(`[Vertical Feed] - onCartUpdate ${StoryProductCartUpdateEvent.event} ${StoryProductCartUpdateEvent.change.toString()}`);
