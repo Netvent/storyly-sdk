@@ -21,6 +21,7 @@ import com.appsamurai.storyly.verticalfeed.VerticalFeedItemButtonComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemCommentComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemEmojiComponent
+import com.appsamurai.storyly.verticalfeed.VerticalFeedItemImageQuizComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemPollComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemProductCardComponent
 import com.appsamurai.storyly.verticalfeed.VerticalFeedItemProductCatalogComponent
@@ -301,6 +302,18 @@ internal fun createStoryComponentMap(storyComponent: VerticalFeedItemComponent):
                 "customPayload" to storyComponent.customPayload,
                 "title" to storyComponent.title,
                 "options" to storyComponent.options,
+                "rightAnswerIndex" to storyComponent.rightAnswerIndex,
+                "selectedOptionIndex" to storyComponent.selectedOptionIndex,
+            )
+        }
+
+        is VerticalFeedItemImageQuizComponent -> {
+            return mapOf(
+                "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
+                "id" to storyComponent.id,
+                "customPayload" to storyComponent.customPayload,
+                "title" to storyComponent.title ?: "",
+                "options" to (storyComponent.options ?: emptyList()),
                 "rightAnswerIndex" to storyComponent.rightAnswerIndex,
                 "selectedOptionIndex" to storyComponent.selectedOptionIndex,
             )

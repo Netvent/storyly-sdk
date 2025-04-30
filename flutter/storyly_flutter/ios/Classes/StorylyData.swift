@@ -390,6 +390,16 @@ internal func createStoryComponentMap(storyComponent: StoryComponent) -> [String
             "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
             "selectedOptionIndex": quizComponent.selectedOptionIndex,
         ]
+    case let imageQuizComponent as StoryImageQuizComponent:
+        return [
+            "type": "imagequiz",
+            "id": imageQuizComponent.id,
+            "customPayload": imageQuizComponent.customPayload,
+            "title": imageQuizComponent.title,
+            "options": imageQuizComponent.options ?? [],
+            "rightAnswerIndex": imageQuizComponent.rightAnswerIndex?.intValue,
+            "selectedOptionIndex": imageQuizComponent.selectedOptionIndex,
+        ]
     case let pollComponent as StoryPollComponent:
         return [
             "type": "poll",

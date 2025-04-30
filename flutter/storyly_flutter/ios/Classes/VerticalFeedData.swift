@@ -292,6 +292,16 @@ internal func createStoryComponentMap(storyComponent: VerticalFeedItemComponent?
             "rightAnswerIndex": quizComponent.rightAnswerIndex?.intValue,
             "selectedOptionIndex": quizComponent.selectedOptionIndex,
         ]
+    case let imageQuizComponent as VerticalFeedImageQuizComponent:
+        return [
+            "type": "imagequiz",
+            "id": imageQuizComponent.id,
+            "customPayload": imageQuizComponent.customPayload,
+            "title": imageQuizComponent.title,
+            "options": imageQuizComponent.options ?? [],
+            "rightAnswerIndex": imageQuizComponent.rightAnswerIndex?.intValue,
+            "selectedOptionIndex": imageQuizComponent.selectedOptionIndex,
+        ]
     case let pollComponent as VerticalFeedPollComponent:
         return [
             "type": "poll",

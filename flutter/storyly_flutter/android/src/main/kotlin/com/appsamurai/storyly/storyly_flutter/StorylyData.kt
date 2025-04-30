@@ -13,6 +13,7 @@ import com.appsamurai.storyly.StoryGroup
 import com.appsamurai.storyly.StoryGroupAnimation
 import com.appsamurai.storyly.StoryGroupListOrientation
 import com.appsamurai.storyly.StoryGroupSize
+import com.appsamurai.storyly.StoryImageQuizComponent
 import com.appsamurai.storyly.StoryPollComponent
 import com.appsamurai.storyly.StoryProductCardComponent
 import com.appsamurai.storyly.StoryProductCatalogComponent
@@ -325,6 +326,18 @@ internal fun createStoryComponentMap(storyComponent: StoryComponent): Map<String
                 "customPayload" to storyComponent.customPayload,
                 "title" to storyComponent.title,
                 "options" to storyComponent.options,
+                "rightAnswerIndex" to storyComponent.rightAnswerIndex,
+                "selectedOptionIndex" to storyComponent.selectedOptionIndex,
+            )
+        }
+
+        is StoryImageQuizComponent -> {
+            return mapOf(
+                "type" to storyComponent.type.name.lowercase(Locale.ENGLISH),
+                "id" to storyComponent.id,
+                "customPayload" to storyComponent.customPayload,
+                "title" to (storyComponent.title ?: ""),
+                "options" to (storyComponent.options ?: emptyList()),
                 "rightAnswerIndex" to storyComponent.rightAnswerIndex,
                 "selectedOptionIndex" to storyComponent.selectedOptionIndex,
             )

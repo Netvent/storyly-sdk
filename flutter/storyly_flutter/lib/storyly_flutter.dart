@@ -692,6 +692,8 @@ StoryComponent? getStorylyComponent(Map<String, dynamic>? json) {
       return StoryProductCatalogComponent.fromJson(json);
     case 'quiz':
       return StoryQuizComponent.fromJson(json);
+    case 'imagequiz':
+      return StoryImageQuizComponent.fromJson(json);
     case 'poll':
       return StoryPollComponent.fromJson(json);
     case 'emoji':
@@ -770,6 +772,54 @@ class StoryQuizComponent implements StoryComponent {
     );
   }
 }
+
+
+/// This data class represents the ImageQuiz component.
+class StoryImageQuizComponent implements StoryComponent {
+  StoryImageQuizComponent({
+    required this.type,
+    required this.id,
+    required this.customPayload,
+    this.rightAnswerIndex,
+    required this.title,
+    required this.options,
+    required this.selectedOptionIndex,
+  });
+
+  @override
+  final String type;
+
+  @override
+  final String id;
+
+  @override
+  final String? customPayload;
+
+  /// rightAnswerIndex Index of the right answer if exists
+  final int? rightAnswerIndex;
+
+  /// title Title of the quiz if exists
+  final String title;
+
+  /// options List of options in the image quiz
+  final List<String> options;
+
+  /// selectedOptionIndex Option index that the user selected
+  final int selectedOptionIndex;
+
+  factory StoryImageQuizComponent.fromJson(Map<String, dynamic> json) {
+    return StoryImageQuizComponent(
+      type: json['type'],
+      id: json['id'],
+      customPayload: json['customPayload'],
+      rightAnswerIndex: json['rightAnswerIndex'],
+      title: json['title'],
+      options: List<String>.from(json['options'].map((x) => x)),
+      selectedOptionIndex: json['selectedOptionIndex'],
+    );
+  }
+}
+
 
 /// This data class represents the Poll component.
 class StoryPollComponent implements StoryComponent {
