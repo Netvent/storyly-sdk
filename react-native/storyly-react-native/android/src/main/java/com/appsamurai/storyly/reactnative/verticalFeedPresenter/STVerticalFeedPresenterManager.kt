@@ -154,7 +154,7 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
             COMMAND_REJECT_CART_CHANGE_CODE -> {
                 val responseId: String = args?.getString(0) ?: return
-                val failMessage: String = if (args.size() > 1) args.getString(1) else ""
+                val failMessage: String = if (args.size() > 1) args.getString(1) ?: "" else ""
                 root.rejectCartChange(responseId, failMessage)
             }
 
@@ -173,7 +173,7 @@ class STVerticalFeedPresenterManager : ViewGroupManager<STVerticalFeedPresenterV
 
             COMMAND_REJECT_WISHLIST_CHANGE_CODE -> {
                 val responseId: String = args?.getString(0) ?: return
-                val failMessage: String = if (args.size() > 1) args.getString(1) else ""
+                val failMessage: String = if (args.size() > 1) args.getString(1) ?: "" else ""
                 root.rejectWishlistChange(responseId, failMessage)
             }
 
