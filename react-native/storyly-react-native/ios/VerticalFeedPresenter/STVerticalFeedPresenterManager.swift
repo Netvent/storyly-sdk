@@ -30,24 +30,24 @@ class STVerticalFeedPresenterManager: RCTViewManager {
         }
     }
 
-    @objc(resumeStory:)
-    func resumeStory(reactTag: NSNumber) {
+    @objc(play:)
+    func play(reactTag: NSNumber) {
         print("STR:STStorylyManager:resumeStory()")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedPresenterView {
-                stStorylyView.resumeStory()
+                stStorylyView.play()
             }
         }
     }
 
-    @objc(pauseStory:)
-    func pauseStory(reactTag: NSNumber) {
+    @objc(pause:)
+    func pause(reactTag: NSNumber) {
         print("STR:STStorylyManager:pauseStory()")
         self.bridge.uiManager.addUIBlock { uiManager, viewRegistry in
             let view = viewRegistry?[reactTag]
             if let stStorylyView = view as? STVerticalFeedPresenterView {
-                stStorylyView.pauseStory()
+                stStorylyView.pause()
             }
         }
     }
