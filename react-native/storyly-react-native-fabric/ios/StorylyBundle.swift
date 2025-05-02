@@ -49,9 +49,7 @@ private func stStorylyBundle(json: NSDictionary) -> StorylyBundle? {
     let storylyView = StorylyView()
     storylyView.storylyInit = StorylyInit(
         storylyId: storylyId,
-        config: storylyConfigBuilder
-            .setLayoutDirection(direction: getStorylyLayoutDirection(direction: json["storylyLayoutDirection"] as? String))
-            .build()
+        config: storylyConfigBuilder.build()
     )
     return StorylyBundle(storylyView: storylyView,
                          storyGroupViewFactory: storyGroupViewFactory
