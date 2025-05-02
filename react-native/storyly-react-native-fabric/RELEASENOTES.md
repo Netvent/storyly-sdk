@@ -1,5 +1,8 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.13.2 (02.05.2025)
+* fixed RTL assignment in StorylyConfig
+* fixed size conversion of custom styling on android platform
 
 ### 4.13.1 (25.04.2025)
 * improved layout of custom styling on android platform
