@@ -59,8 +59,9 @@ declare module "storyly-react-native" {
       storylyLocale?: string;
 
       onLoad?: (event: StoryLoadEvent) => void;
-      onFail?: (event: string) => void;
+      onFail?: (event: StoryFailEvent) => void;
       onStoryOpen?: () => void;
+      onStoryOpenFailed?: (event: StoryOpenFailedEvent) => void;
       onStoryClose?: () => void;
       onEvent?: (event: StoryEvent) => void;
       onPress?: (event: StoryPressEvent) => void;
@@ -78,6 +79,10 @@ declare module "storyly-react-native" {
     }
 
     export interface StoryFailEvent {
+      errorMessage: string;
+    }
+
+    export interface StoryOpenFailedEvent {
       errorMessage: string;
     }
 
