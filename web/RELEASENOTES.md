@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.5.5 - 15.05.2025 [for cdn](https://web-story.storyly.io/sdk/4.5.5/storyly-web.js)
+
+- Fix: Fixed compatibility with Next.js by preserving navigation state during URL updates, preventing issues when navigating back in single-page applications.
+
 ### 4.5.2 - 06.05.2025 [for cdn](https://web-story.storyly.io/sdk/4.5.2/storyly-web.js)
 
 - Fix: Fixed showing share shortcut when story shareable is disabled
