@@ -1,5 +1,8 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.14.1 (15.05.2025)
+* improved event types for storyly load failed and story open failed
+
 ### 4.14.0 (30.04.2025)
 * IMPORTANT! renamed openStory function for Vertical Feed
 * fixed nullable string cast issue for latest versions of react native
