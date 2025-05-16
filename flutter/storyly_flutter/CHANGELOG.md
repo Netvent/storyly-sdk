@@ -1,3 +1,10 @@
+### 4.15.0 (16.05.2025)
+* fixed a bug related to story group title custom font size
+* fixed a bug related to scrapped and detached views in StorylyBar on android platform
+* fixed a bug related to story header icon visibility on android platform
+* changed emoji library to emoji2 on android platform
+* fixed a bug related to energized group badges on ios platform
+
 ### 4.14.0 (30.04.2025)
 * IMPORTANT! renamed openStory function for Vertical Feed
 * fixed a bug related to dark cover update for custom styling
