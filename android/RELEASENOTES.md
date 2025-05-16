@@ -1,4 +1,11 @@
 # Release Notes
+### 4.15.0 (16.05.2025)
+* added open method for StorylyVerticalFeedPresenterView
+* fixed a bug related to scrapped and detached views in StorylyBar
+* fixed a bug related to story group title custom font size
+* fixed a bug related to story header icon visibility
+* changed emoji library to emoji2
+  
 ### 4.14.0 (29.04.2025)
 * add API endpoint configuration to StorylyConfig 
 * added VerticalFeedBarImpression as a public Vertical Feed event
