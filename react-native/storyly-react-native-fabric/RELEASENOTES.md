@@ -1,5 +1,14 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.15.0 (16.05.2025)
+* fixed a bug related to story group title custom font size
+* fixed a bug related to dark cover update for custom styling
+* fixed a bug related to scrapped and detached views in StorylyBar on android platform
+* fixed a bug related to story header icon visibility on android platform
+* fixed a bug related to swipe interactive component animation on android platform
+* changed emoji library to emoji2 on android platform
+* fixed a bug related to energized group badges on ios platform
+
 ### 4.13.2 (02.05.2025)
 * fixed RTL assignment in StorylyConfig
 * fixed size conversion of custom styling on android platform
