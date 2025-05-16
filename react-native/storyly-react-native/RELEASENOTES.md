@@ -1,5 +1,12 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.15.0 (16.05.2025)
+* fixed a bug related to story group title custom font size
+* fixed a bug related to scrapped and detached views in StorylyBar on android platform
+* fixed a bug related to story header icon visibility on android platform
+* changed emoji library to emoji2 on android platform
+* fixed a bug related to energized group badges on ios platform
+
 ### 4.14.1 (15.05.2025)
 * improved event types for storyly load failed and story open failed
 
