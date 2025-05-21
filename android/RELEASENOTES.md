@@ -1,4 +1,7 @@
 # Release Notes
+### 4.15.1 (21.05.2025)
+* fixed a bug related to Storyly views when a Picture-in-Picture activity is active
+
 ### 4.15.0 (16.05.2025)
 * added open method for StorylyVerticalFeedPresenterView
 * fixed a bug related to scrapped and detached views in StorylyBar
