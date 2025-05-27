@@ -1,5 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.15.1 (27.05.2025)
+* fixed a bug related to Inter fonts on ios platform
+* fixed a bug related to Storyly views when a Picture-in-Picture activity is active on android platform
+
 ### 4.15.0 (16.05.2025)
 * fixed a bug related to story group title custom font size
 * fixed a bug related to scrapped and detached views in StorylyBar on android platform
