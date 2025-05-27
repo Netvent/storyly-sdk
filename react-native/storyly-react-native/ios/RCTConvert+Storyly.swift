@@ -93,6 +93,10 @@ private func stStorylyGroupStyling(
     if let pinIconVisible = json["pinIconVisible"] as? Bool {
         groupStylingBuilder = groupStylingBuilder.setPinIconVisibility(isVisible: pinIconVisible)
     }
+    if let titleFontName = json["titleFont"] as? NSString,
+        let titleFont = getCustomFont(typeface: titleFontName, fontSize: CGFloat(json["titleTextSize"] as? Int ?? 12)) {
+        groupStylingBuilder = groupStylingBuilder.setTitleFont(font: titleFont)
+    }
     return configBuilder
         .setStoryGroupStyling(
             styling: groupStylingBuilder
@@ -103,7 +107,6 @@ private func stStorylyGroupStyling(
                 .setSize(size: getStoryGroupSize(groupSize: json["groupSize"] as? String))
                 .setIconBorderAnimation(animation: getStoryGroupAnimation(groupAnimation: json["iconBorderAnimation"] as? String))
                 .setTitleLineCount(count: json["titleLineCount"] as? Int ?? 2)
-                .setTitleFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: CGFloat(json["titleTextSize"] as? Int ?? 12)))
                 .setTitleVisibility(isVisible: json["titleVisible"] as? Bool ?? true)
                 .setCustomGroupViewFactory(factory: groupViewFactory)
                 .build()
@@ -152,10 +155,16 @@ private func stStoryStyling(
     if let progressBarColorJson = json["progressBarColor"] as? NSArray {
         storyStylingBuilder = storyStylingBuilder.setProgressBarColor(colors: RCTConvert.uiColorArray(progressBarColorJson))
     }
+    if let titleFontName = json["titleFont"] as? NSString, 
+        let titleFont = getCustomFont(typeface: titleFontName, fontSize: 14, defaultWeight: .semibold) {
+        storyStylingBuilder = storyStylingBuilder.setTitleFont(font: titleFont)
+    }
+    if let interactiveFontName = json["interactiveFont"] as? NSString,
+        let interactiveFont = getCustomFont(typeface: interactiveFontName, fontSize: 14, defaultWeight: .regular) {
+        storyStylingBuilder = storyStylingBuilder.setInteractiveFont(font: interactiveFont)
+    }
     return configBuilder
         .setStoryStyling(styling: storyStylingBuilder
-            .setTitleFont(font: getCustomFont(typeface: json["titleFont"] as? NSString, fontSize: 14, defaultWeight: .semibold))
-            .setInteractiveFont(font: getCustomFont(typeface: json["interactiveFont"] as? NSString, fontSize: 14, defaultWeight: .regular))
             .setTitleVisibility(isVisible: json["isTitleVisible"] as? Bool ?? true)
             .setHeaderIconVisibility(isVisible: json["isHeaderIconVisible"] as? Bool ?? true)
             .setCloseButtonVisibility(isVisible: json["isCloseButtonVisible"] as? Bool ?? true)
@@ -253,10 +262,10 @@ private func getStoryGroupListOrientation(orientation: String?) -> StoryGroupLis
     }
 }
 
-private func getCustomFont(typeface: NSString?, fontSize: CGFloat, defaultWeight: UIFont.Weight = .regular) -> UIFont {
+private func getCustomFont(typeface: NSString?, fontSize: CGFloat, defaultWeight: UIFont.Weight = .regular) -> UIFont? {
     if let fontName = typeface?.deletingPathExtension,
        let font = UIFont(name: fontName, size: fontSize) { return font }
-    return .systemFont(ofSize: fontSize, weight: defaultWeight)
+    return nil
 }
 
 internal extension UIImage {
