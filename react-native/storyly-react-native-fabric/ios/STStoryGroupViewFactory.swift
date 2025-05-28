@@ -49,6 +49,13 @@ internal class STStoryGroupViewFactory: StoryGroupViewFactory {
         subview.bottomAnchor.constraint(equalTo: holderView.bottomAnchor).isActive = true
     }
     
+    internal func removeCustomReactNativeView(subview: UIView?) {
+        guard let subview = subview else { return }
+        guard let index = customViewList.firstIndex(where: { subview.nativeID == $0.holderView.subviews.first?.nativeID }) else { return }
+        let view = customViewList.remove(at: index)
+        view.holderView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private func onUpdateView(_ groupView: STStoryGroupView, _ storyGroup: StoryGroup?) {
         guard let index = self.customViewList.firstIndex(of: groupView) else { return }
         onUpdateCustomView?([
