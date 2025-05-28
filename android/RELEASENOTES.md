@@ -1,4 +1,7 @@
 # Release Notes
+### 4.15.2 (28.05.2025)
+* improved countdown interactive component alarm schedule as exact
+
 ### 4.15.1 (21.05.2025)
 * fixed a bug related to Storyly views when a Picture-in-Picture activity is active
 
