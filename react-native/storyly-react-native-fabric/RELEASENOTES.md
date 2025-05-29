@@ -1,5 +1,10 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.15.1 (29.05.2025)
+* fixed a bug related to hot reload for custom styling on ios platform
+* fixed a bug related to Storyly views when a Picture-in-Picture activity is active on android platform
+* improved countdown interactive component alarm schedule as exact on android platform
+
 ### 4.15.0 (16.05.2025)
 * fixed a bug related to story group title custom font size
 * fixed a bug related to dark cover update for custom styling
