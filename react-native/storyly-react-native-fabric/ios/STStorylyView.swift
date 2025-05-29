@@ -122,6 +122,10 @@ public class STStorylyView: UIView {
     public override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
         storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
     }
+    
+    public override func removeReactSubview(_ subview: UIView!) {
+        storyGroupViewFactory?.removeCustomReactNativeView(subview: subview)
+    }
 }
 
 extension STStorylyView {

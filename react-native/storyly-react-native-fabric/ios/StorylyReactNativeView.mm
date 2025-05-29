@@ -194,6 +194,11 @@ using namespace facebook::react;
     [_stStorylyView insertReactSubview:(STStorylyGroupView *) view atIndex:index];
 }
 
+- (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
+    [_stStorylyView removeReactSubview:childComponentView];
+    NSLog([NSString stringWithFormat:@"StorylyReactNativeView:unmountChildComponentView: index: %ld", index]);
+}
+
 @end
 
 Class<RCTComponentViewProtocol> StorylyReactNativeViewCls(void)
