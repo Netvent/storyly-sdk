@@ -195,7 +195,7 @@ using namespace facebook::react;
 }
 
 - (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index {
-    [_stStorylyView removeReactSubview:childComponentView];
+    [_stStorylyView removeReactSubview:childComponentView at:index];
     NSLog([NSString stringWithFormat:@"StorylyReactNativeView:unmountChildComponentView: index: %ld", index]);
 }
 
