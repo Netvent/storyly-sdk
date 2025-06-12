@@ -123,8 +123,9 @@ public class STStorylyView: UIView {
         storyGroupViewFactory?.attachCustomReactNativeView(subview: subview, index: atIndex)
     }
     
-    public override func removeReactSubview(_ subview: UIView!) {
-        storyGroupViewFactory?.removeCustomReactNativeView(subview: subview)
+    @objc(removeReactSubview:at:)
+    public func removeReactSubview(_ subview: UIView!, at atIndex: Int) {
+        storyGroupViewFactory?.removeCustomReactNativeView(subview: subview, index: atIndex)
     }
 }
 
