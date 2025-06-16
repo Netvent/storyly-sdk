@@ -1,5 +1,14 @@
 # Release Notes
 
+### 4.6.0 - 16.06.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.0/storyly-web.js)
+
+- Improvement: Scroll indicator design changed and added new parameters
+
+### 4.5.7 - 20.05.2025 [for cdn](https://web-story.storyly.io/sdk/4.5.7/storyly-web.js)
+
+- Fix: Fixed groups transition when using tab&go groups
+- Fix: Fixed product story visibility when using as conditional
+
 ### 4.5.5 - 15.05.2025 [for cdn](https://web-story.storyly.io/sdk/4.5.5/storyly-web.js)
 
 - Fix: Fixed compatibility with Next.js by preserving navigation state during URL updates, preventing issues when navigating back in single-page applications.
