@@ -1,4 +1,7 @@
 # Release Notes
+### 4.16.0 (20.06.2025)
+* improved orientation changes for large screens by covering Android 16 changes
+
 ### 4.15.2 (28.05.2025)
 * improved countdown interactive component alarm schedule as exact
 
