@@ -1,4 +1,9 @@
 # Release Notes
+### 4.16.0 (20.06.2025)
+* fixed audio session handling for video covers
+* improved audio session handling for video stories
+* fixed a bug related to bar styling changes on initialization
+
 ### 4.15.0 (16.05.2025)
 * added open method for StorylyVerticalFeedPresenterView
 * fixed a bug related to story group title custom font size
