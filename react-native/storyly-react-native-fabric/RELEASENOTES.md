@@ -1,5 +1,12 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.16.0 (23.06.2025)
+* improved orientation changes for large screens by covering Android 16 changes on android platform
+* improved countdown interactive component alarm schedule as exact on android platform
+* fixed audio session handling for video covers on ios platform
+* improved audio session handling for video stories on ios platform
+* fixed a bug related to bar styling changes on initialization on ios platform
+
 ### 4.15.2 (12.06.2025)
 * fixed a bug related to custom styling group unmount
 
