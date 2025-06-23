@@ -502,7 +502,7 @@ declare module "storyly-react-native" {
       customPayload?: string;
     }
 
-    export interface VerticalFeedItemImageQuizComponent extends StoryComponent {
+    export interface VerticalFeedItemImageQuizComponent extends VerticalFeedItemComponent {
       title: string;
       options: string[];
       rightAnswerIndex?: number;
