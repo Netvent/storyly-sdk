@@ -1,4 +1,7 @@
 # Release Notes
+### 4.16.1 (26.06.2025)
+* fixed a bug related to scrolling in product detail sheet for vertical feed
+
 ### 4.16.0 (20.06.2025)
 * improved orientation changes for large screens by covering Android 16 changes
 
