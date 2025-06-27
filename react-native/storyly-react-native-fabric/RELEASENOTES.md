@@ -1,5 +1,9 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.16.1 (27.06.2025)
+* fixed a bug related to vertical bar orientation of storyly view on ios platform
+* fixed a bug related to scrolling in product detail sheet for vertical feed on android platform
+
 ### 4.16.0 (23.06.2025)
 * improved orientation changes for large screens by covering Android 16 changes on android platform
 * improved countdown interactive component alarm schedule as exact on android platform
