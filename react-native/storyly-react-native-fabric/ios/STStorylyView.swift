@@ -44,6 +44,7 @@ public class STStorylyView: UIView {
             storylyView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             storylyView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             storylyView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            storylyView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         }
     }
     
