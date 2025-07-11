@@ -1,5 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.16.2 (11.07.2025)
+* improved interactive component add/remove flow on android platform
+* fixed a bug related to scrolling in product detail sheet for vertical feed on android platform
+
 ### 4.16.0 (23.06.2025)
 * improved orientation changes for large screens by covering Android 16 changes on android platform
 * improved countdown interactive component alarm schedule as exact on android platform
