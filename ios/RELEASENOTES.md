@@ -1,4 +1,7 @@
 # Release Notes
+### 4.16.1 (22.07.2025)
+* fixed pause/resume flow after closing bottom sheet for vertical feed 
+
 ### 4.16.0 (20.06.2025)
 * fixed audio session handling for video covers
 * improved audio session handling for video stories
