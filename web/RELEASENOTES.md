@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.6.2 - 24.07.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.2/storyly-web.js)
+
+- Fix: Fixed story groups overlapping after sorting
+
 ### 4.6.0 - 16.06.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.0/storyly-web.js)
 
 - Improvement: Scroll indicator design changed and added new parameters
