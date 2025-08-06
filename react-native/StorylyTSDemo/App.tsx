@@ -35,7 +35,7 @@ function App() {
         //     }
         //   ]
         // );}}
-        storylyId="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MTcxODUsImluc19pZCI6MjQ1OTZ9.woksDHkpZURPWfFmCPlTIOVL-c1iwySJO0D6-YkiCd0"
+        storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
         // onLoad={event => { console.log(event); }}
         // onFail={event => { console.log("[Storyly] onFail"); }}
         // onPress={event => { console.log("[Storyly] onPress"); }}
