@@ -1,4 +1,7 @@
 # Release Notes
+### 4.16.2 (11.08.2025)
+* fixed audio session handling for storyly
+
 ### 4.16.1 (22.07.2025)
 * fixed pause/resume flow after closing bottom sheet for vertical feed 
 
