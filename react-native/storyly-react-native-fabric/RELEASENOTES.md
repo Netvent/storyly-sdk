@@ -1,5 +1,14 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.16.3 (14.08.2025)
+* fixed a bug related to visible story group tracking on android platform
+* fixed a bug related to image group cover reset on android platform
+* improved memory management for widget gallery on android platform
+* improved interactive component add/remove flow on android platform
+* fixed a bug related to scrolling in product detail sheet for vertical feed on android platform
+* fixed audio session handling for storyly on ios platform
+* fixed pause/resume flow after closing bottom sheet for vertical feed on ios platform
+
 ### 4.16.1 (27.06.2025)
 * fixed a bug related to vertical bar orientation of storyly view on ios platform
 * fixed a bug related to scrolling in product detail sheet for vertical feed on android platform
