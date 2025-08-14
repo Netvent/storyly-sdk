@@ -1,3 +1,16 @@
+### 4.16.3 (14.08.2025)
+* added mandatory namespace field for AGP >= 8 on android platform
+* fixed a bug related to visible story group tracking on android platform
+* fixed a bug related to image group cover reset on android platform
+* improved memory management for widget gallery on android platform
+* improved interactive component add/remove flow on android platform
+* fixed a bug related to scrolling in product detail sheet for vertical feed on android platform
+* improved orientation changes for large screens by covering Android 16 changes on android platform
+* fixed pause/resume flow after closing bottom sheet for vertical feed on ios platform
+* fixed audio session handling for video covers on ios platform
+* improved audio session handling for video stories on ios platform
+* fixed a bug related to bar styling changes on initialization on ios platform
+
 ### 4.15.0 (16.05.2025)
 * fixed a bug related to story group title custom font size
 * fixed a bug related to scrapped and detached views in StorylyBar on android platform
