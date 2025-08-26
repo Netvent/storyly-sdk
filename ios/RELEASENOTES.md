@@ -1,4 +1,7 @@
 # Release Notes
+### 4.16.3 (26.08.2025)
+* improved view hierarchy of the story screen
+
 ### 4.16.2 (11.08.2025)
 * fixed audio session handling for storyly
 
