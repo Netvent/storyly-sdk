@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.6.9 - 27.08.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.9/storyly-web.js)
+
+- Fix: Fixed stories continued playing while the share dialog was open
+- Improvement: Added reLayout method for manual layouting
+
 ### 4.6.2 - 24.07.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.2/storyly-web.js)
 
 - Fix: Fixed story groups overlapping after sorting
