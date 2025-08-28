@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.6.10 - 28.08.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.10/storyly-web.js)
+
+- Fix: Fixed cover visibility in bar layout
+
 ### 4.6.9 - 27.08.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.9/storyly-web.js)
 
 - Fix: Fixed stories continued playing while the share dialog was open
