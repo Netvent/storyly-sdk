@@ -39,7 +39,7 @@ class StorylyReactNativeViewManager : ViewGroupManager<STStorylyView>(),
     }
 
     override fun receiveCommand(root: STStorylyView, commandId: String?, args: ReadableArray?) {
-        delegate.receiveCommand(root, commandId, args)
+        delegate.receiveCommand(root, commandId  ?: "", args)
     }
 
     @ReactProp(name = "storylyConfig")
