@@ -1,5 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.17.0 (02.09.2025)
+* updated dependencies for React 19
+* improved view hierarchy of the story screen on ios platform
+
 ### 4.16.3 (14.08.2025)
 * fixed a bug related to visible story group tracking on android platform
 * fixed a bug related to image group cover reset on android platform
