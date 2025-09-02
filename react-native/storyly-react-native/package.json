@@ -29,8 +29,8 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-native": ">=0.64.2 <1.0.x"
+    "react": "*",
+    "react-native": "*"
   },
   "devDependencies": {
     "pod-install": "^0.1.0",
