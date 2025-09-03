@@ -24,7 +24,8 @@ target 'StorylyReactNativeExample' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    :app_path => "#{Pod::Config.instance.installation_root}/.."
+    :app_path => "#{Pod::Config.instance.installation_root}/..",
+    :fabric_enabled => true
   )
 
   target 'StorylyReactNativeExampleTests' do
