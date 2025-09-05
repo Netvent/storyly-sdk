@@ -1,4 +1,7 @@
 # Release Notes
+### 4.17.0 (05.09.2025)
+* added video cover support for vertical feed view
+
 ### 4.16.3 (14.08.2025)
 * fixed a bug related to visible story group tracking
 * fixed a bug related to image group cover reset
