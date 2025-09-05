@@ -1,4 +1,7 @@
 # Release Notes
+### 4.17.0 (05.09.2025)
+* added video cover support for vertical feed view
+  
 ### 4.16.3 (26.08.2025)
 * improved view hierarchy of the story screen
 
