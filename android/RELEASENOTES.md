@@ -1,4 +1,7 @@
 # Release Notes
+### 4.17.1 (16.10.2025)
+* improved project file structure
+  
 ### 4.17.0 (05.09.2025)
 * added video cover support for vertical feed view
 
