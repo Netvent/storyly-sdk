@@ -1,5 +1,9 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.17.1 (24.10.2025)
+* added video cover support for vertical feed view
+* fixed an interaction bug related to comment interactive component on ios platform
+
 ### 4.17.0 (02.09.2025)
 * updated dependencies for React 19
 * improved view hierarchy of the story screen on ios platform
