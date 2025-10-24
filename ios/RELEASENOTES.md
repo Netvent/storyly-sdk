@@ -1,4 +1,7 @@
 # Release Notes
+### 4.17.1 (24.10.2025)
+* fixed an interaction bug related to comment interactive component
+
 ### 4.17.0 (05.09.2025)
 * added video cover support for vertical feed view
   
