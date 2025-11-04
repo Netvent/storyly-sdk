@@ -1,5 +1,14 @@
 # Release Notes
 
+### 4.6.15 - 28.08.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.15/storyly-web.js)
+
+- Fix: Fixed multiple votes poll interactive
+- Fix: Fixed multi line stories in PWA view
+
+### 4.6.11 - 28.08.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.11/storyly-web.js)
+
+- Fix: Fixed Accessibility story focus
+
 ### 4.6.10 - 28.08.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.10/storyly-web.js)
 
 - Fix: Fixed cover visibility in bar layout
