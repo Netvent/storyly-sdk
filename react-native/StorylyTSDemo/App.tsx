@@ -5,52 +5,113 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Storyly } from 'storyly-react-native';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, StyleSheet, View, Text, Image, Dimensions, PixelRatio, SafeAreaView } from 'react-native';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+
+  const storylyRef = useRef<Storyly>(null);
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={'light-content'} />
       <Storyly
-        style={{ height: "100%" }}
-        // ref={ref => { ref?.setExternalData(
-        //   [
-        //     {
-        //       "{Title}": "306",
-        //       "{Price}": "1000",
-        //       "{Image_url}": "https://img.yad2.co.il/Pic/202202/20/1_1/o/y2_1_03059_20220220170310.jpeg",
-        //       "{Button}": "למודעה",
-        //       "{Button_url}": "ylbgocfu",
-        //       "{sg1_image_url}": "https://img.yad2.co.il/Pic/202202/20/1_1/o/y2_1_03059_20220220170310.jpeg",
-        //       "{sg1_price}": "1000",
-        //       "{sg1_title}": "306",
-        //       "{sg1_subtitle}": "2000",
-        //       "{sg1_button}": "ylbgocfu",
-        //       "{sg1_button_url}": "ylbgocfu",
-        //     }
-        //   ]
-        // );}}
-        storylyId="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6NDA0fQ.1AkqOy_lsiownTBNhVOUKc91uc9fDcAxfQZtpm3nj40"
-        // onLoad={event => { console.log(event); }}
-        // onFail={event => { console.log("[Storyly] onFail"); }}
-        // onPress={event => { console.log("[Storyly] onPress"); }}
-        // onEvent={event => { console.log("[Storyly] onEvent"); }}
-        // onStoryOpen={() => { console.log("[Storyly] onStoryOpen"); }}
-        // onStoryClose={() => { console.log("[Storyly] onStoryClose"); }}
-        // onUserInteracted={event => { console.log("[Storyly] onUserInteracted"); }}
+        style={{ height: "100%", width: "100%" }}
+        ref={storylyRef}
+        storylyId="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MTcxODUsImluc19pZCI6MTkxMDB9.AmtkzTlj_g3RQwwHZTz6rsozH8VFqAogeSwgBdXLMDU"
+        onLoad={event => {
+          console.log(event)
+        }}
+        storyGroupListOrientation='vertical'
+        storyGroupViewFactory={{
+          width: styles.customCard.width,
+          height: styles.customCard.height,
+          customView: viewFactory,
+        }}
       />
+    </SafeAreaView>
+  );
+}
+
+const CARD_HEIGHT = PixelRatio.getPixelSizeForLayoutSize(45);
+const ICON_SIZE = PixelRatio.getPixelSizeForLayoutSize(35);
+
+const viewFactory = ({ storyGroup }: { storyGroup: Storyly.StoryGroup }) => {
+  if (!storyGroup) return <View style={styles.customCard} />;
+  console.log(storyGroup)
+  return (
+    <View style={styles.customCard}>
+      <View style={styles.iconContainer}>
+        {storyGroup.iconUrl ? (
+          <Image
+            source={{ uri: storyGroup.iconUrl }}
+            style={styles.icon}
+            resizeMode="cover"
+          />
+        ) : (
+          <View style={styles.iconContainer} />
+        )}
+      </View>
+
+      <View style={styles.contentContainer}>
+        <Text style={styles.title} numberOfLines={2}>
+          {storyGroup.title}
+        </Text>
+        {storyGroup.stories && storyGroup.stories.length > 0 && (
+          <Text style={styles.description} numberOfLines={2}>
+            {storyGroup.stories[0].title}
+          </Text>
+        )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F1F1F1'
+  },
+  customCard: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 12,
+    marginVertical: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 3,
+    width: Dimensions.get('window').width,
+    height: CARD_HEIGHT,
+  },
+  iconContainer: {
+    marginRight: 12,
+    justifyContent: 'center',
+  },
+  icon: {
+    width: ICON_SIZE,
+    height: ICON_SIZE,
+    borderRadius: 8,
+  },
+  contentContainer: {
     flex: 1,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#1A1A1A',
+    marginBottom: 4,
+  },
+  description: {
+    fontSize: 14,
+    color: '#666666',
+    marginBottom: 4,
   },
 });
 

@@ -2123,10 +2123,10 @@ PODS:
     - React-utils (= 0.80.2)
     - SocketRocket
   - SocketRocket (0.7.1)
-  - Storyly (4.16.0)
-  - storyly-react-native (4.16.2):
+  - Storyly (4.17.1)
+  - storyly-react-native (4.17.1):
     - React
-    - Storyly (= 4.16.0)
+    - Storyly (= 4.17.1)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2433,8 +2433,8 @@ SPEC CHECKSUMS:
   ReactCodegen: 439c427ccc115d71d16cc84256e5fbdc7fcef57a
   ReactCommon: 592ef441605638b95e533653259254b4bd35ff4f
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Storyly: 150bf3f01e21200b12d2b7d734f5c50025c1353f
-  storyly-react-native: ebacebb12d2bc0f94a27ebdeceeae48c4660801b
+  Storyly: af27a0c4b94d45cc5ca38a8666f3d263a2f398ae
+  storyly-react-native: 2ee2c8bd905115baf5cc7dc37ffa536619d2c2f2
   Yoga: a742cc68e8366fcfc681808162492bc0aa7a9498
 
 PODFILE CHECKSUM: 52fb496da679a12693a16b379a45e9e18c2ba428
