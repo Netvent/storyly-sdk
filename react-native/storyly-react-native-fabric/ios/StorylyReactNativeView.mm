@@ -39,64 +39,106 @@ using namespace facebook::react;
 
       __weak StorylyReactNativeView* weakSelf = self;
       _stStorylyView.onStorylyLoaded = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyLoaded(StorylyReactNativeViewEventEmitter::OnStorylyLoaded{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyLoaded(StorylyReactNativeViewEventEmitter::OnStorylyLoaded{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyLoadFailed = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyLoadFailed(StorylyReactNativeViewEventEmitter::OnStorylyLoadFailed{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyLoadFailed(StorylyReactNativeViewEventEmitter::OnStorylyLoadFailed{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyEvent = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyEvent(StorylyReactNativeViewEventEmitter::OnStorylyEvent{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyEvent(StorylyReactNativeViewEventEmitter::OnStorylyEvent{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyStoryPresented = ^() {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyStoryPresented(StorylyReactNativeViewEventEmitter::OnStorylyStoryPresented{});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyStoryPresented(StorylyReactNativeViewEventEmitter::OnStorylyStoryPresented{});
       };
       _stStorylyView.onStorylyStoryPresentFailed = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyStoryPresentFailed(StorylyReactNativeViewEventEmitter::OnStorylyStoryPresentFailed{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyStoryPresentFailed(StorylyReactNativeViewEventEmitter::OnStorylyStoryPresentFailed{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyStoryDismissed = ^() {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyStoryDismissed(StorylyReactNativeViewEventEmitter::OnStorylyStoryDismissed{});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyStoryDismissed(StorylyReactNativeViewEventEmitter::OnStorylyStoryDismissed{});
       };
       _stStorylyView.onStorylyActionClicked = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyActionClicked(StorylyReactNativeViewEventEmitter::OnStorylyActionClicked{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyActionClicked(StorylyReactNativeViewEventEmitter::OnStorylyActionClicked{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyUserInteracted = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyUserInteracted(StorylyReactNativeViewEventEmitter::OnStorylyUserInteracted{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyUserInteracted(StorylyReactNativeViewEventEmitter::OnStorylyUserInteracted{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyProductHydration = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyProductHydration(StorylyReactNativeViewEventEmitter::OnStorylyProductHydration{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyProductHydration(StorylyReactNativeViewEventEmitter::OnStorylyProductHydration{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyCartUpdated = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyCartUpdated(StorylyReactNativeViewEventEmitter::OnStorylyCartUpdated{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyCartUpdated(StorylyReactNativeViewEventEmitter::OnStorylyCartUpdated{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylyProductEvent = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylyProductEvent(StorylyReactNativeViewEventEmitter::OnStorylyProductEvent{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylyProductEvent(StorylyReactNativeViewEventEmitter::OnStorylyProductEvent{std::string([raw UTF8String])});
       };
       _stStorylyView.onStorylySizeChanged = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onStorylySizeChanged(StorylyReactNativeViewEventEmitter::OnStorylySizeChanged{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onStorylySizeChanged(StorylyReactNativeViewEventEmitter::OnStorylySizeChanged{std::string([raw UTF8String])});
       };
       _stStorylyView.onCreateCustomView = ^() {
-          [weakSelf storylyEventEmitter]
-            ->onCreateCustomView(StorylyReactNativeViewEventEmitter::OnCreateCustomView{});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onCreateCustomView(StorylyReactNativeViewEventEmitter::OnCreateCustomView{});
       };
       _stStorylyView.onUpdateCustomView = ^(NSString* raw) {
-          [weakSelf storylyEventEmitter]
-            ->onUpdateCustomView(StorylyReactNativeViewEventEmitter::OnUpdateCustomView{std::string([raw UTF8String])});
+          const auto eventEmitter = [weakSelf storylyEventEmitter];
+          if (!eventEmitter) {
+              return;
+          }
+          eventEmitter->onUpdateCustomView(StorylyReactNativeViewEventEmitter::OnUpdateCustomView{std::string([raw UTF8String])});
       };
       self.contentView = _stStorylyView;
       
-     NSLog([NSString stringWithFormat:@"StorylyReactNativeView:initWithFrame: %@", _stStorylyView]);
+      NSLog([NSString stringWithFormat:@"StorylyReactNativeView:initWithFrame: %@", _stStorylyView]);
   }
 
   return self;
