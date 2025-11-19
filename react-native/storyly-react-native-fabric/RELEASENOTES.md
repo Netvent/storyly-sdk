@@ -1,5 +1,8 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.17.2 (19.11.2025)
+* fixed a bug related to event emitters on ios platform
+
 ### 4.17.1 (24.10.2025)
 * added video cover support for vertical feed view
 * fixed an interaction bug related to comment interactive component on ios platform
