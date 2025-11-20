@@ -1,4 +1,11 @@
 # Release Notes
+### 4.18.0 (20.11.2025)
+* added lowest price availability for eu regulations for product related interactive components
+* added auto alignment for text component to align texts based on layout direction in StorylyConfig
+* added a callback function for exact alarm permission in countdown interactive component
+* fixed a bug related to shown results of quiz interactive component
+* removed pointer icon to increase price text area in product card interactive component
+  
 ### 4.17.1 (16.10.2025)
 * improved project file structure
   
