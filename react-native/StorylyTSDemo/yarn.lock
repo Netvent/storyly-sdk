@@ -5897,10 +5897,10 @@ stop-iteration-iterator@^1.1.0:
     es-errors "^1.3.0"
     internal-slot "^1.1.0"
 
-storyly-react-native@4.16.2:
-  version "4.16.2"
-  resolved "https://registry.yarnpkg.com/storyly-react-native/-/storyly-react-native-4.16.2.tgz#f045b1c5af31a0436ce813223d523eedcf029853"
-  integrity sha512-HBwKBZv0LI9avteltn6KRd90/e6rwwEYaqW1I4tWcCnKLRw0PvQ175/lcHO2dHunA2DB+7Nmd2E+TQYjj+X9Kg==
+storyly-react-native@4.17.1:
+  version "4.17.1"
+  resolved "https://registry.yarnpkg.com/storyly-react-native/-/storyly-react-native-4.17.1.tgz#90e21a4a8bacadfd936b64a09e8d5d80d0455b85"
+  integrity sha512-NCPQ/Pa49cogDgLkwpS9wfb2Yxqupdr6gMa63lQ7aCvZ06NtcO2HytxP3SUjSXbHf4wI6auHUhoDIXRw/udo1g==
   dependencies:
     prop-types "^15.8.1"
 
