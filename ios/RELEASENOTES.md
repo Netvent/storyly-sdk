@@ -1,4 +1,7 @@
 # Release Notes
+### 4.18.1 (24.11.2025)
+* fixed an alignment issue of lowest price in product catalog interactive component
+
 ### 4.18.0 (20.11.2025)
 * added lowest price availability for eu regulations for product related interactive components
 * added auto alignment for text component to align texts based on layout direction in StorylyConfig
