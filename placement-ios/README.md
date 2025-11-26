@@ -1,0 +1,1 @@
+Please check [Storyly Integration Documentation](https://docs.storyly.io/docs/ios-initial-sdk-setup)
