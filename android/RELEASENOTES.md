@@ -1,4 +1,10 @@
 # Release Notes
+### 4.19.0 (01.12.2025)
+* added play/pause/replay accesibility controls for stories
+* fixed padding values of product detail sheet indicator area
+* fixed a bug related to scrapped and detached views in StorylyBar
+* fixed a bug related to fixed orientation for Android 8 devices
+  
 ### 4.18.0 (20.11.2025)
 * added lowest price availability for eu regulations for product related interactive components
 * added auto alignment for text component to align texts based on layout direction in StorylyConfig
