@@ -1,4 +1,8 @@
 # Release Notes
+### 4.19.0 (01.12.2025)
+* added play/pause/replay accesibility controls for stories
+* fixed a bug related to swipe interactive component background color
+  
 ### 4.18.1 (24.11.2025)
 * fixed an alignment issue of lowest price in product catalog interactive component
 
