@@ -1,5 +1,16 @@
 # Release Notes
 * If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+### 4.19.0 (02.12.2025)
+* added play/pause/replay accesibility controls for stories
+* added lowest price availability for eu regulations for product related interactive components
+* added auto alignment for text component to align texts based on layout direction in StorylyConfig
+* removed pointer icon to increase price text area in product card interactive component
+* fixed a bug related to shown results of quiz interactive component on android platform
+* fixed a bug related to scrapped and detached views in StorylyBar on android platform
+* fixed a bug related to fixed orientation for Android 8 devices on android platform
+* fixed padding values of product detail sheet indicator area on android platform
+* fixed a bug related to swipe interactive component background color on ios platform
+
 ### 4.17.1 (24.10.2025)
 * added video cover support for vertical feed view
 * fixed an interaction bug related to comment interactive component on ios platform
