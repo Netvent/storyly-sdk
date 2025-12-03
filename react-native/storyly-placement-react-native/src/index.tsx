@@ -1,2 +1,2 @@
-export { default as StorylyPlacementReactNativeView } from './StorylyPlacementReactNativeViewNativeComponent';
-export * from './StorylyPlacementReactNativeViewNativeComponent';
+export { default as StorylyPlacementReactNativeView } from './newarch/StorylyPlacementReactNativeViewNativeComponent';
+export * from './newarch/StorylyPlacementReactNativeViewNativeComponent';
