@@ -15,14 +15,20 @@ buildscript {
   }
 }
 
+def isNewArchitectureEnabled() {
+    return rootProject.hasProperty("newArchEnabled") && rootProject.getProperty("newArchEnabled") == "true"
+}
+
+def getExtOrIntegerDefault(name) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["StorylyPlacementReactNative_" + name]).toInteger()
+}
+
 
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
-apply plugin: "com.facebook.react"
-
-def getExtOrIntegerDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["StorylyPlacementReactNative_" + name]).toInteger()
+if (isNewArchitectureEnabled()) {
+    apply plugin: "com.facebook.react"
 }
 
 android {
@@ -56,10 +62,12 @@ android {
 
   sourceSets {
     main {
-      java.srcDirs += [
-        "generated/java",
-        "generated/jni"
-      ]
+        if (isNewArchitectureEnabled()) {
+            java.srcDirs += [
+                "generated/java",
+                "generated/jni"
+            ]
+        }
     }
   }
 }
