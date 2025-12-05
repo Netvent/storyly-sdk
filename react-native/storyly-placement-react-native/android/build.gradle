@@ -1,5 +1,5 @@
 buildscript {
-  ext.getExtOrDefault = {name ->
+  ext.getExtOrDefault = { name ->
     return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['StorylyPlacementReactNative_' + name]
   }
 
@@ -16,7 +16,7 @@ buildscript {
 }
 
 def isNewArchitectureEnabled() {
-    return rootProject.hasProperty("newArchEnabled") && rootProject.getProperty("newArchEnabled") == "true"
+  return rootProject.hasProperty("newArchEnabled") && rootProject.getProperty("newArchEnabled") == "true"
 }
 
 def getExtOrIntegerDefault(name) {
@@ -28,7 +28,7 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 if (isNewArchitectureEnabled()) {
-    apply plugin: "com.facebook.react"
+  apply plugin: "com.facebook.react"
 }
 
 android {
@@ -39,6 +39,9 @@ android {
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+
+    // Build config for architecture selection
+    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
   }
 
   buildFeatures {
@@ -60,14 +63,20 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+
   sourceSets {
     main {
+      java {
+        srcDirs = ["src/main/java"]
         if (isNewArchitectureEnabled()) {
-            java.srcDirs += [
-                "generated/java",
-                "generated/jni"
-            ]
+          srcDirs += ["src/newarch/java"]
+        } else {
+          srcDirs += ["src/oldarch/java"]
         }
+      }
     }
   }
 }
@@ -82,4 +91,6 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+   implementation "com.appsamurai.storyly:storyly-placement:1.1.0"
 }

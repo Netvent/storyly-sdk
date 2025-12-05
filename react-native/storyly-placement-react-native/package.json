@@ -1,9 +1,11 @@
 {
   "name": "storyly-placement-react-native",
   "version": "0.1.0",
-  "description": "React-native package for Storyly Placement",
+  "description": "React-native package for Storyly Placement SDK - supports StoryBar, Banner, VideoFeed, and SwipeCard widgets",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
+  "react-native": "src/index",
+  "source": "src/index",
   "exports": {
     ".": {
       "source": "./src/index.tsx",
@@ -36,6 +38,7 @@
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "prepare": "bob build",
     "typecheck": "tsc",
+    "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "bootstrap": "yarn example && yarn install && yarn example pods update && yarn codegen:android",
     "enable:newarch:ios": "(/usr/libexec/PlistBuddy -c 'Set :RCTNewArchEnabled true' example/ios/StorylyPlacementReactNativeExample/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c 'Add :RCTNewArchEnabled bool true' example/ios/StorylyPlacementReactNativeExample/Info.plist) && cd example/ios && RCT_NEW_ARCH_ENABLED=1 pod update && cd ../.. && echo 'New Architecture ENABLED for iOS'",
     "enable:newarch:android": "cd example/android && ORG_GRADLE_PROJECT_newArchEnabled=true ./gradlew --refresh-dependencies --no-daemon && cd ../.. && echo 'New Architecture ENABLED for Android'",
@@ -49,7 +52,13 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "storyly",
+    "placement",
+    "storybar",
+    "banner",
+    "videofeed",
+    "swipecard"
   ],
   "repository": {
     "type": "git",
