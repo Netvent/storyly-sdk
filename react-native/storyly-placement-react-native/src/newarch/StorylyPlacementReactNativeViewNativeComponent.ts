@@ -35,6 +35,14 @@ export interface NativeCommands {
   rejectWishlistChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, raw: string) => void;
 }
 
+export const STORYLY_PLACEMENT_COMMANDS = [
+  'approveCartChange',
+  'rejectCartChange',
+  'approveWishlistChange',
+  'rejectWishlistChange',
+] as const;
+
+
 export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: [
     'approveCartChange',
@@ -43,6 +51,8 @@ export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
     'rejectWishlistChange',
   ],
 });
+
+export const PlacementCommands = Commands;
 
 export default codegenNativeComponent<StorylyPlacementViewNativeProps>(
   'StorylyPlacementReactNativeView'

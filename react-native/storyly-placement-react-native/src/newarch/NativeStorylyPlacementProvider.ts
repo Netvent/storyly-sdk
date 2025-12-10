@@ -4,7 +4,7 @@ import { TurboModuleRegistry } from 'react-native';
 
 export interface Spec extends TurboModule {
   // Provider lifecycle
-  createProvider(providerId: string, config: string): void;
+  createProvider(providerId: string): Promise<void>;
   destroyProvider(providerId: string): void;
 
   // Configuration
@@ -20,8 +20,9 @@ export interface Spec extends TurboModule {
   removeListeners(count: number): void;
 }
 
-// MARK: - Module Export
 
-export default TurboModuleRegistry.getEnforcing<Spec>('StorylyPlacementProvider');
+
+// MARK: - Module Export
+export default TurboModuleRegistry.get<Spec>('StorylyPlacementProvider');
 
 

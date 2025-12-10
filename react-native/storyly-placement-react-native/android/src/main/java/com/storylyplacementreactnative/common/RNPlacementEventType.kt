@@ -2,17 +2,11 @@ package com.storylyplacementreactnative.common
 
 
 enum class RNPlacementEventType(val eventName: String) {
-    // View Events
-    ON_PLACEMENT_READY("onPlacementReady"),
-    ON_PLACEMENT_FAIL("onPlacementFail"),
-    ON_PLACEMENT_EVENT("onPlacementEvent"),
-    ON_PLACEMENT_ACTION_CLICKED("onPlacementActionClicked"),
-    ON_PLACEMENT_PRODUCT_EVENT("onPlacementProductEvent"),
-    ON_PLACEMENT_CART_UPDATE("onPlacementCartUpdate"),
-    ON_PLACEMENT_WISHLIST_UPDATE("onPlacementWishlistUpdate"),
-    
-    // Provider Events
-    ON_PROVIDER_LOAD("onProviderLoad"),
-    ON_PROVIDER_LOAD_FAIL("onProviderLoadFail"),
-    ON_PROVIDER_HYDRATION("onProviderHydration"),
+    ON_WIDGET_READY("onWidgetReady"),
+    ON_FAIL("onFail"),
+    ON_EVENT("onEvent"),
+    ON_ACTION_CLICKED("onActionClicked"),
+    ON_PRODUCT_EVENT("onProductEvent"),
+    ON_CART_UPDATE("onCartUpdate"),
+    ON_WISHLIST_UPDATE("onWishlistUpdate"),
 }

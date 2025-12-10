@@ -1,5 +1,6 @@
 package com.storylyplacementreactnative.newarch
 
+import android.util.Log
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -42,11 +43,13 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>(),
 
 
     override fun setProviderId(view: RNStorylyPlacementView?, value: String?) {
-//        view?.configure()
+        Log.d("[StorylyPlacementReactNativeView]", "setProvider id: ${value} for view")
+        value ?: return
+        view?.configure(value)
     }
 
     override fun approveCartChange(view: RNStorylyPlacementView?, raw: String?) {
-//       TODO("Not yet implemented")
+//
     }
 
     override fun rejectCartChange(view: RNStorylyPlacementView?, raw: String?) {

@@ -205,46 +205,42 @@ object RNPlacementDataConverter {
         return products.mapNotNull { createSTRProductInformation(it) }
     }
 
-    // MARK: - Config Conversion
-
     fun createSTRPlacementConfig(config: Map<String, Any?>, token: String): STRPlacementConfig {
-        val placementInit = config["placementInit"] as? Map<*, *> ?: emptyMap<Any, Any>()
-        
         val builder = STRPlacementConfig.Builder()
-        
-        (placementInit["testMode"] as? Boolean)?.let { builder.setTestMode(it) }
-        (placementInit["locale"] as? String)?.let { builder.setLocale(it) }
-        (placementInit["layoutDirection"] as? String)?.let { layoutDir ->
+
+        (config["testMode"] as? Boolean)?.let { builder.setTestMode(it) }
+        (config["locale"] as? String)?.let { builder.setLocale(it) }
+        (config["layoutDirection"] as? String)?.let { layoutDir ->
             builder.setLayoutDirection(
                 if (layoutDir == "rtl") STRLayoutDirection.RTL else STRLayoutDirection.LTR
             )
         }
-        (placementInit["customParameter"] as? String)?.let { builder.setCustomParameter(it) }
-        (placementInit["labels"] as? List<*>)?.filterIsInstance<String>()?.let { labels ->
+        (config["customParameter"] as? String)?.let { builder.setCustomParameter(it) }
+        (config["labels"] as? List<*>)?.filterIsInstance<String>()?.let { labels ->
             builder.setLabels(labels.toSet())
         }
-        (placementInit["userProperties"] as? Map<*, *>)?.let { userProps ->
+        (config["userProperties"] as? Map<*, *>)?.let { userProps ->
             val props = userProps.entries
                 .filter { it.key is String && it.value is String }
                 .associate { it.key as String to it.value as String }
             builder.setUserProperties(props)
         }
-        
+
         val productConfig = config["productConfig"] as? Map<*, *>
         val productConfigObj = createSTRProductConfig(productConfig)
         builder.setProductConfig(productConfigObj)
-        
+
         return builder.build(token)
     }
 
     fun createSTRProductConfig(productConfig: Map<*, *>?): STRProductConfig {
         val builder = STRProductConfig.Builder()
-        
+
         if (productConfig != null) {
             (productConfig["isCartEnabled"] as? Boolean)?.let { builder.setCartAvailability(it) }
             (productConfig["isFallbackEnabled"] as? Boolean)?.let { builder.setFallbackAvailability(it) }
         }
-        
+
         return builder.build()
     }
 }

@@ -10,15 +10,19 @@ class RNPlacementEvent(
     surfaceId: Int,
     viewId: Int,
     private val eventType: RNPlacementEventType,
-    private val jsonPayload: String
+    private val jsonPayload: String?
 ) : Event<RNPlacementEvent>(surfaceId, viewId) {
     override fun getEventName(): String = eventType.eventName
 
-    override fun canCoalesce() = false
+    override fun canCoalesce(): Boolean {
+      return false
+    }
 
     override fun getEventData(): WritableMap {
         return Arguments.createMap().apply {
-            putString("raw", jsonPayload)
+            jsonPayload?.let {
+               putString("raw", jsonPayload)
+            }
         }
     }
 }

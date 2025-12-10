@@ -12,13 +12,14 @@ import type {
   PlacementWishlistUpdateEvent,
 } from './data/event';
 import type { STRCart } from './data/story';
-import StorylyPlacementNativeView, { Commands, applyBaseEvent } from './StorylyPlacementNativeView';
+import StorylyPlacementNativeView, { PlacementCommands, applyBaseEvent } from './StorylyPlacementNativeView';
+import type { StorylyPlacementProvider } from './StorylyPlacementProvider';
 
 
 type StorylyPlacementNativeComponentRef = React.ComponentRef<typeof StorylyPlacementNativeView>;
 
 export interface StorylyPlacementProps extends ViewProps {
-  providerId: string;
+  provider?: StorylyPlacementProvider;
 
   onWidgetReady?: (event: PlacementWidgetReadyEvent) => void;
   onActionClicked?: (event: PlacementActionEvent) => void;
@@ -40,29 +41,27 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
   (props, ref) => {
     const placementRef = useRef<StorylyPlacementNativeComponentRef>(null);
 
-  
-    // Methods exposed to parent via ref
     const approveCartChange = (responseId: string, cart: STRCart) => {
       if (placementRef.current) {
-        Commands.approveCartChange(placementRef.current, JSON.stringify({ responseId, cart }));
+        PlacementCommands.approveCartChange(placementRef.current, JSON.stringify({ responseId, cart }));
       }
     };
 
     const rejectCartChange = (responseId: string, failMessage: string) => {
       if (placementRef.current) {
-        Commands.rejectCartChange(placementRef.current, JSON.stringify({ responseId, failMessage }));
+        PlacementCommands.rejectCartChange(placementRef.current, JSON.stringify({ responseId, failMessage }));
       }
     };
 
     const approveWishlistChange = (responseId: string, item: STRCart) => {
       if (placementRef.current) {
-        Commands.approveWishlistChange(placementRef.current, JSON.stringify({ responseId, item }));
+        PlacementCommands.approveWishlistChange(placementRef.current, JSON.stringify({ responseId, item }));
       }
     };
 
     const rejectWishlistChange = (responseId: string, failMessage: string) => {
       if (placementRef.current) {
-        Commands.rejectWishlistChange(placementRef.current, JSON.stringify({ responseId, failMessage }));
+        PlacementCommands.rejectWishlistChange(placementRef.current, JSON.stringify({ responseId, failMessage }));
       }
     };
 
@@ -119,7 +118,7 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
       <StorylyPlacementNativeView
         {...props}
         ref={placementRef}
-        providerId={props.providerId}
+        providerId={props.provider?.providerId ?? ''}
         onWidgetReady={applyBaseEvent(_onWidgetReady)}
         onActionClicked={applyBaseEvent(_onActionClicked)}
         onEvent={applyBaseEvent(_onEvent)}

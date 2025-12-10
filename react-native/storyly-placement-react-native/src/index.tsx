@@ -3,11 +3,10 @@ export type { StorylyPlacementProps, StorylyPlacementMethods } from './StorylyPl
 
 export {
   useStorylyPlacementProvider,
-  PlacementDataProvider,
 } from './StorylyPlacementProvider';
 export type {
-  StorylyPlacementProviderCallbacks,
-  StorylyPlacementProviderMethods,
+  StorylyPlacementProviderListener,
+  StorylyPlacementProvider,
 } from './StorylyPlacementProvider';
 
 // MARK: - Data Types

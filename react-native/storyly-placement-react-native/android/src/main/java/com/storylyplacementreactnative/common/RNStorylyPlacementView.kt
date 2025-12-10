@@ -23,27 +23,19 @@ import java.util.UUID
 
 class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
 
-    companion object {
-        private const val TAG = "RNStorylyPlacementView"
-    }
-
-    // MARK: - Properties
-
     private var providerId: String? = null
 
     // Callback maps for async cart/wishlist operations
     internal val cartUpdateCallbacks = mutableMapOf<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>>()
     internal val wishlistUpdateCallbacks = mutableMapOf<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>>()
 
-    private var nativePlacementView: STRPlacementView? = null
+    private var placementView: STRPlacementView? = null
 
-    // Event dispatcher function (set by view manager)
-    internal var dispatchEvent: ((RNPlacementEventType, String) -> Unit)? = null
+    internal var dispatchEvent: ((RNPlacementEventType, String?) -> Unit)? = null
 
-    // Choreographer for layout updates
     private val choreographerFrameCallback: Choreographer.FrameCallback by lazy {
         Choreographer.FrameCallback {
-            if (isAttachedToWindow && nativePlacementView?.isAttachedToWindow == true) {
+            if (isAttachedToWindow && placementView?.isAttachedToWindow == true) {
                 manuallyLayout()
                 viewTreeObserver.dispatchOnGlobalLayout()
                 Choreographer.getInstance().postFrameCallback(choreographerFrameCallback)
@@ -75,28 +67,28 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     private fun setupPlacementView() {
         val currentProviderId = providerId ?: return
 
-        Log.d(TAG, "Setting up placement view with providerId: $currentProviderId")
+        Log.d("[RNStorylyPlacementView]", "Setting up placement view with providerId: $currentProviderId")
 
         val providerWrapper = RNPlacementProviderManager.getProvider(currentProviderId)
         val dataProvider = providerWrapper?.provider ?: run {
-            Log.e(TAG, "Provider not found for id: $currentProviderId")
+            Log.e("[RNStorylyPlacementView]", "Provider not found for id: $currentProviderId")
             return
         }
 
         // Remove old view if exists
-        nativePlacementView?.let { removeView(it) }
+        placementView?.let { removeView(it) }
 
         // Create STRPlacementView
-        nativePlacementView = STRPlacementView(context, dataProvider).apply {
+        placementView = STRPlacementView(context, dataProvider).apply {
             listener = createSTRListener()
             productListener = createSTRProductListener()
         }
 
-        addView(nativePlacementView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+        addView(placementView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
     }
 
     private fun manuallyLayout() {
-        val view = nativePlacementView ?: return
+        val view = placementView ?: return
         view.measure(
             MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.EXACTLY),
             MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY)
@@ -115,36 +107,37 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     private fun createSTRListener(): STRListener {
         return object : STRListener {
             override fun onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
-                Log.d(TAG, "onActionClicked: url=$url")
+                Log.d("[RNStorylyPlacementView]", "onActionClicked: url=$url")
                 val eventJson = RNPlacementDataConverter.encodeToJson(
                     mapOf(
                         "url" to url,
-                        "widgetType" to widget.getType(),
+                        "widgetType" to widget.getType().raw,
                     )
                 )
-                dispatchEvent?.invoke(RNPlacementEventType.ON_PLACEMENT_ACTION_CLICKED, eventJson ?: "")
+                dispatchEvent?.invoke(RNPlacementEventType.ON_ACTION_CLICKED, eventJson)
             }
 
             override fun onEvent(widget: STRWidgetController, payload: STREventPayload) {
-                Log.d(TAG, "onEvent: widgetType=${widget.getType()}")
+                Log.d("[RNStorylyPlacementView]", "onEvent: widgetType=${widget.getType()}")
                 val eventJson = RNPlacementDataConverter.encodeToJson(
                     mapOf(
-                        "widgetType" to widget.getType(),
+                        "widgetType" to widget.getType().raw,
+                        "event" to payload.baseEvent.getType()
                     )
                 )
-                dispatchEvent?.invoke(RNPlacementEventType.ON_PLACEMENT_EVENT, eventJson ?: "")
+                dispatchEvent?.invoke(RNPlacementEventType.ON_EVENT, eventJson)
             }
 
             override fun onFail(widget: STRWidgetController, payload: STRErrorPayload) {
-                Log.e(TAG, "onFail: widgetType=${widget.getType()}")
+                Log.e("[RNStorylyPlacementView]", "onFail: widgetType=${widget.getType()}")
                 val eventJson = RNPlacementDataConverter.createFailEvent("Widget error")
-                dispatchEvent?.invoke(RNPlacementEventType.ON_PLACEMENT_FAIL, eventJson ?: "")
+                dispatchEvent?.invoke(RNPlacementEventType.ON_FAIL, eventJson)
             }
 
             override fun onWidgetReady(widget: STRWidgetController, ratio: Float) {
-                Log.d(TAG, "onWidgetReady: ratio=$ratio")
+                Log.d("[RNStorylyPlacementView]", "onWidgetReady: ratio=$ratio")
                 val eventJson = RNPlacementDataConverter.createWidgetReadyEvent(ratio)
-                dispatchEvent?.invoke(RNPlacementEventType.ON_PLACEMENT_READY, eventJson ?: "")
+                dispatchEvent?.invoke(RNPlacementEventType.ON_WIDGET_READY, eventJson)
             }
         }
     }
@@ -154,14 +147,14 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     private fun createSTRProductListener(): STRProductListener {
         return object : STRProductListener {
             override fun onProductEvent(widget: STRWidgetController, event: STREvent) {
-                Log.d(TAG, "onProductEvent: ${event.getType()}")
+                Log.d("[RNStorylyPlacementView]", "onProductEvent: ${event.getType()}")
                 val eventJson = RNPlacementDataConverter.encodeToJson(
                     mapOf(
                         "event" to event.getType(),
                         "widgetType" to widget.getType(),
                     )
                 )
-                dispatchEvent?.invoke(RNPlacementEventType.ON_PLACEMENT_PRODUCT_EVENT, eventJson ?: "")
+                dispatchEvent?.invoke(RNPlacementEventType.ON_PRODUCT_EVENT, eventJson)
             }
 
             override fun onUpdateCart(
@@ -187,7 +180,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                         "responseId" to responseId,
                     )
                 )
-                dispatchEvent?.invoke(RNPlacementEventType.ON_PLACEMENT_CART_UPDATE, eventJson ?: "")
+                dispatchEvent?.invoke(RNPlacementEventType.ON_CART_UPDATE, eventJson)
             }
 
             override fun onUpdateWishlist(
@@ -210,26 +203,10 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                         "responseId" to responseId,
                     )
                 )
-                dispatchEvent?.invoke(RNPlacementEventType.ON_PLACEMENT_WISHLIST_UPDATE, eventJson ?: "")
+                dispatchEvent?.invoke(RNPlacementEventType.ON_WISHLIST_UPDATE, eventJson)
             }
         }
     }
-
-    // MARK: - Commands
-
-    fun pauseStory() {
-        Log.d(TAG, "pauseStory")
-        // Note: STRPlacementView doesn't have pause/resume methods directly
-        // These might need to be implemented based on specific widget types
-    }
-
-    fun resumeStory() {
-        Log.d(TAG, "resumeStory")
-        // Note: STRPlacementView doesn't have pause/resume methods directly
-        // These might need to be implemented based on specific widget types
-    }
-
-    // MARK: - Cart/Wishlist Response (JSON string input)
 
     fun approveCartChange(responseId: String, cartJson: String?) {
         val callbacks = cartUpdateCallbacks[responseId] ?: return

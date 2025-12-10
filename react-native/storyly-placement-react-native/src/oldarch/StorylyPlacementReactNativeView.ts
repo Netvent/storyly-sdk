@@ -3,25 +3,8 @@ import {
   UIManager,
   findNodeHandle,
 } from 'react-native';
-import type { BaseEvent } from '../data/event';
-import type { 
-  StorylyPlacementViewNativeProps, 
-  NativeCommands,
-  NativeEvent,
-  BubblingEventHandler
-} from '../StorylyPlacementNativeView.types';
-import { STORYLY_PLACEMENT_COMMANDS } from '../StorylyPlacementNativeView.types';
+import { STORYLY_PLACEMENT_COMMANDS, type NativeCommands, type StorylyPlacementViewNativeProps } from '../newarch/StorylyPlacementReactNativeViewNativeComponent';
 
-export const applyBaseEvent = (callback: (event: BaseEvent) => void) => {
-  const responseCallback: BubblingEventHandler<NativeEvent> = (event) => {
-    if (event.nativeEvent.raw) {
-      callback(JSON.parse(event.nativeEvent.raw) as BaseEvent);
-    } else {
-      callback({} as BaseEvent);
-    }
-  };
-  return responseCallback;
-};
 
 const COMPONENT_NAME = 'StorylyPlacementReactNativeView';
 
@@ -41,15 +24,15 @@ const dispatchCommand = (
   }
 };
 
-const Commands: NativeCommands = {} as NativeCommands;
+const PlacementCommands: NativeCommands = {} as NativeCommands;
 
 STORYLY_PLACEMENT_COMMANDS.forEach((command) => {
-  (Commands as any)[command] = (view: any, raw: string) => {
+  (PlacementCommands as any)[command] = (view: any, raw: string) => {
     dispatchCommand(view, command, [raw]);
   };
 });
 
-export { Commands };
+export { PlacementCommands };
 
 const StorylyPlacementNativeView =
   requireNativeComponent<StorylyPlacementViewNativeProps>(COMPONENT_NAME);

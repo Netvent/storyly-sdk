@@ -1,10 +1,59 @@
-import { View, StyleSheet } from 'react-native';
-import { StorylyPlacementReactNativeView } from 'storyly-placement-react-native';
+import { useRef, useState } from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import { useStorylyPlacementProvider, StorylyPlacement, type StorylyPlacementConfig, type StorylyPlacementMethods } from 'storyly-placement-react-native';
+import type { StorylyPlacementProviderListener } from 'storyly-placement-react-native';
+
+
+const screenWidth = Dimensions.get('window').width;
 
 export default function App() {
+  const placementConfig: StorylyPlacementConfig = {
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MTcxODUsImluc19pZCI6MTkxMDB9.AmtkzTlj_g3RQwwHZTz6rsozH8VFqAogeSwgBdXLMDU",
+  };
+
+  const placementListener: StorylyPlacementProviderListener = {
+    onLoad: (event) => { console.log('onLoad', event); },
+    onLoadFail: (event) => { console.log('onLoadFail', event); },
+    onHydration: (event) => {
+      console.log('onHydration', event);
+      // provider.hydrateProducts([]);
+    },
+  };
+  const provider = useStorylyPlacementProvider(placementConfig, placementListener);
+
+  const placementRef = useRef<StorylyPlacementMethods>(null);
+  const [placementHeight, setPlacementHeight] = useState<number>(0);
+
+
   return (
     <View style={styles.container}>
-      <StorylyPlacementReactNativeView color="#32a852" style={styles.box} />
+      <StorylyPlacement
+        style={{height: placementHeight, width: "100%", backgroundColor: 'blue'}}
+        ref={placementRef}
+        provider={provider}
+        onWidgetReady={(event) => {
+          setPlacementHeight(screenWidth / event.ratio);
+          console.log('onWidgetReady', event, 'calculated height:', placementHeight);
+        }}
+        onActionClicked={(event) => {
+          console.log('onActionClicked', event);
+        }}
+        onEvent={(event) => {
+          console.log('onEvent', event);
+        }}
+        onFail={(event) => {
+          console.log('onFail', event);
+        }}
+        onProductEvent={(event) => {
+          console.log('onProductEvent', event);
+        }}
+        onUpdateCart={(event) => {
+          console.log('onUpdateCart', event);
+        }}
+        onUpdateWishlist={(event) => {
+          console.log('onUpdateWishlist', event);
+        }}
+        />
     </View>
   );
 }
