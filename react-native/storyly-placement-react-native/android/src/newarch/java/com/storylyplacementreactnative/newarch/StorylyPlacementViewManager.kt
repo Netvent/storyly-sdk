@@ -30,7 +30,6 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>(),
 
     override fun createViewInstance(context: ThemedReactContext): RNStorylyPlacementView {
         return RNStorylyPlacementView(context).apply {
-            // Set up event dispatcher
             dispatchEvent = { eventType, jsonPayload ->
                 val surfaceId = UIManagerHelper.getSurfaceId(context)
                 val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(context, id)
@@ -42,26 +41,25 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>(),
     }
 
 
-    override fun setProviderId(view: RNStorylyPlacementView?, value: String?) {
-        Log.d("[StorylyPlacementReactNativeView]", "setProvider id: ${value} for view")
-        value ?: return
-        view?.configure(value)
+    override fun setProviderId(view: RNStorylyPlacementView?, providerId: String?) {
+        providerId ?: return
+        view?.configure(providerId)
     }
 
-    override fun approveCartChange(view: RNStorylyPlacementView?, raw: String?) {
-//
+    override fun approveCartChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+        view?.approveCartChange(responseId, raw)
     }
 
-    override fun rejectCartChange(view: RNStorylyPlacementView?, raw: String?) {
-//        TODO("Not yet implemented")
+    override fun rejectCartChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+        view?.rejectCartChange(responseId, raw)
     }
 
-    override fun approveWishlistChange(view: RNStorylyPlacementView?, raw: String?) {
-//       TODO("Not yet implemented")
+    override fun approveWishlistChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+        view?.approveWishlistChange(responseId, raw)
     }
 
-    override fun rejectWishlistChange(view: RNStorylyPlacementView?, raw: String?) {
-//       TODO("Not yet implemented")
+    override fun rejectWishlistChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+        view?.rejectWishlistChange(responseId, raw)
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {

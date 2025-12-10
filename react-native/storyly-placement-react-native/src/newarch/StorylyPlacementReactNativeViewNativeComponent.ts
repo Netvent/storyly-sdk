@@ -11,7 +11,7 @@ export type NativeEvent = Readonly<{
 }>;
 
 export interface StorylyPlacementViewNativeProps extends ViewProps {
-  providerId: string;
+  providerId?: string;
 
   // Widget Events
   onWidgetReady?: BubblingEventHandler<NativeEvent>;
@@ -28,11 +28,11 @@ export interface StorylyPlacementViewNativeProps extends ViewProps {
 export type StorylyPlacementViewComponentType = HostComponent<StorylyPlacementViewNativeProps>;
 
 export interface NativeCommands {
-  approveCartChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, raw: string) => void;
-  rejectCartChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, raw: string) => void;
+  approveCartChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, responseId: string, raw: string) => void;
+  rejectCartChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, responseId: string, raw: string) => void;
 
-  approveWishlistChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, raw: string) => void;
-  rejectWishlistChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, raw: string) => void;
+  approveWishlistChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, responseId: string, raw: string) => void;
+  rejectWishlistChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, responseId: string, raw: string) => void;
 }
 
 export const STORYLY_PLACEMENT_COMMANDS = [

@@ -43,25 +43,25 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
 
     const approveCartChange = (responseId: string, cart: STRCart) => {
       if (placementRef.current) {
-        PlacementCommands.approveCartChange(placementRef.current, JSON.stringify({ responseId, cart }));
+        PlacementCommands.approveCartChange(placementRef.current, responseId, JSON.stringify({ cart }));
       }
     };
 
     const rejectCartChange = (responseId: string, failMessage: string) => {
       if (placementRef.current) {
-        PlacementCommands.rejectCartChange(placementRef.current, JSON.stringify({ responseId, failMessage }));
+        PlacementCommands.rejectCartChange(placementRef.current, responseId, JSON.stringify({ failMessage }));
       }
     };
 
     const approveWishlistChange = (responseId: string, item: STRCart) => {
       if (placementRef.current) {
-        PlacementCommands.approveWishlistChange(placementRef.current, JSON.stringify({ responseId, item }));
+        PlacementCommands.approveWishlistChange(placementRef.current, responseId, JSON.stringify({ item }));
       }
     };
 
     const rejectWishlistChange = (responseId: string, failMessage: string) => {
       if (placementRef.current) {
-        PlacementCommands.rejectWishlistChange(placementRef.current, JSON.stringify({ responseId, failMessage }));
+        PlacementCommands.rejectWishlistChange(placementRef.current, responseId, JSON.stringify({ failMessage }));
       }
     };
 
@@ -118,7 +118,7 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
       <StorylyPlacementNativeView
         {...props}
         ref={placementRef}
-        providerId={props.provider?.providerId ?? ''}
+        providerId={props.provider?.providerId ?? undefined}
         onWidgetReady={applyBaseEvent(_onWidgetReady)}
         onActionClicked={applyBaseEvent(_onActionClicked)}
         onEvent={applyBaseEvent(_onEvent)}

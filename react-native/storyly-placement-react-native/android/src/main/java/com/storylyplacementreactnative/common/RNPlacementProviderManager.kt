@@ -8,6 +8,14 @@ import com.appsamurai.storyly.core.data.model.product.STRProductInformation
 import com.appsamurai.storyly.core.listener.provider.STRProviderListener
 import com.appsamurai.storyly.core.listener.provider.STRProviderProductListener
 import com.appsamurai.storyly.placement.data.provider.PlacementDataProvider
+import com.storylyplacementreactnative.common.data.decodeSTRPlacementConfig
+import com.storylyplacementreactnative.common.data.encodeDataPayload
+import com.storylyplacementreactnative.common.data.product.decodeSTRCart
+import com.storylyplacementreactnative.common.data.product.decodeSTRProductItem
+import com.storylyplacementreactnative.common.data.product.encodeSTRProductInformation
+import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
+import com.storylyplacementreactnative.common.data.util.decodeFromJson
+import com.storylyplacementreactnative.common.data.util.encodeToJson
 
 
 object RNPlacementProviderManager {
@@ -42,14 +50,12 @@ class RNPlacementProviderWrapper(
     private val context: Context,
     val id: String
 ) {
-
-    var provider: PlacementDataProvider = PlacementDataProvider(context)
+    val provider: PlacementDataProvider by lazy { PlacementDataProvider(context) }
 
     internal var sendEvent: ((String, RNPlacementProviderEventType, String) -> Unit)? = null
 
     fun configure(configJson: String) {
-        val parsedConfig = RNPlacementDataConverter.decodeFromJson(configJson)
-        if (parsedConfig == null) {
+        val parsedConfig = decodeFromJson(configJson) ?: run {
             Log.e("[RNPlacementProviderWrapper]", "Failed to parse config JSON")
             return
         }
@@ -62,35 +68,32 @@ class RNPlacementProviderWrapper(
 
         Log.d("[RNPlacementProviderWrapper]", "Configuring provider with token: $token")
 
-        val placementConfig = RNPlacementDataConverter.createSTRPlacementConfig(config, token)
+        val placementConfig = decodeSTRPlacementConfig(config, token)
 
         provider.apply {
           listener = object : STRProviderListener {
             override fun onLoad(data: STRDataPayload, dataSource: STRDataSource) {
-              val eventData = mapOf(
-                "dataSource" to dataSource.value,
-              )
-              val eventJson = RNPlacementDataConverter.encodeToJson(eventData)
+              val eventJson = encodeToJson(mapOf(
+                  "data" to encodeDataPayload(data),
+                  "dataSource" to dataSource.value,
+              ))
               Log.d("[RNPlacementProviderWrapper]", "STRProviderListener:onLoad: $eventJson")
               sendEvent?.invoke(id, RNPlacementProviderEventType.ON_LOAD, eventJson ?: "")
             }
 
             override fun onLoadFail(errorMessage: String) {
-              val eventData = mapOf(
+              val eventJson = encodeToJson(mapOf(
                 "errorMessage" to errorMessage,
-              )
-              val eventJson = RNPlacementDataConverter.encodeToJson(eventData)
+              ))
               Log.d("[RNPlacementProviderWrapper]", "STRProviderListener:onLoadFail: $eventJson")
               sendEvent?.invoke(id, RNPlacementProviderEventType.ON_LOAD_FAIL, eventJson ?: "")
             }
           }
           productListener = object : STRProviderProductListener {
             override fun onHydration(products: List<STRProductInformation>) {
-              val productsMap = products.map { RNPlacementDataConverter.createSTRProductInformationMap(it) }
-              val eventData = mapOf(
-                "products" to productsMap,
-              )
-              val eventJson = RNPlacementDataConverter.encodeToJson(eventData)
+              val eventJson = encodeToJson(mapOf(
+                "products" to products.map { encodeSTRProductInformation(it) },
+              ))
               Log.d("[RNPlacementProviderWrapper]", "STRProviderProductListener:onHydration: $eventJson")
               sendEvent?.invoke(id, RNPlacementProviderEventType.ON_HYDRATION, eventJson ?: "")
             }
@@ -100,23 +103,30 @@ class RNPlacementProviderWrapper(
         }
     }
 
-    fun hydrateProducts(productsJson: String) {
-        Log.d("[RNPlacementProviderWrapper]", "hydrateProducts: $productsJson")
-        val products = RNPlacementDataConverter.parseProductItems(productsJson)
+    fun hydrateProducts(raw: String) {
+        val map = decodeFromJson(raw) ?: return
+        Log.d("[RNPlacementProviderWrapper]", "hydrateProducts: $raw")
+        val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
+            decodeSTRProductItem(it)
+        } ?: return
         provider.hydrateProducts(products)
     }
 
-    fun hydrateWishlist(productsJson: String) {
-        Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $productsJson")
-        val products = RNPlacementDataConverter.parseProductItems(productsJson)
+    fun hydrateWishlist(raw: String) {
+        val map = decodeFromJson(raw) ?: return
+        Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
+        val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
+            decodeSTRProductItem(it)
+        } ?: return
         provider.hydrateWishlist(products)
     }
 
-    fun updateCart(cartJson: String) {
-        Log.d("[RNPlacementProviderWrapper]", "updateCart: $cartJson")
-        val cart = RNPlacementDataConverter.parseCart(cartJson)
-        if (cart != null) {
-            provider.updateCart(cart)
-        }
+    fun updateCart(raw: String) {
+        val map = decodeFromJson(raw) ?: return
+        Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
+        val cart = (map["cart"] as? Map<String, Any?>)?.let {
+            decodeSTRCart(it)
+        } ?: return
+        provider.updateCart(cart)
     }
 }

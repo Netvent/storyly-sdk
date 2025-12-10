@@ -18,6 +18,16 @@ import com.appsamurai.storyly.core.ui.STRWidgetController
 import com.appsamurai.storyly.placement.ui.STRListener
 import com.appsamurai.storyly.placement.ui.STRPlacementView
 import com.appsamurai.storyly.placement.ui.STRProductListener
+import com.storylyplacementreactnative.common.data.encodeSTRErrorPayload
+import com.storylyplacementreactnative.common.data.encodeSTREventPayload
+import com.storylyplacementreactnative.common.data.encodeSTRPayload
+import com.storylyplacementreactnative.common.data.product.decodeSTRCart
+import com.storylyplacementreactnative.common.data.product.decodeSTRProductItem
+import com.storylyplacementreactnative.common.data.product.encodeSTRCart
+import com.storylyplacementreactnative.common.data.product.encodeSTRCartItem
+import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
+import com.storylyplacementreactnative.common.data.util.decodeFromJson
+import com.storylyplacementreactnative.common.data.util.encodeToJson
 import java.util.UUID
 
 
@@ -57,7 +67,6 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
         Choreographer.getInstance().removeFrameCallback(choreographerFrameCallback)
     }
 
-    // MARK: - Configuration (JSON string input)
 
     fun configure(providerId: String) {
         this.providerId = providerId
@@ -102,58 +111,55 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
         }
     }
 
-    // MARK: - STRListener Implementation
-
     private fun createSTRListener(): STRListener {
         return object : STRListener {
             override fun onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
                 Log.d("[RNStorylyPlacementView]", "onActionClicked: url=$url")
-                val eventJson = RNPlacementDataConverter.encodeToJson(
-                    mapOf(
-                        "url" to url,
-                        "widgetType" to widget.getType().raw,
-                    )
-                )
+                val eventJson = encodeToJson(mapOf(
+                    "widget" to widget.getType().raw,
+                    "url" to url,
+                    "payload" to encodeSTRPayload(payload)
+                ))
                 dispatchEvent?.invoke(RNPlacementEventType.ON_ACTION_CLICKED, eventJson)
             }
 
             override fun onEvent(widget: STRWidgetController, payload: STREventPayload) {
                 Log.d("[RNStorylyPlacementView]", "onEvent: widgetType=${widget.getType()}")
-                val eventJson = RNPlacementDataConverter.encodeToJson(
-                    mapOf(
-                        "widgetType" to widget.getType().raw,
-                        "event" to payload.baseEvent.getType()
-                    )
-                )
+                val eventJson = encodeToJson(mapOf(
+                    "widget" to widget.getType().raw,
+                    "payload" to encodeSTREventPayload(payload)
+                ))
                 dispatchEvent?.invoke(RNPlacementEventType.ON_EVENT, eventJson)
             }
 
             override fun onFail(widget: STRWidgetController, payload: STRErrorPayload) {
-                Log.e("[RNStorylyPlacementView]", "onFail: widgetType=${widget.getType()}")
-                val eventJson = RNPlacementDataConverter.createFailEvent("Widget error")
+                Log.e("[RNStorylyPlacementView]", "onFail: widget=${widget.getType()}")
+                val eventJson = encodeToJson(mapOf(
+                    "widget" to widget.getType(),
+                    "payload" to encodeSTRErrorPayload(payload)
+                ))
                 dispatchEvent?.invoke(RNPlacementEventType.ON_FAIL, eventJson)
             }
 
             override fun onWidgetReady(widget: STRWidgetController, ratio: Float) {
                 Log.d("[RNStorylyPlacementView]", "onWidgetReady: ratio=$ratio")
-                val eventJson = RNPlacementDataConverter.createWidgetReadyEvent(ratio)
+                val eventJson = encodeToJson(mapOf(
+                    "widget" to widget.getType(),
+                    "ratio" to ratio,
+                ))
                 dispatchEvent?.invoke(RNPlacementEventType.ON_WIDGET_READY, eventJson)
             }
         }
     }
 
-    // MARK: - STRProductListener Implementation
-
     private fun createSTRProductListener(): STRProductListener {
         return object : STRProductListener {
             override fun onProductEvent(widget: STRWidgetController, event: STREvent) {
                 Log.d("[RNStorylyPlacementView]", "onProductEvent: ${event.getType()}")
-                val eventJson = RNPlacementDataConverter.encodeToJson(
-                    mapOf(
-                        "event" to event.getType(),
-                        "widgetType" to widget.getType(),
-                    )
-                )
+                val eventJson = encodeToJson(mapOf(
+                    "widget" to widget.getType(),
+                    "event" to event.getType(),
+                ))
                 dispatchEvent?.invoke(RNPlacementEventType.ON_PRODUCT_EVENT, eventJson)
             }
 
@@ -167,16 +173,12 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
             ) {
                 val responseId = UUID.randomUUID().toString()
                 cartUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
-
-                val cartMap = RNPlacementDataConverter.createSTRCartMap(cart)
-                val changeMap = RNPlacementDataConverter.createSTRCartItemMap(change)
-
-                val eventJson = RNPlacementDataConverter.encodeToJson(
+                val eventJson = encodeToJson(
                     mapOf(
                         "event" to event.getType(),
-                        "widgetType" to widget.getType(),
-                        "cart" to cartMap,
-                        "change" to changeMap,
+                        "widget" to widget.getType(),
+                        "cart" to encodeSTRCart(cart),
+                        "change" to encodeSTRCartItem(change),
                         "responseId" to responseId,
                     )
                 )
@@ -193,13 +195,11 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                 val responseId = UUID.randomUUID().toString()
                 wishlistUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
 
-                val itemMap = item?.let { RNPlacementDataConverter.createSTRProductItemMap(it) }
-
-                val eventJson = RNPlacementDataConverter.encodeToJson(
+                val eventJson = encodeToJson(
                     mapOf(
                         "event" to event.getType(),
-                        "widgetType" to widget.getType(),
-                        "item" to itemMap,
+                        "widget" to widget.getType(),
+                        "item" to item?.let { encodeSTRProductItem(it) },
                         "responseId" to responseId,
                     )
                 )
@@ -208,37 +208,44 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
         }
     }
 
-    fun approveCartChange(responseId: String, cartJson: String?) {
+    fun approveCartChange(responseId: String, raw: String?) {
         val callbacks = cartUpdateCallbacks[responseId] ?: return
-        val cart = if (cartJson != null) {
-            RNPlacementDataConverter.parseCart(cartJson)
-        } else {
-            null
+        val cart = raw?.let {
+            val map = decodeFromJson(it)
+            decodeSTRCart(map?.get("cart") as? Map<String, Any?>)
         }
         callbacks.first?.invoke(cart)
         cartUpdateCallbacks.remove(responseId)
     }
 
-    fun rejectCartChange(responseId: String, failMessage: String) {
+    fun rejectCartChange(responseId: String, raw: String?) {
         val callbacks = cartUpdateCallbacks[responseId] ?: return
+        val failMessage = raw?.let {
+            val map = decodeFromJson(it)
+            map?.get("failMessage") as? String
+        } ?: ""
         callbacks.second?.invoke(STRCartEventResult(failMessage))
         cartUpdateCallbacks.remove(responseId)
     }
 
-    fun approveWishlistChange(responseId: String, itemJson: String?) {
+    fun approveWishlistChange(responseId: String, raw: String?) {
         val callbacks = wishlistUpdateCallbacks[responseId] ?: return
-        val item = if (itemJson != null) {
-            val decoded = RNPlacementDataConverter.decodeFromJson(itemJson)
-            decoded?.let { RNPlacementDataConverter.createSTRProductItem(it) }
-        } else {
-            null
+        val item = raw?.let {
+            val map = decodeFromJson(it)
+            (map?.get("item") as? Map<String, Any?>)?.let { item ->
+                decodeSTRProductItem(item)
+            }
         }
         callbacks.first?.invoke(item)
         wishlistUpdateCallbacks.remove(responseId)
     }
 
-    fun rejectWishlistChange(responseId: String, failMessage: String) {
+    fun rejectWishlistChange(responseId: String, raw: String?) {
         val callbacks = wishlistUpdateCallbacks[responseId] ?: return
+        val failMessage = raw?.let {
+            val map = decodeFromJson(it)
+            map?.get("failMessage") as? String
+        } ?: ""
         callbacks.second?.invoke(STRWishlistEventResult(failMessage))
         wishlistUpdateCallbacks.remove(responseId)
     }

@@ -29,12 +29,12 @@ class StorylyPlacementReactNativeViewPackage : BaseReactPackage() {
         return ReactModuleInfoProvider {
             mapOf(
                 StorylyPlacementProviderModule.NAME to ReactModuleInfo(
-                    StorylyPlacementProviderModule.NAME,
-                    StorylyPlacementProviderModule::class.java.name,
-                    false, // canOverrideExistingModule
-                    false, // needsEagerInit
-                    false, // isCxxModule
-                    true   // isTurboModule
+                  name = StorylyPlacementProviderModule.NAME,
+                  className = StorylyPlacementProviderModule::class.java.name,
+                  canOverrideExistingModule = false,
+                  needsEagerInit = false,
+                  isCxxModule = false,
+                  isTurboModule = true
                 )
             )
         }
