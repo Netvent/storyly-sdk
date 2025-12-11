@@ -1,8 +1,11 @@
 package com.storylyplacementreactnative.oldarch
 
 import android.util.Log
+import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.WritableMap
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.SimpleViewManager
@@ -44,8 +47,8 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>() 
         }
     }
 
-    private fun createEventMap(jsonPayload: String?): com.facebook.react.bridge.WritableMap {
-        return com.facebook.react.bridge.Arguments.createMap().apply {
+    private fun createEventMap(jsonPayload: String?): WritableMap {
+        return Arguments.createMap().apply {
             jsonPayload?.let { putString("raw", it) }
         }
     }
