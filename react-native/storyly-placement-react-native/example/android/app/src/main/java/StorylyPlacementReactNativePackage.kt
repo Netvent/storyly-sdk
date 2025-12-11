@@ -2,8 +2,8 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
-import com.storylyplacementreactnative.newarch.StorylyPlacementProviderModule
-import com.storylyplacementreactnative.newarch.StorylyPlacementViewManager
+import com.storylyplacementreactnative.oldarch.StorylyPlacementProviderModule
+import com.storylyplacementreactnative.oldarch.StorylyPlacementViewManager
 
 
 class StorylyPlacementReactNativePackage : ReactPackage {

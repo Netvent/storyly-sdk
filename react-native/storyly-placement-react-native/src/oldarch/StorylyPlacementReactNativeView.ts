@@ -6,7 +6,7 @@ import {
 import { STORYLY_PLACEMENT_COMMANDS, type NativeCommands, type StorylyPlacementViewNativeProps } from '../newarch/StorylyPlacementReactNativeViewNativeComponent';
 
 
-const COMPONENT_NAME = 'StorylyPlacementReactNativeView';
+const COMPONENT_NAME = 'StorylyPlacementReactNativeViewLegacy';
 
 const dispatchCommand = (
   view: any,
