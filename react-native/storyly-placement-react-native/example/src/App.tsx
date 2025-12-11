@@ -24,11 +24,10 @@ export default function App() {
   const placementRef = useRef<StorylyPlacementMethods>(null);
   const [placementHeight, setPlacementHeight] = useState<number>(0);
 
-
   return (
     <View style={styles.container}>
       <StorylyPlacement
-        style={{height: placementHeight, width: "100%", backgroundColor: 'blue'}}
+        style={{height: placementHeight, width: "100%", backgroundColor: 'gray'}}
         ref={placementRef}
         provider={provider}
         onWidgetReady={(event) => {
