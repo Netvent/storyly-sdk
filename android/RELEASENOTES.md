@@ -1,4 +1,7 @@
 # Release Notes
+### 4.19.1 (11.12.2025)
+* fixed storyly broadcast receiver for countdown notifications
+
 ### 4.19.0 (01.12.2025)
 * added play/pause/replay accesibility controls for stories
 * fixed padding values of product detail sheet indicator area
