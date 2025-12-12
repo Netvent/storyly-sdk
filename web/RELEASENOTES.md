@@ -1,6 +1,13 @@
 # Release Notes
 
-### 4.7.2 - 03.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.15/storyly-web.js)
+### 4.7.5 - 12.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.7.5/storyly-web.js)
+
+- Fix: scroll layout issue
+- Fix: cutting poll layer text
+- Fix: requestIdleCallback polyfill issue
+- Fix: cta layer radius issue
+
+### 4.7.2 - 03.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.7.2/storyly-web.js)
 
 - Feature: text component supports rich text
 - Feature: added custom payload to actionClicked callback
