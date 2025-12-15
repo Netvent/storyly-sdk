@@ -1,4 +1,3 @@
-import type { STRProductItem } from './story';
 
 
 export interface StorylyPlacementConfig {
@@ -11,13 +10,18 @@ export interface StorylyPlacementConfig {
   userProperties?: Record<string, string>;
 
   productConfig?: {
-    isFallbackEnabled?: boolean,
-    isCartEnabled?: boolean,
-    productFeed?: Record<string, STRProductItem[]>;
+    isFallbackEnabled?: boolean;
+    isCartEnabled?: boolean;
   };
   shareConfig?: {
     shareUrl?: string;
     facebookAppID?: string;
+    appLogoVisibility?: boolean;
   };
-  // networkConfig?: PlacementNetworkConfig;
+  networkConfig?: {
+    cdnHost?: string;
+    productHost?: string;
+    analyticHost?: string;
+    placementHost?: string;
+  };
 }

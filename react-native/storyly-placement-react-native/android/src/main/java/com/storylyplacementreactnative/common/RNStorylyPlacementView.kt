@@ -182,8 +182,8 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                     cartUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
                     val eventJson = encodeToJson(
                         mapOf(
-                            "event" to event.getType(),
                             "widget" to widget.getType().raw,
+                            "event" to event.getType(),
                             "cart" to encodeSTRCart(cart),
                             "change" to encodeSTRCartItem(change),
                             "responseId" to responseId,
@@ -204,8 +204,8 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
 
                     val eventJson = encodeToJson(
                         mapOf(
-                            "event" to event.getType(),
                             "widget" to widget.getType().raw,
+                            "event" to event.getType(),
                             "item" to item?.let { encodeSTRProductItem(it) },
                             "responseId" to responseId,
                         )

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { useStorylyPlacementProvider, StorylyPlacement, type StorylyPlacementConfig, type StorylyPlacementMethods } from 'storyly-placement-react-native';
-import type { StorylyPlacementProviderListener } from 'storyly-placement-react-native';
+import type { StorylyPlacementProviderListener, STRBannerPayload } from 'storyly-placement-react-native';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -35,6 +35,10 @@ export default function App() {
           console.log('onWidgetReady', event, 'calculated height:', placementHeight);
         }}
         onActionClicked={(event) => {
+          if (event.widget === 'banner') {
+            const bannerPayload = event.payload as STRBannerPayload;
+            console.log('bannerEvent', bannerPayload.item?.uniqueId, bannerPayload.component?.type);
+          }
           console.log('onActionClicked', event);
         }}
         onEvent={(event) => {

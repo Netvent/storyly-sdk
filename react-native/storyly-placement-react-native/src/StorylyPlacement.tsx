@@ -2,16 +2,16 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import type { ViewProps } from 'react-native';
 import type {
+  STRCart,
   BaseEvent,
-  PlacementActionEvent,
+  PlacementActionClickEvent,
   PlacementCartUpdateEvent,
+  PlacementEvent,
   PlacementFailEvent,
   PlacementProductEvent,
-  PlacementWidgetEvent,
   PlacementWidgetReadyEvent,
   PlacementWishlistUpdateEvent,
-} from './data/event';
-import type { STRCart } from './data/story';
+ } from './data';
 import StorylyPlacementNativeView, { PlacementCommands, applyBaseEvent } from './StorylyPlacementNativeView';
 import type { StorylyPlacementProvider } from './StorylyPlacementProvider';
 
@@ -22,8 +22,8 @@ export interface StorylyPlacementProps extends ViewProps {
   provider?: StorylyPlacementProvider;
 
   onWidgetReady?: (event: PlacementWidgetReadyEvent) => void;
-  onActionClicked?: (event: PlacementActionEvent) => void;
-  onEvent?: (event: PlacementWidgetEvent) => void;
+  onActionClicked?: (event: PlacementActionClickEvent) => void;
+  onEvent?: (event: PlacementEvent) => void;
   onFail?: (event: PlacementFailEvent) => void;
   onProductEvent?: (event: PlacementProductEvent) => void;
   onUpdateCart?: (event: PlacementCartUpdateEvent) => void;
@@ -80,13 +80,13 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
 
     const _onActionClicked = (event: BaseEvent) => {
       if (props.onActionClicked) {
-        props.onActionClicked(event as PlacementActionEvent);
+        props.onActionClicked(event as PlacementActionClickEvent);
       }
     };
 
     const _onEvent = (event: BaseEvent) => {
       if (props.onEvent) {
-        props.onEvent(event as PlacementWidgetEvent);
+        props.onEvent(event as PlacementEvent);
       }
     };
 

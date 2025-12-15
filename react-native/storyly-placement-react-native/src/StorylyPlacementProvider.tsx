@@ -6,15 +6,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { NativeEventEmitter } from 'react-native';
 import type {
-  STRCart,
-  STRProductItem,
-} from './data/story';
-import type {
   PlacementHydrationEvent,
   PlacementLoadEvent,
   PlacementLoadFailEvent,
-} from './data/event';
-import type { StorylyPlacementConfig } from './data/config';
+  StorylyPlacementConfig,
+  STRCart,
+  STRProductItem,
+} from './data';
 import StorylyPlacementProviderNative from './StorylyPlacementProviderNative';
 
 export interface StorylyPlacementProviderListener {

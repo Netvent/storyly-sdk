@@ -1,5 +1,5 @@
 import type { HostComponent } from 'react-native';
-import type { BaseEvent } from './data/event';
+import type { BaseEvent } from './data/util';
 import type { NativeCommands, NativeEvent, StorylyPlacementViewNativeProps } from './newarch/StorylyPlacementReactNativeViewNativeComponent';
 import type { BubblingEventHandler } from 'react-native/Libraries/Types/CodegenTypesNamespace';
 
