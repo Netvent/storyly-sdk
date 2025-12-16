@@ -15,5 +15,7 @@ import Foundation
             return "onHydration"
         }
     }
+  
+    static var allCases: [RNPlacementProviderEventType] = [.onLoad, .onLoadFail, .onHydration]
 }
 

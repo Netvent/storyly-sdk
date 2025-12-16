@@ -2,7 +2,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTEventDispatcher.h>
 #import <React/RCTUIManager.h>
-#import "StorylyPlacementReactNative-Swift.h"
+#import <StorylyPlacementReactNative/StorylyPlacementReactNative-Swift.h>
 
 @implementation StorylyPlacementReactNativeViewLegacy
 
@@ -16,17 +16,13 @@ RCT_EXPORT_MODULE(StorylyPlacementReactNativeViewLegacy)
     __weak typeof(view) weakView = view;
     
     view.dispatchEvent = ^(RNPlacementEventType eventType, NSString * _Nullable payload) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        __strong typeof(weakView) strongView = weakView;
-        
-        if (strongSelf && strongView) {
+        if (weakSelf && weakView) {
             NSDictionary *eventData = @{};
             if (payload) {
                 eventData = @{@"raw": payload};
             }
             
-            [strongSelf.bridge.eventDispatcher sendAppEventWithName:[eventType eventName]
-                                                               body:eventData];
+          [weakSelf.bridge.eventDispatcher sendAppEventWithName:[RNEventMapper mapPlacementEvent: eventType] body:eventData];
         }
     };
     
@@ -39,7 +35,7 @@ RCT_CUSTOM_VIEW_PROPERTY(providerId, NSString, RNStorylyPlacementView)
 {
     NSString *providerId = [RCTConvert NSString:json];
     if (providerId) {
-        [view configure:providerId];
+        [view configureWithProviderId: providerId];
     }
 }
 
@@ -110,15 +106,7 @@ RCT_EXPORT_METHOD(rejectWishlistChange:(nonnull NSNumber *)reactTag
 
 - (NSArray<NSString *> *)customDirectEventTypes
 {
-    return @[
-        @"onWidgetReady",
-        @"onFail",
-        @"onEvent",
-        @"onActionClicked",
-        @"onProductEvent",
-        @"onUpdateCart",
-        @"onUpdateWishlist"
-    ];
+  return [RNEventMapper allPlacementEvents];
 }
 
 @end

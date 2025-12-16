@@ -27,5 +27,9 @@ import Foundation
       return "onWishlistUpdate"
     }
   }
+  
+  static var allCases: [RNPlacementEventType] {
+    return [.onWidgetReady, .onFail, .onEvent, .onActionClicked, .onProductEvent, .onCartUpdate, .onWishlistUpdate]
+  }
 }
 

@@ -46,7 +46,7 @@ import StorylyCore
         return PlacementDataProvider()
     }()
     
-    @objc public var sendEvent: ((String, String, String) -> Void)?
+    @objc public var sendEvent: ((String, RNPlacementProviderEventType, String) -> Void)?
     
     init(id: String) {
         self.id = id
@@ -133,7 +133,7 @@ private class STRProviderListenerImpl: NSObject, STRProviderDelegate {
         
         if let eventJson = encodeToJson(eventData) {
             print("[RNPlacementProviderWrapper] STRProviderListener:onLoad: \(eventJson)")
-            wrapper.sendEvent?(wrapper.id, RNPlacementProviderEventType.onLoad.eventName, eventJson)
+            wrapper.sendEvent?(wrapper.id, .onLoad, eventJson)
         }
     }
     
@@ -146,7 +146,7 @@ private class STRProviderListenerImpl: NSObject, STRProviderDelegate {
         
         if let eventJson = encodeToJson(eventData) {
             print("[RNPlacementProviderWrapper] STRProviderListener:onLoadFail: \(eventJson)")
-          wrapper.sendEvent?(wrapper.id, RNPlacementProviderEventType.onLoadFail.eventName, eventJson)
+          wrapper.sendEvent?(wrapper.id, .onLoadFail, eventJson)
         }
     }
 }
@@ -169,7 +169,7 @@ private class STRProviderProductListenerImpl: NSObject, STRProviderProductDelega
         
         if let eventJson = encodeToJson(eventData) {
             print("[RNPlacementProviderWrapper] STRProviderProductListener:onHydration: \(eventJson)")
-            wrapper.sendEvent?(wrapper.id, RNPlacementProviderEventType.onHydration.eventName, eventJson)
+            wrapper.sendEvent?(wrapper.id, .onHydration, eventJson)
         }
     }
 }

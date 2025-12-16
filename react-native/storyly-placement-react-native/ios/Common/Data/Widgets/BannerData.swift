@@ -47,7 +47,6 @@ func encodeBannerComponent(_ component: BannerComponent?) -> [String: Any]? {
         "customPayload": component.customPayload as Any
     ]
     
-    // Add component-specific fields
     if let button = component as? BannerButtonComponent {
         result["text"] = button.text
         result["actionUrl"] = button.actionUrl

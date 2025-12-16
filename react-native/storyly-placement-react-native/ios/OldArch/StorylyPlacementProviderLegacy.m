@@ -1,5 +1,5 @@
 #import "StorylyPlacementProviderLegacy.h"
-#import "StorylyPlacementReactNative-Swift.h"
+#import <StorylyPlacementReactNative/StorylyPlacementReactNative-Swift.h>
 
 @implementation StorylyPlacementProviderLegacy {
     int _listenerCount;
@@ -36,8 +36,8 @@ RCT_EXPORT_METHOD(createProvider:(NSString *)providerId
     wrapper.sendEvent = ^(NSString *id, RNPlacementProviderEventType eventType, NSString *jsonPayload) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf && strongSelf->_hasListeners) {
-            NSString *eventName = [NSString stringWithFormat:@"%@_%@", id, [eventType eventName]];
-            [strongSelf sendEventWithName:eventName body:jsonPayload];
+            NSString *eventName = [NSString stringWithFormat:@"%@_%@", id, [RNEventMapper mapProviderEvent:eventType]];
+//            [strongSelf sendEventWithName:eventName body:jsonPayload];
         }
     };
     
@@ -58,7 +58,7 @@ RCT_EXPORT_METHOD(updateConfig:(NSString *)providerId config:(NSString *)config)
     
     RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
-        [wrapper configure:config];
+        [wrapper configureWithConfigJson:config];
     }
 }
 
@@ -70,7 +70,7 @@ RCT_EXPORT_METHOD(hydrateProducts:(NSString *)providerId productsJson:(NSString 
     
     RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
-        [wrapper hydrateProducts:productsJson];
+        [wrapper hydrateProductsWithProductsJson:productsJson];
     }
 }
 
@@ -80,7 +80,7 @@ RCT_EXPORT_METHOD(hydrateWishlist:(NSString *)providerId productsJson:(NSString 
     
     RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
-        [wrapper hydrateWishlist:productsJson];
+        [wrapper hydrateWishlistWithProductsJson:productsJson];
     }
 }
 
@@ -90,7 +90,7 @@ RCT_EXPORT_METHOD(updateCart:(NSString *)providerId cartJson:(NSString *)cartJso
     
     RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
-        [wrapper updateCart:cartJson];
+        [wrapper updateCartWithCartJson:cartJson];
     }
 }
 
@@ -98,7 +98,6 @@ RCT_EXPORT_METHOD(updateCart:(NSString *)providerId cartJson:(NSString *)cartJso
 
 - (NSArray<NSString *> *)supportedEvents
 {
-    // Return empty array as event names are dynamic based on provider ID
     return @[];
 }
 

@@ -36,9 +36,9 @@ RCT_EXPORT_MODULE(StorylyPlacementProvider)
     RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] createProviderWithId:providerId];
     
     __weak StorylyPlacementProvider *weakSelf = self;
-    wrapper.sendEvent = ^(NSString *id, NSString *eventType, NSString *jsonPayload) {
+    wrapper.sendEvent = ^(NSString *id, RNPlacementProviderEventType eventType, NSString *jsonPayload) {
         if (weakSelf) {
-            NSString *eventName = [NSString stringWithFormat:@"%@_%@", id, eventType];
+            NSString *eventName = [NSString stringWithFormat:@"%@_%@", id, [RNEventMapper mapProviderEvent:eventType]];
             [weakSelf sendEventWithName:eventName body:jsonPayload];
         }
     };
