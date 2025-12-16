@@ -15,19 +15,22 @@ Pod::Spec.new do |s|
 
   # Conditionally include architecture-specific files
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
-    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/*.h", "ios/NewArch/**/*.{h,m,mm,swift}"
+    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/NewArch/**/*.{h,mm,swift}"
+    s.private_header_files = "ios/NewArch/**/*.h"
   else
-    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/*.h", "ios/OldArch/**/*.{h,m,mm,swift}"
+    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/OldArch/**/*.{h,m,swift}"
+    s.private_header_files = "ios/OldArch/**/*.h"
   end
 
   # Swift module support
+  s.swift_version = "5.0"
   s.pod_target_xcconfig = {
     "DEFINES_MODULE" => "YES"
   }
 
+
   # React Native dependencies
   install_modules_dependencies(s)
 
-  # TODO: Add StorylyPlacement SDK dependency when available
   s.dependency "StorylyPlacement", "~> 1.1.0"
 end

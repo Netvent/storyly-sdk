@@ -63,7 +63,7 @@ export default function App() {
         }}
         />
 
-<Button title="Resume Paused Story Bar"   onPress={() => {
+      <Button title="Resume Paused Story Bar"   onPress={() => {
         if (pauseWidget) {
           placementRef.current?.getWidget<STRStoryBarController>(pauseWidget).resume();
           setPauseWidget(null);

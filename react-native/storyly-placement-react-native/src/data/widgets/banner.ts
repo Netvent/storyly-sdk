@@ -22,7 +22,7 @@ export type BannerComponentUnion = BannerButtonComponent;
 
 
 export interface STRBannerItem {
-  uniqueId: string;
+  id: string;
   name?: string;
   index: number;
   actionUrl?: string;

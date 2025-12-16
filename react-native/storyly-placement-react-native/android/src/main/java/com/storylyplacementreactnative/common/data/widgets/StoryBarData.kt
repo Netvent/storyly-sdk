@@ -26,11 +26,10 @@ import com.appsamurai.storyly.storybar.ui.model.StorySwipeComponent
 import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
 
 
-// TODO: update with StoryBarDataPayload
 fun encodeStoryBarDataPayload(data: STRDataPayload): Map<String, Any?> {
     return mapOf(
         "type" to STRWidgetType.StoryBar.raw,
-//        "items" to data.items.map { encodeBannerSlide(it) }
+        "items" to data.items.map { encodeStoryGroupItem(it) }
     )
 }
 
