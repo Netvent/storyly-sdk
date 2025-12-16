@@ -5,39 +5,39 @@
 
 import type { STRCart, STRCartItem, STRProductItem } from '../product';
 import type { BaseEvent } from '../util';
-import type { PlacementWidgetType, STRErrorPayload, STREventPayload, STRPayload } from './payloads';
+import type { PlacementWidget, STRErrorPayload, STREventPayload, STRPayload } from './payloads';
 
 
 export interface PlacementWidgetReadyEvent extends BaseEvent {
-  widget: PlacementWidgetType;
+  widget: PlacementWidget;
   ratio: number;
 }
 
 export interface PlacementActionClickEvent extends BaseEvent {
-  widget: PlacementWidgetType;
+  widget: PlacementWidget;
   url: string;
   payload?: STRPayload;
 }
 
 export interface PlacementEvent extends BaseEvent {
-  widget: PlacementWidgetType;
+  widget: PlacementWidget;
   payload: STREventPayload;
 }
 
 export interface PlacementFailEvent extends BaseEvent {
-  widget: PlacementWidgetType;
+  widget: PlacementWidget;
   payload: STRErrorPayload;
 }
 
 // MARK: - Product Events
 
 export interface PlacementProductEvent extends BaseEvent {
-  widget: PlacementWidgetType;
+  widget: PlacementWidget;
   event: string;
 }
 
 export interface PlacementCartUpdateEvent extends BaseEvent {
-  widget: PlacementWidgetType;
+  widget: PlacementWidget;
   event: string;
   cart?: STRCart;
   change?: STRCartItem;
@@ -45,7 +45,7 @@ export interface PlacementCartUpdateEvent extends BaseEvent {
 }
 
 export interface PlacementWishlistUpdateEvent extends BaseEvent {
-  widget: PlacementWidgetType;
+  widget: PlacementWidget;
   event: string;
   item?: STRProductItem;
   responseId: string;

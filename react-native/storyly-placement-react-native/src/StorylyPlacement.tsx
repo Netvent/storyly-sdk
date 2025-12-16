@@ -11,9 +11,11 @@ import type {
   PlacementProductEvent,
   PlacementWidgetReadyEvent,
   PlacementWishlistUpdateEvent,
+  PlacementWidget,
  } from './data';
 import StorylyPlacementNativeView, { PlacementCommands, applyBaseEvent } from './StorylyPlacementNativeView';
 import type { StorylyPlacementProvider } from './StorylyPlacementProvider';
+import { createWidgetProxy, type STRWidgetController } from './StorylyWidget';
 
 
 type StorylyPlacementNativeComponentRef = React.ComponentRef<typeof StorylyPlacementNativeView>;
@@ -30,16 +32,28 @@ export interface StorylyPlacementProps extends ViewProps {
   onUpdateWishlist?: (event: PlacementWishlistUpdateEvent) => void;
 }
 
+
 export interface StorylyPlacementMethods {
+  getWidget<T extends STRWidgetController>(widget: PlacementWidget): T;
   approveCartChange: (responseId: string, cart: STRCart) => void;
   rejectCartChange: (responseId: string, failMessage: string) => void;
   approveWishlistChange: (responseId: string, item: STRCart) => void;
   rejectWishlistChange: (responseId: string, failMessage: string) => void;
 }
 
+     
 const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementProps>(
   (props, ref) => {
     const placementRef = useRef<StorylyPlacementNativeComponentRef>(null);
+
+    const getWidget = <T extends STRWidgetController>(widget: PlacementWidget): T => {
+      return createWidgetProxy(widget, (method: string, params: any) => {
+        if (placementRef.current) {
+          console.log('callWidget', widget.viewId, method, JSON.stringify(params));
+          PlacementCommands.callWidget(placementRef.current, widget.viewId, method, JSON.stringify(params));
+        }
+      }) as T;
+    };
 
     const approveCartChange = (responseId: string, cart: STRCart) => {
       if (placementRef.current) {
@@ -66,6 +80,7 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
     };
 
     useImperativeHandle(ref, () => ({
+      getWidget,
       approveCartChange,
       rejectCartChange,
       approveWishlistChange,

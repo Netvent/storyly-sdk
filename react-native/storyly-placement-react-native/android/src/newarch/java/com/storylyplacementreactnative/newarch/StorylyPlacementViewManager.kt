@@ -62,6 +62,10 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>(),
         view?.rejectWishlistChange(responseId, raw)
     }
 
+    override fun callWidget(view: RNStorylyPlacementView?, id: String, method: String, raw: String?) {
+        view?.callWidget(id, method, raw)
+    }
+
     override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
         val events = super.getExportedCustomDirectEventTypeConstants()
         val eventMap = mutableMapOf<String, Any>()

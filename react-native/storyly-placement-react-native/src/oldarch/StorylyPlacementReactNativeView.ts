@@ -3,7 +3,7 @@ import {
   UIManager,
   findNodeHandle,
 } from 'react-native';
-import { STORYLY_PLACEMENT_COMMANDS, type NativeCommands, type StorylyPlacementViewNativeProps } from '../newarch/StorylyPlacementReactNativeViewNativeComponent';
+import { type StorylyPlacementViewNativeProps } from '../newarch/StorylyPlacementReactNativeViewNativeComponent';
 
 
 const COMPONENT_NAME = 'StorylyPlacementReactNativeViewLegacy';
@@ -24,15 +24,34 @@ const dispatchCommand = (
   }
 };
 
-const PlacementCommands: NativeCommands = {} as NativeCommands;
+export interface NativeCommands {
+  callWidget: (viewRef: any, id: string, method: string, raw: string) => void;
 
-STORYLY_PLACEMENT_COMMANDS.forEach((command) => {
-  (PlacementCommands as any)[command] = (view: any, raw: string) => {
-    dispatchCommand(view, command, [raw]);
-  };
-});
+  approveCartChange: (viewRef: any, responseId: string, raw: string) => void;
+  rejectCartChange: (viewRef: any, responseId: string, raw: string) => void;
 
-export { PlacementCommands };
+  approveWishlistChange: (viewRef: any, responseId: string, raw: string) => void;
+  rejectWishlistChange: (viewRef: any, responseId: string, raw: string) => void;
+}
+
+export const PlacementCommands: NativeCommands = {
+  approveCartChange: (view: any, responseId: string, raw: string) => {
+    dispatchCommand(view, 'approveCartChange', [responseId, raw]);
+  },
+  rejectCartChange: (view: any, responseId: string, raw: string) => {
+    dispatchCommand(view, 'rejectCartChange', [responseId, raw]);
+  },
+  approveWishlistChange: (view: any, responseId: string, raw: string) => {
+    dispatchCommand(view, 'approveWishlistChange', [responseId, raw]);
+  },
+  rejectWishlistChange: (view: any, responseId: string, raw: string) => {
+    dispatchCommand(view, 'rejectWishlistChange', [responseId, raw]);
+  },
+  callWidget: (view: any, id: string, method: string, raw: string | null) => {
+    dispatchCommand(view, 'callWidget', [id, method, raw]);
+  },
+};
+
 
 const StorylyPlacementNativeView =
   requireNativeComponent<StorylyPlacementViewNativeProps>(COMPONENT_NAME);

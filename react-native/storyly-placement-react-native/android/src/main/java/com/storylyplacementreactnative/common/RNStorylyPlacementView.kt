@@ -6,6 +6,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.Choreographer
 import android.widget.FrameLayout
+import com.appsamurai.storyly.core.STRWidgetType
 import com.appsamurai.storyly.core.analytics.error.STRErrorPayload
 import com.appsamurai.storyly.core.analytics.event.STREvent
 import com.appsamurai.storyly.core.analytics.event.STREventPayload
@@ -20,6 +21,11 @@ import com.appsamurai.storyly.placement.data.provider.PlacementDataProvider
 import com.appsamurai.storyly.placement.ui.STRListener
 import com.appsamurai.storyly.placement.ui.STRPlacementView
 import com.appsamurai.storyly.placement.ui.STRProductListener
+import com.appsamurai.storyly.storybar.ui.STRStoryBarController
+import com.appsamurai.storyly.storybar.ui.model.PlayMode
+import com.appsamurai.storyly.videofeed.ui.STRVideoFeedController
+import com.appsamurai.storyly.videofeed.ui.STRVideoFeedPresenterController
+import com.appsamurai.storyly.videofeed.ui.model.VFPlayMode
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.storylyplacementreactnative.common.data.encodeSTRErrorPayload
@@ -32,6 +38,7 @@ import com.storylyplacementreactnative.common.data.product.encodeSTRCartItem
 import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
 import com.storylyplacementreactnative.common.data.util.decodeFromJson
 import com.storylyplacementreactnative.common.data.util.encodeToJson
+import java.lang.ref.WeakReference
 import java.util.UUID
 
 
@@ -42,6 +49,8 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     // Callback maps for async cart/wishlist operations
     internal val cartUpdateCallbacks = mutableMapOf<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>>()
     internal val wishlistUpdateCallbacks = mutableMapOf<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>>()
+
+    private var widgetMap = mutableMapOf<String, WeakReference<STRWidgetController>>()
 
     private var placementView: STRPlacementView? = null
 
@@ -126,7 +135,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                 override fun onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
                     Log.d("[RNStorylyPlacement]", "onActionClicked: url=$url")
                     val eventJson = encodeToJson(mapOf(
-                        "widget" to widget.getType().raw,
+                        "widget" to encodeWidgetController(widget),
                         "url" to url,
                         "payload" to encodeSTRPayload(payload)
                     ))
@@ -136,16 +145,17 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                 override fun onEvent(widget: STRWidgetController, payload: STREventPayload) {
                     Log.d("[RNStorylyPlacement]", "onEvent: widgetType=${widget.getType()}, payload=${payload.baseEvent.getType()}")
                     val eventJson = encodeToJson(mapOf(
-                        "widget" to widget.getType().raw,
+                        "widget" to encodeWidgetController(widget),
                         "payload" to encodeSTREventPayload(payload)
                     ))
+                    println("AAAA: ${eventJson}")
                     dispatchEvent?.invoke(RNPlacementEventType.ON_EVENT, eventJson)
                 }
 
                 override fun onFail(widget: STRWidgetController, payload: STRErrorPayload) {
                     Log.w("[RNStorylyPlacement]", "onFail: widget=${widget.getType()}, payload=${payload.baseError.getType()}")
                     val eventJson = encodeToJson(mapOf(
-                        "widget" to widget.getType().raw,
+                        "widget" to encodeWidgetController(widget),
                         "payload" to encodeSTRErrorPayload(payload)
                     ))
                     dispatchEvent?.invoke(RNPlacementEventType.ON_FAIL, eventJson)
@@ -154,7 +164,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                 override fun onWidgetReady(widget: STRWidgetController, ratio: Float) {
                     Log.d("[RNStorylyPlacement]", "onWidgetReady: ratio=$ratio")
                     val eventJson = encodeToJson(mapOf(
-                        "widget" to widget.getType().raw,
+                        "widget" to encodeWidgetController(widget),
                         "ratio" to ratio,
                     ))
                     dispatchEvent?.invoke(RNPlacementEventType.ON_WIDGET_READY, eventJson)
@@ -164,7 +174,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                 override fun onProductEvent(widget: STRWidgetController, event: STREvent) {
                     Log.d("[RNStorylyPlacement]", "onProductEvent: ${event.getType()}")
                     val eventJson = encodeToJson(mapOf(
-                        "widget" to widget.getType().raw,
+                        "widget" to encodeWidgetController(widget),
                         "event" to event.getType(),
                     ))
                     dispatchEvent?.invoke(RNPlacementEventType.ON_PRODUCT_EVENT, eventJson)
@@ -178,11 +188,12 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                     onSuccess: ((STRCart?) -> Unit)?,
                     onFail: ((STRCartEventResult) -> Unit)?,
                 ) {
+                    Log.d("[RNStorylyPlacement]", "onUpdateProduct: ${event.getType()}")
                     val responseId = UUID.randomUUID().toString()
                     cartUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
                     val eventJson = encodeToJson(
                         mapOf(
-                            "widget" to widget.getType().raw,
+                            "widget" to encodeWidgetController(widget),
                             "event" to event.getType(),
                             "cart" to encodeSTRCart(cart),
                             "change" to encodeSTRCartItem(change),
@@ -199,12 +210,13 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                     onSuccess: ((STRProductItem?) -> Unit)?,
                     onFail: ((STRWishlistEventResult) -> Unit)?,
                 ) {
+                    Log.d("[RNStorylyPlacement]", "onUpdateWishlist: ${event.getType()}")
                     val responseId = UUID.randomUUID().toString()
                     wishlistUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
 
                     val eventJson = encodeToJson(
                         mapOf(
-                            "widget" to widget.getType().raw,
+                            "widget" to encodeWidgetController(widget),
                             "event" to event.getType(),
                             "item" to item?.let { encodeSTRProductItem(it) },
                             "responseId" to responseId,
@@ -213,6 +225,90 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                     dispatchEvent?.invoke(RNPlacementEventType.ON_WISHLIST_UPDATE, eventJson)
                 }
             }
+        }
+    }
+
+    fun callWidget(id: String, method: String, raw: String?) {
+        Log.d("[RNStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
+        val widget = widgetMap[id]?.get() ?: return
+        val params = decodeFromJson(raw)
+        when (widget.getType()) {
+            STRWidgetType.StoryBar -> {
+                val controller = widget as? STRStoryBarController ?: return
+                when (method) {
+                    "pause" -> {
+                        controller.pause()
+                    }
+                    "resume" -> {
+                        controller.resume()
+                    }
+                    "close" -> {
+                        controller.close()
+                    }
+                    "open" -> {
+                        params ?: return
+                        val uri = (params["uri"] as? String) ?: return
+                        controller.open(uri)
+                    }
+                    "openWithId" -> {
+                        params ?: return
+                        val storyGroupId = (params["storyGroupId"] as? String) ?: return
+                        val storyId = params["storyId"] as? String
+                        val playMode = (params["playMode"] as? String)?.let { PlayMode.getFromValue(it) } ?: PlayMode.Default // TODO: include mapping in native
+                        controller.open(storyGroupId, storyId, playMode)
+                    }
+                    else -> return
+                }
+            }
+            STRWidgetType.VideoFeed -> {
+                val controller = widget as? STRVideoFeedController ?: return
+                when (method) {
+                    "pause" -> {
+                        controller.pause()
+                    }
+                    "resume" -> {
+                        controller.resume()
+                    }
+                    "close" -> {
+                        controller.close()
+                    }
+                    "open" -> {
+                        params ?: return
+                        val uri = (params["uri"] as? String) ?: return
+                        controller.open(uri)
+                    }
+                    "openWithId" -> {
+                        params ?: return
+                        val groupId = (params["groupId"] as? String) ?: return
+                        val itemId = params["itemId"] as? String
+                        val playMode = (params["playMode"] as? String)?.let { VFPlayMode.getFromValue(it) } ?: VFPlayMode.Default // TODO: include mapping in native
+                        controller.open(groupId, itemId, playMode)
+                    }
+                    else -> return
+                }
+
+            }
+            STRWidgetType.VideoFeedPresenter -> {
+                val controller = widget as? STRVideoFeedPresenterController ?: return
+                when (method) {
+                    "pause" -> {
+                        controller.pause()
+                    }
+                    "play" -> {
+                        controller.play()
+                    }
+                    "open" -> {
+                        params ?: return
+                        val groupId = (params["groupId"] as? String) ?: return
+                        controller.open(groupId)
+                    }
+                    else -> return
+                }
+
+            }
+            STRWidgetType.Banner -> return
+            STRWidgetType.SwipeCard -> return
+            STRWidgetType.None -> return
         }
     }
 
@@ -257,6 +353,24 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
         } ?: ""
         callbacks.second?.invoke(STRWishlistEventResult(failMessage))
         wishlistUpdateCallbacks.remove(responseId)
+    }
+
+    private fun encodeWidgetController(controller: STRWidgetController): Map<String, String> {
+        return mapOf(
+            "type" to controller.getType().raw,
+            "viewId" to updateWidgetMapKey(controller)
+        )
+    }
+
+    private fun updateWidgetMapKey(controller: STRWidgetController): String {
+        widgetMap.entries.removeIf { it.value.get() == null }
+        widgetMap.entries.firstOrNull { it.value.get() == controller }?.let { entry ->
+            return entry.key
+        }
+
+        val newKey = UUID.randomUUID().toString()
+        widgetMap[newKey] = WeakReference(controller)
+        return newKey
     }
 }
 

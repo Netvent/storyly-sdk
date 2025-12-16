@@ -28,6 +28,8 @@ export interface StorylyPlacementViewNativeProps extends ViewProps {
 export type StorylyPlacementViewComponentType = HostComponent<StorylyPlacementViewNativeProps>;
 
 export interface NativeCommands {
+  callWidget: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, id: string, method: string, raw: string) => void;
+
   approveCartChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, responseId: string, raw: string) => void;
   rejectCartChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, responseId: string, raw: string) => void;
 
@@ -35,16 +37,11 @@ export interface NativeCommands {
   rejectWishlistChange: (viewRef: React.ElementRef<StorylyPlacementViewComponentType>, responseId: string, raw: string) => void;
 }
 
-export const STORYLY_PLACEMENT_COMMANDS = [
-  'approveCartChange',
-  'rejectCartChange',
-  'approveWishlistChange',
-  'rejectWishlistChange',
-] as const;
 
 
 export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: [
+    'callWidget',
     'approveCartChange',
     'rejectCartChange',
     'approveWishlistChange',

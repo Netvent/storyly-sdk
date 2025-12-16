@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Button } from 'react-native';
 import { useStorylyPlacementProvider, StorylyPlacement, type StorylyPlacementConfig, type StorylyPlacementMethods } from 'storyly-placement-react-native';
-import type { StorylyPlacementProviderListener, STRBannerPayload } from 'storyly-placement-react-native';
+import type { PlacementWidget, StorylyPlacementProviderListener, STRBannerPayload, STRStoryBarController } from 'storyly-placement-react-native';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -24,6 +24,8 @@ export default function App() {
   const placementRef = useRef<StorylyPlacementMethods>(null);
   const [placementHeight, setPlacementHeight] = useState<number>(0);
 
+  const [pauseWidget, setPauseWidget] = useState<PlacementWidget | null>(null);
+
   return (
     <View style={styles.container}>
       <StorylyPlacement
@@ -35,13 +37,16 @@ export default function App() {
           console.log('onWidgetReady', event, 'calculated height:', placementHeight);
         }}
         onActionClicked={(event) => {
-          if (event.widget === 'banner') {
-            const bannerPayload = event.payload as STRBannerPayload;
-            console.log('bannerEvent', bannerPayload.item?.uniqueId, bannerPayload.component?.type);
+          if (event.widget.type === 'story-bar') {
+            placementRef.current?.getWidget<STRStoryBarController>(event.widget).pause();
+            setPauseWidget(event.widget);
           }
           console.log('onActionClicked', event);
         }}
         onEvent={(event) => {
+          if (event.widget.type === 'story-bar') {
+            // placementRef.current?.getWidget<STRStoryBarController>(event.widget).pause();
+          }
           console.log('onEvent', event);
         }}
         onFail={(event) => {
@@ -57,19 +62,23 @@ export default function App() {
           console.log('onUpdateWishlist', event);
         }}
         />
+
+<Button title="Resume Paused Story Bar"   onPress={() => {
+        if (pauseWidget) {
+          placementRef.current?.getWidget<STRStoryBarController>(pauseWidget).resume();
+          setPauseWidget(null);
+        }
+      }} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
+    backgroundColor: 'white',
+    // flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
   },
 });

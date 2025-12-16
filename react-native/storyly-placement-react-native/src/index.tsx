@@ -4,5 +4,7 @@ export type { StorylyPlacementProps, StorylyPlacementMethods } from './StorylyPl
 export * from './StorylyPlacementProvider';
 export type * from './StorylyPlacementProvider';
 
+export * from './StorylyWidget';
+
 // MARK: - Data Types
 export * from './data';

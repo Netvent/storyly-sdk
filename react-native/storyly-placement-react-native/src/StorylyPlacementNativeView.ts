@@ -23,9 +23,8 @@ const NativeViewModule = (isFabricEnabled
   ? require('./newarch/StorylyPlacementReactNativeViewNativeComponent')
   : require('./oldarch/StorylyPlacementReactNativeView')) as {
     default: HostComponent<StorylyPlacementViewNativeProps>;
-    PlacementCommands: NativeCommands;
+    Commands: NativeCommands;
   };
 
-export const PlacementCommands = NativeViewModule.PlacementCommands;
-
+export const PlacementCommands = NativeViewModule.Commands;
 export default NativeViewModule.default;

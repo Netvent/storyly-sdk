@@ -25,10 +25,12 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>() 
     }
 
     enum class Command(val id: Int, val commandName: String) {
-        APPROVE_CART_CHANGE(1, "approveCartChange"),
-        REJECT_CART_CHANGE(2, "rejectCartChange"),
-        APPROVE_WISHLIST_CHANGE(3, "approveWishlistChange"),
-        REJECT_WISHLIST_CHANGE(4, "rejectWishlistChange");
+        CALL_WIDGET(1, "callWidget");
+        APPROVE_CART_CHANGE(2, "approveCartChange"),
+        REJECT_CART_CHANGE(3, "rejectCartChange"),
+        APPROVE_WISHLIST_CHANGE(4, "approveWishlistChange"),
+        REJECT_WISHLIST_CHANGE(5, "rejectWishlistChange"),
+
 
         companion object {
             fun fromName(name: String): Command? = entries.find { it.commandName == name }
@@ -75,14 +77,34 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>() 
 
     override fun receiveCommand(view: RNStorylyPlacementView, commandId: String?, args: ReadableArray?) {
         val command = commandId?.let { Command.fromName(it) } ?: return
-        val responseId = args?.getString(0) ?: return
-        val raw = args?.getString(1)
 
         when (command) {
-            Command.APPROVE_CART_CHANGE -> view.approveCartChange(responseId, raw)
-            Command.REJECT_CART_CHANGE -> view.rejectCartChange(responseId, raw)
-            Command.APPROVE_WISHLIST_CHANGE -> view.approveWishlistChange(responseId, raw)
-            Command.REJECT_WISHLIST_CHANGE -> view.rejectWishlistChange(responseId, raw)
+            Command.APPROVE_CART_CHANGE -> {
+                val responseId = args?.getString(0) ?: return
+                val raw = args?.getString(1)
+                view.approveCartChange(responseId, raw)
+            }
+            Command.REJECT_CART_CHANGE -> {
+                val responseId = args?.getString(0) ?: return
+                val raw = args?.getString(1)
+                view.rejectCartChange(responseId, raw)
+            }
+            Command.APPROVE_WISHLIST_CHANGE -> {
+                val responseId = args?.getString(0) ?: return
+                val raw = args?.getString(1)
+                view.approveWishlistChange(responseId, raw)
+            }
+            Command.REJECT_WISHLIST_CHANGE -> {
+                val responseId = args?.getString(0) ?: return
+                val raw = args?.getString(1)
+                view.rejectWishlistChange(responseId, raw)
+            }
+            Command.CALL_WIDGET -> {
+                val id = args?.getString(0) ?: return
+                val method = args?.getString(1) ?: return
+                val raw = args?.getString(2)
+                view.callWidget(id, method, raw)
+            }
         }
     }
 }
