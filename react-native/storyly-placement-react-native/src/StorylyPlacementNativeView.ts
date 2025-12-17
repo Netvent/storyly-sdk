@@ -5,7 +5,6 @@ const isFabricEnabled = (global as any)?.nativeFabricUIManager != null;
 
 export const applyBaseEvent = (callback: (event: BaseEvent) => void) => {
   const responseCallback = (event: any) => {
-    console.log(event.nativeEvent.raw)
     if (event.nativeEvent.raw) {
       callback(JSON.parse(event.nativeEvent.raw) as BaseEvent);
     } else {

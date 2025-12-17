@@ -87,60 +87,60 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
       rejectWishlistChange,
     }));
 
-    const _onWidgetReady = (event: BaseEvent) => {
+    const _onWidgetReady = applyBaseEvent((event: BaseEvent) => {
       if (props.onWidgetReady) {
         props.onWidgetReady(event as PlacementWidgetReadyEvent);
       }
-    };
+    });
 
-    const _onActionClicked = (event: BaseEvent) => {
+    const _onActionClicked = applyBaseEvent((event: BaseEvent) => {
       if (props.onActionClicked) {
         props.onActionClicked(event as PlacementActionClickEvent);
       }
-    };
+    });
 
-    const _onEvent = (event: BaseEvent) => {
+    const _onEvent = applyBaseEvent((event: BaseEvent) => {
       if (props.onEvent) {
         props.onEvent(event as PlacementEvent);
       }
-    };
+    });
 
-    const _onFail = (event: BaseEvent) => {
+    const _onFail = applyBaseEvent((event: BaseEvent) => {
       if (props.onFail) {
         props.onFail(event as PlacementFailEvent);
       }
-    };
+    });
 
-    const _onProductEvent = (event: BaseEvent) => {
+    const _onProductEvent = applyBaseEvent((event: BaseEvent) => {
       if (props.onProductEvent) {
         props.onProductEvent(event as PlacementProductEvent);
       }
-    };
+    });
 
-    const _onUpdateCart = (event: BaseEvent) => {
+    const _onUpdateCart = applyBaseEvent((event: BaseEvent) => {
       if (props.onUpdateCart) {
         props.onUpdateCart(event as PlacementCartUpdateEvent);
       }
-    };
+    });
 
-    const _onUpdateWishlist = (event: BaseEvent) => {
+    const _onUpdateWishlist = applyBaseEvent((event: BaseEvent) => {
       if (props.onUpdateWishlist) {
         props.onUpdateWishlist(event as PlacementWishlistUpdateEvent);
       }
-    };
+    });
 
     return (
       <StorylyPlacementNativeView
         {...props}
         ref={placementRef}
         providerId={props.provider?.providerId ?? undefined}
-        onWidgetReady={applyBaseEvent(_onWidgetReady)}
-        onActionClicked={applyBaseEvent(_onActionClicked)}
-        onEvent={applyBaseEvent(_onEvent)}
-        onFail={applyBaseEvent(_onFail)}
-        onProductEvent={applyBaseEvent(_onProductEvent)}
-        onUpdateCart={applyBaseEvent(_onUpdateCart)}
-        onUpdateWishlist={applyBaseEvent(_onUpdateWishlist)}
+        onWidgetReady={_onWidgetReady}
+        onActionClicked={_onActionClicked}
+        onEvent={_onEvent}
+        onFail={_onFail}
+        onProductEvent={_onProductEvent}
+        onUpdateCart={_onUpdateCart}
+        onUpdateWishlist={_onUpdateWishlist}
       />
     );
   }
