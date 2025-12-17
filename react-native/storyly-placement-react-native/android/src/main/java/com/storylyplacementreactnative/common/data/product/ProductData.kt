@@ -15,6 +15,7 @@ internal fun encodeSTRProductItem(product: STRProductItem) {
         "desc" to product.desc,
         "price" to product.price.toDouble(),
         "salesPrice" to product.salesPrice?.toDouble(),
+        "lowestPrice" to product.lowestPrice?.toDouble(),
         "currency" to product.currency,
         "imageUrls" to product.imageUrls,
         "variants" to product.variants.map { variant -> encodeSTRProductVariant(variant) },

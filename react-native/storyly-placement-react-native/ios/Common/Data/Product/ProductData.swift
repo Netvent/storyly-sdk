@@ -19,6 +19,9 @@ func encodeSTRProductItem(_ item: STRProductItem) -> [String: Any] {
     if let salesPrice = item.salesPrice {
         result["salesPrice"] = salesPrice
     }
+    if let lowestPrice = item.lowestPrice {
+        result["lowestPrice"] = lowestPrice
+    }
   
     if let imageUrls = item.imageUrls {
         result["imageUrls"] = imageUrls
