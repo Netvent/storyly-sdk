@@ -13,7 +13,7 @@ import type {
   PlacementWishlistUpdateEvent,
   PlacementWidget,
  } from './data';
-import StorylyPlacementNativeView, { PlacementCommands, applyBaseEvent } from './StorylyPlacementNativeView';
+import StorylyPlacementNativeView, { PlacementCommands, applyBaseEvent } from './native/StorylyPlacementNativeView';
 import type { StorylyPlacementProvider } from './StorylyPlacementProvider';
 import { createWidgetProxy, type STRWidgetController } from './StorylyWidget';
 

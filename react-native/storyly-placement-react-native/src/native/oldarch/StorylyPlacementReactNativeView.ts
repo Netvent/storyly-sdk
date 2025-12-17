@@ -4,6 +4,7 @@ import {
   findNodeHandle,
 } from 'react-native';
 import { type StorylyPlacementViewNativeProps } from '../newarch/StorylyPlacementReactNativeViewNativeComponent';
+import type { StorylyPlacementNativeCommands } from '../StorylyPlacementNativeTypes';
 
 
 const COMPONENT_NAME = 'StorylyPlacementReactNativeViewLegacy';
@@ -24,17 +25,7 @@ const dispatchCommand = (
   }
 };
 
-export interface NativeCommands {
-  callWidget: (viewRef: any, id: string, method: string, raw: string) => void;
-
-  approveCartChange: (viewRef: any, responseId: string, raw: string) => void;
-  rejectCartChange: (viewRef: any, responseId: string, raw: string) => void;
-
-  approveWishlistChange: (viewRef: any, responseId: string, raw: string) => void;
-  rejectWishlistChange: (viewRef: any, responseId: string, raw: string) => void;
-}
-
-export const PlacementCommands: NativeCommands = {
+export const PlacementCommands: StorylyPlacementNativeCommands = {
   approveCartChange: (view: any, responseId: string, raw: string) => {
     dispatchCommand(view, 'approveCartChange', [responseId, raw]);
   },

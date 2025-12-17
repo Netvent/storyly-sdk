@@ -1,4 +1,5 @@
-import type { BaseEvent } from './data/util';
+import type { BaseEvent } from '../data/util';
+import type { StorylyPlacementNativeCommands } from './StorylyPlacementNativeTypes';
 
 
 const isFabricEnabled = (global as any)?.nativeFabricUIManager != null;
@@ -19,13 +20,13 @@ const loadComponent = () => {
     const newarchComponent = require('./newarch/StorylyPlacementReactNativeViewNativeComponent');
     return {
       default: newarchComponent.default,
-      PlacementCommands: newarchComponent.Commands,
+      PlacementCommands: newarchComponent.Commands as StorylyPlacementNativeCommands,
     };
   } else {
     const oldarchComponent = require('./oldarch/StorylyPlacementReactNativeView');
     return {
       default: oldarchComponent.default,
-      PlacementCommands: oldarchComponent.PlacementCommands,
+      PlacementCommands: oldarchComponent.PlacementCommands as StorylyPlacementNativeCommands,
     };
   }
 };

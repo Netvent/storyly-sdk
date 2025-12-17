@@ -3,7 +3,7 @@
  * Non-view module for PlacementDataProvider implementation
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { NativeEventEmitter } from 'react-native';
 import type {
   PlacementHydrationEvent,
@@ -13,7 +13,7 @@ import type {
   STRCart,
   STRProductItem,
 } from './data';
-import StorylyPlacementProviderNative from './StorylyPlacementProviderNative';
+import StorylyPlacementProviderNative from './native/StorylyPlacementProviderNative';
 
 export interface StorylyPlacementProviderListener {
   onLoad?: (event: PlacementLoadEvent) => void;
@@ -26,10 +26,6 @@ export interface StorylyPlacementProvider {
   hydrateProducts: (products: STRProductItem[]) => void;
   hydrateWishlist: (products: STRProductItem[]) => void;
   updateCart: (cart: STRCart) => void;
-  approveCartChange: (responseId: string, cart?: STRCart) => void;
-  rejectCartChange: (responseId: string, failMessage: string) => void;
-  approveWishlistChange: (responseId: string, item?: STRProductItem) => void;
-  rejectWishlistChange: (responseId: string, failMessage: string) => void;
   destroy: () => void;
 }
 
@@ -95,15 +91,9 @@ export const useStorylyPlacementProvider = (
   useEffect(() => {
     const currentProviderId = providerIdRef.current;
     console.debug('Creating provider with id:', currentProviderId);
-    const result = StorylyPlacementProviderNative.createProvider(currentProviderId);
-    
-    if (result instanceof Promise) {
-      result.then(() => {
-        setProviderId(currentProviderId);
-      });
-    } else {
+    StorylyPlacementProviderNative.createProvider(currentProviderId).then(() => {
       setProviderId(currentProviderId);
-    }
+    });
 
     return () => {
       StorylyPlacementProviderNative.destroyProvider(currentProviderId);
@@ -129,49 +119,32 @@ export const useStorylyPlacementProvider = (
     };
   }, [providerId, listener]);
 
-
-  return {
+  return useMemo(() => ({
     providerId,
     hydrateProducts: (products: STRProductItem[]) => {
+      if (!providerId) return;
       StorylyPlacementProviderNative.hydrateProducts(
         providerId,
         JSON.stringify({ products })
       );
     },
     hydrateWishlist: (products: STRProductItem[]) => {
+      if (!providerId) return;
       StorylyPlacementProviderNative.hydrateWishlist(
         providerId,
         JSON.stringify({ products })
       );
     },
     updateCart: (cart: STRCart) => {
+      if (!providerId) return;
       StorylyPlacementProviderNative.updateCart(
         providerId,
         JSON.stringify({ cart })
       );
     },
-    approveCartChange: (responseId: string, cart?: STRCart) => {
-      StorylyPlacementProviderNative.approveCartChange(
-        providerId,
-        responseId,
-        JSON.stringify({ cart })
-      );
-    },
-    rejectCartChange: (responseId: string, failMessage: string) => {
-      StorylyPlacementProviderNative.rejectCartChange(providerId, responseId, failMessage);
-    },
-    approveWishlistChange: (responseId: string, item?: STRProductItem) => {
-      StorylyPlacementProviderNative.approveWishlistChange(
-        providerId,
-        responseId,
-        JSON.stringify({ item })
-      );
-    },
-    rejectWishlistChange: (responseId: string, failMessage: string) => {
-      StorylyPlacementProviderNative.rejectWishlistChange(providerId, responseId, failMessage);
-    },
     destroy: () => {
+      if (!providerId) return;
       StorylyPlacementProviderNative.destroyProvider(providerId);
     },
-  };
+  }), [providerId]);
 };

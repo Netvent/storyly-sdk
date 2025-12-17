@@ -1,6 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import type { Spec as StorylyPlacementProviderNative } from './newarch/NativeStorylyPlacementProvider';
-import StorylyPlacementProviderTurboNative from './newarch/NativeStorylyPlacementProvider';
+import type { StorylyPlacementProviderNative } from './StorylyPlacementNativeTypes';
 
 
 const LINKING_ERROR =
@@ -11,9 +10,9 @@ const LINKING_ERROR =
 
 const NativeModule = (() => {
     try {
-      return StorylyPlacementProviderTurboNative as StorylyPlacementProviderNative;
+      return require('./newarch/NativeStorylyPlacementProvider').default as StorylyPlacementProviderNative;
     } catch (error) {
-      return NativeModules.StorylyPlacementProvider;
+      return NativeModules.StorylyPlacementProvider as StorylyPlacementProviderNative;
     }
 })()
 
