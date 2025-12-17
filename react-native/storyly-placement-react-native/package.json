@@ -40,12 +40,6 @@
     "typecheck": "tsc",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "bootstrap": "yarn example && yarn install && yarn example pods update && yarn codegen:android",
-    "enable:newarch:ios": "(/usr/libexec/PlistBuddy -c 'Set :RCTNewArchEnabled true' example/ios/StorylyPlacementReactNativeExample/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c 'Add :RCTNewArchEnabled bool true' example/ios/StorylyPlacementReactNativeExample/Info.plist) && cd example/ios && RCT_NEW_ARCH_ENABLED=1 pod update && cd ../.. && echo 'New Architecture ENABLED for iOS'",
-    "enable:newarch:android": "cd example/android && ORG_GRADLE_PROJECT_newArchEnabled=true ./gradlew --refresh-dependencies --no-daemon && cd ../.. && echo 'New Architecture ENABLED for Android'",
-    "enable:newarch": "yarn enable:newarch:ios && yarn enable:newarch:android",
-    "disable:newarch:ios": "(/usr/libexec/PlistBuddy -c 'Set :RCTNewArchEnabled false' example/ios/StorylyPlacementReactNativeExample/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c 'Add :RCTNewArchEnabled bool false' example/ios/StorylyPlacementReactNativeExample/Info.plist) && cd example/ios && RCT_NEW_ARCH_ENABLED=0 pod update && cd ../.. && echo 'New Architecture DISABLED for iOS'",
-    "disable:newarch:android": "cd example/android && ORG_GRADLE_PROJECT_newArchEnabled=false ./gradlew --refresh-dependencies --no-daemon && cd ../.. && echo 'New Architecture DISABLED for Android'",
-    "disable:newarch": "yarn disable:newarch:ios && yarn disable:newarch:android",
     "codegen:android": "cd example/android && ./gradlew generateCodegenArtifactsFromSchema && cd ../..",
     "invalidate-cache": "del-cli yarn.lock node_modules android/build android/.gradle android/.idea example/node_modules example/yarn.lock example/android/.gradle example/android/.idea example/android/build ios/Pods"
   },

@@ -28,7 +28,6 @@ Pod::Spec.new do |s|
     "DEFINES_MODULE" => "YES"
   }
 
-
   # React Native dependencies
   install_modules_dependencies(s)
 

@@ -6,5 +6,4 @@ export type * from './StorylyPlacementProvider';
 
 export * from './StorylyWidget';
 
-// MARK: - Data Types
 export * from './data';
