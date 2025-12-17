@@ -38,6 +38,7 @@ internal fun decodeSTRProductItem(product: Map<String, Any?>?): STRProductItem? 
         desc = desc,
         price = price,
         salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
+        lowestPrice = (product["lowestPrice"] as? Double)?.toFloat(),
         currency = product["currency"] as String,
         imageUrls = product["imageUrls"] as? List<String>,
         variants = (product["variants"] as? List<Map<String, Any?>>)

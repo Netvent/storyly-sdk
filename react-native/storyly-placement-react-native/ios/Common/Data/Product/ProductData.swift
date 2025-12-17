@@ -5,7 +5,7 @@ import StorylyCore
 // MARK: - STRProductItem Encoding/Decoding
 
 func encodeSTRProductItem(_ item: STRProductItem) -> [String: Any] {
-    var result: [String: Any] = [
+    var result: [String: Any?] = [
         "productId": item.productId,
         "productGroupId": item.productGroupId,
         "title": item.title,
@@ -30,7 +30,7 @@ func encodeSTRProductItem(_ item: STRProductItem) -> [String: Any] {
         result["variants"] = variants.map { encodeSTRProductVariant($0) }
     }
     
-    return result
+  return result as [String: Any?]
 }
 
 func decodeSTRProductItem(_ dict: [String: Any]) -> STRProductItem? {
@@ -53,6 +53,7 @@ func decodeSTRProductItem(_ dict: [String: Any]) -> STRProductItem? {
     if let variantsArray = dict["variants"] as? [[String: Any]] {
         variants = variantsArray.compactMap { decodeSTRProductVariant($0) }
     }
+    let lowestPrice = dict["lowestPrice"] as? NSNumber
     
     return STRProductItem(
         productId: productId,
@@ -62,7 +63,7 @@ func decodeSTRProductItem(_ dict: [String: Any]) -> STRProductItem? {
         description: desc,
         price: Float(price),
         salesPrice: salesPrice as NSNumber?,
-        lowestPrice: nil, // TODO: add for both android and ios
+        lowestPrice: lowestPrice,
         currency: currency,
         imageUrls: imageUrls,
         variants: variants,

@@ -29,7 +29,7 @@ import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
 fun encodeStoryBarDataPayload(data: STRDataPayload): Map<String, Any?> {
     return mapOf(
         "type" to STRWidgetType.StoryBar.raw,
-        "items" to data.items.map { encodeStoryGroupItem(it) }
+//        "items" to data.items.map { encodeStoryGroupItem(it) }
     )
 }
 
