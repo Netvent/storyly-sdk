@@ -7,7 +7,7 @@ export interface STRStoryBarController extends STRWidgetController {
   resume: () => void;
   close: () => void;
   open: ({uri}: {uri: string}) => void;
-  openWithId: ({storyGroupId, storyId, playMode}: {storyGroupId: string, storyId?: string, playMode?: string}) => void;
+  openWithId: ({storyGroupId, storyId, playMode}: {storyGroupId: string, storyId?: string, playMode?: "storygroup" | "story" | "default"}) => void;
 }
 
 export interface STRVideoFeedController extends STRWidgetController {
@@ -15,7 +15,7 @@ export interface STRVideoFeedController extends STRWidgetController {
   resume: () => void;
   close: () => void;
   open: ({uri}: {uri: string}) => void;
-  openWithId: ({groupId, itemId, playMode}: {groupId: string, itemId?: string, playMode?: string}) => void;
+  openWithId: ({groupId, itemId, playMode}: {groupId: string, itemId?: string, playMode?: "feedgroup" | "feed" | "default"}) => void;
 }
 
 export interface STRVideoFeedPresenterController extends STRWidgetController {

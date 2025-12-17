@@ -106,7 +106,7 @@
   "codegenConfig": {
     "name": "StorylyPlacementReactNativeViewSpec",
     "type": "all",
-    "jsSrcsDir": "src/newarch",
+    "jsSrcsDir": "src/native/newarch",
     "android": {
       "javaPackageName": "com.storylyplacementreactnative"
     },

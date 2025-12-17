@@ -233,82 +233,98 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
         val widget = widgetMap[id]?.get() ?: return
         val params = decodeFromJson(raw)
         when (widget.getType()) {
-            STRWidgetType.StoryBar -> {
-                val controller = widget as? STRStoryBarController ?: return
-                when (method) {
-                    "pause" -> {
-                        controller.pause()
-                    }
-                    "resume" -> {
-                        controller.resume()
-                    }
-                    "close" -> {
-                        controller.close()
-                    }
-                    "open" -> {
-                        params ?: return
-                        val uri = (params["uri"] as? String) ?: return
-                        controller.open(uri)
-                    }
-                    "openWithId" -> {
-                        params ?: return
-                        val storyGroupId = (params["storyGroupId"] as? String) ?: return
-                        val storyId = params["storyId"] as? String
-                        val playMode = (params["playMode"] as? String)?.let { PlayMode.getFromValue(it) } ?: PlayMode.Default // TODO: include mapping in native
-                        controller.open(storyGroupId, storyId, playMode)
-                    }
-                    else -> return
-                }
-            }
-            STRWidgetType.VideoFeed -> {
-                val controller = widget as? STRVideoFeedController ?: return
-                when (method) {
-                    "pause" -> {
-                        controller.pause()
-                    }
-                    "resume" -> {
-                        controller.resume()
-                    }
-                    "close" -> {
-                        controller.close()
-                    }
-                    "open" -> {
-                        params ?: return
-                        val uri = (params["uri"] as? String) ?: return
-                        controller.open(uri)
-                    }
-                    "openWithId" -> {
-                        params ?: return
-                        val groupId = (params["groupId"] as? String) ?: return
-                        val itemId = params["itemId"] as? String
-                        val playMode = (params["playMode"] as? String)?.let { VFPlayMode.getFromValue(it) } ?: VFPlayMode.Default // TODO: include mapping in native
-                        controller.open(groupId, itemId, playMode)
-                    }
-                    else -> return
-                }
-
-            }
-            STRWidgetType.VideoFeedPresenter -> {
-                val controller = widget as? STRVideoFeedPresenterController ?: return
-                when (method) {
-                    "pause" -> {
-                        controller.pause()
-                    }
-                    "play" -> {
-                        controller.play()
-                    }
-                    "open" -> {
-                        params ?: return
-                        val groupId = (params["groupId"] as? String) ?: return
-                        controller.open(groupId)
-                    }
-                    else -> return
-                }
-
-            }
+            STRWidgetType.StoryBar -> handleStoryBarMethod(widget, method, params)
+            STRWidgetType.VideoFeed -> handleVideoFeedMethod(widget, method, params)
+            STRWidgetType.VideoFeedPresenter -> handleVideoFeedPresenterMethod(widget, method, params)
             STRWidgetType.Banner -> return
             STRWidgetType.SwipeCard -> return
             STRWidgetType.None -> return
+        }
+    }
+
+    private fun handleStoryBarMethod(widget: STRWidgetController, method: String, params: Map<String, Any?>?) {
+        val controller = widget as? STRStoryBarController ?: return
+        when (method) {
+            "pause" -> {
+                controller.pause()
+            }
+            "resume" -> {
+                controller.resume()
+            }
+            "close" -> {
+                controller.close()
+            }
+            "open" -> {
+                params ?: return
+                val uri = (params["uri"] as? String) ?: return
+                controller.open(uri)
+            }
+            "openWithId" -> {
+                params ?: return
+                val storyGroupId = (params["storyGroupId"] as? String) ?: return
+                val storyId = params["storyId"] as? String
+                val playMode = (params["playMode"] as? String).let {
+                    when (it) {
+                        "storygroup" -> PlayMode.StoryGroup
+                        "story" -> PlayMode.Story
+                        else -> PlayMode.Default
+                    }
+                }
+                controller.open(storyGroupId, storyId, playMode)
+            }
+            else -> return
+        }
+    }
+
+    private fun handleVideoFeedMethod(widget: STRWidgetController, method: String, params: Map<String, Any?>?) {
+        val controller = widget as? STRVideoFeedController ?: return
+        when (method) {
+            "pause" -> {
+                controller.pause()
+            }
+            "resume" -> {
+                controller.resume()
+            }
+            "close" -> {
+                controller.close()
+            }
+            "open" -> {
+                params ?: return
+                val uri = (params["uri"] as? String) ?: return
+                controller.open(uri)
+            }
+            "openWithId" -> {
+                params ?: return
+                val groupId = (params["groupId"] as? String) ?: return
+                val itemId = params["itemId"] as? String
+                val playMode = (params["playMode"] as? String).let {
+                    when (it) {
+                        "feedgroup" -> VFPlayMode.FeedGroup
+                        "feed" -> VFPlayMode.Feed
+                        else -> VFPlayMode.Default
+                    }
+                }
+                controller.open(groupId, itemId, playMode)
+            }
+            else -> return
+        }
+    }
+
+    private fun handleVideoFeedPresenterMethod(widget: STRWidgetController, method: String, params: Map<String, Any?>?) {
+        val controller = widget as? STRVideoFeedPresenterController ?: return
+        when (method) {
+            "pause" -> {
+                controller.pause()
+            }
+            "play" -> {
+                controller.play()
+            }
+            "open" -> {
+                params ?: return
+                val groupId = (params["groupId"] as? String) ?: return
+                controller.open(groupId)
+            }
+            else -> return
         }
     }
 

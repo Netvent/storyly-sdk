@@ -124,7 +124,12 @@ import StorylyVideoFeed
                   let storyGroupId = params["storyGroupId"] as? String else { return }
             let storyId = params["storyId"] as? String
             let playModeStr = params["playMode"] as? String
-            let playMode: PlayMode = /*PlayMode.getFromValue(playModeStr ?? "") ??*/ .Default
+            let playMode: PlayMode
+            switch playModeStr {
+              case "storygroup": playMode = .StoryGroup
+              case "story": playMode = .Story
+              default: playMode = .Default
+            }
             _ = controller.open(storyGroupId: storyGroupId, storyId: storyId, play: playMode)
         default:
             break
@@ -151,7 +156,12 @@ import StorylyVideoFeed
                   let groupId = params["groupId"] as? String else { return }
             let itemId = params["itemId"] as? String
             let playModeStr = params["playMode"] as? String
-            let playMode: VFPlayMode = /*VFPlayMode.getFromValue(playModeStr ?? "") ??*/ .Default
+            let playMode: VFPlayMode
+            switch playModeStr {
+              case "feedgroup": playMode = .FeedGroup
+              case "feed": playMode = .Feed
+              default: playMode = .Default
+            }
             _ = controller.open(groupId: groupId, itemId: itemId, play: playMode)
         default:
             break
