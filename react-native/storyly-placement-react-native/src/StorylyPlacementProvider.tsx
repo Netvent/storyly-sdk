@@ -3,7 +3,7 @@
  * Non-view module for PlacementDataProvider implementation
  */
 
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { NativeEventEmitter } from 'react-native';
 import type {
   PlacementHydrationEvent,
@@ -55,7 +55,12 @@ const setupEventListeners = (
   if (callbacks?.onLoad) {
     subscriptions.push(
       emitter.addListener(`${providerId}_onLoad`, (data: unknown) => {
-        callbacks.onLoad?.(data as PlacementLoadEvent);
+        try {
+          const event = JSON.parse(data as string) as PlacementLoadEvent;
+          callbacks.onLoad?.(event);
+        } catch (error) {
+          console.error('Error parsing onLoad event:', error);
+        }
       })
     );
   }
@@ -63,7 +68,12 @@ const setupEventListeners = (
   if (callbacks?.onLoadFail) {
     subscriptions.push(
       emitter.addListener(`${providerId}_onLoadFail`, (data: unknown) => {
-        callbacks.onLoadFail?.(data as PlacementLoadFailEvent);
+        try {
+          const event = JSON.parse(data as string) as PlacementLoadFailEvent;
+          callbacks.onLoadFail?.(event);
+        } catch (error) {
+          console.error('Error parsing onLoadFail event:', error);
+        }
       })
     );
   }
@@ -71,7 +81,12 @@ const setupEventListeners = (
   if (callbacks?.onHydration) {
     subscriptions.push(
       emitter.addListener(`${providerId}_onHydration`, (data: unknown) => {
-        callbacks.onHydration?.(data as PlacementHydrationEvent);
+        try {
+          const event = JSON.parse(data as string) as PlacementHydrationEvent;
+          callbacks.onHydration?.(event);
+        } catch (error) {
+          console.error('Error parsing onHydration event:', error);
+        }
       })
     );
   }
@@ -84,30 +99,28 @@ export const useStorylyPlacementProvider = (
   config: StorylyPlacementConfig,
   listener?: StorylyPlacementProviderListener
 ): StorylyPlacementProvider => {
-  const providerIdRef = useRef<string>(generateProviderId());
   var [providerId, setProviderId] = useState<string | null>(null);
 
-  
   useEffect(() => {
-    const currentProviderId = providerIdRef.current;
+    const currentProviderId = generateProviderId();
     console.debug('Creating provider with id:', currentProviderId);
     StorylyPlacementProviderNative.createProvider(currentProviderId).then(() => {
       setProviderId(currentProviderId);
     });
 
     return () => {
+      console.debug('Destroying provider with id:', currentProviderId);
       StorylyPlacementProviderNative.destroyProvider(currentProviderId);
     };
-  }, [providerIdRef.current]);
+  }, []);
 
+  const configJson = useMemo(() => JSON.stringify(config), [config]);
+  
   useEffect(() => {
     if (!providerId) return;
-
-    console.debug('Creating provider id', providerId,'with config:', config);
-    const configJson = JSON.stringify(config);
-
+    console.debug('Updating config for provider id', providerId,'with config:', configJson);
     StorylyPlacementProviderNative.updateConfig(providerId, configJson);
-  }, [providerId, config]);
+  }, [providerId, configJson]);
 
 
   useEffect(() => {

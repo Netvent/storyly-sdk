@@ -131,8 +131,8 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
 
     return (
       <StorylyPlacementNativeView
-        {...props}
         ref={placementRef}
+        style={props.style}
         providerId={props.provider?.providerId ?? undefined}
         onWidgetReady={_onWidgetReady}
         onActionClicked={_onActionClicked}

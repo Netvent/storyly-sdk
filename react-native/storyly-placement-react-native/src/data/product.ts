@@ -13,6 +13,7 @@ export interface STRProductItem {
   desc?: string;
   price: number;
   salesPrice?: number;
+  lowestPrice?: number;
   currency: string;
   url?: string;
   imageUrls?: string[];
