@@ -1,10 +1,13 @@
 #import "StorylyPlacementProviderLegacy.h"
+#import <React/RCTBridge.h>
 #import <StorylyPlacementReactNative/StorylyPlacementReactNative-Swift.h>
 
 @implementation StorylyPlacementProviderLegacy {
     int _listenerCount;
     BOOL _hasListeners;
 }
+
+@synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE(StorylyPlacementProvider)
 
@@ -37,7 +40,13 @@ RCT_EXPORT_METHOD(createProvider:(NSString *)providerId
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf && strongSelf->_hasListeners) {
             NSString *eventName = [NSString stringWithFormat:@"%@_%@", id, [RNEventMapper mapProviderEvent:eventType]];
-//            [strongSelf sendEventWithName:eventName body:jsonPayload];
+            [strongSelf.bridge enqueueJSCall:@"RCTDeviceEventEmitter"
+                                      method:@"emit"
+                                        args:@[
+                                          eventName,
+                                          jsonPayload ?: [NSNull null]
+                                        ]
+                                  completion:NULL];
         }
     };
     
@@ -96,25 +105,12 @@ RCT_EXPORT_METHOD(updateCart:(NSString *)providerId cartJson:(NSString *)cartJso
 
 // MARK: - Event Emitter
 
-- (NSArray<NSString *> *)supportedEvents
-{
-    return @[];
-}
-
-- (void)startObserving
-{
-    _hasListeners = YES;
-}
-
-- (void)stopObserving
-{
-    _hasListeners = NO;
-}
-
 RCT_EXPORT_METHOD(addListener:(NSString *)eventName)
 {
     _listenerCount++;
-    [super addListener:eventName];
+    if (_listenerCount > 0) {
+        _hasListeners = YES;
+    }
 }
 
 RCT_EXPORT_METHOD(removeListeners:(double)count)
@@ -123,8 +119,9 @@ RCT_EXPORT_METHOD(removeListeners:(double)count)
     if (_listenerCount < 0) {
         _listenerCount = 0;
     }
-    [super removeListeners:count];
+    if (_listenerCount == 0) {
+        _hasListeners = NO;
+    }
 }
 
 @end
-
