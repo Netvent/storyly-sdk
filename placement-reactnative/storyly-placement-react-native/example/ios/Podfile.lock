@@ -2606,7 +2606,7 @@ SPEC CHECKSUMS:
   ReactCommon: e5df435ef0892875b7d503fbe3ec73a1a3712049
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   StorylyPlacement: 0c7de120832c48e6db35d0bf325c0214350e6c18
-  StorylyPlacementReactNative: a05b4444957ce4d85c2a9b7ffbf3969a7b221169
+  StorylyPlacementReactNative: d197a89c112f2a6aa2f5fb853caf427461a2f60f
   Yoga: f95f7e60346fa6828def95fbe5017346ccc8940e
 
 PODFILE CHECKSUM: 58c50a81060b0afe3af02607a7a9c25d13dd6c01
