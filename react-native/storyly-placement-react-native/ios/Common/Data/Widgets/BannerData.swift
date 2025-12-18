@@ -7,7 +7,7 @@ import StorylyBanner
 func encodeBannerDataPayload(_ data: BannerDataPayload) -> [String: Any] {
     return [
         "type": STRWidgetType.banner.description,
-        "items": data.items.map { encodeBannerSlide($0) }.compactMap { $0 }
+        "items": data.items.compactMap { encodeBannerSlide($0) }
     ]
 }
 
@@ -30,7 +30,7 @@ func encodeBannerSlide(_ slide: BannerSlide?) -> [String: Any]? {
         "name": slide.name,
         "index": slide.index,
         "actionUrl": slide.actionUrl,
-        "componentList": slide.componentList?.map { encodeBannerComponent($0) }.compactMap { $0 },
+        "componentList": slide.componentList?.compactMap { encodeBannerComponent($0) },
         "actionProducts": slide.actionProducts?.map { encodeSTRProductItem($0) },
         "currentTime": slide.currentTime
     ]  as [String: Any?]).compactMapValues { $0 }
@@ -41,10 +41,10 @@ func encodeBannerSlide(_ slide: BannerSlide?) -> [String: Any]? {
 func encodeBannerComponent(_ component: BannerComponent?) -> [String: Any]? {
     guard let component = component else { return nil }
     
-    var result: [String: Any] = [
+    var result: [String: Any?] = [
         "id": component.id,
         "type": component.type.get(),
-        "customPayload": component.customPayload as Any
+        "customPayload": component.customPayload,
     ]
     
     if let button = component as? BannerButtonComponent {

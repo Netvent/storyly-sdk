@@ -2,7 +2,6 @@ package com.storylyplacementreactnative.common
 
 import android.content.Context
 import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.Choreographer
 import android.widget.FrameLayout
@@ -72,6 +71,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     init {
         (context as? ReactContext)?.addLifecycleEventListener(object : LifecycleEventListener {
             override fun onHostResume() {
+                Log.w("[RNStorylyPlacement]", "onHostResume view will recreate")
                 setupPlacementView()
             }
 
@@ -91,7 +91,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     }
 
     fun configure(providerId: String) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             if (providerId == this@RNStorylyPlacementView.providerId) {
                 Log.d("[RNStorylyPlacement]", "Already configured with providerId: $providerId")
                 return@post
@@ -103,7 +103,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     }
 
     fun callWidget(id: String, method: String, raw: String?) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             Log.d("[RNStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
             val widget = widgetMap[id]?.get() ?: return@post
             val params = decodeFromJson(raw)
@@ -119,7 +119,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     }
 
     fun approveCartChange(responseId: String, raw: String?) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             val callbacks = cartUpdateCallbacks[responseId] ?: return@post
             val cart = raw?.let {
                 val map = decodeFromJson(it)
@@ -131,7 +131,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     }
 
     fun rejectCartChange(responseId: String, raw: String?) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             val callbacks = cartUpdateCallbacks[responseId] ?: return@post
             val failMessage = raw?.let {
                 val map = decodeFromJson(it)
@@ -143,7 +143,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     }
 
     fun approveWishlistChange(responseId: String, raw: String?) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             val callbacks = wishlistUpdateCallbacks[responseId] ?: return@post
             val item = raw?.let {
                 val map = decodeFromJson(it)
@@ -157,7 +157,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     }
 
     fun rejectWishlistChange(responseId: String, raw: String?) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             val callbacks = wishlistUpdateCallbacks[responseId] ?: return@post
             val failMessage = raw?.let {
                 val map = decodeFromJson(it)
@@ -254,7 +254,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                     onSuccess: ((STRCart?) -> Unit)?,
                     onFail: ((STRCartEventResult) -> Unit)?,
                 ) {
-                    Log.d("[RNStorylyPlacement]", "onUpdateProduct: ${event.getType()}")
+                    Log.d("[RNStorylyPlacement]", "onUpdateCart: ${event.getType()}")
                     val responseId = UUID.randomUUID().toString()
                     cartUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
                     val eventJson = encodeToJson(
@@ -266,7 +266,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                             "responseId" to responseId,
                         )
                     )
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_CART_UPDATE, eventJson)
+                    dispatchEvent?.invoke(RNPlacementEventType.ON_UPDATE_CART, eventJson)
                 }
 
                 override fun onUpdateWishlist(
@@ -288,7 +288,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
                             "responseId" to responseId,
                         )
                     )
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_WISHLIST_UPDATE, eventJson)
+                    dispatchEvent?.invoke(RNPlacementEventType.ON_UPDATE_WISHLIST, eventJson)
                 }
             }
         }

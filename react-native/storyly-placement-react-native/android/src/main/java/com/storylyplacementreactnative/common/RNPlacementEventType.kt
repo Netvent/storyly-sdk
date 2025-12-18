@@ -7,6 +7,6 @@ enum class RNPlacementEventType(val eventName: String) {
     ON_EVENT("onEvent"),
     ON_ACTION_CLICKED("onActionClicked"),
     ON_PRODUCT_EVENT("onProductEvent"),
-    ON_CART_UPDATE("onCartUpdate"),
-    ON_WISHLIST_UPDATE("onWishlistUpdate"),
+    ON_UPDATE_CART("onUpdateCart"),
+    ON_UPDATE_WISHLIST("onUpdateWishlist"),
 }

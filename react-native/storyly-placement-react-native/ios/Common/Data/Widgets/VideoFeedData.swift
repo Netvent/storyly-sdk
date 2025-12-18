@@ -57,7 +57,7 @@ func encodeVideoFeedItem(_ item: VideoFeedItem?) -> [String: Any]? {
         "actionUrl": item.actionUrl,
         "actionProducts": item.actionProducts?.map { encodeSTRProductItem($0) },
         "currentTime": item.currentTime,
-        "feedItemComponentList": item.videoFeedItemComponentList
+        "feedItemComponentList": item.videoFeedItemComponentList?.map { encodeVideoFeedComponent($0) }
     ] as [String: Any?]).compactMapValues { $0 }
 }
 
@@ -66,10 +66,10 @@ func encodeVideoFeedItem(_ item: VideoFeedItem?) -> [String: Any]? {
 func encodeVideoFeedComponent(_ component: VideoFeedComponent?) -> [String: Any]? {
     guard let component = component else { return nil }
     
-    var result: [String: Any] = [
+    var result: [String: Any?] = [
         "id": component.id,
         "type": component.type.get(),
-        "customPayload": component.customPayload as Any
+        "customPayload": component.customPayload
     ]
     
     // Add component-specific fields

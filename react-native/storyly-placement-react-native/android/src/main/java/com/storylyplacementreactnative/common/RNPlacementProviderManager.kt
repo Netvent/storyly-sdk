@@ -108,7 +108,7 @@ class RNPlacementProviderWrapper(
     }
 
     fun hydrateProducts(raw: String) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             val map = decodeFromJson(raw) ?: return@post
             Log.d("[RNPlacementProviderWrapper]", "hydrateProducts: $raw")
             val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
@@ -119,7 +119,7 @@ class RNPlacementProviderWrapper(
     }
 
     fun hydrateWishlist(raw: String) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             val map = decodeFromJson(raw) ?: return@post
             Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
             val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
@@ -130,7 +130,7 @@ class RNPlacementProviderWrapper(
     }
 
     fun updateCart(raw: String) {
-        Handler(Looper.getMainLooper()).post {
+        Handler(context.mainLooper).post {
             val map = decodeFromJson(raw) ?: return@post
             Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
             val cart = (map["cart"] as? Map<String, Any?>)?.let {

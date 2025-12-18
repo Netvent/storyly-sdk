@@ -2,14 +2,12 @@ import Foundation
 
 internal func encodeToJson(_ dictionary: [String: Any?]) -> String? {
   let filtered = dictionary.compactMapValues { $0 }
-  
-  do {
-    let jsonData = try JSONSerialization.data(withJSONObject: filtered, options: [])
-    return String(data: jsonData, encoding: .utf8)
-  } catch {
-    print("[RNStorylyPlacement] RN bridge JSON encode error: \(error.localizedDescription)")
+
+  guard let jsonData = try? JSONSerialization.data(withJSONObject: filtered, options: []) else {
+    print("[RNStorylyPlacement] RN bridge JSON encode error)")
     return nil
   }
+  return String(data: jsonData, encoding: .utf8)
 }
 
 

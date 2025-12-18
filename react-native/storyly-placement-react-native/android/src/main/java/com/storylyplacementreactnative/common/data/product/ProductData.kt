@@ -6,8 +6,8 @@ import com.appsamurai.storyly.core.data.model.product.STRProductInformation
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
 import com.appsamurai.storyly.core.data.model.product.STRProductVariant
 
-internal fun encodeSTRProductItem(product: STRProductItem) {
-    mapOf(
+internal fun encodeSTRProductItem(product: STRProductItem): Map<String, Any?> {
+    return mapOf(
         "productId" to product.productId,
         "productGroupId" to product.productGroupId,
         "title" to product.title,
@@ -30,7 +30,7 @@ internal fun decodeSTRProductItem(product: Map<String, Any?>?): STRProductItem? 
     val title = product["title"] as? String ?: return null
     val url = product["url"] as? String ?: return null
     val desc = product["desc"] as? String ?: return null
-    val price = (product["price"] as? Double)?.toFloat() ?: return null
+    val price = (product["price"] as? Number)?.toFloat() ?: return null
     return STRProductItem(
         productId = productId,
         productGroupId = productGroupId,
@@ -38,8 +38,8 @@ internal fun decodeSTRProductItem(product: Map<String, Any?>?): STRProductItem? 
         url = url,
         desc = desc,
         price = price,
-        salesPrice = (product["salesPrice"] as? Double)?.toFloat(),
-        lowestPrice = (product["lowestPrice"] as? Double)?.toFloat(),
+        salesPrice = (product["salesPrice"] as? Number)?.toFloat(),
+        lowestPrice = (product["lowestPrice"] as? Number)?.toFloat(),
         currency = product["currency"] as String,
         imageUrls = product["imageUrls"] as? List<String>,
         variants = (product["variants"] as? List<Map<String, Any?>>)
@@ -86,12 +86,13 @@ internal fun encodeSTRCart(cart: STRCart?): Map<String, Any?>? {
 
 internal fun decodeSTRCart(cart: Map<String, Any?>?): STRCart? {
     cart ?: return null
+    val totalPrice = (cart["totalPrice"] as? Number)?.toFloat() ?: return null
     return STRCart(
         items = (cart["items"] as? List<Map<String, Any?>>)
             ?.mapNotNull { item -> decodeSTRCartItem(item) }
             ?: emptyList(),
-        totalPrice = (cart["totalPrice"] as Double).toFloat(),
-        oldTotalPrice = (cart["oldTotalPrice"] as? Double)?.toFloat(),
+        totalPrice = totalPrice,
+        oldTotalPrice =  (cart["oldTotalPrice"] as? Number)?.toFloat(),
         currency = cart["currency"] as String,
     )
 }
@@ -114,7 +115,7 @@ internal fun decodeSTRCartItem(item: Map<String, Any?>?): STRCartItem? {
     return STRCartItem(
         item = cartItem,
         quantity = quantity,
-        totalPrice = (item["totalPrice"] as? Double)?.toFloat(),
-        oldTotalPrice = (item["oldTotalPrice"] as? Double)?.toFloat(),
+        totalPrice = (item["totalPrice"] as? Number)?.toFloat(),
+        oldTotalPrice = (item["oldTotalPrice"] as? Number)?.toFloat(),
     )
 }
