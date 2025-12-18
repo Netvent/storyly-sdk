@@ -1,84 +1,81 @@
-import { useRef, useState } from 'react';
-import { View, StyleSheet, Dimensions, Button } from 'react-native';
-import { useStorylyPlacementProvider, StorylyPlacement, type StorylyPlacementConfig, type StorylyPlacementMethods } from 'storyly-placement-react-native';
-import type { PlacementWidget, StorylyPlacementProviderListener, STRBannerPayload, STRStoryBarController } from 'storyly-placement-react-native';
+import { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text, Platform } from 'react-native';
+import { PlacementScreen } from './PlacementScreen';
 
 
-const screenWidth = Dimensions.get('window').width;
+const TABS = [
+  { label: 'Story Bar', token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MTcxODUsImluc19pZCI6MTkxMDB9.AmtkzTlj_g3RQwwHZTz6rsozH8VFqAogeSwgBdXLMDU" },
+  { label: 'Video Feed', token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjc2MCwiYXBwX2lkIjo0MDUsImluc19pZCI6MjQwNDIsInQiOjF9.Uj9rEBowMUOP4zqueJQ8stXJXHdFOKoac8sKUEM8K5M"   },
+  { label: 'Banner', token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjE0ODY3LCJhcHBfaWQiOjIyNDgyLCJwbGNtbnRfaWQiOjI1NDcwLCJzZGtfcGwiOiJpb3MifQ.jAIGPCEy1GES5WQMzjqlWKj_LuPLkkLAtsTdWmwF0MM" },
+  { label: 'Swipe Card', token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjE0ODY3LCJhcHBfaWQiOjIyNDgyLCJwbGNtbnRfaWQiOjI1NDcxLCJzZGtfcGwiOiJpb3MifQ.MeIfgCW71K0LweUH2_b16ODoPFp0MX5dQUer08SrI5k" },
+] as Array<{ label: string, token: string }> ;
+
+
 
 export default function App() {
-  const placementConfig: StorylyPlacementConfig = {
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MTcxODUsImluc19pZCI6MTkxMDB9.AmtkzTlj_g3RQwwHZTz6rsozH8VFqAogeSwgBdXLMDU",
-  };
-
-  const placementListener: StorylyPlacementProviderListener = {
-    onLoad: (event) => { console.log('onLoad', event); },
-    onLoadFail: (event) => { console.log('onLoadFail', event); },
-    onHydration: (event) => {
-      console.log('onHydration', event);
-      // provider.hydrateProducts([]);
-    },
-  };
-  const provider = useStorylyPlacementProvider(placementConfig, placementListener);
-
-  const placementRef = useRef<StorylyPlacementMethods>(null);
-  const [placementHeight, setPlacementHeight] = useState<number>(0);
-
-  const [pauseWidget, setPauseWidget] = useState<PlacementWidget | null>(null);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   return (
     <View style={styles.container}>
-      <StorylyPlacement
-        style={{height: placementHeight, width: "100%", backgroundColor: 'gray'}}
-        ref={placementRef}
-        provider={provider}
-        onWidgetReady={(event) => {
-          setPlacementHeight(screenWidth / event.ratio);
-          console.log('onWidgetReady', event, 'calculated height:', placementHeight);
-        }}
-        onActionClicked={(event) => {
-          if (event.widget.type === 'story-bar') {
-            placementRef.current?.getWidget<STRStoryBarController>(event.widget).pause();
-            setPauseWidget(event.widget);
-          }
-          console.log('onActionClicked', event);
-        }}
-        onEvent={(event) => {
-          if (event.widget.type === 'story-bar') {
-            // placementRef.current?.getWidget<STRStoryBarController>(event.widget).pause();
-          }
-          console.log('onEvent', event);
-        }}
-        onFail={(event) => {
-          console.log('onFail', event);
-        }}
-        onProductEvent={(event) => {
-          console.log('onProductEvent', event);
-        }}
-        onUpdateCart={(event) => {
-          console.log('onUpdateCart', event);
-        }}
-        onUpdateWishlist={(event) => {
-          console.log('onUpdateWishlist', event);
-        }}
-        />
-
-      <Button title="Resume Paused Story Bar"   onPress={() => {
-        if (pauseWidget) {
-          placementRef.current?.getWidget<STRStoryBarController>(pauseWidget).resume();
-          setPauseWidget(null);
-        }
-      }} />
+      <View style={styles.content}>
+        {TABS.map( (tab, index) => (
+            <View key={index} style={[styles.tabContent, { display: index ===  activeTabIndex? 'flex' : 'none' }]}>
+                <PlacementScreen name={tab.label} token={tab.token} />
+            </View>
+        ))}
+      </View>
+      <View style={styles.tabBar}>
+        {TABS.map((tab, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[styles.tabItem, activeTabIndex === index && styles.activeTabItem]}
+            onPress={() => setActiveTabIndex(index)}
+          >
+            <Text style={[styles.tabText, activeTabIndex === index && styles.activeTabText]}>{tab.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: 'white',
-    // flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    marginTop: 60,
+  },
+  content: {
+    flex: 1,
+  },
+  tabContent: {
+      flex: 1,
+      width: '100%',
+  },
+  tabBar: {
+    flexDirection: 'row',
+    height: 60,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: '#fff',
+    marginBottom: 20, 
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 10,
+  },
+  activeTabItem: {
+    backgroundColor: '#f8f9fa',
+  },
+  tabText: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 4,
+  },
+  activeTabText: {
+    color: '#007aff',
+    fontWeight: '600',
   },
 });
