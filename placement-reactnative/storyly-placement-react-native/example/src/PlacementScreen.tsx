@@ -1,6 +1,6 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useRef } from "react";
 import { View, Button, Dimensions, StyleSheet } from "react-native";
-import { type STRCart, type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, type STRCartItem, StorylyPlacement, type STRStoryBarController, type PlacementCartUpdateEvent } from "storyly-placement-react-native";
+import { type STRCart, type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, type STRCartItem, StorylyPlacement, type STRStoryBarController, type PlacementCartUpdateEvent, type STRVideoFeedController, type STRProductItem } from "storyly-placement-react-native";
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -9,7 +9,7 @@ const screenWidth = Dimensions.get('window').width;
 export const PlacementScreen = ({ name, token }: { name: string, token: string }) => {
 
 
-    const placementConfig: StorylyPlacementConfig = useMemo(() => ({
+    const placementConfig: StorylyPlacementConfig = {
         token: token,
         testMode: true,
         productConfig: {
@@ -20,13 +20,30 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
             shareUrl: 'https://www.google.com',
             facebookAppID: '1234567890',
         },
-    }), [token]);
+    }
 
-    const placementListener: StorylyPlacementProviderListener = useMemo(() => ({
+    const placementListener: StorylyPlacementProviderListener = {
         onLoad: (event) => { console.log(`[${name}] onLoad`, event); },
         onLoadFail: (event) => { console.log(`[${name}] onLoadFail`, event); },
-        onHydration: (event) => { console.log(`[${name}] onHydration`, event); },
-    }), [name]);
+        onHydration: (event) => { 
+            console.log(`[${name}] onHydration`, event);
+            // const products: STRProductItem[] = event.products.map(product => ({
+            //     productId: product.productId ?? "",
+            //     productGroupId: product.productGroupId ?? "",
+            //     title: "TITLE",
+            //     desc: "DESCRIPTION",
+            //     price: 80,
+            //     salesPrice: 99,
+            //     lowestPrice: 0,
+            //     currency: "USD",
+            //     url: "",
+            //     imageUrls: ["https://via.placeholder.com/150"],
+            //     variants: [{ name: "COLOR", value: "RED", key: "color_red" }],
+            //     ctaText: "",
+            // } as STRProductItem));
+            // provider.hydrateProducts(products)
+        },
+    };
 
     const provider = useStorylyPlacementProvider(placementConfig, placementListener);
     const placementRef = useRef<StorylyPlacementMethods>(null);
@@ -48,8 +65,8 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
                     console.log(`[${name}] onWidgetReady`, event, 'calculated height:', placementHeight);
                 }}
                 onActionClicked={(event) => {
-                    if (event.widget.type === 'story-bar') {
-                        placementRef.current?.getWidget<STRStoryBarController>(event.widget).pause();
+                    if (event.widget.type === 'story-bar' || event.widget.type === 'video-feed') {
+                        placementRef.current?.getWidget<STRStoryBarController | STRVideoFeedController>(event.widget).pause();
                         setPauseWidget(event.widget);
                     }
                     console.log(`[${name}] onActionClicked`, event);
@@ -130,15 +147,15 @@ const updateCart = (cart: STRCart, change: STRCartItem, eventName: string): STRC
 
     switch (eventName) {
         case "StoryProductAdded":
-        case "VideoFeedProductAdded":
+        case "VideoFeedItemProductAdded":
             handleProductAdded();
             break;
         case "StoryProductUpdated":
-        case "VideoFeedProductUpdated":
+        case "VideoFeedItemProductUpdated":
             handleProductUpdated();
             break;
         case "StoryProductRemoved":
-        case "VideoFeedProductRemoved":
+        case "VideoFeedItemProductRemoved":
             handleProductRemoved();
             break;
         default:

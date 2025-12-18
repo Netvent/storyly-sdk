@@ -38,31 +38,31 @@ class StorylyPlacementProviderModule(
 
     @ReactMethod
     fun destroyProvider(providerId: String) {
-        Log.d("[T_StorylyPlacementProviderModule]", "Destroying provider: $providerId")
+        Log.d("[StorylyPlacementProviderModule]", "Destroying provider: $providerId")
         RNPlacementProviderManager.destroyProvider(providerId)
     }
 
     @ReactMethod
     fun updateConfig(providerId: String, config: String) {
-        Log.d("[T_StorylyPlacementProviderModule]", "Updating config for provider: $providerId")
+        Log.d("[StorylyPlacementProviderModule]", "Updating config for provider: $providerId")
         RNPlacementProviderManager.getProvider(providerId)?.configure(config)
     }
 
     @ReactMethod
     fun hydrateProducts(providerId: String, productsJson: String) {
-        Log.d("[T_StorylyPlacementProviderModule]", "Hydrating products for provider: $providerId")
+        Log.d("[StorylyPlacementProviderModule]", "Hydrating products for provider: $providerId")
         RNPlacementProviderManager.getProvider(providerId)?.hydrateProducts(productsJson)
     }
 
     @ReactMethod
     fun hydrateWishlist(providerId: String, productsJson: String) {
-        Log.d("[T_StorylyPlacementProviderModule]", "Hydrating wishlist for provider: $providerId")
+        Log.d("[StorylyPlacementProviderModule]", "Hydrating wishlist for provider: $providerId")
         RNPlacementProviderManager.getProvider(providerId)?.hydrateWishlist(productsJson)
     }
 
     @ReactMethod
     fun updateCart(providerId: String, cartJson: String) {
-        Log.d("[T_StorylyPlacementProviderModule]", "Updating cart for provider: $providerId")
+        Log.d("[StorylyPlacementProviderModule]", "Updating cart for provider: $providerId")
         RNPlacementProviderManager.getProvider(providerId)?.updateCart(cartJson)
     }
 

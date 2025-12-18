@@ -99,14 +99,51 @@ export const useStorylyPlacementProvider = (
   config: StorylyPlacementConfig,
   listener?: StorylyPlacementProviderListener
 ): StorylyPlacementProvider => {
-  var [providerId, setProviderId] = useState<string | null>(null);
+  const configJson = useMemo(() => JSON.stringify(config), [config]);
+
+  const [provider, setProvider] = useState<StorylyPlacementProvider>({
+    providerId: null,
+    hydrateProducts: () => {},
+    hydrateWishlist: () => {},
+    updateCart: () => {},
+    destroy: () => {},
+  });
+
+  const createProviderInstance = (pid: string): StorylyPlacementProvider => ({
+      providerId: pid,
+      hydrateProducts: (products: STRProductItem[]) => {
+        console.debug('Hydrating products for provider id', pid,'with products:', products);
+        StorylyPlacementProviderNative.hydrateProducts(
+          pid,
+          JSON.stringify({ products })
+        );
+      },
+      hydrateWishlist: (products: STRProductItem[]) => {
+        console.debug('Hydrating wishlist for provider id', pid,'with products:', products);
+        StorylyPlacementProviderNative.hydrateWishlist(
+          pid,
+          JSON.stringify({ products })
+        );
+      },
+      updateCart: (cart: STRCart) => {
+        console.debug('Updating cart for provider id', pid,'with cart:', cart)
+        StorylyPlacementProviderNative.updateCart(
+          pid,
+          JSON.stringify({ cart })
+        );
+      },
+      destroy: () => {
+        console.debug('Destroying provider id', pid);
+        StorylyPlacementProviderNative.destroyProvider(pid);
+      },
+    });
 
   useEffect(() => {
     const currentProviderId = generateProviderId();
     console.debug('Creating provider with id:', currentProviderId);
     StorylyPlacementProviderNative.createProvider(currentProviderId).then(() => {
-      setProviderId(currentProviderId);
-    });
+      setProvider(createProviderInstance(currentProviderId));
+    })
 
     return () => {
       console.debug('Destroying provider with id:', currentProviderId);
@@ -114,50 +151,21 @@ export const useStorylyPlacementProvider = (
     };
   }, []);
 
-  const configJson = useMemo(() => JSON.stringify(config), [config]);
-  
   useEffect(() => {
-    if (!providerId) return;
-    console.debug('Updating config for provider id', providerId,'with config:', configJson);
-    StorylyPlacementProviderNative.updateConfig(providerId, configJson);
-  }, [providerId, configJson]);
+    if (!provider.providerId) return;
+    console.debug('Updating config for provider id', provider.providerId,'with config:', configJson);
+    StorylyPlacementProviderNative.updateConfig(provider.providerId, configJson);
+  }, [provider.providerId, configJson]);
 
 
   useEffect(() => {
-    if (!providerId) return;
+    if (!provider.providerId) return;
 
-    const subscriptions = setupEventListeners(providerId, listener);
+    const subscriptions = setupEventListeners(provider.providerId, listener);
     return () => {
       subscriptions.forEach((sub) => sub.remove());
     };
-  }, [providerId, listener]);
+  }, [provider.providerId, listener]);
 
-  return useMemo(() => ({
-    providerId,
-    hydrateProducts: (products: STRProductItem[]) => {
-      if (!providerId) return;
-      StorylyPlacementProviderNative.hydrateProducts(
-        providerId,
-        JSON.stringify({ products })
-      );
-    },
-    hydrateWishlist: (products: STRProductItem[]) => {
-      if (!providerId) return;
-      StorylyPlacementProviderNative.hydrateWishlist(
-        providerId,
-        JSON.stringify({ products })
-      );
-    },
-    updateCart: (cart: STRCart) => {
-      if (!providerId) return;
-      StorylyPlacementProviderNative.updateCart(
-        providerId,
-        JSON.stringify({ cart })
-      );
-    },
-    destroy: () => {
-      if (!providerId) return;
-      StorylyPlacementProviderNative.destroyProvider(providerId);
-    },
-  }), [providerId]);
+  return provider;
 };

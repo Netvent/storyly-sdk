@@ -25,15 +25,14 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>() 
     }
 
     enum class Command(val id: Int, val commandName: String) {
-        CALL_WIDGET(1, "callWidget");
+        CALL_WIDGET(1, "callWidget"),
         APPROVE_CART_CHANGE(2, "approveCartChange"),
         REJECT_CART_CHANGE(3, "rejectCartChange"),
         APPROVE_WISHLIST_CHANGE(4, "approveWishlistChange"),
-        REJECT_WISHLIST_CHANGE(5, "rejectWishlistChange"),
-
+        REJECT_WISHLIST_CHANGE(5, "rejectWishlistChange");
 
         companion object {
-            fun fromName(name: String): Command? = entries.find { it.commandName == name }
+            fun fromName(id: Int): Command? = entries.find { it.id == id }
         }
     }
 
@@ -66,7 +65,7 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>() 
         val eventMap = mutableMapOf<String, Any>()
         events?.forEach { eventMap[it.key] = it.value }
         RNPlacementEventType.entries.forEach {
-            eventMap[it.eventName] = MapBuilder.of("registrationName", it.eventName)
+            eventMap[it.eventName] = mapOf("registrationName" to it.eventName)
         }
         return eventMap
     }
@@ -75,10 +74,16 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>() 
         return Command.entries.associate { it.commandName to it.id }.toMutableMap()
     }
 
-    override fun receiveCommand(view: RNStorylyPlacementView, commandId: String?, args: ReadableArray?) {
-        val command = commandId?.let { Command.fromName(it) } ?: return
+    override fun receiveCommand(view: RNStorylyPlacementView, commandId: Int, args: ReadableArray?) {
+        val command = commandId.let { Command.fromName(it) } ?: return
 
         when (command) {
+            Command.CALL_WIDGET -> {
+                val id = args?.getString(0) ?: return
+                val method = args?.getString(1) ?: return
+                val raw = args?.getString(2)
+                view.callWidget(id, method, raw)
+            }
             Command.APPROVE_CART_CHANGE -> {
                 val responseId = args?.getString(0) ?: return
                 val raw = args?.getString(1)
@@ -98,12 +103,6 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>() 
                 val responseId = args?.getString(0) ?: return
                 val raw = args?.getString(1)
                 view.rejectWishlistChange(responseId, raw)
-            }
-            Command.CALL_WIDGET -> {
-                val id = args?.getString(0) ?: return
-                val method = args?.getString(1) ?: return
-                val raw = args?.getString(2)
-                view.callWidget(id, method, raw)
             }
         }
     }
