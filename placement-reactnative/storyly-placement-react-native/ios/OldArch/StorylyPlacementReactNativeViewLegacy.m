@@ -21,8 +21,8 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onEvent;
 @property (nonatomic, copy) RCTBubblingEventBlock onActionClicked;
 @property (nonatomic, copy) RCTBubblingEventBlock onProductEvent;
-@property (nonatomic, copy) RCTBubblingEventBlock onCartUpdate;
-@property (nonatomic, copy) RCTBubblingEventBlock onWishlistUpdate;
+@property (nonatomic, copy) RCTBubblingEventBlock onUpdateCart;
+@property (nonatomic, copy) RCTBubblingEventBlock onUpdateWishlist;
 @end
 
 @implementation RNStorylyPlacementView (EventProps)
@@ -32,8 +32,8 @@ RN_BUBBLING_EVENT_PROPERTY(OnFail, onFail)
 RN_BUBBLING_EVENT_PROPERTY(OnEvent, onEvent)
 RN_BUBBLING_EVENT_PROPERTY(OnActionClicked, onActionClicked)
 RN_BUBBLING_EVENT_PROPERTY(OnProductEvent, onProductEvent)
-RN_BUBBLING_EVENT_PROPERTY(OnCartUpdate, onCartUpdate)
-RN_BUBBLING_EVENT_PROPERTY(OnWishlistUpdate, onWishlistUpdate)
+RN_BUBBLING_EVENT_PROPERTY(OnUpdateCart, onUpdateCart)
+RN_BUBBLING_EVENT_PROPERTY(OnUpdateWishlist, onUpdateWishlist)
 
 @end
 
@@ -77,10 +77,10 @@ RCT_EXPORT_MODULE(StorylyPlacementReactNativeViewLegacy)
                 if (strongView.onProductEvent) strongView.onProductEvent(eventData);
                 break;
             case RNPlacementEventTypeOnCartUpdate:
-                if (strongView.onCartUpdate) strongView.onCartUpdate(eventData);
+                if (strongView.onUpdateCart) strongView.onUpdateCart(eventData);
                 break;
             case RNPlacementEventTypeOnWishlistUpdate:
-                if (strongView.onWishlistUpdate) strongView.onWishlistUpdate(eventData);
+                if (strongView.onUpdateWishlist) strongView.onUpdateWishlist(eventData);
                 break;
         }
     };
@@ -94,8 +94,8 @@ RCT_EXPORT_VIEW_PROPERTY(onFail, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onEvent, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onActionClicked, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onProductEvent, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onCartUpdate, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onWishlistUpdate, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onUpdateCart, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onUpdateWishlist, RCTBubblingEventBlock)
 
 // MARK: - Props
 RCT_CUSTOM_VIEW_PROPERTY(providerId, NSString, RNStorylyPlacementView)
