@@ -7,16 +7,12 @@ import StorylyCore
     @objc public static let shared = RNPlacementProviderManager()
     
     private var providers: [String: RNPlacementProviderWrapper] = [:]
-    private let lock = NSLock()
-    
+
     private override init() {
         super.init()
     }
     
     @objc public func createProvider(id: String) -> RNPlacementProviderWrapper {
-        lock.lock()
-        defer { lock.unlock() }
-        
         print("[RNPlacementProviderManager] Create provider: \(id)")
         let wrapper = RNPlacementProviderWrapper(id: id)
         providers[id] = wrapper
@@ -24,16 +20,10 @@ import StorylyCore
     }
     
     @objc public func getProvider(id: String) -> RNPlacementProviderWrapper? {
-        lock.lock()
-        defer { lock.unlock() }
-        
         return providers[id]
     }
     
     @objc public func destroyProvider(id: String) {
-        lock.lock()
-        defer { lock.unlock() }
-        
         print("[RNPlacementProviderManager] Destroy provider: \(id)")
         providers.removeValue(forKey: id)
     }
@@ -54,69 +44,79 @@ import StorylyCore
     }
     
     @objc public func configure(configJson: String) {
-        guard let parsedConfig = decodeFromJson(configJson) else {
-            print("[RNPlacementProviderWrapper] Failed to parse config JSON")
-            return
+        DispatchQueue.main.async {
+          guard let parsedConfig = decodeFromJson(configJson) else {
+              print("[RNPlacementProviderWrapper] Failed to parse config JSON")
+              return
+          }
+          
+          self.setupProvider(config: parsedConfig)
         }
-        
-        setupProvider(config: parsedConfig)
     }
     
     private func setupProvider(config: [String: Any]) {
-        guard let token = config["token"] as? String else {
-            print("[RNPlacementProviderWrapper] Token not found in config")
-            return
+        DispatchQueue.main.async {
+            guard let token = config["token"] as? String else {
+              print("[RNPlacementProviderWrapper] Token not found in config")
+              return
+            }
+            
+            print("[RNPlacementProviderWrapper] Configuring provider with token: \(token)")
+            
+            let placementConfig = decodeSTRPlacementConfig(config, token: token)
+            
+            self.provider.delegate = STRProviderDelegateImpl(wrapper: self)
+            self.provider.productDelegate = STRProviderProductDelegateImpl(wrapper: self)
+            self.provider.config = placementConfig
         }
-        
-        print("[RNPlacementProviderWrapper] Configuring provider with token: \(token)")
-        
-        let placementConfig = decodeSTRPlacementConfig(config, token: token)
-        
-        provider.delegate = STRProviderListenerImpl(wrapper: self)
-        provider.productDelegate = STRProviderProductListenerImpl(wrapper: self)
-        provider.config = placementConfig
     }
     
     @objc public func hydrateProducts(productsJson: String) {
-        guard let dict = decodeFromJson(productsJson),
-              let productsArray = dict["products"] as? [[String: Any]] else {
-            return
+        DispatchQueue.main.async {
+            guard let dict = decodeFromJson(productsJson),
+                  let productsArray = dict["products"] as? [[String: Any]] else {
+                return
+            }
+            
+            print("[RNPlacementProviderWrapper] hydrateProducts: \(productsJson)")
+            
+            let products = productsArray.compactMap { decodeSTRProductItem($0) }
+            self.provider.hydrateProducts(products: products)
         }
-        
-        print("[RNPlacementProviderWrapper] hydrateProducts: \(productsJson)")
-        
-        let products = productsArray.compactMap { decodeSTRProductItem($0) }
-        provider.hydrateProducts(products: products)
     }
     
     @objc public func hydrateWishlist(productsJson: String) {
-        guard let dict = decodeFromJson(productsJson),
-              let productsArray = dict["products"] as? [[String: Any]] else {
-            return
+        DispatchQueue.main.async {
+            guard let dict = decodeFromJson(productsJson),
+                  let productsArray = dict["products"] as? [[String: Any]] else {
+                return
+            }
+            
+            print("[RNPlacementProviderWrapper] hydrateWishlist: \(productsJson)")
+            
+            let products = productsArray.compactMap { decodeSTRProductItem($0) }
+            self.provider.hydrateWishlist(products: products)
         }
-        
-        print("[RNPlacementProviderWrapper] hydrateWishlist: \(productsJson)")
-        
-        let products = productsArray.compactMap { decodeSTRProductItem($0) }
-        provider.hydrateWishlist(products: products)
     }
     
     @objc public func updateCart(cartJson: String) {
-        guard let dict = decodeFromJson(cartJson),
-              let cartDict = dict["cart"] as? [String: Any],
-              let cart = decodeSTRCart(cartDict) else {
-            return
+        DispatchQueue.main.async {
+            guard let dict = decodeFromJson(cartJson),
+                  let cartDict = dict["cart"] as? [String: Any],
+                  let cart = decodeSTRCart(cartDict) else {
+              return
+            }
+            
+            print("[RNPlacementProviderWrapper] updateCart: \(cartJson)")
+            
+            self.provider.updateCart(cart: cart)
         }
-        
-        print("[RNPlacementProviderWrapper] updateCart: \(cartJson)")
-        
-        provider.updateCart(cart: cart)
     }
 }
 
 // MARK: - STRProviderListener Implementation
 
-private class STRProviderListenerImpl: NSObject, STRProviderDelegate {
+private class STRProviderDelegateImpl: NSObject, STRProviderDelegate {
     weak var wrapper: RNPlacementProviderWrapper?
     
     init(wrapper: RNPlacementProviderWrapper) {
@@ -153,7 +153,7 @@ private class STRProviderListenerImpl: NSObject, STRProviderDelegate {
 
 // MARK: - STRProviderProductListener Implementation
 
-private class STRProviderProductListenerImpl: NSObject, STRProviderProductDelegate {
+private class STRProviderProductDelegateImpl: NSObject, STRProviderProductDelegate {
     weak var wrapper: RNPlacementProviderWrapper?
     
     init(wrapper: RNPlacementProviderWrapper) {

@@ -5,35 +5,21 @@ import StorylyCore
 // MARK: - STRProductItem Encoding/Decoding
 
 func encodeSTRProductItem(_ item: STRProductItem) -> [String: Any] {
-    var result: [String: Any?] = [
+    let result: [String: Any] = ([
         "productId": item.productId,
         "productGroupId": item.productGroupId,
         "title": item.title,
         "url": item.url,
-        "desc": item.desc
-    ]
-    
-    result["price"] =  item.price
-    result["currency"] = item.currency
-  
-    if let salesPrice = item.salesPrice {
-        result["salesPrice"] = salesPrice
-    }
-    if let lowestPrice = item.lowestPrice {
-        result["lowestPrice"] = lowestPrice
-    }
-  
-    if let imageUrls = item.imageUrls {
-        result["imageUrls"] = imageUrls
-    }
-    if let ctaText = item.ctaText {
-        result["ctaText"] = ctaText
-    }
-    if let variants = item.variants {
-        result["variants"] = variants.map { encodeSTRProductVariant($0) }
-    }
-    
-  return result as [String: Any?]
+        "desc": item.desc,
+        "price": item.price,
+        "currency": item.currency,
+        "salesPrice": item.salesPrice,
+        "lowestPrice": item.lowestPrice,
+        "imageUrls": item.imageUrls,
+        "ctaText": item.ctaText,
+        "variants": item.variants?.map { encodeSTRProductVariant($0) }
+    ] as [String: Any?]).compactMapValues { $0 }
+    return result
 }
 
 func decodeSTRProductItem(_ dict: [String: Any]) -> STRProductItem? {
@@ -51,11 +37,7 @@ func decodeSTRProductItem(_ dict: [String: Any]) -> STRProductItem? {
     let salesPrice = dict["salesPrice"] as? Double
     let imageUrls = dict["imageUrls"] as? [String]
     let ctaText = dict["ctaText"] as? String
-    
-    var variants: [STRProductVariant]? = nil
-    if let variantsArray = dict["variants"] as? [[String: Any]] {
-        variants = variantsArray.compactMap { decodeSTRProductVariant($0) }
-    }
+    let variants: [STRProductVariant]? = (dict["variants"] as? [[String: Any]])?.compactMap { decodeSTRProductVariant($0) }
     let lowestPrice = dict["lowestPrice"] as? NSNumber
     
     return STRProductItem(
@@ -77,12 +59,11 @@ func decodeSTRProductItem(_ dict: [String: Any]) -> STRProductItem? {
 // MARK: - STRProductVariant Encoding/Decoding
 
 func encodeSTRProductVariant(_ variant: STRProductVariant) -> [String: Any] {
-    var result: [String: Any] = [
-      "name": variant.name,
-      "value": variant.value,
-      "key": variant.key
+    let result: [String: Any] = [
+        "name": variant.name,
+        "value": variant.value,
+        "key": variant.key
     ]
-    
     return result
 }
 
@@ -100,15 +81,12 @@ func decodeSTRProductVariant(_ dict: [String: Any]) -> STRProductVariant? {
 func encodeSTRCart(_ cart: STRCart?) -> [String: Any]? {
     guard let cart = cart else { return nil }
     
-    var result: [String: Any] = [
+    let result: [String: Any] = ([
         "items": cart.items.map { encodeSTRCartItem($0) },
         "totalPrice": cart.totalPrice,
-        "currency": cart.currency
-    ]
-    
-    if let oldTotalPrice = cart.oldTotalPrice {
-        result["oldTotalPrice"] = oldTotalPrice
-    }
+        "currency": cart.currency,
+        "oldTotalPrice": cart.oldTotalPrice
+    ] as [String: Any?]).compactMapValues { $0 }
     
     return result
 }
@@ -120,12 +98,9 @@ func decodeSTRCart(_ dict: [String: Any]?) -> STRCart? {
           let currency = dict["currency"] as? String else {
         return nil
     }
-    
-    let items = itemsArray.compactMap { decodeSTRCartItem($0) }
     let oldTotalPrice = dict["oldTotalPrice"] as? Double
-    
     return STRCart(
-        items: items,
+        items: itemsArray.compactMap { decodeSTRCartItem($0) },
         totalPrice: Float(totalPrice),
         oldTotalPrice: oldTotalPrice as NSNumber?,
         currency: currency
@@ -134,21 +109,15 @@ func decodeSTRCart(_ dict: [String: Any]?) -> STRCart? {
 
 // MARK: - STRCartItem Encoding/Decoding
 
-func encodeSTRCartItem(_ item: STRCartItem?) -> [String: Any]? {
+func encodeSTRCartItem(_ item: STRCartItem?) -> [String: Any?]? {
     guard let item = item else { return nil }
     
-    var result: [String: Any] = [
+    let result: [String: Any] = ([
         "item": encodeSTRProductItem(item.item),
-        "quantity": item.quantity
-    ]
-    
-    if let totalPrice = item.totalPrice {
-        result["totalPrice"] = totalPrice
-    }
-    if let oldTotalPrice = item.oldTotalPrice {
-        result["oldTotalPrice"] = oldTotalPrice
-    }
-    
+        "quantity": item.quantity,
+        "totalPrice": item.totalPrice,
+        "oldTotalPrice": item.oldTotalPrice,
+    ] as [String: Any?]).compactMapValues { $0 }
     return result
 }
 
@@ -172,7 +141,7 @@ func decodeSTRCartItem(_ dict: [String: Any]) -> STRCartItem? {
 
 // MARK: - STRProductInformation Encoding
 
-func encodeSTRProductInformation(_ info: STRProductInformation) -> [String: Any] {
+func encodeSTRProductInformation(_ info: STRProductInformation) -> [String: Any?] {
     return [
         "productId": info.productId,
         "productGroupId": info.productGroupId

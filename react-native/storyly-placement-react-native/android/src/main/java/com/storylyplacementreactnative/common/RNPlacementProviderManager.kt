@@ -1,6 +1,8 @@
 package com.storylyplacementreactnative.common
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.appsamurai.storyly.core.data.model.STRDataPayload
 import com.appsamurai.storyly.core.data.model.STRDataSource
@@ -55,12 +57,14 @@ class RNPlacementProviderWrapper(
     internal var sendEvent: ((String, RNPlacementProviderEventType, String) -> Unit)? = null
 
     fun configure(configJson: String) {
-        val parsedConfig = decodeFromJson(configJson) ?: run {
-            Log.e("[RNPlacementProviderWrapper]", "Failed to parse config JSON")
-            return
-        }
+        Handler(Looper.getMainLooper()).post {
+            val parsedConfig = decodeFromJson(configJson) ?: run {
+                Log.e("[RNPlacementProviderWrapper]", "Failed to parse config JSON")
+                return@post
+            }
 
-        setupProvider(parsedConfig)
+            setupProvider(parsedConfig)
+        }
     }
 
     private fun setupProvider(config: Map<String, Any?>) {
@@ -104,29 +108,36 @@ class RNPlacementProviderWrapper(
     }
 
     fun hydrateProducts(raw: String) {
-        val map = decodeFromJson(raw) ?: return
-        Log.d("[RNPlacementProviderWrapper]", "hydrateProducts: $raw")
-        val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
-            decodeSTRProductItem(it)
-        } ?: return
-        provider.hydrateProducts(products)
+        Handler(Looper.getMainLooper()).post {
+            val map = decodeFromJson(raw) ?: return@post
+            Log.d("[RNPlacementProviderWrapper]", "hydrateProducts: $raw")
+            val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
+                decodeSTRProductItem(it)
+            } ?: return@post
+            provider.hydrateProducts(products)
+        }
     }
 
     fun hydrateWishlist(raw: String) {
-        val map = decodeFromJson(raw) ?: return
-        Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
-        val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
-            decodeSTRProductItem(it)
-        } ?: return
-        provider.hydrateWishlist(products)
+        Handler(Looper.getMainLooper()).post {
+            val map = decodeFromJson(raw) ?: return@post
+            Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
+            val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
+                decodeSTRProductItem(it)
+            } ?: return@post
+            provider.hydrateWishlist(products)
+        }
     }
 
     fun updateCart(raw: String) {
-        val map = decodeFromJson(raw) ?: return
-        Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
-        val cart = (map["cart"] as? Map<String, Any?>)?.let {
-            decodeSTRCart(it)
-        } ?: return
-        provider.updateCart(cart)
+        Handler(Looper.getMainLooper()).post {
+            val map = decodeFromJson(raw) ?: return@post
+            Log.d("[RNPlacementProviderWrapper]", "hydrateWishlist: $raw")
+            val cart = (map["cart"] as? Map<String, Any?>)?.let {
+                decodeSTRCart(it)
+            } ?: return@post
+            provider.updateCart(cart)
+        }
+
     }
 }

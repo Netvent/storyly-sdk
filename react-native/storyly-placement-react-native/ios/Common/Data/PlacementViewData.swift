@@ -27,12 +27,11 @@ func encodeSTRPayload(_ payload: STRPayload) -> [String: Any] {
 // MARK: - STREventPayload Encoding
 
 func encodeSTREventPayload(_ payload: STREventPayload) -> [String: Any] {
-    var baseMap: [String: Any] = [
+    let baseMap: [String: Any] = [
         "event": payload.baseEvent.getType()
     ]
     
     var addition: [String: Any] = [:]
-    
     switch payload {
     case let storyBarEvent as StoryBarEventPayload:
         addition = encodeStoryBarPayload(storyBarEvent.payload) ?? [:]

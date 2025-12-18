@@ -56,3 +56,4 @@ func encodeBannerComponent(_ component: BannerComponent?) -> [String: Any]? {
     return result.compactMapValues { $0 }
 }
 
+

@@ -29,3 +29,4 @@ func encodeSwipeCard(_ card: SwipeCard?) -> [String: Any]? {
     ].compactMapValues { $0 }
 }
 
+

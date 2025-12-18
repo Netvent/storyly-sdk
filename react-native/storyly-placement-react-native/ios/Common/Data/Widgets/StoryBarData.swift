@@ -156,3 +156,4 @@ func encodeStoryBarComponent(_ component: StoryBarComponent?) -> [String: Any]? 
     return result.compactMapValues { $0 }
 }
 
+

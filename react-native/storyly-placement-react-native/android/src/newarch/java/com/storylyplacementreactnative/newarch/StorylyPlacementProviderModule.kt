@@ -1,5 +1,7 @@
 package com.storylyplacementreactnative.newarch
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -31,7 +33,7 @@ class StorylyPlacementProviderModule(
             providerId,
         )
         wrapper.sendEvent = { id, eventType, jsonPayload ->
-              sendEvent("${id}_${eventType.eventName}", jsonPayload)
+            sendEvent("${id}_${eventType.eventName}", jsonPayload)
         }
         promise.resolve(true)
     }

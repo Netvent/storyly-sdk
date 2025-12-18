@@ -18,8 +18,8 @@ import StorylyVideoFeed
     // Event dispatch closure (set by bridge layer)
     @objc public var dispatchEvent: ((RNPlacementEventType, String?) -> Void)?
   
-    private lazy var delegate = STRListenerImpl(placementView: self)
-    private lazy var productDelegate = STRProductListenerImpl(placementView: self)
+    private lazy var delegate = STRDelegateImpl(placementView: self)
+    private lazy var productDelegate = STRProductDelegateImpl(placementView: self)
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,9 +30,7 @@ import StorylyVideoFeed
     }
     
     @objc public func configure(providerId: String) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
+        DispatchQueue.main.async {
             if providerId == self.providerId {
                 print("[RNStorylyPlacement] Already configured with providerId: \(providerId)")
                 return
@@ -41,6 +39,92 @@ import StorylyVideoFeed
             print("[RNStorylyPlacement] Configuring with providerId: \(providerId)")
             self.providerId = providerId
             self.setupPlacementView()
+        }
+    }
+
+    @objc public func callWidget(id: String, method: String, raw: String?) {
+        DispatchQueue.main.async {
+            print("[RNStorylyPlacement] callWidget: \(id)-\(method)-\(raw ?? "nil")")
+            
+            guard let widget = self.widgetMap[id]?.value else { return }
+            let params = decodeFromJson(raw)
+            
+            switch widget.getType() {
+                case .storyBar:
+                    self.handleStoryBarMethod(widget: widget, method: method, params: params)
+                case .videoFeed:
+                    self.handleVideoFeedMethod(widget: widget, method: method, params: params)
+                case .videoFeedPresenter:
+                  self.handleVideoFeedPresenterMethod(widget: widget, method: method, params: params)
+                case .banner, .swipeCard, .none:
+                  break
+                @unknown default:
+                  break
+            }
+        }
+    }
+  
+    @objc public func approveCartChange(responseId: String, raw: String?) {
+        DispatchQueue.main.async {
+          guard let callbacks = self.cartUpdateCallbacks[responseId] else { return }
+            
+            var cart: STRCart? = nil
+            if let raw = raw,
+               let dict = decodeFromJson(raw),
+               let cartDict = dict["cart"] as? [String: Any] {
+              cart = decodeSTRCart(cartDict)
+            }
+            
+            callbacks.onSuccess?(cart)
+            self.cartUpdateCallbacks.removeValue(forKey: responseId)
+        }
+    }
+
+    @objc public func rejectCartChange(responseId: String, raw: String?) {
+        DispatchQueue.main.async {
+            guard let callbacks = self.cartUpdateCallbacks[responseId] else { return }
+            
+            var failMessage = ""
+            if let raw = raw,
+               let dict = decodeFromJson(raw),
+               let message = dict["failMessage"] as? String {
+              failMessage = message
+            }
+            
+            callbacks.onFail?(STRCartEventResult(message: failMessage))
+            self.cartUpdateCallbacks.removeValue(forKey: responseId)
+        }
+    }
+
+    @objc public func approveWishlistChange(responseId: String, raw: String?) {
+        DispatchQueue.main.async {
+            guard let callbacks = self.wishlistUpdateCallbacks[responseId] else { return }
+            
+            var item: STRProductItem? = nil
+            if let raw = raw,
+               let dict = decodeFromJson(raw),
+               let itemDict = dict["item"] as? [String: Any] {
+              item = decodeSTRProductItem(itemDict)
+            }
+            
+            callbacks.onSuccess?(item)
+            self.wishlistUpdateCallbacks.removeValue(forKey: responseId)
+        }
+    }
+
+    @objc public func rejectWishlistChange(responseId: String, raw: String?) {
+        DispatchQueue.main.async {
+            guard let callbacks = self.wishlistUpdateCallbacks[responseId] else { return }
+            
+            var failMessage = ""
+            if let raw = raw,
+               let dict = decodeFromJson(raw),
+               let message = dict["failMessage"] as? String {
+              failMessage = message
+            }
+            
+            callbacks.onFail?(STRWishlistEventResult(message: failMessage))
+            self.wishlistUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
     
@@ -55,11 +139,7 @@ import StorylyVideoFeed
         }
         
         let dataProvider = providerWrapper.provider
-        
-        // Remove old placement view
         placementView?.removeFromSuperview()
-        
-        // Create new placement view
         placementView = createPlacementView(dataProvider: dataProvider)
         
         if let placementView = placementView {
@@ -82,26 +162,6 @@ import StorylyVideoFeed
         view.productDelegate = productDelegate
         
         return view
-    }
-    
-    @objc public func callWidget(id: String, method: String, raw: String?) {
-        print("[RNStorylyPlacement] callWidget: \(id)-\(method)-\(raw ?? "nil")")
-        
-        guard let widget = widgetMap[id]?.value else { return }
-        let params = decodeFromJson(raw)
-        
-        switch widget.getType() {
-        case .storyBar:
-            handleStoryBarMethod(widget: widget, method: method, params: params)
-        case .videoFeed:
-            handleVideoFeedMethod(widget: widget, method: method, params: params)
-        case .videoFeedPresenter:
-            handleVideoFeedPresenterMethod(widget: widget, method: method, params: params)
-        case .banner, .swipeCard, .none:
-            break
-        @unknown default:
-            break
-        }
     }
     
     private func handleStoryBarMethod(widget: STRWidgetController, method: String, params: [String: Any]?) {
@@ -184,62 +244,6 @@ import StorylyVideoFeed
             break
         }
     }
-    
-    @objc public func approveCartChange(responseId: String, raw: String?) {
-        guard let callbacks = cartUpdateCallbacks[responseId] else { return }
-        
-        var cart: STRCart? = nil
-        if let raw = raw,
-           let dict = decodeFromJson(raw),
-           let cartDict = dict["cart"] as? [String: Any] {
-            cart = decodeSTRCart(cartDict)
-        }
-        
-        callbacks.onSuccess?(cart)
-        cartUpdateCallbacks.removeValue(forKey: responseId)
-    }
-    
-    @objc public func rejectCartChange(responseId: String, raw: String?) {
-        guard let callbacks = cartUpdateCallbacks[responseId] else { return }
-        
-        var failMessage = ""
-        if let raw = raw,
-           let dict = decodeFromJson(raw),
-           let message = dict["failMessage"] as? String {
-            failMessage = message
-        }
-        
-        callbacks.onFail?(STRCartEventResult(message: failMessage))
-        cartUpdateCallbacks.removeValue(forKey: responseId)
-    }
-    
-    @objc public func approveWishlistChange(responseId: String, raw: String?) {
-        guard let callbacks = wishlistUpdateCallbacks[responseId] else { return }
-        
-        var item: STRProductItem? = nil
-        if let raw = raw,
-           let dict = decodeFromJson(raw),
-           let itemDict = dict["item"] as? [String: Any] {
-            item = decodeSTRProductItem(itemDict)
-        }
-        
-        callbacks.onSuccess?(item)
-        wishlistUpdateCallbacks.removeValue(forKey: responseId)
-    }
-    
-    @objc public func rejectWishlistChange(responseId: String, raw: String?) {
-        guard let callbacks = wishlistUpdateCallbacks[responseId] else { return }
-        
-        var failMessage = ""
-        if let raw = raw,
-           let dict = decodeFromJson(raw),
-           let message = dict["failMessage"] as? String {
-            failMessage = message
-        }
-        
-        callbacks.onFail?(STRWishlistEventResult(message: failMessage))
-        wishlistUpdateCallbacks.removeValue(forKey: responseId)
-    }
 }
 
 // MARK: - Callback Type Definitions
@@ -256,7 +260,7 @@ struct WishlistCallbacks {
 
 // MARK: - STRListener Implementation
 
-private class STRListenerImpl: NSObject, STRDelegate {
+private class STRDelegateImpl: NSObject, STRDelegate {
     weak var placementView: RNStorylyPlacementView?
     
     init(placementView: RNStorylyPlacementView) {
@@ -327,7 +331,7 @@ private class STRListenerImpl: NSObject, STRDelegate {
 
 // MARK: - STRProductListener Implementation
 
-private class STRProductListenerImpl: NSObject, STRProductDelegate {
+private class STRProductDelegateImpl: NSObject, STRProductDelegate {
     weak var placementView: RNStorylyPlacementView?
     
     init(placementView: RNStorylyPlacementView) {

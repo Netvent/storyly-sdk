@@ -47,8 +47,8 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
     private var providerId: String? = null
 
     // Callback maps for async cart/wishlist operations
-    internal val cartUpdateCallbacks = mutableMapOf<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>>()
-    internal val wishlistUpdateCallbacks = mutableMapOf<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>>()
+    private val cartUpdateCallbacks = mutableMapOf<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>>()
+    private val wishlistUpdateCallbacks = mutableMapOf<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>>()
 
     private var widgetMap = mutableMapOf<String, WeakReference<STRWidgetController>>()
 
@@ -66,7 +66,7 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
         }
     }
 
-    internal val activity: Context
+    private val activity: Context
         get() = ((context as? ReactContext)?.currentActivity ?: context)
 
     init {
@@ -99,6 +99,72 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
             Log.d("[RNStorylyPlacement]", "Configuring with providerId: $providerId")
             this@RNStorylyPlacementView.providerId = providerId
             setupPlacementView()
+        }
+    }
+
+    fun callWidget(id: String, method: String, raw: String?) {
+        Handler(Looper.getMainLooper()).post {
+            Log.d("[RNStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
+            val widget = widgetMap[id]?.get() ?: return@post
+            val params = decodeFromJson(raw)
+            when (widget.getType()) {
+                STRWidgetType.StoryBar -> handleStoryBarMethod(widget, method, params)
+                STRWidgetType.VideoFeed -> handleVideoFeedMethod(widget, method, params)
+                STRWidgetType.VideoFeedPresenter -> handleVideoFeedPresenterMethod(widget, method, params)
+                STRWidgetType.Banner -> return@post
+                STRWidgetType.SwipeCard -> return@post
+                STRWidgetType.None -> return@post
+            }
+        }
+    }
+
+    fun approveCartChange(responseId: String, raw: String?) {
+        Handler(Looper.getMainLooper()).post {
+            val callbacks = cartUpdateCallbacks[responseId] ?: return@post
+            val cart = raw?.let {
+                val map = decodeFromJson(it)
+                decodeSTRCart(map?.get("cart") as? Map<String, Any?>)
+            }
+            callbacks.first?.invoke(cart)
+            cartUpdateCallbacks.remove(responseId)
+        }
+    }
+
+    fun rejectCartChange(responseId: String, raw: String?) {
+        Handler(Looper.getMainLooper()).post {
+            val callbacks = cartUpdateCallbacks[responseId] ?: return@post
+            val failMessage = raw?.let {
+                val map = decodeFromJson(it)
+                map?.get("failMessage") as? String
+            } ?: ""
+            callbacks.second?.invoke(STRCartEventResult(failMessage))
+            cartUpdateCallbacks.remove(responseId)
+        }
+    }
+
+    fun approveWishlistChange(responseId: String, raw: String?) {
+        Handler(Looper.getMainLooper()).post {
+            val callbacks = wishlistUpdateCallbacks[responseId] ?: return@post
+            val item = raw?.let {
+                val map = decodeFromJson(it)
+                (map?.get("item") as? Map<String, Any?>)?.let { item ->
+                    decodeSTRProductItem(item)
+                }
+            }
+            callbacks.first?.invoke(item)
+            wishlistUpdateCallbacks.remove(responseId)
+        }
+    }
+
+    fun rejectWishlistChange(responseId: String, raw: String?) {
+        Handler(Looper.getMainLooper()).post {
+            val callbacks = wishlistUpdateCallbacks[responseId] ?: return@post
+            val failMessage = raw?.let {
+                val map = decodeFromJson(it)
+                map?.get("failMessage") as? String
+            } ?: ""
+            callbacks.second?.invoke(STRWishlistEventResult(failMessage))
+            wishlistUpdateCallbacks.remove(responseId)
         }
     }
 
@@ -228,20 +294,6 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
         }
     }
 
-    fun callWidget(id: String, method: String, raw: String?) {
-        Log.d("[RNStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
-        val widget = widgetMap[id]?.get() ?: return
-        val params = decodeFromJson(raw)
-        when (widget.getType()) {
-            STRWidgetType.StoryBar -> handleStoryBarMethod(widget, method, params)
-            STRWidgetType.VideoFeed -> handleVideoFeedMethod(widget, method, params)
-            STRWidgetType.VideoFeedPresenter -> handleVideoFeedPresenterMethod(widget, method, params)
-            STRWidgetType.Banner -> return
-            STRWidgetType.SwipeCard -> return
-            STRWidgetType.None -> return
-        }
-    }
-
     private fun handleStoryBarMethod(widget: STRWidgetController, method: String, params: Map<String, Any?>?) {
         val controller = widget as? STRStoryBarController ?: return
         when (method) {
@@ -326,49 +378,6 @@ class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
             }
             else -> return
         }
-    }
-
-
-    fun approveCartChange(responseId: String, raw: String?) {
-        val callbacks = cartUpdateCallbacks[responseId] ?: return
-        val cart = raw?.let {
-            val map = decodeFromJson(it)
-            decodeSTRCart(map?.get("cart") as? Map<String, Any?>)
-        }
-        callbacks.first?.invoke(cart)
-        cartUpdateCallbacks.remove(responseId)
-    }
-
-    fun rejectCartChange(responseId: String, raw: String?) {
-        val callbacks = cartUpdateCallbacks[responseId] ?: return
-        val failMessage = raw?.let {
-            val map = decodeFromJson(it)
-            map?.get("failMessage") as? String
-        } ?: ""
-        callbacks.second?.invoke(STRCartEventResult(failMessage))
-        cartUpdateCallbacks.remove(responseId)
-    }
-
-    fun approveWishlistChange(responseId: String, raw: String?) {
-        val callbacks = wishlistUpdateCallbacks[responseId] ?: return
-        val item = raw?.let {
-            val map = decodeFromJson(it)
-            (map?.get("item") as? Map<String, Any?>)?.let { item ->
-                decodeSTRProductItem(item)
-            }
-        }
-        callbacks.first?.invoke(item)
-        wishlistUpdateCallbacks.remove(responseId)
-    }
-
-    fun rejectWishlistChange(responseId: String, raw: String?) {
-        val callbacks = wishlistUpdateCallbacks[responseId] ?: return
-        val failMessage = raw?.let {
-            val map = decodeFromJson(it)
-            map?.get("failMessage") as? String
-        } ?: ""
-        callbacks.second?.invoke(STRWishlistEventResult(failMessage))
-        wishlistUpdateCallbacks.remove(responseId)
     }
 
     private fun encodeWidgetController(controller: STRWidgetController): Map<String, String> {
