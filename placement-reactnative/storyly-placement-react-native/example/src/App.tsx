@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Platform } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { PlacementScreen } from './PlacementScreen';
 
 
@@ -15,14 +15,14 @@ const TABS = [
 export default function App() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
+  const activeTab = TABS[activeTabIndex];
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        {TABS.map( (tab, index) => (
-            <View key={index} style={[styles.tabContent, { display: index ===  activeTabIndex? 'flex' : 'none' }]}>
-                <PlacementScreen name={tab.label} token={tab.token} />
-            </View>
-        ))}
+          <View style={[styles.tabContent]}>
+              <PlacementScreen name={activeTab?.label ?? ""} token={activeTab?.token ?? ""} />
+          </View>
       </View>
       <View style={styles.tabBar}>
         {TABS.map((tab, index) => (

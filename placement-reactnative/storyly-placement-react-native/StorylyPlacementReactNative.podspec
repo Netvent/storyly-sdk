@@ -15,17 +15,21 @@ Pod::Spec.new do |s|
 
   # Conditionally include architecture-specific files
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
-    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/NewArch/**/*.{h,mm,swift}"
-    s.private_header_files = "ios/NewArch/**/*.h"
+    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/NewArch/**/*.{h,mm,swift}", "ios/*.h"
+    s.private_header_files = "ios/NewArch/**/*.h", "ios/*.h"
   else
-    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/OldArch/**/*.{h,m,swift}"
-    s.private_header_files = "ios/OldArch/**/*.h"
+    s.source_files = "ios/Common/**/*.{h,m,mm,swift}", "ios/OldArch/**/*.{h,m,swift}", "ios/*.h"
+    s.private_header_files = "ios/OldArch/**/*.h", "ios/*.h"
   end
 
-  # Swift module support
+  s.requires_arc = true
   s.swift_version = "5.0"
+  
   s.pod_target_xcconfig = {
-    "DEFINES_MODULE" => "YES"
+    "PRODUCT_MODULE_NAME" => "StorylyPlacementReactNative",
+    "DEFINES_MODULE" => "YES",
+    "SWIFT_INSTALL_OBJC_HEADER" => "YES",
+    "SWIFT_OBJC_INTERFACE_HEADER_NAME" => "StorylyPlacementReactNative-Swift.h",
   }
 
   # React Native dependencies

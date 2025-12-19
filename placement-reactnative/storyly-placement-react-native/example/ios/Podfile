@@ -18,8 +18,6 @@ end
 target 'StorylyPlacementReactNativeExample' do
   config = use_native_modules!
 
-  use_frameworks! :linkage => :static
-
   use_react_native!(
     :path => config[:reactNativePath],
     :app_path => "#{Pod::Config.instance.installation_root}/..",

@@ -1,7 +1,10 @@
 #import "StorylyPlacementProvider.h"
-#import <StorylyPlacementReactNative/StorylyPlacementReactNative-Swift.h>
+
 #import <React/RCTBridge.h>
 #import <React/RCTEventDispatcher.h>
+
+#import "StorylyPlacementReactNative-Swift.h"
+
 
 @implementation StorylyPlacementProvider {
     int _listenerCount;

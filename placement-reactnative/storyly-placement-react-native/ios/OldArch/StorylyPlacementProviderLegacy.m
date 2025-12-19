@@ -1,6 +1,7 @@
 #import "StorylyPlacementProviderLegacy.h"
 #import <React/RCTBridge.h>
-#import <StorylyPlacementReactNative/StorylyPlacementReactNative-Swift.h>
+
+#import "StorylyPlacementReactNative-Swift.h"
 
 @implementation StorylyPlacementProviderLegacy {
     int _listenerCount;

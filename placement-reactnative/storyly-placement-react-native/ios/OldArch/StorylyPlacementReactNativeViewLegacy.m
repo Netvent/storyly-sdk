@@ -3,7 +3,8 @@
 #import <React/RCTEventDispatcher.h>
 #import <React/RCTUIManager.h>
 #import <React/RCTComponent.h>
-#import <StorylyPlacementReactNative/StorylyPlacementReactNative-Swift.h>
+
+#import "StorylyPlacementReactNative-Swift.h"
 
 // Macro to generate event property setter and getter using associated objects
 #define RN_BUBBLING_EVENT_PROPERTY(CapitalizedName, lowercaseName) \

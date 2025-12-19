@@ -6,7 +6,7 @@
 #import <react/renderer/components/StorylyPlacementReactNativeViewSpec/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
-#import <StorylyPlacementReactNative/StorylyPlacementReactNative-Swift.h>
+#import "StorylyPlacementReactNative-Swift.h"
 
 using namespace facebook::react;
 
