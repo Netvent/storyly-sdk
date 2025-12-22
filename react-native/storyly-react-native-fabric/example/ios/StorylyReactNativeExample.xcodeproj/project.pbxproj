@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* StorylyReactNativeExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* StorylyReactNativeExampleTests.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		54D82FFFC0CAFE309ACDD66A /* libPods-StorylyReactNativeExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C72A5A7FECB4971B1D6DEDB1 /* libPods-StorylyReactNativeExample.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		9D38F20F53CF7939E265E4EF /* Pods_StorylyReactNativeExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 715F7752F3191165AB43BE92 /* Pods_StorylyReactNativeExample.framework */; };
-		A731B1BE6B02BC86FB8CA5BB /* Pods_StorylyReactNativeExample_StorylyReactNativeExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7964BB64455979DD6C81D0DB /* Pods_StorylyReactNativeExample_StorylyReactNativeExampleTests.framework */; };
+		89B4E16E77A499EACE22C6F5 /* libPods-StorylyReactNativeExample-StorylyReactNativeExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53CB12FEAF05416FE991FAFE /* libPods-StorylyReactNativeExample-StorylyReactNativeExampleTests.a */; };
 		AE1BF6A30D3DED95BE5C6173 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 83BEA0F79AC4B32E799B6C22 /* PrivacyInfo.xcprivacy */; };
 		DCB17BE92E68643100AB822B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB17BE82E68643100AB822B /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -36,11 +36,11 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = StorylyReactNativeExample/Info.plist; sourceTree = "<group>"; };
 		2A46A75614C1D6B4F267EF86 /* Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		494AE0B97DB508D7B5AC21CB /* Pods-StorylyReactNativeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyReactNativeExample.release.xcconfig"; path = "Target Support Files/Pods-StorylyReactNativeExample/Pods-StorylyReactNativeExample.release.xcconfig"; sourceTree = "<group>"; };
-		715F7752F3191165AB43BE92 /* Pods_StorylyReactNativeExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyReactNativeExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7964BB64455979DD6C81D0DB /* Pods_StorylyReactNativeExample_StorylyReactNativeExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorylyReactNativeExample_StorylyReactNativeExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53CB12FEAF05416FE991FAFE /* libPods-StorylyReactNativeExample-StorylyReactNativeExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyReactNativeExample-StorylyReactNativeExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = StorylyReactNativeExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83BEA0F79AC4B32E799B6C22 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = StorylyReactNativeExample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BEC2C7805D158C59C5EFED9B /* Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests.release.xcconfig"; path = "Target Support Files/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		C72A5A7FECB4971B1D6DEDB1 /* libPods-StorylyReactNativeExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StorylyReactNativeExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB17BE82E68643100AB822B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = StorylyReactNativeExample/AppDelegate.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A731B1BE6B02BC86FB8CA5BB /* Pods_StorylyReactNativeExample_StorylyReactNativeExampleTests.framework in Frameworks */,
+				89B4E16E77A499EACE22C6F5 /* libPods-StorylyReactNativeExample-StorylyReactNativeExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D38F20F53CF7939E265E4EF /* Pods_StorylyReactNativeExample.framework in Frameworks */,
+				54D82FFFC0CAFE309ACDD66A /* libPods-StorylyReactNativeExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,8 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				715F7752F3191165AB43BE92 /* Pods_StorylyReactNativeExample.framework */,
-				7964BB64455979DD6C81D0DB /* Pods_StorylyReactNativeExample_StorylyReactNativeExampleTests.framework */,
+				C72A5A7FECB4971B1D6DEDB1 /* libPods-StorylyReactNativeExample.a */,
+				53CB12FEAF05416FE991FAFE /* libPods-StorylyReactNativeExample-StorylyReactNativeExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -317,13 +317,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -338,13 +334,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests/Pods-StorylyReactNativeExample-StorylyReactNativeExampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -359,13 +351,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample/Pods-StorylyReactNativeExample-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample/Pods-StorylyReactNativeExample-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -380,13 +368,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample/Pods-StorylyReactNativeExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StorylyReactNativeExample/Pods-StorylyReactNativeExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -640,7 +624,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DRN_FABRIC_ENABLED",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -733,7 +720,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DRN_FABRIC_ENABLED",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
