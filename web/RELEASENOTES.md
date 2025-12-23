@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.8.0 - 23.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.8.0/storyly-web.js)
+
+- Feature: capturing story screenshot and share on social media
+
 ### 4.7.5 - 12.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.7.5/storyly-web.js)
 
 - Fix: scroll layout issue
