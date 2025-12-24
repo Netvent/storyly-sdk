@@ -14,23 +14,20 @@ class ViewController: UIViewController {
     // Adjust this when widget reports its ratio
     private var placementHeightConstraint: NSLayoutConstraint?
 
-    // MARK: - Core Placement Blocks
 
-    // 1) Placement Data Provider
     private lazy var placementProvider: PlacementDataProvider = {
         let provider = PlacementDataProvider()
-        provider.delegate = self            // STRProviderDelegate
-        // If you need hydration later:
-        // provider.productDelegate = self  // STRProviderProductDelegate
+        provider.delegate = self
         return provider
     }()
 
-    // 2) Placement View
+
     private var placementView: STRPlacementView!
 
-    // MARK: - Lifecycle
+
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
@@ -39,71 +36,51 @@ class ViewController: UIViewController {
     }
 }
 
-// MARK: - Placement Config
 
 extension ViewController {
     private func setupPlacementConfig() {
         placementProvider.config = STRPlacementConfig.Builder()
-            .build(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MTcxODUsImluc19pZCI6MTkxMDB9.AmtkzTlj_g3RQwwHZTz6rsozH8VFqAogeSwgBdXLMDU")
+            .build(token: "your-placement-token")
     }
 
     private func setupPlacementView() {
         placementView = STRPlacementView(dataProvider: placementProvider)
-        placementView.delegate = self    // STRDelegate
-        // NOTE: we do NOT add to the hierarchy here.
-        // Layout is handled in onWidgetReady.
+        placementView.delegate = self
+        placementView.rootViewController = self
+        placementView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(placementView)
+
+        let guide = view.safeAreaLayoutGuide
+
+        self.placementHeightConstraint = placementView.heightAnchor.constraint(equalToConstant: 0)
+        placementHeightConstraint?.isActive = true
+        NSLayoutConstraint.activate([
+            placementView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            placementView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            placementView.topAnchor.constraint(equalTo: guide.topAnchor, constant: 16)
+        ])
     }
 }
 
-// MARK: - STRProviderDelegate
+
 
 extension ViewController: STRProviderDelegate {
     func onLoad(data: STRDataPayload, dataSource: STRDataSource) {
         print("placementProvider onLoad: dataSource=\(dataSource)")
-        // Ideal place to hide skeletons, etc.
     }
 
     func onLoadFail(errorMessage: String) {
         print("placementProvider onLoadFail: \(errorMessage)")
-        // Show fallback UI if needed
     }
 }
 
-// MARK: - STRDelegate (Widget lifecycle / sizing / actions)
+
 
 extension ViewController: STRDelegate {
 
     func onWidgetReady(widget: STRWidgetController, ratio: CGFloat) {
-        print("Hello ONwİDGETr")
-        // Attach placementView to the hierarchy when the widget is ready
-        if placementView.superview == nil {
-            placementView.rootViewController = self
-            placementView.translatesAutoresizingMaskIntoConstraints = false
 
-            view.addSubview(placementView)
-
-            let guide = view.safeAreaLayoutGuide
-
-            NSLayoutConstraint.activate([
-                placementView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-                placementView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-                placementView.topAnchor.constraint(equalTo: guide.topAnchor, constant: 16)
-            ])
-
-            // Create a height constraint; we'll update it using the ratio
-            let heightConstraint = placementView.heightAnchor.constraint(equalToConstant: 0)
-            heightConstraint.isActive = true
-            placementHeightConstraint = heightConstraint
-        }
-
-        // Handle size based on the reported ratio
-        let width = view.bounds.width
-        guard width > 0 else {
-            print("onWidgetReady: width is 0, skipping layout")
-            return
-        }
-
-        let height = width / ratio
+        let height = self.view.frame.width / ratio
         placementHeightConstraint?.constant = height
 
         UIView.animate(withDuration: 0.25) {
@@ -115,7 +92,7 @@ extension ViewController: STRDelegate {
 
     func onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
         print("onActionClicked url=\(url), payload=\(payload)")
-        // In real use: open deep link or routing
+        // In real use: open deep link or implement routing
     }
 
     func onEvent(widget: STRWidgetController, payload: STREventPayload) {

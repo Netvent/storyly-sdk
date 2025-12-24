@@ -32,18 +32,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		400BC5F02EDF14500018947D /* PlacementTestIOS3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacementTestIOS3.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		400BC6062EDF14520018947D /* PlacementTestIOS3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlacementTestIOS3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		400BC6102EDF14520018947D /* PlacementTestIOS3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlacementTestIOS3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		400BC5F02EDF14500018947D /* PlacementDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacementDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		400BC6062EDF14520018947D /* PlacementDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlacementDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		400BC6102EDF14520018947D /* PlacementDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlacementDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		400BC6182EDF14520018947D /* Exceptions for "PlacementTestIOS3" folder in "PlacementTestIOS3" target */ = {
+		400BC6182EDF14520018947D /* Exceptions for "PlacementTestIOS3" folder in "PlacementDemo" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 400BC5EF2EDF14500018947D /* PlacementTestIOS3 */;
+			target = 400BC5EF2EDF14500018947D /* PlacementDemo */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -51,7 +51,7 @@
 		400BC5F22EDF14500018947D /* PlacementTestIOS3 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				400BC6182EDF14520018947D /* Exceptions for "PlacementTestIOS3" folder in "PlacementTestIOS3" target */,
+				400BC6182EDF14520018947D /* Exceptions for "PlacementTestIOS3" folder in "PlacementDemo" target */,
 			);
 			path = PlacementTestIOS3;
 			sourceTree = "<group>";
@@ -111,9 +111,9 @@
 		400BC5F12EDF14500018947D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				400BC5F02EDF14500018947D /* PlacementTestIOS3.app */,
-				400BC6062EDF14520018947D /* PlacementTestIOS3Tests.xctest */,
-				400BC6102EDF14520018947D /* PlacementTestIOS3UITests.xctest */,
+				400BC5F02EDF14500018947D /* PlacementDemo.app */,
+				400BC6062EDF14520018947D /* PlacementDemoTests.xctest */,
+				400BC6102EDF14520018947D /* PlacementDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,9 +121,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		400BC5EF2EDF14500018947D /* PlacementTestIOS3 */ = {
+		400BC5EF2EDF14500018947D /* PlacementDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 400BC6192EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementTestIOS3" */;
+			buildConfigurationList = 400BC6192EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementDemo" */;
 			buildPhases = (
 				400BC5EC2EDF14500018947D /* Sources */,
 				400BC5ED2EDF14500018947D /* Frameworks */,
@@ -136,7 +136,7 @@
 			fileSystemSynchronizedGroups = (
 				400BC5F22EDF14500018947D /* PlacementTestIOS3 */,
 			);
-			name = PlacementTestIOS3;
+			name = PlacementDemo;
 			packageProductDependencies = (
 				40BED7692EFA7EAE00E1EF51 /* StorylyBannerWrapper */,
 				40BED76B2EFA7EAE00E1EF51 /* StorylyPlacement */,
@@ -145,12 +145,12 @@
 				40BED7712EFA7EAE00E1EF51 /* StorylyVideoFeedWrapper */,
 			);
 			productName = PlacementTestIOS3;
-			productReference = 400BC5F02EDF14500018947D /* PlacementTestIOS3.app */;
+			productReference = 400BC5F02EDF14500018947D /* PlacementDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		400BC6052EDF14520018947D /* PlacementTestIOS3Tests */ = {
+		400BC6052EDF14520018947D /* PlacementDemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 400BC61E2EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementTestIOS3Tests" */;
+			buildConfigurationList = 400BC61E2EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementDemoTests" */;
 			buildPhases = (
 				400BC6022EDF14520018947D /* Sources */,
 				400BC6032EDF14520018947D /* Frameworks */,
@@ -164,16 +164,16 @@
 			fileSystemSynchronizedGroups = (
 				400BC6092EDF14520018947D /* PlacementTestIOS3Tests */,
 			);
-			name = PlacementTestIOS3Tests;
+			name = PlacementDemoTests;
 			packageProductDependencies = (
 			);
 			productName = PlacementTestIOS3Tests;
-			productReference = 400BC6062EDF14520018947D /* PlacementTestIOS3Tests.xctest */;
+			productReference = 400BC6062EDF14520018947D /* PlacementDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		400BC60F2EDF14520018947D /* PlacementTestIOS3UITests */ = {
+		400BC60F2EDF14520018947D /* PlacementDemoUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 400BC6212EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementTestIOS3UITests" */;
+			buildConfigurationList = 400BC6212EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementDemoUITests" */;
 			buildPhases = (
 				400BC60C2EDF14520018947D /* Sources */,
 				400BC60D2EDF14520018947D /* Frameworks */,
@@ -187,11 +187,11 @@
 			fileSystemSynchronizedGroups = (
 				400BC6132EDF14520018947D /* PlacementTestIOS3UITests */,
 			);
-			name = PlacementTestIOS3UITests;
+			name = PlacementDemoUITests;
 			packageProductDependencies = (
 			);
 			productName = PlacementTestIOS3UITests;
-			productReference = 400BC6102EDF14520018947D /* PlacementTestIOS3UITests.xctest */;
+			productReference = 400BC6102EDF14520018947D /* PlacementDemoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -217,7 +217,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 400BC5EB2EDF14500018947D /* Build configuration list for PBXProject "PlacementTestIOS3" */;
+			buildConfigurationList = 400BC5EB2EDF14500018947D /* Build configuration list for PBXProject "PlacementDemo" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -234,9 +234,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				400BC5EF2EDF14500018947D /* PlacementTestIOS3 */,
-				400BC6052EDF14520018947D /* PlacementTestIOS3Tests */,
-				400BC60F2EDF14520018947D /* PlacementTestIOS3UITests */,
+				400BC5EF2EDF14500018947D /* PlacementDemo */,
+				400BC6052EDF14520018947D /* PlacementDemoTests */,
+				400BC60F2EDF14520018947D /* PlacementDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -292,12 +292,12 @@
 /* Begin PBXTargetDependency section */
 		400BC6082EDF14520018947D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 400BC5EF2EDF14500018947D /* PlacementTestIOS3 */;
+			target = 400BC5EF2EDF14500018947D /* PlacementDemo */;
 			targetProxy = 400BC6072EDF14520018947D /* PBXContainerItemProxy */;
 		};
 		400BC6122EDF14520018947D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 400BC5EF2EDF14500018947D /* PlacementTestIOS3 */;
+			target = 400BC5EF2EDF14500018947D /* PlacementDemo */;
 			targetProxy = 400BC6112EDF14520018947D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -493,7 +493,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlacementTestIOS3.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PlacementTestIOS3";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlacementDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PlacementDemo";
 			};
 			name = Debug;
 		};
@@ -512,7 +512,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlacementTestIOS3.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PlacementTestIOS3";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlacementDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PlacementDemo";
 			};
 			name = Release;
 		};
@@ -553,7 +553,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		400BC5EB2EDF14500018947D /* Build configuration list for PBXProject "PlacementTestIOS3" */ = {
+		400BC5EB2EDF14500018947D /* Build configuration list for PBXProject "PlacementDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				400BC61C2EDF14520018947D /* Debug */,
@@ -562,7 +562,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		400BC6192EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementTestIOS3" */ = {
+		400BC6192EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				400BC61A2EDF14520018947D /* Debug */,
@@ -571,7 +571,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		400BC61E2EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementTestIOS3Tests" */ = {
+		400BC61E2EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				400BC61F2EDF14520018947D /* Debug */,
@@ -580,7 +580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		400BC6212EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementTestIOS3UITests" */ = {
+		400BC6212EDF14520018947D /* Build configuration list for PBXNativeTarget "PlacementDemoUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				400BC6222EDF14520018947D /* Debug */,
