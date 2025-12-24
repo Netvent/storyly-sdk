@@ -38,7 +38,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		400BC6182EDF14520018947D /* Exceptions for "PlacementTestIOS3" folder in "PlacementDemo" target */ = {
+		400BC6182EDF14520018947D /* Exceptions for "PlacementDemo" folder in "PlacementDemo" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -48,22 +48,22 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		400BC5F22EDF14500018947D /* PlacementTestIOS3 */ = {
+		400BC5F22EDF14500018947D /* PlacementDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				400BC6182EDF14520018947D /* Exceptions for "PlacementTestIOS3" folder in "PlacementDemo" target */,
+				400BC6182EDF14520018947D /* Exceptions for "PlacementDemo" folder in "PlacementDemo" target */,
 			);
-			path = PlacementTestIOS3;
+			path = PlacementDemo;
 			sourceTree = "<group>";
 		};
-		400BC6092EDF14520018947D /* PlacementTestIOS3Tests */ = {
+		400BC6092EDF14520018947D /* PlacementDemoTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PlacementTestIOS3Tests;
+			path = PlacementDemoTests;
 			sourceTree = "<group>";
 		};
-		400BC6132EDF14520018947D /* PlacementTestIOS3UITests */ = {
+		400BC6132EDF14520018947D /* PlacementDemoUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PlacementTestIOS3UITests;
+			path = PlacementDemoUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -101,9 +101,9 @@
 		400BC5E72EDF14500018947D = {
 			isa = PBXGroup;
 			children = (
-				400BC5F22EDF14500018947D /* PlacementTestIOS3 */,
-				400BC6092EDF14520018947D /* PlacementTestIOS3Tests */,
-				400BC6132EDF14520018947D /* PlacementTestIOS3UITests */,
+				400BC5F22EDF14500018947D /* PlacementDemo */,
+				400BC6092EDF14520018947D /* PlacementDemoTests */,
+				400BC6132EDF14520018947D /* PlacementDemoUITests */,
 				400BC5F12EDF14500018947D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,7 +134,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				400BC5F22EDF14500018947D /* PlacementTestIOS3 */,
+				400BC5F22EDF14500018947D /* PlacementDemo */,
 			);
 			name = PlacementDemo;
 			packageProductDependencies = (
@@ -162,7 +162,7 @@
 				400BC6082EDF14520018947D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				400BC6092EDF14520018947D /* PlacementTestIOS3Tests */,
+				400BC6092EDF14520018947D /* PlacementDemoTests */,
 			);
 			name = PlacementDemoTests;
 			packageProductDependencies = (
@@ -185,7 +185,7 @@
 				400BC6122EDF14520018947D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				400BC6132EDF14520018947D /* PlacementTestIOS3UITests */,
+				400BC6132EDF14520018947D /* PlacementDemoUITests */,
 			);
 			name = PlacementDemoUITests;
 			packageProductDependencies = (
@@ -312,7 +312,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2LJL988799;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PlacementTestIOS3/Info.plist;
+				INFOPLIST_FILE = PlacementDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -323,7 +323,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlacementTestIOS3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlacementDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -340,7 +340,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2LJL988799;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PlacementTestIOS3/Info.plist;
+				INFOPLIST_FILE = PlacementDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -351,7 +351,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlacementTestIOS3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlacementDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

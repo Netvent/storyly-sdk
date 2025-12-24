@@ -40,7 +40,7 @@ class ViewController: UIViewController {
 extension ViewController {
     private func setupPlacementConfig() {
         placementProvider.config = STRPlacementConfig.Builder()
-            .build(token: "your-placement-token")
+            .build(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NfaWQiOjIzODAsImFwcF9pZCI6MTcxODUsImluc19pZCI6MTkxMDB9.AmtkzTlj_g3RQwwHZTz6rsozH8VFqAogeSwgBdXLMDU")
     }
 
     private func setupPlacementView() {
