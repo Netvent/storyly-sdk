@@ -12,7 +12,7 @@
 #import <react/renderer/components/storylyfabric/Props.h>
 #import <react/renderer/components/storylyfabric/RCTComponentViewHelpers.h>
 
-#import <storyly_react_native_fabric/storyly_react_native_fabric-Swift.h>
+#import "storyly_react_native_fabric-Swift.h"
 
 #import "RCTFabricComponentsPlugins.h"
 
