@@ -1,5 +1,8 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.19.1 (25.12.2025)
+* fixed swift bridging header
+
 ### 4.19.0 (02.12.2025)
 * added play/pause/replay accesibility controls for stories
 * added lowest price availability for eu regulations for product related interactive components
