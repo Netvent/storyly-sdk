@@ -38,6 +38,7 @@ func encodeStoryGroupItem(_ group: StoryGroup?) -> [String: Any]? {
         "pinned": group.pinned,
         "type": group.type.description,
         "style": encodeStoryGroupStyle(group.style),
+        "nudge": group.nudge,
         "stories": group.stories.compactMap { encodeStory($0) }
     ] as [String: Any?]).compactMapValues { $0 }
 }

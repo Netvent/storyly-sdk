@@ -15,31 +15,31 @@ class StoryBarComponent {
   factory StoryBarComponent.fromJson(Map<String, dynamic> json) {
     final type = json['type'] as String;
     switch (type) {
-      case 'button':
+      case 'Button':
         return StoryButtonComponent.fromJson(json);
-      case 'swipe':
+      case 'Swipe':
         return StorySwipeComponent.fromJson(json);
-      case 'productTag':
+      case 'ProductTag':
         return StoryProductTagComponent.fromJson(json);
-      case 'productCard':
+      case 'ProductCard':
         return StoryProductCardComponent.fromJson(json);
-      case 'productCatalog':
+      case 'ProductCatalog':
         return StoryProductCatalogComponent.fromJson(json);
-      case 'quiz':
+      case 'Quiz':
         return StoryQuizComponent.fromJson(json);
-      case 'imageQuiz':
+      case 'ImageQuiz':
         return StoryImageQuizComponent.fromJson(json);
-      case 'poll':
+      case 'Poll':
         return StoryPollComponent.fromJson(json);
-      case 'emoji':
+      case 'Emoji':
         return StoryEmojiComponent.fromJson(json);
-      case 'rating':
+      case 'Rating':
         return StoryRatingComponent.fromJson(json);
-      case 'promoCode':
+      case 'PromoCode':
         return StoryPromoCodeComponent.fromJson(json);
-      case 'comment':
+      case 'Comment':
         return StoryCommentComponent.fromJson(json);
-      case 'countDown':
+      case 'CountDown':
         return StoryCountDownComponent.fromJson(json);
       default:
         return StoryBarComponent(
@@ -65,15 +65,17 @@ class StoryButtonComponent extends StoryBarComponent {
   final List<STRProductItem>? products;
 
   StoryButtonComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
     this.actionUrl,
     this.products,
-  }) : super(type: 'button', id: id, customPayload: customPayload);
+  });
 
   factory StoryButtonComponent.fromJson(Map<String, dynamic> json) {
     return StoryButtonComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -102,15 +104,17 @@ class StorySwipeComponent extends StoryBarComponent {
   final List<STRProductItem>? products;
 
   StorySwipeComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
     this.actionUrl,
     this.products,
-  }) : super(type: 'swipe', id: id, customPayload: customPayload);
+  });
 
   factory StorySwipeComponent.fromJson(Map<String, dynamic> json) {
     return StorySwipeComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -138,14 +142,16 @@ class StoryProductTagComponent extends StoryBarComponent {
   final List<STRProductItem>? products;
 
   StoryProductTagComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.actionUrl,
     this.products,
-  }) : super(type: 'productTag', id: id, customPayload: customPayload);
+  });
 
   factory StoryProductTagComponent.fromJson(Map<String, dynamic> json) {
     return StoryProductTagComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       actionUrl: json['actionUrl'],
@@ -172,15 +178,17 @@ class StoryProductCardComponent extends StoryBarComponent {
   final List<STRProductItem>? products;
 
   StoryProductCardComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
     this.actionUrl,
     this.products,
-  }) : super(type: 'productCard', id: id, customPayload: customPayload);
+  });
 
   factory StoryProductCardComponent.fromJson(Map<String, dynamic> json) {
     return StoryProductCardComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -208,14 +216,16 @@ class StoryProductCatalogComponent extends StoryBarComponent {
   final List<STRProductItem>? products;
 
   StoryProductCatalogComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.actionUrlList,
     this.products,
-  }) : super(type: 'productCatalog', id: id, customPayload: customPayload);
+  });
 
   factory StoryProductCatalogComponent.fromJson(Map<String, dynamic> json) {
     return StoryProductCatalogComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       actionUrlList: (json['actionUrlList'] as List<dynamic>?)?.cast<String>(),
@@ -243,16 +253,18 @@ class StoryQuizComponent extends StoryBarComponent {
   final int? selectedOptionIndex;
 
   StoryQuizComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.title,
     this.options,
     this.rightAnswerIndex,
     this.selectedOptionIndex,
-  }) : super(type: 'quiz', id: id, customPayload: customPayload);
+  });
 
   factory StoryQuizComponent.fromJson(Map<String, dynamic> json) {
     return StoryQuizComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       title: json['title'],
@@ -282,16 +294,18 @@ class StoryImageQuizComponent extends StoryBarComponent {
   final int? selectedOptionIndex;
 
   StoryImageQuizComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.title,
     this.options,
     this.rightAnswerIndex,
     this.selectedOptionIndex,
-  }) : super(type: 'imageQuiz', id: id, customPayload: customPayload);
+  });
 
   factory StoryImageQuizComponent.fromJson(Map<String, dynamic> json) {
     return StoryImageQuizComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       title: json['title'],
@@ -320,15 +334,17 @@ class StoryPollComponent extends StoryBarComponent {
   final int? selectedOptionIndex;
 
   StoryPollComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.title,
     this.options,
     this.selectedOptionIndex,
-  }) : super(type: 'poll', id: id, customPayload: customPayload);
+  });
 
   factory StoryPollComponent.fromJson(Map<String, dynamic> json) {
     return StoryPollComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       title: json['title'],
@@ -354,14 +370,16 @@ class StoryEmojiComponent extends StoryBarComponent {
   final int? selectedEmojiIndex;
 
   StoryEmojiComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.emojiCodes,
     this.selectedEmojiIndex,
-  }) : super(type: 'emoji', id: id, customPayload: customPayload);
+  });
 
   factory StoryEmojiComponent.fromJson(Map<String, dynamic> json) {
     return StoryEmojiComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       emojiCodes: (json['emojiCodes'] as List<dynamic>?)?.cast<String>(),
@@ -385,14 +403,16 @@ class StoryRatingComponent extends StoryBarComponent {
   final int? rating;
 
   StoryRatingComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.emojiCode,
     this.rating,
-  }) : super(type: 'rating', id: id, customPayload: customPayload);
+  });
 
   factory StoryRatingComponent.fromJson(Map<String, dynamic> json) {
     return StoryRatingComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       emojiCode: json['emojiCode'],
@@ -415,13 +435,15 @@ class StoryPromoCodeComponent extends StoryBarComponent {
   final String? text;
 
   StoryPromoCodeComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
-  }) : super(type: 'promoCode', id: id, customPayload: customPayload);
+  });
 
   factory StoryPromoCodeComponent.fromJson(Map<String, dynamic> json) {
     return StoryPromoCodeComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -442,13 +464,15 @@ class StoryCommentComponent extends StoryBarComponent {
   final String? text;
 
   StoryCommentComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
-  }) : super(type: 'comment', id: id, customPayload: customPayload);
+  });
 
   factory StoryCommentComponent.fromJson(Map<String, dynamic> json) {
     return StoryCommentComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -467,12 +491,14 @@ class StoryCommentComponent extends StoryBarComponent {
 
 class StoryCountDownComponent extends StoryBarComponent {
   StoryCountDownComponent({
-    required String id,
-    String? customPayload,
-  }) : super(type: 'countDown', id: id, customPayload: customPayload);
+    required super.type,
+    required super.id,
+    super.customPayload,
+  });
 
   factory StoryCountDownComponent.fromJson(Map<String, dynamic> json) {
     return StoryCountDownComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
     );

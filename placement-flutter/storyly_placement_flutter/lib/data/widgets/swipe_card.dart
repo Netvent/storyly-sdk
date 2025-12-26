@@ -22,7 +22,7 @@ class STRSwipeCard {
 }
 
 class SwipeCardDataPayload extends STRDataPayload {
-  final STRSwipeCard items;
+  final List<STRProductItem> items;
 
   SwipeCardDataPayload({
     required String type,
@@ -32,14 +32,16 @@ class SwipeCardDataPayload extends STRDataPayload {
   factory SwipeCardDataPayload.fromJson(Map<String, dynamic> json) {
     return SwipeCardDataPayload(
       type: json['type'],
-      items: STRSwipeCard.fromJson(json['items']),
+      items: (json['items'] as List<dynamic>)
+          .map((e) => STRProductItem.fromJson(e))
+          .toList(),
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json['items'] = items.toJson();
+    json['items'] = items?.map((e) => e.toJson()).toList();
     return json;
   }
 }

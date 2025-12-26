@@ -57,15 +57,12 @@ class StorylyPlacementProvider {
     final providerId =
         'provider_${_providerIdCounter++}_${DateTime.now().millisecondsSinceEpoch}';
 
-    _ensureMethodHandlerRegistered();
-
+    await StorylyPlacementFlutterPlatform.instance.createProvider(providerId);
     final provider = StorylyPlacementProvider._(
       providerId: providerId
     );
-
     _providers[providerId] = provider;
-
-    await StorylyPlacementFlutterPlatform.instance.createProvider(providerId);
+    _ensureMethodHandlerRegistered();
     if (config != null) {
       await provider.initialize(config: config, listener: listener);
     }
@@ -134,11 +131,8 @@ class StorylyPlacementProvider {
     String method,
     dynamic arguments,
   ) async {
-    final Map<String, dynamic> payload =
-        arguments is String ? jsonDecode(arguments) : arguments;
-
-    final providerId = payload['providerId'] as String?;
-    final data = payload['data'];
+    final providerId = arguments['providerId'] as String?; 
+    final raw = jsonDecode(arguments['raw'] as String);
 
     if (providerId == null) {
       debugPrint('StorylyPlacement: Invalid event payload');
@@ -154,19 +148,19 @@ class StorylyPlacementProvider {
       switch (method) {
         case 'onLoad':
           listener?.onLoad?.call(
-            PlacementLoadEvent.fromJson(data),
+            PlacementLoadEvent.fromJson(raw),
           );
           break;
 
         case 'onLoadFail':
           listener?.onLoadFail?.call(
-            PlacementLoadFailEvent.fromJson(data),
+            PlacementLoadFailEvent.fromJson(raw),
           );
           break;
 
         case 'onHydration':
           listener?.onHydration?.call(
-            PlacementHydrationEvent.fromJson(data),
+            PlacementHydrationEvent.fromJson(raw),
           );
           break;
 

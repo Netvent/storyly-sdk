@@ -38,10 +38,11 @@ class PlacementActionClickEvent extends BaseEvent {
   });
 
   factory PlacementActionClickEvent.fromJson(Map<String, dynamic> json) {
+    final widget = PlacementWidget.fromJson(json['widget']);
     return PlacementActionClickEvent(
-      widget: PlacementWidget.fromJson(json['widget']),
+      widget: widget,
       url: json['url'],
-      payload: json['payload'] != null ? STRPayload.fromJson(json['payload']) : null,
+      payload: json['payload'] != null ? STRPayload.fromJson(json['payload'], widget.type) : null,
     );
   }
 
@@ -64,9 +65,10 @@ class PlacementEvent extends BaseEvent {
   });
 
   factory PlacementEvent.fromJson(Map<String, dynamic> json) {
+    final widget = PlacementWidget.fromJson(json['widget']);
     return PlacementEvent(
-      widget: PlacementWidget.fromJson(json['widget']),
-      payload: STREventPayload.fromJson(json['payload']),
+      widget: widget,
+      payload: STREventPayload.fromJson(json['payload'], widget.type),
     );
   }
 

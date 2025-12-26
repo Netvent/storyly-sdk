@@ -39,15 +39,17 @@ class BannerButtonComponent extends BannerComponent {
   final List<STRProductItem>? products;
 
   BannerButtonComponent({
+    required String type,
     required String id,
     String? customPayload,
     this.text,
     this.actionUrl,
     this.products,
-  }) : super(type: 'button', id: id, customPayload: customPayload);
+  }) : super(type: type, id: id, customPayload: customPayload);
 
   factory BannerButtonComponent.fromJson(Map<String, dynamic> json) {
     return BannerButtonComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -169,4 +171,5 @@ class STRBannerPayload extends STRPayload {
     };
   }
 }
+
 

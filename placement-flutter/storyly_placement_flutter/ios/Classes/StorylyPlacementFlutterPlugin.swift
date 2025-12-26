@@ -25,11 +25,13 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         if let providerId = call.arguments as? String {
             let wrapper = RNPlacementProviderManager.shared.createProvider(id: providerId)
             wrapper.sendEvent = { [weak self] id, event, eventData in
-                let payload: [String: Any] = [
-                    "providerId": id,
-                    "data": decodeFromJson(eventData) ?? [:]
-                ]
-                self?.channel.invokeMethod(event.eventName, arguments: payload)
+                DispatchQueue.main.async {
+                    let payload: [String: Any] = [
+                        "providerId": id,
+                        "raw": eventData
+                    ]
+                    self?.channel.invokeMethod(event.eventName, arguments: payload)
+                }
             }
             result(nil)
         } else {

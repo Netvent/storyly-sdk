@@ -15,31 +15,31 @@ class VideoFeedComponent {
   factory VideoFeedComponent.fromJson(Map<String, dynamic> json) {
     final type = json['type'] as String;
     switch (type) {
-      case 'button':
+      case 'Button':
         return VideoFeedButtonComponent.fromJson(json);
-      case 'swipe':
+      case 'Swipe':
         return VideoFeedSwipeComponent.fromJson(json);
-      case 'productTag':
+      case 'ProductTag':
         return VideoFeedProductTagComponent.fromJson(json);
-      case 'productCard':
+      case 'ProductCard':
         return VideoFeedProductCardComponent.fromJson(json);
-      case 'productCatalog':
+      case 'ProductCatalog':
         return VideoFeedProductCatalogComponent.fromJson(json);
-      case 'quiz':
+      case 'Quiz':
         return VideoFeedQuizComponent.fromJson(json);
-      case 'imageQuiz':
+      case 'ImageQuiz':
         return VideoFeedImageQuizComponent.fromJson(json);
-      case 'poll':
+      case 'Poll':
         return VideoFeedPollComponent.fromJson(json);
-      case 'emoji':
+      case 'Emoji':
         return VideoFeedEmojiComponent.fromJson(json);
-      case 'rating':
+      case 'Rating':
         return VideoFeedRatingComponent.fromJson(json);
-      case 'promoCode':
+      case 'PromoCode':
         return VideoFeedPromoCodeComponent.fromJson(json);
-      case 'comment':
+      case 'Comment':
         return VideoFeedCommentComponent.fromJson(json);
-      case 'countDown':
+      case 'CountDown':
         return VideoFeedCountDownComponent.fromJson(json);
       default:
         return VideoFeedComponent(
@@ -65,15 +65,17 @@ class VideoFeedButtonComponent extends VideoFeedComponent {
   final List<STRProductItem>? products;
 
   VideoFeedButtonComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
     this.actionUrl,
     this.products,
-  }) : super(type: 'button', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedButtonComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedButtonComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -102,15 +104,17 @@ class VideoFeedSwipeComponent extends VideoFeedComponent {
   final List<STRProductItem>? products;
 
   VideoFeedSwipeComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
     this.actionUrl,
     this.products,
-  }) : super(type: 'swipe', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedSwipeComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedSwipeComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -138,14 +142,16 @@ class VideoFeedProductTagComponent extends VideoFeedComponent {
   final List<STRProductItem>? products;
 
   VideoFeedProductTagComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.actionUrl,
     this.products,
-  }) : super(type: 'productTag', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedProductTagComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedProductTagComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       actionUrl: json['actionUrl'],
@@ -172,15 +178,17 @@ class VideoFeedProductCardComponent extends VideoFeedComponent {
   final List<STRProductItem>? products;
 
   VideoFeedProductCardComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
     this.actionUrl,
     this.products,
-  }) : super(type: 'productCard', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedProductCardComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedProductCardComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -208,14 +216,16 @@ class VideoFeedProductCatalogComponent extends VideoFeedComponent {
   final List<STRProductItem>? products;
 
   VideoFeedProductCatalogComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.actionUrlList,
     this.products,
-  }) : super(type: 'productCatalog', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedProductCatalogComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedProductCatalogComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       actionUrlList: (json['actionUrlList'] as List<dynamic>?)?.cast<String>(),
@@ -243,16 +253,18 @@ class VideoFeedQuizComponent extends VideoFeedComponent {
   final int? selectedOptionIndex;
 
   VideoFeedQuizComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.title,
     this.options,
     this.rightAnswerIndex,
     this.selectedOptionIndex,
-  }) : super(type: 'quiz', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedQuizComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedQuizComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       title: json['title'],
@@ -282,16 +294,18 @@ class VideoFeedImageQuizComponent extends VideoFeedComponent {
   final int? selectedOptionIndex;
 
   VideoFeedImageQuizComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.title,
     this.options,
     this.rightAnswerIndex,
     this.selectedOptionIndex,
-  }) : super(type: 'imageQuiz', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedImageQuizComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedImageQuizComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       title: json['title'],
@@ -320,15 +334,17 @@ class VideoFeedPollComponent extends VideoFeedComponent {
   final int? selectedOptionIndex;
 
   VideoFeedPollComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.title,
     this.options,
     this.selectedOptionIndex,
-  }) : super(type: 'poll', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedPollComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedPollComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       title: json['title'],
@@ -354,14 +370,16 @@ class VideoFeedEmojiComponent extends VideoFeedComponent {
   final int? selectedEmojiIndex;
 
   VideoFeedEmojiComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.emojiCodes,
     this.selectedEmojiIndex,
-  }) : super(type: 'emoji', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedEmojiComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedEmojiComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       emojiCodes: (json['emojiCodes'] as List<dynamic>?)?.cast<String>(),
@@ -385,14 +403,16 @@ class VideoFeedRatingComponent extends VideoFeedComponent {
   final int? rating;
 
   VideoFeedRatingComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.emojiCode,
     this.rating,
-  }) : super(type: 'rating', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedRatingComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedRatingComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       emojiCode: json['emojiCode'],
@@ -415,13 +435,15 @@ class VideoFeedPromoCodeComponent extends VideoFeedComponent {
   final String? text;
 
   VideoFeedPromoCodeComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
-  }) : super(type: 'promoCode', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedPromoCodeComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedPromoCodeComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -442,13 +464,15 @@ class VideoFeedCommentComponent extends VideoFeedComponent {
   final String? text;
 
   VideoFeedCommentComponent({
-    required String id,
-    String? customPayload,
+    required super.type,
+    required super.id,
+    super.customPayload,
     this.text,
-  }) : super(type: 'comment', id: id, customPayload: customPayload);
+  });
 
   factory VideoFeedCommentComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedCommentComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
       text: json['text'],
@@ -467,12 +491,14 @@ class VideoFeedCommentComponent extends VideoFeedComponent {
 
 class VideoFeedCountDownComponent extends VideoFeedComponent {
   VideoFeedCountDownComponent({
-    required String id,
-    String? customPayload,
-  }) : super(type: 'countDown', id: id, customPayload: customPayload);
+    required super.type,
+    required super.id,
+    super.customPayload,
+  });
 
   factory VideoFeedCountDownComponent.fromJson(Map<String, dynamic> json) {
     return VideoFeedCountDownComponent(
+      type: json['type'],
       id: json['id'],
       customPayload: json['customPayload'],
     );
@@ -606,7 +632,7 @@ class STRVideoFeedGroup {
 }
 
 class VideoFeedDataPayload extends STRDataPayload {
-  final STRVideoFeedGroup items;
+  final List<STRVideoFeedGroup> items;
 
   VideoFeedDataPayload({
     required String type,
@@ -616,14 +642,16 @@ class VideoFeedDataPayload extends STRDataPayload {
   factory VideoFeedDataPayload.fromJson(Map<String, dynamic> json) {
     return VideoFeedDataPayload(
       type: json['type'],
-      items: STRVideoFeedGroup.fromJson(json['items']),
+      items:  (json['items'] as List<dynamic>)
+          .map((e) => STRVideoFeedGroup.fromJson(e))
+          .toList(),
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json['items'] = items.toJson();
+    json['items'] = items.map((e) => e.toJson()).toList();
     return json;
   }
 }

@@ -54,7 +54,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                             Handler(Looper.getMainLooper()).post {
                                 val payload = mapOf(
                                     "providerId" to id,
-                                    "data" to decodeFromJson(eventData)
+                                    "raw" to eventData
                                 )
                                 channel.invokeMethod(event.eventName, payload)
                             }

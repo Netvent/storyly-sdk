@@ -1,3 +1,8 @@
+import '../widgets/banner.dart';
+import '../widgets/story_bar.dart';
+import '../widgets/swipe_card.dart';
+import '../widgets/video_feed.dart';
+
 // ignore_for_file: constant_identifier_names
 
 class PlacementWidget {
@@ -30,9 +35,21 @@ class STRDataPayload {
   STRDataPayload({required this.type});
 
   factory STRDataPayload.fromJson(Map<String, dynamic> json) {
-    return STRDataPayload(
-      type: json['type'],
-    );
+    final type = json['type'] as String;
+    switch (type) {
+      case 'story-bar':
+        return StoryBarDataPayload.fromJson(json);
+      case 'video-feed':
+        return VideoFeedDataPayload.fromJson(json);
+      case 'swipe-card':
+        return SwipeCardDataPayload.fromJson(json);
+      case 'banner':
+        return BannerDataPayload.fromJson(json);
+      default:
+        return STRDataPayload(
+          type: type,
+        );
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -45,11 +62,19 @@ class STRDataPayload {
 abstract class STRPayload {
   STRPayload();
 
-  factory STRPayload.fromJson(Map<String, dynamic> json) {
-    // This is a base class/interface. Implementation details depend on concrete subclasses.
-    // For now, returning an anonymous subclass or we might need a concrete implementation.
-    // However, since TS defines it as empty, we can just use it as a marker.
-    return _STRPayloadImpl();
+  factory STRPayload.fromJson(Map<String, dynamic> json, String? type) {
+    switch (type) {
+      case 'story-bar':
+        return STRStoryBarPayload.fromJson(json);
+      case 'video-feed':
+        return STRVideoFeedPayload.fromJson(json);
+      case 'swipe-card':
+        return STRSwipeCardPayload.fromJson(json);
+      case 'banner':
+        return STRBannerPayload.fromJson(json);
+      default:
+        return _STRPayloadImpl();
+    }
   }
   
   Map<String, dynamic> toJson();
@@ -69,13 +94,10 @@ class STREventPayload {
     this.payload,
   });
 
-  factory STREventPayload.fromJson(Map<String, dynamic> json) {
+  factory STREventPayload.fromJson(Map<String, dynamic> json, String type) {
     return STREventPayload(
       event: json['event'],
-      // Payload deserialization might need to be more specific based on event type
-      // but for now we keep it generic as the TS one is generic.
-      // In a real app we might need a factory to decide which subclass to instantiate.
-      payload: json['payload'] != null ? STRPayload.fromJson(json['payload']) : null,
+      payload: STRPayload.fromJson(json, type),
     );
   }
 
