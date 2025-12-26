@@ -1,4 +1,8 @@
 # Release Notes
+### 4.19.2 (26.12.2025)
+* fixed capitalization in German localization
+* improved story transition handling in case of layer fails
+
 ### 4.19.1 (11.12.2025)
 * fixed storyly broadcast receiver for countdown notifications
 
