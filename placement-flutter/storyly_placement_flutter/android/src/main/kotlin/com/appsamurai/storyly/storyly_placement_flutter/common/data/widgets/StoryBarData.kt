@@ -24,6 +24,7 @@ import com.appsamurai.storyly.storybar.ui.model.StoryQuizComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryRatingComponent
 import com.appsamurai.storyly.storybar.ui.model.StorySwipeComponent
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.encodeSTRProductItem
+import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.toHexString
 
 
 fun encodeStoryBarDataPayload(data: STRDataPayload): Map<String, Any?> {
@@ -61,8 +62,8 @@ fun encodeStoryGroupStyle(style: StoryGroupStyle?): Map<String, Any?>? {
     style ?: return null
     return mapOf(
         "badge" to encodeStoryGroupBadgeStyle(style.badge),
-        "borderUnseenColors" to style.borderUnseenColors,
-        "textUnseenColor" to style.textUnseenColor,
+        "borderUnseenColors" to style.borderUnseenColors?.map { it.toHexString() },
+        "textUnseenColor" to style.textUnseenColor?.toHexString(),
     )
 }
 
@@ -70,8 +71,8 @@ fun encodeStoryGroupBadgeStyle(badgeStyle: StoryGroupBadgeStyle?): Map<String, A
     badgeStyle ?: return null
     return mapOf(
         "text" to badgeStyle.text,
-        "textColor" to badgeStyle.textColor,
-        "backgroundColor" to badgeStyle.backgroundColor,
+        "textColor" to badgeStyle.textColor?.toHexString(),
+        "backgroundColor" to badgeStyle.backgroundColor?.toHexString(),
         "endTime" to badgeStyle.endTime,
         "template" to badgeStyle.template,
     )
