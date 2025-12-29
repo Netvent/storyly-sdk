@@ -672,7 +672,7 @@ class STRStoryGroup {
           .map((e) => STRStory.fromJson(e))
           .toList(),
       type: json['type'],
-      nudge: json['nudge'],
+      nudge: json['nudge'] ?? false,
       style: json['style'] != null
           ? STRStoryGroupStyle.fromJson(json['style'])
           : null,

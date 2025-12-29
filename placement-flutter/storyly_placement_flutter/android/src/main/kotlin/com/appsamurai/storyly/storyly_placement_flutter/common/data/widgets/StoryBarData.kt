@@ -53,6 +53,7 @@ fun encodeStoryGroupItem(group: StoryGroup?): Map<String, Any?>? {
         "iconUrl" to group.iconUrl,
         "pinned" to group.pinned,
         "type" to group.type.customName,
+        "nudge" to group.nudge,
         "style" to encodeStoryGroupStyle(group.style),
         "stories" to group.stories.map { story -> encodeStory(story) }
     )
