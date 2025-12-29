@@ -6,7 +6,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'storyly_placement_provider.dart';
-import 'storyly_placement_controller.dart';
 
 typedef StorylyPlacementCreatedCallback = void Function(StorylyPlacementController controller);
 

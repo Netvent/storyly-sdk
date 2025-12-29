@@ -47,6 +47,31 @@ class _PlacementScreenState extends State<PlacementScreen> {
           },
           onHydration: (event) {
             debugPrint('[${widget.name}] onHydration $event');
+
+            // final products = event.products.map((product) {
+            //   return STRProductItem(
+            //     productId: product.productId ?? '',
+            //     productGroupId: product.productGroupId,
+            //     title: 'TITLE',
+            //     desc: 'DESCRIPTION',
+            //     price: 80,
+            //     salesPrice: 99,
+            //     lowestPrice: 0,
+            //     currency: 'USD',
+            //     url: '',
+            //     imageUrls: ['https://via.placeholder.com/150'],
+            //     variants: [
+            //       STRProductVariant(
+            //         name: 'COLOR',
+            //         value: 'RED',
+            //         key: 'color_red',
+            //       ),
+            //     ],
+            //     ctaText: '',
+            //   );
+            // }).toList();
+
+            // _provider?.hydrateProducts(products);
           },
         )
     ).then((provider) => {
@@ -81,6 +106,13 @@ class _PlacementScreenState extends State<PlacementScreen> {
                 _placementHeight = MediaQuery.of(context).size.width / event.ratio;
               });
               debugPrint('[${widget.name}] onWidgetReady $event calculated height: $_placementHeight');
+
+              // if (event.widget.type == 'story-bar') {
+              //   _controller?.getWidget<StoryBarController>(event.widget).openWithId(storyGroupId: "127248", storyId: "1571802", playMode: "story");
+              // } else if (event.widget.type == 'video-feed') {
+              //   _controller?.getWidget<VideoFeedController>(event.widget).openWithId(groupId: "202061", playMode: "default");
+              //   // _controller?.getWidget<VideoFeedController>(event.widget).open(uri: 'https://www.google.com');
+              // }
             },
             onActionClicked: (event) {
               if (event.widget.type == 'story-bar') {
