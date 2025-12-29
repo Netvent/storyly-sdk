@@ -50,3 +50,5 @@ private fun JSONArray.toList(): List<Any?> {
   }
 }
 
+internal fun Int.toHexString() = Integer.toHexString(this)
+
