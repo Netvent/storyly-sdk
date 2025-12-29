@@ -70,7 +70,7 @@ fun encodeStoryGroupBadgeStyle(badgeStyle: StoryGroupBadgeStyle?): Map<String, A
     badgeStyle ?: return null
     return mapOf(
         "text" to badgeStyle.text,
-        "textColor" to badgeStyle.textColor,
+        "textColor" to badgeStyle.textColor?.toHexString(),
         "backgroundColor" to badgeStyle.backgroundColor?.toHexString(),
         "endTime" to badgeStyle.endTime,
         "template" to badgeStyle.template,
