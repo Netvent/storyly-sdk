@@ -41,7 +41,7 @@ class SwipeCardDataPayload extends STRDataPayload {
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json['items'] = items?.map((e) => e.toJson()).toList();
+    json['items'] = items.map((e) => e.toJson()).toList();
     return json;
   }
 }
