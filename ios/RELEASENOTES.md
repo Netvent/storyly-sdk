@@ -1,4 +1,8 @@
 # Release Notes
+### 4.19.1 (26.12.2025)
+* fixed capitalization in German localization
+* improved story transition handling in case of layer fails
+
 ### 4.19.0 (01.12.2025)
 * added play/pause/replay accesibility controls for stories
 * fixed a bug related to swipe interactive component background color

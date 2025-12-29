@@ -1,4 +1,8 @@
 # Release Notes
+### 1.1.0 (03.12.2025)
+* added play/pause/replay accesibility controls for stories
+* fixed a bug related to swipe interactive component background color
+  
 ### 1.0.0 (26.11.2025)
 * added storyly analytics module
 * added flow for banner to video feed

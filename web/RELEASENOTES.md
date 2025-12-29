@@ -1,5 +1,28 @@
 # Release Notes
 
+### 4.8.1 - 23.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.8.0/storyly-web.js)
+
+- Fix: scrollX issue
+
+### 4.8.0 - 23.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.8.0/storyly-web.js)
+
+- Feature: capturing story screenshot and share on social media
+
+### 4.7.5 - 12.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.7.5/storyly-web.js)
+
+- Fix: scroll layout issue
+- Fix: cutting poll layer text
+- Fix: requestIdleCallback polyfill issue
+- Fix: cta layer radius issue
+
+### 4.7.2 - 03.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.7.2/storyly-web.js)
+
+- Feature: text component supports rich text
+- Feature: added custom payload to actionClicked callback
+- Feature: changed number formatting by locale country
+- Feature: added lowest price availability for eu regulations for product related interactive components
+- Feature: added direction parameter in config for layout direction
+
 ### 4.6.15 - 28.08.2025 [for cdn](https://web-story.storyly.io/sdk/4.6.15/storyly-web.js)
 
 - Fix: Fixed multiple votes poll interactive

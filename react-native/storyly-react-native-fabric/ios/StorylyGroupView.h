@@ -9,7 +9,6 @@
 #ifdef RCT_NEW_ARCH_ENABLED
 #import <React/RCTViewComponentView.h>
 #import <UIKit/UIKit.h>
-#import <storyly_react_native_fabric/storyly_react_native_fabric-Swift.h>
 
 @interface StorylyGroupView : RCTViewComponentView
 @end

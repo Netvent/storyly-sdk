@@ -6,7 +6,7 @@ import com.appsamurai.storyly.core.data.model.product.STRProductInformation
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
 import com.appsamurai.storyly.core.data.model.product.STRProductVariant
 
-internal fun encodeSTRProductItem(product: STRProductItem): Map<String, Any?> {
+fun encodeSTRProductItem(product: STRProductItem): Map<String, Any?> {
     return mapOf(
         "productId" to product.productId,
         "productGroupId" to product.productGroupId,

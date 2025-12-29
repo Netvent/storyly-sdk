@@ -1,9 +1,7 @@
 package com.storylyplacementreactnative.common.data.widgets
 
-import com.appsamurai.storyly.banner.data.BannerDataPayload
 import com.appsamurai.storyly.core.STRWidgetType
 import com.appsamurai.storyly.core.data.model.STRDataPayload
-import com.appsamurai.storyly.storybar.analytics.event.StoryBarEventPayload
 import com.appsamurai.storyly.storybar.data.model.StoryBarPayload
 import com.appsamurai.storyly.storybar.ui.model.Story
 import com.appsamurai.storyly.storybar.ui.model.StoryBarComponent
@@ -24,6 +22,7 @@ import com.appsamurai.storyly.storybar.ui.model.StoryQuizComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryRatingComponent
 import com.appsamurai.storyly.storybar.ui.model.StorySwipeComponent
 import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
+import com.storylyplacementreactnative.common.data.util.toHexString
 
 
 fun encodeStoryBarDataPayload(data: STRDataPayload): Map<String, Any?> {
@@ -52,7 +51,7 @@ fun encodeStoryGroupItem(group: StoryGroup?): Map<String, Any?>? {
         "iconUrl" to group.iconUrl,
         "pinned" to group.pinned,
         "type" to group.type.customName,
-        "nudge": group.nudge,
+        "nudge" to group.nudge,
         "style" to encodeStoryGroupStyle(group.style),
         "stories" to group.stories.map { story -> encodeStory(story) }
     )
@@ -62,8 +61,8 @@ fun encodeStoryGroupStyle(style: StoryGroupStyle?): Map<String, Any?>? {
     style ?: return null
     return mapOf(
         "badge" to encodeStoryGroupBadgeStyle(style.badge),
-        "borderUnseenColors" to style.borderUnseenColors,
-        "textUnseenColor" to style.textUnseenColor,
+        "borderUnseenColors" to style.borderUnseenColors?.map { it.toHexString() },
+        "textUnseenColor" to style.textUnseenColor?.toHexString(),
     )
 }
 
@@ -71,8 +70,8 @@ fun encodeStoryGroupBadgeStyle(badgeStyle: StoryGroupBadgeStyle?): Map<String, A
     badgeStyle ?: return null
     return mapOf(
         "text" to badgeStyle.text,
-        "textColor" to badgeStyle.textColor,
-        "backgroundColor" to badgeStyle.backgroundColor,
+        "textColor" to badgeStyle.textColor?.toHexString(),
+        "backgroundColor" to badgeStyle.backgroundColor?.toHexString(),
         "endTime" to badgeStyle.endTime,
         "template" to badgeStyle.template,
     )

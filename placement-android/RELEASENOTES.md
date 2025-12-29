@@ -1,4 +1,9 @@
 # Release Notes
+### 1.1.0 (03.12.2025)
+* added play/pause/replay accesibility controls for stories
+* fixed a bug related to scrapped and detached views in StorylyBar
+* fixed a bug related to fixed orientation for Android 8 devices
+  
 ### 1.0.0 (26.11.2025)
 * added storyly analytics module
 * added flow for banner to video feed
