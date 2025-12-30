@@ -3,7 +3,7 @@ import type { STRProductItem } from '../product';
 
 
 export type BannerComponentType = 
-  | 'button';
+  | 'Button';
 
 
 export interface BannerComponent {

@@ -120,7 +120,6 @@ fun encodeVideoFeedComponent(component: VideoFeedComponent?): Map<String, Any?>?
             "actionUrlList" to component.actionUrlList,
             "products" to component.products?.map { encodeSTRProductItem(it) },
         )
-        is VideoFeedCountDownComponent -> emptyMap() // TODO: implement completion handling for count down
         else -> emptyMap()
     }
 

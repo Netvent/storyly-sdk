@@ -86,19 +86,19 @@ class StorylyProductConfig {
 
 class StorylyShareConfig {
   final String? shareUrl;
-  final String? facebookAppID;
+  final String? facebookAppId;
   final bool? appLogoVisibility;
 
   StorylyShareConfig({
     this.shareUrl,
-    this.facebookAppID,
+    this.facebookAppId,
     this.appLogoVisibility,
   });
 
   factory StorylyShareConfig.fromJson(Map<String, dynamic> json) {
     return StorylyShareConfig(
       shareUrl: json['shareUrl'],
-      facebookAppID: json['facebookAppID'],
+      facebookAppId: json['facebookAppId'],
       appLogoVisibility: json['appLogoVisibility'],
     );
   }
@@ -106,7 +106,7 @@ class StorylyShareConfig {
   Map<String, dynamic> toJson() {
     return {
       'shareUrl': shareUrl,
-      'facebookAppID': facebookAppID,
+      'facebookAppId': facebookAppId,
       'appLogoVisibility': appLogoVisibility,
     };
   }

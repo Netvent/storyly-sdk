@@ -2,7 +2,7 @@ import '../product.dart';
 import '../events/payloads.dart';
 
 class BannerComponent {
-  final String type; // 'button'
+  final String type;
   final String id;
   final String? customPayload;
 
@@ -14,7 +14,7 @@ class BannerComponent {
 
   factory BannerComponent.fromJson(Map<String, dynamic> json) {
     final type = json['type'] as String;
-    if (type == 'button') {
+    if (type == 'Button') {
       return BannerButtonComponent.fromJson(json);
     }
     return BannerComponent(

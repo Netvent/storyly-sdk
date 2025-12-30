@@ -46,12 +46,15 @@ fun encodeStoryGroupItem(group: StoryGroup?): Map<String, Any?>? {
     return mapOf(
         "id" to group.uniqueId,
         "title" to group.title,
+        "name" to group.name,
         "index" to group.index,
         "seen" to group.seen,
         "iconUrl" to group.iconUrl,
         "pinned" to group.pinned,
         "type" to group.type.customName,
         "nudge" to group.nudge,
+        "iconVideoUrl" to group.iconVideoUrl,
+        "iconVideoThumbnailUrl" to group.iconVideoThumbnailUrl,
         "style" to encodeStoryGroupStyle(group.style),
         "stories" to group.stories.map { story -> encodeStory(story) }
     )
@@ -156,7 +159,6 @@ fun encodeStoryBarComponent(component: StoryBarComponent?): Map<String, Any?>? {
             "actionUrlList" to component.actionUrlList,
             "products" to component.products?.map { encodeSTRProductItem(it) },
         )
-        is StoryCountDownComponent -> emptyMap() // TODO: implement completion handling for count down
         else -> emptyMap()
     }
     
