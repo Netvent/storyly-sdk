@@ -79,7 +79,7 @@ class STRBannerItem {
   final String? actionUrl;
   final List<BannerComponent>? componentList;
   final List<STRProductItem>? actionProducts;
-  final int? currentTime; // Using int for number type in TS, assuming it's timestamp or duration
+  final int? currentTime;
 
   STRBannerItem({
     required this.id,
