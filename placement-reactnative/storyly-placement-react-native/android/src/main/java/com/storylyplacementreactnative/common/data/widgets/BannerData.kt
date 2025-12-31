@@ -31,7 +31,7 @@ fun encodeBannerPayload(payload: BannerPayload?): Map<String, Any?>? {
 fun encodeBannerSlide(slide: BannerSlide?): Map<String, Any?>? {
     slide ?: return null
     return mapOf(
-        "uniqueId" to slide.uniqueId,
+        "id" to slide.uniqueId,
         "name" to slide.name,
         "index" to slide.index,
         "actionUrl" to slide.actionUrl,

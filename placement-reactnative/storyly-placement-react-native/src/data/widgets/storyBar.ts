@@ -3,19 +3,18 @@ import type { STRProductItem } from '../product';
 
 
 export type StoryBarComponentType =
-  | 'button'
-  | 'swipe'
-  | 'productTag'
-  | 'productCard'
-  | 'productCatalog'
-  | 'quiz'
-  | 'imageQuiz'
-  | 'poll'
-  | 'emoji'
-  | 'rating'
-  | 'promoCode'
-  | 'comment'
-  | 'countDown';
+  | 'Button'
+  | 'Swipe'
+  | 'ProductTag'
+  | 'ProductCard'
+  | 'ProductCatalog'
+  | 'Quiz'
+  | 'ImageQuiz'
+  | 'Poll'
+  | 'Emoji'
+  | 'Rating'
+  | 'PromoCode'
+  | 'Comment';
 
 
 export interface StoryBarComponent {
@@ -26,14 +25,14 @@ export interface StoryBarComponent {
 
 // Action Components
 export interface StoryButtonComponent extends StoryBarComponent {
-  type: 'button';
+  type: 'Button';
   text?: string;
   actionUrl?: string;
   products?: STRProductItem[];
 }
 
 export interface StorySwipeComponent extends StoryBarComponent {
-  type: 'swipe';
+  type: 'Swipe';
   text?: string;
   actionUrl?: string;
   products?: STRProductItem[];
@@ -41,27 +40,27 @@ export interface StorySwipeComponent extends StoryBarComponent {
 
 // Product Components
 export interface StoryProductTagComponent extends StoryBarComponent {
-  type: 'productTag';
+  type: 'ProductTag';
   actionUrl?: string;
   products?: STRProductItem[];
 }
 
 export interface StoryProductCardComponent extends StoryBarComponent {
-  type: 'productCard';
+  type: 'ProductCard';
   text?: string;
   actionUrl?: string;
   products?: STRProductItem[];
 }
 
 export interface StoryProductCatalogComponent extends StoryBarComponent {
-  type: 'productCatalog';
+  type: 'ProductCatalog';
   actionUrlList?: string[];
   products?: STRProductItem[];
 }
 
 // Interactive Components
 export interface StoryQuizComponent extends StoryBarComponent {
-  type: 'quiz';
+  type: 'Quiz';
   title?: string;
   options?: string[];
   rightAnswerIndex?: number;
@@ -69,7 +68,7 @@ export interface StoryQuizComponent extends StoryBarComponent {
 }
 
 export interface StoryImageQuizComponent extends StoryBarComponent {
-  type: 'imageQuiz';
+  type: 'ImageQuiz';
   title?: string;
   options?: string[];
   rightAnswerIndex?: number;
@@ -77,36 +76,32 @@ export interface StoryImageQuizComponent extends StoryBarComponent {
 }
 
 export interface StoryPollComponent extends StoryBarComponent {
-  type: 'poll';
+  type: 'Poll';
   title?: string;
   options?: string[];
   selectedOptionIndex?: number;
 }
 
 export interface StoryEmojiComponent extends StoryBarComponent {
-  type: 'emoji';
+  type: 'Emoji';
   emojiCodes?: string[];
   selectedEmojiIndex?: number;
 }
 
 export interface StoryRatingComponent extends StoryBarComponent {
-  type: 'rating';
+  type: 'Rating';
   emojiCode?: string;
   rating?: number;
 }
 
 export interface StoryPromoCodeComponent extends StoryBarComponent {
-  type: 'promoCode';
+  type: 'PromoCode';
   text?: string;
 }
 
 export interface StoryCommentComponent extends StoryBarComponent {
-  type: 'comment';
+  type: 'Comment';
   text?: string;
-}
-
-export interface StoryCountDownComponent extends StoryBarComponent {
-  type: 'countDown';
 }
 
 export type StoryBarComponentUnion =
@@ -121,8 +116,7 @@ export type StoryBarComponentUnion =
   | StoryEmojiComponent
   | StoryRatingComponent
   | StoryPromoCodeComponent
-  | StoryCommentComponent
-  | StoryCountDownComponent;
+  | StoryCommentComponent;
 
 // MARK: - StoryBar Widget Types
 
@@ -131,6 +125,8 @@ export interface STRStoryGroup {
   title: string;
   name?: string;
   iconUrl?: string;
+  iconVideoUrl?: string;
+  iconVideoThumbnailUrl?: string;
   index: number;
   pinned: boolean;
   seen: boolean;
@@ -177,3 +173,4 @@ export interface STRStoryBarPayload extends STRPayload {
   story?: STRStory;
   component?: StoryBarComponentUnion;
 }
+

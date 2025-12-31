@@ -15,7 +15,7 @@ export interface StorylyPlacementConfig {
   };
   shareConfig?: {
     shareUrl?: string;
-    facebookAppID?: string;
+    facebookAppId?: string;
     appLogoVisibility?: boolean;
   };
   networkConfig?: {

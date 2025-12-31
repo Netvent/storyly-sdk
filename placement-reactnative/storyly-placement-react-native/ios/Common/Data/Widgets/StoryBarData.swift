@@ -30,6 +30,7 @@ func encodeStoryGroupItem(_ group: StoryGroup?) -> [String: Any]? {
     return ([
         "id": group.uniqueId,
         "title": group.title,
+        "name": group.name,
         "index": group.index,
         "seen": group.seen,
         "iconUrl": group.iconUrl?.absoluteString,
@@ -37,6 +38,7 @@ func encodeStoryGroupItem(_ group: StoryGroup?) -> [String: Any]? {
         "iconVideoThumbnailUrl": group.iconVideoThumbnailUrl?.absoluteString,
         "pinned": group.pinned,
         "type": group.type.description,
+        "nudge": group.nudge,
         "style": encodeStoryGroupStyle(group.style),
         "stories": group.stories.compactMap { encodeStory($0) }
     ] as [String: Any?]).compactMapValues { $0 }
@@ -149,6 +151,7 @@ func encodeStoryBarComponent(_ component: StoryBarComponent?) -> [String: Any]? 
     case let productCatalog as StoryProductCatalogComponent:
         result["actionUrlList"] = productCatalog.actionUrlList
         result["products"] = productCatalog.products?.map { encodeSTRProductItem($0) }
+        
     default:
         break
     }

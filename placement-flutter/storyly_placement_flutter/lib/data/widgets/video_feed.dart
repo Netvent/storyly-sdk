@@ -39,8 +39,6 @@ class VideoFeedComponent {
         return VideoFeedPromoCodeComponent.fromJson(json);
       case 'Comment':
         return VideoFeedCommentComponent.fromJson(json);
-      case 'CountDown':
-        return VideoFeedCountDownComponent.fromJson(json);
       default:
         return VideoFeedComponent(
           type: type,
@@ -486,22 +484,6 @@ class VideoFeedCommentComponent extends VideoFeedComponent {
       'text': text,
     });
     return json;
-  }
-}
-
-class VideoFeedCountDownComponent extends VideoFeedComponent {
-  VideoFeedCountDownComponent({
-    required super.type,
-    required super.id,
-    super.customPayload,
-  });
-
-  factory VideoFeedCountDownComponent.fromJson(Map<String, dynamic> json) {
-    return VideoFeedCountDownComponent(
-      type: json['type'],
-      id: json['id'],
-      customPayload: json['customPayload'],
-    );
   }
 }
 

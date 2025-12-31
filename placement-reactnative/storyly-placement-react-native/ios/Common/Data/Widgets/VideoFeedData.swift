@@ -127,6 +127,7 @@ func encodeVideoFeedComponent(_ component: VideoFeedComponent?) -> [String: Any]
     case let productCatalog as VideoFeedProductCatalogComponent:
         result["actionUrlList"] = productCatalog.actionUrlList
         result["products"] = productCatalog.products?.map { encodeSTRProductItem($0) }
+        
     default:
         break
     }

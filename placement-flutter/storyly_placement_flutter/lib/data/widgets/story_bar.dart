@@ -39,8 +39,6 @@ class StoryBarComponent {
         return StoryPromoCodeComponent.fromJson(json);
       case 'Comment':
         return StoryCommentComponent.fromJson(json);
-      case 'CountDown':
-        return StoryCountDownComponent.fromJson(json);
       default:
         return StoryBarComponent(
           type: type,
@@ -489,22 +487,6 @@ class StoryCommentComponent extends StoryBarComponent {
   }
 }
 
-class StoryCountDownComponent extends StoryBarComponent {
-  StoryCountDownComponent({
-    required super.type,
-    required super.id,
-    super.customPayload,
-  });
-
-  factory StoryCountDownComponent.fromJson(Map<String, dynamic> json) {
-    return StoryCountDownComponent(
-      type: json['type'],
-      id: json['id'],
-      customPayload: json['customPayload'],
-    );
-  }
-}
-
 class STRStory {
   final String id;
   final String title;
@@ -637,6 +619,8 @@ class STRStoryGroup {
   final String title;
   final String? name;
   final String? iconUrl;
+  final String? iconVideoUrl;
+  final String? iconVideoThumbnailUrl;
   final int index;
   final bool pinned;
   final bool seen;
@@ -650,6 +634,8 @@ class STRStoryGroup {
     required this.title,
     this.name,
     this.iconUrl,
+    this.iconVideoUrl,
+    this.iconVideoThumbnailUrl,
     required this.index,
     required this.pinned,
     required this.seen,
@@ -665,6 +651,8 @@ class STRStoryGroup {
       title: json['title'],
       name: json['name'],
       iconUrl: json['iconUrl'],
+      iconVideoUrl: json['iconVideoUrl'],
+      iconVideoThumbnailUrl: json['iconVideoThumbnailUrl'],
       index: json['index'],
       pinned: json['pinned'],
       seen: json['seen'],
@@ -685,6 +673,8 @@ class STRStoryGroup {
       'title': title,
       'name': name,
       'iconUrl': iconUrl,
+      'iconVideoUrl': iconVideoUrl,
+      'iconVideoThumbnailUrl': iconVideoThumbnailUrl,
       'index': index,
       'pinned': pinned,
       'seen': seen,
