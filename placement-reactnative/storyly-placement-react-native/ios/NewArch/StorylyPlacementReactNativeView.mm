@@ -137,14 +137,14 @@ using namespace facebook::react;
         emitter->onProductEvent(productEventData);
         break;
       }
-      case RNPlacementEventTypeOnCartUpdate: {
+      case RNPlacementEventTypeOnUpdateCart: {
         StorylyPlacementReactNativeViewEventEmitter::OnUpdateCart updateCartData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
         emitter->onUpdateCart(updateCartData);
         break;
       }
-      case RNPlacementEventTypeOnWishlistUpdate: {
+      case RNPlacementEventTypeOnUpdateWishlist: {
         StorylyPlacementReactNativeViewEventEmitter::OnUpdateWishlist updateWishlistData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
