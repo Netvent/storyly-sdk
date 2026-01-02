@@ -1,15 +1,12 @@
 package com.appsamurai.storyly.storyly_placement_flutter.common.data.widgets
 
-import com.appsamurai.storyly.banner.data.BannerDataPayload
 import com.appsamurai.storyly.core.STRWidgetType
-import com.appsamurai.storyly.core.data.model.STRDataPayload
-import com.appsamurai.storyly.storybar.analytics.event.StoryBarEventPayload
+import com.appsamurai.storyly.storybar.data.StoryBarDataPayload
 import com.appsamurai.storyly.storybar.data.model.StoryBarPayload
 import com.appsamurai.storyly.storybar.ui.model.Story
 import com.appsamurai.storyly.storybar.ui.model.StoryBarComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryButtonComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryCommentComponent
-import com.appsamurai.storyly.storybar.ui.model.StoryCountDownComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryEmojiComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryGroup
 import com.appsamurai.storyly.storybar.ui.model.StoryGroupBadgeStyle
@@ -27,10 +24,10 @@ import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.enco
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.toHexString
 
 
-fun encodeStoryBarDataPayload(data: STRDataPayload): Map<String, Any?> {
+fun encodeStoryBarDataPayload(data: StoryBarDataPayload): Map<String, Any?> {
     return mapOf(
         "type" to STRWidgetType.StoryBar.raw,
-//        "items" to data.items.map { encodeStoryGroupItem(it) }
+        "items" to data.items.map { encodeStoryGroupItem(it) }
     )
 }
 
@@ -102,7 +99,7 @@ fun encodeStoryBarComponent(component: StoryBarComponent?): Map<String, Any?>? {
     component ?: return null
     val base = mapOf(
         "id" to component.id,
-        "type" to component.type.name,
+        "type" to component.type.get(),
         "customPayload" to component.customPayload,
     )
     
