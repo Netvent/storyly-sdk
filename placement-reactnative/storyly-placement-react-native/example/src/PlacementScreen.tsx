@@ -18,7 +18,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
         },
         shareConfig: {
             shareUrl: 'https://www.google.com',
-            facebookAppID: '1234567890',
+            facebookAppId: '1234567890',
         },
     }
 
@@ -86,7 +86,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
             />
             <Button title={`Resume Paused Widget`} onPress={() => {
                 if (pauseWidget) {
-                    placementRef.current?.getWidget<STRStoryBarController>(pauseWidget).resume();
+                    placementRef.current?.getWidget<STRStoryBarController | STRVideoFeedController>(pauseWidget).resume();
                     setPauseWidget(null);
                 }
             }} />
