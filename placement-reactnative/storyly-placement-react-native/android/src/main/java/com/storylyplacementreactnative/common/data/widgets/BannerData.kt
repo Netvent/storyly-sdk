@@ -46,7 +46,7 @@ fun encodeBannerComponent(component: BannerComponent?): Map<String, Any?>? {
     component ?: return null
     val base = mapOf(
         "id" to component.id,
-        "type" to component.type.name.lowercase(),
+        "type" to component.type.get(),
         "customPayload" to component.customPayload
     )
     val additional = when (component) {

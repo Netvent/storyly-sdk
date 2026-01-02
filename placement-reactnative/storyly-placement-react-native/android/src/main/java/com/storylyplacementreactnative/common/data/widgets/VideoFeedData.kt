@@ -61,7 +61,7 @@ fun encodeVideoFeedComponent(component: VideoFeedComponent?): Map<String, Any?>?
     component ?: return null
     val base = mapOf(
         "id" to component.id,
-        "type" to component.type.name,
+        "type" to component.type.get(),
         "customPayload" to component.customPayload,
     )
 
