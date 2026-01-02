@@ -3,8 +3,6 @@ package com.appsamurai.storyly.storyly_placement_flutter.common
 import android.content.Context
 import android.os.Handler
 import android.util.Log
-import android.view.Choreographer
-import android.widget.FrameLayout
 import com.appsamurai.storyly.core.STRWidgetType
 import com.appsamurai.storyly.core.analytics.error.STRErrorPayload
 import com.appsamurai.storyly.core.analytics.event.STREvent
@@ -23,9 +21,6 @@ import com.appsamurai.storyly.placement.ui.STRPlacementView
 import com.appsamurai.storyly.placement.ui.STRProductListener
 import com.appsamurai.storyly.storybar.ui.STRStoryBarController
 import com.appsamurai.storyly.storybar.ui.model.PlayMode
-import com.appsamurai.storyly.videofeed.ui.STRVideoFeedController
-import com.appsamurai.storyly.videofeed.ui.STRVideoFeedPresenterController
-import com.appsamurai.storyly.videofeed.ui.model.VFPlayMode
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTRErrorPayload
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTREventPayload
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTRPayload
@@ -36,11 +31,15 @@ import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.enco
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.encodeSTRProductItem
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.decodeFromJson
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.encodeToJson
+import com.appsamurai.storyly.videofeed.ui.STRVideoFeedController
+import com.appsamurai.storyly.videofeed.ui.STRVideoFeedPresenterController
+import com.appsamurai.storyly.videofeed.ui.model.VFPlayMode
+import io.flutter.embedding.android.FlutterView
 import java.lang.ref.WeakReference
 import java.util.UUID
 
 
-class RNStorylyPlacementView(context: Context) : FrameLayout(context) {
+class RNStorylyPlacementView(context: Context) : FlutterView(context) {
 
     private var providerId: String? = null
 
