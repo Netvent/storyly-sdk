@@ -370,7 +370,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            placementView.dispatchEvent?(.onCartUpdate, eventJson)
+            placementView.dispatchEvent?(.onUpdateCart, eventJson)
         }
     }
     
@@ -390,7 +390,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            placementView.dispatchEvent?(.onWishlistUpdate, eventJson)
+            placementView.dispatchEvent?(.onUpdateWishlist, eventJson)
         }
     }
 }

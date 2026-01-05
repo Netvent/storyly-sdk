@@ -31,7 +31,7 @@ fun encodeBannerPayload(payload: BannerPayload?): Map<String, Any?>? {
 fun encodeBannerSlide(slide: BannerSlide?): Map<String, Any?>? {
     slide ?: return null
     return mapOf(
-        "uniqueId" to slide.uniqueId,
+        "id" to slide.uniqueId,
         "name" to slide.name,
         "index" to slide.index,
         "actionUrl" to slide.actionUrl,
@@ -46,7 +46,7 @@ fun encodeBannerComponent(component: BannerComponent?): Map<String, Any?>? {
     component ?: return null
     val base = mapOf(
         "id" to component.id,
-        "type" to component.type.name.lowercase(),
+        "type" to component.type.get(),
         "customPayload" to component.customPayload
     )
     val additional = when (component) {

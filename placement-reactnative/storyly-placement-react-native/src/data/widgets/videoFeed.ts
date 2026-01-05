@@ -3,19 +3,18 @@ import type { STRProductItem } from '../product';
 
 
 export type VideoFeedComponentType =
-  | 'button'
-  | 'swipe'
-  | 'productTag'
-  | 'productCard'
-  | 'productCatalog'
-  | 'quiz'
-  | 'imageQuiz'
-  | 'poll'
-  | 'emoji'
-  | 'rating'
-  | 'promoCode'
-  | 'comment'
-  | 'countDown';
+  | 'Button'
+  | 'Swipe'
+  | 'ProductTag'
+  | 'ProductCard'
+  | 'ProductCatalog'
+  | 'Quiz'
+  | 'ImageQuiz'
+  | 'Poll'
+  | 'Emoji'
+  | 'Rating'
+  | 'PromoCode'
+  | 'Comment';
 
 
 export interface VideoFeedComponent {
@@ -25,34 +24,40 @@ export interface VideoFeedComponent {
 }
 
 export interface VideoFeedButtonComponent extends VideoFeedComponent {
+  type: 'Button';
   text?: string;
   actionUrl?: string;
   products?: STRProductItem[];
 }
 
 export interface VideoFeedSwipeComponent extends VideoFeedComponent {
+  type: 'Swipe';
   text?: string;
   actionUrl?: string;
   products?: STRProductItem[];
 }
 
 export interface VideoFeedProductTagComponent extends VideoFeedComponent {
+  type: 'ProductTag';
   actionUrl?: string;
   products?: STRProductItem[];
 }
 
 export interface VideoFeedProductCardComponent extends VideoFeedComponent {
+  type: 'ProductCard';
   text?: string;
   actionUrl?: string;
   products?: STRProductItem[];
 }
 
 export interface VideoFeedProductCatalogComponent extends VideoFeedComponent {
+  type: 'ProductCatalog';
   actionUrlList?: string[];
   products?: STRProductItem[];
 }
 
 export interface VideoFeedQuizComponent extends VideoFeedComponent {
+  type: 'Quiz';
   title?: string;
   options?: string[];
   rightAnswerIndex?: number;
@@ -60,6 +65,7 @@ export interface VideoFeedQuizComponent extends VideoFeedComponent {
 }
 
 export interface VideoFeedImageQuizComponent extends VideoFeedComponent {
+  type: 'ImageQuiz';
   title?: string;
   options?: string[];
   rightAnswerIndex?: number;
@@ -67,30 +73,32 @@ export interface VideoFeedImageQuizComponent extends VideoFeedComponent {
 }
 
 export interface VideoFeedPollComponent extends VideoFeedComponent {
+  type: 'Poll';
   title?: string;
   options?: string[];
   selectedOptionIndex?: number;
 }
 
 export interface VideoFeedEmojiComponent extends VideoFeedComponent {
+  type: 'Emoji';
   emojiCodes?: string[];
   selectedEmojiIndex?: number;
 }
 
 export interface VideoFeedRatingComponent extends VideoFeedComponent {
+  type: 'Rating';
   emojiCode?: string;
   rating?: number;
 }
 
 export interface VideoFeedPromoCodeComponent extends VideoFeedComponent {
+  type: 'PromoCode';
   text?: string;
 }
 
 export interface VideoFeedCommentComponent extends VideoFeedComponent {
+  type: 'Comment';
   text?: string;
-}
-
-export interface VideoFeedCountDownComponent extends VideoFeedComponent {
 }
 
 export type VideoFeedComponentUnion =
@@ -105,8 +113,7 @@ export type VideoFeedComponentUnion =
   | VideoFeedEmojiComponent
   | VideoFeedRatingComponent
   | VideoFeedPromoCodeComponent
-  | VideoFeedCommentComponent
-  | VideoFeedCountDownComponent;
+  | VideoFeedCommentComponent;
 
 
 export interface STRVideoFeedGroup {
@@ -147,3 +154,4 @@ export interface STRVideoFeedPayload extends STRPayload {
   feedItem?: STRVideoFeedItem;
   component?: VideoFeedComponentUnion;
 }
+

@@ -1,7 +1,7 @@
 name: storyly_placement_flutter
-description: "A new Flutter plugin project."
+description: "Flutter package for Storyly Placement SDK - supports StoryBar, Banner, VideoFeed, and SwipeCard widgets"
 version: 0.0.1
-homepage:
+homepage: "https://github.com/Netvent/storyly-sdk/"
 
 environment:
   sdk: ^3.10.4

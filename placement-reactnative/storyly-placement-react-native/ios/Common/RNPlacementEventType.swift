@@ -6,8 +6,8 @@ import Foundation
   case onEvent
   case onActionClicked
   case onProductEvent
-  case onCartUpdate
-  case onWishlistUpdate
+  case onUpdateCart
+  case onUpdateWishlist
   
   public var eventName: String {
     switch self {
@@ -21,15 +21,15 @@ import Foundation
       return "onActionClicked"
     case .onProductEvent:
       return "onProductEvent"
-    case .onCartUpdate:
-      return "onCartUpdate"
-    case .onWishlistUpdate:
-      return "onWishlistUpdate"
+    case .onUpdateCart:
+      return "onUpdateCart"
+    case .onUpdateWishlist:
+      return "onUpdateWishlist"
     }
   }
   
   static var allCases: [RNPlacementEventType] {
-    return [.onWidgetReady, .onFail, .onEvent, .onActionClicked, .onProductEvent, .onCartUpdate, .onWishlistUpdate]
+    return [.onWidgetReady, .onFail, .onEvent, .onActionClicked, .onProductEvent, .onUpdateCart, .onUpdateWishlist]
   }
 }
 

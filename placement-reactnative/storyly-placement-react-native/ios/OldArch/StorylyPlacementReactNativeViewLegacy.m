@@ -77,10 +77,10 @@ RCT_EXPORT_MODULE(StorylyPlacementReactNativeViewLegacy)
             case RNPlacementEventTypeOnProductEvent:
                 if (strongView.onProductEvent) strongView.onProductEvent(eventData);
                 break;
-            case RNPlacementEventTypeOnCartUpdate:
+            case RNPlacementEventTypeOnUpdateCart:
                 if (strongView.onUpdateCart) strongView.onUpdateCart(eventData);
                 break;
-            case RNPlacementEventTypeOnWishlistUpdate:
+            case RNPlacementEventTypeOnUpdateWishlist:
                 if (strongView.onUpdateWishlist) strongView.onUpdateWishlist(eventData);
                 break;
         }

@@ -17,7 +17,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
 
   // We need to give a non-zero height for the platform view to be created.
   // 1.0 is a minimal height to ensure the view is attached and can trigger events.
-  double _placementHeight = 1.0;
+  double _placementHeight = 0.1;
 
   PlacementWidget? _pauseWidget;
   STRCart _cart = STRCart(items: [], totalPrice: 0, currency: 'USD');
@@ -35,7 +35,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
           ),
           shareConfig: StorylyShareConfig(
             shareUrl: 'https://www.google.com',
-            facebookAppID: '1234567890',
+            facebookAppId: '1234567890',
           ),
         ),
         listener:StorylyPlacementListener(

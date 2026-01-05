@@ -61,7 +61,7 @@ fun encodeVideoFeedComponent(component: VideoFeedComponent?): Map<String, Any?>?
     component ?: return null
     val base = mapOf(
         "id" to component.id,
-        "type" to component.type.name,
+        "type" to component.type.get(),
         "customPayload" to component.customPayload,
     )
 
@@ -120,7 +120,6 @@ fun encodeVideoFeedComponent(component: VideoFeedComponent?): Map<String, Any?>?
             "actionUrlList" to component.actionUrlList,
             "products" to component.products?.map { encodeSTRProductItem(it) },
         )
-        is VideoFeedCountDownComponent -> emptyMap() // TODO: implement completion handling for count down
         else -> emptyMap()
     }
 
