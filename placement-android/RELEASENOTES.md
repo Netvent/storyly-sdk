@@ -1,4 +1,13 @@
 # Release Notes
+### 1.2.0 (07.01.2026)
+* added storyly canvas widget
+* added etag handling for Not Modified network responses
+* improved style and size data structure for each widget
+* improved story transition handling in case of layer fails for story bar widget
+* improved widget scale logic
+* fixed capitalization in German localization
+* fixed a bug related banner to video feed flow
+
 ### 1.1.0 (03.12.2025)
 * added play/pause/replay accesibility controls for stories
 * fixed a bug related to scrapped and detached views in StorylyBar
