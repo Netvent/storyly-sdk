@@ -39,7 +39,7 @@ import java.lang.ref.WeakReference
 import java.util.UUID
 
 
-class RNStorylyPlacementView(context: Context) : FlutterView(context) {
+class SPStorylyPlacementView(context: Context) : FlutterView(context) {
 
     private var providerId: String? = null
 
@@ -51,23 +51,23 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
 
     private var placementView: STRPlacementView? = null
 
-    internal var dispatchEvent: ((RNPlacementEventType, String?) -> Unit)? = null
+    internal var dispatchEvent: ((SPPlacementEventType, String?) -> Unit)? = null
 
     fun configure(providerId: String) {
         Handler(context.mainLooper).post {
-            if (providerId == this@RNStorylyPlacementView.providerId) {
-                Log.d("[RNStorylyPlacement]", "Already configured with providerId: $providerId")
+            if (providerId == this@SPStorylyPlacementView.providerId) {
+                Log.d("[SPStorylyPlacement]", "Already configured with providerId: $providerId")
                 return@post
             }
-            Log.d("[RNStorylyPlacement]", "Configuring with providerId: $providerId")
-            this@RNStorylyPlacementView.providerId = providerId
+            Log.d("[SPStorylyPlacement]", "Configuring with providerId: $providerId")
+            this@SPStorylyPlacementView.providerId = providerId
             setupPlacementView()
         }
     }
 
     fun callWidget(id: String, method: String, raw: String?) {
         Handler(context.mainLooper).post {
-            Log.d("[RNStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
+            Log.d("[SPStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
             val widget = widgetMap[id]?.get() ?: return@post
             val params = decodeFromJson(raw)
             when (widget.getType()) {
@@ -135,11 +135,11 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
     private fun setupPlacementView() {
         val currentProviderId = providerId ?: return
 
-        Log.d("[RNStorylyPlacement]", "Setting up placement view with providerId: $currentProviderId")
+        Log.d("[SPStorylyPlacement]", "Setting up placement view with providerId: $currentProviderId")
 
-        val providerWrapper = RNPlacementProviderManager.getProvider(currentProviderId)
+        val providerWrapper = SPPlacementProviderManager.getProvider(currentProviderId)
         val dataProvider = providerWrapper?.provider ?: run {
-            Log.e("[RNStorylyPlacement]", "Provider not found for id: $currentProviderId")
+            Log.e("[SPStorylyPlacement]", "Provider not found for id: $currentProviderId")
             return
         }
         placementView?.let { removeView(it) }
@@ -152,51 +152,51 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
         return STRPlacementView(context.getActivity() ?: context, dataProvider).apply {
             listener = object : STRListener {
                 override fun onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
-                    Log.d("[RNStorylyPlacement]", "onActionClicked: url=$url")
+                    Log.d("[SPStorylyPlacement]", "onActionClicked: url=$url")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "url" to url,
                         "payload" to encodeSTRPayload(payload)
                     ))
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_ACTION_CLICKED, eventJson)
+                    dispatchEvent?.invoke(SPPlacementEventType.ON_ACTION_CLICKED, eventJson)
                 }
 
                 override fun onEvent(widget: STRWidgetController, payload: STREventPayload) {
-                    Log.d("[RNStorylyPlacement]", "onEvent: widgetType=${widget.getType()}, payload=${payload.baseEvent.getType()}")
+                    Log.d("[SPStorylyPlacement]", "onEvent: widgetType=${widget.getType()}, payload=${payload.baseEvent.getType()}")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "payload" to encodeSTREventPayload(payload)
                     ))
                     println("AAAA: ${eventJson}")
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_EVENT, eventJson)
+                    dispatchEvent?.invoke(SPPlacementEventType.ON_EVENT, eventJson)
                 }
 
                 override fun onFail(widget: STRWidgetController, payload: STRErrorPayload) {
-                    Log.w("[RNStorylyPlacement]", "onFail: widget=${widget.getType()}, payload=${payload.baseError.getType()}")
+                    Log.w("[SPStorylyPlacement]", "onFail: widget=${widget.getType()}, payload=${payload.baseError.getType()}")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "payload" to encodeSTRErrorPayload(payload)
                     ))
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_FAIL, eventJson)
+                    dispatchEvent?.invoke(SPPlacementEventType.ON_FAIL, eventJson)
                 }
 
                 override fun onWidgetReady(widget: STRWidgetController, ratio: Float) {
-                    Log.d("[RNStorylyPlacement]", "onWidgetReady: ratio=$ratio")
+                    Log.d("[SPStorylyPlacement]", "onWidgetReady: ratio=$ratio")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "ratio" to ratio,
                     ))
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_WIDGET_READY, eventJson)
+                    dispatchEvent?.invoke(SPPlacementEventType.ON_WIDGET_READY, eventJson)
                 }
             }
             productListener = object : STRProductListener {
                 override fun onProductEvent(widget: STRWidgetController, event: STREvent) {
-                    Log.d("[RNStorylyPlacement]", "onProductEvent: ${event.getType()}")
+                    Log.d("[SPStorylyPlacement]", "onProductEvent: ${event.getType()}")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "event" to event.getType(),
                     ))
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_PRODUCT_EVENT, eventJson)
+                    dispatchEvent?.invoke(SPPlacementEventType.ON_PRODUCT_EVENT, eventJson)
                 }
 
                 override fun onUpdateCart(
@@ -207,7 +207,7 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
                     onSuccess: ((STRCart?) -> Unit)?,
                     onFail: ((STRCartEventResult) -> Unit)?,
                 ) {
-                    Log.d("[RNStorylyPlacement]", "onUpdateCart: ${event.getType()}")
+                    Log.d("[SPStorylyPlacement]", "onUpdateCart: ${event.getType()}")
                     val responseId = UUID.randomUUID().toString()
                     cartUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
                     val eventJson = encodeToJson(
@@ -219,7 +219,7 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
                             "responseId" to responseId,
                         )
                     )
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_UPDATE_CART, eventJson)
+                    dispatchEvent?.invoke(SPPlacementEventType.ON_UPDATE_CART, eventJson)
                 }
 
                 override fun onUpdateWishlist(
@@ -229,7 +229,7 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
                     onSuccess: ((STRProductItem?) -> Unit)?,
                     onFail: ((STRWishlistEventResult) -> Unit)?,
                 ) {
-                    Log.d("[RNStorylyPlacement]", "onUpdateWishlist: ${event.getType()}")
+                    Log.d("[SPStorylyPlacement]", "onUpdateWishlist: ${event.getType()}")
                     val responseId = UUID.randomUUID().toString()
                     wishlistUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
 
@@ -241,7 +241,7 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
                             "responseId" to responseId,
                         )
                     )
-                    dispatchEvent?.invoke(RNPlacementEventType.ON_UPDATE_WISHLIST, eventJson)
+                    dispatchEvent?.invoke(SPPlacementEventType.ON_UPDATE_WISHLIST, eventJson)
                 }
             }
         }

@@ -14,7 +14,7 @@ using namespace facebook::react;
 @end
 
 @implementation StorylyPlacementReactNativeView {
-    RNStorylyPlacementView * _swiftView;
+    SPStorylyPlacementView * _swiftView;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -28,11 +28,11 @@ using namespace facebook::react;
         static const auto defaultProps = std::make_shared<const StorylyPlacementReactNativeViewProps>();
         _props = defaultProps;
 
-        _swiftView = [[RNStorylyPlacementView alloc] initWithFrame:self.bounds];
+        _swiftView = [[SPStorylyPlacementView alloc] initWithFrame:self.bounds];
         
         // Set up event dispatcher
         __weak StorylyPlacementReactNativeView *weakSelf = self;
-        _swiftView.dispatchEvent = ^(RNPlacementEventType eventType, NSString * _Nullable payload) {
+        _swiftView.dispatchEvent = ^(SPPlacementEventType eventType, NSString * _Nullable payload) {
             if (weakSelf) {
                 [weakSelf dispatchEvent:eventType payload:payload];
             }
@@ -92,7 +92,7 @@ using namespace facebook::react;
 
 // MARK: - Event Dispatching
 
-- (void)dispatchEvent:(RNPlacementEventType)eventType payload:(NSString * _Nullable)payload
+- (void)dispatchEvent:(SPPlacementEventType)eventType payload:(NSString * _Nullable)payload
 {
     if (!_eventEmitter) { return; }
     
@@ -100,7 +100,7 @@ using namespace facebook::react;
     if (!emitter) { return; }
 
     switch (eventType) {
-      case RNPlacementEventTypeOnWidgetReady: {
+      case SPPlacementEventTypeOnWidgetReady: {
         StorylyPlacementReactNativeViewEventEmitter::OnWidgetReady widgetReadyData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
@@ -108,7 +108,7 @@ using namespace facebook::react;
         break;
       }
         
-      case RNPlacementEventTypeOnFail: {
+      case SPPlacementEventTypeOnFail: {
         StorylyPlacementReactNativeViewEventEmitter::OnFail failData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
@@ -116,35 +116,35 @@ using namespace facebook::react;
         break;
       }
             
-      case RNPlacementEventTypeOnEvent: {
+      case SPPlacementEventTypeOnEvent: {
         StorylyPlacementReactNativeViewEventEmitter::OnEvent eventData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
         emitter->onEvent(eventData);
         break;
       }
-      case RNPlacementEventTypeOnActionClicked: {
+      case SPPlacementEventTypeOnActionClicked: {
         StorylyPlacementReactNativeViewEventEmitter::OnActionClicked actionClickedData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
         emitter->onActionClicked(actionClickedData);
         break;
       }
-      case RNPlacementEventTypeOnProductEvent: {
+      case SPPlacementEventTypeOnProductEvent: {
         StorylyPlacementReactNativeViewEventEmitter::OnProductEvent productEventData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
         emitter->onProductEvent(productEventData);
         break;
       }
-      case RNPlacementEventTypeOnUpdateCart: {
+      case SPPlacementEventTypeOnUpdateCart: {
         StorylyPlacementReactNativeViewEventEmitter::OnUpdateCart updateCartData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };
         emitter->onUpdateCart(updateCartData);
         break;
       }
-      case RNPlacementEventTypeOnUpdateWishlist: {
+      case SPPlacementEventTypeOnUpdateWishlist: {
         StorylyPlacementReactNativeViewEventEmitter::OnUpdateWishlist updateWishlistData = {
             .raw = payload ? std::string([payload UTF8String]) : std::string("")
         };

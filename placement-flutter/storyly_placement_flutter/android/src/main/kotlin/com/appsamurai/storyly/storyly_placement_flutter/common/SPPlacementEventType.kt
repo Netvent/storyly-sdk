@@ -1,7 +1,7 @@
-package com.storylyplacementreactnative.common
+package com.appsamurai.storyly.storyly_placement_flutter.common
 
 
-enum class RNPlacementEventType(val eventName: String) {
+enum class SPPlacementEventType(val eventName: String) {
     ON_WIDGET_READY("onWidgetReady"),
     ON_FAIL("onFail"),
     ON_EVENT("onEvent"),

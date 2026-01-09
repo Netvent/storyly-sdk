@@ -34,13 +34,13 @@ RCT_EXPORT_METHOD(createProvider:(NSString *)providerId
 {
     NSLog(@"[StorylyPlacementProviderLegacy] Creating provider: %@", providerId);
     
-    RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] createProviderWithId:providerId];
+    SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] createProviderWithId:providerId];
     
     __weak typeof(self) weakSelf = self;
-    wrapper.sendEvent = ^(NSString *id, RNPlacementProviderEventType eventType, NSString *jsonPayload) {
+    wrapper.sendEvent = ^(NSString *id, SPPlacementProviderEventType eventType, NSString *jsonPayload) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf && strongSelf->_hasListeners) {
-            NSString *eventName = [NSString stringWithFormat:@"%@_%@", id, [RNEventMapper mapProviderEvent:eventType]];
+            NSString *eventName = [NSString stringWithFormat:@"%@_%@", id, [SPEventMapper mapProviderEvent:eventType]];
             [strongSelf.bridge enqueueJSCall:@"RCTDeviceEventEmitter"
                                       method:@"emit"
                                         args:@[
@@ -57,7 +57,7 @@ RCT_EXPORT_METHOD(createProvider:(NSString *)providerId
 RCT_EXPORT_METHOD(destroyProvider:(NSString *)providerId)
 {
     NSLog(@"[StorylyPlacementProviderLegacy] Destroying provider: %@", providerId);
-    [[RNPlacementProviderManager shared] destroyProviderWithId:providerId];
+    [[SPPlacementProviderManager shared] destroyProviderWithId:providerId];
 }
 
 // MARK: - Configuration
@@ -66,7 +66,7 @@ RCT_EXPORT_METHOD(updateConfig:(NSString *)providerId config:(NSString *)config)
 {
     NSLog(@"[StorylyPlacementProviderLegacy] Updating config for provider: %@", providerId);
     
-    RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
+    SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper configureWithConfigJson:config];
     }
@@ -78,7 +78,7 @@ RCT_EXPORT_METHOD(hydrateProducts:(NSString *)providerId productsJson:(NSString 
 {
     NSLog(@"[StorylyPlacementProviderLegacy] Hydrating products for provider: %@", providerId);
     
-    RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
+    SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper hydrateProductsWithProductsJson:productsJson];
     }
@@ -88,7 +88,7 @@ RCT_EXPORT_METHOD(hydrateWishlist:(NSString *)providerId productsJson:(NSString 
 {
     NSLog(@"[StorylyPlacementProviderLegacy] Hydrating wishlist for provider: %@", providerId);
     
-    RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
+    SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper hydrateWishlistWithProductsJson:productsJson];
     }
@@ -98,7 +98,7 @@ RCT_EXPORT_METHOD(updateCart:(NSString *)providerId cartJson:(NSString *)cartJso
 {
     NSLog(@"[StorylyPlacementProviderLegacy] Updating cart for provider: %@", providerId);
     
-    RNPlacementProviderWrapper *wrapper = [[RNPlacementProviderManager shared] getProviderWithId:providerId];
+    SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper updateCartWithCartJson:cartJson];
     }

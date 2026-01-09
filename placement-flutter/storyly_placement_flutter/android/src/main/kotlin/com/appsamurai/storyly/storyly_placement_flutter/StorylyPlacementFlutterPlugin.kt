@@ -8,7 +8,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import com.appsamurai.storyly.storyly_placement_flutter.common.RNPlacementProviderManager
+import com.appsamurai.storyly.storyly_placement_flutter.common.SPPlacementProviderManager
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.decodeFromJson
@@ -49,7 +49,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
             "createProvider" -> {
                 val providerId = call.arguments as? String
                 if (providerId != null) {
-                    RNPlacementProviderManager.createProvider(applicationContext, providerId).apply {
+                    SPPlacementProviderManager.createProvider(applicationContext, providerId).apply {
                         this.sendEvent = { id, event, eventData ->
                             Handler(Looper.getMainLooper()).post {
                                 val payload = mapOf(
@@ -68,7 +68,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
             "destroyProvider" -> {
                 val providerId = call.arguments as? String
                 if (providerId != null) {
-                    RNPlacementProviderManager.destroyProvider(providerId)
+                    SPPlacementProviderManager.destroyProvider(providerId)
                     result.success(null)
                 } else {
                     result.error("INVALID_ARGUMENT", "providerId is required", null)
@@ -79,7 +79,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                 val providerId = args?.get("providerId") as? String ?: return
                 val config = args["config"] as? String
 
-                val provider = RNPlacementProviderManager.getProvider(providerId) ?: return
+                val provider = SPPlacementProviderManager.getProvider(providerId) ?: return
                 
                 if (config != null) {
                     provider.configure(config)
@@ -93,7 +93,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                 val providerId = args?.get("providerId") as? String ?: return
                 val products = args["products"] as? String
 
-                val provider = RNPlacementProviderManager.getProvider(providerId) ?: return
+                val provider = SPPlacementProviderManager.getProvider(providerId) ?: return
                 
                 if (products != null) {
                     provider.hydrateProducts(products)
@@ -107,7 +107,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                 val providerId = args?.get("providerId") as? String ?: return
                 val products = args["products"] as? String
 
-                val provider = RNPlacementProviderManager.getProvider(providerId) ?: return
+                val provider = SPPlacementProviderManager.getProvider(providerId) ?: return
                 
                 if (products != null) {
                     provider.hydrateWishlist(products)
@@ -121,7 +121,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                 val providerId = args?.get("providerId") as? String ?: return
                 val cart = args["cart"] as? String
 
-                val provider = RNPlacementProviderManager.getProvider(providerId) ?: return
+                val provider = SPPlacementProviderManager.getProvider(providerId) ?: return
                 
                 if (cart != null) {
                     provider.updateCart(cart)

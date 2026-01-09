@@ -4,7 +4,7 @@ internal func encodeToJson(_ dictionary: [String: Any?]) -> String? {
   let filtered = dictionary.compactMapValues { $0 }
 
   guard let jsonData = try? JSONSerialization.data(withJSONObject: filtered, options: []) else {
-    print("[RNStorylyPlacement] RN bridge JSON encode error)")
+    print("[SPStorylyPlacement] SP bridge JSON encode error)")
     return nil
   }
   return String(data: jsonData, encoding: .utf8)
@@ -21,10 +21,10 @@ internal func decodeFromJson(_ json: String?) -> [String: Any]? {
     if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
       return dictionary
     }
-    print("[RNStorylyPlacement] RN bridge JSON decode error: Not a dictionary")
+    print("[SPStorylyPlacement] SP bridge JSON decode error: Not a dictionary")
     return nil
   } catch {
-    print("[RNStorylyPlacement] RN bridge JSON decode error: \(error.localizedDescription)")
+    print("[SPStorylyPlacement] SP bridge JSON decode error: \(error.localizedDescription)")
     return nil
   }
 }

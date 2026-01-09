@@ -5,7 +5,7 @@ import StorylyCore
 import StorylyStoryBar
 import StorylyVideoFeed
 
-@objc public class RNStorylyPlacementView: UIView {
+@objc public class SPStorylyPlacementView: UIView {
     
     private var providerId: String?
     private var placementView: STRPlacementView?
@@ -16,7 +16,7 @@ import StorylyVideoFeed
     internal var wishlistUpdateCallbacks: [String: WishlistCallbacks] = [:]
     
     // Event dispatch closure (set by bridge layer)
-    @objc public var dispatchEvent: ((RNPlacementEventType, String?) -> Void)?
+    @objc public var dispatchEvent: ((SPPlacementEventType, String?) -> Void)?
   
     private lazy var delegate = STRDelegateImpl(placementView: self)
     private lazy var productDelegate = STRProductDelegateImpl(placementView: self)
@@ -32,11 +32,11 @@ import StorylyVideoFeed
     @objc public func configure(providerId: String) {
         DispatchQueue.main.async {
             if providerId == self.providerId {
-                print("[RNStorylyPlacement] Already configured with providerId: \(providerId)")
+                print("[SPStorylyPlacement] Already configured with providerId: \(providerId)")
                 return
             }
             
-            print("[RNStorylyPlacement] Configuring with providerId: \(providerId)")
+            print("[SPStorylyPlacement] Configuring with providerId: \(providerId)")
             self.providerId = providerId
             self.setupPlacementView()
         }
@@ -44,7 +44,7 @@ import StorylyVideoFeed
 
     @objc public func callWidget(id: String, method: String, raw: String?) {
         DispatchQueue.main.async {
-            print("[RNStorylyPlacement] callWidget: \(id)-\(method)-\(raw ?? "nil")")
+            print("[SPStorylyPlacement] callWidget: \(id)-\(method)-\(raw ?? "nil")")
             
             guard let widget = self.widgetMap[id]?.value else { return }
             let params = decodeFromJson(raw)
@@ -131,10 +131,10 @@ import StorylyVideoFeed
     private func setupPlacementView() {
         guard let currentProviderId = providerId else { return }
         
-        print("[RNStorylyPlacement] Setting up placement view with providerId: \(currentProviderId)")
+        print("[SPStorylyPlacement] Setting up placement view with providerId: \(currentProviderId)")
         
-        guard let providerWrapper = RNPlacementProviderManager.shared.getProvider(id: currentProviderId) else {
-            print("[RNStorylyPlacement] Provider not found for id: \(currentProviderId)")
+        guard let providerWrapper = SPPlacementProviderManager.shared.getProvider(id: currentProviderId) else {
+            print("[SPStorylyPlacement] Provider not found for id: \(currentProviderId)")
             return
         }
         
@@ -261,16 +261,16 @@ struct WishlistCallbacks {
 // MARK: - STRListener Implementation
 
 private class STRDelegateImpl: NSObject, STRDelegate {
-    weak var placementView: RNStorylyPlacementView?
+    weak var placementView: SPStorylyPlacementView?
     
-    init(placementView: RNStorylyPlacementView) {
+    init(placementView: SPStorylyPlacementView) {
         self.placementView = placementView
     }
     
     func onActionClicked(widget: any STRWidgetController, url: String, payload: STRPayload) {
         guard let placementView = placementView else { return }
         
-        print("[RNStorylyPlacement] onActionClicked: url=\(url)")
+        print("[SPStorylyPlacement] onActionClicked: url=\(url)")
         
         let eventData: [String: Any] = [
             "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
@@ -286,7 +286,7 @@ private class STRDelegateImpl: NSObject, STRDelegate {
     func onEvent(widget: any STRWidgetController, payload: STREventPayload) {
         guard let placementView = placementView else { return }
         
-        print("[RNStorylyPlacement] onEvent: widgetType=\(widget.getType()), payload=\(payload.baseEvent.getType())")
+        print("[SPStorylyPlacement] onEvent: widgetType=\(widget.getType()), payload=\(payload.baseEvent.getType())")
         
         let eventData: [String: Any] = [
             "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
@@ -301,7 +301,7 @@ private class STRDelegateImpl: NSObject, STRDelegate {
     func onFail(widget: any STRWidgetController, payload: STRErrorPayload) {
         guard let placementView = placementView else { return }
         
-        print("[RNStorylyPlacement] onFail: widget=\(widget.getType()), payload=\(payload.baseError.getType())")
+        print("[SPStorylyPlacement] onFail: widget=\(widget.getType()), payload=\(payload.baseError.getType())")
         
         let eventData: [String: Any] = [
             "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
@@ -316,7 +316,7 @@ private class STRDelegateImpl: NSObject, STRDelegate {
   func onWidgetReady(widget: any STRWidgetController, ratio: CGFloat) {
       guard let placementView = placementView else { return }
       
-      print("[RNStorylyPlacement] onWidgetReady: ratio=\(ratio)")
+      print("[SPStorylyPlacement] onWidgetReady: ratio=\(ratio)")
       
       let eventData: [String: Any] = [
           "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
@@ -332,16 +332,16 @@ private class STRDelegateImpl: NSObject, STRDelegate {
 // MARK: - STRProductListener Implementation
 
 private class STRProductDelegateImpl: NSObject, STRProductDelegate {
-    weak var placementView: RNStorylyPlacementView?
+    weak var placementView: SPStorylyPlacementView?
     
-    init(placementView: RNStorylyPlacementView) {
+    init(placementView: SPStorylyPlacementView) {
         self.placementView = placementView
     }
     
     func onProductEvent(widget: any STRWidgetController, event: STREvent) {
         guard let placementView = placementView else { return }
         
-        print("[RNStorylyPlacement] onProductEvent: \(event.getType())")
+        print("[SPStorylyPlacement] onProductEvent: \(event.getType())")
         
         let eventData: [String: Any] = [
             "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
@@ -356,7 +356,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
     func onUpdateCart(widget: any STRWidgetController, event: STREvent, cart: STRCart?, change: STRCartItem?, onSuccess: ((STRCart?) -> Void)?, onFail: ((STRCartEventResult) -> Void)?) {
         guard let placementView = placementView else { return }
         
-        print("[RNStorylyPlacement] onUpdateCart: \(event.getType())")
+        print("[SPStorylyPlacement] onUpdateCart: \(event.getType())")
         
         let responseId = UUID().uuidString
         placementView.cartUpdateCallbacks[responseId] = CartCallbacks(onSuccess: onSuccess, onFail: onFail)
@@ -377,7 +377,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
     func onUpdateWishlist(widget: any STRWidgetController, event: STREvent, item: STRProductItem?, onSuccess: ((STRProductItem?) -> Void)?, onFail: ((STRWishlistEventResult) -> Void)?) {
         guard let placementView = placementView else { return }
         
-        print("[RNStorylyPlacement] onUpdateWishlist: \(event.getType())")
+        print("[SPStorylyPlacement] onUpdateWishlist: \(event.getType())")
         
         let responseId = UUID().uuidString
         placementView.wishlistUpdateCallbacks[responseId] = WishlistCallbacks(onSuccess: onSuccess, onFail: onFail)

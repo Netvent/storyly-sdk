@@ -10,7 +10,7 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodCall
-import com.appsamurai.storyly.storyly_placement_flutter.common.RNStorylyPlacementView
+import com.appsamurai.storyly.storyly_placement_flutter.common.SPStorylyPlacementView
 
 class StorylyPlacementFlutterViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
@@ -24,7 +24,7 @@ class StorylyPlacementFlutterView(
     messenger: BinaryMessenger
 ) : PlatformView, MethodChannel.MethodCallHandler {
 
-    private val placementView: RNStorylyPlacementView = RNStorylyPlacementView(context)
+    private val placementView: SPStorylyPlacementView = SPStorylyPlacementView(context)
     private val methodChannel: MethodChannel = MethodChannel(messenger, "storyly_placement_flutter/view_$id")
 
     init {

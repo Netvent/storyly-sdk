@@ -9,7 +9,7 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.storylyplacementreactnative.NativeStorylyPlacementProviderSpec
-import com.storylyplacementreactnative.common.RNPlacementProviderManager
+import com.storylyplacementreactnative.common.SPPlacementProviderManager
 
 
 @ReactModule(name = StorylyPlacementProviderModule.NAME)
@@ -28,7 +28,7 @@ class StorylyPlacementProviderModule(
     @ReactMethod
     override fun createProvider(providerId: String, promise: Promise) {
         Log.d("[StorylyPlacementProviderModule]", "Creating provider: $providerId")
-        val wrapper = RNPlacementProviderManager.createProvider(
+        val wrapper = SPPlacementProviderManager.createProvider(
             reactContext.applicationContext,
             providerId,
         )
@@ -41,31 +41,31 @@ class StorylyPlacementProviderModule(
     @ReactMethod
     override fun destroyProvider(providerId: String) {
         Log.d("[StorylyPlacementProviderModule]", "Destroying provider: $providerId")
-        RNPlacementProviderManager.destroyProvider(providerId)
+        SPPlacementProviderManager.destroyProvider(providerId)
     }
 
     @ReactMethod
     override fun updateConfig(providerId: String, config: String) {
         Log.d("[StorylyPlacementProviderModule]", "Updating config for provider: $providerId")
-        RNPlacementProviderManager.getProvider(providerId)?.configure(config)
+        SPPlacementProviderManager.getProvider(providerId)?.configure(config)
     }
 
     @ReactMethod
     override fun hydrateProducts(providerId: String, productsJson: String) {
         Log.d("[StorylyPlacementProviderModule]", "Hydrating products for provider: $providerId")
-        RNPlacementProviderManager.getProvider(providerId)?.hydrateProducts(productsJson)
+        SPPlacementProviderManager.getProvider(providerId)?.hydrateProducts(productsJson)
     }
 
     @ReactMethod
     override fun hydrateWishlist(providerId: String, productsJson: String) {
         Log.d("[StorylyPlacementProviderModule]", "Hydrating wishlist for provider: $providerId")
-        RNPlacementProviderManager.getProvider(providerId)?.hydrateWishlist(productsJson)
+        SPPlacementProviderManager.getProvider(providerId)?.hydrateWishlist(productsJson)
     }
 
     @ReactMethod
     override fun updateCart(providerId: String, cartJson: String) {
         Log.d("[StorylyPlacementProviderModule]", "Updating cart for provider: $providerId")
-        RNPlacementProviderManager.getProvider(providerId)?.updateCart(cartJson)
+        SPPlacementProviderManager.getProvider(providerId)?.updateCart(cartJson)
     }
 
     @ReactMethod
