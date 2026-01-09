@@ -1,4 +1,5 @@
 import '../widgets/banner.dart';
+import '../widgets/canvas.dart';
 import '../widgets/story_bar.dart';
 import '../widgets/swipe_card.dart';
 import '../widgets/video_feed.dart';
@@ -45,6 +46,8 @@ class STRDataPayload {
         return SwipeCardDataPayload.fromJson(json);
       case 'banner':
         return BannerDataPayload.fromJson(json);
+      case 'canvas':
+        return CanvasDataPayload.fromJson(json);
       default:
         return STRDataPayload(
           type: type,
@@ -72,6 +75,8 @@ abstract class STRPayload {
         return STRSwipeCardPayload.fromJson(json);
       case 'banner':
         return STRBannerPayload.fromJson(json);
+      case 'canvas':
+        return STRCanvasPayload.fromJson(json);
       default:
         return _STRPayloadImpl();
     }

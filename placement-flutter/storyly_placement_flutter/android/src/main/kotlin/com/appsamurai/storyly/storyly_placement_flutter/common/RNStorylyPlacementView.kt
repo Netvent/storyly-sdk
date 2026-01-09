@@ -76,6 +76,7 @@ class RNStorylyPlacementView(context: Context) : FlutterView(context) {
                 STRWidgetType.VideoFeedPresenter -> handleVideoFeedPresenterMethod(widget, method, params)
                 STRWidgetType.Banner -> return@post
                 STRWidgetType.SwipeCard -> return@post
+                STRWidgetType.Canvas -> return@post
                 STRWidgetType.None -> return@post
             }
         }

@@ -56,7 +56,7 @@ import StorylyVideoFeed
                     self.handleVideoFeedMethod(widget: widget, method: method, params: params)
                 case .videoFeedPresenter:
                   self.handleVideoFeedPresenterMethod(widget: widget, method: method, params: params)
-                case .banner, .swipeCard, .none:
+                case .banner, .swipeCard, .canvas, .none:
                   break
                 @unknown default:
                   break
