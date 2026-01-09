@@ -1,6 +1,6 @@
 
 
-export type STRWidgetType = 'banner' | 'story-bar' | 'video-feed' | 'video-feed-presenter' | 'swipe-card';
+export type STRWidgetType = 'banner' | 'story-bar' | 'video-feed' | 'video-feed-presenter' | 'swipe-card' | 'canvas';
 
 export interface PlacementWidget {
   viewId: string;

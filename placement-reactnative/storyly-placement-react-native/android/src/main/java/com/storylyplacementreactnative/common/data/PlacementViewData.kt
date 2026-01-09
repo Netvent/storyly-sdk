@@ -2,6 +2,8 @@ package com.storylyplacementreactnative.common.data
 
 import com.appsamurai.storyly.banner.analytics.event.BannerEventPayload
 import com.appsamurai.storyly.banner.data.model.BannerPayload
+import com.appsamurai.storyly.canvas.analytics.event.CanvasEventPayload
+import com.appsamurai.storyly.canvas.data.model.CanvasPayload
 import com.appsamurai.storyly.core.analytics.error.STRErrorPayload
 import com.appsamurai.storyly.core.analytics.event.STREventPayload
 import com.appsamurai.storyly.core.data.model.STRPayload
@@ -12,6 +14,7 @@ import com.appsamurai.storyly.swipecard.data.model.SwipeCardPayload
 import com.appsamurai.storyly.videofeed.analytics.event.VideoFeedEventPayload
 import com.appsamurai.storyly.videofeed.data.model.VideoFeedPayload
 import com.storylyplacementreactnative.common.data.widgets.encodeBannerPayload
+import com.storylyplacementreactnative.common.data.widgets.encodeCanvasPayload
 import com.storylyplacementreactnative.common.data.widgets.encodeStoryBarPayload
 import com.storylyplacementreactnative.common.data.widgets.encodeSwipeCardPayload
 import com.storylyplacementreactnative.common.data.widgets.encodeVideoFeedPayload
@@ -23,6 +26,7 @@ fun encodeSTRPayload(payload: STRPayload): Map<String, Any?> {
         is VideoFeedPayload -> encodeVideoFeedPayload(payload)
         is BannerPayload -> encodeBannerPayload(payload)
         is SwipeCardPayload -> encodeSwipeCardPayload(payload)
+        is CanvasPayload -> encodeCanvasPayload(payload)
         else -> null
     } ?: emptyMap()
 }
@@ -36,6 +40,7 @@ fun encodeSTREventPayload(payload: STREventPayload): Map<String, Any?> {
         is VideoFeedEventPayload -> encodeVideoFeedPayload(payload.payload)
         is BannerEventPayload -> encodeBannerPayload(payload.payload)
         is SwipeCardEventPayload -> encodeSwipeCardPayload(payload.payload)
+        is CanvasEventPayload -> encodeCanvasPayload(payload.payload)
         else -> null
     } ?: emptyMap()
     return baseMap + addition

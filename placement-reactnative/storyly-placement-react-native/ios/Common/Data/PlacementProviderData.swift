@@ -5,6 +5,7 @@ import StorylyBanner
 import StorylyStoryBar
 import StorylyVideoFeed
 import StorylySwipeCard
+import StorylyCanvas
 
 // MARK: - STRDataPayload Encoding
 
@@ -18,6 +19,8 @@ func encodeDataPayload(_ data: STRDataPayload) -> [String: Any] {
         return encodeBannerDataPayload(bannerData)
     case let swipeCardData as SwipeCardDataPayload:
         return encodeSwipeCardDataPayload(swipeCardData)
+    case let canvasData as CanvasDataPayload:
+        return encodeCanvasDataPayload(canvasData)
     default:
         return [:]
     }
