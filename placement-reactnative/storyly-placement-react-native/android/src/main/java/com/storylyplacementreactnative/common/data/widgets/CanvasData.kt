@@ -1,7 +1,7 @@
 package com.storylyplacementreactnative.common.data.widgets
 
 import com.appsamurai.storyly.canvas.data.CanvasDataPayload
-import com.appsamurai.storyly.canvas.data.model.CanvasItem
+import com.appsamurai.storyly.canvas.data.CanvasItem
 import com.appsamurai.storyly.canvas.data.model.CanvasPayload
 import com.appsamurai.storyly.core.STRWidgetType
 import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
