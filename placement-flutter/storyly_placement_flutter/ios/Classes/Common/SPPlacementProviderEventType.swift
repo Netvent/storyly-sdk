@@ -1,6 +1,6 @@
 import Foundation
 
-@objc public enum RNPlacementProviderEventType: Int {
+@objc public enum SPPlacementProviderEventType: Int {
     case onLoad
     case onLoadFail
     case onHydration
@@ -16,6 +16,6 @@ import Foundation
         }
     }
   
-    static var allCases: [RNPlacementProviderEventType] = [.onLoad, .onLoadFail, .onHydration]
+    static var allCases: [SPPlacementProviderEventType] = [.onLoad, .onLoadFail, .onHydration]
 }
 

@@ -10,7 +10,7 @@ fun encodeToJson(map: Map<String, Any?>?): String? {
   return try {
     JSONObject(map.filterValues { it != null }).toString()
   } catch (e: Exception) {
-    Log.e("[RNStorylyPlacement]", "RN bridge JSON encode error: ${e.localizedMessage ?: ""}")
+    Log.e("[SPStorylyPlacement]", "SP bridge JSON encode error: ${e.localizedMessage ?: ""}")
     null
   }
 }
@@ -21,7 +21,7 @@ fun decodeFromJson(json: String?): Map<String, Any?>? {
     val jsonObject = JSONObject(json)
     jsonObject.toMap()
   } catch (e: Exception) {
-    Log.e("[RNStorylyPlacement]", "RN bridge JSON decide error: ${e.localizedMessage ?: ""}")
+    Log.e("[SPStorylyPlacement]", "SP bridge JSON decode error: ${e.localizedMessage ?: ""}")
     null
   }
 }

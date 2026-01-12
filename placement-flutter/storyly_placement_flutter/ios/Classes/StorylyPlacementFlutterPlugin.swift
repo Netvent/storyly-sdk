@@ -23,7 +23,7 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
       result("iOS " + UIDevice.current.systemVersion)
     case "createProvider":
         if let providerId = call.arguments as? String {
-            let wrapper = RNPlacementProviderManager.shared.createProvider(id: providerId)
+            let wrapper = SPPlacementProviderManager.shared.createProvider(id: providerId)
             wrapper.sendEvent = { [weak self] id, event, eventData in
                 DispatchQueue.main.async {
                     let payload: [String: Any] = [
@@ -39,7 +39,7 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         }
     case "destroyProvider":
         if let providerId = call.arguments as? String {
-            RNPlacementProviderManager.shared.destroyProvider(id: providerId)
+            SPPlacementProviderManager.shared.destroyProvider(id: providerId)
             result(nil)
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId is required", details: nil))
@@ -48,7 +48,7 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         if let args = call.arguments as? [String: Any],
            let providerId = args["providerId"] as? String,
            let config = args["config"] as? String {
-            RNPlacementProviderManager.shared.getProvider(id: providerId)?.configure(configJson: config)
+            SPPlacementProviderManager.shared.getProvider(id: providerId)?.configure(configJson: config)
             result(nil)
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and config are required", details: nil))
@@ -57,7 +57,7 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         if let args = call.arguments as? [String: Any],
            let providerId = args["providerId"] as? String,
            let products = args["products"] as? String {
-            RNPlacementProviderManager.shared.getProvider(id: providerId)?.hydrateProducts(productsJson: products)
+            SPPlacementProviderManager.shared.getProvider(id: providerId)?.hydrateProducts(productsJson: products)
             result(nil)
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and products are required", details: nil))
@@ -66,7 +66,7 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         if let args = call.arguments as? [String: Any],
            let providerId = args["providerId"] as? String,
            let products = args["products"] as? String {
-            RNPlacementProviderManager.shared.getProvider(id: providerId)?.hydrateWishlist(productsJson: products)
+            SPPlacementProviderManager.shared.getProvider(id: providerId)?.hydrateWishlist(productsJson: products)
             result(nil)
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and products are required", details: nil))
@@ -75,7 +75,7 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         if let args = call.arguments as? [String: Any],
            let providerId = args["providerId"] as? String,
            let cart = args["cart"] as? String {
-            RNPlacementProviderManager.shared.getProvider(id: providerId)?.updateCart(cartJson: cart)
+            SPPlacementProviderManager.shared.getProvider(id: providerId)?.updateCart(cartJson: cart)
             result(nil)
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and cart are required", details: nil))
@@ -114,7 +114,7 @@ class StorylyPlacementFlutterViewFactory: NSObject, FlutterPlatformViewFactory {
 
 class StorylyPlacementFlutterView: NSObject, FlutterPlatformView {
     private var _view: UIView
-    private var placementView: RNStorylyPlacementView
+    private var placementView: SPStorylyPlacementView
     private var methodChannel: FlutterMethodChannel
 
     init(
@@ -124,7 +124,7 @@ class StorylyPlacementFlutterView: NSObject, FlutterPlatformView {
         messenger: FlutterBinaryMessenger
     ) {
         _view = UIView()
-        placementView = RNStorylyPlacementView()
+        placementView = SPStorylyPlacementView()
         
         methodChannel = FlutterMethodChannel(name: "storyly_placement_flutter/view_\(viewId)", binaryMessenger: messenger)
         

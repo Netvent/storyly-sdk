@@ -9,60 +9,60 @@ import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.viewmanagers.StorylyPlacementReactNativeViewManagerInterface
 import com.facebook.react.viewmanagers.StorylyPlacementReactNativeViewManagerDelegate
-import com.storylyplacementreactnative.common.RNPlacementEventType
-import com.storylyplacementreactnative.common.RNStorylyPlacementView
+import com.storylyplacementreactnative.common.SPPlacementEventType
+import com.storylyplacementreactnative.common.SPStorylyPlacementView
 
 
 @ReactModule(name = StorylyPlacementViewManager.NAME)
-class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>(),
-    StorylyPlacementReactNativeViewManagerInterface<RNStorylyPlacementView> {
+class StorylyPlacementViewManager : SimpleViewManager<SPStorylyPlacementView>(),
+    StorylyPlacementReactNativeViewManagerInterface<SPStorylyPlacementView> {
 
     companion object {
         const val NAME = "StorylyPlacementReactNativeView"
     }
 
-    private val delegate: ViewManagerDelegate<RNStorylyPlacementView> =
+    private val delegate: ViewManagerDelegate<SPStorylyPlacementView> =
         StorylyPlacementReactNativeViewManagerDelegate(this)
 
-    override fun getDelegate(): ViewManagerDelegate<RNStorylyPlacementView> = delegate
+    override fun getDelegate(): ViewManagerDelegate<SPStorylyPlacementView> = delegate
 
     override fun getName(): String = NAME
 
-    override fun createViewInstance(context: ThemedReactContext): RNStorylyPlacementView {
-        return RNStorylyPlacementView(context).apply {
+    override fun createViewInstance(context: ThemedReactContext): SPStorylyPlacementView {
+        return SPStorylyPlacementView(context).apply {
             dispatchEvent = { eventType, jsonPayload ->
                 val surfaceId = UIManagerHelper.getSurfaceId(context)
                 val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(context, id)
                 eventDispatcher?.dispatchEvent(
-                    RNPlacementEvent(surfaceId, id, eventType, jsonPayload)
+                    SPPlacementEvent(surfaceId, id, eventType, jsonPayload)
                 )
             }
         }
     }
 
 
-    override fun setProviderId(view: RNStorylyPlacementView?, providerId: String?) {
+    override fun setProviderId(view: SPStorylyPlacementView?, providerId: String?) {
         providerId ?: return
         view?.configure(providerId)
     }
 
-    override fun approveCartChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+    override fun approveCartChange(view: SPStorylyPlacementView?, responseId: String, raw: String?) {
         view?.approveCartChange(responseId, raw)
     }
 
-    override fun rejectCartChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+    override fun rejectCartChange(view: SPStorylyPlacementView?, responseId: String, raw: String?) {
         view?.rejectCartChange(responseId, raw)
     }
 
-    override fun approveWishlistChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+    override fun approveWishlistChange(view: SPStorylyPlacementView?, responseId: String, raw: String?) {
         view?.approveWishlistChange(responseId, raw)
     }
 
-    override fun rejectWishlistChange(view: RNStorylyPlacementView?, responseId: String, raw: String?) {
+    override fun rejectWishlistChange(view: SPStorylyPlacementView?, responseId: String, raw: String?) {
         view?.rejectWishlistChange(responseId, raw)
     }
 
-    override fun callWidget(view: RNStorylyPlacementView?, id: String, method: String, raw: String?) {
+    override fun callWidget(view: SPStorylyPlacementView?, id: String, method: String, raw: String?) {
         view?.callWidget(id, method, raw)
     }
 
@@ -70,7 +70,7 @@ class StorylyPlacementViewManager : SimpleViewManager<RNStorylyPlacementView>(),
         val events = super.getExportedCustomDirectEventTypeConstants()
         val eventMap = mutableMapOf<String, Any>()
         events?.forEach { eventMap[it.key] = it.value }
-        RNPlacementEventType.entries.forEach {
+        SPPlacementEventType.entries.forEach {
             eventMap[it.eventName] = mapOf("registrationName" to it.eventName)
         }
         return eventMap

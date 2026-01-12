@@ -5,6 +5,7 @@ import StorylyBanner
 import StorylyStoryBar
 import StorylyVideoFeed
 import StorylySwipeCard
+import StorylyCanvas
 
 
 // MARK: - STRPayload Encoding
@@ -19,6 +20,8 @@ func encodeSTRPayload(_ payload: STRPayload) -> [String: Any] {
         return encodeBannerPayload(bannerPayload) ?? [:]
     case let swipeCardPayload as SwipeCardPayload:
         return encodeSwipeCardPayload(swipeCardPayload) ?? [:]
+    case let canvasPayload as CanvasPayload:
+        return encodeCanvasPayload(canvasPayload) ?? [:]
     default:
         return [:]
     }
@@ -41,6 +44,8 @@ func encodeSTREventPayload(_ payload: STREventPayload) -> [String: Any] {
         addition = encodeBannerPayload(bannerEvent.payload) ?? [:]
     case let swipeCardEvent as SwipeCardEventPayload:
         addition = encodeSwipeCardPayload(swipeCardEvent.payload) ?? [:]
+    case let canvasEvent as CanvasEventPayload:
+        addition = encodeCanvasPayload(canvasEvent.payload) ?? [:]
     default:
         break
     }

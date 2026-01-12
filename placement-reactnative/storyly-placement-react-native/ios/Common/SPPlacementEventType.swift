@@ -1,6 +1,6 @@
 import Foundation
 
-@objc public enum RNPlacementEventType: Int {
+@objc public enum SPPlacementEventType: Int {
   case onWidgetReady
   case onFail
   case onEvent
@@ -28,7 +28,7 @@ import Foundation
     }
   }
   
-  static var allCases: [RNPlacementEventType] {
+  static var allCases: [SPPlacementEventType] {
     return [.onWidgetReady, .onFail, .onEvent, .onActionClicked, .onProductEvent, .onUpdateCart, .onUpdateWishlist]
   }
 }

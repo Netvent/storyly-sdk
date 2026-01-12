@@ -38,7 +38,6 @@ func encodeStoryGroupItem(_ group: StoryGroup?) -> [String: Any]? {
         "iconVideoThumbnailUrl": group.iconVideoThumbnailUrl?.absoluteString,
         "pinned": group.pinned,
         "type": group.type.description,
-        "nudge": group.nudge,
         "style": encodeStoryGroupStyle(group.style),
         "nudge": group.nudge,
         "stories": group.stories.compactMap { encodeStory($0) }

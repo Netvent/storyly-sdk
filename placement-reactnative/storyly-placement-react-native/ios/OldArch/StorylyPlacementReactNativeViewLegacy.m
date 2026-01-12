@@ -15,8 +15,8 @@
     return objc_getAssociatedObject(self, @selector(lowercaseName)); \
 }
 
-// Category to add event properties to RNStorylyPlacementView (OldArch only)
-@interface RNStorylyPlacementView (EventProps)
+// Category to add event properties to SPStorylyPlacementView (OldArch only)
+@interface SPStorylyPlacementView (EventProps)
 @property (nonatomic, copy) RCTBubblingEventBlock onWidgetReady;
 @property (nonatomic, copy) RCTBubblingEventBlock onFail;
 @property (nonatomic, copy) RCTBubblingEventBlock onEvent;
@@ -26,7 +26,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onUpdateWishlist;
 @end
 
-@implementation RNStorylyPlacementView (EventProps)
+@implementation SPStorylyPlacementView (EventProps)
 
 RN_BUBBLING_EVENT_PROPERTY(OnWidgetReady, onWidgetReady)
 RN_BUBBLING_EVENT_PROPERTY(OnFail, onFail)
@@ -49,10 +49,10 @@ RCT_EXPORT_MODULE(StorylyPlacementReactNativeViewLegacy)
 
 - (UIView *)view
 {
-    RNStorylyPlacementView *view = [[RNStorylyPlacementView alloc] init];
+    SPStorylyPlacementView *view = [[SPStorylyPlacementView alloc] init];
     
     __weak typeof(view) weakView = view;
-    view.dispatchEvent = ^(RNPlacementEventType eventType, NSString * _Nullable payload) {
+    view.dispatchEvent = ^(SPPlacementEventType eventType, NSString * _Nullable payload) {
         __strong typeof(weakView) strongView = weakView;
         if (!strongView) return;
         
@@ -62,25 +62,25 @@ RCT_EXPORT_MODULE(StorylyPlacementReactNativeViewLegacy)
         }
         
         switch (eventType) {
-            case RNPlacementEventTypeOnWidgetReady:
+            case SPPlacementEventTypeOnWidgetReady:
                 if (strongView.onWidgetReady) strongView.onWidgetReady(eventData);
                 break;
-            case RNPlacementEventTypeOnFail:
+            case SPPlacementEventTypeOnFail:
                 if (strongView.onFail) strongView.onFail(eventData);
                 break;
-            case RNPlacementEventTypeOnEvent:
+            case SPPlacementEventTypeOnEvent:
                 if (strongView.onEvent) strongView.onEvent(eventData);
                 break;
-            case RNPlacementEventTypeOnActionClicked:
+            case SPPlacementEventTypeOnActionClicked:
                 if (strongView.onActionClicked) strongView.onActionClicked(eventData);
                 break;
-            case RNPlacementEventTypeOnProductEvent:
+            case SPPlacementEventTypeOnProductEvent:
                 if (strongView.onProductEvent) strongView.onProductEvent(eventData);
                 break;
-            case RNPlacementEventTypeOnUpdateCart:
+            case SPPlacementEventTypeOnUpdateCart:
                 if (strongView.onUpdateCart) strongView.onUpdateCart(eventData);
                 break;
-            case RNPlacementEventTypeOnUpdateWishlist:
+            case SPPlacementEventTypeOnUpdateWishlist:
                 if (strongView.onUpdateWishlist) strongView.onUpdateWishlist(eventData);
                 break;
         }
@@ -99,7 +99,7 @@ RCT_EXPORT_VIEW_PROPERTY(onUpdateCart, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onUpdateWishlist, RCTBubblingEventBlock)
 
 // MARK: - Props
-RCT_CUSTOM_VIEW_PROPERTY(providerId, NSString, RNStorylyPlacementView)
+RCT_CUSTOM_VIEW_PROPERTY(providerId, NSString, SPStorylyPlacementView)
 {
     NSString *providerId = [RCTConvert NSString:json];
     if (providerId) {
@@ -115,8 +115,8 @@ RCT_EXPORT_METHOD(callWidget:(nonnull NSNumber *)reactTag
                   raw:(NSString *)raw)
 {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
-        RNStorylyPlacementView *view = (RNStorylyPlacementView *)viewRegistry[reactTag];
-        if ([view isKindOfClass:[RNStorylyPlacementView class]]) {
+        SPStorylyPlacementView *view = (SPStorylyPlacementView *)viewRegistry[reactTag];
+        if ([view isKindOfClass:[SPStorylyPlacementView class]]) {
             [view callWidgetWithId:widgetId method:method raw:raw];
         }
     }];
@@ -127,8 +127,8 @@ RCT_EXPORT_METHOD(approveCartChange:(nonnull NSNumber *)reactTag
                   raw:(NSString *)raw)
 {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
-        RNStorylyPlacementView *view = (RNStorylyPlacementView *)viewRegistry[reactTag];
-        if ([view isKindOfClass:[RNStorylyPlacementView class]]) {
+        SPStorylyPlacementView *view = (SPStorylyPlacementView *)viewRegistry[reactTag];
+        if ([view isKindOfClass:[SPStorylyPlacementView class]]) {
             [view approveCartChangeWithResponseId:responseId raw:raw];
         }
     }];
@@ -139,8 +139,8 @@ RCT_EXPORT_METHOD(rejectCartChange:(nonnull NSNumber *)reactTag
                   raw:(NSString *)raw)
 {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
-        RNStorylyPlacementView *view = (RNStorylyPlacementView *)viewRegistry[reactTag];
-        if ([view isKindOfClass:[RNStorylyPlacementView class]]) {
+        SPStorylyPlacementView *view = (SPStorylyPlacementView *)viewRegistry[reactTag];
+        if ([view isKindOfClass:[SPStorylyPlacementView class]]) {
             [view rejectCartChangeWithResponseId:responseId raw:raw];
         }
     }];
@@ -151,8 +151,8 @@ RCT_EXPORT_METHOD(approveWishlistChange:(nonnull NSNumber *)reactTag
                   raw:(NSString *)raw)
 {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
-        RNStorylyPlacementView *view = (RNStorylyPlacementView *)viewRegistry[reactTag];
-        if ([view isKindOfClass:[RNStorylyPlacementView class]]) {
+        SPStorylyPlacementView *view = (SPStorylyPlacementView *)viewRegistry[reactTag];
+        if ([view isKindOfClass:[SPStorylyPlacementView class]]) {
             [view approveWishlistChangeWithResponseId:responseId raw:raw];
         }
     }];
@@ -163,8 +163,8 @@ RCT_EXPORT_METHOD(rejectWishlistChange:(nonnull NSNumber *)reactTag
                   raw:(NSString *)raw)
 {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
-        RNStorylyPlacementView *view = (RNStorylyPlacementView *)viewRegistry[reactTag];
-        if ([view isKindOfClass:[RNStorylyPlacementView class]]) {
+        SPStorylyPlacementView *view = (SPStorylyPlacementView *)viewRegistry[reactTag];
+        if ([view isKindOfClass:[SPStorylyPlacementView class]]) {
             [view rejectWishlistChangeWithResponseId:responseId raw:raw];
         }
     }];
