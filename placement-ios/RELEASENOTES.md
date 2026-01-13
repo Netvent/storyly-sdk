@@ -1,4 +1,9 @@
 # Release Notes
+### 1.2.1 (13.01.2026)
+* fixed a bug related to video feed presenter layouting
+* fixed memory leaks
+* improved video feed tutorial view present logic
+
 ### 1.2.0 (07.01.2026)
 * added storyly canvas widget
 * added etag handling for Not Modified network responses
