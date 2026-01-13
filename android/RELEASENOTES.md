@@ -1,4 +1,8 @@
 # Release Notes
+### 4.19.3 (13.01.2026)
+* fixed a bug related to pause/resume flow of vertical feed presenter
+* improved vertical feed tutorial view present logic
+  
 ### 4.19.2 (26.12.2025)
 * fixed capitalization in German localization
 * improved story transition handling in case of layer fails
