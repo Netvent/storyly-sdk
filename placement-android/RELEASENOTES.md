@@ -1,4 +1,9 @@
 # Release Notes
+### 1.2.1 (13.01.2026)
+* fixed a bug related to canvas widget image load
+* fixed a memory leak in video feed widget
+* improved video feed tutorial view present logic
+  
 ### 1.2.0 (07.01.2026)
 * added storyly canvas widget
 * added etag handling for Not Modified network responses
@@ -7,6 +12,7 @@
 * improved widget scale logic
 * fixed capitalization in German localization
 * fixed a bug related banner to video feed flow
+* fixed a bug related to pause/resume flow of video feed presenter
 
 ### 1.1.0 (03.12.2025)
 * added play/pause/replay accesibility controls for stories
