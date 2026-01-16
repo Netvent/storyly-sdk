@@ -7,8 +7,8 @@ abstract class StorylyPlacementFlutterPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static StorylyPlacementFlutterPlatform _instance = MethodChannelStorylyPlacementFlutter();
-
+  static StorylyPlacementFlutterPlatform _instance =
+      MethodChannelStorylyPlacementFlutter();
 
   static StorylyPlacementFlutterPlatform get instance => _instance;
 
@@ -46,7 +46,11 @@ abstract class StorylyPlacementFlutterPlatform extends PlatformInterface {
   }
 
   /// Sets the callback for receiving method calls from the native platform.
-  void setMethodCallHandler(Future<dynamic> Function(String method, dynamic arguments)? handler) {
-    throw UnimplementedError('setMethodCallHandler() has not been implemented.');
+  void setMethodCallHandler(
+    Future<dynamic> Function(String method, dynamic arguments)? handler,
+  ) {
+    throw UnimplementedError(
+      'setMethodCallHandler() has not been implemented.',
+    );
   }
 }

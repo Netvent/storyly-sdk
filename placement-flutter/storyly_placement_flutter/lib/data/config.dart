@@ -31,7 +31,8 @@ class StorylyPlacementConfig {
       layoutDirection: json['layoutDirection'],
       customParameter: json['customParameter'],
       labels: (json['labels'] as List<dynamic>?)?.cast<String>(),
-      userProperties: (json['userProperties'] as Map<String, dynamic>?)?.cast<String, String>(),
+      userProperties: (json['userProperties'] as Map<String, dynamic>?)
+          ?.cast<String, String>(),
       productConfig: json['productConfig'] != null
           ? StorylyProductConfig.fromJson(json['productConfig'])
           : null,
@@ -64,10 +65,7 @@ class StorylyProductConfig {
   final bool? isFallbackEnabled;
   final bool? isCartEnabled;
 
-  StorylyProductConfig({
-    this.isFallbackEnabled,
-    this.isCartEnabled,
-  });
+  StorylyProductConfig({this.isFallbackEnabled, this.isCartEnabled});
 
   factory StorylyProductConfig.fromJson(Map<String, dynamic> json) {
     return StorylyProductConfig(
@@ -143,4 +141,3 @@ class StorylyNetworkConfig {
     };
   }
 }
-

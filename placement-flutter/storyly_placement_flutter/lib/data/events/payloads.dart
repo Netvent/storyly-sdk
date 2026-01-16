@@ -8,25 +8,17 @@ import '../widgets/video_feed.dart';
 
 class PlacementWidget {
   final String viewId;
-  final String type; // STRWidgetType: 'banner' | 'story-bar' | 'video-feed' | 'video-feed-presenter' | 'swipe-card'
+  final String
+  type; // STRWidgetType: 'banner' | 'story-bar' | 'video-feed' | 'video-feed-presenter' | 'swipe-card'
 
-  PlacementWidget({
-    required this.viewId,
-    required this.type,
-  });
+  PlacementWidget({required this.viewId, required this.type});
 
   factory PlacementWidget.fromJson(Map<String, dynamic> json) {
-    return PlacementWidget(
-      viewId: json['viewId'],
-      type: json['type'],
-    );
+    return PlacementWidget(viewId: json['viewId'], type: json['type']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'viewId': viewId,
-      'type': type,
-    };
+    return {'viewId': viewId, 'type': type};
   }
 }
 
@@ -49,16 +41,12 @@ class STRDataPayload {
       case 'canvas':
         return CanvasDataPayload.fromJson(json);
       default:
-        return STRDataPayload(
-          type: type,
-        );
+        return STRDataPayload(type: type);
     }
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'type': type,
-    };
+    return {'type': type};
   }
 }
 
@@ -81,7 +69,7 @@ abstract class STRPayload {
         return _STRPayloadImpl();
     }
   }
-  
+
   Map<String, dynamic> toJson();
 }
 
@@ -94,10 +82,7 @@ class STREventPayload {
   final String event;
   final STRPayload? payload;
 
-  STREventPayload({
-    required this.event,
-    this.payload,
-  });
+  STREventPayload({required this.event, this.payload});
 
   factory STREventPayload.fromJson(Map<String, dynamic> json, String type) {
     return STREventPayload(
@@ -107,10 +92,7 @@ class STREventPayload {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'event': event,
-      'payload': payload?.toJson(),
-    };
+    return {'event': event, 'payload': payload?.toJson()};
   }
 }
 
@@ -118,23 +100,13 @@ class STRErrorPayload {
   final String event;
   final String message;
 
-  STRErrorPayload({
-    required this.event,
-    required this.message,
-  });
+  STRErrorPayload({required this.event, required this.message});
 
   factory STRErrorPayload.fromJson(Map<String, dynamic> json) {
-    return STRErrorPayload(
-      event: json['event'],
-      message: json['message'],
-    );
+    return STRErrorPayload(event: json['event'], message: json['message']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'event': event,
-      'message': message,
-    };
+    return {'event': event, 'message': message};
   }
 }
-

@@ -6,11 +6,7 @@ class StoryBarComponent {
   final String id;
   final String? customPayload;
 
-  StoryBarComponent({
-    required this.type,
-    required this.id,
-    this.customPayload,
-  });
+  StoryBarComponent({required this.type, required this.id, this.customPayload});
 
   factory StoryBarComponent.fromJson(Map<String, dynamic> json) {
     final type = json['type'] as String;
@@ -49,11 +45,7 @@ class StoryBarComponent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'type': type,
-      'id': id,
-      'customPayload': customPayload,
-    };
+    return {'type': type, 'id': id, 'customPayload': customPayload};
   }
 }
 
@@ -421,10 +413,7 @@ class StoryRatingComponent extends StoryBarComponent {
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json.addAll({
-      'emojiCode': emojiCode,
-      'rating': rating,
-    });
+    json.addAll({'emojiCode': emojiCode, 'rating': rating});
     return json;
   }
 }
@@ -451,9 +440,7 @@ class StoryPromoCodeComponent extends StoryBarComponent {
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json.addAll({
-      'text': text,
-    });
+    json.addAll({'text': text});
     return json;
   }
 }
@@ -480,9 +467,7 @@ class StoryCommentComponent extends StoryBarComponent {
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json.addAll({
-      'text': text,
-    });
+    json.addAll({'text': text});
     return json;
   }
 }
@@ -596,8 +581,8 @@ class STRStoryGroupStyle {
 
   factory STRStoryGroupStyle.fromJson(Map<String, dynamic> json) {
     return STRStoryGroupStyle(
-      borderUnseenColors:
-          (json['borderUnseenColors'] as List<dynamic>?)?.cast<String>(),
+      borderUnseenColors: (json['borderUnseenColors'] as List<dynamic>?)
+          ?.cast<String>(),
       textUnseenColor: json['textUnseenColor'],
       badge: json['badge'] != null
           ? STRStoryGroupBadgeStyle.fromJson(json['badge'])
@@ -689,10 +674,8 @@ class STRStoryGroup {
 class StoryBarDataPayload extends STRDataPayload {
   final List<STRStoryGroup> items;
 
-  StoryBarDataPayload({
-    required String type,
-    required this.items,
-  }) : super(type: type);
+  StoryBarDataPayload({required String type, required this.items})
+    : super(type: type);
 
   factory StoryBarDataPayload.fromJson(Map<String, dynamic> json) {
     return StoryBarDataPayload(
@@ -716,18 +699,14 @@ class STRStoryBarPayload extends STRPayload {
   final STRStory? story;
   final StoryBarComponent? component;
 
-  STRStoryBarPayload({
-    this.group,
-    this.story,
-    this.component,
-  });
+  STRStoryBarPayload({this.group, this.story, this.component});
 
   factory STRStoryBarPayload.fromJson(Map<String, dynamic> json) {
     return STRStoryBarPayload(
-      group:
-          json['group'] != null ? STRStoryGroup.fromJson(json['group']) : null,
-      story:
-          json['story'] != null ? STRStory.fromJson(json['story']) : null,
+      group: json['group'] != null
+          ? STRStoryGroup.fromJson(json['group'])
+          : null,
+      story: json['story'] != null ? STRStory.fromJson(json['story']) : null,
       component: json['component'] != null
           ? StoryBarComponent.fromJson(json['component'])
           : null,
@@ -743,4 +722,3 @@ class STRStoryBarPayload extends STRPayload {
     };
   }
 }
-

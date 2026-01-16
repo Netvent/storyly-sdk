@@ -5,10 +5,7 @@ class STRCanvasItem {
   final String? actionUrl;
   final List<STRProductItem>? actionProducts;
 
-  STRCanvasItem({
-    this.actionUrl,
-    this.actionProducts,
-  });
+  STRCanvasItem({this.actionUrl, this.actionProducts});
 
   factory STRCanvasItem.fromJson(Map<String, dynamic> json) {
     return STRCanvasItem(
@@ -30,10 +27,8 @@ class STRCanvasItem {
 class CanvasDataPayload extends STRDataPayload {
   final List<STRCanvasItem> items;
 
-  CanvasDataPayload({
-    required String type,
-    required this.items,
-  }) : super(type: type);
+  CanvasDataPayload({required String type, required this.items})
+    : super(type: type);
 
   factory CanvasDataPayload.fromJson(Map<String, dynamic> json) {
     return CanvasDataPayload(
@@ -55,9 +50,7 @@ class CanvasDataPayload extends STRDataPayload {
 class STRCanvasPayload extends STRPayload {
   final STRCanvasItem? item;
 
-  STRCanvasPayload({
-    this.item,
-  });
+  STRCanvasPayload({this.item});
 
   factory STRCanvasPayload.fromJson(Map<String, dynamic> json) {
     return STRCanvasPayload(
@@ -67,8 +60,6 @@ class STRCanvasPayload extends STRPayload {
 
   @override
   Map<String, dynamic> toJson() {
-    return {
-      'item': item?.toJson(),
-    };
+    return {'item': item?.toJson()};
   }
 }

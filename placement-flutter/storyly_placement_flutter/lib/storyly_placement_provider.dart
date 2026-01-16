@@ -20,10 +20,10 @@ export 'data/widgets/video_feed.dart';
 export 'storyly_placement_view.dart';
 export 'storyly_placement_controller.dart';
 
-
 typedef PlacementLoadCallback = void Function(PlacementLoadEvent event);
 typedef PlacementLoadFailCallback = void Function(PlacementLoadFailEvent event);
-typedef PlacementHydrationCallback = void Function(PlacementHydrationEvent event);
+typedef PlacementHydrationCallback =
+    void Function(PlacementHydrationEvent event);
 
 class StorylyPlacementListener {
   final PlacementLoadCallback? onLoad;
@@ -36,6 +36,7 @@ class StorylyPlacementListener {
     this.onHydration,
   });
 }
+
 class StorylyPlacementProvider {
   static int _providerIdCounter = 0;
   static final Map<String, StorylyPlacementProvider> _providers = {};
@@ -48,19 +49,18 @@ class StorylyPlacementProvider {
 
   bool _disposed = false;
 
-  StorylyPlacementProvider._({
-    required String providerId,
-  }): _providerId = providerId;
+  StorylyPlacementProvider._({required String providerId})
+    : _providerId = providerId;
 
-
-  static Future<StorylyPlacementProvider> create({StorylyPlacementConfig? config, StorylyPlacementListener? listener}) async {
+  static Future<StorylyPlacementProvider> create({
+    StorylyPlacementConfig? config,
+    StorylyPlacementListener? listener,
+  }) async {
     final providerId =
         'provider_${_providerIdCounter++}_${DateTime.now().millisecondsSinceEpoch}';
 
     await StorylyPlacementFlutterPlatform.instance.createProvider(providerId);
-    final provider = StorylyPlacementProvider._(
-      providerId: providerId
-    );
+    final provider = StorylyPlacementProvider._(providerId: providerId);
     _providers[providerId] = provider;
     _ensureMethodHandlerRegistered();
     if (config != null) {
@@ -69,15 +69,13 @@ class StorylyPlacementProvider {
     return provider;
   }
 
-
   Future<void> dispose() async {
     if (_disposed) return;
     _disposed = true;
 
     _providers.remove(_providerId);
 
-    await StorylyPlacementFlutterPlatform.instance
-        .destroyProvider(_providerId);
+    await StorylyPlacementFlutterPlatform.instance.destroyProvider(_providerId);
 
     if (_providers.isEmpty) {
       StorylyPlacementFlutterPlatform.instance.setMethodCallHandler(null);
@@ -85,7 +83,10 @@ class StorylyPlacementProvider {
     }
   }
 
-  Future<void> initialize({required StorylyPlacementConfig config, StorylyPlacementListener? listener}) {
+  Future<void> initialize({
+    required StorylyPlacementConfig config,
+    StorylyPlacementListener? listener,
+  }) {
     _listener = listener;
     return StorylyPlacementFlutterPlatform.instance.updateConfig(
       _providerId,
@@ -96,18 +97,14 @@ class StorylyPlacementProvider {
   Future<void> hydrateProducts(List<STRProductItem> products) {
     return StorylyPlacementFlutterPlatform.instance.hydrateProducts(
       _providerId,
-      jsonEncode({
-        'products': products.map((e) => e.toJson()).toList(),
-      }),
+      jsonEncode({'products': products.map((e) => e.toJson()).toList()}),
     );
   }
 
   Future<void> hydrateWishlist(List<STRProductItem> products) {
     return StorylyPlacementFlutterPlatform.instance.hydrateWishlist(
       _providerId,
-      jsonEncode({
-        'products': products.map((e) => e.toJson()).toList(),
-      }),
+      jsonEncode({'products': products.map((e) => e.toJson()).toList()}),
     );
   }
 
@@ -121,8 +118,9 @@ class StorylyPlacementProvider {
   static void _ensureMethodHandlerRegistered() {
     if (_handlerRegistered) return;
 
-    StorylyPlacementFlutterPlatform.instance
-        .setMethodCallHandler(_methodCallHandler);
+    StorylyPlacementFlutterPlatform.instance.setMethodCallHandler(
+      _methodCallHandler,
+    );
 
     _handlerRegistered = true;
   }
@@ -131,7 +129,7 @@ class StorylyPlacementProvider {
     String method,
     dynamic arguments,
   ) async {
-    final providerId = arguments['providerId'] as String?; 
+    final providerId = arguments['providerId'] as String?;
     final raw = jsonDecode(arguments['raw'] as String);
 
     if (providerId == null) {
@@ -147,30 +145,22 @@ class StorylyPlacementProvider {
 
       switch (method) {
         case 'onLoad':
-          listener?.onLoad?.call(
-            PlacementLoadEvent.fromJson(raw),
-          );
+          listener?.onLoad?.call(PlacementLoadEvent.fromJson(raw));
           break;
 
         case 'onLoadFail':
-          listener?.onLoadFail?.call(
-            PlacementLoadFailEvent.fromJson(raw),
-          );
+          listener?.onLoadFail?.call(PlacementLoadFailEvent.fromJson(raw));
           break;
 
         case 'onHydration':
-          listener?.onHydration?.call(
-            PlacementHydrationEvent.fromJson(raw),
-          );
+          listener?.onHydration?.call(PlacementHydrationEvent.fromJson(raw));
           break;
 
         default:
           debugPrint('StorylyPlacement: Unknown event "$method"');
       }
     } catch (e) {
-      debugPrint(
-        'StorylyPlacement: Error handling event "$method": $e',
-      );
+      debugPrint('StorylyPlacement: Error handling event "$method": $e');
     }
   }
 }

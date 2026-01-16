@@ -15,19 +15,15 @@ class STRSwipeCard {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'actionProducts': actionProducts?.map((e) => e.toJson()).toList(),
-    };
+    return {'actionProducts': actionProducts?.map((e) => e.toJson()).toList()};
   }
 }
 
 class SwipeCardDataPayload extends STRDataPayload {
   final List<STRProductItem> items;
 
-  SwipeCardDataPayload({
-    required String type,
-    required this.items,
-  }) : super(type: type);
+  SwipeCardDataPayload({required String type, required this.items})
+    : super(type: type);
 
   factory SwipeCardDataPayload.fromJson(Map<String, dynamic> json) {
     return SwipeCardDataPayload(
@@ -59,9 +55,6 @@ class STRSwipeCardPayload extends STRPayload {
 
   @override
   Map<String, dynamic> toJson() {
-    return {
-      'card': card?.toJson(),
-    };
+    return {'card': card?.toJson()};
   }
 }
-

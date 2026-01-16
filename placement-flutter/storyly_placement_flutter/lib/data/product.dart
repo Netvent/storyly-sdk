@@ -18,11 +18,7 @@ class STRProductVariant {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'value': value,
-      'key': key,
-    };
+    return {'name': name, 'value': value, 'key': key};
   }
 }
 
@@ -96,10 +92,7 @@ class STRProductInformation {
   final String? productId;
   final String? productGroupId;
 
-  STRProductInformation({
-    this.productId,
-    this.productGroupId,
-  });
+  STRProductInformation({this.productId, this.productGroupId});
 
   factory STRProductInformation.fromJson(Map<String, dynamic> json) {
     return STRProductInformation(
@@ -109,10 +102,7 @@ class STRProductInformation {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'productId': productId,
-      'productGroupId': productGroupId,
-    };
+    return {'productId': productId, 'productGroupId': productGroupId};
   }
 }
 
@@ -181,4 +171,3 @@ class STRCart {
     };
   }
 }
-

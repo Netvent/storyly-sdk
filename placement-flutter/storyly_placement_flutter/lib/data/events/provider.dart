@@ -6,10 +6,7 @@ class PlacementLoadEvent extends BaseEvent {
   final String dataSource;
   final STRDataPayload data;
 
-  PlacementLoadEvent({
-    required this.dataSource,
-    required this.data,
-  });
+  PlacementLoadEvent({required this.dataSource, required this.data});
 
   factory PlacementLoadEvent.fromJson(Map<String, dynamic> json) {
     return PlacementLoadEvent(
@@ -19,10 +16,7 @@ class PlacementLoadEvent extends BaseEvent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'dataSource': dataSource,
-      'data': data.toJson(),
-    };
+    return {'dataSource': dataSource, 'data': data.toJson()};
   }
 }
 
@@ -32,15 +26,11 @@ class PlacementLoadFailEvent extends BaseEvent {
   PlacementLoadFailEvent({required this.errorMessage});
 
   factory PlacementLoadFailEvent.fromJson(Map<String, dynamic> json) {
-    return PlacementLoadFailEvent(
-      errorMessage: json['errorMessage'],
-    );
+    return PlacementLoadFailEvent(errorMessage: json['errorMessage']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'errorMessage': errorMessage,
-    };
+    return {'errorMessage': errorMessage};
   }
 }
 
@@ -58,9 +48,6 @@ class PlacementHydrationEvent extends BaseEvent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'products': products.map((e) => e.toJson()).toList(),
-    };
+    return {'products': products.map((e) => e.toJson()).toList()};
   }
 }
-

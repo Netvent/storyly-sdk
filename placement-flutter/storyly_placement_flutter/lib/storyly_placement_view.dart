@@ -7,11 +7,12 @@ import 'package:flutter/services.dart';
 
 import 'storyly_placement_provider.dart';
 
-typedef StorylyPlacementCreatedCallback = void Function(StorylyPlacementController controller);
+typedef StorylyPlacementCreatedCallback =
+    void Function(StorylyPlacementController controller);
 
 class StorylyPlacementView extends StatefulWidget {
   final StorylyPlacementProvider? provider;
-  
+
   final StorylyPlacementCreatedCallback? onStorylyPlacementCreated;
   final void Function(PlacementWidgetReadyEvent)? onWidgetReady;
   final void Function(PlacementActionClickEvent)? onActionClicked;
@@ -44,24 +45,32 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
   @override
   void initState() {
     super.initState();
-    debugPrint('StorylyPlacementView: initState provider: ${widget.provider?.providerId}');
+    debugPrint(
+      'StorylyPlacementView: initState provider: ${widget.provider?.providerId}',
+    );
     _controller = StorylyPlacementController();
   }
 
   @override
   void didUpdateWidget(StorylyPlacementView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    debugPrint('StorylyPlacementView: didUpdateWidget, provider: ${widget.provider?.providerId}');
+    debugPrint(
+      'StorylyPlacementView: didUpdateWidget, provider: ${widget.provider?.providerId}',
+    );
     if (widget.provider == null) return;
     if (widget.provider?.providerId != oldWidget.provider?.providerId) {
-      debugPrint('StorylyPlacementView: configure: ${widget.provider?.providerId}');
+      debugPrint(
+        'StorylyPlacementView: configure: ${widget.provider?.providerId}',
+      );
       _controller.configure(widget.provider!.providerId);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('StorylyPlacementView: build,provider: ${widget.provider?.providerId}');
+    debugPrint(
+      'StorylyPlacementView: build,provider: ${widget.provider?.providerId}',
+    );
     if (defaultTargetPlatform == TargetPlatform.android) {
       return PlatformViewLink(
         viewType: 'storyly_placement_flutter_view',
@@ -74,14 +83,14 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
         },
         onCreatePlatformView: (params) {
           return PlatformViewsService.initSurfaceAndroidView(
-            id: params.id,
-            viewType: 'storyly_placement_flutter_view',
-            layoutDirection: TextDirection.ltr,
-            creationParamsCodec: const StandardMessageCodec(),
-            onFocus: () {
-              params.onFocusChanged(true);
-            },
-          )
+              id: params.id,
+              viewType: 'storyly_placement_flutter_view',
+              layoutDirection: TextDirection.ltr,
+              creationParamsCodec: const StandardMessageCodec(),
+              onFocus: () {
+                params.onFocusChanged(true);
+              },
+            )
             ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
             ..addOnPlatformViewCreatedListener(_onPlatformViewCreated)
             ..create();
@@ -97,7 +106,8 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
     }
 
     return Text(
-        '$defaultTargetPlatform is not yet supported by the storyly_placement_flutter plugin');
+      '$defaultTargetPlatform is not yet supported by the storyly_placement_flutter plugin',
+    );
   }
 
   void _onPlatformViewCreated(int id) {
@@ -106,20 +116,22 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
     if (widget.provider != null) {
       _controller.configure(widget.provider!.providerId);
     }
-    
+
     if (widget.onStorylyPlacementCreated != null) {
       widget.onStorylyPlacementCreated!(_controller);
     }
-    
+
     // Register method call handler
-    MethodChannel('storyly_placement_flutter/view_$id').setMethodCallHandler(_handleMethodCall);
+    MethodChannel(
+      'storyly_placement_flutter/view_$id',
+    ).setMethodCallHandler(_handleMethodCall);
   }
 
   Future<dynamic> _handleMethodCall(MethodCall call) async {
     try {
       final args = call.arguments;
       final data = args is String ? jsonDecode(args) : args;
-      
+
       switch (call.method) {
         case 'onWidgetReady':
           debugPrint('StorylyPlacementView: onWidgetReady, data: $data');
@@ -127,7 +139,9 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           break;
         case 'onActionClicked':
           debugPrint('StorylyPlacementView: onActionClicked, data: $data');
-          widget.onActionClicked?.call(PlacementActionClickEvent.fromJson(data));
+          widget.onActionClicked?.call(
+            PlacementActionClickEvent.fromJson(data),
+          );
           break;
         case 'onEvent':
           debugPrint('StorylyPlacementView: onEvent, data: $data');
@@ -147,7 +161,9 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           break;
         case 'onUpdateWishlist':
           debugPrint('StorylyPlacementView: onUpdateWishlist, data: $data');
-          widget.onUpdateWishlist?.call(PlacementWishlistUpdateEvent.fromJson(data));
+          widget.onUpdateWishlist?.call(
+            PlacementWishlistUpdateEvent.fromJson(data),
+          );
           break;
         default:
           debugPrint("Unknown method: ${call.method}");
@@ -157,4 +173,3 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
     }
   }
 }
-

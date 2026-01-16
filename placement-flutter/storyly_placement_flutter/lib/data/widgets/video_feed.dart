@@ -49,11 +49,7 @@ class VideoFeedComponent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'type': type,
-      'id': id,
-      'customPayload': customPayload,
-    };
+    return {'type': type, 'id': id, 'customPayload': customPayload};
   }
 }
 
@@ -421,10 +417,7 @@ class VideoFeedRatingComponent extends VideoFeedComponent {
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json.addAll({
-      'emojiCode': emojiCode,
-      'rating': rating,
-    });
+    json.addAll({'emojiCode': emojiCode, 'rating': rating});
     return json;
   }
 }
@@ -451,9 +444,7 @@ class VideoFeedPromoCodeComponent extends VideoFeedComponent {
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json.addAll({
-      'text': text,
-    });
+    json.addAll({'text': text});
     return json;
   }
 }
@@ -480,9 +471,7 @@ class VideoFeedCommentComponent extends VideoFeedComponent {
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
-    json.addAll({
-      'text': text,
-    });
+    json.addAll({'text': text});
     return json;
   }
 }
@@ -542,7 +531,9 @@ class STRVideoFeedItem {
       'actionUrl': actionUrl,
       'actionProducts': actionProducts?.map((e) => e.toJson()).toList(),
       'currentTime': currentTime,
-      'feedItemComponentList': feedItemComponentList?.map((e) => e.toJson()).toList(),
+      'feedItemComponentList': feedItemComponentList
+          ?.map((e) => e.toJson())
+          .toList(),
     };
   }
 }
@@ -616,15 +607,13 @@ class STRVideoFeedGroup {
 class VideoFeedDataPayload extends STRDataPayload {
   final List<STRVideoFeedGroup> items;
 
-  VideoFeedDataPayload({
-    required String type,
-    required this.items,
-  }) : super(type: type);
+  VideoFeedDataPayload({required String type, required this.items})
+    : super(type: type);
 
   factory VideoFeedDataPayload.fromJson(Map<String, dynamic> json) {
     return VideoFeedDataPayload(
       type: json['type'],
-      items:  (json['items'] as List<dynamic>)
+      items: (json['items'] as List<dynamic>)
           .map((e) => STRVideoFeedGroup.fromJson(e))
           .toList(),
     );
@@ -643,11 +632,7 @@ class STRVideoFeedPayload extends STRPayload {
   final STRVideoFeedItem? feedItem;
   final VideoFeedComponent? component;
 
-  STRVideoFeedPayload({
-    this.group,
-    this.feedItem,
-    this.component,
-  });
+  STRVideoFeedPayload({this.group, this.feedItem, this.component});
 
   factory STRVideoFeedPayload.fromJson(Map<String, dynamic> json) {
     return STRVideoFeedPayload(
@@ -672,4 +657,3 @@ class STRVideoFeedPayload extends STRPayload {
     };
   }
 }
-

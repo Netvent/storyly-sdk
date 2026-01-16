@@ -6,11 +6,7 @@ class BannerComponent {
   final String id;
   final String? customPayload;
 
-  BannerComponent({
-    required this.type,
-    required this.id,
-    this.customPayload,
-  });
+  BannerComponent({required this.type, required this.id, this.customPayload});
 
   factory BannerComponent.fromJson(Map<String, dynamic> json) {
     final type = json['type'] as String;
@@ -25,11 +21,7 @@ class BannerComponent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'type': type,
-      'id': id,
-      'customPayload': customPayload,
-    };
+    return {'type': type, 'id': id, 'customPayload': customPayload};
   }
 }
 
@@ -123,10 +115,8 @@ class STRBannerItem {
 class BannerDataPayload extends STRDataPayload {
   final List<STRBannerItem> items;
 
-  BannerDataPayload({
-    required String type,
-    required this.items,
-  }) : super(type: type);
+  BannerDataPayload({required String type, required this.items})
+    : super(type: type);
 
   factory BannerDataPayload.fromJson(Map<String, dynamic> json) {
     return BannerDataPayload(
@@ -149,10 +139,7 @@ class STRBannerPayload extends STRPayload {
   final STRBannerItem? item;
   final BannerComponent? component;
 
-  STRBannerPayload({
-    this.item,
-    this.component,
-  });
+  STRBannerPayload({this.item, this.component});
 
   factory STRBannerPayload.fromJson(Map<String, dynamic> json) {
     return STRBannerPayload(
@@ -165,11 +152,6 @@ class STRBannerPayload extends STRPayload {
 
   @override
   Map<String, dynamic> toJson() {
-    return {
-      'item': item?.toJson(),
-      'component': component?.toJson(),
-    };
+    return {'item': item?.toJson(), 'component': component?.toJson()};
   }
 }
-
-

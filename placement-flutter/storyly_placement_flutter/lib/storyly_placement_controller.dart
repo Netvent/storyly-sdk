@@ -24,7 +24,11 @@ class StoryBarController implements STRWidgetController {
   }
 
   Future<void> open({required String uri}) {
-    return _controller.callWidget(_widget.viewId, 'open', jsonEncode({'uri': uri}));
+    return _controller.callWidget(
+      _widget.viewId,
+      'open',
+      jsonEncode({'uri': uri}),
+    );
   }
 
   Future<void> openWithId({
@@ -63,7 +67,11 @@ class VideoFeedController implements STRWidgetController {
   }
 
   Future<void> open({required String uri}) {
-    return _controller.callWidget(_widget.viewId, 'open', jsonEncode({'uri': uri}));
+    return _controller.callWidget(
+      _widget.viewId,
+      'open',
+      jsonEncode({'uri': uri}),
+    );
   }
 
   Future<void> openWithId({
@@ -74,11 +82,7 @@ class VideoFeedController implements STRWidgetController {
     return _controller.callWidget(
       _widget.viewId,
       'openWithId',
-      jsonEncode({
-        'groupId': groupId,
-        'itemId': itemId,
-        'playMode': playMode,
-      }),
+      jsonEncode({'groupId': groupId, 'itemId': itemId, 'playMode': playMode}),
     );
   }
 }
@@ -98,7 +102,11 @@ class VideoFeedPresenterController implements STRWidgetController {
   }
 
   Future<void> open({required String groupId}) {
-    return _controller.callWidget(_widget.viewId, 'open', jsonEncode({'groupId': groupId}));
+    return _controller.callWidget(
+      _widget.viewId,
+      'open',
+      jsonEncode({'groupId': groupId}),
+    );
   }
 }
 
@@ -125,36 +133,34 @@ class StorylyPlacementController {
   Future<void> approveCartChange(String responseId, STRCart cart) async {
     await _methodChannel?.invokeMethod('approveCartChange', {
       'responseId': responseId,
-      'raw': jsonEncode({
-        'cart': cart.toJson()
-      })
+      'raw': jsonEncode({'cart': cart.toJson()}),
     });
   }
 
   Future<void> rejectCartChange(String responseId, String failMessage) async {
     await _methodChannel?.invokeMethod('rejectCartChange', {
       'responseId': responseId,
-      'raw': jsonEncode({
-        'failMessage': failMessage,
-      })
+      'raw': jsonEncode({'failMessage': failMessage}),
     });
   }
 
-  Future<void> approveWishlistChange(String responseId, STRCartItem item) async {
+  Future<void> approveWishlistChange(
+    String responseId,
+    STRCartItem item,
+  ) async {
     await _methodChannel?.invokeMethod('approveWishlistChange', {
       'responseId': responseId,
-      'raw': jsonEncode({
-        'item': item.toJson()
-      })
+      'raw': jsonEncode({'item': item.toJson()}),
     });
   }
 
-  Future<void> rejectWishlistChange(String responseId, String failMessage) async {
+  Future<void> rejectWishlistChange(
+    String responseId,
+    String failMessage,
+  ) async {
     await _methodChannel?.invokeMethod('rejectWishlistChange', {
       'responseId': responseId,
-      'raw': jsonEncode({
-        'failMessage': failMessage,
-      })
+      'raw': jsonEncode({'failMessage': failMessage}),
     });
   }
 
@@ -167,9 +173,6 @@ class StorylyPlacementController {
   }
 
   Future<void> configure(String providerId) async {
-    await _methodChannel?.invokeMethod('configure', {
-      'providerId': providerId,
-    });
+    await _methodChannel?.invokeMethod('configure', {'providerId': providerId});
   }
 }
-

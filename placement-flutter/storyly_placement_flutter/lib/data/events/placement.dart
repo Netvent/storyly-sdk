@@ -6,10 +6,7 @@ class PlacementWidgetReadyEvent extends BaseEvent {
   final PlacementWidget widget;
   final double ratio;
 
-  PlacementWidgetReadyEvent({
-    required this.widget,
-    required this.ratio,
-  });
+  PlacementWidgetReadyEvent({required this.widget, required this.ratio});
 
   factory PlacementWidgetReadyEvent.fromJson(Map<String, dynamic> json) {
     return PlacementWidgetReadyEvent(
@@ -19,10 +16,7 @@ class PlacementWidgetReadyEvent extends BaseEvent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'widget': widget.toJson(),
-      'ratio': ratio,
-    };
+    return {'widget': widget.toJson(), 'ratio': ratio};
   }
 }
 
@@ -42,7 +36,9 @@ class PlacementActionClickEvent extends BaseEvent {
     return PlacementActionClickEvent(
       widget: widget,
       url: json['url'],
-      payload: json['payload'] != null ? STRPayload.fromJson(json['payload'], widget.type) : null,
+      payload: json['payload'] != null
+          ? STRPayload.fromJson(json['payload'], widget.type)
+          : null,
     );
   }
 
@@ -59,10 +55,7 @@ class PlacementEvent extends BaseEvent {
   final PlacementWidget widget;
   final STREventPayload payload;
 
-  PlacementEvent({
-    required this.widget,
-    required this.payload,
-  });
+  PlacementEvent({required this.widget, required this.payload});
 
   factory PlacementEvent.fromJson(Map<String, dynamic> json) {
     final widget = PlacementWidget.fromJson(json['widget']);
@@ -73,10 +66,7 @@ class PlacementEvent extends BaseEvent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'widget': widget.toJson(),
-      'payload': payload.toJson(),
-    };
+    return {'widget': widget.toJson(), 'payload': payload.toJson()};
   }
 }
 
@@ -84,10 +74,7 @@ class PlacementFailEvent extends BaseEvent {
   final PlacementWidget widget;
   final STRErrorPayload payload;
 
-  PlacementFailEvent({
-    required this.widget,
-    required this.payload,
-  });
+  PlacementFailEvent({required this.widget, required this.payload});
 
   factory PlacementFailEvent.fromJson(Map<String, dynamic> json) {
     return PlacementFailEvent(
@@ -97,10 +84,7 @@ class PlacementFailEvent extends BaseEvent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'widget': widget.toJson(),
-      'payload': payload.toJson(),
-    };
+    return {'widget': widget.toJson(), 'payload': payload.toJson()};
   }
 }
 
@@ -108,10 +92,7 @@ class PlacementProductEvent extends BaseEvent {
   final PlacementWidget widget;
   final String event;
 
-  PlacementProductEvent({
-    required this.widget,
-    required this.event,
-  });
+  PlacementProductEvent({required this.widget, required this.event});
 
   factory PlacementProductEvent.fromJson(Map<String, dynamic> json) {
     return PlacementProductEvent(
@@ -121,10 +102,7 @@ class PlacementProductEvent extends BaseEvent {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'widget': widget.toJson(),
-      'event': event,
-    };
+    return {'widget': widget.toJson(), 'event': event};
   }
 }
 
@@ -148,7 +126,9 @@ class PlacementCartUpdateEvent extends BaseEvent {
       widget: PlacementWidget.fromJson(json['widget']),
       event: json['event'],
       cart: json['cart'] != null ? STRCart.fromJson(json['cart']) : null,
-      change: json['change'] != null ? STRCartItem.fromJson(json['change']) : null,
+      change: json['change'] != null
+          ? STRCartItem.fromJson(json['change'])
+          : null,
       responseId: json['responseId'],
     );
   }
@@ -195,4 +175,3 @@ class PlacementWishlistUpdateEvent extends BaseEvent {
     };
   }
 }
-

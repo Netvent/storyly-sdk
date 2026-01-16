@@ -2,13 +2,15 @@ import 'package:flutter/services.dart';
 
 import 'storyly_placement_platform_interface.dart';
 
-
-class MethodChannelStorylyPlacementFlutter extends StorylyPlacementFlutterPlatform {
+class MethodChannelStorylyPlacementFlutter
+    extends StorylyPlacementFlutterPlatform {
   final methodChannel = const MethodChannel('storyly_placement_flutter');
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version = await methodChannel.invokeMethod<String>(
+      'getPlatformVersion',
+    );
     return version;
   }
 
@@ -55,11 +57,15 @@ class MethodChannelStorylyPlacementFlutter extends StorylyPlacementFlutterPlatfo
   }
 
   @override
-  void setMethodCallHandler(Future<dynamic> Function(String method, dynamic arguments)? handler) {
+  void setMethodCallHandler(
+    Future<dynamic> Function(String method, dynamic arguments)? handler,
+  ) {
     if (handler == null) {
       methodChannel.setMethodCallHandler(null);
     } else {
-      methodChannel.setMethodCallHandler((call) => handler(call.method, call.arguments));
+      methodChannel.setMethodCallHandler(
+        (call) => handler(call.method, call.arguments),
+      );
     }
   }
 }
