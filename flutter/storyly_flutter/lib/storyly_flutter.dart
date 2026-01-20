@@ -165,11 +165,7 @@ class _StorylyViewState extends State<StorylyView> {
             (BuildContext context, PlatformViewController controller) {
           return AndroidViewSurface(
             controller: controller as AndroidViewController,
-            gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-              Factory<OneSequenceGestureRecognizer>(
-                () => EagerGestureRecognizer(),
-              ),
-            },
+            gestureRecognizers: _buildGestureRecognizers(widget.androidParam ?? StorylyParam()),
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
           );
         },
@@ -193,11 +189,7 @@ class _StorylyViewState extends State<StorylyView> {
       return UiKitView(
         viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,
-        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-          Factory<OneSequenceGestureRecognizer>(
-            () => EagerGestureRecognizer(),
-          ),
-        },
+        gestureRecognizers: _buildGestureRecognizers(widget.iosParam ?? StorylyParam()),
         creationParams: widget.iosParam?._toMap() ?? {},
         creationParamsCodec: const StandardMessageCodec(),
       );
@@ -205,6 +197,20 @@ class _StorylyViewState extends State<StorylyView> {
     return Text(
       '$defaultTargetPlatform is not supported yet for Storyly Flutter plugin.',
     );
+  }
+
+  Set<Factory<OneSequenceGestureRecognizer>> _buildGestureRecognizers(StorylyParam params) {
+    if (params.storyGroupListOrientation == 'vertical') {
+      return <Factory<OneSequenceGestureRecognizer>>{
+          Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer()),
+          Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+        };
+    } else {
+      return <Factory<OneSequenceGestureRecognizer>>{
+          Factory<HorizontalDragGestureRecognizer>(() => HorizontalDragGestureRecognizer()),
+          Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+      };
+    }
   }
 
   void _onPlatformViewCreated(int _id) {
