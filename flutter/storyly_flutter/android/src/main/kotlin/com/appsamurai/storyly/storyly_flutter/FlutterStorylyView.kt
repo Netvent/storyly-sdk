@@ -110,6 +110,7 @@ class FlutterStorylyView(
 
     private val storylyView: StorylyView by lazy {
         StorylyView(context).apply {
+            requestDisallowInterceptTouchEvent(true)
             storylyInit = StorylyInitMapper(context).getStorylyInit(json = args) ?: return@apply
             (args["storylyBackgroundColor"] as? String)?.let { setBackgroundColor(Color.parseColor(it)) }
 
@@ -264,6 +265,10 @@ class FlutterStorylyView(
                 }
             }
         }
+    }
+
+    init {
+
     }
 
     override fun getView(): View = storylyView
