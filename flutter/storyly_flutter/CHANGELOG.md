@@ -1,3 +1,6 @@
+### 4.16.4 (21.01.2026)
+* improved gesture recognizers
+
 ### 4.16.3 (14.08.2025)
 * added mandatory namespace field for AGP >= 8 on android platform
 * fixed a bug related to visible story group tracking on android platform

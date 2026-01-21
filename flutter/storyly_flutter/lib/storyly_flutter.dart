@@ -165,7 +165,8 @@ class _StorylyViewState extends State<StorylyView> {
             (BuildContext context, PlatformViewController controller) {
           return AndroidViewSurface(
             controller: controller as AndroidViewController,
-            gestureRecognizers: _buildGestureRecognizers(widget.androidParam ?? StorylyParam()),
+            gestureRecognizers:
+                _buildGestureRecognizers(widget.androidParam ?? StorylyParam()),
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
           );
         },
@@ -189,7 +190,8 @@ class _StorylyViewState extends State<StorylyView> {
       return UiKitView(
         viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,
-        gestureRecognizers: _buildGestureRecognizers(widget.iosParam ?? StorylyParam()),
+        gestureRecognizers:
+            _buildGestureRecognizers(widget.iosParam ?? StorylyParam()),
         creationParams: widget.iosParam?._toMap() ?? {},
         creationParamsCodec: const StandardMessageCodec(),
       );
@@ -199,16 +201,19 @@ class _StorylyViewState extends State<StorylyView> {
     );
   }
 
-  Set<Factory<OneSequenceGestureRecognizer>> _buildGestureRecognizers(StorylyParam params) {
+  Set<Factory<OneSequenceGestureRecognizer>> _buildGestureRecognizers(
+      StorylyParam params) {
     if (params.storyGroupListOrientation == 'vertical') {
       return <Factory<OneSequenceGestureRecognizer>>{
-          Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer()),
-          Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
-        };
+        Factory<VerticalDragGestureRecognizer>(
+            () => VerticalDragGestureRecognizer()),
+        Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+      };
     } else {
       return <Factory<OneSequenceGestureRecognizer>>{
-          Factory<HorizontalDragGestureRecognizer>(() => HorizontalDragGestureRecognizer()),
-          Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+        Factory<HorizontalDragGestureRecognizer>(
+            () => HorizontalDragGestureRecognizer()),
+        Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
       };
     }
   }
