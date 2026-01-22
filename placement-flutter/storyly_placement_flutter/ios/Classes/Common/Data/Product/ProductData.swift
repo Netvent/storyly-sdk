@@ -99,7 +99,7 @@ func decodeSTRCartItem(_ dict: [String: Any]) -> STRCartItem? {
     let oldTotalPrice = dict["oldTotalPrice"] as? Double
     
     return STRCartItem(
-        item: item,
+        product: item,
         quantity: quantity
     )
 }

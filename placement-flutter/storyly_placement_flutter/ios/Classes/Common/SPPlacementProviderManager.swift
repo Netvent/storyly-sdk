@@ -94,7 +94,7 @@ import StorylyCore
             
             print("[SPPlacementProviderWrapper] hydrateWishlist: \(productsJson)")
             
-            let products = productsArray.compactMap { decodeSTRProductItem($0) }
+            let products = productsArray.compactMap { decodeSTRProductInformation($0) }
             self.provider.hydrateWishlist(products: products)
         }
     }
@@ -147,6 +147,7 @@ private class STRProviderProductDelegateImpl: NSObject, STRDataProviderProductDe
     }
     
     func onHydration(products: [STRProductInformation]) {
+        print("[SPPlacementProviderWrapper] STRDataProviderProductListener:onHydration")
         guard let wrapper = wrapper else { return }
         
         let eventData: [String: Any] = [

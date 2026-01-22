@@ -64,7 +64,7 @@ import StorylyVideoFeed
         }
     }
   
-    @objc public func approveCartChange(responseId: String, raw: String?) {
+    @objc public func approveCartChange(responseId: String) {
         DispatchQueue.main.async {
           guard let callbacks = self.cartUpdateCallbacks[responseId] else { return }
             
@@ -89,18 +89,10 @@ import StorylyVideoFeed
         }
     }
 
-    @objc public func approveWishlistChange(responseId: String, raw: String?) {
+    @objc public func approveWishlistChange(responseId: String) {
         DispatchQueue.main.async {
             guard let callbacks = self.wishlistUpdateCallbacks[responseId] else { return }
-            
-            var item: STRProductItem? = nil
-            if let raw = raw,
-               let dict = decodeFromJson(raw),
-               let itemDict = dict["item"] as? [String: Any] {
-              item = decodeSTRProductItem(itemDict)
-            }
-            
-            callbacks.onSuccess?(item)
+            callbacks.onSuccess?()
             self.wishlistUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
@@ -116,7 +108,7 @@ import StorylyVideoFeed
               failMessage = message
             }
             
-            callbacks.onFail?(STRWishlistEventResult(message: failMessage))
+            callbacks.onFail?(failMessage)
             self.wishlistUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
@@ -247,8 +239,8 @@ struct CartCallbacks {
 }
 
 struct WishlistCallbacks {
-    let onSuccess: ((STRProductItem?) -> Void)?
-    let onFail: ((STRWishlistEventResult) -> Void)?
+    let onSuccess: (() -> Void)?
+    let onFail: ((String) -> Void)?
 }
 
 // MARK: - STRListener Implementation
@@ -331,7 +323,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         self.placementView = placementView
     }
     
-    func onProductEvent(widget: any STRWidgetController, event: STREvent) {
+    func onProductEvent(widget: any STRWidgetController, event: STRProductEvent) {
         guard let placementView = placementView else { return }
         
         print("[SPStorylyPlacement] onProductEvent: \(event.getType())")
@@ -346,7 +338,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         }
     }
     
-    func onUpdateCart(widget: any STRWidgetController, change: STRCartItem?, onSuccess: (() -> Void)?, onFail: ((String) -> Void)?) {
+    func onUpdateCart(widget: any STRWidgetController, item: STRCartItem?, onSuccess: (() -> Void)?, onFail: ((String) -> Void)?) {
         guard let placementView = placementView else { return }
         
         print("[SPStorylyPlacement] onUpdateCart")
@@ -356,7 +348,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         
         let eventData: [String: Any?] = [
             "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
-            "change": encodeSTRCartItem(change),
+            "item": encodeSTRCartItem(item),
             "responseId": responseId
         ]
         
@@ -365,7 +357,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         }
     }
     
-    func onUpdateWishlist(widget: any STRWidgetController, event: STREvent, item: STRProductItem?, onSuccess: ((STRProductItem?) -> Void)?, onFail: ((STRWishlistEventResult) -> Void)?) {
+    func onUpdateWishlist(widget: any STRWidgetController, event: STRProductEvent, item: STRProductItem?, onSuccess: (() -> Void)?, onFail: ((String) -> Void)?) {
         guard let placementView = placementView else { return }
         
         print("[SPStorylyPlacement] onUpdateWishlist: \(event.getType())")
