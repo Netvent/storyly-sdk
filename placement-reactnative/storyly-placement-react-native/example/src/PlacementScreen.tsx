@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { View, Button, Dimensions, StyleSheet } from "react-native";
-import {  type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, type STRCartItem, StorylyPlacement, type STRStoryBarController, type PlacementCartUpdateEvent, type STRVideoFeedController, type STRProductItem } from "storyly-placement-react-native";
+import {  type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, type STRCartItem, StorylyPlacement, type STRStoryBarController, type PlacementCartUpdateEvent, type STRVideoFeedController, type STRProductItem, type STRProductInformation } from "storyly-placement-react-native";
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -42,6 +42,13 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
             //     ctaText: "",
             // } as STRProductItem));
             // provider.hydrateProducts(products)
+
+            // const infos: STRProductInformation[] = event.products.map(product => ({
+            //     productId: product.productId ?? "",
+            //     productGroupId: product.productGroupId ?? "",
+            // } as STRProductInformation));
+            // provider.hydrateWishlist(infos);
+
         },
     };
 
