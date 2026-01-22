@@ -7,15 +7,14 @@ import android.util.Log
 import com.appsamurai.storyly.core.data.model.STRDataPayload
 import com.appsamurai.storyly.core.data.model.STRDataSource
 import com.appsamurai.storyly.core.data.model.product.STRProductInformation
-import com.appsamurai.storyly.core.listener.provider.STRProviderListener
-import com.appsamurai.storyly.core.listener.provider.STRProviderProductListener
-import com.appsamurai.storyly.placement.data.provider.PlacementDataProvider
+import com.appsamurai.storyly.core.listener.provider.STRDataProviderListener
+import com.appsamurai.storyly.core.listener.provider.STRDataProviderProductListener
+import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
 import com.storylyplacementreactnative.common.data.decodeSTRPlacementConfig
 import com.storylyplacementreactnative.common.data.encodeDataPayload
-import com.storylyplacementreactnative.common.data.product.decodeSTRCart
+import com.storylyplacementreactnative.common.data.product.decodeSTRProductInformation
 import com.storylyplacementreactnative.common.data.product.decodeSTRProductItem
 import com.storylyplacementreactnative.common.data.product.encodeSTRProductInformation
-import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
 import com.storylyplacementreactnative.common.data.util.decodeFromJson
 import com.storylyplacementreactnative.common.data.util.encodeToJson
 
@@ -52,7 +51,7 @@ class SPPlacementProviderWrapper(
     private val context: Context,
     val id: String
 ) {
-    val provider: PlacementDataProvider by lazy { PlacementDataProvider(context) }
+    val provider: STRPlacementDataProvider by lazy { STRPlacementDataProvider(context) }
 
     internal var sendEvent: ((String, SPPlacementProviderEventType, String) -> Unit)? = null
 
@@ -75,35 +74,35 @@ class SPPlacementProviderWrapper(
         val placementConfig = decodeSTRPlacementConfig(config, token)
 
         provider.apply {
-          listener = object : STRProviderListener {
-            override fun onLoad(data: STRDataPayload, dataSource: STRDataSource) {
-              val eventJson = encodeToJson(mapOf(
-                  "data" to encodeDataPayload(data),
-                  "dataSource" to dataSource.value,
-              ))
-              Log.d("[SPPlacementProviderWrapper]", "STRProviderListener:onLoad: $eventJson")
-              sendEvent?.invoke(id, SPPlacementProviderEventType.ON_LOAD, eventJson ?: "")
+            listener = object : STRDataProviderListener {
+                override fun onLoad(data: STRDataPayload, dataSource: STRDataSource) {
+                    val eventJson = encodeToJson(mapOf(
+                        "data" to encodeDataPayload(data),
+                        "dataSource" to dataSource.value,
+                    ))
+                    Log.d("[SPPlacementProviderWrapper]", "STRDataProviderListener:onLoad: $eventJson")
+                    sendEvent?.invoke(id, SPPlacementProviderEventType.ON_LOAD, eventJson ?: "")
+                }
+
+                override fun onLoadFail(errorMessage: String) {
+                    val eventJson = encodeToJson(mapOf(
+                        "errorMessage" to errorMessage,
+                    ))
+                    Log.d("[SPPlacementProviderWrapper]", "STRDataProviderListener:onLoadFail: $eventJson")
+                    sendEvent?.invoke(id, SPPlacementProviderEventType.ON_LOAD_FAIL, eventJson ?: "")
+                }
+            }
+            productListener = object : STRDataProviderProductListener {
+                override fun onHydration(products: List<STRProductInformation>) {
+                    val eventJson = encodeToJson(mapOf(
+                        "products" to products.map { encodeSTRProductInformation(it) },
+                    ))
+                    Log.d("[SPPlacementProviderWrapper]", "STRDataProviderProductListener:onHydration: $eventJson")
+                    sendEvent?.invoke(id, SPPlacementProviderEventType.ON_HYDRATION, eventJson ?: "")
+                }
             }
 
-            override fun onLoadFail(errorMessage: String) {
-              val eventJson = encodeToJson(mapOf(
-                "errorMessage" to errorMessage,
-              ))
-              Log.d("[SPPlacementProviderWrapper]", "STRProviderListener:onLoadFail: $eventJson")
-              sendEvent?.invoke(id, SPPlacementProviderEventType.ON_LOAD_FAIL, eventJson ?: "")
-            }
-          }
-          productListener = object : STRProviderProductListener {
-            override fun onHydration(products: List<STRProductInformation>) {
-              val eventJson = encodeToJson(mapOf(
-                "products" to products.map { encodeSTRProductInformation(it) },
-              ))
-              Log.d("[SPPlacementProviderWrapper]", "STRProviderProductListener:onHydration: $eventJson")
-              sendEvent?.invoke(id, SPPlacementProviderEventType.ON_HYDRATION, eventJson ?: "")
-            }
-          }
-
-          this.config = placementConfig
+            this.config = placementConfig
         }
     }
 
@@ -123,21 +122,9 @@ class SPPlacementProviderWrapper(
             val map = decodeFromJson(raw) ?: return@post
             Log.d("[SPPlacementProviderWrapper]", "hydrateWishlist: $raw")
             val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
-                decodeSTRProductItem(it)
+                decodeSTRProductInformation(it)
             } ?: return@post
             provider.hydrateWishlist(products)
         }
-    }
-
-    fun updateCart(raw: String) {
-        Handler(context.mainLooper).post {
-            val map = decodeFromJson(raw) ?: return@post
-            Log.d("[SPPlacementProviderWrapper]", "hydrateWishlist: $raw")
-            val cart = (map["cart"] as? Map<String, Any?>)?.let {
-                decodeSTRCart(it)
-            } ?: return@post
-            provider.updateCart(cart)
-        }
-
     }
 }
