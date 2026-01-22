@@ -1,4 +1,7 @@
 # Release Notes
+### 1.3.1 (22.01.2026)
+* fixed a cart related config
+
 ### 1.3.0 (22.01.2026)
 * added dots as progress style for banner widget
 * added new enumeration for product events
