@@ -32,8 +32,8 @@ import StorylyCore
 @objc public class SPPlacementProviderWrapper: NSObject {
     
     @objc public let id: String
-    @objc public lazy var provider: PlacementDataProvider = {
-        return PlacementDataProvider()
+    @objc public lazy var provider: STRPlacementDataProvider = {
+        return STRPlacementDataProvider()
     }()
     
     @objc public var sendEvent: ((String, SPPlacementProviderEventType, String) -> Void)?
@@ -94,29 +94,15 @@ import StorylyCore
             
             print("[SPPlacementProviderWrapper] hydrateWishlist: \(productsJson)")
             
-            let products = productsArray.compactMap { decodeSTRProductItem($0) }
+            let products = productsArray.compactMap { decodeSTRProductInformation($0) }
             self.provider.hydrateWishlist(products: products)
-        }
-    }
-    
-    @objc public func updateCart(cartJson: String) {
-        DispatchQueue.main.async {
-            guard let dict = decodeFromJson(cartJson),
-                  let cartDict = dict["cart"] as? [String: Any],
-                  let cart = decodeSTRCart(cartDict) else {
-              return
-            }
-            
-            print("[SPPlacementProviderWrapper] updateCart: \(cartJson)")
-            
-            self.provider.updateCart(cart: cart)
         }
     }
 }
 
 // MARK: - STRProviderListener Implementation
 
-private class STRProviderDelegateImpl: NSObject, STRProviderDelegate {
+private class STRProviderDelegateImpl: NSObject, STRDataProviderDelegate {
     weak var wrapper: SPPlacementProviderWrapper?
     
     init(wrapper: SPPlacementProviderWrapper) {
@@ -153,7 +139,7 @@ private class STRProviderDelegateImpl: NSObject, STRProviderDelegate {
 
 // MARK: - STRProviderProductListener Implementation
 
-private class STRProviderProductDelegateImpl: NSObject, STRProviderProductDelegate {
+private class STRProviderProductDelegateImpl: NSObject, STRDataProviderProductDelegate {
     weak var wrapper: SPPlacementProviderWrapper?
     
     init(wrapper: SPPlacementProviderWrapper) {

@@ -49,15 +49,6 @@ func decodeSTRPlacementConfig(_ config: [String: Any], token: String) -> STRPlac
 
 func decodeSTRProductConfig(_ productConfig: [String: Any]) -> STRProductConfig? {
   let builder = STRProductConfig.Builder()
-  
-  if let isCartEnabled = productConfig["isCartEnabled"] as? Bool {
-    _ = builder.setCartEnabled(isEnabled: isCartEnabled)
-  }
-  
-  if let isFallbackEnabled = productConfig["isFallbackEnabled"] as? Bool {
-    _ = builder.setFallbackAvailability(isEnabled: isFallbackEnabled)
-  }
-  
   return builder.build()
 }
 

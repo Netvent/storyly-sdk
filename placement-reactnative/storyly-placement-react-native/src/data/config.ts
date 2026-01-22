@@ -9,10 +9,7 @@ export interface StorylyPlacementConfig {
   labels?: string[];
   userProperties?: Record<string, string>;
 
-  productConfig?: {
-    isFallbackEnabled?: boolean;
-    isCartEnabled?: boolean;
-  };
+  productConfig?: {};
   shareConfig?: {
     shareUrl?: string;
     facebookAppId?: string;
