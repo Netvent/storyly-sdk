@@ -108,26 +108,20 @@ class PlacementProductEvent extends BaseEvent {
 
 class PlacementCartUpdateEvent extends BaseEvent {
   final PlacementWidget widget;
-  final String event;
-  final STRCart? cart;
-  final STRCartItem? change;
+  final STRCartItem? item;
   final String responseId;
 
   PlacementCartUpdateEvent({
     required this.widget,
-    required this.event,
-    this.cart,
-    this.change,
+    this.item,
     required this.responseId,
   });
 
   factory PlacementCartUpdateEvent.fromJson(Map<String, dynamic> json) {
     return PlacementCartUpdateEvent(
       widget: PlacementWidget.fromJson(json['widget']),
-      event: json['event'],
-      cart: json['cart'] != null ? STRCart.fromJson(json['cart']) : null,
-      change: json['change'] != null
-          ? STRCartItem.fromJson(json['change'])
+      item: json['item'] != null
+          ? STRCartItem.fromJson(json['item'])
           : null,
       responseId: json['responseId'],
     );
@@ -136,9 +130,7 @@ class PlacementCartUpdateEvent extends BaseEvent {
   Map<String, dynamic> toJson() {
     return {
       'widget': widget.toJson(),
-      'event': event,
-      'cart': cart?.toJson(),
-      'change': change?.toJson(),
+      'item': item?.toJson(),
       'responseId': responseId,
     };
   }

@@ -107,33 +107,25 @@ class STRProductInformation {
 }
 
 class STRCartItem {
-  final STRProductItem item;
+  final STRProductItem product;
   final int quantity;
-  final double? totalPrice;
-  final double? oldTotalPrice;
 
   STRCartItem({
-    required this.item,
-    required this.quantity,
-    this.totalPrice,
-    this.oldTotalPrice,
+    required this.product,
+    required this.quantity
   });
 
   factory STRCartItem.fromJson(Map<String, dynamic> json) {
     return STRCartItem(
-      item: STRProductItem.fromJson(json['item']),
-      quantity: json['quantity'],
-      totalPrice: (json['totalPrice'] as num?)?.toDouble(),
-      oldTotalPrice: (json['oldTotalPrice'] as num?)?.toDouble(),
+      product: STRProductItem.fromJson(json['product']),
+      quantity: json['quantity']
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'item': item.toJson(),
-      'quantity': quantity,
-      'totalPrice': totalPrice,
-      'oldTotalPrice': oldTotalPrice,
+      'item': product.toJson(),
+      'quantity': quantity
     };
   }
 }

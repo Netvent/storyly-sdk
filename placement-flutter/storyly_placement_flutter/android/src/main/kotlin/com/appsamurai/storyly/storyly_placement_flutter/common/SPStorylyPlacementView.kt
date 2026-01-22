@@ -6,16 +6,15 @@ import android.util.Log
 import com.appsamurai.storyly.core.STRWidgetType
 import com.appsamurai.storyly.core.analytics.error.STRErrorPayload
 import com.appsamurai.storyly.core.analytics.event.STREvent
+import com.appsamurai.storyly.core.analytics.product.STRProductEvent
 import com.appsamurai.storyly.core.analytics.event.STREventPayload
 import com.appsamurai.storyly.core.data.model.STRPayload
-import com.appsamurai.storyly.core.data.model.product.STRCart
-import com.appsamurai.storyly.core.data.model.product.STRCartEventResult
 import com.appsamurai.storyly.core.data.model.product.STRCartItem
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
 import com.appsamurai.storyly.core.data.model.product.STRWishlistEventResult
 import com.appsamurai.storyly.core.ui.STRWidgetController
 import com.appsamurai.storyly.coreinternal.util.getActivity
-import com.appsamurai.storyly.placement.data.provider.PlacementDataProvider
+import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
 import com.appsamurai.storyly.placement.ui.STRListener
 import com.appsamurai.storyly.placement.ui.STRPlacementView
 import com.appsamurai.storyly.placement.ui.STRProductListener
@@ -24,9 +23,7 @@ import com.appsamurai.storyly.storybar.ui.model.PlayMode
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTRErrorPayload
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTREventPayload
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTRPayload
-import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.decodeSTRCart
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.decodeSTRProductItem
-import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.encodeSTRCart
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.encodeSTRCartItem
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.encodeSTRProductItem
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.decodeFromJson
@@ -44,8 +41,8 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
     private var providerId: String? = null
 
     // Callback maps for async cart/wishlist operations
-    private val cartUpdateCallbacks = mutableMapOf<String, Pair<((STRCart?) -> Unit)?, ((STRCartEventResult) -> Unit)?>>()
-    private val wishlistUpdateCallbacks = mutableMapOf<String, Pair<((STRProductItem?) -> Unit)?, ((STRWishlistEventResult) -> Unit)?>>()
+    private val cartUpdateCallbacks = mutableMapOf<String, Pair<(() -> Unit)?, ((String) -> Unit)?>>()
+    private val wishlistUpdateCallbacks = mutableMapOf<String, Pair<(() -> Unit)?, ((String) -> Unit)?>>()
 
     private var widgetMap = mutableMapOf<String, WeakReference<STRWidgetController>>()
 
@@ -85,11 +82,7 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
     fun approveCartChange(responseId: String, raw: String?) {
         Handler(context.mainLooper).post {
             val callbacks = cartUpdateCallbacks[responseId] ?: return@post
-            val cart = raw?.let {
-                val map = decodeFromJson(it)
-                decodeSTRCart(map?.get("cart") as? Map<String, Any?>)
-            }
-            callbacks.first?.invoke(cart)
+            callbacks.first?.invoke()
             cartUpdateCallbacks.remove(responseId)
         }
     }
@@ -101,21 +94,15 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
                 val map = decodeFromJson(it)
                 map?.get("failMessage") as? String
             } ?: ""
-            callbacks.second?.invoke(STRCartEventResult(failMessage))
+            callbacks.second?.invoke(failMessage)
             cartUpdateCallbacks.remove(responseId)
         }
     }
 
-    fun approveWishlistChange(responseId: String, raw: String?) {
+    fun approveWishlistChange(responseId: String) {
         Handler(context.mainLooper).post {
             val callbacks = wishlistUpdateCallbacks[responseId] ?: return@post
-            val item = raw?.let {
-                val map = decodeFromJson(it)
-                (map?.get("item") as? Map<String, Any?>)?.let { item ->
-                    decodeSTRProductItem(item)
-                }
-            }
-            callbacks.first?.invoke(item)
+            callbacks.first?.invoke()
             wishlistUpdateCallbacks.remove(responseId)
         }
     }
@@ -127,7 +114,7 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
                 val map = decodeFromJson(it)
                 map?.get("failMessage") as? String
             } ?: ""
-            callbacks.second?.invoke(STRWishlistEventResult(failMessage))
+            callbacks.second?.invoke(failMessage)
             wishlistUpdateCallbacks.remove(responseId)
         }
     }
@@ -148,7 +135,7 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
         addView(placementView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
     }
 
-    private fun createPlacementView(dataProvider: PlacementDataProvider): STRPlacementView {
+    private fun createPlacementView(dataProvider: STRPlacementDataProvider): STRPlacementView {
         return STRPlacementView(context.getActivity() ?: context, dataProvider).apply {
             listener = object : STRListener {
                 override fun onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
@@ -190,7 +177,7 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
                 }
             }
             productListener = object : STRProductListener {
-                override fun onProductEvent(widget: STRWidgetController, event: STREvent) {
+                override fun onProductEvent(widget: STRWidgetController, event: STRProductEvent) {
                     Log.d("[SPStorylyPlacement]", "onProductEvent: ${event.getType()}")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
@@ -201,21 +188,17 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
 
                 override fun onUpdateCart(
                     widget: STRWidgetController,
-                    event: STREvent,
-                    cart: STRCart?,
-                    change: STRCartItem?,
-                    onSuccess: ((STRCart?) -> Unit)?,
-                    onFail: ((STRCartEventResult) -> Unit)?,
+                    item: STRCartItem?,
+                    onSuccess: (() -> Unit)?,
+                    onFail: ((String) -> Unit)?,
                 ) {
-                    Log.d("[SPStorylyPlacement]", "onUpdateCart: ${event.getType()}")
+                    Log.d("[SPStorylyPlacement]", "onUpdateCart")
                     val responseId = UUID.randomUUID().toString()
                     cartUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
                     val eventJson = encodeToJson(
                         mapOf(
                             "widget" to encodeWidgetController(widget),
-                            "event" to event.getType(),
-                            "cart" to encodeSTRCart(cart),
-                            "change" to encodeSTRCartItem(change),
+                            "item" to encodeSTRCartItem(item),
                             "responseId" to responseId,
                         )
                     )
@@ -224,10 +207,10 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
 
                 override fun onUpdateWishlist(
                     widget: STRWidgetController,
+                    event: STRProductEvent,
                     item: STRProductItem?,
-                    event: STREvent,
-                    onSuccess: ((STRProductItem?) -> Unit)?,
-                    onFail: ((STRWishlistEventResult) -> Unit)?,
+                    onSuccess: (() -> Unit)?,
+                    onFail: ((String) -> Unit)?,
                 ) {
                     Log.d("[SPStorylyPlacement]", "onUpdateWishlist: ${event.getType()}")
                     val responseId = UUID.randomUUID().toString()

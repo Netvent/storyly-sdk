@@ -68,14 +68,7 @@ import StorylyVideoFeed
         DispatchQueue.main.async {
           guard let callbacks = self.cartUpdateCallbacks[responseId] else { return }
             
-            var cart: STRCart? = nil
-            if let raw = raw,
-               let dict = decodeFromJson(raw),
-               let cartDict = dict["cart"] as? [String: Any] {
-              cart = decodeSTRCart(cartDict)
-            }
-            
-            callbacks.onSuccess?(cart)
+            callbacks.onSuccess?()
             self.cartUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
@@ -91,7 +84,7 @@ import StorylyVideoFeed
               failMessage = message
             }
             
-            callbacks.onFail?(STRCartEventResult(message: failMessage))
+            callbacks.onFail?(failMessage)
             self.cartUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
@@ -154,7 +147,7 @@ import StorylyVideoFeed
         }
     }
     
-    private func createPlacementView(dataProvider: PlacementDataProvider) -> STRPlacementView {
+    private func createPlacementView(dataProvider: STRPlacementDataProvider) -> STRPlacementView {
         let view = STRPlacementView(dataProvider: dataProvider)
         
         view.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
@@ -249,8 +242,8 @@ import StorylyVideoFeed
 // MARK: - Callback Type Definitions
 
 struct CartCallbacks {
-    let onSuccess: ((STRCart?) -> Void)?
-    let onFail: ((STRCartEventResult) -> Void)?
+    let onSuccess: (() -> Void)?
+    let onFail: ((String) -> Void)?
 }
 
 struct WishlistCallbacks {
@@ -353,18 +346,16 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         }
     }
     
-    func onUpdateCart(widget: any STRWidgetController, event: STREvent, cart: STRCart?, change: STRCartItem?, onSuccess: ((STRCart?) -> Void)?, onFail: ((STRCartEventResult) -> Void)?) {
+    func onUpdateCart(widget: any STRWidgetController, change: STRCartItem?, onSuccess: (() -> Void)?, onFail: ((String) -> Void)?) {
         guard let placementView = placementView else { return }
         
-        print("[SPStorylyPlacement] onUpdateCart: \(event.getType())")
+        print("[SPStorylyPlacement] onUpdateCart")
         
         let responseId = UUID().uuidString
         placementView.cartUpdateCallbacks[responseId] = CartCallbacks(onSuccess: onSuccess, onFail: onFail)
         
         let eventData: [String: Any?] = [
             "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
-            "event": event.getType(),
-            "cart": encodeSTRCart(cart),
             "change": encodeSTRCartItem(change),
             "responseId": responseId
         ]

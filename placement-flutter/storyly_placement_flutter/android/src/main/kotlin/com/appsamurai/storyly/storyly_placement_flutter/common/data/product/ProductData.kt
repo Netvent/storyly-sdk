@@ -74,48 +74,19 @@ internal fun encodeSTRProductInformation(info: STRProductInformation): Map<Strin
     )
 }
 
-internal fun encodeSTRCart(cart: STRCart?): Map<String, Any?>? {
-    cart ?: return null
-    return mapOf(
-     "items" to cart.items.map { item -> encodeSTRCartItem(item) },
-     "totalPrice" to cart.totalPrice,
-     "oldTotalPrice" to cart.oldTotalPrice,
-     "currency" to cart.currency,
-    )
-}
-
-internal fun decodeSTRCart(cart: Map<String, Any?>?): STRCart? {
-    cart ?: return null
-    val totalPrice = (cart["totalPrice"] as? Number)?.toFloat() ?: return null
-    return STRCart(
-        items = (cart["items"] as? List<Map<String, Any?>>)
-            ?.mapNotNull { item -> decodeSTRCartItem(item) }
-            ?: emptyList(),
-        totalPrice = totalPrice,
-        oldTotalPrice =  (cart["oldTotalPrice"] as? Number)?.toFloat(),
-        currency = cart["currency"] as String,
+internal fun decodeSTRProductInformation(info: Map<String, Any?>): STRProductInformation? {
+    val productId = info["productId"] as? String ?: return null
+    val productGroupId = info["productGroupId"] as? String ?: return null
+    return STRProductInformation(
+        productId = productId,
+        productGroupId = productGroupId,
     )
 }
 
 internal fun encodeSTRCartItem(item: STRCartItem?): Map<String, Any?>? {
     item ?: return null
     return mapOf(
-        "item" to encodeSTRProductItem(item.item),
+        "product" to encodeSTRProductItem(item.product),
         "quantity" to item.quantity,
-        "totalPrice" to item.totalPrice,
-        "oldTotalPrice" to item.oldTotalPrice,
-    )
-}
-
-internal fun decodeSTRCartItem(item: Map<String, Any?>?): STRCartItem? {
-    item ?: return null
-    val productItem = item["item"] as? Map<String, Any?> ?: return null
-    val cartItem = decodeSTRProductItem(productItem) ?: return null
-    val quantity = item["quantity"] as? Int ?: return null
-    return STRCartItem(
-        item = cartItem,
-        quantity = quantity,
-        totalPrice = (item["totalPrice"] as? Number)?.toFloat(),
-        oldTotalPrice = (item["oldTotalPrice"] as? Number)?.toFloat(),
     )
 }
