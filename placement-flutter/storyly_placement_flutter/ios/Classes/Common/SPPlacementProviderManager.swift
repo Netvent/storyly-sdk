@@ -38,6 +38,9 @@ import StorylyCore
     
     @objc public var sendEvent: ((String, SPPlacementProviderEventType, String) -> Void)?
     
+    private var providerDelegate: STRProviderDelegateImpl?
+    private var providerProductDelegate: STRProviderProductDelegateImpl?
+    
     init(id: String) {
         self.id = id
         super.init()
@@ -65,8 +68,11 @@ import StorylyCore
             
             let placementConfig = decodeSTRPlacementConfig(config, token: token)
             
-            self.provider.delegate = STRProviderDelegateImpl(wrapper: self)
-            self.provider.productDelegate = STRProviderProductDelegateImpl(wrapper: self)
+            self.providerDelegate = STRProviderDelegateImpl(wrapper: self)
+            self.providerProductDelegate = STRProviderProductDelegateImpl(wrapper: self)
+            
+            self.provider.delegate = self.providerDelegate
+            self.provider.productDelegate = self.providerProductDelegate
             self.provider.config = placementConfig
         }
     }
