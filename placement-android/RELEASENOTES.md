@@ -1,4 +1,20 @@
 # Release Notes
+### 1.3.0 (22.01.2026)
+* added dots as progress style for banner widget
+* added new enumeration for product events
+* fixed story resume upon go to cart button click in success sheet
+* changed onUpdateCart listener method signature
+* changed hydrateWishlist method signature
+* renamed PlacementDataProvider to STRPlacementDataProvider
+* renamed STRProviderListener to STRDataProviderListener
+* renamed STRProviderProductListener to STRDataProviderProductListener
+* renamed ProductCartAdded, ProductCartAddFailed, CartButtonClicked to ProductAddToCartSuccess, ProductAddToCartFail, GoToCartButtonClicked respectively
+* removed ProductAdded event
+* removed price fields from STRCartItem
+* removed cart integration
+* removed product fallback configuration
+* removed CardActionClicked product event for swipe card widget
+
 ### 1.2.1 (13.01.2026)
 * fixed a bug related to canvas widget image load
 * fixed a memory leak in video feed widget
