@@ -73,7 +73,7 @@ class SPPlacementProviderWrapper(
         Log.d("[SPPlacementProviderWrapper]", "Configuring provider with token: $token")
 
         val placementConfig = decodeSTRPlacementConfig(config, token)
-        placementConfig.setFramework("rn")
+        placementConfig.framework = "rn"
 
         provider.apply {
           listener = object : STRProviderListener {
