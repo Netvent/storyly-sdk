@@ -1,4 +1,11 @@
 # Release Notes
+### 1.3.1 (27.01.2026)
+* fixed a bug related to dots progress when autoplay is enabled for banner widget
+* fixed a crash in case of empty data rendering for video feed widget
+* fixed a resume issue of banner slides when story/video feed presenter is dismissed from a flow
+* removed internal cart integration logic from codebase
+* removed development endpoints from codebase
+  
 ### 1.3.0 (22.01.2026)
 * added dots as progress style for banner widget
 * added new enumeration for product events
