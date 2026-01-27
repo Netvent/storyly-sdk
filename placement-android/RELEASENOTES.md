@@ -1,4 +1,9 @@
 # Release Notes
+### 1.3.2 (27.01.2026)
+* fixed a bug related to dots progress when autoplay is enabled for banner widget
+* removed internal cart integration logic from codebase
+* removed development endpoints from codebase
+
 ### 1.3.1 (22.01.2026)
 * fixed a cart related config
 
