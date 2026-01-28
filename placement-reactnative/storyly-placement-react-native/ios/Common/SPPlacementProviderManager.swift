@@ -1,6 +1,6 @@
 import Foundation
 import StorylyPlacement
-import StorylyCore
+@_spi(InternalFramework) import StorylyCore
 
 @objc public class SPPlacementProviderManager: NSObject {
     
@@ -67,6 +67,7 @@ import StorylyCore
             print("[SPPlacementProviderWrapper] Configuring provider with token: \(token)")
             
             let placementConfig = decodeSTRPlacementConfig(config, token: token)
+            placementConfig.setFramework(framework: "rn")
             
             self.provider.delegate = self.delegate
             self.provider.productDelegate = self.productDelegate

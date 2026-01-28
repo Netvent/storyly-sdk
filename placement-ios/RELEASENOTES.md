@@ -1,4 +1,27 @@
 # Release Notes
+### 1.3.1 (27.01.2026)
+* fixed a bug related to dots progress when autoplay is enabled for banner widget
+* fixed a crash in case of empty data rendering for video feed widget
+* fixed a resume issue of banner slides when story/video feed presenter is dismissed from a flow
+* removed internal cart integration logic from codebase
+* removed development endpoints from codebase
+  
+### 1.3.0 (22.01.2026)
+* added dots as progress style for banner widget
+* added new enumeration for product events
+* fixed wishlist functionality 
+* changed onUpdateCart listener method signature
+* changed hydrateWishlist method signature
+* renamed PlacementDataProvider to STRPlacementDataProvider
+* renamed STRProviderDelegate to STRDataProviderDelegate
+* renamed STRProviderProductDelegate to STRDataProviderDelegate
+* renamed ProductCartAdded, ProductCartAddFailed, CartButtonClicked to ProductAddToCartSuccess, ProductAddToCartFail, GoToCartButtonClicked respectively
+* removed ProductAdded event
+* removed price fields from STRCartItem
+* removed cart integration
+* removed product fallback configuration
+* removed CardActionClicked product event for swipe card widget
+
 ### 1.2.1 (13.01.2026)
 * fixed a bug related to video feed presenter layouting
 * fixed memory leaks
