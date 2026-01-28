@@ -89,16 +89,6 @@ RCT_EXPORT_MODULE(StorylyPlacementProvider)
     }
 }
 
-- (void)updateCart:(NSString *)providerId cartJson:(NSString *)cartJson
-{
-    NSLog(@"[StorylyPlacementProvider] Updating cart for provider: %@", providerId);
-    
-    SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
-    if (wrapper) {
-        [wrapper updateCartWithCartJson:cartJson];
-    }
-}
-
 // MARK: - Event Listeners
 
 - (void)addListener:(NSString *)eventName

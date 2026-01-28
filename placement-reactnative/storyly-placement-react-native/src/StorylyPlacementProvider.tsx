@@ -10,7 +10,7 @@ import type {
   PlacementLoadEvent,
   PlacementLoadFailEvent,
   StorylyPlacementConfig,
-  STRCart,
+  STRProductInformation,
   STRProductItem,
 } from './data';
 import StorylyPlacementProviderNative from './native/StorylyPlacementProviderNative';
@@ -24,8 +24,7 @@ export interface StorylyPlacementProviderListener {
 export interface StorylyPlacementProvider {
   providerId: string | null;
   hydrateProducts: (products: STRProductItem[]) => void;
-  hydrateWishlist: (products: STRProductItem[]) => void;
-  updateCart: (cart: STRCart) => void;
+  hydrateWishlist: (products: STRProductInformation[]) => void;
   destroy: () => void;
 }
 
@@ -105,7 +104,6 @@ export const useStorylyPlacementProvider = (
     providerId: null,
     hydrateProducts: () => {},
     hydrateWishlist: () => {},
-    updateCart: () => {},
     destroy: () => {},
   });
 
@@ -118,18 +116,11 @@ export const useStorylyPlacementProvider = (
           JSON.stringify({ products })
         );
       },
-      hydrateWishlist: (products: STRProductItem[]) => {
+      hydrateWishlist: (products: STRProductInformation[]) => {
         console.debug('Hydrating wishlist for provider id', pid,'with products:', products);
         StorylyPlacementProviderNative.hydrateWishlist(
           pid,
           JSON.stringify({ products })
-        );
-      },
-      updateCart: (cart: STRCart) => {
-        console.debug('Updating cart for provider id', pid,'with cart:', cart)
-        StorylyPlacementProviderNative.updateCart(
-          pid,
-          JSON.stringify({ cart })
         );
       },
       destroy: () => {

@@ -94,16 +94,6 @@ RCT_EXPORT_METHOD(hydrateWishlist:(NSString *)providerId productsJson:(NSString 
     }
 }
 
-RCT_EXPORT_METHOD(updateCart:(NSString *)providerId cartJson:(NSString *)cartJson)
-{
-    NSLog(@"[StorylyPlacementProviderLegacy] Updating cart for provider: %@", providerId);
-    
-    SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
-    if (wrapper) {
-        [wrapper updateCartWithCartJson:cartJson];
-    }
-}
-
 // MARK: - Event Emitter
 
 RCT_EXPORT_METHOD(addListener:(NSString *)eventName)

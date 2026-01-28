@@ -61,12 +61,6 @@ class StorylyPlacementProviderModule(
     }
 
     @ReactMethod
-    fun updateCart(providerId: String, cartJson: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Updating cart for provider: $providerId")
-        SPPlacementProviderManager.getProvider(providerId)?.updateCart(cartJson)
-    }
-
-    @ReactMethod
     fun addListener(eventName: String) {
         listenerCount++
     }

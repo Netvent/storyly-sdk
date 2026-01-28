@@ -26,18 +26,7 @@ export interface STRProductInformation {
   productGroupId?: string;
 }
 
-
 export interface STRCartItem {
-  item: STRProductItem;
+  product: STRProductItem;
   quantity: number;
-  totalPrice?: number;
-  oldTotalPrice?: number;
 }
-
-export interface STRCart {
-  items: STRCartItem[];
-  totalPrice: number;
-  oldTotalPrice?: number;
-  currency: string;
-}
-

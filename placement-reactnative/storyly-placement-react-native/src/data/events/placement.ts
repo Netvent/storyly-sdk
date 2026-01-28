@@ -3,7 +3,7 @@
  * Based on StorylyPlacement iOS SDK delegate callbacks
  */
 
-import type { STRCart, STRCartItem, STRProductItem } from '../product';
+import type { STRCartItem, STRProductItem } from '../product';
 import type { BaseEvent } from '../util';
 import type { PlacementWidget, STRErrorPayload, STREventPayload, STRPayload } from './payloads';
 
@@ -38,9 +38,7 @@ export interface PlacementProductEvent extends BaseEvent {
 
 export interface PlacementCartUpdateEvent extends BaseEvent {
   widget: PlacementWidget;
-  event: string;
-  cart?: STRCart;
-  change?: STRCartItem;
+  item?: STRCartItem;
   responseId: string;
 }
 

@@ -76,66 +76,28 @@ func decodeSTRProductVariant(_ dict: [String: Any]) -> STRProductVariant? {
     return STRProductVariant(name: name, value: value, key: key)
 }
 
-// MARK: - STRCart Encoding/Decoding
-
-func encodeSTRCart(_ cart: STRCart?) -> [String: Any]? {
-    guard let cart = cart else { return nil }
-    
-    let result: [String: Any] = ([
-        "items": cart.items.map { encodeSTRCartItem($0) },
-        "totalPrice": cart.totalPrice,
-        "currency": cart.currency,
-        "oldTotalPrice": cart.oldTotalPrice
-    ] as [String: Any?]).compactMapValues { $0 }
-    
-    return result
-}
-
-func decodeSTRCart(_ dict: [String: Any]?) -> STRCart? {
-    guard let dict = dict,
-          let itemsArray = dict["items"] as? [[String: Any]],
-          let totalPrice = dict["totalPrice"] as? Double,
-          let currency = dict["currency"] as? String else {
-        return nil
-    }
-    let oldTotalPrice = dict["oldTotalPrice"] as? Double
-    return STRCart(
-        items: itemsArray.compactMap { decodeSTRCartItem($0) },
-        totalPrice: Float(totalPrice),
-        oldTotalPrice: oldTotalPrice as NSNumber?,
-        currency: currency
-    )
-}
-
 // MARK: - STRCartItem Encoding/Decoding
 
 func encodeSTRCartItem(_ item: STRCartItem?) -> [String: Any?]? {
     guard let item = item else { return nil }
     
     let result: [String: Any] = ([
-        "item": encodeSTRProductItem(item.item),
+        "product": encodeSTRProductItem(item.product),
         "quantity": item.quantity,
-        "totalPrice": item.totalPrice,
-        "oldTotalPrice": item.oldTotalPrice,
     ] as [String: Any?]).compactMapValues { $0 }
     return result
 }
 
 func decodeSTRCartItem(_ dict: [String: Any]) -> STRCartItem? {
-    guard let itemDict = dict["item"] as? [String: Any],
-          let item = decodeSTRProductItem(itemDict),
+    guard let productDict = dict["product"] as? [String: Any],
+          let product = decodeSTRProductItem(productDict),
           let quantity = dict["quantity"] as? Int else {
         return nil
     }
     
-    let totalPrice = dict["totalPrice"] as? Double
-    let oldTotalPrice = dict["oldTotalPrice"] as? Double
-    
     return STRCartItem(
-        item: item,
-        quantity: quantity,
-        totalPrice: totalPrice as NSNumber?,
-        oldTotalPrice: oldTotalPrice as NSNumber?
+        product: product,
+        quantity: quantity
     )
 }
 
@@ -146,5 +108,11 @@ func encodeSTRProductInformation(_ info: STRProductInformation) -> [String: Any?
         "productId": info.productId,
         "productGroupId": info.productGroupId
     ]
+}
+
+func decodeSTRProductInformation(_ dict: [String: Any]) -> STRProductInformation {
+    let productId = dict["productId"] as? String
+    let productGroupId = dict["productGroupId"] as? String
+    return STRProductInformation(productId: productId, productGroupId: productGroupId)
 }
 

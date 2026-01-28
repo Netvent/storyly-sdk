@@ -13,7 +13,6 @@ export interface Spec extends TurboModule {
   // Product hydration
   hydrateProducts(providerId: string, productsJson: string): void;
   hydrateWishlist(providerId: string, productsJson: string): void;
-  updateCart(providerId: string, cartJson: string): void;
 
   // Event listeners
   addListener(eventName: string): void;
