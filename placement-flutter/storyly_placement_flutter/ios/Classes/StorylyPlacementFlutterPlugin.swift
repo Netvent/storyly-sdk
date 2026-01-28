@@ -71,15 +71,6 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and products are required", details: nil))
         }
-    case "updateCart":
-        if let args = call.arguments as? [String: Any],
-           let providerId = args["providerId"] as? String,
-           let cart = args["cart"] as? String {
-            SPPlacementProviderManager.shared.getProvider(id: providerId)?.updateCart(cartJson: cart)
-            result(nil)
-        } else {
-            result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and cart are required", details: nil))
-        }
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -172,9 +163,8 @@ class StorylyPlacementFlutterView: NSObject, FlutterPlatformView {
                  }
             case "approveCartChange":
                 if let args = call.arguments as? [String: Any],
-                   let responseId = args["responseId"] as? String,
-                   let raw = args["raw"] as? String {
-                    self.placementView.approveCartChange(responseId: responseId, raw: raw)
+                   let responseId = args["responseId"] as? String {
+                    self.placementView.approveCartChange(responseId: responseId)
                     result(nil)
                 } else {
                     result(FlutterError(code: "INVALID_ARGUMENT", message: "responseId and cart are required", details: nil))
@@ -190,9 +180,8 @@ class StorylyPlacementFlutterView: NSObject, FlutterPlatformView {
                 }
             case "approveWishlistChange":
                 if let args = call.arguments as? [String: Any],
-                   let responseId = args["responseId"] as? String,
-                   let raw = args["raw"] as? String {
-                    self.placementView.approveWishlistChange(responseId: responseId, raw: raw)
+                   let responseId = args["responseId"] as? String {
+                    self.placementView.approveWishlistChange(responseId: responseId)
                     result(nil)
                 } else {
                     result(FlutterError(code: "INVALID_ARGUMENT", message: "responseId and item are required", details: nil))

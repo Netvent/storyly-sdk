@@ -91,10 +91,9 @@ class StorylyPlacementFlutterView(
             }
             "approveWishlistChange" -> {
                 val responseId = call.argument<String>("responseId")
-                val raw = call.argument<String>("raw")
-                
+
                 if (responseId != null) {
-                    placementView.approveWishlistChange(responseId, raw)
+                    placementView.approveWishlistChange(responseId)
                     result.success(null)
                 } else {
                     result.error("INVALID_ARGUMENT", "responseId and item are required", null)

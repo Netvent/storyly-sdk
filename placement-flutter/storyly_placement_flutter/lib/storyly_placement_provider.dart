@@ -101,7 +101,7 @@ class StorylyPlacementProvider {
     );
   }
 
-  Future<void> hydrateWishlist(List<STRProductItem> products) {
+  Future<void> hydrateWishlist(List<STRProductInformation> products) {
     return StorylyPlacementFlutterPlatform.instance.hydrateWishlist(
       _providerId,
       jsonEncode({'products': products.map((e) => e.toJson()).toList()}),
