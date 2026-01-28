@@ -5,13 +5,11 @@ import android.os.Handler
 import android.util.Log
 import com.appsamurai.storyly.core.STRWidgetType
 import com.appsamurai.storyly.core.analytics.error.STRErrorPayload
-import com.appsamurai.storyly.core.analytics.event.STREvent
 import com.appsamurai.storyly.core.analytics.product.STRProductEvent
 import com.appsamurai.storyly.core.analytics.event.STREventPayload
 import com.appsamurai.storyly.core.data.model.STRPayload
 import com.appsamurai.storyly.core.data.model.product.STRCartItem
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
-import com.appsamurai.storyly.core.data.model.product.STRWishlistEventResult
 import com.appsamurai.storyly.core.ui.STRWidgetController
 import com.appsamurai.storyly.coreinternal.util.getActivity
 import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
@@ -23,7 +21,6 @@ import com.appsamurai.storyly.storybar.ui.model.PlayMode
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTRErrorPayload
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTREventPayload
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.encodeSTRPayload
-import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.decodeSTRProductItem
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.encodeSTRCartItem
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.product.encodeSTRProductItem
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.decodeFromJson

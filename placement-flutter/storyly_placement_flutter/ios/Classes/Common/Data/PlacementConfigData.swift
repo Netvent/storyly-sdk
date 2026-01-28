@@ -86,7 +86,7 @@ func decodeSTRNetworkConfig(_ networkConfig: [String: Any]) -> STRNetworkConfig?
   }
   
   if let placementHost = networkConfig["placementHost"] as? String {
-    _ = builder.setListHost(url: placementHost)
+      _ = builder.setPlacementHost(url: placementHost)
   }
   
   return builder.build()
