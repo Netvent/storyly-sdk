@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.9.0 - 29.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.9.0/storyly-web.js)
+
+- Feature: added skeleton view for story group covers
+
 ### 4.8.1 - 23.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.8.0/storyly-web.js)
 
 - Fix: scrollX issue
