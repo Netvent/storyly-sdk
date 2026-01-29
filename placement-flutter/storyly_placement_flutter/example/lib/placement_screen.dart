@@ -142,13 +142,17 @@ class _PlacementScreenState extends State<PlacementScreen> {
               debugPrint('[${widget.name}] onProductEvent $event');
             },
             onUpdateCart: (event) {
-              debugPrint('[${widget.name}] onUpdateCart productId ${event.item?.product.productId}');
+              debugPrint(
+                '[${widget.name}] onUpdateCart productId ${event.item?.product.productId}',
+              );
               if (event.item != null) {
                 _controller?.approveCartChange(event.responseId);
               }
             },
             onUpdateWishlist: (event) {
-              debugPrint('[${widget.name}] onUpdateWishlist ${event.event} ${event.item?.productId}');
+              debugPrint(
+                '[${widget.name}] onUpdateWishlist ${event.event} ${event.item?.productId}',
+              );
               _controller?.approveWishlistChange(event.responseId);
             },
           ),

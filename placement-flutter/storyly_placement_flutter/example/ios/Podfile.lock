@@ -2,29 +2,31 @@ PODS:
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
-  - storyly_placement_flutter (0.0.1):
+  - storyly_placement_flutter (1.3.2):
     - Flutter
-    - StorylyPlacement (= 1.1.0)
-  - StorylyPlacement (1.1.0):
-    - StorylyPlacement/Analytics (= 1.1.0)
-    - StorylyPlacement/Banner (= 1.1.0)
-    - StorylyPlacement/Core (= 1.1.0)
-    - StorylyPlacement/CoreInternal (= 1.1.0)
-    - StorylyPlacement/Placement (= 1.1.0)
-    - StorylyPlacement/StoryBar (= 1.1.0)
-    - StorylyPlacement/SwipeCard (= 1.1.0)
-    - StorylyPlacement/VideoFeed (= 1.1.0)
-  - StorylyPlacement/Analytics (1.1.0)
-  - StorylyPlacement/Banner (1.1.0)
-  - StorylyPlacement/Core (1.1.0)
-  - StorylyPlacement/CoreInternal (1.1.0)
-  - StorylyPlacement/Placement (1.1.0):
+    - StorylyPlacement (= 1.3.1)
+  - StorylyPlacement (1.3.1):
+    - StorylyPlacement/Analytics (= 1.3.1)
+    - StorylyPlacement/Banner (= 1.3.1)
+    - StorylyPlacement/Canvas (= 1.3.1)
+    - StorylyPlacement/Core (= 1.3.1)
+    - StorylyPlacement/CoreInternal (= 1.3.1)
+    - StorylyPlacement/Placement (= 1.3.1)
+    - StorylyPlacement/StoryBar (= 1.3.1)
+    - StorylyPlacement/SwipeCard (= 1.3.1)
+    - StorylyPlacement/VideoFeed (= 1.3.1)
+  - StorylyPlacement/Analytics (1.3.1)
+  - StorylyPlacement/Banner (1.3.1)
+  - StorylyPlacement/Canvas (1.3.1)
+  - StorylyPlacement/Core (1.3.1)
+  - StorylyPlacement/CoreInternal (1.3.1)
+  - StorylyPlacement/Placement (1.3.1):
     - StorylyPlacement/Analytics
     - StorylyPlacement/Core
     - StorylyPlacement/CoreInternal
-  - StorylyPlacement/StoryBar (1.1.0)
-  - StorylyPlacement/SwipeCard (1.1.0)
-  - StorylyPlacement/VideoFeed (1.1.0)
+  - StorylyPlacement/StoryBar (1.3.1)
+  - StorylyPlacement/SwipeCard (1.3.1)
+  - StorylyPlacement/VideoFeed (1.3.1)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -45,10 +47,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
-  storyly_placement_flutter: 1c1eebc2c5153f93f1d4f0e4d52c53f2925b5eaf
-  StorylyPlacement: 0c7de120832c48e6db35d0bf325c0214350e6c18
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
+  storyly_placement_flutter: 887b9bfba22d7ca0e2876bb4489db3a7307b64a7
+  StorylyPlacement: 6d7fb2216b02c1fb218ae911530687d6a5b0f5c8
 
 PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.15.2

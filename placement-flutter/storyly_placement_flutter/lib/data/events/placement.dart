@@ -120,9 +120,7 @@ class PlacementCartUpdateEvent extends BaseEvent {
   factory PlacementCartUpdateEvent.fromJson(Map<String, dynamic> json) {
     return PlacementCartUpdateEvent(
       widget: PlacementWidget.fromJson(json['widget']),
-      item: json['item'] != null
-          ? STRCartItem.fromJson(json['item'])
-          : null,
+      item: json['item'] != null ? STRCartItem.fromJson(json['item']) : null,
       responseId: json['responseId'],
     );
   }

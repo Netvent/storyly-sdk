@@ -110,23 +110,17 @@ class STRCartItem {
   final STRProductItem product;
   final int quantity;
 
-  STRCartItem({
-    required this.product,
-    required this.quantity
-  });
+  STRCartItem({required this.product, required this.quantity});
 
   factory STRCartItem.fromJson(Map<String, dynamic> json) {
     return STRCartItem(
       product: STRProductItem.fromJson(json['product']),
-      quantity: json['quantity']
+      quantity: json['quantity'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'item': product.toJson(),
-      'quantity': quantity
-    };
+    return {'item': product.toJson(), 'quantity': quantity};
   }
 }
 

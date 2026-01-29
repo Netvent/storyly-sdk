@@ -144,9 +144,7 @@ class StorylyPlacementController {
     });
   }
 
-  Future<void> approveWishlistChange(
-    String responseId
-  ) async {
+  Future<void> approveWishlistChange(String responseId) async {
     await _methodChannel?.invokeMethod('approveWishlistChange', {
       'responseId': responseId,
       'raw': null,
