@@ -2,7 +2,6 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import type { ViewProps } from 'react-native';
 import type {
-  STRCart,
   BaseEvent,
   PlacementActionClickEvent,
   PlacementCartUpdateEvent,
@@ -35,9 +34,9 @@ export interface StorylyPlacementProps extends ViewProps {
 
 export interface StorylyPlacementMethods {
   getWidget<T extends STRWidgetController>(widget: PlacementWidget): T;
-  approveCartChange: (responseId: string, cart: STRCart) => void;
+  approveCartChange: (responseId: string) => void;
   rejectCartChange: (responseId: string, failMessage: string) => void;
-  approveWishlistChange: (responseId: string, item: STRCart) => void;
+  approveWishlistChange: (responseId: string) => void;
   rejectWishlistChange: (responseId: string, failMessage: string) => void;
 }
 
@@ -55,9 +54,9 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
       }) as T;
     };
 
-    const approveCartChange = (responseId: string, cart: STRCart) => {
+    const approveCartChange = (responseId: string) => {
       if (placementRef.current) {
-        PlacementCommands.approveCartChange(placementRef.current, responseId, JSON.stringify({ cart }));
+        PlacementCommands.approveCartChange(placementRef.current, responseId, JSON.stringify({  }));
       }
     };
 
@@ -67,9 +66,9 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
       }
     };
 
-    const approveWishlistChange = (responseId: string, item: STRCart) => {
+    const approveWishlistChange = (responseId: string) => {
       if (placementRef.current) {
-        PlacementCommands.approveWishlistChange(placementRef.current, responseId, JSON.stringify({ item }));
+        PlacementCommands.approveWishlistChange(placementRef.current, responseId, JSON.stringify({  }));
       }
     };
 

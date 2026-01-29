@@ -1,7 +1,6 @@
 package com.storylyplacementreactnative.newarch
 
-import android.os.Handler
-import android.os.Looper
+
 import android.util.Log
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -60,12 +59,6 @@ class StorylyPlacementProviderModule(
     override fun hydrateWishlist(providerId: String, productsJson: String) {
         Log.d("[StorylyPlacementProviderModule]", "Hydrating wishlist for provider: $providerId")
         SPPlacementProviderManager.getProvider(providerId)?.hydrateWishlist(productsJson)
-    }
-
-    @ReactMethod
-    override fun updateCart(providerId: String, cartJson: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Updating cart for provider: $providerId")
-        SPPlacementProviderManager.getProvider(providerId)?.updateCart(cartJson)
     }
 
     @ReactMethod
