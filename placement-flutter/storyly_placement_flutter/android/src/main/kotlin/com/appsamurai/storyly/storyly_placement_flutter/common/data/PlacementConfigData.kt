@@ -40,8 +40,6 @@ fun decodeSTRPlacementConfig(config: Map<String, Any?>, token: String): STRPlace
 fun decodeSTRProductConfig(productConfig: Map<String, Any?>?): STRProductConfig? {
     productConfig ?: return null
     val builder = STRProductConfig.Builder()
-    (productConfig["isCartEnabled"] as? Boolean)?.let { builder.setCartAvailability(it) }
-    (productConfig["isFallbackEnabled"] as? Boolean)?.let { builder.setFallbackAvailability(it) }
     return builder.build()
 }
 

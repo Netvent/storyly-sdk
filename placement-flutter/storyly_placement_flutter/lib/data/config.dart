@@ -62,23 +62,14 @@ class StorylyPlacementConfig {
 }
 
 class StorylyProductConfig {
-  final bool? isFallbackEnabled;
-  final bool? isCartEnabled;
-
-  StorylyProductConfig({this.isFallbackEnabled, this.isCartEnabled});
+  StorylyProductConfig();
 
   factory StorylyProductConfig.fromJson(Map<String, dynamic> json) {
-    return StorylyProductConfig(
-      isFallbackEnabled: json['isFallbackEnabled'],
-      isCartEnabled: json['isCartEnabled'],
-    );
+    return StorylyProductConfig();
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'isFallbackEnabled': isFallbackEnabled,
-      'isCartEnabled': isCartEnabled,
-    };
+    return {};
   }
 }
 

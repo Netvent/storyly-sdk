@@ -57,7 +57,7 @@ func encodeVideoFeedItem(_ item: VideoFeedItem?) -> [String: Any]? {
         "actionUrl": item.actionUrl,
         "actionProducts": item.actionProducts?.map { encodeSTRProductItem($0) },
         "currentTime": item.currentTime,
-        "feedItemComponentList": item.videoFeedItemComponentList?.map { encodeVideoFeedComponent($0) }
+        "feedItemComponentList": item.feedItemComponentList?.map { encodeVideoFeedComponent($0) }
     ] as [String: Any?]).compactMapValues { $0 }
 }
 

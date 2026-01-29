@@ -64,18 +64,11 @@ import StorylyVideoFeed
         }
     }
   
-    @objc public func approveCartChange(responseId: String, raw: String?) {
+    @objc public func approveCartChange(responseId: String) {
         DispatchQueue.main.async {
           guard let callbacks = self.cartUpdateCallbacks[responseId] else { return }
             
-            var cart: STRCart? = nil
-            if let raw = raw,
-               let dict = decodeFromJson(raw),
-               let cartDict = dict["cart"] as? [String: Any] {
-              cart = decodeSTRCart(cartDict)
-            }
-            
-            callbacks.onSuccess?(cart)
+            callbacks.onSuccess?()
             self.cartUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
@@ -91,23 +84,15 @@ import StorylyVideoFeed
               failMessage = message
             }
             
-            callbacks.onFail?(STRCartEventResult(message: failMessage))
+            callbacks.onFail?(failMessage)
             self.cartUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
 
-    @objc public func approveWishlistChange(responseId: String, raw: String?) {
+    @objc public func approveWishlistChange(responseId: String) {
         DispatchQueue.main.async {
             guard let callbacks = self.wishlistUpdateCallbacks[responseId] else { return }
-            
-            var item: STRProductItem? = nil
-            if let raw = raw,
-               let dict = decodeFromJson(raw),
-               let itemDict = dict["item"] as? [String: Any] {
-              item = decodeSTRProductItem(itemDict)
-            }
-            
-            callbacks.onSuccess?(item)
+            callbacks.onSuccess?()
             self.wishlistUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
@@ -123,7 +108,7 @@ import StorylyVideoFeed
               failMessage = message
             }
             
-            callbacks.onFail?(STRWishlistEventResult(message: failMessage))
+            callbacks.onFail?(failMessage)
             self.wishlistUpdateCallbacks.removeValue(forKey: responseId)
         }
     }
@@ -154,7 +139,7 @@ import StorylyVideoFeed
         }
     }
     
-    private func createPlacementView(dataProvider: PlacementDataProvider) -> STRPlacementView {
+    private func createPlacementView(dataProvider: STRPlacementDataProvider) -> STRPlacementView {
         let view = STRPlacementView(dataProvider: dataProvider)
         
         view.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
@@ -249,13 +234,13 @@ import StorylyVideoFeed
 // MARK: - Callback Type Definitions
 
 struct CartCallbacks {
-    let onSuccess: ((STRCart?) -> Void)?
-    let onFail: ((STRCartEventResult) -> Void)?
+    let onSuccess: (() -> Void)?
+    let onFail: ((String) -> Void)?
 }
 
 struct WishlistCallbacks {
-    let onSuccess: ((STRProductItem?) -> Void)?
-    let onFail: ((STRWishlistEventResult) -> Void)?
+    let onSuccess: (() -> Void)?
+    let onFail: ((String) -> Void)?
 }
 
 // MARK: - STRListener Implementation
@@ -338,7 +323,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         self.placementView = placementView
     }
     
-    func onProductEvent(widget: any STRWidgetController, event: STREvent) {
+    func onProductEvent(widget: any STRWidgetController, event: STRProductEvent) {
         guard let placementView = placementView else { return }
         
         print("[SPStorylyPlacement] onProductEvent: \(event.getType())")
@@ -353,19 +338,17 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         }
     }
     
-    func onUpdateCart(widget: any STRWidgetController, event: STREvent, cart: STRCart?, change: STRCartItem?, onSuccess: ((STRCart?) -> Void)?, onFail: ((STRCartEventResult) -> Void)?) {
+    func onUpdateCart(widget: any STRWidgetController, item: STRCartItem?, onSuccess: (() -> Void)?, onFail: ((String) -> Void)?) {
         guard let placementView = placementView else { return }
         
-        print("[SPStorylyPlacement] onUpdateCart: \(event.getType())")
+        print("[SPStorylyPlacement] onUpdateCart")
         
         let responseId = UUID().uuidString
         placementView.cartUpdateCallbacks[responseId] = CartCallbacks(onSuccess: onSuccess, onFail: onFail)
         
         let eventData: [String: Any?] = [
             "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
-            "event": event.getType(),
-            "cart": encodeSTRCart(cart),
-            "change": encodeSTRCartItem(change),
+            "item": encodeSTRCartItem(item),
             "responseId": responseId
         ]
         
@@ -374,7 +357,7 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
         }
     }
     
-    func onUpdateWishlist(widget: any STRWidgetController, event: STREvent, item: STRProductItem?, onSuccess: ((STRProductItem?) -> Void)?, onFail: ((STRWishlistEventResult) -> Void)?) {
+    func onUpdateWishlist(widget: any STRWidgetController, event: STRProductEvent, item: STRProductItem?, onSuccess: (() -> Void)?, onFail: ((String) -> Void)?) {
         guard let placementView = placementView else { return }
         
         print("[SPStorylyPlacement] onUpdateWishlist: \(event.getType())")
