@@ -32,11 +32,14 @@ import StorylyPlacement
 @objc public class SPPlacementProviderWrapper: NSObject {
     
     @objc public let id: String
-    @objc public lazy var provider: PlacementDataProvider = {
-        return PlacementDataProvider()
+    @objc public lazy var provider: STRPlacementDataProvider = {
+        return STRPlacementDataProvider()
     }()
     
     @objc public var sendEvent: ((String, SPPlacementProviderEventType, String) -> Void)?
+    
+    private var providerDelegate: STRProviderDelegateImpl?
+    private var providerProductDelegate: STRProviderProductDelegateImpl?
     
     init(id: String) {
         self.id = id
@@ -66,8 +69,11 @@ import StorylyPlacement
             let placementConfig = decodeSTRPlacementConfig(config, token: token)
             placementConfig.setFramework(framework: "flutter")
             
-            self.provider.delegate = STRProviderDelegateImpl(wrapper: self)
-            self.provider.productDelegate = STRProviderProductDelegateImpl(wrapper: self)
+            self.providerDelegate = STRProviderDelegateImpl(wrapper: self)
+            self.providerProductDelegate = STRProviderProductDelegateImpl(wrapper: self)
+            
+            self.provider.delegate = self.providerDelegate
+            self.provider.productDelegate = self.providerProductDelegate
             self.provider.config = placementConfig
         }
     }
@@ -95,29 +101,15 @@ import StorylyPlacement
             
             print("[SPPlacementProviderWrapper] hydrateWishlist: \(productsJson)")
             
-            let products = productsArray.compactMap { decodeSTRProductItem($0) }
+            let products = productsArray.compactMap { decodeSTRProductInformation($0) }
             self.provider.hydrateWishlist(products: products)
-        }
-    }
-    
-    @objc public func updateCart(cartJson: String) {
-        DispatchQueue.main.async {
-            guard let dict = decodeFromJson(cartJson),
-                  let cartDict = dict["cart"] as? [String: Any],
-                  let cart = decodeSTRCart(cartDict) else {
-              return
-            }
-            
-            print("[SPPlacementProviderWrapper] updateCart: \(cartJson)")
-            
-            self.provider.updateCart(cart: cart)
         }
     }
 }
 
-// MARK: - STRProviderListener Implementation
+// MARK: - STRDataProviderListener Implementation
 
-private class STRProviderDelegateImpl: NSObject, STRProviderDelegate {
+private class STRProviderDelegateImpl: NSObject, STRDataProviderDelegate {
     weak var wrapper: SPPlacementProviderWrapper?
     
     init(wrapper: SPPlacementProviderWrapper) {
@@ -133,7 +125,7 @@ private class STRProviderDelegateImpl: NSObject, STRProviderDelegate {
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            print("[SPPlacementProviderWrapper] STRProviderListener:onLoad: \(eventJson)")
+            print("[SPPlacementProviderWrapper] STRDataProviderListener:onLoad: \(eventJson)")
             wrapper.sendEvent?(wrapper.id, .onLoad, eventJson)
         }
     }
@@ -146,15 +138,15 @@ private class STRProviderDelegateImpl: NSObject, STRProviderDelegate {
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            print("[SPPlacementProviderWrapper] STRProviderListener:onLoadFail: \(eventJson)")
+            print("[SPPlacementProviderWrapper] STRDataProviderListener:onLoadFail: \(eventJson)")
           wrapper.sendEvent?(wrapper.id, .onLoadFail, eventJson)
         }
     }
 }
 
-// MARK: - STRProviderProductListener Implementation
+// MARK: - STRDataProviderProductListener Implementation
 
-private class STRProviderProductDelegateImpl: NSObject, STRProviderProductDelegate {
+private class STRProviderProductDelegateImpl: NSObject, STRDataProviderProductDelegate {
     weak var wrapper: SPPlacementProviderWrapper?
     
     init(wrapper: SPPlacementProviderWrapper) {
@@ -162,6 +154,7 @@ private class STRProviderProductDelegateImpl: NSObject, STRProviderProductDelega
     }
     
     func onHydration(products: [STRProductInformation]) {
+        print("[SPPlacementProviderWrapper] STRDataProviderProductListener:onHydration")
         guard let wrapper = wrapper else { return }
         
         let eventData: [String: Any] = [
@@ -169,7 +162,7 @@ private class STRProviderProductDelegateImpl: NSObject, STRProviderProductDelega
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            print("[SPPlacementProviderWrapper] STRProviderProductListener:onHydration: \(eventJson)")
+            print("[SPPlacementProviderWrapper] STRDataProviderProductListener:onHydration: \(eventJson)")
             wrapper.sendEvent?(wrapper.id, .onHydration, eventJson)
         }
     }

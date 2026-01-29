@@ -130,10 +130,10 @@ class StorylyPlacementController {
     }
   }
 
-  Future<void> approveCartChange(String responseId, STRCart cart) async {
+  Future<void> approveCartChange(String responseId) async {
     await _methodChannel?.invokeMethod('approveCartChange', {
       'responseId': responseId,
-      'raw': jsonEncode({'cart': cart.toJson()}),
+      'raw': null,
     });
   }
 
@@ -145,12 +145,11 @@ class StorylyPlacementController {
   }
 
   Future<void> approveWishlistChange(
-    String responseId,
-    STRCartItem item,
+    String responseId
   ) async {
     await _methodChannel?.invokeMethod('approveWishlistChange', {
       'responseId': responseId,
-      'raw': jsonEncode({'item': item.toJson()}),
+      'raw': null,
     });
   }
 

@@ -116,20 +116,6 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                     result.error("INVALID_ARGUMENT", "providerId and products are required", null)
                 }
             }
-            "updateCart" -> {
-                val args = call.arguments as? Map<String, Any>
-                val providerId = args?.get("providerId") as? String ?: return
-                val cart = args["cart"] as? String
-
-                val provider = SPPlacementProviderManager.getProvider(providerId) ?: return
-                
-                if (cart != null) {
-                    provider.updateCart(cart)
-                    result.success(null)
-                } else {
-                    result.error("INVALID_ARGUMENT", "providerId and cart are required", null)
-                }
-            }
             else -> {
                 result.notImplemented()
             }
