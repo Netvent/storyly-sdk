@@ -7,15 +7,11 @@ import android.view.Choreographer
 import android.widget.FrameLayout
 import com.appsamurai.storyly.core.STRWidgetType
 import com.appsamurai.storyly.core.analytics.error.STRErrorPayload
-import com.appsamurai.storyly.core.analytics.event.STREvent
 import com.appsamurai.storyly.core.analytics.event.STREventPayload
 import com.appsamurai.storyly.core.analytics.product.STRProductEvent
 import com.appsamurai.storyly.core.data.model.STRPayload
-import com.appsamurai.storyly.core.data.model.product.STRCart
-import com.appsamurai.storyly.core.data.model.product.STRCartEventResult
 import com.appsamurai.storyly.core.data.model.product.STRCartItem
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
-import com.appsamurai.storyly.core.data.model.product.STRWishlistEventResult
 import com.appsamurai.storyly.core.ui.STRWidgetController
 import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
 import com.appsamurai.storyly.placement.ui.STRListener
@@ -31,7 +27,6 @@ import com.facebook.react.bridge.ReactContext
 import com.storylyplacementreactnative.common.data.encodeSTRErrorPayload
 import com.storylyplacementreactnative.common.data.encodeSTREventPayload
 import com.storylyplacementreactnative.common.data.encodeSTRPayload
-import com.storylyplacementreactnative.common.data.product.decodeSTRProductItem
 import com.storylyplacementreactnative.common.data.product.encodeSTRCartItem
 import com.storylyplacementreactnative.common.data.product.encodeSTRProductItem
 import com.storylyplacementreactnative.common.data.util.decodeFromJson

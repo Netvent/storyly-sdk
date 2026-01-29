@@ -1,6 +1,5 @@
 package com.storylyplacementreactnative.common.data.product
 
-import com.appsamurai.storyly.core.data.model.product.STRCart
 import com.appsamurai.storyly.core.data.model.product.STRCartItem
 import com.appsamurai.storyly.core.data.model.product.STRProductInformation
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
