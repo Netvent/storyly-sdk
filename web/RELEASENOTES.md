@@ -1,6 +1,10 @@
 # Release Notes
 
-### 4.9.0 - 29.12.2025 [for cdn](https://web-story.storyly.io/sdk/4.9.0/storyly-web.js)
+### 4.10.0 - 02.02.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.0/storyly-web.js)
+
+- Feature: added grid view layout for bar
+
+### 4.9.0 - 29.01.2026 [for cdn](https://web-story.storyly.io/sdk/4.9.0/storyly-web.js)
 
 - Feature: added skeleton view for story group covers
 
