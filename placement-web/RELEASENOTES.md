@@ -1,5 +1,9 @@
 # Release Notes
 
+### 1.2.0 (04.02.2026)
+
+- added canvas widget
+
 ### 1.1.0 (26.11.2025)
 
 - added flow for banner to video feed
