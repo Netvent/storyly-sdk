@@ -1,5 +1,13 @@
 # Release Notes
 
+### 1.4.0 (16.02.2026)
+
+- added RTL (right-to-left) layout support
+- added video support for banner widget
+- added banner styling options (background color, dots, progress)
+- fixed banner progress indicator behavior
+- fixed background color rendering
+
 ### 1.2.0 (04.02.2026)
 
 - added canvas widget
