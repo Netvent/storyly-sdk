@@ -1,4 +1,12 @@
 # Release Notes
+### 1.4.0 (16.02.2026)
+* added video support for banner widget
+* added RTL layout direction support for banner widget
+* added widget controller extensions to simplify specific widget controller access
+* updated default autoplay duration for banner widget
+* fixed a visual bug for the first feed of video feed presenter
+* fixed a bug related to background color of swipe up interactive component
+  
 ### 1.3.1 (27.01.2026)
 * fixed a bug related to dots progress when autoplay is enabled for banner widget
 * fixed a crash in case of empty data rendering for video feed widget
