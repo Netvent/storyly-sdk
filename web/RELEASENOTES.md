@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.10.1 - 17.02.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.1/storyly-web.js)
+
+- Fix: added story group data in actionClicked callback
+
 ### 4.10.0 - 02.02.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.0/storyly-web.js)
 
 - Feature: added grid view layout for bar
