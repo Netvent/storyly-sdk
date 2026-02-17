@@ -1,4 +1,13 @@
 # Release Notes
+### 1.4.0 (16.02.2026)
+* replaced storyly-exoplayer dependency with media3 for video playback
+* added video support for banner widget
+* added RTL layout direction support for banner widget
+* added widget controller extensions to simplify specific widget controller access
+* updated default autoplay duration for banner widget
+* fixed a bug related to product variant ordering in product detail sheet
+* fixed inconsistent scrolling behavior for video feed presenter
+  
 ### 1.3.2 (27.01.2026)
 * fixed a bug related to dots progress when autoplay is enabled for banner widget
 * removed internal cart integration logic from codebase
