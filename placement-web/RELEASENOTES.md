@@ -1,5 +1,10 @@
 # Release Notes
 
+### 1.4.1 (18.02.2026)
+
+- fixed ColorContrastChecker not defined issue
+- fixed pinned story groups does not open
+
 ### 1.4.0 (16.02.2026)
 
 - added RTL (right-to-left) layout support
