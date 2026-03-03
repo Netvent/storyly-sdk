@@ -1,5 +1,11 @@
 # Release Notes
 
+### 1.4.3 (03.03.2026)
+
+- fixed an issue where tapping on a story group was triggered while scrolling through the story bar on mobile
+- fixed an issue where the product catalog disappeared after viewing a story
+- fixed an issue where page scrolling remained locked after closing a story
+
 ### 1.4.1 (18.02.2026)
 
 - fixed ColorContrastChecker not defined issue
