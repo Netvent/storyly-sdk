@@ -1,5 +1,10 @@
 # Release Notes
 
+### 1.4.6 (06.03.2026)
+
+- fixed storyly-placement container overflowing on sites with fixed-dimension or flex/grid parent elements
+- fixed inconsistent card spacing in bar layout after story group reordering
+
 ### 1.4.3 (03.03.2026)
 
 - fixed an issue where tapping on a story group was triggered while scrolling through the story bar on mobile

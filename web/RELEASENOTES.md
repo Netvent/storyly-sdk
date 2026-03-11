@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.10.3 - 11.03.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.3/storyly-web.js)
+
+- Fix: deep link stories not opening when URL was re-encoded by email clients
+- Fix: image shown callback firing even when image asset was not actually loaded
+
 ### 4.10.1 - 17.02.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.1/storyly-web.js)
 
 - Fix: added story group data in actionClicked callback
