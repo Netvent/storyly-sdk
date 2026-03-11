@@ -1,4 +1,14 @@
 # Release Notes
+### 1.4.1 (11.03.2026)
+* improved data queue manager
+* improved video observers for story bar and video feed widgets
+* improved gradients of product catalog interactive component for video feed widget
+* fixed interactive component animation glitch on initial load of the video feed presenter
+* fixed interactive component animation glitch on initial load of the story bar presenter
+* renamed PlayMode to STRStoryBarPlayMode for story bar widget
+* renamed VFPlayMode to STRVideoFeedPlayMode for video feed widget
+* renamed StoryShowFailed to FeedShowFailed for video feed widget
+  
 ### 1.4.0 (16.02.2026)
 * added video support for banner widget
 * added RTL layout direction support for banner widget
