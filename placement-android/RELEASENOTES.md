@@ -1,4 +1,12 @@
 # Release Notes
+### 1.4.1 (11.03.2026)
+* improved data queue manager
+* improved gradients of product catalog interactive component for video feed widget
+* renamed bar to storyBar for story bar data payload extension 
+* renamed PlayMode to STRStoryBarPlayMode for story bar widget
+* renamed VFPlayMode to STRVideoFeedPlayMode for video feed widget
+* renamed StoryShowFailed to FeedShowFailed for video feed widget
+  
 ### 1.4.0 (16.02.2026)
 * replaced storyly-exoplayer dependency with media3 for video playback
 * added video support for banner widget
