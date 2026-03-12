@@ -169,7 +169,7 @@ import StorylyVideoFeed
                   let storyGroupId = params["storyGroupId"] as? String else { return }
             let storyId = params["storyId"] as? String
             let playModeStr = params["playMode"] as? String
-            let playMode: PlayMode
+            let playMode: STRStoryBarPlayMode
             switch playModeStr {
               case "storygroup": playMode = .StoryGroup
               case "story": playMode = .Story
@@ -201,7 +201,7 @@ import StorylyVideoFeed
                   let groupId = params["groupId"] as? String else { return }
             let itemId = params["itemId"] as? String
             let playModeStr = params["playMode"] as? String
-            let playMode: VFPlayMode
+            let playMode: STRVideoFeedPlayMode
             switch playModeStr {
               case "feedgroup": playMode = .FeedGroup
               case "feed": playMode = .Feed
