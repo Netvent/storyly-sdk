@@ -1,4 +1,7 @@
 # Release Notes
+### 1.4.2 (12.03.2026)
+* improved click handling on banner widget
+  
 ### 1.4.1 (11.03.2026)
 * improved data queue manager
 * improved gradients of product catalog interactive component for video feed widget
