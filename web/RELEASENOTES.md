@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.10.5 - 17.03.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.5/storyly-web.js)
+
+- Fix: where the scroll indicator was blocking clicks on the story group cover
+- Fix: unnecessary bottom sheet opens when clicked text component
+
 ### 4.10.3 - 11.03.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.3/storyly-web.js)
 
 - Fix: deep link stories not opening when URL was re-encoded by email clients
