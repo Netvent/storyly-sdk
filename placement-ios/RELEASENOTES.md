@@ -1,4 +1,8 @@
 # Release Notes
+### 1.5.0 (19.03.2026)
+* added onVisibilityChange delegate method to STRDelegate
+* added pause/resume/open functions to STRWidgetController
+  
 ### 1.4.2 (12.03.2026)
 * improved click handling on banner widget
 
