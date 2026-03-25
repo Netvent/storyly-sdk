@@ -18,10 +18,10 @@ import com.appsamurai.storyly.placement.ui.STRListener
 import com.appsamurai.storyly.placement.ui.STRPlacementView
 import com.appsamurai.storyly.placement.ui.STRProductListener
 import com.appsamurai.storyly.storybar.ui.STRStoryBarController
-import com.appsamurai.storyly.storybar.ui.model.PlayMode
+import com.appsamurai.storyly.storybar.ui.model.STRStoryBarPlayMode
 import com.appsamurai.storyly.videofeed.ui.STRVideoFeedController
 import com.appsamurai.storyly.videofeed.ui.STRVideoFeedPresenterController
-import com.appsamurai.storyly.videofeed.ui.model.VFPlayMode
+import com.appsamurai.storyly.videofeed.ui.model.STRVideoFeedPlayMode
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.storylyplacementreactnative.common.data.encodeSTRErrorPayload
@@ -212,6 +212,15 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                     dispatchEvent?.invoke(SPPlacementEventType.ON_FAIL, eventJson)
                 }
 
+              override fun onVisibilityChange(widget: STRWidgetController?, isVisible: Boolean) {
+                Log.w("[SPStorylyPlacement]", "onVisibilityChange: widget=${widget?.getType()}, visibility=${isVisible}")
+                val eventJson = encodeToJson(mapOf(
+                  "widget" to encodeWidgetController(widget),
+                  "isVisible" to isVisible
+                ))
+                dispatchEvent?.invoke(SPPlacementEventType.ON_VISIBILITY_CHANGE, eventJson)
+              }
+
                 override fun onWidgetReady(widget: STRWidgetController, ratio: Float) {
                     Log.d("[SPStorylyPlacement]", "onWidgetReady: ratio=$ratio")
                     val eventJson = encodeToJson(mapOf(
@@ -284,9 +293,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
             "resume" -> {
                 controller.resume()
             }
-            "close" -> {
-                controller.close()
-            }
             "open" -> {
                 params ?: return
                 val uri = (params["uri"] as? String) ?: return
@@ -298,9 +304,9 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                 val storyId = params["storyId"] as? String
                 val playMode = (params["playMode"] as? String).let {
                     when (it) {
-                        "storygroup" -> PlayMode.StoryGroup
-                        "story" -> PlayMode.Story
-                        else -> PlayMode.Default
+                        "storygroup" -> STRStoryBarPlayMode.StoryGroup
+                        "story" -> STRStoryBarPlayMode.Story
+                        else -> STRStoryBarPlayMode.Default
                     }
                 }
                 controller.open(storyGroupId, storyId, playMode)
@@ -318,9 +324,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
             "resume" -> {
                 controller.resume()
             }
-            "close" -> {
-                controller.close()
-            }
             "open" -> {
                 params ?: return
                 val uri = (params["uri"] as? String) ?: return
@@ -332,9 +335,9 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                 val itemId = params["itemId"] as? String
                 val playMode = (params["playMode"] as? String).let {
                     when (it) {
-                        "feedgroup" -> VFPlayMode.FeedGroup
-                        "feed" -> VFPlayMode.Feed
-                        else -> VFPlayMode.Default
+                        "feedgroup" -> STRVideoFeedPlayMode.FeedGroup
+                        "feed" -> STRVideoFeedPlayMode.Feed
+                        else -> STRVideoFeedPlayMode.Default
                     }
                 }
                 controller.open(groupId, itemId, playMode)
@@ -361,7 +364,8 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
         }
     }
 
-    private fun encodeWidgetController(controller: STRWidgetController): Map<String, String> {
+    private fun encodeWidgetController(controller: STRWidgetController?): Map<String, String>? {
+        controller ?: return null
         return mapOf(
             "type" to controller.getType().raw,
             "viewId" to updateWidgetMapKey(controller)

@@ -78,6 +78,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
                 }}
                 onEvent={(event) => { console.log(`[${name}] onEvent`, event); }}
                 onFail={(event) => { console.log(`[${name}] onFail`, event); }}
+                onVisibilityChange={(event) => { console.log(`[${name}] onVisibilityChange`, event.isVisible); }}
                 onProductEvent={(event) => { console.log(`[${name}] onProductEvent`, event); }}
                 onUpdateCart={(event: PlacementCartUpdateEvent) => {
                     console.log(`[${name}] onUpdateCart`, event, event.item);

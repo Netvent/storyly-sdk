@@ -11,6 +11,7 @@ import type {
   PlacementWidgetReadyEvent,
   PlacementWishlistUpdateEvent,
   PlacementWidget,
+  PlacementVisibilityChangeEvent,
  } from './data';
 import StorylyPlacementNativeView, { PlacementCommands, applyBaseEvent } from './native/StorylyPlacementNativeView';
 import type { StorylyPlacementProvider } from './StorylyPlacementProvider';
@@ -26,6 +27,7 @@ export interface StorylyPlacementProps extends ViewProps {
   onActionClicked?: (event: PlacementActionClickEvent) => void;
   onEvent?: (event: PlacementEvent) => void;
   onFail?: (event: PlacementFailEvent) => void;
+  onVisibilityChange?: (event: PlacementVisibilityChangeEvent) => void;
   onProductEvent?: (event: PlacementProductEvent) => void;
   onUpdateCart?: (event: PlacementCartUpdateEvent) => void;
   onUpdateWishlist?: (event: PlacementWishlistUpdateEvent) => void;
@@ -110,6 +112,12 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
       }
     });
 
+    const _onVisibilityChange = applyBaseEvent((event: BaseEvent) => {
+      if (props.onVisibilityChange) {
+        props.onVisibilityChange(event as PlacementVisibilityChangeEvent);
+      }
+    });    
+
     const _onProductEvent = applyBaseEvent((event: BaseEvent) => {
       if (props.onProductEvent) {
         props.onProductEvent(event as PlacementProductEvent);
@@ -137,6 +145,7 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
         onActionClicked={_onActionClicked}
         onEvent={_onEvent}
         onFail={_onFail}
+        onVisibilityChange={_onVisibilityChange}
         onProductEvent={_onProductEvent}
         onUpdateCart={_onUpdateCart}
         onUpdateWishlist={_onUpdateWishlist}

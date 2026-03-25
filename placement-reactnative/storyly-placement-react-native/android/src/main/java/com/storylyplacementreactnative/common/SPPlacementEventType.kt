@@ -4,6 +4,7 @@ package com.storylyplacementreactnative.common
 enum class SPPlacementEventType(val eventName: String) {
     ON_WIDGET_READY("onWidgetReady"),
     ON_FAIL("onFail"),
+    ON_VISIBILITY_CHANGE("onVisibilityChange"),
     ON_EVENT("onEvent"),
     ON_ACTION_CLICKED("onActionClicked"),
     ON_PRODUCT_EVENT("onProductEvent"),

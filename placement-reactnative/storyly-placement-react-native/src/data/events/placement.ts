@@ -29,6 +29,11 @@ export interface PlacementFailEvent extends BaseEvent {
   payload: STRErrorPayload;
 }
 
+export interface PlacementVisibilityChangeEvent extends BaseEvent {
+  widget: PlacementWidget;
+  isVisible: Boolean;
+}
+
 // MARK: - Product Events
 
 export interface PlacementProductEvent extends BaseEvent {
