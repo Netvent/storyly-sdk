@@ -88,6 +88,24 @@ class PlacementFailEvent extends BaseEvent {
   }
 }
 
+class PlacementOnVisibilityChangeEvent extends BaseEvent {
+  final PlacementWidget? widget;
+  final bool isVisible;
+
+  PlacementOnVisibilityChangeEvent({this.widget, required this.isVisible});
+
+  factory PlacementOnVisibilityChangeEvent.fromJson(Map<String, dynamic> json) {
+    return PlacementOnVisibilityChangeEvent(
+      widget: json['widget'] != null ? PlacementWidget.fromJson(json['widget']) : null,
+      isVisible: json['isVisible'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'widget': widget?.toJson(), 'isVisible': isVisible};
+  }
+}
+
 class PlacementProductEvent extends BaseEvent {
   final PlacementWidget widget;
   final String event;

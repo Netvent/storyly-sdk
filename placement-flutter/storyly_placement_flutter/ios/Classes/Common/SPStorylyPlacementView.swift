@@ -157,8 +157,6 @@ import StorylyVideoFeed
             controller.pause(animated: true, completion: nil)
         case "resume":
             controller.resume(animated: true, completion: nil)
-        case "close":
-            controller.close(animated: true, completion: nil)
         case "open":
             guard let params = params,
                   let uriStr = params["uri"] as? String,
@@ -169,7 +167,7 @@ import StorylyVideoFeed
                   let storyGroupId = params["storyGroupId"] as? String else { return }
             let storyId = params["storyId"] as? String
             let playModeStr = params["playMode"] as? String
-            let playMode: PlayMode
+            let playMode: STRStoryBarPlayMode
             switch playModeStr {
               case "storygroup": playMode = .StoryGroup
               case "story": playMode = .Story
@@ -189,8 +187,6 @@ import StorylyVideoFeed
             controller.pause(animated: true, completion: nil)
         case "resume":
             controller.resume(animated: true, completion: nil)
-        case "close":
-            controller.close(animated: true, completion: nil)
         case "open":
             guard let params = params,
                   let uriStr = params["uri"] as? String,
@@ -201,13 +197,13 @@ import StorylyVideoFeed
                   let groupId = params["groupId"] as? String else { return }
             let itemId = params["itemId"] as? String
             let playModeStr = params["playMode"] as? String
-            let playMode: VFPlayMode
+            let playMode: STRVideoFeedPlayMode
             switch playModeStr {
               case "feedgroup": playMode = .FeedGroup
               case "feed": playMode = .Feed
               default: playMode = .Default
             }
-            _ = controller.open(groupId: groupId, itemId: itemId, play: playMode)
+            _ = controller.open(feedGroupId: groupId, feedId: itemId, play: playMode)
         default:
             break
         }
@@ -224,7 +220,7 @@ import StorylyVideoFeed
         case "open":
             guard let params = params,
                   let groupId = params["groupId"] as? String else { return }
-            _ = controller.open(groupId: groupId)
+            _ = controller.open(feedGroupId: groupId)
         default:
             break
         }
@@ -295,6 +291,21 @@ private class STRDelegateImpl: NSObject, STRDelegate {
         
         if let eventJson = encodeToJson(eventData) {
             placementView.dispatchEvent?(.onFail, eventJson)
+        }
+    }
+    
+    func onVisibilityChange(widget: (any STRWidgetController)?, isVisible: Bool) {
+        guard let placementView = placementView else { return }
+        
+        print("[SPStorylyPlacement] onVisibilityChange: widget=\(widget?.getType()), isVisible=\(isVisible)")
+        
+        let eventData: [String: Any] = [
+            "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
+            "isVisible": isVisible
+        ]
+        
+        if let eventJson = encodeToJson(eventData) {
+            placementView.dispatchEvent?(.onVisibilityChange, eventJson)
         }
     }
     

@@ -3,6 +3,7 @@ import Foundation
 @objc public enum SPPlacementEventType: Int {
   case onWidgetReady
   case onFail
+  case onVisibilityChange
   case onEvent
   case onActionClicked
   case onProductEvent
@@ -15,6 +16,8 @@ import Foundation
       return "onWidgetReady"
     case .onFail:
       return "onFail"
+    case .onVisibilityChange:
+      return "onVisibilityChange"
     case .onEvent:
       return "onEvent"
     case .onActionClicked:
@@ -29,7 +32,7 @@ import Foundation
   }
   
   static var allCases: [SPPlacementEventType] {
-    return [.onWidgetReady, .onFail, .onEvent, .onActionClicked, .onProductEvent, .onUpdateCart, .onUpdateWishlist]
+    return [.onWidgetReady, .onFail, .onVisibilityChange, .onEvent, .onActionClicked, .onProductEvent, .onUpdateCart, .onUpdateWishlist]
   }
 }
 
