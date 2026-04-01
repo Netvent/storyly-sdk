@@ -1,4 +1,13 @@
 # Release Notes
+### 1.6.0 (01.04.2026)
+* improved pause/resume flow story bar widget
+* improved pause/resume flow video feed widget
+* improved corner radius logic for buttons in banner widget
+* improved corner radius logic for media in canvas widget
+* added support for google fonts for banner widget buttons
+* added media ratio logic for canvas widget
+* added horizontal and vertical paddings for canvas widget
+  
 ### 1.5.0 (19.03.2026)
 * added onVisibilityChange delegate method to STRDelegate
 * added pause/resume/open functions to STRWidgetController
