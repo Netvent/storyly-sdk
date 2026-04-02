@@ -18,10 +18,10 @@ import com.appsamurai.storyly.placement.ui.STRListener
 import com.appsamurai.storyly.placement.ui.STRPlacementView
 import com.appsamurai.storyly.placement.ui.STRProductListener
 import com.appsamurai.storyly.storybar.ui.STRStoryBarController
-import com.appsamurai.storyly.storybar.ui.model.PlayMode
+import com.appsamurai.storyly.storybar.ui.model.STRStoryBarPlayMode
 import com.appsamurai.storyly.videofeed.ui.STRVideoFeedController
 import com.appsamurai.storyly.videofeed.ui.STRVideoFeedPresenterController
-import com.appsamurai.storyly.videofeed.ui.model.VFPlayMode
+import com.appsamurai.storyly.videofeed.ui.model.STRVideoFeedPlayMode
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.ReactContext
 import com.storylyplacementreactnative.common.data.encodeSTRErrorPayload
@@ -298,9 +298,9 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                 val storyId = params["storyId"] as? String
                 val playMode = (params["playMode"] as? String).let {
                     when (it) {
-                        "storygroup" -> PlayMode.StoryGroup
-                        "story" -> PlayMode.Story
-                        else -> PlayMode.Default
+                        "storygroup" -> STRStoryBarPlayMode.StoryGroup
+                        "story" -> STRStoryBarPlayMode.Story
+                        else -> STRStoryBarPlayMode.Default
                     }
                 }
                 controller.open(storyGroupId, storyId, playMode)
@@ -332,9 +332,9 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                 val itemId = params["itemId"] as? String
                 val playMode = (params["playMode"] as? String).let {
                     when (it) {
-                        "feedgroup" -> VFPlayMode.FeedGroup
-                        "feed" -> VFPlayMode.Feed
-                        else -> VFPlayMode.Default
+                        "feedgroup" -> STRVideoFeedPlayMode.FeedGroup
+                        "feed" -> STRVideoFeedPlayMode.Feed
+                        else -> STRVideoFeedPlayMode.Default
                     }
                 }
                 controller.open(groupId, itemId, playMode)
