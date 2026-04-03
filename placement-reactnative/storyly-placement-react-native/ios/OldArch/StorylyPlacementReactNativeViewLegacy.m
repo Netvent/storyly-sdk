@@ -19,6 +19,7 @@
 @interface SPStorylyPlacementView (EventProps)
 @property (nonatomic, copy) RCTBubblingEventBlock onWidgetReady;
 @property (nonatomic, copy) RCTBubblingEventBlock onFail;
+@property (nonatomic, copy) RCTBubblingEventBlock onVisibilityChange;
 @property (nonatomic, copy) RCTBubblingEventBlock onEvent;
 @property (nonatomic, copy) RCTBubblingEventBlock onActionClicked;
 @property (nonatomic, copy) RCTBubblingEventBlock onProductEvent;
@@ -30,6 +31,7 @@
 
 RN_BUBBLING_EVENT_PROPERTY(OnWidgetReady, onWidgetReady)
 RN_BUBBLING_EVENT_PROPERTY(OnFail, onFail)
+RN_BUBBLING_EVENT_PROPERTY(OnVisibilityChange, onVisibilityChange)
 RN_BUBBLING_EVENT_PROPERTY(OnEvent, onEvent)
 RN_BUBBLING_EVENT_PROPERTY(OnActionClicked, onActionClicked)
 RN_BUBBLING_EVENT_PROPERTY(OnProductEvent, onProductEvent)
@@ -68,6 +70,9 @@ RCT_EXPORT_MODULE(StorylyPlacementReactNativeViewLegacy)
             case SPPlacementEventTypeOnFail:
                 if (strongView.onFail) strongView.onFail(eventData);
                 break;
+            case SPPlacementEventTypeOnVisibilityChange:
+                if (strongView.onVisibilityChange) strongView.onVisibilityChange(eventData);
+                break;                
             case SPPlacementEventTypeOnEvent:
                 if (strongView.onEvent) strongView.onEvent(eventData);
                 break;
@@ -92,6 +97,7 @@ RCT_EXPORT_MODULE(StorylyPlacementReactNativeViewLegacy)
 // MARK: - Event Properties
 RCT_EXPORT_VIEW_PROPERTY(onWidgetReady, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onFail, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onVisibilityChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onEvent, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onActionClicked, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onProductEvent, RCTBubblingEventBlock)

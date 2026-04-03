@@ -18,6 +18,7 @@ export interface StorylyPlacementViewNativeProps extends ViewProps {
   onActionClicked?: BubblingEventHandler<NativeEvent>;
   onEvent?: BubblingEventHandler<NativeEvent>;
   onFail?: BubblingEventHandler<NativeEvent>;
+  onVisibilityChange?: BubblingEventHandler<NativeEvent>;
 
   // Product Events
   onProductEvent?: BubblingEventHandler<NativeEvent>;

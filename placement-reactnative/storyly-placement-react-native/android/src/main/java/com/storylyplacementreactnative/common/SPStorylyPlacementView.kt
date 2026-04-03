@@ -224,6 +224,15 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                     dispatchEvent?.invoke(SPPlacementEventType.ON_FAIL, eventJson)
                 }
 
+              override fun onVisibilityChange(widget: STRWidgetController?, isVisible: Boolean) {
+                Log.w("[SPStorylyPlacement]", "onVisibilityChange: widget=${widget?.getType()}, visibility=${isVisible}")
+                val eventJson = encodeToJson(mapOf(
+                  "widget" to encodeWidgetController(widget),
+                  "isVisible" to isVisible
+                ))
+                dispatchEvent?.invoke(SPPlacementEventType.ON_VISIBILITY_CHANGE, eventJson)
+              }
+
                 override fun onWidgetReady(widget: STRWidgetController, ratio: Float) {
                     Log.d("[SPStorylyPlacement]", "onWidgetReady: ratio=$ratio")
                     val eventJson = encodeToJson(mapOf(
@@ -342,7 +351,8 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
         }
     }
 
-    private fun encodeWidgetController(controller: STRWidgetController): Map<String, String> {
+    private fun encodeWidgetController(controller: STRWidgetController?): Map<String, String>? {
+        controller ?: return null
         return mapOf(
             "type" to controller.getType().raw,
             "viewId" to updateWidgetMapKey(controller)

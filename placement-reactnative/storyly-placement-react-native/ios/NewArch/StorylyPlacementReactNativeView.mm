@@ -115,6 +115,14 @@ using namespace facebook::react;
         emitter->onFail(failData);
         break;
       }
+
+      case SPPlacementEventTypeOnVisibilityChange: {
+        StorylyPlacementReactNativeViewEventEmitter::OnVisibilityChange visibilityChangeData = {
+            .raw = payload ? std::string([payload UTF8String]) : std::string("")
+        };
+        emitter->onVisibilityChange(visibilityChangeData);
+        break;
+      }
             
       case SPPlacementEventTypeOnEvent: {
         StorylyPlacementReactNativeViewEventEmitter::OnEvent eventData = {
