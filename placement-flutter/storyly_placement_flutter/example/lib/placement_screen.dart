@@ -129,6 +129,9 @@ class _PlacementScreenState extends State<PlacementScreen> {
             onFail: (event) {
               debugPrint('[${widget.name}] onFail $event');
             },
+            onVisibilityChange: (event) {
+              debugPrint('[${widget.name}] onVisibilityChange ${event.isVisible}');
+            },
             onProductEvent: (event) {
               debugPrint('[${widget.name}] onProductEvent $event');
             },

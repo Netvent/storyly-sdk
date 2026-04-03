@@ -18,6 +18,7 @@ class StorylyPlacementView extends StatefulWidget {
   final void Function(PlacementActionClickEvent)? onActionClicked;
   final void Function(PlacementEvent)? onEvent;
   final void Function(PlacementFailEvent)? onFail;
+  final void Function(PlacementOnVisibilityChangeEvent)? onVisibilityChange;
   final void Function(PlacementProductEvent)? onProductEvent;
   final void Function(PlacementCartUpdateEvent)? onUpdateCart;
   final void Function(PlacementWishlistUpdateEvent)? onUpdateWishlist;
@@ -30,6 +31,7 @@ class StorylyPlacementView extends StatefulWidget {
     this.onActionClicked,
     this.onEvent,
     this.onFail,
+    this.onVisibilityChange,
     this.onProductEvent,
     this.onUpdateCart,
     this.onUpdateWishlist,
@@ -150,6 +152,10 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           debugPrint('StorylyPlacementView: onFail, data: $data');
           widget.onFail?.call(PlacementFailEvent.fromJson(data));
           break;
+        case 'onVisibilityChange':
+          debugPrint('StorylyPlacementView: onVisibilityChange, data: $data');
+          widget.onVisibilityChange?.call(PlacementOnVisibilityChangeEvent.fromJson(data));
+          break;  
         case 'onProductEvent':
           debugPrint('StorylyPlacementView: onProductEvent, data: $data');
           widget.onProductEvent?.call(PlacementProductEvent.fromJson(data));

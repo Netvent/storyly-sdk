@@ -291,6 +291,21 @@ private class STRDelegateImpl: NSObject, STRDelegate {
         }
     }
     
+    func onVisibilityChange(widget: (any STRWidgetController)?, isVisible: Bool) {
+        guard let placementView = placementView else { return }
+        
+        print("[SPStorylyPlacement] onVisibilityChange: widget=\(widget?.getType()), isVisible=\(isVisible)")
+        
+        let eventData: [String: Any] = [
+            "widget": encodeWidgetController(widget, widgetMap: &placementView.widgetMap),
+            "isVisible": isVisible
+        ]
+        
+        if let eventJson = encodeToJson(eventData) {
+            placementView.dispatchEvent?(.onVisibilityChange, eventJson)
+        }
+    }
+    
   func onWidgetReady(widget: any STRWidgetController, ratio: CGFloat) {
       guard let placementView = placementView else { return }
       

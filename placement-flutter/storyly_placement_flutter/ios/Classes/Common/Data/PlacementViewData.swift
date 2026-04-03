@@ -64,7 +64,8 @@ func encodeSTRErrorPayload(_ payload: STRErrorPayload) -> [String: Any] {
 
 // MARK: - Widget Controller Encoding
 
-func encodeWidgetController(_ controller: STRWidgetController, widgetMap: inout [String: WeakReference<STRWidgetController>]) -> [String: String] {
+func encodeWidgetController(_ controller: STRWidgetController?, widgetMap: inout [String: WeakReference<STRWidgetController>]) -> [String: String]? {
+    guard let controller = controller else { return nil }
     return [
         "type": controller.getType().description,
         "viewId": updateWidgetMapKey(controller, widgetMap: &widgetMap)
