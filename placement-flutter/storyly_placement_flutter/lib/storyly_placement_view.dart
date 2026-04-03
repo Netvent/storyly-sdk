@@ -132,8 +132,7 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
   Future<dynamic> _handleMethodCall(MethodCall call) async {
     try {
       final args = call.arguments;
-      final data = args is String ? jsonDecode(args) : args;
-
+      final data = args is String ? jsonDecode(args) as Map<String, dynamic> : args as Map<String, dynamic>;
       switch (call.method) {
         case 'onWidgetReady':
           debugPrint('StorylyPlacementView: onWidgetReady, data: $data');
@@ -175,7 +174,7 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           debugPrint("Unknown method: ${call.method}");
       }
     } catch (e) {
-      debugPrint("Error handling method call ${call.method}: $e");
+      debugPrint("Error handling method call ${call.method}: $e: ${call.arguments}");
     }
   }
 }

@@ -1,6 +1,7 @@
 package com.appsamurai.storyly.storyly_placement_flutter.common
 
 import android.content.Context
+import android.net.Uri
 import android.os.Handler
 import android.util.Log
 import com.appsamurai.storyly.core.STRWidgetType
@@ -64,6 +65,17 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
             Log.d("[SPStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
             val widget = widgetMap[id]?.get() ?: return@post
             val params = decodeFromJson(raw)
+            when (method) {
+                "pause" -> { widget.pause(); return@post }
+                "resume" -> { widget.resume(); return@post }
+                "open" -> {
+                    params ?: return@post
+                    val uriStr = (params["uri"] as? String) ?: return@post
+                    val uri = Uri.parse(uriStr) ?: return@post
+                    widget.open(uri)
+                    return@post
+                }
+            }
             when (widget.getType()) {
                 STRWidgetType.StoryBar -> handleStoryBarMethod(widget, method, params)
                 STRWidgetType.VideoFeed -> handleVideoFeedMethod(widget, method, params)
@@ -239,17 +251,6 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
     private fun handleStoryBarMethod(widget: STRWidgetController, method: String, params: Map<String, Any?>?) {
         val controller = widget as? STRStoryBarController ?: return
         when (method) {
-            "pause" -> {
-                controller.pause()
-            }
-            "resume" -> {
-                controller.resume()
-            }
-            "open" -> {
-                params ?: return
-                val uri = (params["uri"] as? String) ?: return
-                controller.open(uri)
-            }
             "openWithId" -> {
                 params ?: return
                 val storyGroupId = (params["storyGroupId"] as? String) ?: return
@@ -270,21 +271,10 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
     private fun handleVideoFeedMethod(widget: STRWidgetController, method: String, params: Map<String, Any?>?) {
         val controller = widget as? STRVideoFeedController ?: return
         when (method) {
-            "pause" -> {
-                controller.pause()
-            }
-            "resume" -> {
-                controller.resume()
-            }
-            "open" -> {
-                params ?: return
-                val uri = (params["uri"] as? String) ?: return
-                controller.open(uri)
-            }
             "openWithId" -> {
                 params ?: return
-                val groupId = (params["groupId"] as? String) ?: return
-                val itemId = params["itemId"] as? String
+                val feedGroupId = (params["feedGroupId"] as? String) ?: return
+                val feedId = params["feedId"] as? String
                 val playMode = (params["playMode"] as? String).let {
                     when (it) {
                         "feedgroup" -> STRVideoFeedPlayMode.FeedGroup
@@ -292,7 +282,7 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
                         else -> STRVideoFeedPlayMode.Default
                     }
                 }
-                controller.open(groupId, itemId, playMode)
+                controller.open(feedGroupId, feedId, playMode)
             }
             else -> return
         }
@@ -301,16 +291,13 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
     private fun handleVideoFeedPresenterMethod(widget: STRWidgetController, method: String, params: Map<String, Any?>?) {
         val controller = widget as? STRVideoFeedPresenterController ?: return
         when (method) {
-            "pause" -> {
-                controller.pause()
-            }
             "play" -> {
                 controller.play()
             }
-            "open" -> {
+            "openWithId" -> {
                 params ?: return
-                val groupId = (params["groupId"] as? String) ?: return
-                controller.open(groupId)
+                val feedGroupId = (params["feedGroupId"] as? String) ?: return
+                controller.open(feedGroupId)
             }
             else -> return
         }

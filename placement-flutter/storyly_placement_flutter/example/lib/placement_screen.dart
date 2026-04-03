@@ -112,24 +112,15 @@ class _PlacementScreenState extends State<PlacementScreen> {
               );
 
               // if (event.widget.type == 'story-bar') {
-              //   _controller?.getWidget<StoryBarController>(event.widget).openWithId(storyGroupId: "127248", storyId: "1571802", playMode: "story");
+              //   _controller?.getWidget<STRStoryBarController>(event.widget).openWithId(storyGroupId: "127248", storyId: "1571802", playMode: "story");
               // } else if (event.widget.type == 'video-feed') {
-              //   _controller?.getWidget<VideoFeedController>(event.widget).openWithId(groupId: "202061", playMode: "default");
-              //   // _controller?.getWidget<VideoFeedController>(event.widget).open(uri: 'https://www.google.com');
+              //   _controller?.getWidget<STRVideoFeedController>(event.widget).openWithId(feedGroupId: "202061", playMode: "default");
+              //   // _controller?.getWidget(event.widget).open(uri: 'https://www.google.com');
               // }
             },
             onActionClicked: (event) {
-              if (event.widget.type == 'story-bar') {
-                _controller
-                    ?.getWidget<StoryBarController>(event.widget)
-                    .pause();
-                _pauseWidget = event.widget;
-              } else if (event.widget.type == 'video-feed') {
-                _controller
-                    ?.getWidget<VideoFeedController>(event.widget)
-                    .pause();
-                _pauseWidget = event.widget;
-              }
+              _controller?.getWidget(event.widget).pause();
+              _pauseWidget = event.widget;
               debugPrint('[${widget.name}] onActionClicked $event');
             },
             onEvent: (event) {
@@ -163,15 +154,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
         ElevatedButton(
           onPressed: () {
             if (_pauseWidget != null) {
-              if (_pauseWidget!.type == 'story-bar') {
-                _controller
-                    ?.getWidget<StoryBarController>(_pauseWidget!)
-                    .resume();
-              } else if (_pauseWidget!.type == 'video-feed') {
-                _controller
-                    ?.getWidget<VideoFeedController>(_pauseWidget!)
-                    .resume();
-              }
+              _controller?.getWidget(_pauseWidget!).resume();
               _pauseWidget = null;
             }
           },

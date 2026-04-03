@@ -52,7 +52,7 @@ private fun encodeVideoFeedItem(item: VideoFeedItem?): Map<String, Any?>? {
         "actionUrl" to item.actionUrl,
         "actionProducts" to item.actionProducts?.map { encodeSTRProductItem(it) },
         "currentTime" to item.currentTime,
-        "feedItemComponentList" to item.feedItemComponentList
+        "feedItemComponentList" to item.feedItemComponentList?.map { encodeVideoFeedComponent(it) }
     )
 }
 

@@ -3,13 +3,11 @@ import 'package:flutter/services.dart';
 import 'data/product.dart';
 import 'data/events/payloads.dart';
 
-abstract class STRWidgetController {}
-
-class StoryBarController implements STRWidgetController {
+class STRWidgetController {
   final StorylyPlacementController _controller;
   final PlacementWidget _widget;
 
-  StoryBarController(this._controller, this._widget);
+  STRWidgetController(this._controller, this._widget);
 
   Future<void> pause() {
     return _controller.callWidget(_widget.viewId, 'pause', '{}');
@@ -19,10 +17,6 @@ class StoryBarController implements STRWidgetController {
     return _controller.callWidget(_widget.viewId, 'resume', '{}');
   }
 
-  Future<void> close() {
-    return _controller.callWidget(_widget.viewId, 'close', '{}');
-  }
-
   Future<void> open({required String uri}) {
     return _controller.callWidget(
       _widget.viewId,
@@ -30,6 +24,10 @@ class StoryBarController implements STRWidgetController {
       jsonEncode({'uri': uri}),
     );
   }
+}
+
+class STRStoryBarController extends STRWidgetController {
+  STRStoryBarController(super._controller, super._widget);
 
   Future<void> openWithId({
     required String storyGroupId,
@@ -48,64 +46,34 @@ class StoryBarController implements STRWidgetController {
   }
 }
 
-class VideoFeedController implements STRWidgetController {
-  final StorylyPlacementController _controller;
-  final PlacementWidget _widget;
-
-  VideoFeedController(this._controller, this._widget);
-
-  Future<void> pause() {
-    return _controller.callWidget(_widget.viewId, 'pause', '{}');
-  }
-
-  Future<void> resume() {
-    return _controller.callWidget(_widget.viewId, 'resume', '{}');
-  }
-
-  Future<void> close() {
-    return _controller.callWidget(_widget.viewId, 'close', '{}');
-  }
-
-  Future<void> open({required String uri}) {
-    return _controller.callWidget(
-      _widget.viewId,
-      'open',
-      jsonEncode({'uri': uri}),
-    );
-  }
+class STRVideoFeedController extends STRWidgetController {
+  STRVideoFeedController(super._controller, super._widget);
 
   Future<void> openWithId({
-    required String groupId,
-    String? itemId,
+    required String feedGroupId,
+    String? feedId,
     String? playMode, // "feedgroup" | "feed" | "default"
   }) {
     return _controller.callWidget(
       _widget.viewId,
       'openWithId',
-      jsonEncode({'groupId': groupId, 'itemId': itemId, 'playMode': playMode}),
+      jsonEncode({'feedGroupId': feedGroupId, 'feedId': feedId, 'playMode': playMode}),
     );
   }
 }
 
-class VideoFeedPresenterController implements STRWidgetController {
-  final StorylyPlacementController _controller;
-  final PlacementWidget _widget;
-
-  VideoFeedPresenterController(this._controller, this._widget);
-
-  Future<void> pause() {
-    return _controller.callWidget(_widget.viewId, 'pause', '{}');
-  }
+class STRVideoFeedPresenterController extends STRWidgetController {
+  STRVideoFeedPresenterController(super._controller, super._widget);
 
   Future<void> play() {
     return _controller.callWidget(_widget.viewId, 'play', '{}');
   }
 
-  Future<void> open({required String groupId}) {
+  Future<void> openWithId({required String feedGroupId}) {
     return _controller.callWidget(
       _widget.viewId,
-      'open',
-      jsonEncode({'groupId': groupId}),
+      'openWithId',
+      jsonEncode({'feedGroupId': feedGroupId}),
     );
   }
 }
@@ -120,11 +88,11 @@ class StorylyPlacementController {
   T getWidget<T extends STRWidgetController>(PlacementWidget widget) {
     switch (widget.type) {
       case "story-bar":
-        return StoryBarController(this, widget) as T;
+        return STRStoryBarController(this, widget) as T;
       case "video-feed":
-        return VideoFeedController(this, widget) as T;
+        return STRVideoFeedController(this, widget) as T;
       case "video-feed-presenter":
-        return VideoFeedPresenterController(this, widget) as T;
+        return STRVideoFeedPresenterController(this, widget) as T;
       default:
         throw Exception("Unknown widget type: ${widget.type}");
     }
