@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { View, Button, Dimensions, StyleSheet } from "react-native";
-import {  type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, type STRCartItem, StorylyPlacement, type STRStoryBarController, type PlacementCartUpdateEvent, type STRVideoFeedController, type STRProductItem, type STRProductInformation } from "storyly-placement-react-native";
+import {  type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, StorylyPlacement, type PlacementCartUpdateEvent, type STRProductItem, type STRProductInformation } from "storyly-placement-react-native";
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -70,10 +70,8 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
                     console.log(`[${name}] onWidgetReady`, event, 'calculated height:', placementHeight);
                 }}
                 onActionClicked={(event) => {
-                    if (event.widget.type === 'story-bar' || event.widget.type === 'video-feed') {
-                        placementRef.current?.getWidget<STRStoryBarController | STRVideoFeedController>(event.widget).pause();
-                        setPauseWidget(event.widget);
-                    }
+                    placementRef.current?.getWidget(event.widget).pause();
+                    setPauseWidget(event.widget);
                     console.log(`[${name}] onActionClicked`, event);
                 }}
                 onEvent={(event) => { console.log(`[${name}] onEvent`, event); }}
@@ -92,7 +90,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
             />
             <Button title={`Resume Paused Widget`} onPress={() => {
                 if (pauseWidget) {
-                    placementRef.current?.getWidget<STRStoryBarController | STRVideoFeedController>(pauseWidget).resume();
+                    placementRef.current?.getWidget(pauseWidget).resume();
                     setPauseWidget(null);
                 }
             }} />
