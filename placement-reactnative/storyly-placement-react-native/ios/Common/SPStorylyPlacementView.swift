@@ -45,10 +45,27 @@ import StorylyVideoFeed
     @objc public func callWidget(id: String, method: String, raw: String?) {
         DispatchQueue.main.async {
             print("[SPStorylyPlacement] callWidget: \(id)-\(method)-\(raw ?? "nil")")
-            
+
             guard let widget = self.widgetMap[id]?.value else { return }
             let params = decodeFromJson(raw)
-            
+
+            switch method {
+            case "pause":
+                widget.pause()
+                return
+            case "resume":
+                widget.resume()
+                return
+            case "open":
+                guard let params = params,
+                      let uriStr = params["uri"] as? String,
+                      let uri = URL(string: uriStr) else { return }
+                _ = widget.open(payload: uri)
+                return
+            default:
+                break
+            }
+
             switch widget.getType() {
                 case .storyBar:
                     self.handleStoryBarMethod(widget: widget, method: method, params: params)
@@ -151,17 +168,8 @@ import StorylyVideoFeed
     
     private func handleStoryBarMethod(widget: STRWidgetController, method: String, params: [String: Any]?) {
         guard let controller = widget as? STRStoryBarController else { return }
-        
+
         switch method {
-        case "pause":
-            controller.pause(animated: true, completion: nil)
-        case "resume":
-            controller.resume(animated: true, completion: nil)
-        case "open":
-            guard let params = params,
-                  let uriStr = params["uri"] as? String,
-                  let uri = URL(string: uriStr) else { return }
-            _ = controller.open(payload: uri)
         case "openWithId":
             guard let params = params,
                   let storyGroupId = params["storyGroupId"] as? String else { return }
@@ -181,21 +189,12 @@ import StorylyVideoFeed
     
     private func handleVideoFeedMethod(widget: STRWidgetController, method: String, params: [String: Any]?) {
         guard let controller = widget as? STRVideoFeedController else { return }
-        
+
         switch method {
-        case "pause":
-            controller.pause(animated: true, completion: nil)
-        case "resume":
-            controller.resume(animated: true, completion: nil)
-        case "open":
-            guard let params = params,
-                  let uriStr = params["uri"] as? String,
-                  let uri = URL(string: uriStr) else { return }
-            _ = controller.open(payload: uri)
         case "openWithId":
             guard let params = params,
-                  let groupId = params["groupId"] as? String else { return }
-            let itemId = params["itemId"] as? String
+                  let feedGroupId = params["feedGroupId"] as? String else { return }
+            let feedId = params["feedId"] as? String
             let playModeStr = params["playMode"] as? String
             let playMode: STRVideoFeedPlayMode
             switch playModeStr {
@@ -203,7 +202,7 @@ import StorylyVideoFeed
               case "feed": playMode = .Feed
               default: playMode = .Default
             }
-          _ = controller.open(feedGroupId: groupId, feedId: itemId, play: playMode)
+            _ = controller.open(feedGroupId: feedGroupId, feedId: feedId, play: playMode)
         default:
             break
         }
@@ -211,16 +210,14 @@ import StorylyVideoFeed
     
     private func handleVideoFeedPresenterMethod(widget: STRWidgetController, method: String, params: [String: Any]?) {
         guard let controller = widget as? STRVideoFeedPresenterController else { return }
-        
+
         switch method {
-        case "pause":
-            controller.pause()
         case "play":
             controller.play()
-        case "open":
+        case "openWithId":
             guard let params = params,
-                  let groupId = params["groupId"] as? String else { return }
-            _ = controller.open(feedGroupId: groupId)
+                  let feedGroupId = params["feedGroupId"] as? String else { return }
+            _ = controller.open(feedGroupId: feedGroupId)
         default:
             break
         }

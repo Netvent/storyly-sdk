@@ -1,5 +1,12 @@
 # Release Notes
 
+### 1.5.0 (31.03.2026)
+
+- added separate horizontal and vertical padding support for canvas widget
+- added dynamic tile border-radius calculation for canvas widget
+- fixed stories widget not re-rendering when parent container resizes
+- fixed share URL encoding issue causing malformed links
+
 ### 1.4.6 (06.03.2026)
 
 - fixed storyly-placement container overflowing on sites with fixed-dimension or flex/grid parent elements
