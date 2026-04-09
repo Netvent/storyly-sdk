@@ -132,7 +132,9 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
   Future<dynamic> _handleMethodCall(MethodCall call) async {
     try {
       final args = call.arguments;
-      final data = args is String ? jsonDecode(args) as Map<String, dynamic> : args as Map<String, dynamic>;
+      final data = args is String
+          ? jsonDecode(args) as Map<String, dynamic>
+          : args as Map<String, dynamic>;
       switch (call.method) {
         case 'onWidgetReady':
           debugPrint('StorylyPlacementView: onWidgetReady, data: $data');
@@ -154,8 +156,10 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           break;
         case 'onVisibilityChange':
           debugPrint('StorylyPlacementView: onVisibilityChange, data: $data');
-          widget.onVisibilityChange?.call(PlacementOnVisibilityChangeEvent.fromJson(data));
-          break;  
+          widget.onVisibilityChange?.call(
+            PlacementOnVisibilityChangeEvent.fromJson(data),
+          );
+          break;
         case 'onProductEvent':
           debugPrint('StorylyPlacementView: onProductEvent, data: $data');
           widget.onProductEvent?.call(PlacementProductEvent.fromJson(data));
@@ -174,7 +178,9 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           debugPrint("Unknown method: ${call.method}");
       }
     } catch (e) {
-      debugPrint("Error handling method call ${call.method}: $e: ${call.arguments}");
+      debugPrint(
+        "Error handling method call ${call.method}: $e: ${call.arguments}",
+      );
     }
   }
 }

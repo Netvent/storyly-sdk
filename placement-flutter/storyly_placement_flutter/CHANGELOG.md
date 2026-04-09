@@ -1,4 +1,26 @@
 # Release Notes
+### 1.6.0 (09.04.2026)
+* improved pause/resume flow story bar widget
+* improved pause/resume flow video feed widget
+* improved corner radius logic for buttons in banner widget
+* improved corner radius logic for media in canvas widget
+* improved data queue manager
+* improved click handling on banner widget
+* improved gradients of product catalog interactive component for video feed widget
+* added support for google fonts for banner widget buttons
+* added media ratio logic for canvas widget
+* added horizontal and vertical paddings for canvas widget
+* added onVisibilityChange callback
+* added pause/resume/open functions to STRWidgetController
+* renamed PlayMode to STRStoryBarPlayMode for story bar widget
+* renamed VFPlayMode to STRVideoFeedPlayMode for video feed widget
+* renamed StoryShowFailed to FeedShowFailed for video feed widget
+* improved video cache directory for placement widgets on android platform
+* fixed a video playback issue for canvas widget on android platform
+* fixed interactive component animation glitch on initial load of the video feed presenter on ios platform
+* fixed interactive component animation glitch on initial load of the story bar presenter on ios platform
+* improved video observers for story bar and video feed widgets on ios platform
+
 ### 1.4.0 (18.02.2026)
 * added video support for banner widget
 * added RTL layout direction support for banner widget

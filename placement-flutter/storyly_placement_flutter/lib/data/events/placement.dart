@@ -96,7 +96,9 @@ class PlacementOnVisibilityChangeEvent extends BaseEvent {
 
   factory PlacementOnVisibilityChangeEvent.fromJson(Map<String, dynamic> json) {
     return PlacementOnVisibilityChangeEvent(
-      widget: json['widget'] != null ? PlacementWidget.fromJson(json['widget']) : null,
+      widget: json['widget'] != null
+          ? PlacementWidget.fromJson(json['widget'])
+          : null,
       isVisible: json['isVisible'],
     );
   }

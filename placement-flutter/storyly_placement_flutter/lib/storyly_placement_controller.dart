@@ -57,7 +57,11 @@ class STRVideoFeedController extends STRWidgetController {
     return _controller.callWidget(
       _widget.viewId,
       'openWithId',
-      jsonEncode({'feedGroupId': feedGroupId, 'feedId': feedId, 'playMode': playMode}),
+      jsonEncode({
+        'feedGroupId': feedGroupId,
+        'feedId': feedId,
+        'playMode': playMode,
+      }),
     );
   }
 }
