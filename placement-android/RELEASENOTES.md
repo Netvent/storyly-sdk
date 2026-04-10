@@ -1,4 +1,11 @@
 # Release Notes
+### 1.7.0 (10.04.2026)
+* added design settings for video feed widget
+* added visibility support for cart button in swipe card widget
+* added canvas to story bar presenter flow
+* added canvas to video feed presenter flow
+* improved reset logic of canvas widget
+  
 ### 1.6.0 (01.04.2026)
 * improved pause/resume flow story bar widget
 * improved pause/resume flow video feed widget
