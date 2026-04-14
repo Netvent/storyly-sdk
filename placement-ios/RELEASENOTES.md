@@ -1,4 +1,8 @@
 # Release Notes
+### 1.7.1 (14.04.2026)
+* fixed close button visibility for video feed widget
+* fixed impression/like icon layouts for video feed widget
+
 ### 1.7.0 (10.04.2026)
 * added design settings for video feed widget
 * added visibility support for cart button in swipe card widget
