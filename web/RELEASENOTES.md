@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.10.7 - 15.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.7/storyly-web.js)
+
+- Fix: text animation is broken when using by letter
+- Fix: navigation arrows alignment issue in energized layout
+
 ### 4.10.5 - 17.03.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.5/storyly-web.js)
 
 - Fix: where the scroll indicator was blocking clicks on the story group cover
