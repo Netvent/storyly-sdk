@@ -1,5 +1,13 @@
 # Release Notes
 
+### 4.10.9 - 22.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.9/storyly-web.js)
+
+- Fix: button corner radius appeared inconsistent across platforms
+
+### 4.10.8 - 18.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.8/storyly-web.js)
+
+- Fix: cover image breaks after navigating via deeplink
+
 ### 4.10.7 - 15.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.7/storyly-web.js)
 
 - Fix: text animation is broken when using by letter
