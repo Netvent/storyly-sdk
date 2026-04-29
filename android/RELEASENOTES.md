@@ -1,4 +1,8 @@
 # Release Notes
+### 4.20.0 (29.04.2026)
+* added retail media integration
+* fixed inconsistent scrolling behavior for video feed presenter
+   
 ### 4.19.3 (13.01.2026)
 * fixed a bug related to pause/resume flow of vertical feed presenter
 * improved vertical feed tutorial view present logic
