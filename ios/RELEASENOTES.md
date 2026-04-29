@@ -1,4 +1,9 @@
 # Release Notes
+### 4.20.0 (29.04.2026)
+* added retail media integration
+* improved video observers for storyly and vertical feed
+* fixed a bug related to background color of swipe up interactive component
+  
 ### 4.19.2 (13.01.2026)
 * fixed a bug related to vertical feed presenter layouting
 * fixed an interaction crash on vertical feed presenter view if feed is empty
