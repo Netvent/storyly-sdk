@@ -1,5 +1,13 @@
 # Release Notes
 
+### 4.11.0 - 30.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.11.0/storyly-web.js)
+
+- Improvement: added selectedOptionIndex field to Poll, Quiz, Image Quiz, and Emoji layer events, and fixed Image Quiz answer to return the option letter (A/B/C/D) instead of a numeric index.
+
+### 4.10.10 - 25.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.10/storyly-web.js)
+
+- Fix: showing video seekbar in webview
+
 ### 4.10.9 - 22.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.10.9/storyly-web.js)
 
 - Fix: button corner radius appeared inconsistent across platforms
