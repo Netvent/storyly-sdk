@@ -1,6 +1,6 @@
 import Foundation
 import StorylyPlacement
-@_spi(PlacementInternal) import StorylyCore
+@_spi(StorylyInternalApi) import StorylyCore
 import StorylyBanner
 import StorylyStoryBar
 import StorylyVideoFeed

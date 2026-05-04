@@ -16,7 +16,7 @@ import com.appsamurai.storyly.core.data.model.product.STRCartItem
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
 import com.appsamurai.storyly.core.ui.STRScrollAxis
 import com.appsamurai.storyly.core.ui.STRWidgetController
-import com.appsamurai.storyly.core.util.PlacementInternalApi
+import com.appsamurai.storyly.core.util.StorylyInternalApi
 import com.appsamurai.storyly.coreinternal.util.getActivity
 import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
 import com.appsamurai.storyly.placement.ui.STRListener
@@ -308,7 +308,7 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
         }
     }
 
-    @PlacementInternalApi
+    @StorylyInternalApi
     private fun encodeWidgetController(controller: STRWidgetController?): Map<String, String>? {
         controller ?: return null
         return mapOf(
