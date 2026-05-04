@@ -1,6 +1,6 @@
 import Foundation
 import StorylyPlacement
-import StorylyCore
+@_spi(PlacementInternal) import StorylyCore
 import StorylyBanner
 import StorylyStoryBar
 import StorylyVideoFeed
@@ -68,7 +68,8 @@ func encodeWidgetController(_ controller: STRWidgetController?, widgetMap: inout
     guard let controller = controller else { return nil }
     return [
         "type": controller.getType().description,
-        "viewId": updateWidgetMapKey(controller, widgetMap: &widgetMap)
+        "viewId": updateWidgetMapKey(controller, widgetMap: &widgetMap),
+        "scrollAxis": controller.getScrollAxis().description,
     ]
 }
 

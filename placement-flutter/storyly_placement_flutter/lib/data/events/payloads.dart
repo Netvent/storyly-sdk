@@ -10,15 +10,24 @@ class PlacementWidget {
   final String viewId;
   final String
   type; // STRWidgetType: 'banner' | 'story-bar' | 'video-feed' | 'video-feed-presenter' | 'swipe-card'
+  final String? scrollAxis; // 'horizontal' | 'vertical' | 'none' | null
 
-  PlacementWidget({required this.viewId, required this.type});
+  PlacementWidget({required this.viewId, required this.type, this.scrollAxis});
 
   factory PlacementWidget.fromJson(Map<String, dynamic> json) {
-    return PlacementWidget(viewId: json['viewId'], type: json['type']);
+    return PlacementWidget(
+      viewId: json['viewId'],
+      type: json['type'],
+      scrollAxis: json['scrollAxis'] as String?,
+    );
   }
 
   Map<String, dynamic> toJson() {
-    return {'viewId': viewId, 'type': type};
+    return {
+      'viewId': viewId,
+      'type': type,
+      if (scrollAxis != null) 'scrollAxis': scrollAxis,
+    };
   }
 }
 

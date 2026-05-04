@@ -43,6 +43,7 @@ class StorylyPlacementView extends StatefulWidget {
 
 class _StorylyPlacementViewState extends State<StorylyPlacementView> {
   late StorylyPlacementController _controller;
+  String? _scrollAxis; // 'horizontal' | 'vertical' | 'all' | none
 
   @override
   void initState() {
@@ -74,29 +75,13 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
       'StorylyPlacementView: build,provider: ${widget.provider?.providerId}',
     );
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return PlatformViewLink(
+      return AndroidView(
         viewType: 'storyly_placement_flutter_view',
-        surfaceFactory: (context, controller) {
-          return AndroidViewSurface(
-            controller: controller as AndroidViewController,
-            gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
-            hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-          );
-        },
-        onCreatePlatformView: (params) {
-          return PlatformViewsService.initSurfaceAndroidView(
-              id: params.id,
-              viewType: 'storyly_placement_flutter_view',
-              layoutDirection: TextDirection.ltr,
-              creationParamsCodec: const StandardMessageCodec(),
-              onFocus: () {
-                params.onFocusChanged(true);
-              },
-            )
-            ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-            ..addOnPlatformViewCreatedListener(_onPlatformViewCreated)
-            ..create();
-        },
+        layoutDirection: TextDirection.ltr,
+        creationParamsCodec: const StandardMessageCodec(),
+        onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: _buildGestureRecognizers(),
+        hitTestBehavior: PlatformViewHitTestBehavior.opaque,
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
@@ -104,12 +89,33 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
         layoutDirection: TextDirection.ltr,
         creationParamsCodec: const StandardMessageCodec(),
         onPlatformViewCreated: _onPlatformViewCreated,
+        gestureRecognizers: _buildGestureRecognizers(),
       );
     }
 
     return Text(
       '$defaultTargetPlatform is not yet supported by the storyly_placement_flutter plugin',
     );
+  }
+
+  Set<Factory<OneSequenceGestureRecognizer>> _buildGestureRecognizers() {
+    final tap = Factory<TapGestureRecognizer>(() => TapGestureRecognizer());
+    final h = Factory<HorizontalDragGestureRecognizer>(
+      () => HorizontalDragGestureRecognizer(),
+    );
+    final v = Factory<VerticalDragGestureRecognizer>(
+      () => VerticalDragGestureRecognizer(),
+    );
+    final all = Factory<EagerGestureRecognizer>(
+      () => EagerGestureRecognizer(),
+    );
+    return switch (_scrollAxis) {
+      'horizontal' => {tap, h},
+      'vertical' => {tap, v},
+      'none' => {tap},
+      'all' => {all},
+      _ => {all},
+    };
   }
 
   void _onPlatformViewCreated(int id) {
@@ -138,7 +144,12 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
       switch (call.method) {
         case 'onWidgetReady':
           debugPrint('StorylyPlacementView: onWidgetReady, data: $data');
-          widget.onWidgetReady?.call(PlacementWidgetReadyEvent.fromJson(data));
+          final event = PlacementWidgetReadyEvent.fromJson(data);
+          final axis = event.widget.scrollAxis;
+          if (axis != _scrollAxis) {
+            setState(() => _scrollAxis = axis);
+          }
+          widget.onWidgetReady?.call(event);
           break;
         case 'onActionClicked':
           debugPrint('StorylyPlacementView: onActionClicked, data: $data');

@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.Uri
 import android.os.Handler
 import android.util.Log
+import android.view.Choreographer
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.appsamurai.storyly.core.STRWidgetType
 import com.appsamurai.storyly.core.analytics.error.STRErrorPayload
 import com.appsamurai.storyly.core.analytics.product.STRProductEvent
@@ -11,7 +14,9 @@ import com.appsamurai.storyly.core.analytics.event.STREventPayload
 import com.appsamurai.storyly.core.data.model.STRPayload
 import com.appsamurai.storyly.core.data.model.product.STRCartItem
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
+import com.appsamurai.storyly.core.ui.STRScrollAxis
 import com.appsamurai.storyly.core.ui.STRWidgetController
+import com.appsamurai.storyly.core.util.PlacementInternalApi
 import com.appsamurai.storyly.coreinternal.util.getActivity
 import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
 import com.appsamurai.storyly.placement.ui.STRListener
@@ -34,7 +39,7 @@ import java.lang.ref.WeakReference
 import java.util.UUID
 
 
-class SPStorylyPlacementView(context: Context) : FlutterView(context) {
+class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
 
     private var providerId: String? = null
 
@@ -303,11 +308,13 @@ class SPStorylyPlacementView(context: Context) : FlutterView(context) {
         }
     }
 
+    @PlacementInternalApi
     private fun encodeWidgetController(controller: STRWidgetController?): Map<String, String>? {
         controller ?: return null
         return mapOf(
             "type" to controller.getType().raw,
-            "viewId" to updateWidgetMapKey(controller)
+            "viewId" to updateWidgetMapKey(controller),
+            "scrollAxis" to controller.getScrollAxis().value,
         )
     }
 
