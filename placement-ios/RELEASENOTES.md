@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.0 (05.05.2026)
+* added retail media integration
+* added internal scroll axis information for widgets
+  
 ### 1.7.2 (22.04.2026)
 * fixed a video playback bug for video feed covers
   
