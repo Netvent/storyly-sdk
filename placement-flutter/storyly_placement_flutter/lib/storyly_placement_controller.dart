@@ -98,7 +98,7 @@ class StorylyPlacementController {
       case "video-feed-presenter":
         return STRVideoFeedPresenterController(this, widget) as T;
       default:
-        throw Exception("Unknown widget type: ${widget.type}");
+        return STRWidgetController(this, widget) as T;
     }
   }
 
