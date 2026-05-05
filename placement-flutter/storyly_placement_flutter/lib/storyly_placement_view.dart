@@ -106,9 +106,7 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
     final v = Factory<VerticalDragGestureRecognizer>(
       () => VerticalDragGestureRecognizer(),
     );
-    final all = Factory<EagerGestureRecognizer>(
-      () => EagerGestureRecognizer(),
-    );
+    final all = Factory<EagerGestureRecognizer>(() => EagerGestureRecognizer());
     return switch (_scrollAxis) {
       'horizontal' => {tap, h},
       'vertical' => {tap, v},

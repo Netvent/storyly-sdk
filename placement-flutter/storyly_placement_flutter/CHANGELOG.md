@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.0 (05.05.2026)
+* improved scrolling behavior for widgets
+* fixed a video playback bug for video feed covers on ios platform
+
 ### 1.7.1 (14.04.2026)
 * added design settings for video feed widget
 * added visibility support for cart button in swipe card widget
