@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.0 (05.05.2026)
+* added retail media integration
+* added internal scroll axis information for widgets
+
 ### 1.7.0 (10.04.2026)
 * added design settings for video feed widget
 * added visibility support for cart button in swipe card widget
