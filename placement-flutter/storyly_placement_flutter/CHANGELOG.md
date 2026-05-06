@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.1 (06.05.2026)
+* fixed proguard rules for storyly retail media package on android platform
+* fixed proguard rules for storyly analytics package on android platform
+
 ### 1.8.0 (05.05.2026)
 * improved scrolling behavior for widgets
 * fixed a video playback bug for video feed covers on ios platform
