@@ -1,4 +1,8 @@
 # Release Notes
+### 1.8.2 (06.05.2026)
+* fixed proguard rules for storyly retail media package
+* fixed proguard rules for storyly analytics package
+
 ### 1.8.0 (05.05.2026)
 * added retail media integration
 * added internal scroll axis information for widgets
