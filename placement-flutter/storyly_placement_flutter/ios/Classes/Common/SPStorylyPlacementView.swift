@@ -159,7 +159,8 @@ import StorylyVideoFeed
     private func createPlacementView(dataProvider: STRPlacementDataProvider) -> STRPlacementView {
         let view = STRPlacementView(dataProvider: dataProvider)
         
-        view.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
+        let keyWindow = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+        view.rootViewController = keyWindow?.rootViewController?.getPresentedViewController()
         view.delegate = delegate
         view.productDelegate = productDelegate
         
@@ -386,3 +387,11 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
     }
 }
 
+extension UIViewController {
+    internal func getPresentedViewController() -> UIViewController? {
+        guard let vc = self.presentedViewController else {
+            return self
+        }
+        return vc.getPresentedViewController()
+    }
+}
