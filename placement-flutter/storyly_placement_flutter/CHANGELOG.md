@@ -1,4 +1,7 @@
 # Release Notes
+### 1.8.2 (08.05.2026)
+* fixed root view controller access on ios platform
+
 ### 1.8.1 (06.05.2026)
 * fixed proguard rules for storyly retail media package on android platform
 * fixed proguard rules for storyly analytics package on android platform
