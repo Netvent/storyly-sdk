@@ -1,1 +1,0 @@
-Please check [Moments by Storyly Android Documentation](https://docs.storyly.io/docs/moments-android-quick-start)

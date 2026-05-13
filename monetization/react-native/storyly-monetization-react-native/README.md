@@ -1,1 +1,0 @@
-Please check [Monetization by Storyly Integration Documentation](https://docs.storyly.io/docs/monetization-react-native)

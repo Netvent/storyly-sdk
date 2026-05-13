@@ -1,1 +1,0 @@
-Please check [Storyly Integration Documentation](https://docs.storyly.io/docs/monetization-flutter)
