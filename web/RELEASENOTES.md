@@ -1,5 +1,13 @@
 # Release Notes
 
+### 1.7.2 (13.05.2026)
+
+- fixed missing events in userEvents
+
+### 1.7.1 (12.05.2026)
+
+- fixed story bar cover sizing and scaling issue
+
 ### 1.7.0 (15.04.2026)
 
 - added design settings for video feed widget
