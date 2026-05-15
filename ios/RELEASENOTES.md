@@ -1,4 +1,8 @@
 # Release Notes
+### 1.9.0 (15.05.2026)
+* added carousel support for banner widget
+* updated SDWebImage dependency to version 5.21.7
+
 ### 1.8.0 (05.05.2026)
 * added retail media integration
 * added internal scroll axis information for widgets
