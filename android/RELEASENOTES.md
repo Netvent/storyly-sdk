@@ -1,4 +1,8 @@
 # Release Notes
+### 1.9.0 (15.05.2026)
+* added carousel support for banner widget
+* added max lines for title in canvas widget
+  
 ### 1.8.2 (06.05.2026)
 * fixed proguard rules for storyly retail media package
 * fixed proguard rules for storyly analytics package
