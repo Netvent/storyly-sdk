@@ -1,5 +1,11 @@
 # Release Notes
 
+### 1.8.0 (15.05.2026)
+
+- added carousel template to banner widget
+- fixed storyCompleted callback data
+- fixed energized layout covers overflow
+
 ### 1.7.2 (13.05.2026)
 
 - fixed missing events in userEvents
