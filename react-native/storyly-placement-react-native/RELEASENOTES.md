@@ -1,4 +1,12 @@
 # Release Notes
+### 1.9.0 (18.05.2026)
+* added carousel support for banner widget
+* added internal scroll axis information for widgets
+* added max lines for title in canvas widget on android platform
+* fixed proguard rules for storyly analytics package on android platform
+* updated SDWebImage dependency to version 5.21.7 on ios platform
+* fixed a video playback bug for video feed covers on ios platform
+
 ### 1.7.1 (14.04.2026)
 * added design settings for video feed widget
 * added visibility support for cart button in swipe card widget
