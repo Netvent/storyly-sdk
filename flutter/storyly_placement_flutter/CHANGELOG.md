@@ -1,4 +1,14 @@
 # Release Notes
+### 1.10.0 (26.05.2026)
+* added design settings for story bar widget
+* added carousel support for banner widget
+* improved start flow of timed interactives for story bar widget on ios platform
+* updated SDWebImage dependency to version 5.21.7 on ios platform
+* fixed a video playback bug for video feed covers on ios platform
+* improved reset flow for banner and canvas widget on android platform
+* added max lines for title in canvas widget on android platform
+* fixed proguard rules for storyly analytics package on android platform
+
 ### 1.8.2 (08.05.2026)
 * fixed root view controller access on ios platform
 
