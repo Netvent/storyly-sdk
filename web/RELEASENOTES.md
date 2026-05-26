@@ -1,5 +1,9 @@
 # Release Notes
 
+### 1.9.0 (26.05.2026)
+
+- added story widget design settings
+
 ### 1.8.0 (15.05.2026)
 
 - added carousel template to banner widget
