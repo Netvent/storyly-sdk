@@ -1,4 +1,9 @@
 # Release Notes
+### 1.10.0 (26.05.2026)
+* added design settings for story bar widget
+* improved reset flow for banner and canvas widget on android platform
+* improved start flow of timed interactives for story bar widget on ios platform
+
 ### 1.9.0 (18.05.2026)
 * added carousel support for banner widget
 * added internal scroll axis information for widgets

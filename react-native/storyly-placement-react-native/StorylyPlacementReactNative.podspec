@@ -35,5 +35,5 @@ Pod::Spec.new do |s|
   # React Native dependencies
   install_modules_dependencies(s)
 
-  s.dependency "StorylyPlacement", "1.9.0"
+  s.dependency "StorylyPlacement", "1.10.0"
 end
