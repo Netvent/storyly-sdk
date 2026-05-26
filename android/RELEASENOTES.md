@@ -1,4 +1,8 @@
 # Release Notes
+### 1.10.0 (26.05.2026)
+* added design settings for story bar widget
+* improved reset flow for banner and canvas widget
+  
 ### 1.9.0 (15.05.2026)
 * added carousel support for banner widget
 * added max lines for title in canvas widget
