@@ -1,6 +1,11 @@
 # Release Notes
+### 1.10.0 (26.05.2026)
+* added design settings for story bar widget
+* improved start flow of timed interactives for story bar widget
+  
 ### 1.9.0 (15.05.2026)
 * added carousel support for banner widget
+* fixed a bug related to story bar widget bounds size
 * updated SDWebImage dependency to version 5.21.7
 
 ### 1.8.0 (05.05.2026)
