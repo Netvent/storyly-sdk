@@ -1,5 +1,9 @@
 # Release Notes
 
+### 1.9.1 (01.06.2026)
+
+- fixed swiper swiper security vulnerability issue
+
 ### 1.9.0 (26.05.2026)
 
 - added story widget design settings
