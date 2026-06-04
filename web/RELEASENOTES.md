@@ -1,5 +1,10 @@
 # Release Notes
 
+### 1.10.1 (04.06.2026)
+
+- improved npm package with code-splitting and TypeScript type definitions, widgets are
+  now lazy-loaded for a smaller initial bundle size
+
 ### 1.9.1 (01.06.2026)
 
 - fixed swiper swiper security vulnerability issue
