@@ -1,5 +1,5 @@
 # Release Notes
-* These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native/RELEASENOTES.md) package.
+* These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-sdk/blob/master/legacy/react-native/storyly-react-native/RELEASENOTES.md) package.
 ### 4.19.1 (25.12.2025)
 * fixed swift bridging header
 

@@ -1,5 +1,5 @@
 # Release Notes
-* If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-mobile/blob/master/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
+* If you are using new Fabric architecture please use [storyly-react-native-fabric](https://github.com/Netvent/storyly-sdk/blob/master/legacy/react-native/storyly-react-native-fabric/RELEASENOTES.md) package.
 ### 4.19.0 (02.12.2025)
 * added play/pause/replay accesibility controls for stories
 * added lowest price availability for eu regulations for product related interactive components
