@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { View, Button, Dimensions, StyleSheet } from "react-native";
-import {  type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, StorylyPlacement, type PlacementCartUpdateEvent, type STRProductItem, type STRProductInformation } from "storyly-placement-react-native";
+import {  type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, StorylyPlacement, type PlacementCartUpdateEvent, type STRProductItem, type STRProductInformation, StorylyAnalytics, STRAnalyticProductEvent } from "storyly-placement-react-native";
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -55,6 +55,11 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
     const provider = useStorylyPlacementProvider(placementConfig, placementListener);
     const placementRef = useRef<StorylyPlacementMethods>(null);
 
+    // Initialize the standalone Storyly Analytics module once.
+    useEffect(() => {
+        StorylyAnalytics.initialize({ token: token, userId: 'demo-user' });
+    }, [token]);
+
     const [placementHeight, setPlacementHeight] = useState<number>(0);
     const [pauseWidget, setPauseWidget] = useState<PlacementWidget | null>(null);
 
@@ -94,6 +99,18 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
                     placementRef.current?.getWidget(pauseWidget).resume();
                     setPauseWidget(null);
                 }
+            }} />
+            <Button title={`Track Analytics Event`} onPress={() => {
+                StorylyAnalytics.trackProduct(STRAnalyticProductEvent.WishlistAdded, {
+                    productId: 'product-1',
+                    productGroupId: 'group-1',
+                    title: 'Demo Product',
+                    desc: 'A product tracked from the analytics demo',
+                    price: 99.9,
+                    salesPrice: 79.9,
+                    quantity: 2,
+                });
+                console.log(`[${name}] tracked PDPViewed analytics event`);
             }} />
         </View>
     );

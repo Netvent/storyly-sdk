@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
 import com.facebook.react.uimanager.ViewManager
+import com.storylyplacementreactnative.newarch.StorylyAnalyticsModule
 import com.storylyplacementreactnative.newarch.StorylyPlacementProviderModule
 import com.storylyplacementreactnative.newarch.StorylyPlacementViewManager
 
@@ -21,6 +22,7 @@ class StorylyPlacementReactNativeViewPackage : BaseReactPackage() {
     override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
         return when (name) {
             StorylyPlacementProviderModule.NAME -> StorylyPlacementProviderModule(reactContext)
+            StorylyAnalyticsModule.NAME -> StorylyAnalyticsModule(reactContext)
             else -> null
         }
     }
@@ -31,6 +33,14 @@ class StorylyPlacementReactNativeViewPackage : BaseReactPackage() {
                 StorylyPlacementProviderModule.NAME to ReactModuleInfo(
                   name = StorylyPlacementProviderModule.NAME,
                   className = StorylyPlacementProviderModule::class.java.name,
+                  canOverrideExistingModule = false,
+                  needsEagerInit = false,
+                  isCxxModule = false,
+                  isTurboModule = true
+                ),
+                StorylyAnalyticsModule.NAME to ReactModuleInfo(
+                  name = StorylyAnalyticsModule.NAME,
+                  className = StorylyAnalyticsModule::class.java.name,
                   canOverrideExistingModule = false,
                   needsEagerInit = false,
                   isCxxModule = false,
