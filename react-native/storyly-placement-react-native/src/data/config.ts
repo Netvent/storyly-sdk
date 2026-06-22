@@ -5,6 +5,7 @@ export interface StorylyPlacementConfig {
   testMode?: boolean;
   locale?: string;
   layoutDirection?: 'ltr' | 'rtl';
+  theme?: 'dark' | 'light';
   customParameter?: string;
   labels?: string[];
   userProperties?: Record<string, string>;

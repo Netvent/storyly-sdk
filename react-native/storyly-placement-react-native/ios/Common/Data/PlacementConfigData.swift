@@ -17,6 +17,10 @@ func decodeSTRPlacementConfig(_ config: [String: Any], token: String) -> STRPlac
     _ = builder.setLayoutDirection(direction: layoutDirection == "rtl" ? .RTL : .LTR)
   }
   
+  if let theme = config["theme"] as? String {
+    _ = builder.setTheme(theme: theme == "dark" ? .dark : .light)
+  }
+
   if let customParameter = config["customParameter"] as? String {
     _ = builder.setCustomParameter(parameter: customParameter)
   }

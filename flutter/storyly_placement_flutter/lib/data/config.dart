@@ -3,6 +3,7 @@ class StorylyPlacementConfig {
   final bool? testMode;
   final String? locale;
   final String? layoutDirection; // 'ltr' | 'rtl'
+  final String? theme; // 'dark' | 'light'
   final String? customParameter;
   final List<String>? labels;
   final Map<String, String>? userProperties;
@@ -15,6 +16,7 @@ class StorylyPlacementConfig {
     this.testMode,
     this.locale,
     this.layoutDirection,
+    this.theme,
     this.customParameter,
     this.labels,
     this.userProperties,
@@ -29,6 +31,7 @@ class StorylyPlacementConfig {
       testMode: json['testMode'],
       locale: json['locale'],
       layoutDirection: json['layoutDirection'],
+      theme: json['theme'],
       customParameter: json['customParameter'],
       labels: (json['labels'] as List<dynamic>?)?.cast<String>(),
       userProperties: (json['userProperties'] as Map<String, dynamic>?)
@@ -51,6 +54,7 @@ class StorylyPlacementConfig {
       'testMode': testMode,
       'locale': locale,
       'layoutDirection': layoutDirection,
+      'theme': theme,
       'customParameter': customParameter,
       'labels': labels,
       'userProperties': userProperties,
