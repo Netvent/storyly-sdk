@@ -1,4 +1,15 @@
 # Release Notes
+### 1.11.0 (24.06.2026)
+* added title and description color support for swipe card widget
+* added dark/light theme support in placement config
+* added app session information for the placement widgets
+* added quantity field for products in storyly analytics
+* added session initialize event in storyly analytics 
+* improved progress bar time management in video feed widget
+* improved progress bar time management in story bar widget
+* improved video group cover structure in story bar widget
+* fixed an issue related to restore data in canvas widget
+
 ### 1.10.0 (26.05.2026)
 * added design settings for story bar widget
 * improved reset flow for banner and canvas widget
