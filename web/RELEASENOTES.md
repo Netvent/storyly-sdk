@@ -1,5 +1,10 @@
 # Release Notes
 
+### 1.11.0 (24.06.2026)
+
+- added title and description color support for swipe card widget
+- added dark/light theme support in placement config
+
 ### 1.10.1 (04.06.2026)
 
 - improved npm package with code-splitting and TypeScript type definitions, widgets are
