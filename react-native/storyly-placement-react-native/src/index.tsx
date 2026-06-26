@@ -6,4 +6,6 @@ export type * from './StorylyPlacementProvider';
 
 export * from './StorylyWidget';
 
+export * from './StorylyAnalytics';
+
 export * from './data';
