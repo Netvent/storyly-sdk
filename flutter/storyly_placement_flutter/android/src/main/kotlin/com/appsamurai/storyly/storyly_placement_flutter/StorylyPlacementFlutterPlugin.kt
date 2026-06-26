@@ -11,6 +11,10 @@ import io.flutter.plugin.common.MethodChannel.Result
 import com.appsamurai.storyly.storyly_placement_flutter.common.SPPlacementProviderManager
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
+import com.appsamurai.storyly.analytics.STRAnalytics
+import com.appsamurai.storyly.storyly_placement_flutter.common.data.analytics.decodeSTRAnalyticProduct
+import com.appsamurai.storyly.storyly_placement_flutter.common.data.analytics.decodeSTRAnalyticProductEvent
+import com.appsamurai.storyly.storyly_placement_flutter.common.data.analytics.decodeSTRAnalyticsConfig
 import com.appsamurai.storyly.storyly_placement_flutter.common.data.util.decodeFromJson
 
 /** StorylyPlacementFlutterPlugin */
@@ -114,6 +118,34 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                     result.success(null)
                 } else {
                     result.error("INVALID_ARGUMENT", "providerId and products are required", null)
+                }
+            }
+            "analyticsInitialize" -> {
+                val args = call.arguments as? Map<String, Any>
+                val configJson = args?.get("config") as? String
+
+                val config = decodeFromJson(configJson)?.let { decodeSTRAnalyticsConfig(it) }
+                if (config != null) {
+                    STRAnalytics.initialize(applicationContext, config)
+                    result.success(null)
+                } else {
+                    result.error("INVALID_ARGUMENT", "A valid analytics config is required", null)
+                }
+            }
+            "analyticsTrack" -> {
+                val args = call.arguments as? Map<String, Any>
+                val eventJson = args?.get("event") as? String
+
+                val payload = decodeFromJson(eventJson)
+                val event = decodeSTRAnalyticProductEvent(payload?.get("event") as? String)
+                val products = (payload?.get("products") as? List<Map<String, Any?>>)
+                    ?.mapNotNull { decodeSTRAnalyticProduct(it) }
+
+                if (event != null && products != null) {
+                    STRAnalytics.track(event, products)
+                    result.success(null)
+                } else {
+                    result.error("INVALID_ARGUMENT", "A valid event and products are required", null)
                 }
             }
             else -> {

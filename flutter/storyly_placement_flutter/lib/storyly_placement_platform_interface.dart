@@ -45,6 +45,14 @@ abstract class StorylyPlacementFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('updateCart() has not been implemented.');
   }
 
+  Future<void> analyticsInitialize(String configJson) {
+    throw UnimplementedError('analyticsInitialize() has not been implemented.');
+  }
+
+  Future<void> analyticsTrack(String eventJson) {
+    throw UnimplementedError('analyticsTrack() has not been implemented.');
+  }
+
   /// Sets the callback for receiving method calls from the native platform.
   void setMethodCallHandler(
     Future<dynamic> Function(String method, dynamic arguments)? handler,

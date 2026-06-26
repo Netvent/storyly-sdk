@@ -57,6 +57,18 @@ class MethodChannelStorylyPlacementFlutter
   }
 
   @override
+  Future<void> analyticsInitialize(String configJson) async {
+    await methodChannel.invokeMethod('analyticsInitialize', {
+      'config': configJson,
+    });
+  }
+
+  @override
+  Future<void> analyticsTrack(String eventJson) async {
+    await methodChannel.invokeMethod('analyticsTrack', {'event': eventJson});
+  }
+
+  @override
   void setMethodCallHandler(
     Future<dynamic> Function(String method, dynamic arguments)? handler,
   ) {

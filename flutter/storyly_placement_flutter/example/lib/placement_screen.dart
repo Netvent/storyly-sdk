@@ -26,6 +26,13 @@ class _PlacementScreenState extends State<PlacementScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Initialize the standalone Storyly Analytics module. Once initialized,
+    // product events can be tracked from anywhere in the app.
+    StorylyAnalytics.initialize(
+      STRAnalyticsConfig(token: widget.token, userId: 'demo-user'),
+    );
+
     StorylyPlacementProvider.create(
       config: StorylyPlacementConfig(
         token: widget.token,
@@ -161,6 +168,24 @@ class _PlacementScreenState extends State<PlacementScreen> {
             }
           },
           child: const Text('Resume Paused Widget'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            StorylyAnalytics.trackProduct(
+              STRAnalyticProductEvent.pdpViewed,
+              STRAnalyticProduct(
+                productId: 'product-1',
+                productGroupId: 'group-1',
+                title: 'Demo Product',
+                desc: 'A product tracked from the analytics demo',
+                price: 99.9,
+                salesPrice: 79.9,
+                quantity: 2,
+              ),
+            );
+            debugPrint('[${widget.name}] tracked PDPViewed analytics event');
+          },
+          child: const Text('Track Analytics Event'),
         ),
       ],
     );

@@ -19,6 +19,7 @@ export 'data/widgets/swipe_card.dart';
 export 'data/widgets/video_feed.dart';
 export 'storyly_placement_view.dart';
 export 'storyly_placement_controller.dart';
+export 'storyly_analytics.dart';
 
 typedef PlacementLoadCallback = void Function(PlacementLoadEvent event);
 typedef PlacementLoadFailCallback = void Function(PlacementLoadFailEvent event);

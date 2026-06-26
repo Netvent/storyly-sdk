@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import StorylyAnalytics
 
 public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
   private let channel: FlutterMethodChannel
@@ -70,6 +71,28 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
             result(nil)
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and products are required", details: nil))
+        }
+    case "analyticsInitialize":
+        if let args = call.arguments as? [String: Any],
+           let configJson = args["config"] as? String,
+           let dict = decodeFromJson(configJson),
+           let config = decodeSTRAnalyticsConfig(dict) {
+            STRAnalytics.initialize(config: config)
+            result(nil)
+        } else {
+            result(FlutterError(code: "INVALID_ARGUMENT", message: "A valid analytics config is required", details: nil))
+        }
+    case "analyticsTrack":
+        if let args = call.arguments as? [String: Any],
+           let eventJson = args["event"] as? String,
+           let dict = decodeFromJson(eventJson),
+           let event = decodeSTRAnalyticProductEvent(dict["event"] as? String),
+           let productsArray = dict["products"] as? [[String: Any]] {
+            let products = productsArray.compactMap { decodeSTRAnalyticProduct($0) }
+            STRAnalytics.track(productEvent: event, products: products)
+            result(nil)
+        } else {
+            result(FlutterError(code: "INVALID_ARGUMENT", message: "A valid event and products are required", details: nil))
         }
     default:
       result(FlutterMethodNotImplemented)
