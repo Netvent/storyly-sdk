@@ -5,6 +5,7 @@ import com.appsamurai.storyly.core.config.placement.STRNetworkConfig
 import com.appsamurai.storyly.core.config.placement.STRPlacementConfig
 import com.appsamurai.storyly.core.config.placement.STRProductConfig
 import com.appsamurai.storyly.core.config.placement.STRShareConfig
+import com.appsamurai.storyly.core.config.placement.STRTheme
 import com.storylyplacementreactnative.common.data.product.decodeSTRProductItem
 
 
@@ -16,6 +17,11 @@ fun decodeSTRPlacementConfig(config: Map<String, Any?>, token: String): STRPlace
     (config["layoutDirection"] as? String)?.let { layoutDir ->
         builder.setLayoutDirection(
             if (layoutDir == "rtl") STRLayoutDirection.RTL else STRLayoutDirection.LTR
+        )
+    }
+    (config["theme"] as? String)?.let { theme ->
+        builder.setTheme(
+            if (theme == "dark") STRTheme.DARK else STRTheme.LIGHT
         )
     }
     (config["customParameter"] as? String)?.let { builder.setCustomParameter(it) }
