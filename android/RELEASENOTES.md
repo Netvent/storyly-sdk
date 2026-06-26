@@ -1,4 +1,7 @@
 # Release Notes
+### 1.11.1 (26.06.2026)
+* fixed gradient view round corners in banner widget
+  
 ### 1.11.0 (24.06.2026)
 * added title and description color support for swipe card widget
 * added dark/light theme support in placement config
