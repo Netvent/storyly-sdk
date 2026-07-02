@@ -1,7 +1,7 @@
-/// Configuration required to initialize [StorylyAnalytics].
+/// Configuration required to initialize [STRAnalytics].
 ///
 /// Mirrors the native `STRAnalyticsConfig` on Android and iOS. Pass an
-/// instance to [StorylyAnalytics.initialize] before tracking any events.
+/// instance to [STRAnalytics.initialize] before tracking any events.
 class STRAnalyticsConfig {
   /// The unique API token identifying the Storyly account for analytics tracking.
   final String token;
@@ -23,7 +23,7 @@ class STRAnalyticsConfig {
 /// A product involved in a Storyly Analytics event.
 ///
 /// Mirrors the native `STRAnalyticProduct`. Pass one or more instances to
-/// [StorylyAnalytics.track] alongside an [STRAnalyticProductEvent].
+/// [STRAnalytics.track] alongside an [STRAnalyticProductEvent].
 class STRAnalyticProduct {
   /// The unique identifier of the product (e.g. SKU or product feed ID).
   final String productId;

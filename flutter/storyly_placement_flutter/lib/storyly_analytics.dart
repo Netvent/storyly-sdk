@@ -14,8 +14,8 @@ export 'data/analytics.dart';
 /// Usage:
 /// 1. Call [initialize] once with a valid [STRAnalyticsConfig] before tracking.
 /// 2. Call [track] (or [trackProduct]) to record product events.
-class StorylyAnalytics {
-  StorylyAnalytics._();
+class STRAnalytics {
+  STRAnalytics._();
 
   /// Initializes the Storyly Analytics module with the provided configuration.
   ///

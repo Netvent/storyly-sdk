@@ -1,14 +1,14 @@
 import '../product.dart';
 import '../events/payloads.dart';
 
-class STRCanvasItem {
+class CanvasItem {
   final String? actionUrl;
   final List<STRProductItem>? actionProducts;
 
-  STRCanvasItem({this.actionUrl, this.actionProducts});
+  CanvasItem({this.actionUrl, this.actionProducts});
 
-  factory STRCanvasItem.fromJson(Map<String, dynamic> json) {
-    return STRCanvasItem(
+  factory CanvasItem.fromJson(Map<String, dynamic> json) {
+    return CanvasItem(
       actionUrl: json['actionUrl'],
       actionProducts: (json['actionProducts'] as List<dynamic>?)
           ?.map((e) => STRProductItem.fromJson(e))
@@ -25,7 +25,7 @@ class STRCanvasItem {
 }
 
 class CanvasDataPayload extends STRDataPayload {
-  final List<STRCanvasItem> items;
+  final List<CanvasItem> items;
 
   CanvasDataPayload({required String type, required this.items})
     : super(type: type);
@@ -34,7 +34,7 @@ class CanvasDataPayload extends STRDataPayload {
     return CanvasDataPayload(
       type: json['type'],
       items: (json['items'] as List<dynamic>)
-          .map((e) => STRCanvasItem.fromJson(e))
+          .map((e) => CanvasItem.fromJson(e))
           .toList(),
     );
   }
@@ -48,13 +48,13 @@ class CanvasDataPayload extends STRDataPayload {
 }
 
 class STRCanvasPayload extends STRPayload {
-  final STRCanvasItem? item;
+  final CanvasItem? item;
 
   STRCanvasPayload({this.item});
 
   factory STRCanvasPayload.fromJson(Map<String, dynamic> json) {
     return STRCanvasPayload(
-      item: json['item'] != null ? STRCanvasItem.fromJson(json['item']) : null,
+      item: json['item'] != null ? CanvasItem.fromJson(json['item']) : null,
     );
   }
 
