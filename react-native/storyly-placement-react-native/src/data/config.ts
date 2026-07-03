@@ -1,6 +1,21 @@
 
 
-export interface StorylyPlacementConfig {
+export interface STRProductConfig {}
+
+export interface STRShareConfig {
+  shareUrl?: string;
+  facebookAppId?: string;
+  appLogoVisibility?: boolean;
+}
+
+export interface STRNetworkConfig {
+  cdnHost?: string;
+  productHost?: string;
+  analyticHost?: string;
+  placementHost?: string;
+}
+
+export interface STRPlacementConfig {
   token: string;
   testMode?: boolean;
   locale?: string;
@@ -10,16 +25,7 @@ export interface StorylyPlacementConfig {
   labels?: string[];
   userProperties?: Record<string, string>;
 
-  productConfig?: {};
-  shareConfig?: {
-    shareUrl?: string;
-    facebookAppId?: string;
-    appLogoVisibility?: boolean;
-  };
-  networkConfig?: {
-    cdnHost?: string;
-    productHost?: string;
-    analyticHost?: string;
-    placementHost?: string;
-  };
+  productConfig?: STRProductConfig;
+  shareConfig?: STRShareConfig;
+  networkConfig?: STRNetworkConfig;
 }

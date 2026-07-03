@@ -116,7 +116,7 @@ export type VideoFeedComponentUnion =
   | VideoFeedCommentComponent;
 
 
-export interface STRVideoFeedGroup {
+export interface VideoFeedGroup {
   id: string;
   title: string;
   name?: string;
@@ -128,10 +128,10 @@ export interface STRVideoFeedGroup {
   nudge: boolean;
   iconVideoUrl?: string;
   iconVideoThumbnailUrl?: string;
-  feedList: STRVideoFeedItem[];
+  feedList: VideoFeedItem[];
 }
 
-export interface STRVideoFeedItem {
+export interface VideoFeedItem {
   id: string;
   title?: string;
   name?: string;
@@ -146,12 +146,12 @@ export interface STRVideoFeedItem {
 
 
 export interface VideoFeedDataPayload extends STRDataPayload {
-  items: STRVideoFeedGroup;
+  items: VideoFeedGroup;
 }
 
 export interface STRVideoFeedPayload extends STRPayload {
-  group?: STRVideoFeedGroup;
-  feedItem?: STRVideoFeedItem;
+  group?: VideoFeedGroup;
+  feedItem?: VideoFeedItem;
   component?: VideoFeedComponentUnion;
 }
 

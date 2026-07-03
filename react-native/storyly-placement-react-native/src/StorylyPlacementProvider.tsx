@@ -9,19 +9,19 @@ import type {
   PlacementHydrationEvent,
   PlacementLoadEvent,
   PlacementLoadFailEvent,
-  StorylyPlacementConfig,
+  STRPlacementConfig,
   STRProductInformation,
   STRProductItem,
 } from './data';
 import StorylyPlacementProviderNative from './native/StorylyPlacementProviderNative';
 
-export interface StorylyPlacementProviderListener {
+export interface STRPlacementDataProviderListener {
   onLoad?: (event: PlacementLoadEvent) => void;
   onLoadFail?: (event: PlacementLoadFailEvent) => void;
   onHydration?: (event: PlacementHydrationEvent) => void;
 }
 
-export interface StorylyPlacementProvider {
+export interface STRPlacementDataProvider {
   providerId: string | null;
   hydrateProducts: (products: STRProductItem[]) => void;
   hydrateWishlist: (products: STRProductInformation[]) => void;
@@ -46,7 +46,7 @@ const generateProviderId = (): string => {
 
 const setupEventListeners = (
   providerId: string,
-  callbacks?: StorylyPlacementProviderListener
+  callbacks?: STRPlacementDataProviderListener
 ): Array<{ remove: () => void }> => {
   const emitter = getEventEmitter();
   const subscriptions: Array<{ remove: () => void }> = [];
@@ -94,20 +94,20 @@ const setupEventListeners = (
 };
 
 
-export const useStorylyPlacementProvider = (
-  config: StorylyPlacementConfig,
-  listener?: StorylyPlacementProviderListener
-): StorylyPlacementProvider => {
+export const useSTRPlacementDataProvider = (
+  config: STRPlacementConfig,
+  listener?: STRPlacementDataProviderListener
+): STRPlacementDataProvider => {
   const configJson = useMemo(() => JSON.stringify(config), [config]);
 
-  const [provider, setProvider] = useState<StorylyPlacementProvider>({
+  const [provider, setProvider] = useState<STRPlacementDataProvider>({
     providerId: null,
     hydrateProducts: () => {},
     hydrateWishlist: () => {},
     destroy: () => {},
   });
 
-  const createProviderInstance = (pid: string): StorylyPlacementProvider => ({
+  const createProviderInstance = (pid: string): STRPlacementDataProvider => ({
       providerId: pid,
       hydrateProducts: (products: STRProductItem[]) => {
         console.debug('Hydrating products for provider id', pid,'with products:', products);

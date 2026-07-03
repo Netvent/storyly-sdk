@@ -21,7 +21,7 @@ export interface BannerButtonComponent extends BannerComponent {
 export type BannerComponentUnion = BannerButtonComponent;
 
 
-export interface STRBannerItem {
+export interface BannerSlide {
   id: string;
   name?: string;
   index: number;
@@ -32,10 +32,10 @@ export interface STRBannerItem {
 }
 
 export interface BannerDataPayload extends STRDataPayload {
-  items: STRBannerItem[];
+  items: BannerSlide[];
 }
 
 export interface STRBannerPayload extends STRPayload {
-  item?: STRBannerItem;
+  item?: BannerSlide;
   component?: BannerComponentUnion;
 }

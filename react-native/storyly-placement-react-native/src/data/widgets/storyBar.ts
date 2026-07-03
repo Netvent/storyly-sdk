@@ -120,7 +120,7 @@ export type StoryBarComponentUnion =
 
 // MARK: - StoryBar Widget Types
 
-export interface STRStoryGroup {
+export interface StoryGroup {
   id: string;
   title: string;
   name?: string;
@@ -130,13 +130,13 @@ export interface STRStoryGroup {
   index: number;
   pinned: boolean;
   seen: boolean;
-  stories: STRStory[];
+  stories: Story[];
   type: string;
   nudge: boolean;
-  style?: STRStoryGroupStyle;
+  style?: StoryGroupStyle;
 }
 
-export interface STRStory {
+export interface Story {
   id: string;
   title: string;
   name?: string;
@@ -149,13 +149,13 @@ export interface STRStory {
   storyComponentList?: StoryBarComponentUnion[];
 }
 
-export interface STRStoryGroupStyle {
+export interface StoryGroupStyle {
   borderUnseenColors?: string[];
   textUnseenColor?: string;
-  badge?: STRStoryGroupBadgeStyle;
+  badge?: StoryGroupBadgeStyle;
 }
 
-export interface STRStoryGroupBadgeStyle {
+export interface StoryGroupBadgeStyle {
   backgroundColor?: string;
   textColor?: string;
   endTime?: number;
@@ -165,12 +165,12 @@ export interface STRStoryGroupBadgeStyle {
 
 
 export interface StoryBarDataPayload extends STRDataPayload {
-  items: STRStoryGroup[];
+  items: StoryGroup[];
 }
 
 export interface STRStoryBarPayload extends STRPayload {
-  group?: STRStoryGroup;
-  story?: STRStory;
+  group?: StoryGroup;
+  story?: Story;
   component?: StoryBarComponentUnion;
 }
 
