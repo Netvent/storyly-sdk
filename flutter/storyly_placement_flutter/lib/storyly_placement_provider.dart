@@ -26,12 +26,12 @@ typedef PlacementLoadFailCallback = void Function(PlacementLoadFailEvent event);
 typedef PlacementHydrationCallback =
     void Function(PlacementHydrationEvent event);
 
-class StorylyPlacementListener {
+class STRPlacementDataProviderListener {
   final PlacementLoadCallback? onLoad;
   final PlacementLoadFailCallback? onLoadFail;
   final PlacementHydrationCallback? onHydration;
 
-  const StorylyPlacementListener({
+  const STRPlacementDataProviderListener({
     this.onLoad,
     this.onLoadFail,
     this.onHydration,
@@ -46,7 +46,7 @@ class STRPlacementDataProvider {
   final String _providerId;
   String get providerId => _providerId;
 
-  StorylyPlacementListener? _listener;
+  STRPlacementDataProviderListener? _listener;
 
   bool _disposed = false;
 
@@ -55,7 +55,7 @@ class STRPlacementDataProvider {
 
   static Future<STRPlacementDataProvider> create({
     STRPlacementConfig? config,
-    StorylyPlacementListener? listener,
+    STRPlacementDataProviderListener? listener,
   }) async {
     final providerId =
         'provider_${_providerIdCounter++}_${DateTime.now().millisecondsSinceEpoch}';
@@ -86,7 +86,7 @@ class STRPlacementDataProvider {
 
   Future<void> initialize({
     required STRPlacementConfig config,
-    StorylyPlacementListener? listener,
+    STRPlacementDataProviderListener? listener,
   }) {
     _listener = listener;
     return StorylyPlacementFlutterPlatform.instance.updateConfig(

@@ -43,7 +43,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
           facebookAppId: '1234567890',
         ),
       ),
-      listener: StorylyPlacementListener(
+      listener: STRPlacementDataProviderListener(
         onLoad: (event) {
           debugPrint('[${widget.name}] onLoad $event');
         },
