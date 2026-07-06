@@ -1,4 +1,4 @@
-class StorylyPlacementConfig {
+class STRPlacementConfig {
   final String token;
   final bool? testMode;
   final String? locale;
@@ -7,11 +7,11 @@ class StorylyPlacementConfig {
   final String? customParameter;
   final List<String>? labels;
   final Map<String, String>? userProperties;
-  final StorylyProductConfig? productConfig;
-  final StorylyShareConfig? shareConfig;
-  final StorylyNetworkConfig? networkConfig;
+  final STRProductConfig? productConfig;
+  final STRShareConfig? shareConfig;
+  final STRNetworkConfig? networkConfig;
 
-  StorylyPlacementConfig({
+  STRPlacementConfig({
     required this.token,
     this.testMode,
     this.locale,
@@ -25,8 +25,8 @@ class StorylyPlacementConfig {
     this.networkConfig,
   });
 
-  factory StorylyPlacementConfig.fromJson(Map<String, dynamic> json) {
-    return StorylyPlacementConfig(
+  factory STRPlacementConfig.fromJson(Map<String, dynamic> json) {
+    return STRPlacementConfig(
       token: json['token'],
       testMode: json['testMode'],
       locale: json['locale'],
@@ -37,13 +37,13 @@ class StorylyPlacementConfig {
       userProperties: (json['userProperties'] as Map<String, dynamic>?)
           ?.cast<String, String>(),
       productConfig: json['productConfig'] != null
-          ? StorylyProductConfig.fromJson(json['productConfig'])
+          ? STRProductConfig.fromJson(json['productConfig'])
           : null,
       shareConfig: json['shareConfig'] != null
-          ? StorylyShareConfig.fromJson(json['shareConfig'])
+          ? STRShareConfig.fromJson(json['shareConfig'])
           : null,
       networkConfig: json['networkConfig'] != null
-          ? StorylyNetworkConfig.fromJson(json['networkConfig'])
+          ? STRNetworkConfig.fromJson(json['networkConfig'])
           : null,
     );
   }
@@ -65,11 +65,11 @@ class StorylyPlacementConfig {
   }
 }
 
-class StorylyProductConfig {
-  StorylyProductConfig();
+class STRProductConfig {
+  STRProductConfig();
 
-  factory StorylyProductConfig.fromJson(Map<String, dynamic> json) {
-    return StorylyProductConfig();
+  factory STRProductConfig.fromJson(Map<String, dynamic> json) {
+    return STRProductConfig();
   }
 
   Map<String, dynamic> toJson() {
@@ -77,19 +77,19 @@ class StorylyProductConfig {
   }
 }
 
-class StorylyShareConfig {
+class STRShareConfig {
   final String? shareUrl;
   final String? facebookAppId;
   final bool? appLogoVisibility;
 
-  StorylyShareConfig({
+  STRShareConfig({
     this.shareUrl,
     this.facebookAppId,
     this.appLogoVisibility,
   });
 
-  factory StorylyShareConfig.fromJson(Map<String, dynamic> json) {
-    return StorylyShareConfig(
+  factory STRShareConfig.fromJson(Map<String, dynamic> json) {
+    return STRShareConfig(
       shareUrl: json['shareUrl'],
       facebookAppId: json['facebookAppId'],
       appLogoVisibility: json['appLogoVisibility'],
@@ -105,21 +105,21 @@ class StorylyShareConfig {
   }
 }
 
-class StorylyNetworkConfig {
+class STRNetworkConfig {
   final String? cdnHost;
   final String? productHost;
   final String? analyticHost;
   final String? placementHost;
 
-  StorylyNetworkConfig({
+  STRNetworkConfig({
     this.cdnHost,
     this.productHost,
     this.analyticHost,
     this.placementHost,
   });
 
-  factory StorylyNetworkConfig.fromJson(Map<String, dynamic> json) {
-    return StorylyNetworkConfig(
+  factory STRNetworkConfig.fromJson(Map<String, dynamic> json) {
+    return STRNetworkConfig(
       cdnHost: json['cdnHost'],
       productHost: json['productHost'],
       analyticHost: json['analyticHost'],
