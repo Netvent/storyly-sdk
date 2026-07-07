@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { View, Button, Dimensions, StyleSheet } from "react-native";
-import {  type StorylyPlacementConfig, type StorylyPlacementProviderListener, useStorylyPlacementProvider, type StorylyPlacementMethods, type PlacementWidget, StorylyPlacement, type PlacementCartUpdateEvent, type STRProductItem, type STRProductInformation, StorylyAnalytics, STRAnalyticProductEvent } from "storyly-placement-react-native";
+import {  type STRPlacementConfig, type STRPlacementDataProviderListener, useSTRPlacementDataProvider, type STRPlacementViewMethods, type PlacementWidget, STRPlacementView, type PlacementCartUpdateEvent, type STRProductItem, type STRProductInformation, STRAnalytics, STRAnalyticProductEvent } from "storyly-placement-react-native";
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -9,7 +9,7 @@ const screenWidth = Dimensions.get('window').width;
 export const PlacementScreen = ({ name, token }: { name: string, token: string }) => {
 
 
-    const placementConfig: StorylyPlacementConfig = {
+    const placementConfig: STRPlacementConfig = {
         token: token,
         testMode: true,
         productConfig: {
@@ -22,7 +22,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
         },
     }
 
-    const placementListener: StorylyPlacementProviderListener = {
+    const placementListener: STRPlacementDataProviderListener = {
         onLoad: (event) => { console.log(`[${name}] onLoad`, event); },
         onLoadFail: (event) => { console.log(`[${name}] onLoadFail`, event); },
         onHydration: (event) => { 
@@ -52,12 +52,12 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
         },
     };
 
-    const provider = useStorylyPlacementProvider(placementConfig, placementListener);
-    const placementRef = useRef<StorylyPlacementMethods>(null);
+    const provider = useSTRPlacementDataProvider(placementConfig, placementListener);
+    const placementRef = useRef<STRPlacementViewMethods>(null);
 
     // Initialize the standalone Storyly Analytics module once.
     useEffect(() => {
-        StorylyAnalytics.initialize({ token: token, userId: 'demo-user' });
+        STRAnalytics.initialize({ token: token, userId: 'demo-user' });
     }, [token]);
 
     const [placementHeight, setPlacementHeight] = useState<number>(0);
@@ -66,7 +66,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
 
     return (
         <View style={styles.screenContainer}>
-            <StorylyPlacement
+            <STRPlacementView
                 style={{ height: placementHeight, width: "100%", backgroundColor: 'lightgray' }}
                 ref={placementRef}
                 provider={provider}
@@ -101,7 +101,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
                 }
             }} />
             <Button title={`Track Analytics Event`} onPress={() => {
-                StorylyAnalytics.trackProduct(STRAnalyticProductEvent.WishlistAdded, {
+                STRAnalytics.trackProduct(STRAnalyticProductEvent.WishlistAdded, {
                     productId: 'product-1',
                     productGroupId: 'group-1',
                     title: 'Demo Product',

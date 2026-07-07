@@ -10,8 +10,8 @@ import 'storyly_placement_provider.dart';
 typedef StorylyPlacementCreatedCallback =
     void Function(StorylyPlacementController controller);
 
-class StorylyPlacementView extends StatefulWidget {
-  final StorylyPlacementProvider? provider;
+class STRPlacementView extends StatefulWidget {
+  final STRPlacementDataProvider? provider;
 
   final StorylyPlacementCreatedCallback? onStorylyPlacementCreated;
   final void Function(PlacementWidgetReadyEvent)? onWidgetReady;
@@ -23,7 +23,7 @@ class StorylyPlacementView extends StatefulWidget {
   final void Function(PlacementCartUpdateEvent)? onUpdateCart;
   final void Function(PlacementWishlistUpdateEvent)? onUpdateWishlist;
 
-  const StorylyPlacementView({
+  const STRPlacementView({
     super.key,
     required this.provider,
     this.onStorylyPlacementCreated,
@@ -38,10 +38,10 @@ class StorylyPlacementView extends StatefulWidget {
   }) : super();
 
   @override
-  State<StorylyPlacementView> createState() => _StorylyPlacementViewState();
+  State<STRPlacementView> createState() => _STRPlacementViewState();
 }
 
-class _StorylyPlacementViewState extends State<StorylyPlacementView> {
+class _STRPlacementViewState extends State<STRPlacementView> {
   late StorylyPlacementController _controller;
   String? _scrollAxis; // 'horizontal' | 'vertical' | 'all' | none
 
@@ -49,21 +49,21 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
   void initState() {
     super.initState();
     debugPrint(
-      'StorylyPlacementView: initState provider: ${widget.provider?.providerId}',
+      'STRPlacementView: initState provider: ${widget.provider?.providerId}',
     );
     _controller = StorylyPlacementController();
   }
 
   @override
-  void didUpdateWidget(StorylyPlacementView oldWidget) {
+  void didUpdateWidget(STRPlacementView oldWidget) {
     super.didUpdateWidget(oldWidget);
     debugPrint(
-      'StorylyPlacementView: didUpdateWidget, provider: ${widget.provider?.providerId}',
+      'STRPlacementView: didUpdateWidget, provider: ${widget.provider?.providerId}',
     );
     if (widget.provider == null) return;
     if (widget.provider?.providerId != oldWidget.provider?.providerId) {
       debugPrint(
-        'StorylyPlacementView: configure: ${widget.provider?.providerId}',
+        'STRPlacementView: configure: ${widget.provider?.providerId}',
       );
       _controller.configure(widget.provider!.providerId);
     }
@@ -72,7 +72,7 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
   @override
   Widget build(BuildContext context) {
     debugPrint(
-      'StorylyPlacementView: build,provider: ${widget.provider?.providerId}',
+      'STRPlacementView: build,provider: ${widget.provider?.providerId}',
     );
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(
@@ -141,7 +141,7 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           : args as Map<String, dynamic>;
       switch (call.method) {
         case 'onWidgetReady':
-          debugPrint('StorylyPlacementView: onWidgetReady, data: $data');
+          debugPrint('STRPlacementView: onWidgetReady, data: $data');
           final event = PlacementWidgetReadyEvent.fromJson(data);
           final axis = event.widget.scrollAxis;
           if (axis != _scrollAxis) {
@@ -150,35 +150,35 @@ class _StorylyPlacementViewState extends State<StorylyPlacementView> {
           widget.onWidgetReady?.call(event);
           break;
         case 'onActionClicked':
-          debugPrint('StorylyPlacementView: onActionClicked, data: $data');
+          debugPrint('STRPlacementView: onActionClicked, data: $data');
           widget.onActionClicked?.call(
             PlacementActionClickEvent.fromJson(data),
           );
           break;
         case 'onEvent':
-          debugPrint('StorylyPlacementView: onEvent, data: $data');
+          debugPrint('STRPlacementView: onEvent, data: $data');
           widget.onEvent?.call(PlacementEvent.fromJson(data));
           break;
         case 'onFail':
-          debugPrint('StorylyPlacementView: onFail, data: $data');
+          debugPrint('STRPlacementView: onFail, data: $data');
           widget.onFail?.call(PlacementFailEvent.fromJson(data));
           break;
         case 'onVisibilityChange':
-          debugPrint('StorylyPlacementView: onVisibilityChange, data: $data');
+          debugPrint('STRPlacementView: onVisibilityChange, data: $data');
           widget.onVisibilityChange?.call(
             PlacementOnVisibilityChangeEvent.fromJson(data),
           );
           break;
         case 'onProductEvent':
-          debugPrint('StorylyPlacementView: onProductEvent, data: $data');
+          debugPrint('STRPlacementView: onProductEvent, data: $data');
           widget.onProductEvent?.call(PlacementProductEvent.fromJson(data));
           break;
         case 'onUpdateCart':
-          debugPrint('StorylyPlacementView: onUpdateCart, data: $data');
+          debugPrint('STRPlacementView: onUpdateCart, data: $data');
           widget.onUpdateCart?.call(PlacementCartUpdateEvent.fromJson(data));
           break;
         case 'onUpdateWishlist':
-          debugPrint('StorylyPlacementView: onUpdateWishlist, data: $data');
+          debugPrint('STRPlacementView: onUpdateWishlist, data: $data');
           widget.onUpdateWishlist?.call(
             PlacementWishlistUpdateEvent.fromJson(data),
           );

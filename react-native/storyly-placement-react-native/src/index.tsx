@@ -1,5 +1,5 @@
-export { default as StorylyPlacement } from './StorylyPlacement';
-export type { StorylyPlacementProps, StorylyPlacementMethods } from './StorylyPlacement';
+export { default as STRPlacementView } from './StorylyPlacement';
+export type { STRPlacementViewProps, STRPlacementViewMethods } from './StorylyPlacement';
 
 export * from './StorylyPlacementProvider';
 export type * from './StorylyPlacementProvider';

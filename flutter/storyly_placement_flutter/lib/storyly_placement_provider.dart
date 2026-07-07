@@ -26,42 +26,42 @@ typedef PlacementLoadFailCallback = void Function(PlacementLoadFailEvent event);
 typedef PlacementHydrationCallback =
     void Function(PlacementHydrationEvent event);
 
-class StorylyPlacementListener {
+class STRPlacementDataProviderListener {
   final PlacementLoadCallback? onLoad;
   final PlacementLoadFailCallback? onLoadFail;
   final PlacementHydrationCallback? onHydration;
 
-  const StorylyPlacementListener({
+  const STRPlacementDataProviderListener({
     this.onLoad,
     this.onLoadFail,
     this.onHydration,
   });
 }
 
-class StorylyPlacementProvider {
+class STRPlacementDataProvider {
   static int _providerIdCounter = 0;
-  static final Map<String, StorylyPlacementProvider> _providers = {};
+  static final Map<String, STRPlacementDataProvider> _providers = {};
   static bool _handlerRegistered = false;
 
   final String _providerId;
   String get providerId => _providerId;
 
-  StorylyPlacementListener? _listener;
+  STRPlacementDataProviderListener? _listener;
 
   bool _disposed = false;
 
-  StorylyPlacementProvider._({required String providerId})
+  STRPlacementDataProvider._({required String providerId})
     : _providerId = providerId;
 
-  static Future<StorylyPlacementProvider> create({
-    StorylyPlacementConfig? config,
-    StorylyPlacementListener? listener,
+  static Future<STRPlacementDataProvider> create({
+    STRPlacementConfig? config,
+    STRPlacementDataProviderListener? listener,
   }) async {
     final providerId =
         'provider_${_providerIdCounter++}_${DateTime.now().millisecondsSinceEpoch}';
 
     await StorylyPlacementFlutterPlatform.instance.createProvider(providerId);
-    final provider = StorylyPlacementProvider._(providerId: providerId);
+    final provider = STRPlacementDataProvider._(providerId: providerId);
     _providers[providerId] = provider;
     _ensureMethodHandlerRegistered();
     if (config != null) {
@@ -85,8 +85,8 @@ class StorylyPlacementProvider {
   }
 
   Future<void> initialize({
-    required StorylyPlacementConfig config,
-    StorylyPlacementListener? listener,
+    required STRPlacementConfig config,
+    STRPlacementDataProviderListener? listener,
   }) {
     _listener = listener;
     return StorylyPlacementFlutterPlatform.instance.updateConfig(

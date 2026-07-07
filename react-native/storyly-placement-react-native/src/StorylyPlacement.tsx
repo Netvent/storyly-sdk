@@ -14,14 +14,14 @@ import type {
   PlacementVisibilityChangeEvent,
  } from './data';
 import StorylyPlacementNativeView, { PlacementCommands, applyBaseEvent } from './native/StorylyPlacementNativeView';
-import type { StorylyPlacementProvider } from './StorylyPlacementProvider';
+import type { STRPlacementDataProvider } from './StorylyPlacementProvider';
 import { createWidgetProxy, type STRWidgetController } from './StorylyWidget';
 
 
 type StorylyPlacementNativeComponentRef = React.ComponentRef<typeof StorylyPlacementNativeView>;
 
-export interface StorylyPlacementProps extends ViewProps {
-  provider?: StorylyPlacementProvider;
+export interface STRPlacementViewProps extends ViewProps {
+  provider?: STRPlacementDataProvider;
 
   onWidgetReady?: (event: PlacementWidgetReadyEvent) => void;
   onActionClicked?: (event: PlacementActionClickEvent) => void;
@@ -34,7 +34,7 @@ export interface StorylyPlacementProps extends ViewProps {
 }
 
 
-export interface StorylyPlacementMethods {
+export interface STRPlacementViewMethods {
   getWidget<T extends STRWidgetController>(widget: PlacementWidget): T;
   approveCartChange: (responseId: string) => void;
   rejectCartChange: (responseId: string, failMessage: string) => void;
@@ -43,7 +43,7 @@ export interface StorylyPlacementMethods {
 }
 
      
-const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementProps>(
+const STRPlacementView = forwardRef<STRPlacementViewMethods, STRPlacementViewProps>(
   (props, ref) => {
     const placementRef = useRef<StorylyPlacementNativeComponentRef>(null);
 
@@ -154,5 +154,5 @@ const StorylyPlacement = forwardRef<StorylyPlacementMethods, StorylyPlacementPro
   }
 );
 
-export default StorylyPlacement;
+export default STRPlacementView;
 

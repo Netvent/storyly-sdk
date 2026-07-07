@@ -64,7 +64,7 @@ class BannerButtonComponent extends BannerComponent {
   }
 }
 
-class STRBannerItem {
+class BannerSlide {
   final String id;
   final String? name;
   final int index;
@@ -73,7 +73,7 @@ class STRBannerItem {
   final List<STRProductItem>? actionProducts;
   final int? currentTime;
 
-  STRBannerItem({
+  BannerSlide({
     required this.id,
     this.name,
     required this.index,
@@ -83,8 +83,8 @@ class STRBannerItem {
     this.currentTime,
   });
 
-  factory STRBannerItem.fromJson(Map<String, dynamic> json) {
-    return STRBannerItem(
+  factory BannerSlide.fromJson(Map<String, dynamic> json) {
+    return BannerSlide(
       id: json['id'],
       name: json['name'],
       index: json['index'],
@@ -113,7 +113,7 @@ class STRBannerItem {
 }
 
 class BannerDataPayload extends STRDataPayload {
-  final List<STRBannerItem> items;
+  final List<BannerSlide> items;
 
   BannerDataPayload({required String type, required this.items})
     : super(type: type);
@@ -122,7 +122,7 @@ class BannerDataPayload extends STRDataPayload {
     return BannerDataPayload(
       type: json['type'],
       items: (json['items'] as List<dynamic>)
-          .map((e) => STRBannerItem.fromJson(e))
+          .map((e) => BannerSlide.fromJson(e))
           .toList(),
     );
   }
@@ -136,14 +136,14 @@ class BannerDataPayload extends STRDataPayload {
 }
 
 class STRBannerPayload extends STRPayload {
-  final STRBannerItem? item;
+  final BannerSlide? item;
   final BannerComponent? component;
 
   STRBannerPayload({this.item, this.component});
 
   factory STRBannerPayload.fromJson(Map<String, dynamic> json) {
     return STRBannerPayload(
-      item: json['item'] != null ? STRBannerItem.fromJson(json['item']) : null,
+      item: json['item'] != null ? BannerSlide.fromJson(json['item']) : null,
       component: json['component'] != null
           ? BannerComponent.fromJson(json['component'])
           : null,

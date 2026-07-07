@@ -472,7 +472,7 @@ class StoryCommentComponent extends StoryBarComponent {
   }
 }
 
-class STRStory {
+class Story {
   final String id;
   final String title;
   final String? name;
@@ -484,7 +484,7 @@ class STRStory {
   final int? currentTime;
   final List<StoryBarComponent>? storyComponentList;
 
-  STRStory({
+  Story({
     required this.id,
     required this.title,
     this.name,
@@ -497,8 +497,8 @@ class STRStory {
     this.storyComponentList,
   });
 
-  factory STRStory.fromJson(Map<String, dynamic> json) {
-    return STRStory(
+  factory Story.fromJson(Map<String, dynamic> json) {
+    return Story(
       id: json['id'],
       title: json['title'],
       name: json['name'],
@@ -532,14 +532,14 @@ class STRStory {
   }
 }
 
-class STRStoryGroupBadgeStyle {
+class StoryGroupBadgeStyle {
   final String? backgroundColor;
   final String? textColor;
   final int? endTime;
   final String? template;
   final String? text;
 
-  STRStoryGroupBadgeStyle({
+  StoryGroupBadgeStyle({
     this.backgroundColor,
     this.textColor,
     this.endTime,
@@ -547,8 +547,8 @@ class STRStoryGroupBadgeStyle {
     this.text,
   });
 
-  factory STRStoryGroupBadgeStyle.fromJson(Map<String, dynamic> json) {
-    return STRStoryGroupBadgeStyle(
+  factory StoryGroupBadgeStyle.fromJson(Map<String, dynamic> json) {
+    return StoryGroupBadgeStyle(
       backgroundColor: json['backgroundColor'],
       textColor: json['textColor'],
       endTime: json['endTime'],
@@ -568,24 +568,24 @@ class STRStoryGroupBadgeStyle {
   }
 }
 
-class STRStoryGroupStyle {
+class StoryGroupStyle {
   final List<String>? borderUnseenColors;
   final String? textUnseenColor;
-  final STRStoryGroupBadgeStyle? badge;
+  final StoryGroupBadgeStyle? badge;
 
-  STRStoryGroupStyle({
+  StoryGroupStyle({
     this.borderUnseenColors,
     this.textUnseenColor,
     this.badge,
   });
 
-  factory STRStoryGroupStyle.fromJson(Map<String, dynamic> json) {
-    return STRStoryGroupStyle(
+  factory StoryGroupStyle.fromJson(Map<String, dynamic> json) {
+    return StoryGroupStyle(
       borderUnseenColors: (json['borderUnseenColors'] as List<dynamic>?)
           ?.cast<String>(),
       textUnseenColor: json['textUnseenColor'],
       badge: json['badge'] != null
-          ? STRStoryGroupBadgeStyle.fromJson(json['badge'])
+          ? StoryGroupBadgeStyle.fromJson(json['badge'])
           : null,
     );
   }
@@ -599,7 +599,7 @@ class STRStoryGroupStyle {
   }
 }
 
-class STRStoryGroup {
+class StoryGroup {
   final String id;
   final String title;
   final String? name;
@@ -609,12 +609,12 @@ class STRStoryGroup {
   final int index;
   final bool pinned;
   final bool seen;
-  final List<STRStory> stories;
+  final List<Story> stories;
   final String type;
   final bool nudge;
-  final STRStoryGroupStyle? style;
+  final StoryGroupStyle? style;
 
-  STRStoryGroup({
+  StoryGroup({
     required this.id,
     required this.title,
     this.name,
@@ -630,8 +630,8 @@ class STRStoryGroup {
     this.style,
   });
 
-  factory STRStoryGroup.fromJson(Map<String, dynamic> json) {
-    return STRStoryGroup(
+  factory StoryGroup.fromJson(Map<String, dynamic> json) {
+    return StoryGroup(
       id: json['id'],
       title: json['title'],
       name: json['name'],
@@ -642,12 +642,12 @@ class STRStoryGroup {
       pinned: json['pinned'],
       seen: json['seen'],
       stories: (json['stories'] as List<dynamic>)
-          .map((e) => STRStory.fromJson(e))
+          .map((e) => Story.fromJson(e))
           .toList(),
       type: json['type'],
       nudge: json['nudge'] ?? false,
       style: json['style'] != null
-          ? STRStoryGroupStyle.fromJson(json['style'])
+          ? StoryGroupStyle.fromJson(json['style'])
           : null,
     );
   }
@@ -672,7 +672,7 @@ class STRStoryGroup {
 }
 
 class StoryBarDataPayload extends STRDataPayload {
-  final List<STRStoryGroup> items;
+  final List<StoryGroup> items;
 
   StoryBarDataPayload({required String type, required this.items})
     : super(type: type);
@@ -681,7 +681,7 @@ class StoryBarDataPayload extends STRDataPayload {
     return StoryBarDataPayload(
       type: json['type'],
       items: (json['items'] as List<dynamic>)
-          .map((e) => STRStoryGroup.fromJson(e))
+          .map((e) => StoryGroup.fromJson(e))
           .toList(),
     );
   }
@@ -695,8 +695,8 @@ class StoryBarDataPayload extends STRDataPayload {
 }
 
 class STRStoryBarPayload extends STRPayload {
-  final STRStoryGroup? group;
-  final STRStory? story;
+  final StoryGroup? group;
+  final Story? story;
   final StoryBarComponent? component;
 
   STRStoryBarPayload({this.group, this.story, this.component});
@@ -704,9 +704,9 @@ class STRStoryBarPayload extends STRPayload {
   factory STRStoryBarPayload.fromJson(Map<String, dynamic> json) {
     return STRStoryBarPayload(
       group: json['group'] != null
-          ? STRStoryGroup.fromJson(json['group'])
+          ? StoryGroup.fromJson(json['group'])
           : null,
-      story: json['story'] != null ? STRStory.fromJson(json['story']) : null,
+      story: json['story'] != null ? Story.fromJson(json['story']) : null,
       component: json['component'] != null
           ? StoryBarComponent.fromJson(json['component'])
           : null,

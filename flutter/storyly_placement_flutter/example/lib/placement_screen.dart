@@ -13,7 +13,7 @@ class PlacementScreen extends StatefulWidget {
 }
 
 class _PlacementScreenState extends State<PlacementScreen> {
-  StorylyPlacementProvider? _provider;
+  STRPlacementDataProvider? _provider;
   StorylyPlacementController? _controller;
 
   // We need to give a non-zero height for the platform view to be created.
@@ -29,21 +29,21 @@ class _PlacementScreenState extends State<PlacementScreen> {
 
     // Initialize the standalone Storyly Analytics module. Once initialized,
     // product events can be tracked from anywhere in the app.
-    StorylyAnalytics.initialize(
+    STRAnalytics.initialize(
       STRAnalyticsConfig(token: widget.token, userId: 'demo-user'),
     );
 
-    StorylyPlacementProvider.create(
-      config: StorylyPlacementConfig(
+    STRPlacementDataProvider.create(
+      config: STRPlacementConfig(
         token: widget.token,
         testMode: true,
-        productConfig: StorylyProductConfig(),
-        shareConfig: StorylyShareConfig(
+        productConfig: STRProductConfig(),
+        shareConfig: STRShareConfig(
           shareUrl: 'https://www.google.com',
           facebookAppId: '1234567890',
         ),
       ),
-      listener: StorylyPlacementListener(
+      listener: STRPlacementDataProviderListener(
         onLoad: (event) {
           debugPrint('[${widget.name}] onLoad $event');
         },
@@ -104,7 +104,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
         SizedBox(
           height: _placementHeight,
           width: double.infinity,
-          child: StorylyPlacementView(
+          child: STRPlacementView(
             provider: _provider,
             onStorylyPlacementCreated: (controller) {
               _controller = controller;
@@ -171,7 +171,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
         ),
         ElevatedButton(
           onPressed: () {
-            StorylyAnalytics.trackProduct(
+            STRAnalytics.trackProduct(
               STRAnalyticProductEvent.pdpViewed,
               STRAnalyticProduct(
                 productId: 'product-1',

@@ -1,13 +1,13 @@
 import '../product.dart';
 import '../events/payloads.dart';
 
-class STRSwipeCard {
+class SwipeCard {
   final List<STRProductItem>? actionProducts;
 
-  STRSwipeCard({this.actionProducts});
+  SwipeCard({this.actionProducts});
 
-  factory STRSwipeCard.fromJson(Map<String, dynamic> json) {
-    return STRSwipeCard(
+  factory SwipeCard.fromJson(Map<String, dynamic> json) {
+    return SwipeCard(
       actionProducts: (json['actionProducts'] as List<dynamic>?)
           ?.map((e) => STRProductItem.fromJson(e))
           .toList(),
@@ -43,13 +43,13 @@ class SwipeCardDataPayload extends STRDataPayload {
 }
 
 class STRSwipeCardPayload extends STRPayload {
-  final STRSwipeCard? card;
+  final SwipeCard? card;
 
   STRSwipeCardPayload({this.card});
 
   factory STRSwipeCardPayload.fromJson(Map<String, dynamic> json) {
     return STRSwipeCardPayload(
-      card: json['card'] != null ? STRSwipeCard.fromJson(json['card']) : null,
+      card: json['card'] != null ? SwipeCard.fromJson(json['card']) : null,
     );
   }
 

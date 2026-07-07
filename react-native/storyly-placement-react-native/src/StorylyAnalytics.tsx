@@ -12,7 +12,7 @@ import type {
 } from './data';
 import StorylyAnalyticsNative from './native/StorylyAnalyticsNative';
 
-export const StorylyAnalytics = {
+export const STRAnalytics = {
   /**
    * Initializes the Storyly Analytics module with the provided configuration.
    * Call once during application startup, before tracking any events.
@@ -36,6 +36,6 @@ export const StorylyAnalytics = {
     event: STRAnalyticProductEvent,
     product: STRAnalyticProduct
   ): void {
-    StorylyAnalytics.track(event, [product]);
+    STRAnalytics.track(event, [product]);
   },
 };

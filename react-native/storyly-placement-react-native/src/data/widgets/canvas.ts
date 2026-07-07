@@ -2,15 +2,15 @@ import type { STRDataPayload, STRPayload } from "../events";
 import type { STRProductItem } from "../product";
 
 
-export interface STRCanvasItem {
+export interface CanvasItem {
     actionUrl?: string;
     actionProducts?: STRProductItem[];
 }
 
 export interface CanvasDataPayload extends STRDataPayload {
-    items: STRCanvasItem[];
+    items: CanvasItem[];
 }
 
 export interface STRCanvasPayload extends STRPayload {
-    item?: STRCanvasItem;
+    item?: CanvasItem;
 }
