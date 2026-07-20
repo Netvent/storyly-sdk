@@ -1,0 +1,15 @@
+{
+  "originHash" : "0780a96eab4925a51f5d1061c99d7def81602b5cfef53f2969548867cddd8270",
+  "pins" : [
+    {
+      "identity" : "storyly-placement-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Netvent/storyly-placement-ios",
+      "state" : {
+        "revision" : "6cbc4f47af827a102953718a695c371b6e796021",
+        "version" : "1.11.1"
+      }
+    }
+  ],
+  "version" : 3
+}
