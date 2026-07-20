@@ -91,19 +91,15 @@ private struct PlacementViewRepresentable: UIViewRepresentable {
             self.isVisible = isVisible
         }
 
-        nonisolated func onWidgetReady(widget: STRWidgetController, ratio: CGFloat) {
-            MainActor.assumeIsolated {
-                aspectRatio.wrappedValue = ratio
-            }
+        func onWidgetReady(widget: STRWidgetController, ratio: CGFloat) {
+            aspectRatio.wrappedValue = ratio
         }
 
-        nonisolated func onVisibilityChange(widget: STRWidgetController?, isVisible: Bool) {
-            MainActor.assumeIsolated {
-                self.isVisible.wrappedValue = isVisible
-            }
+        func onVisibilityChange(widget: STRWidgetController?, isVisible: Bool) {
+            self.isVisible.wrappedValue = isVisible
         }
 
-        nonisolated func onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
+        func onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
             print("StorylyPlacement onActionClicked: type=\(widget.getType()), url=\(url)")
         }
     }
