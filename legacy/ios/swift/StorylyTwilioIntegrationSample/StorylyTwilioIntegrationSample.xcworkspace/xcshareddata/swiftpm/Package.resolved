@@ -1,0 +1,15 @@
+{
+  "originHash" : "storyly-twilio-integration-sample",
+  "pins" : [
+    {
+      "identity" : "storyly-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Netvent/storyly-ios",
+      "state" : {
+        "revision" : "6ef276c76add72e7781d194777f85e045b6b31a3",
+        "version" : "4.20.0"
+      }
+    }
+  ],
+  "version" : 3
+}
