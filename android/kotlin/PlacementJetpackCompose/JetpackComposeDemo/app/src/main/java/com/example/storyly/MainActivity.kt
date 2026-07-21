@@ -13,14 +13,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.storyly.placement.PlacementScreen
-import com.example.storyly.ui.theme.StorylyJetpackComposeTheme
+import com.example.storyly.ui.theme.JetpackComposeDemoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            StorylyJetpackComposeTheme {
+            JetpackComposeDemoTheme {
                 PlacementApp()
             }
         }

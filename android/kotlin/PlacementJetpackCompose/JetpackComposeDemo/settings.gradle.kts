@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "StorylyJetpackCompose"
+rootProject.name = "JetpackComposeDemo"
 include(":app")
  
