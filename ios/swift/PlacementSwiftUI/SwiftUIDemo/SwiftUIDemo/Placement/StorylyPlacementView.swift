@@ -1,6 +1,6 @@
 //
 //  StorylyPlacementView.swift
-//  StorylySwiftUI
+//  SwiftUIDemo
 //
 //  Created by Kadir Sancak on 20.07.2026.
 //

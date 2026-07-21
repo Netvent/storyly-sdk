@@ -16,13 +16,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		75D7F3E8300E4471003373D1 /* StorylySwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorylySwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75D7F3E8300E4471003373D1 /* SwiftUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		75D7F3EA300E4471003373D1 /* StorylySwiftUI */ = {
+		75D7F3EA300E4471003373D1 /* SwiftUIDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StorylySwiftUI;
+			path = SwiftUIDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -47,7 +47,7 @@
 		75D7F3DF300E4471003373D1 = {
 			isa = PBXGroup;
 			children = (
-				75D7F3EA300E4471003373D1 /* StorylySwiftUI */,
+				75D7F3EA300E4471003373D1 /* SwiftUIDemo */,
 				75D7F41E300E5231003373D1 /* Frameworks */,
 				75D7F3E9300E4471003373D1 /* Products */,
 			);
@@ -56,7 +56,7 @@
 		75D7F3E9300E4471003373D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				75D7F3E8300E4471003373D1 /* StorylySwiftUI.app */,
+				75D7F3E8300E4471003373D1 /* SwiftUIDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,9 +71,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		75D7F3E7300E4471003373D1 /* StorylySwiftUI */ = {
+		75D7F3E7300E4471003373D1 /* SwiftUIDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75D7F3F3300E4473003373D1 /* Build configuration list for PBXNativeTarget "StorylySwiftUI" */;
+			buildConfigurationList = 75D7F3F3300E4473003373D1 /* Build configuration list for PBXNativeTarget "SwiftUIDemo" */;
 			buildPhases = (
 				75D7F3E4300E4471003373D1 /* Sources */,
 				75D7F3E5300E4471003373D1 /* Frameworks */,
@@ -84,9 +84,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				75D7F3EA300E4471003373D1 /* StorylySwiftUI */,
+				75D7F3EA300E4471003373D1 /* SwiftUIDemo */,
 			);
-			name = StorylySwiftUI;
+			name = SwiftUIDemo;
 			packageProductDependencies = (
 				75D7F41F300E5231003373D1 /* StorylyBanner */,
 				75D7F421300E5231003373D1 /* StorylyCanvas */,
@@ -95,8 +95,8 @@
 				75D7F427300E5231003373D1 /* StorylySwipeCard */,
 				75D7F429300E5231003373D1 /* StorylyVideoFeed */,
 			);
-			productName = StorylySwiftUI;
-			productReference = 75D7F3E8300E4471003373D1 /* StorylySwiftUI.app */;
+			productName = SwiftUIDemo;
+			productReference = 75D7F3E8300E4471003373D1 /* SwiftUIDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -114,7 +114,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 75D7F3E3300E4471003373D1 /* Build configuration list for PBXProject "StorylySwiftUI" */;
+			buildConfigurationList = 75D7F3E3300E4471003373D1 /* Build configuration list for PBXProject "SwiftUIDemo" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -131,7 +131,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75D7F3E7300E4471003373D1 /* StorylySwiftUI */,
+				75D7F3E7300E4471003373D1 /* SwiftUIDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -295,7 +295,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.storyly.StorylySwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.storyly.SwiftUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -326,7 +326,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.storyly.StorylySwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.storyly.SwiftUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -341,7 +341,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		75D7F3E3300E4471003373D1 /* Build configuration list for PBXProject "StorylySwiftUI" */ = {
+		75D7F3E3300E4471003373D1 /* Build configuration list for PBXProject "SwiftUIDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75D7F3F1300E4473003373D1 /* Debug */,
@@ -350,7 +350,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75D7F3F3300E4473003373D1 /* Build configuration list for PBXNativeTarget "StorylySwiftUI" */ = {
+		75D7F3F3300E4473003373D1 /* Build configuration list for PBXNativeTarget "SwiftUIDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75D7F3F4300E4473003373D1 /* Debug */,
