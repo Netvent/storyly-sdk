@@ -1,6 +1,33 @@
 {
-  "originHash" : "storyly-twilio-integration-sample",
+  "originHash" : "f3e2d8e2e21c733af017159c48c8afc893426409412f7f58c3f86f04af31443b",
   "pins" : [
+    {
+      "identity" : "analytics-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/analytics-swift",
+      "state" : {
+        "revision" : "5658b7ff5768083683b83162121bad8b4a4b267f",
+        "version" : "1.10.0"
+      }
+    },
+    {
+      "identity" : "jsonsafeencoding-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/jsonsafeencoding-swift.git",
+      "state" : {
+        "revision" : "af6a8b360984085e36c6341b21ecb35c12f47ebd",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "sovran-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/sovran-swift.git",
+      "state" : {
+        "revision" : "24867f3e4ac62027db9827112135e6531b6f4051",
+        "version" : "1.1.2"
+      }
+    },
     {
       "identity" : "storyly-ios",
       "kind" : "remoteSourceControl",
