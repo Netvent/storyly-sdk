@@ -1,5 +1,11 @@
 # Release Notes
 
+### 1.12.0 (31.07.2026)
+
+- added visibility support for navigation bar in video feed widget
+- improved disclosure layout in banner widget
+- fixed multiple placement rendering
+
 ### 1.11.0 (24.06.2026)
 
 - added title and description color support for swipe card widget
