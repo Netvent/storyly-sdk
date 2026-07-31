@@ -1,4 +1,10 @@
 # Release Notes
+### 1.12.0 (31.07.2026)
+* added Polish localization support
+* added visibility support for navigation bar in video feed widget
+* fixed navigation bar functionality for image carousel in video feed widget
+* improved disclosure layout in banner widget
+  
 ### 1.11.1 (26.06.2026)
 * fixed gradient view round corners in banner widget
 
