@@ -1,4 +1,7 @@
 # Release Notes
+### 4.21.0 (31.07.2026)
+* added Polish localization support
+  
 ### 4.20.0 (29.04.2026)
 * added retail media integration
 * fixed inconsistent scrolling behavior for video feed presenter
