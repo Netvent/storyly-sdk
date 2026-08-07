@@ -1,5 +1,10 @@
 # Release Notes
 
+### 1.13.0 (07.08.2026)
+
+- added networkConfig parameter to support configurable API/CDN
+- fixed outer border color in safari
+
 ### 1.12.0 (31.07.2026)
 
 - added visibility support for navigation bar in video feed widget
