@@ -1,0 +1,24 @@
+{
+  "originHash" : "3127d571f2bf524752c74a51dd3945d498792b6f309ae1fc29cdf3abd58b3fbd",
+  "pins" : [
+    {
+      "identity" : "storyly-placement-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Netvent/storyly-placement-ios",
+      "state" : {
+        "revision" : "8b724b7b37ca21db7097b8ca272bda9e8f408920",
+        "version" : "1.12.0"
+      }
+    },
+    {
+      "identity" : "storyly-placement-swiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Netvent/storyly-placement-swiftui",
+      "state" : {
+        "revision" : "8bb91a4b8094315e6f9a318a2acbe3c4886bfbaa",
+        "version" : "1.12.0"
+      }
+    }
+  ],
+  "version" : 3
+}
