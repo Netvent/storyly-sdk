@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.12.0 - 07.08.2026 [for cdn](https://web-story.storyly.io/sdk/4.12.0/storyly-web.js)
+
+- added networkConfig parameter to support configurable API/CDN
+
 ### 4.11.0 - 30.04.2026 [for cdn](https://web-story.storyly.io/sdk/4.11.0/storyly-web.js)
 
 - Improvement: added selectedOptionIndex field to Poll, Quiz, Image Quiz, and Emoji layer events, and fixed Image Quiz answer to return the option letter (A/B/C/D) instead of a numeric index.
