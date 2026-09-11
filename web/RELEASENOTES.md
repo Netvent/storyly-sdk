@@ -1,5 +1,17 @@
 # Release Notes
 
+### 1.15.0 (11.09.2026)
+
+- added fill button support in canvas widget
+
+### 1.14.1 (05.09.2026)
+
+- fixed stories seen in banner to story flow
+
+### 1.14.0 (03.09.2026)
+
+- added loop behaviour to banner
+
 ### 1.13.2 (17.08.2026)
 
 - fixed swipe card items rendering without product name and price.
