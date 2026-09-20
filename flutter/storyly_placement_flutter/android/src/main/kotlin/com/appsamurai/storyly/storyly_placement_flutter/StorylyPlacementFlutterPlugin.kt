@@ -8,6 +8,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import com.appsamurai.storyly.storyly_placement_flutter.common.SPLogManager
 import com.appsamurai.storyly.storyly_placement_flutter.common.SPPlacementProviderManager
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -118,6 +119,17 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                     result.success(null)
                 } else {
                     result.error("INVALID_ARGUMENT", "providerId and products are required", null)
+                }
+            }
+            "setLogLevel" -> {
+                val args = call.arguments as? Map<String, Any>
+                val level = args?.get("level") as? String
+
+                if (level != null) {
+                    SPLogManager.setLogLevel(level)
+                    result.success(null)
+                } else {
+                    result.error("INVALID_ARGUMENT", "level is required", null)
                 }
             }
             "analyticsInitialize" -> {

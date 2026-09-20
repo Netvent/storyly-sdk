@@ -1,13 +1,13 @@
 package com.storylyplacementreactnative.newarch
 
 
-import android.util.Log
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.storylyplacementreactnative.NativeStorylyPlacementProviderSpec
+import com.storylyplacementreactnative.common.SPLogManager
 import com.storylyplacementreactnative.common.SPPlacementProviderManager
 
 
@@ -15,7 +15,6 @@ import com.storylyplacementreactnative.common.SPPlacementProviderManager
 class StorylyPlacementProviderModule(
     private val reactContext: ReactApplicationContext
 ) : NativeStorylyPlacementProviderSpec(reactContext) {
-
     companion object {
         const val NAME = "StorylyPlacementProvider"
     }
@@ -26,7 +25,6 @@ class StorylyPlacementProviderModule(
 
     @ReactMethod
     override fun createProvider(providerId: String, promise: Promise) {
-        Log.d("[StorylyPlacementProviderModule]", "Creating provider: $providerId")
         val wrapper = SPPlacementProviderManager.createProvider(
             reactContext.applicationContext,
             providerId,
@@ -39,26 +37,27 @@ class StorylyPlacementProviderModule(
 
     @ReactMethod
     override fun destroyProvider(providerId: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Destroying provider: $providerId")
         SPPlacementProviderManager.destroyProvider(providerId)
     }
 
     @ReactMethod
     override fun updateConfig(providerId: String, config: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Updating config for provider: $providerId")
         SPPlacementProviderManager.getProvider(providerId)?.configure(config)
     }
 
     @ReactMethod
     override fun hydrateProducts(providerId: String, productsJson: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Hydrating products for provider: $providerId")
         SPPlacementProviderManager.getProvider(providerId)?.hydrateProducts(productsJson)
     }
 
     @ReactMethod
     override fun hydrateWishlist(providerId: String, productsJson: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Hydrating wishlist for provider: $providerId")
         SPPlacementProviderManager.getProvider(providerId)?.hydrateWishlist(productsJson)
+    }
+
+    @ReactMethod
+    override fun setLogLevel(level: String) {
+        SPLogManager.setLogLevel(level)
     }
 
     @ReactMethod

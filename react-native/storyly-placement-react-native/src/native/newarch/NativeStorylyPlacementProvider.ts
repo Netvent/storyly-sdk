@@ -14,12 +14,13 @@ export interface Spec extends TurboModule {
   hydrateProducts(providerId: string, productsJson: string): void;
   hydrateWishlist(providerId: string, productsJson: string): void;
 
+  // Logging
+  setLogLevel(level: string): void;
+
   // Event listeners
   addListener(eventName: string): void;
   removeListeners(count: number): void;
 }
-
-
 
 // MARK: - Module Export
 export default TurboModuleRegistry.get<Spec>('StorylyPlacementProvider');

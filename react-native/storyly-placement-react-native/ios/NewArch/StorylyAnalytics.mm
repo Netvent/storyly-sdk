@@ -15,13 +15,11 @@ RCT_EXPORT_MODULE(StorylyAnalytics)
 
 - (void)initialize:(NSString *)config
 {
-    NSLog(@"[StorylyAnalytics] initialize");
     [[SPAnalyticsManager shared] initializeWithConfigJson:config];
 }
 
 - (void)track:(NSString *)event
 {
-    NSLog(@"[StorylyAnalytics] track");
     [[SPAnalyticsManager shared] trackWithEventJson:event];
 }
 

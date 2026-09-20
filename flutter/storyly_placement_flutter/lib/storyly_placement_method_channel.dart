@@ -57,6 +57,11 @@ class MethodChannelStorylyPlacementFlutter
   }
 
   @override
+  Future<void> setLogLevel(String level) async {
+    await methodChannel.invokeMethod('setLogLevel', {'level': level});
+  }
+
+  @override
   Future<void> analyticsInitialize(String configJson) async {
     await methodChannel.invokeMethod('analyticsInitialize', {
       'config': configJson,

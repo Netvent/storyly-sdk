@@ -72,6 +72,14 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "providerId and products are required", details: nil))
         }
+    case "setLogLevel":
+        if let args = call.arguments as? [String: Any],
+           let level = args["level"] as? String {
+            SPLogManager.setLogLevel(level)
+            result(nil)
+        } else {
+            result(FlutterError(code: "INVALID_ARGUMENT", message: "level is required", details: nil))
+        }
     case "analyticsInitialize":
         if let args = call.arguments as? [String: Any],
            let configJson = args["config"] as? String,

@@ -45,6 +45,10 @@ abstract class StorylyPlacementFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('updateCart() has not been implemented.');
   }
 
+  Future<void> setLogLevel(String level) {
+    throw UnimplementedError('setLogLevel() has not been implemented.');
+  }
+
   Future<void> analyticsInitialize(String configJson) {
     throw UnimplementedError('analyticsInitialize() has not been implemented.');
   }

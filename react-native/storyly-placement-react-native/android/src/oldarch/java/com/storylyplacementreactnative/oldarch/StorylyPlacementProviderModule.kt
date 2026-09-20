@@ -1,12 +1,12 @@
 package com.storylyplacementreactnative.oldarch
 
-import android.util.Log
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.storylyplacementreactnative.common.SPLogManager
 import com.storylyplacementreactnative.common.SPPlacementProviderManager
 
 
@@ -14,7 +14,6 @@ import com.storylyplacementreactnative.common.SPPlacementProviderManager
 class StorylyPlacementProviderModule(
     private val reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext) {
-
     companion object {
         const val NAME = "StorylyPlacementProvider"
     }
@@ -25,7 +24,6 @@ class StorylyPlacementProviderModule(
 
     @ReactMethod
     fun createProvider(providerId: String, promise: Promise) {
-        Log.d("[StorylyPlacementProviderModule]", "Creating provider: $providerId")
         val wrapper = SPPlacementProviderManager.createProvider(
             reactContext.applicationContext,
             providerId,
@@ -38,26 +36,27 @@ class StorylyPlacementProviderModule(
 
     @ReactMethod
     fun destroyProvider(providerId: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Destroying provider: $providerId")
         SPPlacementProviderManager.destroyProvider(providerId)
     }
 
     @ReactMethod
     fun updateConfig(providerId: String, config: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Updating config for provider: $providerId")
         SPPlacementProviderManager.getProvider(providerId)?.configure(config)
     }
 
     @ReactMethod
     fun hydrateProducts(providerId: String, productsJson: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Hydrating products for provider: $providerId")
         SPPlacementProviderManager.getProvider(providerId)?.hydrateProducts(productsJson)
     }
 
     @ReactMethod
     fun hydrateWishlist(providerId: String, productsJson: String) {
-        Log.d("[StorylyPlacementProviderModule]", "Hydrating wishlist for provider: $providerId")
         SPPlacementProviderManager.getProvider(providerId)?.hydrateWishlist(productsJson)
+    }
+
+    @ReactMethod
+    fun setLogLevel(level: String) {
+        SPLogManager.setLogLevel(level)
     }
 
     @ReactMethod

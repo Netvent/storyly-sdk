@@ -11,6 +11,9 @@ export interface StorylyPlacementProviderNative {
     hydrateProducts(providerId: string, productsJson: string): void;
     hydrateWishlist(providerId: string, productsJson: string): void;
   
+    // Logging
+    setLogLevel(level: string): void;
+  
     // Event listeners
     addListener(eventName: string): void;
     removeListeners(count: number): void;

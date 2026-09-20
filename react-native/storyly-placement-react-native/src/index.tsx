@@ -8,4 +8,6 @@ export * from './StorylyWidget';
 
 export * from './StorylyAnalytics';
 
+export * from './StorylyLog';
+
 export * from './data';

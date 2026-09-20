@@ -1,6 +1,5 @@
 package com.storylyplacementreactnative.oldarch
 
-import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -12,7 +11,6 @@ import com.storylyplacementreactnative.common.SPAnalyticsManager
 class StorylyAnalyticsModule(
     private val reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext) {
-
     companion object {
         const val NAME = "StorylyAnalytics"
     }
@@ -21,13 +19,11 @@ class StorylyAnalyticsModule(
 
     @ReactMethod
     fun initialize(config: String) {
-        Log.d("[StorylyAnalyticsModule]", "initialize")
         SPAnalyticsManager.initialize(reactContext.applicationContext, config)
     }
 
     @ReactMethod
     fun track(event: String) {
-        Log.d("[StorylyAnalyticsModule]", "track")
         SPAnalyticsManager.track(event)
     }
 }

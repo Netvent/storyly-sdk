@@ -57,8 +57,8 @@ const setupEventListeners = (
         try {
           const event = JSON.parse(data as string) as PlacementLoadEvent;
           callbacks.onLoad?.(event);
-        } catch (error) {
-          console.error('Error parsing onLoad event:', error);
+        } catch {
+          // malformed payload from native; ignored
         }
       })
     );
@@ -70,8 +70,8 @@ const setupEventListeners = (
         try {
           const event = JSON.parse(data as string) as PlacementLoadFailEvent;
           callbacks.onLoadFail?.(event);
-        } catch (error) {
-          console.error('Error parsing onLoadFail event:', error);
+        } catch {
+          // malformed payload from native; ignored
         }
       })
     );
@@ -83,8 +83,8 @@ const setupEventListeners = (
         try {
           const event = JSON.parse(data as string) as PlacementHydrationEvent;
           callbacks.onHydration?.(event);
-        } catch (error) {
-          console.error('Error parsing onHydration event:', error);
+        } catch {
+          // malformed payload from native; ignored
         }
       })
     );
@@ -110,41 +110,35 @@ export const useSTRPlacementDataProvider = (
   const createProviderInstance = (pid: string): STRPlacementDataProvider => ({
       providerId: pid,
       hydrateProducts: (products: STRProductItem[]) => {
-        console.debug('Hydrating products for provider id', pid,'with products:', products);
         StorylyPlacementProviderNative.hydrateProducts(
           pid,
           JSON.stringify({ products })
         );
       },
       hydrateWishlist: (products: STRProductInformation[]) => {
-        console.debug('Hydrating wishlist for provider id', pid,'with products:', products);
         StorylyPlacementProviderNative.hydrateWishlist(
           pid,
           JSON.stringify({ products })
         );
       },
       destroy: () => {
-        console.debug('Destroying provider id', pid);
         StorylyPlacementProviderNative.destroyProvider(pid);
       },
     });
 
   useEffect(() => {
     const currentProviderId = generateProviderId();
-    console.debug('Creating provider with id:', currentProviderId);
     StorylyPlacementProviderNative.createProvider(currentProviderId).then(() => {
       setProvider(createProviderInstance(currentProviderId));
     })
 
     return () => {
-      console.debug('Destroying provider with id:', currentProviderId);
       StorylyPlacementProviderNative.destroyProvider(currentProviderId);
     };
   }, []);
 
   useEffect(() => {
     if (!provider.providerId) return;
-    console.debug('Updating config for provider id', provider.providerId,'with config:', configJson);
     StorylyPlacementProviderNative.updateConfig(provider.providerId, configJson);
   }, [provider.providerId, configJson]);
 

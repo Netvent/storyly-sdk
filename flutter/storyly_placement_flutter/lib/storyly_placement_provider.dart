@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 
 import 'storyly_placement_platform_interface.dart';
 import 'data/config.dart';
@@ -20,6 +19,7 @@ export 'data/widgets/video_feed.dart';
 export 'storyly_placement_view.dart';
 export 'storyly_placement_controller.dart';
 export 'storyly_analytics.dart';
+export 'storyly_log.dart';
 
 typedef PlacementLoadCallback = void Function(PlacementLoadEvent event);
 typedef PlacementLoadFailCallback = void Function(PlacementLoadFailEvent event);
@@ -133,10 +133,7 @@ class STRPlacementDataProvider {
     final providerId = arguments['providerId'] as String?;
     final raw = jsonDecode(arguments['raw'] as String);
 
-    if (providerId == null) {
-      debugPrint('StorylyPlacement: Invalid event payload');
-      return;
-    }
+    if (providerId == null) return;
 
     final provider = _providers[providerId];
     if (provider == null || provider._disposed) return;
@@ -158,10 +155,10 @@ class STRPlacementDataProvider {
           break;
 
         default:
-          debugPrint('StorylyPlacement: Unknown event "$method"');
+          break;
       }
-    } catch (e) {
-      debugPrint('StorylyPlacement: Error handling event "$method": $e');
+    } catch (_) {
+      // malformed payload from native; ignored
     }
   }
 }

@@ -32,8 +32,6 @@ RCT_EXPORT_METHOD(createProvider:(NSString *)providerId
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
-    NSLog(@"[StorylyPlacementProviderLegacy] Creating provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] createProviderWithId:providerId];
     
     __weak typeof(self) weakSelf = self;
@@ -56,7 +54,6 @@ RCT_EXPORT_METHOD(createProvider:(NSString *)providerId
 
 RCT_EXPORT_METHOD(destroyProvider:(NSString *)providerId)
 {
-    NSLog(@"[StorylyPlacementProviderLegacy] Destroying provider: %@", providerId);
     [[SPPlacementProviderManager shared] destroyProviderWithId:providerId];
 }
 
@@ -64,8 +61,6 @@ RCT_EXPORT_METHOD(destroyProvider:(NSString *)providerId)
 
 RCT_EXPORT_METHOD(updateConfig:(NSString *)providerId config:(NSString *)config)
 {
-    NSLog(@"[StorylyPlacementProviderLegacy] Updating config for provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper configureWithConfigJson:config];
@@ -76,8 +71,6 @@ RCT_EXPORT_METHOD(updateConfig:(NSString *)providerId config:(NSString *)config)
 
 RCT_EXPORT_METHOD(hydrateProducts:(NSString *)providerId productsJson:(NSString *)productsJson)
 {
-    NSLog(@"[StorylyPlacementProviderLegacy] Hydrating products for provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper hydrateProductsWithProductsJson:productsJson];
@@ -86,12 +79,17 @@ RCT_EXPORT_METHOD(hydrateProducts:(NSString *)providerId productsJson:(NSString 
 
 RCT_EXPORT_METHOD(hydrateWishlist:(NSString *)providerId productsJson:(NSString *)productsJson)
 {
-    NSLog(@"[StorylyPlacementProviderLegacy] Hydrating wishlist for provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper hydrateWishlistWithProductsJson:productsJson];
     }
+}
+
+// MARK: - Logging
+
+RCT_EXPORT_METHOD(setLogLevel:(NSString *)level)
+{
+    [SPLogManager setLogLevel:level];
 }
 
 // MARK: - Event Emitter

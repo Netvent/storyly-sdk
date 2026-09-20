@@ -1,10 +1,11 @@
 import Foundation
+import StorylyCore
 
 internal func encodeToJson(_ dictionary: [String: Any?]) -> String? {
   let filtered = dictionary.compactMapValues { $0 }
 
   guard let jsonData = try? JSONSerialization.data(withJSONObject: filtered, options: []) else {
-    print("[SPStorylyPlacement] SP bridge JSON encode error)")
+    STRLog.error(message: "[SPStorylyPlacement] SP bridge JSON encode error")
     return nil
   }
   return String(data: jsonData, encoding: .utf8)
@@ -21,10 +22,10 @@ internal func decodeFromJson(_ json: String?) -> [String: Any]? {
     if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
       return dictionary
     }
-    print("[SPStorylyPlacement] SP bridge JSON decode error: Not a dictionary")
+    STRLog.error(message: "[SPStorylyPlacement] SP bridge JSON decode error: Not a dictionary")
     return nil
   } catch {
-    print("[SPStorylyPlacement] SP bridge JSON decode error: \(error.localizedDescription)")
+    STRLog.error(message: "[SPStorylyPlacement] SP bridge JSON decode error: \(error.localizedDescription)")
     return nil
   }
 }

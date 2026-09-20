@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:storyly_placement_flutter/storyly_placement_provider.dart';
 import 'placement_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Storyly logs are off by default; opt in for the demo app.
+  StorylyLog.setLogLevel(STRLogLevel.debug);
   runApp(const MyApp());
 }
 

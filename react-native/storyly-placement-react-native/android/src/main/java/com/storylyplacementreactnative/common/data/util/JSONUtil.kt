@@ -1,6 +1,6 @@
 package com.storylyplacementreactnative.common.data.util
 
-import android.util.Log
+import com.appsamurai.storyly.core.listener.log.STRLog
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -10,7 +10,7 @@ fun encodeToJson(map: Map<String, Any?>?): String? {
   return try {
     JSONObject(map.filterValues { it != null }).toString()
   } catch (e: Exception) {
-    Log.e("[SPStorylyPlacement]", "SP bridge JSON encode error: ${e.localizedMessage ?: ""}")
+    STRLog.error("[SPStorylyPlacement] SP bridge JSON encode error: ${e.localizedMessage ?: ""}")
     null
   }
 }
@@ -21,7 +21,7 @@ fun decodeFromJson(json: String?): Map<String, Any?>? {
     val jsonObject = JSONObject(json)
     jsonObject.toMap()
   } catch (e: Exception) {
-    Log.e("[SPStorylyPlacement]", "SP bridge JSON decode error: ${e.localizedMessage ?: ""}")
+    STRLog.error("[SPStorylyPlacement] SP bridge JSON decode error: ${e.localizedMessage ?: ""}")
     null
   }
 }

@@ -3,7 +3,6 @@ import StorylyPlacement
 @_spi(InternalFramework) import StorylyCore
 
 @objc public class SPPlacementProviderManager: NSObject {
-    
     @objc public static let shared = SPPlacementProviderManager()
     
     private var providers: [String: SPPlacementProviderWrapper] = [:]
@@ -13,7 +12,6 @@ import StorylyPlacement
     }
     
     @objc public func createProvider(id: String) -> SPPlacementProviderWrapper {
-        print("[SPPlacementProviderManager] Create provider: \(id)")
         let wrapper = SPPlacementProviderWrapper(id: id)
         providers[id] = wrapper
         return wrapper
@@ -24,13 +22,11 @@ import StorylyPlacement
     }
     
     @objc public func destroyProvider(id: String) {
-        print("[SPPlacementProviderManager] Destroy provider: \(id)")
         providers.removeValue(forKey: id)
     }
 }
 
 @objc public class SPPlacementProviderWrapper: NSObject {
-    
     @objc public let id: String
     @objc public lazy var provider: STRPlacementDataProvider = {
         return STRPlacementDataProvider()
@@ -49,7 +45,7 @@ import StorylyPlacement
     @objc public func configure(configJson: String) {
         DispatchQueue.main.async {
           guard let parsedConfig = decodeFromJson(configJson) else {
-              print("[SPPlacementProviderWrapper] Failed to parse config JSON")
+              STRLog.error(message: "[SPPlacementProviderWrapper] Failed to parse config JSON")
               return
           }
           
@@ -60,11 +56,10 @@ import StorylyPlacement
     private func setupProvider(config: [String: Any]) {
         DispatchQueue.main.async {
             guard let token = config["token"] as? String else {
-              print("[SPPlacementProviderWrapper] Token not found in config")
+              STRLog.error(message: "[SPPlacementProviderWrapper] Token not found in config")
               return
             }
             
-            print("[SPPlacementProviderWrapper] Configuring provider with token: \(token)")
             
             let placementConfig = decodeSTRPlacementConfig(config, token: token)
             placementConfig.setFramework(framework: "flutter")
@@ -85,7 +80,6 @@ import StorylyPlacement
                 return
             }
             
-            print("[SPPlacementProviderWrapper] hydrateProducts: \(productsJson)")
             
             let products = productsArray.compactMap { decodeSTRProductItem($0) }
             self.provider.hydrateProducts(products: products)
@@ -99,7 +93,6 @@ import StorylyPlacement
                 return
             }
             
-            print("[SPPlacementProviderWrapper] hydrateWishlist: \(productsJson)")
             
             let products = productsArray.compactMap { decodeSTRProductInformation($0) }
             self.provider.hydrateWishlist(products: products)
@@ -125,7 +118,6 @@ private class STRProviderDelegateImpl: NSObject, STRDataProviderDelegate {
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            print("[SPPlacementProviderWrapper] STRDataProviderListener:onLoad: \(eventJson)")
             wrapper.sendEvent?(wrapper.id, .onLoad, eventJson)
         }
     }
@@ -138,7 +130,6 @@ private class STRProviderDelegateImpl: NSObject, STRDataProviderDelegate {
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            print("[SPPlacementProviderWrapper] STRDataProviderListener:onLoadFail: \(eventJson)")
           wrapper.sendEvent?(wrapper.id, .onLoadFail, eventJson)
         }
     }
@@ -154,7 +145,6 @@ private class STRProviderProductDelegateImpl: NSObject, STRDataProviderProductDe
     }
     
     func onHydration(products: [STRProductInformation]) {
-        print("[SPPlacementProviderWrapper] STRDataProviderProductListener:onHydration")
         guard let wrapper = wrapper else { return }
         
         let eventData: [String: Any] = [
@@ -162,7 +152,6 @@ private class STRProviderProductDelegateImpl: NSObject, STRDataProviderProductDe
         ]
         
         if let eventJson = encodeToJson(eventData) {
-            print("[SPPlacementProviderWrapper] STRDataProviderProductListener:onHydration: \(eventJson)")
             wrapper.sendEvent?(wrapper.id, .onHydration, eventJson)
         }
     }

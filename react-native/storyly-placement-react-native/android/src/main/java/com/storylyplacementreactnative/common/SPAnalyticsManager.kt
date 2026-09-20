@@ -1,22 +1,21 @@
 package com.storylyplacementreactnative.common
 
 import android.content.Context
-import android.util.Log
 import com.appsamurai.storyly.analytics.STRAnalytics
 import com.appsamurai.storyly.analytics.config.STRAnalyticsConfig
 import com.appsamurai.storyly.analytics.model.STRAnalyticProduct
 import com.appsamurai.storyly.analytics.model.STRAnalyticProductEvent
+import com.appsamurai.storyly.core.listener.log.STRLog
 import com.storylyplacementreactnative.common.data.util.decodeFromJson
 
 object SPAnalyticsManager {
-
     fun initialize(context: Context, configJson: String) {
         val map = decodeFromJson(configJson) ?: run {
-            Log.e("[SPAnalyticsManager]", "Failed to parse analytics config JSON")
+            STRLog.error("[SPAnalyticsManager] Failed to parse analytics config JSON")
             return
         }
         val config = decodeSTRAnalyticsConfig(map) ?: run {
-            Log.e("[SPAnalyticsManager]", "A valid analytics config is required")
+            STRLog.error("[SPAnalyticsManager] A valid analytics config is required")
             return
         }
         STRAnalytics.initialize(context.applicationContext, config)

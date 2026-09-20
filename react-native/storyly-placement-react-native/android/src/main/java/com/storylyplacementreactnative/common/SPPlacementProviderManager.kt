@@ -3,10 +3,10 @@ package com.storylyplacementreactnative.common
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import com.appsamurai.storyly.core.data.model.STRDataPayload
 import com.appsamurai.storyly.core.data.model.STRDataSource
 import com.appsamurai.storyly.core.data.model.product.STRProductInformation
+import com.appsamurai.storyly.core.listener.log.STRLog
 import com.appsamurai.storyly.core.listener.provider.STRDataProviderListener
 import com.appsamurai.storyly.core.listener.provider.STRDataProviderProductListener
 import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
@@ -20,13 +20,11 @@ import com.storylyplacementreactnative.common.data.util.encodeToJson
 
 
 object SPPlacementProviderManager {
-
     private val providers = mutableMapOf<String, SPPlacementProviderWrapper>()
     private val lock = Any()
 
     fun createProvider(context: Context, id: String): SPPlacementProviderWrapper {
         synchronized(lock) {
-            Log.d("[SPPlacementProviderManager]", "Create provider: $id")
             val wrapper = SPPlacementProviderWrapper(context, id)
             providers[id] = wrapper
             return wrapper
@@ -41,7 +39,6 @@ object SPPlacementProviderManager {
 
     fun destroyProvider(id: String) {
         synchronized(lock) {
-            Log.d("[SPPlacementProviderManager]", "Destroy provider: $id")
             providers.remove(id)
         }
     }
@@ -58,7 +55,7 @@ class SPPlacementProviderWrapper(
     fun configure(configJson: String) {
         Handler(Looper.getMainLooper()).post {
             val parsedConfig = decodeFromJson(configJson) ?: run {
-                Log.e("[SPPlacementProviderWrapper]", "Failed to parse config JSON")
+                STRLog.error("[SPPlacementProviderWrapper] Failed to parse config JSON")
                 return@post
             }
 
@@ -69,7 +66,6 @@ class SPPlacementProviderWrapper(
     private fun setupProvider(config: Map<String, Any?>) {
         val token = config["token"] as? String ?: return
 
-        Log.d("[SPPlacementProviderWrapper]", "Configuring provider with token: $token")
 
         val placementConfig = decodeSTRPlacementConfig(config, token)
         placementConfig.framework = "rn"
@@ -81,7 +77,6 @@ class SPPlacementProviderWrapper(
                         "data" to encodeDataPayload(data),
                         "dataSource" to dataSource.value,
                     ))
-                    Log.d("[SPPlacementProviderWrapper]", "STRDataProviderListener:onLoad: $eventJson")
                     sendEvent?.invoke(id, SPPlacementProviderEventType.ON_LOAD, eventJson ?: "")
                 }
 
@@ -89,7 +84,6 @@ class SPPlacementProviderWrapper(
                     val eventJson = encodeToJson(mapOf(
                         "errorMessage" to errorMessage,
                     ))
-                    Log.d("[SPPlacementProviderWrapper]", "STRDataProviderListener:onLoadFail: $eventJson")
                     sendEvent?.invoke(id, SPPlacementProviderEventType.ON_LOAD_FAIL, eventJson ?: "")
                 }
             }
@@ -98,7 +92,6 @@ class SPPlacementProviderWrapper(
                     val eventJson = encodeToJson(mapOf(
                         "products" to products.map { encodeSTRProductInformation(it) },
                     ))
-                    Log.d("[SPPlacementProviderWrapper]", "STRDataProviderProductListener:onHydration: $eventJson")
                     sendEvent?.invoke(id, SPPlacementProviderEventType.ON_HYDRATION, eventJson ?: "")
                 }
             }
@@ -110,7 +103,6 @@ class SPPlacementProviderWrapper(
     fun hydrateProducts(raw: String) {
         Handler(context.mainLooper).post {
             val map = decodeFromJson(raw) ?: return@post
-            Log.d("[SPPlacementProviderWrapper]", "hydrateProducts: $raw")
             val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
                 decodeSTRProductItem(it)
             } ?: return@post
@@ -121,7 +113,6 @@ class SPPlacementProviderWrapper(
     fun hydrateWishlist(raw: String) {
         Handler(context.mainLooper).post {
             val map = decodeFromJson(raw) ?: return@post
-            Log.d("[SPPlacementProviderWrapper]", "hydrateWishlist: $raw")
             val products = (map["products"] as? List<Map<String, Any?>>)?.mapNotNull {
                 decodeSTRProductInformation(it)
             } ?: return@post

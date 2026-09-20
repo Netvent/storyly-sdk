@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { PlacementScreen } from './PlacementScreen';
+import { StorylyLog } from 'storyly-placement-react-native';
+
+// Storyly logs are off by default; opt in for the demo app.
+StorylyLog.setLogLevel('debug');
 
 
 const TABS = [

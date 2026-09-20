@@ -1,8 +1,8 @@
 import Foundation
 import StorylyAnalytics
+import StorylyCore
 
 @objc public class SPAnalyticsManager: NSObject {
-
     @objc public static let shared = SPAnalyticsManager()
 
     private override init() {
@@ -12,7 +12,7 @@ import StorylyAnalytics
     @objc public func initialize(configJson: String) {
         guard let dict = decodeFromJson(configJson),
               let config = decodeSTRAnalyticsConfig(dict) else {
-            print("[SPAnalyticsManager] A valid analytics config is required")
+            STRLog.error(message: "[SPAnalyticsManager] A valid analytics config is required")
             return
         }
         STRAnalytics.initialize(config: config)

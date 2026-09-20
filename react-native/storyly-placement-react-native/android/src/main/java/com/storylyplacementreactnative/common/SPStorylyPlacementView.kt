@@ -3,7 +3,6 @@ package com.storylyplacementreactnative.common
 import android.content.Context
 import android.net.Uri
 import android.os.Handler
-import android.util.Log
 import android.view.Choreographer
 import android.widget.FrameLayout
 import com.appsamurai.storyly.core.STRWidgetType
@@ -13,6 +12,7 @@ import com.appsamurai.storyly.core.analytics.product.STRProductEvent
 import com.appsamurai.storyly.core.data.model.STRPayload
 import com.appsamurai.storyly.core.data.model.product.STRCartItem
 import com.appsamurai.storyly.core.data.model.product.STRProductItem
+import com.appsamurai.storyly.core.listener.log.STRLog
 import com.appsamurai.storyly.core.ui.STRWidgetController
 import com.appsamurai.storyly.placement.data.provider.STRPlacementDataProvider
 import com.appsamurai.storyly.placement.ui.STRListener
@@ -37,7 +37,6 @@ import java.util.UUID
 
 
 class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
-
     private var providerId: String? = null
 
     // Callback maps for async cart/wishlist operations
@@ -66,7 +65,7 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
     init {
         (context as? ReactContext)?.addLifecycleEventListener(object : LifecycleEventListener {
             override fun onHostResume() {
-                Log.w("[SPStorylyPlacement]", "onHostResume view will recreate")
+                STRLog.warn("[SPStorylyPlacement] onHostResume view will recreate")
                 setupPlacementView()
             }
 
@@ -88,10 +87,8 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
     fun configure(providerId: String) {
         Handler(context.mainLooper).post {
             if (providerId == this@SPStorylyPlacementView.providerId) {
-                Log.d("[SPStorylyPlacement]", "Already configured with providerId: $providerId")
                 return@post
             }
-            Log.d("[SPStorylyPlacement]", "Configuring with providerId: $providerId")
             this@SPStorylyPlacementView.providerId = providerId
             setupPlacementView()
         }
@@ -99,7 +96,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
 
     fun callWidget(id: String, method: String, raw: String?) {
         Handler(context.mainLooper).post {
-            Log.d("[SPStorylyPlacement]", "callWidget: ${id}-${method}-${raw}")
             val widget = widgetMap[id]?.get() ?: return@post
             val params = decodeFromJson(raw)
             when (method) {
@@ -168,11 +164,10 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
     private fun setupPlacementView() {
         val currentProviderId = providerId ?: return
 
-        Log.d("[SPStorylyPlacement]", "Setting up placement view with providerId: $currentProviderId")
 
         val providerWrapper = SPPlacementProviderManager.getProvider(currentProviderId)
         val dataProvider = providerWrapper?.provider ?: run {
-            Log.e("[SPStorylyPlacement]", "Provider not found for id: $currentProviderId")
+            STRLog.error("[SPStorylyPlacement] Provider not found for id: $currentProviderId")
             return
         }
         placementView?.let { removeView(it) }
@@ -196,7 +191,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
         return STRPlacementView(activity, dataProvider).apply {
             listener = object : STRListener {
                 override fun onActionClicked(widget: STRWidgetController, url: String, payload: STRPayload) {
-                    Log.d("[SPStorylyPlacement]", "onActionClicked: url=$url")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "url" to url,
@@ -206,17 +200,15 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                 }
 
                 override fun onEvent(widget: STRWidgetController, payload: STREventPayload) {
-                    Log.d("[SPStorylyPlacement]", "onEvent: widgetType=${widget.getType()}, payload=${payload.baseEvent.getType()}")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "payload" to encodeSTREventPayload(payload)
                     ))
-                    println("AAAA: ${eventJson}")
                     dispatchEvent?.invoke(SPPlacementEventType.ON_EVENT, eventJson)
                 }
 
                 override fun onFail(widget: STRWidgetController, payload: STRErrorPayload) {
-                    Log.w("[SPStorylyPlacement]", "onFail: widget=${widget.getType()}, payload=${payload.baseError.getType()}")
+                    STRLog.warn("[SPStorylyPlacement] onFail: widget=${widget.getType()}, payload=${payload.baseError.getType()}")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "payload" to encodeSTRErrorPayload(payload)
@@ -225,7 +217,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                 }
 
               override fun onVisibilityChange(widget: STRWidgetController?, isVisible: Boolean) {
-                Log.w("[SPStorylyPlacement]", "onVisibilityChange: widget=${widget?.getType()}, visibility=${isVisible}")
                 val eventJson = encodeToJson(mapOf(
                   "widget" to encodeWidgetController(widget),
                   "isVisible" to isVisible
@@ -234,7 +225,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
               }
 
                 override fun onWidgetReady(widget: STRWidgetController, ratio: Float) {
-                    Log.d("[SPStorylyPlacement]", "onWidgetReady: ratio=$ratio")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "ratio" to ratio,
@@ -244,7 +234,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
             }
             productListener = object : STRProductListener {
                 override fun onProductEvent(widget: STRWidgetController, event: STRProductEvent) {
-                    Log.d("[SPStorylyPlacement]", "onProductEvent: ${event.getType()}")
                     val eventJson = encodeToJson(mapOf(
                         "widget" to encodeWidgetController(widget),
                         "event" to event.getType(),
@@ -258,7 +247,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                     onSuccess: (() -> Unit)?,
                     onFail: ((String) -> Unit)?,
                 ) {
-                    Log.d("[SPStorylyPlacement]", "onUpdateCart")
                     val responseId = UUID.randomUUID().toString()
                     cartUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
                     val eventJson = encodeToJson(
@@ -278,7 +266,6 @@ class SPStorylyPlacementView(context: Context) : FrameLayout(context) {
                     onSuccess: (() -> Unit)?,
                     onFail: ((String) -> Unit)?,
                 ) {
-                    Log.d("[SPStorylyPlacement]", "onUpdateWishlist: ${event.getType()}")
                     val responseId = UUID.randomUUID().toString()
                     wishlistUpdateCallbacks[responseId] = Pair(onSuccess, onFail)
 

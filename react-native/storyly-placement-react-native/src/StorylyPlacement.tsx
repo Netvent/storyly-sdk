@@ -50,7 +50,6 @@ const STRPlacementView = forwardRef<STRPlacementViewMethods, STRPlacementViewPro
     const getWidget = <T extends STRWidgetController>(widget: PlacementWidget): T => {
       return createWidgetProxy(widget, (method: string, params: any) => {
         if (placementRef.current) {
-          console.log('callWidget', widget.viewId, method, JSON.stringify(params));
           PlacementCommands.callWidget(placementRef.current, widget.viewId, method, JSON.stringify(params));
         }
       }) as T;

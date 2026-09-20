@@ -48,30 +48,20 @@ class _STRPlacementViewState extends State<STRPlacementView> {
   @override
   void initState() {
     super.initState();
-    debugPrint(
-      'STRPlacementView: initState provider: ${widget.provider?.providerId}',
-    );
     _controller = StorylyPlacementController();
   }
 
   @override
   void didUpdateWidget(STRPlacementView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    debugPrint(
-      'STRPlacementView: didUpdateWidget, provider: ${widget.provider?.providerId}',
-    );
     if (widget.provider == null) return;
     if (widget.provider?.providerId != oldWidget.provider?.providerId) {
-      debugPrint('STRPlacementView: configure: ${widget.provider?.providerId}');
       _controller.configure(widget.provider!.providerId);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-      'STRPlacementView: build,provider: ${widget.provider?.providerId}',
-    );
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(
         viewType: 'storyly_placement_flutter_view',
@@ -139,7 +129,6 @@ class _STRPlacementViewState extends State<STRPlacementView> {
           : args as Map<String, dynamic>;
       switch (call.method) {
         case 'onWidgetReady':
-          debugPrint('STRPlacementView: onWidgetReady, data: $data');
           final event = PlacementWidgetReadyEvent.fromJson(data);
           final axis = event.widget.scrollAxis;
           if (axis != _scrollAxis) {
@@ -148,46 +137,37 @@ class _STRPlacementViewState extends State<STRPlacementView> {
           widget.onWidgetReady?.call(event);
           break;
         case 'onActionClicked':
-          debugPrint('STRPlacementView: onActionClicked, data: $data');
           widget.onActionClicked?.call(
             PlacementActionClickEvent.fromJson(data),
           );
           break;
         case 'onEvent':
-          debugPrint('STRPlacementView: onEvent, data: $data');
           widget.onEvent?.call(PlacementEvent.fromJson(data));
           break;
         case 'onFail':
-          debugPrint('STRPlacementView: onFail, data: $data');
           widget.onFail?.call(PlacementFailEvent.fromJson(data));
           break;
         case 'onVisibilityChange':
-          debugPrint('STRPlacementView: onVisibilityChange, data: $data');
           widget.onVisibilityChange?.call(
             PlacementOnVisibilityChangeEvent.fromJson(data),
           );
           break;
         case 'onProductEvent':
-          debugPrint('STRPlacementView: onProductEvent, data: $data');
           widget.onProductEvent?.call(PlacementProductEvent.fromJson(data));
           break;
         case 'onUpdateCart':
-          debugPrint('STRPlacementView: onUpdateCart, data: $data');
           widget.onUpdateCart?.call(PlacementCartUpdateEvent.fromJson(data));
           break;
         case 'onUpdateWishlist':
-          debugPrint('STRPlacementView: onUpdateWishlist, data: $data');
           widget.onUpdateWishlist?.call(
             PlacementWishlistUpdateEvent.fromJson(data),
           );
           break;
         default:
-          debugPrint("Unknown method: ${call.method}");
+          break;
       }
-    } catch (e) {
-      debugPrint(
-        "Error handling method call ${call.method}: $e: ${call.arguments}",
-      );
+    } catch (_) {
+      // malformed payload from native; ignored
     }
   }
 }

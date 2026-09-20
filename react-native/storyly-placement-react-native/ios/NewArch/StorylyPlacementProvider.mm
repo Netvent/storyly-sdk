@@ -34,8 +34,6 @@ RCT_EXPORT_MODULE(StorylyPlacementProvider)
                resolve:(RCTPromiseResolveBlock)resolve
                 reject:(RCTPromiseRejectBlock)reject
 {
-    NSLog(@"[StorylyPlacementProvider] Creating provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] createProviderWithId:providerId];
     
     __weak StorylyPlacementProvider *weakSelf = self;
@@ -51,7 +49,6 @@ RCT_EXPORT_MODULE(StorylyPlacementProvider)
 
 - (void)destroyProvider:(NSString *)providerId
 {
-    NSLog(@"[StorylyPlacementProvider] Destroying provider: %@", providerId);
     [[SPPlacementProviderManager shared] destroyProviderWithId:providerId];
 }
 
@@ -59,8 +56,6 @@ RCT_EXPORT_MODULE(StorylyPlacementProvider)
 
 - (void)updateConfig:(NSString *)providerId config:(NSString *)config
 {
-    NSLog(@"[StorylyPlacementProvider] Updating config for provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper configureWithConfigJson:config];
@@ -71,8 +66,6 @@ RCT_EXPORT_MODULE(StorylyPlacementProvider)
 
 - (void)hydrateProducts:(NSString *)providerId productsJson:(NSString *)productsJson
 {
-    NSLog(@"[StorylyPlacementProvider] Hydrating products for provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper hydrateProductsWithProductsJson:productsJson];
@@ -81,12 +74,17 @@ RCT_EXPORT_MODULE(StorylyPlacementProvider)
 
 - (void)hydrateWishlist:(NSString *)providerId productsJson:(NSString *)productsJson
 {
-    NSLog(@"[StorylyPlacementProvider] Hydrating wishlist for provider: %@", providerId);
-    
     SPPlacementProviderWrapper *wrapper = [[SPPlacementProviderManager shared] getProviderWithId:providerId];
     if (wrapper) {
         [wrapper hydrateWishlistWithProductsJson:productsJson];
     }
+}
+
+// MARK: - Logging
+
+- (void)setLogLevel:(NSString *)level
+{
+    [SPLogManager setLogLevel:level];
 }
 
 // MARK: - Event Listeners
