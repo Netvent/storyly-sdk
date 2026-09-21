@@ -1,5 +1,12 @@
 # Release Notes
 
+### 1.16.0 (21.09.2026)
+
+- added play icon visibility support in canvas widget
+- added widget viewed and canvas item impression analytics events
+- improved banner impression tracking with media-based view duration
+- fixed first tap on pause not stopping story playback after switching to a new story group
+
 ### 1.15.0 (11.09.2026)
 
 - added fill button support in canvas widget
