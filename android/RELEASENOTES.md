@@ -1,4 +1,10 @@
 # Release Notes
+### 1.16.0 (22.09.2026)
+* improved widget event tracking based on widget visibility
+* added play icon visibility support in canvas widget
+* updated banner video impression delay
+* added missing fields for widget analytics
+
 ### 1.13.0 (04.09.2026)
 * added fill button support in canvas widget
   
