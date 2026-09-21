@@ -1,12 +1,7 @@
 import 'storyly_placement_platform_interface.dart';
 
 /// Log levels for Storyly Placement. [off] is the default.
-enum STRLogLevel {
-  debug,
-  warning,
-  error,
-  off,
-}
+enum STRLogLevel { debug, warning, error, off }
 
 /// Log level control for the placement SDK.
 ///

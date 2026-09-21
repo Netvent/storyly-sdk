@@ -1,4 +1,12 @@
 # Release Notes
+### 1.16.0 (22.09.2026)
+* added support for setting the log level
+* improved widget event tracking based on widget visibility
+* added play icon visibility support in canvas widget
+* updated banner video impression delay
+* added missing fields for widget analytics
+* improved visibility check with window based intersection on ios platform
+
 ### 1.13.0 (07.08.2026)
 * added fill button support in canvas widget
 * fixed rating interactive component interaction bug in video feed widget on ios platform
