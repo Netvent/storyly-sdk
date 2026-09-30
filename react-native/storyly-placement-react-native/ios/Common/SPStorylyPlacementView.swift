@@ -150,10 +150,16 @@ import StorylyVideoFeed
         }
     }
     
+    // RN mounts <Modal> children before presenting the modal, so re-resolve once attached to a window.
+    public override func didMoveToWindow() {
+        super.didMoveToWindow()
+        if window != nil { placementView?.rootViewController = owningViewController }
+    }
+
     private func createPlacementView(dataProvider: STRPlacementDataProvider) -> STRPlacementView {
         let view = STRPlacementView(dataProvider: dataProvider)
         
-        view.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
+        view.rootViewController = owningViewController
         view.delegate = delegate
         view.productDelegate = productDelegate
         
@@ -373,3 +379,18 @@ private class STRProductDelegateImpl: NSObject, STRProductDelegate {
     }
 }
 
+extension UIView {
+    /// The controller that owns this view (nearest UIViewController up the responder chain).
+    /// A view placed inside a presented sheet/modal resolves to that sheet's controller, so it is
+    /// the right controller for Storyly to present its player from; UIKit forwards the request up
+    /// the chain when needed. Falls back to the window's root while the view is not attached yet.
+    var owningViewController: UIViewController? {
+        var responder: UIResponder? = self
+        while let current = responder {
+            if let vc = current as? UIViewController { return vc }
+            responder = current.next
+        }
+        let window = self.window ?? UIApplication.shared.windows.first { $0.isKeyWindow }
+        return window?.rootViewController
+    }
+}

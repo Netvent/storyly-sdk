@@ -26,7 +26,7 @@ class STStorylyView: UIView {
         didSet {
             oldValue?.removeFromSuperview()
             guard let storylyView = storylyView else { return }
-            storylyView.rootViewController = UIApplication.shared.delegate?.window??.rootViewController
+            storylyView.rootViewController = owningViewController
             storylyView.delegate = self
             storylyView.productDelegate = self
             addSubview(storylyView)
@@ -116,6 +116,13 @@ class STStorylyView: UIView {
         print("STR:STStorylyView:init:StorylyBundle:\(Bundle(for: StorylyView.self).infoDictionary)")
     }
     
+
+    // RN mounts <Modal> children before presenting the modal, so re-resolve once attached to a window.
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        if window != nil { storylyView?.rootViewController = owningViewController }
+    }
+
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     override func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
