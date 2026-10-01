@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.12.3 - 01.10.2026 [for cdn](https://web-story.storyly.io/sdk/4.12.3/storyly-web.js)
+
+- fixed story groups not rendering and openStory not working on first visit when the API response takes longer than 2 seconds
+- fixed openStory opening the same story twice and re-opening after setSegments
+
 ### 4.12.2 - 21.09.2026 [for cdn](https://web-story.storyly.io/sdk/4.12.2/storyly-web.js)
 
 - fixed first tap on pause not stopping story playback after switching to a new story group
