@@ -1,4 +1,7 @@
 # Release Notes
+### 1.16.1 (02.10.2026)
+* improved root view controller detection for story presentation on ios platform
+
 ### 1.16.0 (22.09.2026)
 * added support for setting the log level
 * improved widget event tracking based on widget visibility
