@@ -1,5 +1,8 @@
 # Release Notes
 * These are Fabric supported package of storyly-react-native, for the older architecture please use [storyly-react-native](https://github.com/Netvent/storyly-sdk/blob/master/legacy/react-native/storyly-react-native/RELEASENOTES.md) package.
+### 4.21.3 (02.10.2026)
+* improved root view controller detection for story presentation on ios platform
+
 ### 4.21.2 (07.09.2026)
 * added Polish localization support
 * fixed capitalization in German localization
