@@ -1,11 +1,11 @@
 name: storyly_placement_flutter
 description: "Flutter package for Storyly Placement SDK - supports StoryBar, Banner, VideoFeed, Canvas and SwipeCard widgets"
-version: 1.16.0
+version: 1.16.1
 homepage: "https://github.com/Netvent/storyly-sdk/"
 
 environment:
-  sdk: ^3.10.4
-  flutter: '>=3.3.0'
+  sdk: ^3.9.0
+  flutter: '>=3.35.0'
 
 dependencies:
   flutter:

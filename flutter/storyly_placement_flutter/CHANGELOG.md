@@ -1,4 +1,7 @@
 # Release Notes
+### 1.16.1 (06.10.2026)
+* lowered minimum dart sdk constraint to 3.9.0 (flutter 3.35.0)
+
 ### 1.16.0 (22.09.2026)
 * added support for setting the log level
 * improved widget event tracking based on widget visibility

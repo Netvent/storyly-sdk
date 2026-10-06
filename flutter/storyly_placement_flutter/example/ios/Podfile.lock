@@ -2,34 +2,34 @@ PODS:
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
-  - storyly_placement_flutter (1.13.0):
+  - storyly_placement_flutter (1.16.1):
     - Flutter
-    - StorylyPlacement (= 1.13.0)
-  - StorylyPlacement (1.13.0):
-    - StorylyPlacement/Analytics (= 1.13.0)
-    - StorylyPlacement/Banner (= 1.13.0)
-    - StorylyPlacement/Canvas (= 1.13.0)
-    - StorylyPlacement/Core (= 1.13.0)
-    - StorylyPlacement/CoreInternal (= 1.13.0)
-    - StorylyPlacement/Placement (= 1.13.0)
-    - StorylyPlacement/RetailMedia (= 1.13.0)
-    - StorylyPlacement/StoryBar (= 1.13.0)
-    - StorylyPlacement/SwipeCard (= 1.13.0)
-    - StorylyPlacement/VideoFeed (= 1.13.0)
-  - StorylyPlacement/Analytics (1.13.0)
-  - StorylyPlacement/Banner (1.13.0)
-  - StorylyPlacement/Canvas (1.13.0)
-  - StorylyPlacement/Core (1.13.0)
-  - StorylyPlacement/CoreInternal (1.13.0)
-  - StorylyPlacement/Placement (1.13.0):
+    - StorylyPlacement (= 1.16.0)
+  - StorylyPlacement (1.16.0):
+    - StorylyPlacement/Analytics (= 1.16.0)
+    - StorylyPlacement/Banner (= 1.16.0)
+    - StorylyPlacement/Canvas (= 1.16.0)
+    - StorylyPlacement/Core (= 1.16.0)
+    - StorylyPlacement/CoreInternal (= 1.16.0)
+    - StorylyPlacement/Placement (= 1.16.0)
+    - StorylyPlacement/RetailMedia (= 1.16.0)
+    - StorylyPlacement/StoryBar (= 1.16.0)
+    - StorylyPlacement/SwipeCard (= 1.16.0)
+    - StorylyPlacement/VideoFeed (= 1.16.0)
+  - StorylyPlacement/Analytics (1.16.0)
+  - StorylyPlacement/Banner (1.16.0)
+  - StorylyPlacement/Canvas (1.16.0)
+  - StorylyPlacement/Core (1.16.0)
+  - StorylyPlacement/CoreInternal (1.16.0)
+  - StorylyPlacement/Placement (1.16.0):
     - StorylyPlacement/Analytics
     - StorylyPlacement/Core
     - StorylyPlacement/CoreInternal
     - StorylyPlacement/RetailMedia
-  - StorylyPlacement/RetailMedia (1.13.0)
-  - StorylyPlacement/StoryBar (1.13.0)
-  - StorylyPlacement/SwipeCard (1.13.0)
-  - StorylyPlacement/VideoFeed (1.13.0)
+  - StorylyPlacement/RetailMedia (1.16.0)
+  - StorylyPlacement/StoryBar (1.16.0)
+  - StorylyPlacement/SwipeCard (1.16.0)
+  - StorylyPlacement/VideoFeed (1.16.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -51,8 +51,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
-  storyly_placement_flutter: fc0d1f1e22cd29088ae6f15c65e439ae76a262b0
-  StorylyPlacement: 54ea183993563f21a1621e450baabb426b968b3e
+  storyly_placement_flutter: d6ec45bc840915a8c2b2a60af8c82f061abf9e42
+  StorylyPlacement: 74eaf83d5629838d8c24be4b23382b2095ca846a
 
 PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
 
