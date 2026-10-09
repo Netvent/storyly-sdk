@@ -1,4 +1,9 @@
 # Release Notes
+### 1.17.0 (09.10.2026)
+* fixed price visibility for product card and product tag interactive components
+* added iphone duo support on ios platform
+* improved update data flow for story bar widget on ios platform
+
 ### 1.16.1 (06.10.2026)
 * lowered minimum dart sdk constraint to 3.9.0 (flutter 3.35.0)
 
