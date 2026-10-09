@@ -1,4 +1,8 @@
 # Release Notes
+### 4.22.0 (09.10.2026)
+* fixed price visibility for product card and product tag interactive components
+* added iphone duo support
+
 ### 4.21.2 (04.09.2026)
 * fixed rating interactive component interaction bug in story bar
 * fixed rating interactive component interaction bug in vertical feed
