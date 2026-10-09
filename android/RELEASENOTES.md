@@ -1,4 +1,7 @@
 # Release Notes
+### 1.17.0 (09.10.2026)
+* fixed price visibility for product card and product tag interactive components
+
 ### 1.16.0 (22.09.2026)
 * improved widget event tracking based on widget visibility
 * added play icon visibility support in canvas widget
