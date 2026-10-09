@@ -1,4 +1,7 @@
 # Release Notes
+### 4.21.1 (09.10.2026)
+* fixed price visibility for product card and product tag interactive components
+
 ### 4.21.0 (31.07.2026)
 * added Polish localization support
   
