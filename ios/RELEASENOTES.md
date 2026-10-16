@@ -1,4 +1,10 @@
 # Release Notes
+### 1.17.1 (16.10.2026)
+* added action click events on flow rule trigger
+* improved open calls with retry mechanism
+* improved safe area handling for iphone duo
+* fixed start call for off-screen banner widgets
+
 ### 1.17.0 (09.10.2026)
 * fixed price visibility for product card and product tag interactive components
 * improved update data flow for story bar widget
