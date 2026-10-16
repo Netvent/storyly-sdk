@@ -1,4 +1,7 @@
 # Release Notes
+### 4.22.1 (16.10.2026)
+* improved safe area handling for iphone duo
+
 ### 4.22.0 (09.10.2026)
 * fixed price visibility for product card and product tag interactive components
 * added iphone duo support
