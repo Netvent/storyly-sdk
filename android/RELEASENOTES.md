@@ -1,4 +1,9 @@
 # Release Notes
+### 1.17.1 (16.10.2026)
+* added action click events on flow rule trigger
+* improved open calls with retry mechanism
+* improved attach/detach flow in banner widget
+
 ### 1.17.0 (09.10.2026)
 * fixed price visibility for product card and product tag interactive components
 
