@@ -154,7 +154,7 @@ class StorylyPlacementFlutterPlugin : FlutterPlugin, MethodCallHandler {
                     ?.mapNotNull { decodeSTRAnalyticProduct(it) }
 
                 if (event != null && products != null) {
-                    STRAnalytics.track(event, products)
+                    STRAnalytics.track(event, products, payload?.get("orderId") as? String)
                     result.success(null)
                 } else {
                     result.error("INVALID_ARGUMENT", "A valid event and products are required", null)

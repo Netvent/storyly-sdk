@@ -28,14 +28,19 @@ class STRAnalytics {
   }
 
   /// Tracks a product analytics event involving one or more products.
+  ///
+  /// [orderId] is the order identifier. It should be provided for
+  /// [STRAnalyticProductEvent.purchased].
   static Future<void> track(
     STRAnalyticProductEvent event,
-    List<STRAnalyticProduct> products,
-  ) {
+    List<STRAnalyticProduct> products, {
+    String? orderId,
+  }) {
     return StorylyPlacementFlutterPlatform.instance.analyticsTrack(
       jsonEncode({
         'event': event.value,
         'products': products.map((e) => e.toJson()).toList(),
+        'orderId': orderId,
       }),
     );
   }
@@ -45,8 +50,9 @@ class STRAnalytics {
   /// Convenience wrapper around [track].
   static Future<void> trackProduct(
     STRAnalyticProductEvent event,
-    STRAnalyticProduct product,
-  ) {
-    return track(event, [product]);
+    STRAnalyticProduct product, {
+    String? orderId,
+  }) {
+    return track(event, [product], orderId: orderId);
   }
 }

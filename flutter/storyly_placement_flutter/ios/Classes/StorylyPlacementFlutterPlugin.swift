@@ -97,7 +97,7 @@ public class StorylyPlacementFlutterPlugin: NSObject, FlutterPlugin {
            let event = decodeSTRAnalyticProductEvent(dict["event"] as? String),
            let productsArray = dict["products"] as? [[String: Any]] {
             let products = productsArray.compactMap { decodeSTRAnalyticProduct($0) }
-            STRAnalytics.track(productEvent: event, products: products)
+            STRAnalytics.track(productEvent: event, products: products, orderId: dict["orderId"] as? String)
             result(nil)
         } else {
             result(FlutterError(code: "INVALID_ARGUMENT", message: "A valid event and products are required", details: nil))
