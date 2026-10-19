@@ -7,7 +7,7 @@
 
 ### 1.17.0 (09.10.2026)
 * fixed price visibility for product card and product tag interactive components
-* improved update data flow for story bar widget
+* improved update data flow to prevent a possible race condition for story bar widget
 * added iphone duo support
 
 ### 1.16.0 (22.09.2026)
