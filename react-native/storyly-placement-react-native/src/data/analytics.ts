@@ -30,6 +30,8 @@ export interface STRAnalyticProduct {
   salesPrice?: number;
   /** The number of units of this product involved in the event. Defaults to 1. */
   quantity?: number;
+  /** The currency code of `price` and `salesPrice` (e.g. "USD"). */
+  currency?: string;
 }
 
 /**

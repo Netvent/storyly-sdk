@@ -26,7 +26,7 @@ object SPAnalyticsManager {
         val event = decodeSTRAnalyticProductEvent(map["event"] as? String) ?: return
         val products = (map["products"] as? List<Map<String, Any?>>)
             ?.mapNotNull { decodeSTRAnalyticProduct(it) } ?: return
-        STRAnalytics.track(event, products)
+        STRAnalytics.track(event, products, map["orderId"] as? String)
     }
 }
 
@@ -56,5 +56,6 @@ internal fun decodeSTRAnalyticProduct(product: Map<String, Any?>?): STRAnalyticP
         price = price,
         salesPrice = (product["salesPrice"] as? Number)?.toFloat(),
         quantity = (product["quantity"] as? Number)?.toInt() ?: 1,
+        currency = product["currency"] as? String,
     )
 }

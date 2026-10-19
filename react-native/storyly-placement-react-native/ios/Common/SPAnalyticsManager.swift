@@ -25,7 +25,7 @@ import StorylyCore
             return
         }
         let products = productsArray.compactMap { decodeSTRAnalyticProduct($0) }
-        STRAnalytics.track(productEvent: event, products: products)
+        STRAnalytics.track(productEvent: event, products: products, orderId: dict["orderId"] as? String)
     }
 }
 
@@ -55,6 +55,7 @@ func decodeSTRAnalyticProduct(_ dict: [String: Any]) -> STRAnalyticProduct? {
     let desc = dict["desc"] as? String
     let salesPrice = dict["salesPrice"] as? Double
     let quantity = dict["quantity"] as? Int ?? 1
+    let currency = dict["currency"] as? String
 
     return STRAnalyticProduct(
         productId: productId,
@@ -63,6 +64,7 @@ func decodeSTRAnalyticProduct(_ dict: [String: Any]) -> STRAnalyticProduct? {
         desc: desc,
         price: Float(price),
         salesPrice: salesPrice as NSNumber?,
-        quantity: quantity
+        quantity: quantity,
+        currency: currency
     )
 }
