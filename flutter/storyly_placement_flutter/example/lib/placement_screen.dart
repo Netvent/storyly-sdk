@@ -172,7 +172,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
         ElevatedButton(
           onPressed: () {
             STRAnalytics.trackProduct(
-              STRAnalyticProductEvent.pdpViewed,
+              STRAnalyticProductEvent.purchased,
               STRAnalyticProduct(
                 productId: 'product-1',
                 productGroupId: 'group-1',
@@ -181,9 +181,11 @@ class _PlacementScreenState extends State<PlacementScreen> {
                 price: 99.9,
                 salesPrice: 79.9,
                 quantity: 2,
+                currency: 'USD',
               ),
+              orderId: 'order-${DateTime.now().millisecondsSinceEpoch}',
             );
-            debugPrint('[${widget.name}] tracked PDPViewed analytics event');
+            debugPrint('[${widget.name}] tracked Purchased analytics event');
           },
           child: const Text('Track Analytics Event'),
         ),
