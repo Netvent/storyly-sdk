@@ -1,4 +1,7 @@
 # Release Notes
+### 1.17.2 (22.10.2026)
+* improved landscape/unfold views for video feed and story bar widgets
+
 ### 1.17.1 (16.10.2026)
 * added action click events on flow rule trigger
 * improved open calls with retry mechanism
