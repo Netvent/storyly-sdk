@@ -1,4 +1,7 @@
 # Release Notes
+### 1.17.2 (22.10.2026)
+- Please refer to the release notes [v1.17.2](https://github.com/Netvent/storyly-sdk/blob/master/ios/RELEASENOTES.md#1172-22102026) of native ios sdk
+
 ### 1.17.1 (16.10.2026)
 - Please refer to the release notes [v1.17.1](https://github.com/Netvent/storyly-sdk/blob/master/ios/RELEASENOTES.md#1171-16102026) of native ios sdk
 
