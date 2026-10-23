@@ -1,5 +1,9 @@
 # Release Notes
 
+### 1.17.0 (23.10.2026)
+
+- added priceFormatter parameter to customize how product prices are displayed
+
 ### 1.16.0 (21.09.2026)
 
 - added play icon visibility support in canvas widget
