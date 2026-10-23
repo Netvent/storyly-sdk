@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.13.0 - 23.10.2026 [for cdn](https://web-story.storyly.io/sdk/4.13.0/storyly-web.js)
+
+- added priceFormatter parameter to customize how product prices are displayed
+
 ### 4.12.3 - 01.10.2026 [for cdn](https://web-story.storyly.io/sdk/4.12.3/storyly-web.js)
 
 - fixed story groups not rendering and openStory not working on first visit when the API response takes longer than 2 seconds
