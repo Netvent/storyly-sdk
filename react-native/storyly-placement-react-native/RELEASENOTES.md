@@ -1,4 +1,14 @@
 # Release Notes
+### 1.18.0 (30.10.2026)
+* added accessibility support for banner widget
+* added missing currency and order id fields for conversion tracking
+* added order id to track method for conversion tracking
+* added slide recovery on attach/detach in banner widget on android platform
+* fixed a bug related to scrapped and detached views in video feed widget on android platform
+* fixed counter text view animation for story bar and video feed widgets on android platform
+* improved update data flow to prevent a possible race condition for widgets(except the story bar) on ios platform
+* improved landscape/unfold views for video feed and story bar widgets on ios platform
+
 ### 1.17.1 (16.10.2026)
 * added action click events on flow rule trigger
 * improved open calls with retry mechanism
@@ -9,7 +19,7 @@
 ### 1.17.0 (09.10.2026)
 * fixed price visibility for product card and product tag interactive components
 * added iphone duo support on ios platform
-* improved update data flow for story bar widget on ios platform
+* improved update data flow to prevent a possible race condition for story bar widget on ios platform
 
 ### 1.16.1 (02.10.2026)
 * improved root view controller detection for story presentation on ios platform
