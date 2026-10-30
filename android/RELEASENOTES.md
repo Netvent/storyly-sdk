@@ -1,4 +1,11 @@
 # Release Notes
+### 1.18.0 (30.10.2026)
+* added accessibility support for banner widget
+* added missing currency and order id fields for conversion tracking
+* added order id to track method for conversion tracking
+* fixed a bug related to scrapped and detached views in video feed widget
+* fixed counter text view animation for story bar and video feed widgets
+
 ### 1.17.2 (21.10.2026)
 * added slide recovery on attach/detach in banner widget
 
