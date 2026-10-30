@@ -23,19 +23,28 @@ export const STRAnalytics = {
 
   /**
    * Tracks a product analytics event involving one or more products.
+   *
+   * @param orderId The order identifier. Should be provided for `STRAnalyticProductEvent.Purchased`.
    */
-  track(event: STRAnalyticProductEvent, products: STRAnalyticProduct[]): void {
-    StorylyAnalyticsNative.track(JSON.stringify({ event, products }));
+  track(
+    event: STRAnalyticProductEvent,
+    products: STRAnalyticProduct[],
+    orderId?: string
+  ): void {
+    StorylyAnalyticsNative.track(JSON.stringify({ event, products, orderId }));
   },
 
   /**
    * Tracks a product analytics event involving a single product.
    * Convenience wrapper around `track`.
+   *
+   * @param orderId The order identifier. Should be provided for `STRAnalyticProductEvent.Purchased`.
    */
   trackProduct(
     event: STRAnalyticProductEvent,
-    product: STRAnalyticProduct
+    product: STRAnalyticProduct,
+    orderId?: string
   ): void {
-    STRAnalytics.track(event, [product]);
+    STRAnalytics.track(event, [product], orderId);
   },
 };

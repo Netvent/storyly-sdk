@@ -101,7 +101,7 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
                 }
             }} />
             <Button title={`Track Analytics Event`} onPress={() => {
-                STRAnalytics.trackProduct(STRAnalyticProductEvent.WishlistAdded, {
+                STRAnalytics.trackProduct(STRAnalyticProductEvent.Purchased, {
                     productId: 'product-1',
                     productGroupId: 'group-1',
                     title: 'Demo Product',
@@ -109,8 +109,9 @@ export const PlacementScreen = ({ name, token }: { name: string, token: string }
                     price: 99.9,
                     salesPrice: 79.9,
                     quantity: 2,
-                });
-                console.log(`[${name}] tracked PDPViewed analytics event`);
+                    currency: 'USD',
+                }, `order-${Date.now()}`);
+                console.log(`[${name}] tracked Purchased analytics event`);
             }} />
         </View>
     );
