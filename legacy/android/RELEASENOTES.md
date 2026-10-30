@@ -1,4 +1,8 @@
 # Release Notes
+### 4.21.2 (30.10.2026)
+* fixed a bug related to scrapped and detached views in vertical feed widget
+* fixed counter text view animation for story bar and vertical feed widgets
+
 ### 4.21.1 (09.10.2026)
 * fixed price visibility for product card and product tag interactive components
 
