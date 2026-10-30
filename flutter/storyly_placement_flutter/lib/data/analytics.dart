@@ -46,6 +46,9 @@ class STRAnalyticProduct {
   /// The number of units of this product involved in the event. Defaults to `1`.
   final int quantity;
 
+  /// The currency code of [price] and [salesPrice] (e.g. "USD"), or `null` if not provided.
+  final String? currency;
+
   STRAnalyticProduct({
     required this.productId,
     required this.productGroupId,
@@ -54,6 +57,7 @@ class STRAnalyticProduct {
     required this.price,
     this.salesPrice,
     this.quantity = 1,
+    this.currency,
   });
 
   factory STRAnalyticProduct.fromJson(Map<String, dynamic> json) {
@@ -65,6 +69,7 @@ class STRAnalyticProduct {
       price: (json['price'] as num).toDouble(),
       salesPrice: (json['salesPrice'] as num?)?.toDouble(),
       quantity: (json['quantity'] as num?)?.toInt() ?? 1,
+      currency: json['currency'],
     );
   }
 
@@ -77,6 +82,7 @@ class STRAnalyticProduct {
       'price': price,
       'salesPrice': salesPrice,
       'quantity': quantity,
+      'currency': currency,
     };
   }
 }
