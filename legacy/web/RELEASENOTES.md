@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.14.0 - 02.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.14.0/storyly-web.js)
+
+- added CSP nonce support with the new nonce parameter, the SDK applies it to the style and script elements it creates on pages with a strict Content-Security-Policy
+
 ### 4.13.0 - 23.10.2026 [for cdn](https://web-story.storyly.io/sdk/4.13.0/storyly-web.js)
 
 - added priceFormatter parameter to customize how product prices are displayed
