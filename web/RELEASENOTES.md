@@ -1,5 +1,12 @@
 # Release Notes
 
+### 1.18.0 (02.11.2026)
+
+- added CSP nonce support with the new nonce parameter, the SDK applies it to the style and script elements it creates on pages with a strict Content-Security-Policy
+- fixed product prices in the product detail sheet being overridden by the layer's price texts
+- fixed banner size calculation when the container height depends on the banner itself
+- fixed accessibility warning caused by aria-hidden being set on focused story elements
+
 ### 1.17.0 (23.10.2026)
 
 - added priceFormatter parameter to customize how product prices are displayed
