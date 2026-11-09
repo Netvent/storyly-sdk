@@ -245,7 +245,13 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, *> {
         "pinned" to storyGroup.pinned,
         "type" to storyGroup.type.ordinal,
         "name" to storyGroup.name,
-        "nudge" to storyGroup.nudge
+        "nudge" to storyGroup.nudge,
+        "sponsored" to storyGroup.sponsored?.let {
+            mapOf(
+                "tag" to it.tag,
+                "description" to it.description
+            )
+        }
     )
 }
 

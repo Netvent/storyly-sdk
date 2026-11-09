@@ -1232,6 +1232,7 @@ class StoryGroup {
     required this.type,
     required this.nudge,
     this.name,
+    this.sponsored,
   });
 
   /// id ID of the story group
@@ -1260,6 +1261,10 @@ class StoryGroup {
 
   final int type;
 
+  /// sponsored Sponsorship disclosure of the group, or null when "Sponsored" is not enabled
+  /// for the group in the dashboard. Unrelated to the retail media group type
+  final StoryGroupSponsor? sponsored;
+
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
     return StoryGroup(
       seen: json['seen'],
@@ -1272,6 +1277,28 @@ class StoryGroup {
       type: json['type'],
       name: json['name'],
       nudge: json['nudge'],
+      sponsored: json['sponsored'] != null
+          ? StoryGroupSponsor.fromJson(json['sponsored'])
+          : null,
+    );
+  }
+}
+
+/// This data class represents the sponsorship disclosure of a story group, configured with the
+/// "Sponsored" toggle in the dashboard.
+class StoryGroupSponsor {
+  StoryGroupSponsor({this.tag, this.description});
+
+  /// tag Label shown in the header (e.g. "Sponsored")
+  final String? tag;
+
+  /// description Disclosure text shown when the user taps the label
+  final String? description;
+
+  factory StoryGroupSponsor.fromJson(Map<String, dynamic> json) {
+    return StoryGroupSponsor(
+      tag: json['tag'],
+      description: json['description'],
     );
   }
 }
