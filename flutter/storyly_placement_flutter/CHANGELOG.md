@@ -1,4 +1,7 @@
 # Release Notes
+### 1.18.1 (09.11.2026)
+* added sponsorship information for story groups ve video feeds
+
 ### 1.18.0 (30.10.2026)
 * added accessibility support for banner widget
 * added missing currency and order id fields for conversion tracking
