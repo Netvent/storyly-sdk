@@ -595,6 +595,29 @@ class StoryGroupStyle {
   }
 }
 
+/// Sponsorship disclosure of a story group, configured with the "Sponsored"
+/// toggle in the dashboard.
+class StoryGroupSponsor {
+  /// Label shown in the story header (e.g. "Sponsored").
+  final String? tag;
+
+  /// Disclosure text shown when the user taps the label.
+  final String? description;
+
+  StoryGroupSponsor({this.tag, this.description});
+
+  factory StoryGroupSponsor.fromJson(Map<String, dynamic> json) {
+    return StoryGroupSponsor(
+      tag: json['tag'],
+      description: json['description'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'tag': tag, 'description': description};
+  }
+}
+
 class StoryGroup {
   final String id;
   final String title;
@@ -610,6 +633,11 @@ class StoryGroup {
   final bool nudge;
   final StoryGroupStyle? style;
 
+  /// Sponsorship disclosure of the group, or null when "Sponsored" is not
+  /// enabled for the group in the dashboard. Unrelated to the retail media
+  /// group type ("sponsored").
+  final StoryGroupSponsor? sponsored;
+
   StoryGroup({
     required this.id,
     required this.title,
@@ -624,6 +652,7 @@ class StoryGroup {
     required this.type,
     required this.nudge,
     this.style,
+    this.sponsored,
   });
 
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
@@ -645,6 +674,9 @@ class StoryGroup {
       style: json['style'] != null
           ? StoryGroupStyle.fromJson(json['style'])
           : null,
+      sponsored: json['sponsored'] != null
+          ? StoryGroupSponsor.fromJson(json['sponsored'])
+          : null,
     );
   }
 
@@ -663,6 +695,7 @@ class StoryGroup {
       'type': type,
       'nudge': nudge,
       'style': style?.toJson(),
+      'sponsored': sponsored?.toJson(),
     };
   }
 }
