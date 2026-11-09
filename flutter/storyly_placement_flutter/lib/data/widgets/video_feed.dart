@@ -538,6 +538,29 @@ class VideoFeedItem {
   }
 }
 
+/// Sponsorship disclosure of a video feed group, configured with the
+/// "Sponsored" toggle in the dashboard.
+class VideoFeedGroupSponsor {
+  /// Label shown in the video feed header (e.g. "Sponsored").
+  final String? tag;
+
+  /// Disclosure text shown when the user taps the label.
+  final String? description;
+
+  VideoFeedGroupSponsor({this.tag, this.description});
+
+  factory VideoFeedGroupSponsor.fromJson(Map<String, dynamic> json) {
+    return VideoFeedGroupSponsor(
+      tag: json['tag'],
+      description: json['description'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'tag': tag, 'description': description};
+  }
+}
+
 class VideoFeedGroup {
   final String id;
   final String title;
@@ -552,6 +575,10 @@ class VideoFeedGroup {
   final String? iconVideoThumbnailUrl;
   final List<VideoFeedItem> feedList;
 
+  /// Sponsorship disclosure of the group, or null when "Sponsored" is not
+  /// enabled for the group in the dashboard.
+  final VideoFeedGroupSponsor? sponsored;
+
   VideoFeedGroup({
     required this.id,
     required this.title,
@@ -565,6 +592,7 @@ class VideoFeedGroup {
     this.iconVideoUrl,
     this.iconVideoThumbnailUrl,
     required this.feedList,
+    this.sponsored,
   });
 
   factory VideoFeedGroup.fromJson(Map<String, dynamic> json) {
@@ -583,6 +611,9 @@ class VideoFeedGroup {
       feedList: (json['feedList'] as List<dynamic>)
           .map((e) => VideoFeedItem.fromJson(e))
           .toList(),
+      sponsored: json['sponsored'] != null
+          ? VideoFeedGroupSponsor.fromJson(json['sponsored'])
+          : null,
     );
   }
 
@@ -600,6 +631,7 @@ class VideoFeedGroup {
       'iconVideoUrl': iconVideoUrl,
       'iconVideoThumbnailUrl': iconVideoThumbnailUrl,
       'feedList': feedList.map((e) => e.toJson()).toList(),
+      'sponsored': sponsored?.toJson(),
     };
   }
 }

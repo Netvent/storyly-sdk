@@ -40,7 +40,17 @@ func encodeStoryGroupItem(_ group: StoryGroup?) -> [String: Any]? {
         "type": group.type.description,
         "style": encodeStoryGroupStyle(group.style),
         "nudge": group.nudge,
+        "sponsored": encodeStoryGroupSponsor(group.sponsored),
         "stories": group.stories.compactMap { encodeStory($0) }
+    ] as [String: Any?]).compactMapValues { $0 }
+}
+
+func encodeStoryGroupSponsor(_ sponsor: StoryGroupSponsor?) -> [String: Any]? {
+    guard let sponsor = sponsor else { return nil }
+    
+    return ([
+        "tag": sponsor.tag,
+        "description": sponsor.desc
     ] as [String: Any?]).compactMapValues { $0 }
 }
 

@@ -10,6 +10,7 @@ import com.appsamurai.storyly.storybar.ui.model.StoryCommentComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryEmojiComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryGroup
 import com.appsamurai.storyly.storybar.ui.model.StoryGroupBadgeStyle
+import com.appsamurai.storyly.storybar.ui.model.StoryGroupSponsor
 import com.appsamurai.storyly.storybar.ui.model.StoryGroupStyle
 import com.appsamurai.storyly.storybar.ui.model.StoryImageQuizComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryPollComponent
@@ -55,7 +56,16 @@ fun encodeStoryGroupItem(group: StoryGroup?): Map<String, Any?>? {
         "iconVideoUrl" to group.iconVideoUrl,
         "iconVideoThumbnailUrl" to group.iconVideoThumbnailUrl,
         "style" to encodeStoryGroupStyle(group.style),
+        "sponsored" to encodeStoryGroupSponsor(group.sponsored),
         "stories" to group.stories.map { story -> encodeStory(story) }
+    )
+}
+
+fun encodeStoryGroupSponsor(sponsor: StoryGroupSponsor?): Map<String, Any?>? {
+    sponsor ?: return null
+    return mapOf(
+        "tag" to sponsor.tag,
+        "description" to sponsor.description,
     )
 }
 

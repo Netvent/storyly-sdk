@@ -38,7 +38,17 @@ func encodeVideoFeedGroup(_ group: VideoFeedGroup?) -> [String: Any]? {
         "nudge": group.nudge,
         "iconVideoUrl": group.iconVideoUrl?.absoluteString,
         "iconVideoThumbnailUrl": group.iconVideoThumbnailUrl?.absoluteString,
+        "sponsored": encodeVideoFeedGroupSponsor(group.sponsored),
         "feedList": group.feedList.map { encodeVideoFeedItem($0) }.compactMap { $0 }
+    ] as [String: Any?]).compactMapValues { $0 }
+}
+
+func encodeVideoFeedGroupSponsor(_ sponsor: VideoFeedGroupSponsor?) -> [String: Any]? {
+    guard let sponsor = sponsor else { return nil }
+    
+    return ([
+        "tag": sponsor.tag,
+        "description": sponsor.desc
     ] as [String: Any?]).compactMapValues { $0 }
 }
 
