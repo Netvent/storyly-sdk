@@ -36,7 +36,16 @@ fun encodeVideoFeedGroup(group: VideoFeedGroup?): Map<String, Any?>? {
         "nudge" to group.nudge,
         "iconVideoUrl" to group.iconVideoUrl,
         "iconVideoThumbnailUrl" to group.iconVideoThumbnailUrl,
+        "sponsored" to encodeVideoFeedGroupSponsor(group.sponsored),
         "feedList" to group.feedList.map { encodeVideoFeedItem(it) }
+    )
+}
+
+fun encodeVideoFeedGroupSponsor(sponsor: VideoFeedGroupSponsor?): Map<String, Any?>? {
+    sponsor ?: return null
+    return mapOf(
+        "tag" to sponsor.tag,
+        "description" to sponsor.description,
     )
 }
 

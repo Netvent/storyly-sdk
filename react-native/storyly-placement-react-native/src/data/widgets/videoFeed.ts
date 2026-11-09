@@ -129,6 +129,18 @@ export interface VideoFeedGroup {
   iconVideoUrl?: string;
   iconVideoThumbnailUrl?: string;
   feedList: VideoFeedItem[];
+  /**
+   * Sponsorship disclosure of the group, or undefined when "Sponsored" is not
+   * enabled for the group in the dashboard.
+   */
+  sponsored?: VideoFeedGroupSponsor;
+}
+
+export interface VideoFeedGroupSponsor {
+  /** Label shown in the video feed header (e.g. "Sponsored"). */
+  tag?: string;
+  /** Disclosure text shown when the user taps the label. */
+  description?: string;
 }
 
 export interface VideoFeedItem {
