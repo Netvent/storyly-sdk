@@ -8,6 +8,7 @@ import com.appsamurai.storyly.StoryComponentType
 import com.appsamurai.storyly.StoryEmojiComponent
 import com.appsamurai.storyly.StoryGroup
 import com.appsamurai.storyly.StoryGroupBadgeStyle
+import com.appsamurai.storyly.StoryGroupSponsor
 import com.appsamurai.storyly.StoryGroupStyle
 import com.appsamurai.storyly.StoryPollComponent
 import com.appsamurai.storyly.StoryProductCardComponent
@@ -35,7 +36,16 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): Map<String, Any?> {
         "type" to storyGroup.type.customName,
         "name" to storyGroup.name,
         "nudge" to storyGroup.nudge,
-        "style" to createStoryGroupStyleMap(storyGroup.style)
+        "style" to createStoryGroupStyleMap(storyGroup.style),
+        "sponsored" to createStoryGroupSponsorMap(storyGroup.sponsored)
+    )
+}
+
+internal fun createStoryGroupSponsorMap(sponsor: StoryGroupSponsor?): Map<String, Any?>? {
+    sponsor ?: return null
+    return mapOf(
+        "tag" to sponsor.tag,
+        "description" to sponsor.description,
     )
 }
 

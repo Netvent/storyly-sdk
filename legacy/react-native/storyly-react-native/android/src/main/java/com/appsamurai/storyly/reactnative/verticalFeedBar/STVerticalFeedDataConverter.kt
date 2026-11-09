@@ -51,6 +51,12 @@ internal fun createVerticalFeedGroup(verticalFeedGroup: VerticalFeedGroup): Writ
         storyGroupMap.putString("type", verticalFeedGroup.type.customName)
         storyGroupMap.putString("name", verticalFeedGroup.name)
         storyGroupMap.putBoolean("nudge", verticalFeedGroup.nudge)
+        storyGroupMap.putMap("sponsored", verticalFeedGroup.sponsored?.let {
+            Arguments.createMap().apply {
+                putString("tag", it.tag)
+                putString("description", it.description)
+            }
+        })
         storyGroupMap.putMap("style", verticalFeedGroup.style?.let {
             Arguments.createMap().apply {
                 putArray("borderUnseenColors", it.borderUnseenColors?.let { borderUnseenColors ->

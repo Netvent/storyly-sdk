@@ -25,6 +25,12 @@ internal fun createStoryGroupMap(storyGroup: StoryGroup): WritableMap {
         storyGroupMap.putString("type", storyGroup.type.customName)
         storyGroupMap.putString("name", storyGroup.name)
         storyGroupMap.putBoolean("nudge", storyGroup.nudge)
+        storyGroupMap.putMap("sponsored", storyGroup.sponsored?.let {
+            Arguments.createMap().apply {
+                putString("tag", it.tag)
+                putString("description", it.description)
+            }
+        })
         storyGroupMap.putMap("style", storyGroup.style?.let {
             Arguments.createMap().apply {
                 putArray("borderUnseenColors", it.borderUnseenColors?.let { borderUnseenColors ->

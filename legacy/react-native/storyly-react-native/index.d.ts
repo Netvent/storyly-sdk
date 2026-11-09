@@ -217,6 +217,8 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
+      /** Sponsorship disclosure of the group, or undefined when "Sponsored" is not enabled for the group in the dashboard. Unrelated to the retail media group type ("sponsored"). */
+      sponsored?: StoryGroupSponsor,
     }
 
     export interface Story {
@@ -270,6 +272,13 @@ declare module "storyly-react-native" {
     borderUnseenColors?: [string],
     textUnseenColor?: string,
     badge?: StoryGroupBadgeStyle,
+  }
+
+  export interface StoryGroupSponsor {
+    /** Label shown in the story header (e.g. "Sponsored"). */
+    tag?: string,
+    /** Disclosure text shown when the user taps the label. */
+    description?: string,
   }
 
   export interface StoryGroupBadgeStyle {
@@ -549,6 +558,8 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
+      /** Sponsorship disclosure of the group, or undefined when "Sponsored" is not enabled for the group in the dashboard. Unrelated to the retail media group type ("sponsored"). */
+      sponsored?: StoryGroupSponsor,
     }
 
     export interface VerticalFeedItem {
@@ -811,6 +822,8 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
+      /** Sponsorship disclosure of the group, or undefined when "Sponsored" is not enabled for the group in the dashboard. Unrelated to the retail media group type ("sponsored"). */
+      sponsored?: StoryGroupSponsor,
     }
 
     export interface VerticalFeedItem {
@@ -1073,6 +1086,8 @@ declare module "storyly-react-native" {
       name: string,
       nudge: boolean,
       style?: StoryGroupStyle,
+      /** Sponsorship disclosure of the group, or undefined when "Sponsored" is not enabled for the group in the dashboard. Unrelated to the retail media group type ("sponsored"). */
+      sponsored?: StoryGroupSponsor,
     }
 
     export interface VerticalFeedItem {

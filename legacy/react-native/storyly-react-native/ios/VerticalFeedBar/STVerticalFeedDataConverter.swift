@@ -24,7 +24,16 @@ func createVerticalFeedGroupMap(storyGroup: VerticalFeedGroup) -> [String: Any?]
         "type": storyGroup.type.description,
         "name": storyGroup.name,
         "nudge": storyGroup.nudge,
-        "style": createVerticalFeedGroupStyleMap(storyGroupStyle: storyGroup.style)
+        "style": createVerticalFeedGroupStyleMap(storyGroupStyle: storyGroup.style),
+        "sponsored": createVerticalFeedGroupSponsorMap(sponsor: storyGroup.sponsored)
+    ]
+}
+
+func createVerticalFeedGroupSponsorMap(sponsor: VerticalFeedGroupSponsor?) -> [String: Any?]? {
+    guard let sponsor = sponsor else { return nil }
+    return [
+        "tag": sponsor.tag,
+        "description": sponsor.desc
     ]
 }
 
