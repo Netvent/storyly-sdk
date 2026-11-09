@@ -1,4 +1,8 @@
 # Release Notes
+### 1.18.1 (09.11.2026)
+* IMPORTANT! moved SDK distribution from Maven Central to Storyly's Maven repository, please check [documentation](https://docs.storyly.io/docs/android-jetpackcompose-initial-setup#import-module)
+- Please refer to the release notes [v1.18.1](https://github.com/Netvent/storyly-sdk/blob/master/android/RELEASENOTES.md#1181-09112026) of native android sdk
+
 ### 1.18.0 (30.10.2026)
 - Please refer to the release notes [v1.18.0](https://github.com/Netvent/storyly-sdk/blob/master/android/RELEASENOTES.md#1180-30102026) of native android sdk
 
