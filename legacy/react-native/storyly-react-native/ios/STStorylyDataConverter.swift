@@ -25,7 +25,16 @@ func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         "type": storyGroup.type.description,
         "name": storyGroup.name,
         "nudge": storyGroup.nudge,
-        "style": createStoryGroupStyleMap(storyGroupStyle: storyGroup.style)
+        "style": createStoryGroupStyleMap(storyGroupStyle: storyGroup.style),
+        "sponsored": createStoryGroupSponsorMap(sponsor: storyGroup.sponsored)
+    ]
+}
+
+func createStoryGroupSponsorMap(sponsor: StoryGroupSponsor?) -> [String: Any?]? {
+    guard let sponsor = sponsor else { return nil }
+    return [
+        "tag": sponsor.tag,
+        "description": sponsor.desc
     ]
 }
 
