@@ -218,7 +218,13 @@ internal func createStoryGroupMap(storyGroup: StoryGroup) -> [String: Any?] {
         "pinned": storyGroup.pinned,
         "type": storyGroup.type.rawValue,
         "name": storyGroup.name,
-        "nudge": storyGroup.nudge
+        "nudge": storyGroup.nudge,
+        "sponsored": storyGroup.sponsored.map { sponsor in
+            [
+                "tag": sponsor.tag,
+                "description": sponsor.desc
+            ]
+        }
     ]
 }
 
