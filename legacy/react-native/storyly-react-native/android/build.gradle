@@ -63,6 +63,7 @@ android {
 
 repositories {
     // ref: https://www.baeldung.com/maven-local-repository
+    maven { url "https://db62cod6cnasq.cloudfront.net/storyly-sdk/android/" }
     maven {
         // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
         url "$rootDir/../node_modules/react-native/android"

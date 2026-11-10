@@ -18,6 +18,7 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://db62cod6cnasq.cloudfront.net/storyly-sdk/android/" }
     }
 }
 

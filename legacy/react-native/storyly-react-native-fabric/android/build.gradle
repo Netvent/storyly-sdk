@@ -103,6 +103,7 @@ android {
 repositories {
   mavenCentral()
   google()
+  maven { url "https://db62cod6cnasq.cloudfront.net/storyly-sdk/android/" }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
