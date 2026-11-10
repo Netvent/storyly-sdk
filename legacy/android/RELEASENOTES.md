@@ -1,4 +1,8 @@
 # Release Notes
+### 4.21.3 (09.11.2026)
+* IMPORTANT! moved SDK distribution from Maven Central to Storyly's Maven repository, please check [documentation](https://docs.storyly.io/v2.0/docs/android-initial-sdk-setup)
+* added sponsorship information for story groups ve video feeds
+
 ### 4.21.2 (30.10.2026)
 * fixed a bug related to scrapped and detached views in vertical feed widget
 * fixed counter text view animation for story bar and vertical feed widgets
