@@ -1,4 +1,7 @@
 # Release Notes
+### 4.22.2 (09.11.2026)
+* added sponsorship information for story groups ve video feeds
+
 ### 4.22.1 (16.10.2026)
 * improved safe area handling for iphone duo
 
