@@ -82,6 +82,7 @@ repositories {
   mavenLocal()
   mavenCentral()
   google()
+  maven { url "https://db62cod6cnasq.cloudfront.net/storyly-sdk/android/" }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
@@ -90,5 +91,5 @@ dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-   implementation "com.appsamurai.storyly:storyly-placement:1.18.0"
+   implementation "com.appsamurai.storyly:storyly-placement:1.18.1"
 }
