@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.14.1 - 12.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.14.1/storyly-web.js)
+
+- fixed product prices showing the ISO currency code instead of the currency symbol when the browser locale has no symbol for that currency
+
 ### 4.14.0 - 02.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.14.0/storyly-web.js)
 
 - added CSP nonce support with the new nonce parameter, the SDK applies it to the style and script elements it creates on pages with a strict Content-Security-Policy
