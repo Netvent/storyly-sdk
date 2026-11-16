@@ -1,5 +1,9 @@
 # Release Notes
 
+### 1.19.0 (16.11.2026)
+
+- added AI label support in story bar and story header, aiLabel is also included in the load, storyViewed, nextStory and previousStory events
+
 ### 1.18.1 (12.11.2026)
 
 - fixed product prices showing the ISO currency code instead of the currency symbol when the browser locale has no symbol for that currency
