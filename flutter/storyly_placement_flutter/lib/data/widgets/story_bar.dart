@@ -484,6 +484,9 @@ class Story {
   final int? currentTime;
   final List<StoryBarComponent>? storyComponentList;
 
+  /// Whether the story is marked as AI content.
+  final bool aiLabel;
+
   Story({
     required this.id,
     required this.title,
@@ -495,6 +498,7 @@ class Story {
     this.actionProducts,
     this.currentTime,
     this.storyComponentList,
+    this.aiLabel = false,
   });
 
   factory Story.fromJson(Map<String, dynamic> json) {
@@ -513,6 +517,7 @@ class Story {
       storyComponentList: (json['storyComponentList'] as List<dynamic>?)
           ?.map((e) => StoryBarComponent.fromJson(e))
           .toList(),
+      aiLabel: json['aiLabel'] ?? false,
     );
   }
 
@@ -528,6 +533,7 @@ class Story {
       'actionProducts': actionProducts?.map((e) => e.toJson()).toList(),
       'currentTime': currentTime,
       'storyComponentList': storyComponentList?.map((e) => e.toJson()).toList(),
+      'aiLabel': aiLabel,
     };
   }
 }
@@ -618,6 +624,34 @@ class StoryGroupSponsor {
   }
 }
 
+/// AI content disclosure of a story group, configured with the AI label
+/// settings in the dashboard.
+class StoryGroupAILabel {
+  /// Label text set for the group, or null when the default label text is used.
+  final String? text;
+
+  /// Disclosure text set for the group, or null when the default disclosure
+  /// text is used.
+  final String? desc;
+
+  /// Whether the AI label is shown on the story group cover.
+  final bool cover;
+
+  StoryGroupAILabel({this.text, this.desc, this.cover = false});
+
+  factory StoryGroupAILabel.fromJson(Map<String, dynamic> json) {
+    return StoryGroupAILabel(
+      text: json['text'],
+      desc: json['desc'],
+      cover: json['cover'] ?? false,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'text': text, 'desc': desc, 'cover': cover};
+  }
+}
+
 class StoryGroup {
   final String id;
   final String title;
@@ -638,6 +672,10 @@ class StoryGroup {
   /// group type ("sponsored").
   final StoryGroupSponsor? sponsored;
 
+  /// AI content disclosure of the group, or null when the group has no AI
+  /// label. Stories marked as AI content are listed with [Story.aiLabel].
+  final StoryGroupAILabel? aiLabel;
+
   StoryGroup({
     required this.id,
     required this.title,
@@ -653,6 +691,7 @@ class StoryGroup {
     required this.nudge,
     this.style,
     this.sponsored,
+    this.aiLabel,
   });
 
   factory StoryGroup.fromJson(Map<String, dynamic> json) {
@@ -677,6 +716,9 @@ class StoryGroup {
       sponsored: json['sponsored'] != null
           ? StoryGroupSponsor.fromJson(json['sponsored'])
           : null,
+      aiLabel: json['aiLabel'] != null
+          ? StoryGroupAILabel.fromJson(json['aiLabel'])
+          : null,
     );
   }
 
@@ -696,6 +738,7 @@ class StoryGroup {
       'nudge': nudge,
       'style': style?.toJson(),
       'sponsored': sponsored?.toJson(),
+      'aiLabel': aiLabel?.toJson(),
     };
   }
 }

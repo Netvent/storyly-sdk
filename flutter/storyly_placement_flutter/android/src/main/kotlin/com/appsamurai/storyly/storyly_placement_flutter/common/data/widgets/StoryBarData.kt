@@ -10,6 +10,7 @@ import com.appsamurai.storyly.storybar.ui.model.StoryCommentComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryEmojiComponent
 import com.appsamurai.storyly.storybar.ui.model.StoryGroup
 import com.appsamurai.storyly.storybar.ui.model.StoryGroupBadgeStyle
+import com.appsamurai.storyly.storybar.ui.model.StoryGroupAILabel
 import com.appsamurai.storyly.storybar.ui.model.StoryGroupSponsor
 import com.appsamurai.storyly.storybar.ui.model.StoryGroupStyle
 import com.appsamurai.storyly.storybar.ui.model.StoryImageQuizComponent
@@ -57,6 +58,7 @@ fun encodeStoryGroupItem(group: StoryGroup?): Map<String, Any?>? {
         "iconVideoThumbnailUrl" to group.iconVideoThumbnailUrl,
         "style" to encodeStoryGroupStyle(group.style),
         "sponsored" to encodeStoryGroupSponsor(group.sponsored),
+        "aiLabel" to encodeStoryGroupAILabel(group.aiLabel),
         "stories" to group.stories.map { story -> encodeStory(story) }
     )
 }
@@ -66,6 +68,15 @@ fun encodeStoryGroupSponsor(sponsor: StoryGroupSponsor?): Map<String, Any?>? {
     return mapOf(
         "tag" to sponsor.tag,
         "description" to sponsor.description,
+    )
+}
+
+fun encodeStoryGroupAILabel(aiLabel: StoryGroupAILabel?): Map<String, Any?>? {
+    aiLabel ?: return null
+    return mapOf(
+        "text" to aiLabel.text,
+        "desc" to aiLabel.desc,
+        "cover" to aiLabel.cover,
     )
 }
 
@@ -101,7 +112,8 @@ fun encodeStory(story: Story?): Map<String, Any?>? {
         "actionUrl" to story.actionUrl,
         "actionProducts" to story.actionProducts?.map { encodeSTRProductItem(it) },
         "currentTime" to story.currentTime,
-        "storyComponentList" to story.storyComponentList?.map { encodeStoryBarComponent(it) }
+        "storyComponentList" to story.storyComponentList?.map { encodeStoryBarComponent(it) },
+        "aiLabel" to story.aiLabel
     )
 }
 
