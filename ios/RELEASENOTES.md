@@ -7,7 +7,6 @@
 * fixed text alignment for RTL in banner widget
 * fixed button alignment issue in banner widget
 * fixed story group border animation in story bar widget
-* fixed sponsored label visibility in video feed widget
 
 ### 1.18.1 (09.11.2026)
 * added sponsorship information for story groups ve video feeds
