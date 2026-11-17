@@ -1,4 +1,15 @@
 # Release Notes
+### 1.19.0 (17.11.2026)
+* added AI content label support to stories and story group covers in story bar widget
+* added video share to Instagram Stories in video feed widget
+* added loop support as end of banner behavior in banner widget
+* fixed story group border animation in story bar widget
+* improved landscape/unfold views of vertical grid layout in video feed widget on ios platform
+* fixed text alignment for RTL in banner widget on ios platform
+* fixed button alignment issue in banner widget on ios platform
+* fixed paddings for RTL in banner widget on android platform
+* fixed sponsored label visibility in video feed widget on android platform
+
 ### 1.18.1 (09.11.2026)
 * added sponsorship information for story groups ve video feeds
 
