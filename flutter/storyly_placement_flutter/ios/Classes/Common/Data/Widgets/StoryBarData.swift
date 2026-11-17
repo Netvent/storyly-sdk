@@ -41,6 +41,7 @@ func encodeStoryGroupItem(_ group: StoryGroup?) -> [String: Any]? {
         "style": encodeStoryGroupStyle(group.style),
         "nudge": group.nudge,
         "sponsored": encodeStoryGroupSponsor(group.sponsored),
+        "aiLabel": encodeStoryGroupAILabel(group.aiLabel),
         "stories": group.stories.compactMap { encodeStory($0) }
     ] as [String: Any?]).compactMapValues { $0 }
 }
@@ -51,6 +52,16 @@ func encodeStoryGroupSponsor(_ sponsor: StoryGroupSponsor?) -> [String: Any]? {
     return ([
         "tag": sponsor.tag,
         "description": sponsor.desc
+    ] as [String: Any?]).compactMapValues { $0 }
+}
+
+func encodeStoryGroupAILabel(_ aiLabel: StoryGroupAILabel?) -> [String: Any]? {
+    guard let aiLabel = aiLabel else { return nil }
+    
+    return ([
+        "text": aiLabel.text,
+        "desc": aiLabel.desc,
+        "cover": aiLabel.cover
     ] as [String: Any?]).compactMapValues { $0 }
 }
 
@@ -91,7 +102,8 @@ func encodeStory(_ story: Story?) -> [String: Any]? {
         "actionUrl": story.actionUrl,
         "actionProducts": story.actionProducts?.map { encodeSTRProductItem($0) },
         "currentTime": story.currentTime,
-        "storyComponentList": story.storyComponentList?.compactMap { encodeStoryBarComponent($0) }
+        "storyComponentList": story.storyComponentList?.compactMap { encodeStoryBarComponent($0) },
+        "aiLabel": story.aiLabel
     ] as [String: Any?]).compactMapValues { $0 }
 }
 
