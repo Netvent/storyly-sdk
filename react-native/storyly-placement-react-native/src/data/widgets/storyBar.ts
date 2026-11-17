@@ -140,6 +140,20 @@ export interface StoryGroup {
    * group type ("sponsored").
    */
   sponsored?: StoryGroupSponsor;
+  /**
+   * AI content disclosure of the group, or undefined when the group has no AI
+   * label. Stories marked as AI content are listed with `Story.aiLabel`.
+   */
+  aiLabel?: StoryGroupAILabel;
+}
+
+export interface StoryGroupAILabel {
+  /** Label text set for the group, or undefined when the default label text is used. */
+  text?: string;
+  /** Disclosure text set for the group, or undefined when the default disclosure text is used. */
+  desc?: string;
+  /** Whether the AI label is shown on the story group cover. */
+  cover: boolean;
 }
 
 export interface StoryGroupSponsor {
@@ -160,6 +174,8 @@ export interface Story {
   actionProducts?: STRProductItem[];
   currentTime?: number;
   storyComponentList?: StoryBarComponentUnion[];
+  /** Whether the story is marked as AI content. */
+  aiLabel: boolean;
 }
 
 export interface StoryGroupStyle {
