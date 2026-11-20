@@ -1,5 +1,12 @@
 # Release Notes
 
+## 1.20.1 (20.11.2026)
+
+- fixed bold and italic text disappearing in text blocks that use a custom font
+- fixed box-animated text layers (e.g. Bounce) moving around their top-left corner instead of their center, so text animations now match the Storyly Studio preview
+- fixed story not being marked as seen when navigated with the next arrow on desktop
+- fixed story group ring rendering unevenly on Windows Chrome at fractional display scales and after browser zoom
+
 ### 1.20.0 (20.11.2026)
 
 - improved Content-Security-Policy support, the SDK now works on pages that block inline style attributes and workers, and also accepts the nonce as cspNonce or from `<meta name="csp-nonce">`
