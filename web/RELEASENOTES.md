@@ -1,5 +1,10 @@
 # Release Notes
 
+### 1.20.0 (20.11.2026)
+
+- improved Content-Security-Policy support, the SDK now works on pages that block inline style attributes and workers, and also accepts the nonce as cspNonce or from `<meta name="csp-nonce">`
+- fixed texts falling back to the browser default font instead of a sans-serif font while the web font is unavailable
+
 ### 1.19.0 (16.11.2026)
 
 - added AI label support in story bar and story header, aiLabel is also included in the load, storyViewed, nextStory and previousStory events
