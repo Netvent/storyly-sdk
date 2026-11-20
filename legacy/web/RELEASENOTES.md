@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.15.1 - 20.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.15.1/storyly-web.js)
+
+- fixed text falling back to the host page font instead of a sans-serif font while a custom font is loading or unavailable
+- fixed story group ring looking different on high-density (Retina) screens after 4.15.0, the Windows ring fix now only applies to standard and fractional display scales
+
 ### 4.15.0 - 20.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.15.0/storyly-web.js)
 
 - added Content-Security-Policy support for inline styles and video streaming, the SDK now works on pages with a strict style-src and script-src policy
