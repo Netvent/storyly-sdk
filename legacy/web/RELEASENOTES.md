@@ -1,5 +1,13 @@
 # Release Notes
 
+### 4.15.0 - 20.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.15.0/storyly-web.js)
+
+- added Content-Security-Policy support for inline styles and video streaming, the SDK now works on pages with a strict style-src and script-src policy
+- fixed box-animated text layers (e.g. Bounce) moving around their top-left corner instead of their center, so text animations now match the Storyly Studio preview
+- fixed story group ring rendering unevenly on Windows Chrome at fractional display scales and after browser zoom
+- fixed story group not being marked as seen or moved to the end when stories were navigated with the next arrow on desktop
+- fixed bold and italic text disappearing in text blocks that use a custom font
+
 ### 4.14.1 - 12.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.14.1/storyly-web.js)
 
 - fixed product prices showing the ISO currency code instead of the currency symbol when the browser locale has no symbol for that currency
