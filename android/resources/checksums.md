@@ -4,6 +4,80 @@ SHA-256 checksums for the Storyly Android Placement SDK artifacts. Use these val
 
 ---
 
+## SDK Version 1.19.1
+
+### storyly-analytics
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-analytics-1.19.1.aar` | `9eb73d2b9ab7ce1b40fbb4aed85ec8826a7e9eac98bb2766ba39a8b907f3e2cb` |
+| `storyly-analytics-1.19.1.pom` | `9212d616d6670e0bdb8a039c680d89c85f61650c705035d14361e0aee561f42c` |
+
+### storyly-banner
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-banner-1.19.1.aar` | `bb04c5ec7d72f57cf86bf3cedb5383ebabcef15c1f74188352a0bb9ca687d594` |
+| `storyly-banner-1.19.1.pom` | `ffcac644b8d251f3a71f3ff43ab700caca34da38e70ee4cc732a5b0f8f08a482` |
+
+### storyly-canvas
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-canvas-1.19.1.aar` | `20df580dd66743298b458f8797c926b850e538556f4ad60d58bb0032377e5e49` |
+| `storyly-canvas-1.19.1.pom` | `9b60cfce451b1b0dae246feed23b9880c501ee64c7f9b254276bd54658a1eec4` |
+
+### storyly-core
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-core-1.19.1.aar` | `0d3e649cf745b819857270257fd7a3b321f2312ad8313b28e3758b9a5503d3c5` |
+| `storyly-core-1.19.1.pom` | `54f64578a2823bec2df4c2e7483e0b5d814cf64f3c87da7f052f49b3f589c488` |
+
+### storyly-coreinternal
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-coreinternal-1.19.1.aar` | `3411c77c4a8733d2ed8cdb5911966dea60089213601767269488b212c74b2e8f` |
+| `storyly-coreinternal-1.19.1.pom` | `274c7f7a47a0a8e4ad910521705825e852fff1fadd89143ba785c7437eeb88fd` |
+
+### storyly-placement
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-placement-1.19.1.aar` | `4d02133722bbca714247b7ddfacba813fdba50004c1335f878d0ea6338922213` |
+| `storyly-placement-1.19.1.pom` | `ee8c07ac3a4ee714dab2edb9d898996b828068eac90102b81394061337b23da5` |
+
+### storyly-retailmedia
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-retailmedia-1.19.1.aar` | `9a539f67c041d49b360553c908e0c4859eb20747cc93db916e91673cdcba367a` |
+| `storyly-retailmedia-1.19.1.pom` | `ef15774c969e3e10c806faa5c06cfff94b93d9c6a577898047ed69aebec5b46c` |
+
+### storyly-storybar
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-storybar-1.19.1.aar` | `7897c51fc4e1c92d6f8a6390311eb475f92a0812134a802ade86e83272da3d37` |
+| `storyly-storybar-1.19.1.pom` | `8fda1a6ce28990da09737c2f27079ee1336edc4d7704872e536680f1df46dc57` |
+
+### storyly-swipecard
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-swipecard-1.19.1.aar` | `a8dcda4c4667a8a56f1489d0c152355c656ade7bee058e8d3224a8a0772347d7` |
+| `storyly-swipecard-1.19.1.pom` | `6b6368a84f750fe848d7bb232263bed1bd7f31b464810416d4b62949be1a5ccd` |
+
+### storyly-videofeed
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-videofeed-1.19.1.aar` | `6ce5aa3ebbc2e1bed3e4956eb2df0fe3ccde3b740ed863689d0409510ea238f4` |
+| `storyly-videofeed-1.19.1.pom` | `aaad9353f034d0be48022997ef7b54d882463201986823e849d0de6e9ad4509c` |
+
+---
+
 ## SDK Version 1.19.0
 
 ### storyly-analytics

@@ -4,6 +4,17 @@ SHA-256 checksums for the Storyly Android Placement Compose SDK artifacts. Use t
 
 ---
 
+## SDK Version 1.19.1
+
+### storyly-placement-compose
+
+| File | SHA-256 |
+| --- | --- |
+| `storyly-placement-compose-1.19.1.aar` | `f5faf0c39ef762073790e820620981264230d86a2027d77f3c979228ab7eb861` |
+| `storyly-placement-compose-1.19.1.pom` | `c06622c3c58a0ede16d76316f7a2ae8250c65b1e87a3d2ed4675d637fd18ef11` |
+
+---
+
 ## SDK Version 1.19.0
 
 ### storyly-placement-compose
