@@ -1,4 +1,7 @@
 # Release Notes
+### 1.19.1 (23.11.2026)
+* added reuse mechanism for widgets in case of reinit
+
 ### 1.19.0 (16.11.2026)
 * added AI content label support to stories and story group covers in story bar widget
 * added video share to Instagram Stories in video feed widget
