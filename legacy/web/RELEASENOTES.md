@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.15.2 - 23.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.15.2/storyly-web.js)
+
+- fixed story groups not appearing on pages with a strict Content-Security-Policy, the SDK no longer needs worker-src or inline style attributes and also reads the nonce from the new cspNonce parameter or a csp-nonce meta tag
+
 ### 4.15.1 - 20.11.2026 [for cdn](https://web-story.storyly.io/sdk/4.15.1/storyly-web.js)
 
 - fixed text falling back to the host page font instead of a sans-serif font while a custom font is loading or unavailable
