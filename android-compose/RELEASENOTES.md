@@ -1,4 +1,7 @@
 # Release Notes
+### 1.19.1 (23.11.2026)
+- Please refer to the release notes [v1.19.1](https://github.com/Netvent/storyly-sdk/blob/master/android/RELEASENOTES.md#1191-23112026) of native android sdk
+
 ### 1.19.0 (16.11.2026)
 - Please refer to the release notes [v1.19.0](https://github.com/Netvent/storyly-sdk/blob/master/android/RELEASENOTES.md#1190-16112026) of native android sdk
 
