@@ -52,6 +52,7 @@ class SPPlacementProviderWrapper(
 
     internal var sendEvent: ((String, SPPlacementProviderEventType, String) -> Unit)? = null
 
+    // Must refetch even when configJson is unchanged: the JS `reload()` calls this with the same config.
     fun configure(configJson: String) {
         Handler(Looper.getMainLooper()).post {
             val parsedConfig = decodeFromJson(configJson) ?: run {

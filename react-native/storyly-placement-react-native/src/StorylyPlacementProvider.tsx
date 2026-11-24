@@ -3,7 +3,7 @@
  * Non-view module for PlacementDataProvider implementation
  */
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { NativeEventEmitter } from 'react-native';
 import type {
   PlacementHydrationEvent,
@@ -25,6 +25,8 @@ export interface STRPlacementDataProvider {
   providerId: string | null;
   hydrateProducts: (products: STRProductItem[]) => void;
   hydrateWishlist: (products: STRProductInformation[]) => void;
+  /** Fetches the placement data again with the current config; widgets already on screen are kept. */
+  reload: () => void;
   destroy: () => void;
 }
 
@@ -99,11 +101,14 @@ export const useSTRPlacementDataProvider = (
   listener?: STRPlacementDataProviderListener
 ): STRPlacementDataProvider => {
   const configJson = useMemo(() => JSON.stringify(config), [config]);
+  const configJsonRef = useRef(configJson);
+  configJsonRef.current = configJson;
 
   const [provider, setProvider] = useState<STRPlacementDataProvider>({
     providerId: null,
     hydrateProducts: () => {},
     hydrateWishlist: () => {},
+    reload: () => {},
     destroy: () => {},
   });
 
@@ -120,6 +125,10 @@ export const useSTRPlacementDataProvider = (
           pid,
           JSON.stringify({ products })
         );
+      },
+      reload: () => {
+        // Relies on native updateConfig refetching even when the config is unchanged.
+        StorylyPlacementProviderNative.updateConfig(pid, configJsonRef.current);
       },
       destroy: () => {
         StorylyPlacementProviderNative.destroyProvider(pid);

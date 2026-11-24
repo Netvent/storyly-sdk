@@ -42,6 +42,7 @@ import StorylyPlacement
         super.init()
     }
     
+    // Must refetch even when configJson is unchanged: the JS `reload()` calls this with the same config.
     @objc public func configure(configJson: String) {
         DispatchQueue.main.async {
           guard let parsedConfig = decodeFromJson(configJson) else {
