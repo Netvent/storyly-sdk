@@ -1,4 +1,7 @@
 # Release Notes
+### 1.19.2 (24.11.2026)
+* added reload method to placement data provider 
+
 ### 1.19.1 (23.11.2026)
 * added reuse mechanism for widgets in case of reinit
 * fixed corner radius issue in canvas widget on ios platform
